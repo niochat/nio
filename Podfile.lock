@@ -14,6 +14,9 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
+  - AppCenter/Core (2.5.1)
+  - AppCenter/Crashes (2.5.1):
+    - AppCenter/Core
   - GZIP (1.2.3)
   - libbase58 (0.1.4)
   - OLMKit (3.1.0):
@@ -32,11 +35,13 @@ PODS:
     - Realm (~> 3.17.3)
 
 DEPENDENCIES:
+  - AppCenter/Crashes
   - SwiftMatrixSDK
 
 SPEC REPOS:
   trunk:
     - AFNetworking
+    - AppCenter
     - GZIP
     - libbase58
     - OLMKit
@@ -45,12 +50,13 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  AppCenter: fddcbac6e4baae3d93a196ceb0bfe0e4ce407dec
   GZIP: af5c90ef903776a7e9afe6ebebd794a84a2929d4
   libbase58: 7c040313537b8c44b6e2d15586af8e21f7354efd
   OLMKit: 4ee0159d63feeb86d836fdcfefe418e163511639
   Realm: 5a1d9d47bfc101dd597668b1a8af4288a2557f6d
   SwiftMatrixSDK: 84957de558895ff562884c51572a75ae96b7c1f1
 
-PODFILE CHECKSUM: 98eceeede1c67e162229e07b3747e34544e9c103
+PODFILE CHECKSUM: 9cddc957395f9200b04293edbc32bc2c687463c3
 
 COCOAPODS: 1.8.4

@@ -4,4 +4,5 @@ target 'Nio' do
   use_frameworks!
 
   pod 'SwiftMatrixSDK'
+  pod 'AppCenter/Crashes'
 end

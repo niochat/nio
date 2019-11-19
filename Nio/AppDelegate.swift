@@ -1,11 +1,19 @@
 import UIKit
+import AppCenter
+import AppCenterCrashes
 
 //swiftlint:disable line_length
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
+        if let appcenterAPIKey = ProcessInfo.processInfo.environment["APPCENTER_API_KEY"] {
+            MSAppCenter.start(appcenterAPIKey, withServices: [
+                MSCrashes.self
+            ])
+        }
+
         return true
     }
 
