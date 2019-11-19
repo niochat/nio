@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,7 +13,12 @@
 		39C931E32384328B004449E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39C931E22384328B004449E1 /* Assets.xcassets */; };
 		39C931E62384328B004449E1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39C931E52384328B004449E1 /* Preview Assets.xcassets */; };
 		39C931E92384328B004449E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39C931E72384328B004449E1 /* LaunchScreen.storyboard */; };
+		39C931F523846966004449E1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931F423846966004449E1 /* LoginView.swift */; };
 		39C931F723846B2D004449E1 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 39C931F623846B2D004449E1 /* .swiftlint.yml */; };
+		39C931FA2384795F004449E1 /* GeometryGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931F92384795F004449E1 /* GeometryGetter.swift */; };
+		39C931FC23847986004449E1 /* KeyboardGuardian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931FB23847986004449E1 /* KeyboardGuardian.swift */; };
+		39C931FE23847E7F004449E1 /* MatrixStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931FD23847E7F004449E1 /* MatrixStore.swift */; };
+		39C9320123847F8F004449E1 /* KeychainItem in Frameworks */ = {isa = PBXBuildFile; productRef = 39C9320023847F8F004449E1 /* KeychainItem */; };
 		87FE3870173FD55A91B15921 /* Pods_Nio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3410F361E5A713D19ECEF861 /* Pods_Nio.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,7 +34,11 @@
 		39C931E52384328B004449E1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		39C931E82384328B004449E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		39C931EA2384328B004449E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		39C931F423846966004449E1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		39C931F623846B2D004449E1 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
+		39C931F92384795F004449E1 /* GeometryGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryGetter.swift; sourceTree = "<group>"; };
+		39C931FB23847986004449E1 /* KeyboardGuardian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardGuardian.swift; sourceTree = "<group>"; };
+		39C931FD23847E7F004449E1 /* MatrixStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +47,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				87FE3870173FD55A91B15921 /* Pods_Nio.framework in Frameworks */,
+				39C9320123847F8F004449E1 /* KeychainItem in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,8 +76,11 @@
 			isa = PBXGroup;
 			children = (
 				39C931DC2384328A004449E1 /* AppDelegate.swift */,
+				39C931FD23847E7F004449E1 /* MatrixStore.swift */,
 				39C931DE2384328A004449E1 /* SceneDelegate.swift */,
 				39C931E02384328A004449E1 /* RootView.swift */,
+				39C931F423846966004449E1 /* LoginView.swift */,
+				39C931F8238478DB004449E1 /* Utility */,
 				39C931E22384328B004449E1 /* Assets.xcassets */,
 				39C931EA2384328B004449E1 /* Info.plist */,
 				39C931F3238449C2004449E1 /* Supporting Files */,
@@ -91,6 +104,15 @@
 				39C931E72384328B004449E1 /* LaunchScreen.storyboard */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		39C931F8238478DB004449E1 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				39C931F92384795F004449E1 /* GeometryGetter.swift */,
+				39C931FB23847986004449E1 /* KeyboardGuardian.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		5DC5384442FBDB92C6AD5E68 /* Frameworks */ = {
@@ -129,6 +151,9 @@
 			dependencies = (
 			);
 			name = Nio;
+			packageProductDependencies = (
+				39C9320023847F8F004449E1 /* KeychainItem */,
+			);
 			productName = Nio;
 			productReference = 39C931D92384328A004449E1 /* Nio.app */;
 			productType = "com.apple.product-type.application";
@@ -157,6 +182,9 @@
 				Base,
 			);
 			mainGroup = 39C931D023843289004449E1;
+			packageReferences = (
+				39C931FF23847F8F004449E1 /* XCRemoteSwiftPackageReference "keychain-item" */,
+			);
 			productRefGroup = 39C931DA2384328A004449E1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -246,8 +274,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				39C931DD2384328A004449E1 /* AppDelegate.swift in Sources */,
+				39C931FC23847986004449E1 /* KeyboardGuardian.swift in Sources */,
 				39C931DF2384328A004449E1 /* SceneDelegate.swift in Sources */,
+				39C931F523846966004449E1 /* LoginView.swift in Sources */,
+				39C931FE23847E7F004449E1 /* MatrixStore.swift in Sources */,
 				39C931E12384328A004449E1 /* RootView.swift in Sources */,
+				39C931FA2384795F004449E1 /* GeometryGetter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +475,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		39C931FF23847F8F004449E1 /* XCRemoteSwiftPackageReference "keychain-item" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/objcio/keychain-item";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		39C9320023847F8F004449E1 /* KeychainItem */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 39C931FF23847F8F004449E1 /* XCRemoteSwiftPackageReference "keychain-item" */;
+			productName = KeychainItem;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 39C931D123843289004449E1 /* Project object */;
 }

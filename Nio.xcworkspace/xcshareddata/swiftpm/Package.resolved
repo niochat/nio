@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "KeychainItem",
+        "repositoryURL": "https://github.com/objcio/keychain-item",
+        "state": {
+          "branch": null,
+          "revision": "563fc973ee4c1fcdea646630f847a241025da3c4",
+          "version": "0.1.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

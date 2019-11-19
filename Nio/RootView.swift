@@ -1,8 +1,20 @@
 import SwiftUI
 
 struct RootView: View {
+    @EnvironmentObject var mxStore: MatrixStore
+
     var body: some View {
-        Text("Hello, World!")
+        if mxStore.isLoggedIn {
+            return AnyView(
+                Text("Conversations View")
+            )
+        } else {
+            return AnyView(
+                LoginView().onLogin { username, password, homeserver in
+                    self.mxStore.login(username: username, password: password, homeserver: homeserver)
+                }
+            )
+        }
     }
 }
 
