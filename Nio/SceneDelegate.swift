@@ -1,18 +1,11 @@
-//
-//  SceneDelegate.swift
-//  Nio
-//
-//  Created by Kilian Koeltzsch on 19.11.19.
-//  Copyright © 2019 Kilian Koeltzsch. All rights reserved.
-//
-
 import UIKit
 import SwiftUI
+
+//swiftlint:disable line_length
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -58,7 +51,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
 }
-
