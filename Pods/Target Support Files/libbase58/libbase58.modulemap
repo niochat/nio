@@ -1,0 +1,6 @@
+framework module libbase58 {
+  umbrella header "libbase58-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,7 @@
+${PODS_ROOT}/Target Support Files/Pods-Nio/Pods-Nio-frameworks.sh
+${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework
+${BUILT_PRODUCTS_DIR}/GZIP/GZIP.framework
+${BUILT_PRODUCTS_DIR}/OLMKit/OLMKit.framework
+${BUILT_PRODUCTS_DIR}/Realm/Realm.framework
+${BUILT_PRODUCTS_DIR}/SwiftMatrixSDK/SwiftMatrixSDK.framework
+${BUILT_PRODUCTS_DIR}/libbase58/libbase58.framework

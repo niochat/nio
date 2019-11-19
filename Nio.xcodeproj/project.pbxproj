@@ -13,9 +13,13 @@
 		39C931E32384328B004449E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39C931E22384328B004449E1 /* Assets.xcassets */; };
 		39C931E62384328B004449E1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39C931E52384328B004449E1 /* Preview Assets.xcassets */; };
 		39C931E92384328B004449E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39C931E72384328B004449E1 /* LaunchScreen.storyboard */; };
+		87FE3870173FD55A91B15921 /* Pods_Nio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3410F361E5A713D19ECEF861 /* Pods_Nio.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E4E720D4D3B7FC804D870FA /* Pods-Nio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nio.release.xcconfig"; path = "Target Support Files/Pods-Nio/Pods-Nio.release.xcconfig"; sourceTree = "<group>"; };
+		2B2F4F3EBCAD5CCD1232E88A /* Pods-Nio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nio.debug.xcconfig"; path = "Target Support Files/Pods-Nio/Pods-Nio.debug.xcconfig"; sourceTree = "<group>"; };
+		3410F361E5A713D19ECEF861 /* Pods_Nio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		39C931D92384328A004449E1 /* Nio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39C931DC2384328A004449E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39C931DE2384328A004449E1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -31,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87FE3870173FD55A91B15921 /* Pods_Nio.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +47,8 @@
 			children = (
 				39C931DB2384328A004449E1 /* Nio */,
 				39C931DA2384328A004449E1 /* Products */,
+				E59A03343DCFE20D3EC045F7 /* Pods */,
+				5DC5384442FBDB92C6AD5E68 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -75,6 +82,24 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		5DC5384442FBDB92C6AD5E68 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3410F361E5A713D19ECEF861 /* Pods_Nio.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E59A03343DCFE20D3EC045F7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2B2F4F3EBCAD5CCD1232E88A /* Pods-Nio.debug.xcconfig */,
+				1E4E720D4D3B7FC804D870FA /* Pods-Nio.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -82,9 +107,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 39C931ED2384328B004449E1 /* Build configuration list for PBXNativeTarget "Nio" */;
 			buildPhases = (
+				3B30D3B15955D3087BA94018 /* [CP] Check Pods Manifest.lock */,
 				39C931D523843289004449E1 /* Sources */,
 				39C931D623843289004449E1 /* Frameworks */,
 				39C931D723843289004449E1 /* Resources */,
+				68561E1145B5AE87692E95D3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -140,6 +167,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3B30D3B15955D3087BA94018 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Nio-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		68561E1145B5AE87692E95D3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Nio/Pods-Nio-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Nio/Pods-Nio-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Nio/Pods-Nio-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		39C931D523843289004449E1 /* Sources */ = {
@@ -282,6 +351,7 @@
 		};
 		39C931EE2384328B004449E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B2F4F3EBCAD5CCD1232E88A /* Pods-Nio.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -302,6 +372,7 @@
 		};
 		39C931EF2384328B004449E1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E4E720D4D3B7FC804D870FA /* Pods-Nio.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
