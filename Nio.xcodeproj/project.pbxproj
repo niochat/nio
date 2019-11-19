@@ -13,7 +13,7 @@
 		39C931E32384328B004449E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39C931E22384328B004449E1 /* Assets.xcassets */; };
 		39C931E62384328B004449E1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39C931E52384328B004449E1 /* Preview Assets.xcassets */; };
 		39C931E92384328B004449E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39C931E72384328B004449E1 /* LaunchScreen.storyboard */; };
-		39C931F223844808004449E1 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 39C931F123844807004449E1 /* .swiftlint.yml */; };
+		39C931F723846B2D004449E1 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 39C931F623846B2D004449E1 /* .swiftlint.yml */; };
 		87FE3870173FD55A91B15921 /* Pods_Nio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3410F361E5A713D19ECEF861 /* Pods_Nio.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,7 +29,7 @@
 		39C931E52384328B004449E1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		39C931E82384328B004449E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		39C931EA2384328B004449E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		39C931F123844807004449E1 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = .swiftlint.yml; path = ../.swiftlint.yml; sourceTree = "<group>"; };
+		39C931F623846B2D004449E1 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,9 +69,8 @@
 				39C931DE2384328A004449E1 /* SceneDelegate.swift */,
 				39C931E02384328A004449E1 /* RootView.swift */,
 				39C931E22384328B004449E1 /* Assets.xcassets */,
-				39C931E72384328B004449E1 /* LaunchScreen.storyboard */,
 				39C931EA2384328B004449E1 /* Info.plist */,
-				39C931F123844807004449E1 /* .swiftlint.yml */,
+				39C931F3238449C2004449E1 /* Supporting Files */,
 				39C931E42384328B004449E1 /* Preview Content */,
 			);
 			path = Nio;
@@ -83,6 +82,15 @@
 				39C931E52384328B004449E1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		39C931F3238449C2004449E1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				39C931F623846B2D004449E1 /* .swiftlint.yml */,
+				39C931E72384328B004449E1 /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		5DC5384442FBDB92C6AD5E68 /* Frameworks */ = {
@@ -163,7 +171,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39C931F223844808004449E1 /* .swiftlint.yml in Resources */,
+				39C931F723846B2D004449E1 /* .swiftlint.yml in Resources */,
 				39C931E92384328B004449E1 /* LaunchScreen.storyboard in Resources */,
 				39C931E62384328B004449E1 /* Preview Assets.xcassets in Resources */,
 				39C931E32384328B004449E1 /* Assets.xcassets in Resources */,
