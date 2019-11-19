@@ -10,9 +10,7 @@ struct RootView: View {
             )
         } else {
             return AnyView(
-                LoginView().onLogin { username, password, homeserver in
-                    self.mxStore.login(username: username, password: password, homeserver: homeserver)
-                }
+                LoginView()
             )
         }
     }

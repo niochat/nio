@@ -1,18 +1,19 @@
 import SwiftUI
 
 struct LoginView: View {
+    @EnvironmentObject var mxStore: MatrixStore
+
     @State private var username = ""
     @State private var password = ""
     @State private var homeserver = "matrix.org"
 
     @State private var showingRegisterView = false
 
-    var loginHandler: ((String, String, URL) -> Void)?
-
-    func onLogin(handler: @escaping (String, String, URL) -> Void) -> LoginView {
-        var copy = self
-        copy.loginHandler = handler
-        return copy
+    var loginEnabled: Bool {
+        guard !username.isEmpty && !password.isEmpty else { return false }
+        guard let hsURL = URL(string: homeserver) else { return false }
+        guard !hsURL.absoluteString.isEmpty else { return false }
+        return true
     }
 
     var body: some View {
@@ -24,11 +25,16 @@ struct LoginView: View {
             LoginForm(username: $username, password: $password, homeserver: $homeserver)
 
             Button(action: {
-                // TODO: Validate HS URL (and non-empty username/pw) and disable login button if invalid
-                self.loginHandler?(self.username, self.password, URL(string: "https://matrix.org")!)
+                self.mxStore.login(username: self.username,
+                                   password: self.password,
+                                   homeserver: URL(string: "https://matrix.org")!)
             }, label: {
-                Text("Log in").bold()
-            }).padding([.top, .bottom], 30)
+                Text("Log in")
+                    .font(.system(size: 18))
+                    .bold()
+            })
+            .padding([.top, .bottom], 30)
+            .disabled(!loginEnabled)
 
             Button(action: {
                 self.showingRegisterView.toggle()
@@ -39,7 +45,7 @@ struct LoginView: View {
             Spacer()
         }
         .sheet(isPresented: $showingRegisterView) {
-            Text("Registering for new accounts not yet implemented.")
+            Text("Registering for new accounts is not yet implemented.")
         }
     }
 }
@@ -102,5 +108,6 @@ private struct LoginForm: View {
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
+            .environmentObject(MatrixStore())
     }
 }
