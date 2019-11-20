@@ -8,7 +8,7 @@ struct ConversationListView: View {
             self.selectedNavigationItem = .settings
         }, label: {
             Image(systemName: "person.crop.circle")
-                .font(.system(size: 20))
+                .font(.system(size: 25))
         })
     }
 
@@ -16,8 +16,8 @@ struct ConversationListView: View {
         Button(action: {
             self.selectedNavigationItem = .newMessage
         }, label: {
-            Image(systemName: "square.and.pencil")
-                .font(.system(size: 20))
+            Image(systemName: "plus")
+                .font(.system(size: 25))
         })
     }
 
