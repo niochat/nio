@@ -5,14 +5,14 @@ struct LoginView: View {
 
     @State private var username = ""
     @State private var password = ""
-    @State private var homeserver = "matrix.org"
+    @State private var homeserver = ""
 
     @State private var showingRegisterView = false
 
     var loginEnabled: Bool {
         guard !username.isEmpty && !password.isEmpty else { return false }
-        guard let hsURL = URL(string: homeserver) else { return false }
-        guard !hsURL.absoluteString.isEmpty else { return false }
+        let homeserver = self.homeserver.isEmpty ? "https://matrix.org" : self.homeserver
+        guard URL(string: homeserver) != nil else { return false }
         return true
     }
 
@@ -23,14 +23,13 @@ struct LoginView: View {
 
             Spacer()
             LoginForm(username: $username, password: $password, homeserver: $homeserver)
-                .keyboardObserving()
 
             Button(action: {
                 self.mxStore.login(username: self.username,
                                    password: self.password,
                                    homeserver: URL(string: "https://matrix.org")!)
             }, label: {
-                Text("Log in")
+                Text("Sign in")
                     .font(.system(size: 18))
                     .bold()
             })
@@ -45,6 +44,7 @@ struct LoginView: View {
 
             Spacer()
         }
+        .keyboardObserving()
         .sheet(isPresented: $showingRegisterView) {
             Text("Registering for new accounts is not yet implemented.")
         }
@@ -59,7 +59,7 @@ private struct LoginTitleView: View {
             (Text("👋 Welcome to ") + purpleTitle + Text("!"))
                 .font(.title)
                 .bold()
-            Text("Log in to your account below to get started.")
+            Text("Sign in to your account to get started.")
         }
     }
 }
@@ -71,37 +71,47 @@ private struct LoginForm: View {
 
     var body: some View {
         VStack {
-            HStack(alignment: .center) {
-                Text("Username")
-                    .font(Font.body.smallCaps())
-                    .foregroundColor(.accentColor)
-                TextField("t.anderson", text: $username)
-            }
-            .padding([.horizontal, .bottom])
+            FormTextField(title: "Username", text: $username)
 
-            HStack(alignment: .center) {
-                Text("Password")
-                    .font(Font.body.smallCaps())
-                    .foregroundColor(.accentColor)
-                SecureField("********", text: $password)
-            }
-            .padding([.horizontal, .bottom])
+            FormTextField(title: "Password", text: $password, isSecure: true)
 
-            HStack(alignment: .center) {
-                Text("Homeserver")
-                    .font(Font.body.smallCaps())
-                    .foregroundColor(.accentColor)
-                TextField("matrix.org", text: $homeserver)
-                    .keyboardType(.URL)
-            }
-            .padding(.horizontal)
+            FormTextField(title: "Homeserver", text: $homeserver)
+            Text("Homeserver is optional if you're using matrix.org.")
+                .font(.caption)
+                .foregroundColor(.gray)
         }
+    }
+}
+
+private struct FormTextField: View {
+    @Environment(\.colorScheme) var colorScheme
+
+    var title: LocalizedStringKey
+    @Binding var text: String
+
+    var isSecure = false
+
+    var body: some View {
+        ZStack {
+            Capsule(style: .continuous)
+                .foregroundColor(colorScheme == .light ? Color(#colorLiteral(red: 0.9395676295, green: 0.9395676295, blue: 0.9395676295, alpha: 1)) : Color(#colorLiteral(red: 0.2293992357, green: 0.2293992357, blue: 0.2293992357, alpha: 1)))
+                .frame(height: 50)
+            if isSecure {
+                SecureField(title, text: $text)
+                    .padding()
+            } else {
+                TextField(title, text: $text)
+                    .padding()
+            }
+        }
+        .padding(.horizontal)
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
+            .accentColor(.purple)
             .environmentObject(MatrixStore())
     }
 }
