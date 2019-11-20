@@ -4,14 +4,12 @@ struct RootView: View {
     @EnvironmentObject var mxStore: MatrixStore
 
     var body: some View {
-        if mxStore.isLoggedIn {
-            return AnyView(
-                MainTabView()
-            )
-        } else {
-            return AnyView(
+        Group {
+            if mxStore.isLoggedIn {
+                ConversationListView()
+            } else {
                 LoginView()
-            )
+            }
         }
     }
 }
@@ -19,5 +17,6 @@ struct RootView: View {
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {
         RootView()
+            .environmentObject(MatrixStore())
     }
 }
