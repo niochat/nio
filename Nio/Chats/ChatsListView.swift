@@ -15,7 +15,7 @@ struct ChatsListView: View {
     var body: some View {
         NavigationView {
             List(0..<10, id: \.self) { chat in
-                NavigationLink(destination: Text("Random chat #\(chat)")) {
+                NavigationLink(destination: ChatView()) {
                     VStack {
                         HStack {
                             Text("Random chat #\(chat)")

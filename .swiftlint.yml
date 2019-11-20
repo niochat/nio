@@ -1,2 +1,6 @@
 excluded:
   - Pods
+
+identifier_name:
+  excluded:
+    - id
