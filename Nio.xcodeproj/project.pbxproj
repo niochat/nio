@@ -16,8 +16,6 @@
 		39C931E92384328B004449E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39C931E72384328B004449E1 /* LaunchScreen.storyboard */; };
 		39C931F523846966004449E1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931F423846966004449E1 /* LoginView.swift */; };
 		39C931F723846B2D004449E1 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 39C931F623846B2D004449E1 /* .swiftlint.yml */; };
-		39C931FA2384795F004449E1 /* GeometryGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931F92384795F004449E1 /* GeometryGetter.swift */; };
-		39C931FC23847986004449E1 /* KeyboardGuardian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931FB23847986004449E1 /* KeyboardGuardian.swift */; };
 		39C931FE23847E7F004449E1 /* MatrixStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931FD23847E7F004449E1 /* MatrixStore.swift */; };
 		39C9320123847F8F004449E1 /* KeychainItem in Frameworks */ = {isa = PBXBuildFile; productRef = 39C9320023847F8F004449E1 /* KeychainItem */; };
 		39C932032384B878004449E1 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C932022384B878004449E1 /* MainTabView.swift */; };
@@ -43,8 +41,6 @@
 		39C931EA2384328B004449E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39C931F423846966004449E1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		39C931F623846B2D004449E1 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
-		39C931F92384795F004449E1 /* GeometryGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryGetter.swift; sourceTree = "<group>"; };
-		39C931FB23847986004449E1 /* KeyboardGuardian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardGuardian.swift; sourceTree = "<group>"; };
 		39C931FD23847E7F004449E1 /* MatrixStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixStore.swift; sourceTree = "<group>"; };
 		39C932022384B878004449E1 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		39C932062384BB13004449E1 /* ConversationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListView.swift; sourceTree = "<group>"; };
@@ -97,7 +93,6 @@
 				39C932022384B878004449E1 /* MainTabView.swift */,
 				39C932052384BAA0004449E1 /* Conversations */,
 				39D166C42385C7F6006DD257 /* Extensions */,
-				39C931F8238478DB004449E1 /* Utility */,
 				39C931E22384328B004449E1 /* Assets.xcassets */,
 				39C931EA2384328B004449E1 /* Info.plist */,
 				39C931F3238449C2004449E1 /* Supporting Files */,
@@ -121,15 +116,6 @@
 				39C931E72384328B004449E1 /* LaunchScreen.storyboard */,
 			);
 			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		39C931F8238478DB004449E1 /* Utility */ = {
-			isa = PBXGroup;
-			children = (
-				39C931F92384795F004449E1 /* GeometryGetter.swift */,
-				39C931FB23847986004449E1 /* KeyboardGuardian.swift */,
-			);
-			path = Utility;
 			sourceTree = "<group>";
 		};
 		39C932052384BAA0004449E1 /* Conversations */ = {
@@ -317,13 +303,11 @@
 				39D166C62385C804006DD257 /* String+Emoji.swift in Sources */,
 				39C93209238553E4004449E1 /* ConversationView.swift in Sources */,
 				39D166C82385C832006DD257 /* MessageView.swift in Sources */,
-				39C931FC23847986004449E1 /* KeyboardGuardian.swift in Sources */,
 				39C932032384B878004449E1 /* MainTabView.swift in Sources */,
 				39C931DF2384328A004449E1 /* SceneDelegate.swift in Sources */,
 				39C931F523846966004449E1 /* LoginView.swift in Sources */,
 				39C931FE23847E7F004449E1 /* MatrixStore.swift in Sources */,
 				39C931E12384328A004449E1 /* RootView.swift in Sources */,
-				39C931FA2384795F004449E1 /* GeometryGetter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,6 +23,7 @@ struct LoginView: View {
 
             Spacer()
             LoginForm(username: $username, password: $password, homeserver: $homeserver)
+                .keyboardObserving()
 
             Button(action: {
                 self.mxStore.login(username: self.username,
@@ -68,8 +69,6 @@ private struct LoginForm: View {
     @Binding var password: String
     @Binding var homeserver: String
 
-    @ObservedObject private var keyboard = KeyboardGuardian(textFieldCount: 1)
-
     var body: some View {
         VStack {
             HStack(alignment: .center) {
@@ -92,16 +91,11 @@ private struct LoginForm: View {
                 Text("Homeserver")
                     .font(Font.body.smallCaps())
                     .foregroundColor(.purple)
-                TextField("matrix.org", text: $homeserver,
-                          onEditingChanged: { if $0 { self.keyboard.showField = 0 }})
-                    .background(GeometryGetter(rect: $keyboard.rects[0]))
+                TextField("matrix.org", text: $homeserver)
                     .keyboardType(.URL)
             }
             .padding(.horizontal)
         }
-        .offset(y: keyboard.slide).animation(.easeInOut(duration: 0.25))
-        .onAppear { self.keyboard.addObserver() }
-        .onDisappear { self.keyboard.removeObserver() }
     }
 }
 
