@@ -13,6 +13,7 @@ struct MessageComposerView: View {
                 Image(systemName: "paperplane.fill")
                     .font(.system(size: 20))
             })
+            .disabled(message.isEmpty)
         }
         .padding(10)
         .overlay(
