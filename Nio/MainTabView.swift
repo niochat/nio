@@ -3,11 +3,11 @@ import SwiftUI
 struct MainTabView: View {
     var body: some View {
         TabView {
-            ChatsListView()
+            ConversationListView()
                 .tabItem {
                     VStack {
                         Image(systemName: "bubble.left.and.bubble.right")
-                        Text("Chats")
+                        Text("Conversations")
                     }
                 }
 

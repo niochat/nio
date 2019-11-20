@@ -35,7 +35,7 @@ let messages = [
 
 let conversationTitle = "Morpheus"
 
-struct ChatView: View {
+struct ConversationView: View {
     init() {
         UITableView.appearance().separatorStyle = .none
     }
@@ -78,10 +78,10 @@ struct MessageView: View {
     }
 }
 
-struct ChatView_Previews: PreviewProvider {
+struct ConversationView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ChatView()
+            ConversationView()
                 .accentColor(.purple)
                 .navigationBarTitle("Morpheus", displayMode: .inline)
         }

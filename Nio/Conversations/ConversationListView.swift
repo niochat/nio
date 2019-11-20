@@ -1,11 +1,11 @@
 import SwiftUI
 
-struct ChatsListView: View {
-    @State var showingNewChatSheet = false
+struct ConversationListView: View {
+    @State var showingNewConversationSheet = false
 
-    var newChatButton: some View {
+    var newConversationButton: some View {
         Button(action: {
-            self.showingNewChatSheet.toggle()
+            self.showingNewConversationSheet.toggle()
         }, label: {
             Image(systemName: "square.and.pencil")
                 .font(.system(size: 20))
@@ -14,17 +14,17 @@ struct ChatsListView: View {
 
     var body: some View {
         NavigationView {
-            List(0..<10, id: \.self) { chat in
-                NavigationLink(destination: ChatView()) {
+            List(0..<10, id: \.self) { conversation in
+                NavigationLink(destination: ConversationView()) {
                     VStack {
                         HStack {
-                            Text("Random chat #\(chat)")
+                            Text("Random conversation #\(conversation)")
                                 .font(.headline)
                             Image(systemName: "lock.slash.fill")
                                 .font(.caption)
                                 .foregroundColor(.yellow)
                             Spacer()
-                            Text("\(chat+10) minutes ago")
+                            Text("\(conversation+10) minutes ago")
                                 .font(.caption)
                                 .foregroundColor(.gray)
                         }
@@ -39,17 +39,17 @@ struct ChatsListView: View {
                     }
                 }
             }
-            .navigationBarTitle("Chats")
-            .navigationBarItems(trailing: newChatButton)
+            .navigationBarTitle("Conversations")
+            .navigationBarItems(trailing: newConversationButton)
         }
-        .sheet(isPresented: $showingNewChatSheet) {
+        .sheet(isPresented: $showingNewConversationSheet) {
             Text("New conversation")
         }
     }
 }
 
-struct ChatsListView_Previews: PreviewProvider {
+struct ConversationListView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatsListView()
+        ConversationListView()
     }
 }
