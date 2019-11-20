@@ -3,11 +3,19 @@ import SwiftUI
 struct MessageComposerView: View {
     @State private var message = ""
 
+    typealias SendHandler = (String) -> Void
+    var sendHandler: (SendHandler)?
+    func onSend(handler: @escaping SendHandler) -> Self {
+        var copy = self
+        copy.sendHandler = handler
+        return copy
+    }
+
     var body: some View {
         HStack {
             TextField("Message...", text: $message)
             Button(action: {
-                messages.append(StubMessage(id: messages.count, sender: "Neo", message: self.message))
+                self.sendHandler?(self.message)
                 self.message = ""
             }, label: {
                 Image(systemName: "paperplane.fill")
