@@ -40,7 +40,7 @@ struct LoginView: View {
             Button(action: {
                 self.showingRegisterView.toggle()
             }, label: {
-                Text("Register a new account on matrix.org").font(.footnote)
+                Text("Don't have an account yet?").font(.footnote)
             })
 
             Spacer()
