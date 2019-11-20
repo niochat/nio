@@ -35,7 +35,7 @@ struct ChatsListView: View {
                          """)
                             .font(.subheadline)
                             .foregroundColor(.gray)
-                            .lineLimit(3)
+                            .lineLimit(2)
                     }
                 }
             }
