@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct MessageComposerView: View {
+    @Environment (\.colorScheme) var colorScheme
+
     @State private var message = ""
 
     typealias SendHandler = (String) -> Void
@@ -13,7 +15,23 @@ struct MessageComposerView: View {
 
     var body: some View {
         HStack {
-            TextField("Message...", text: $message)
+            Button(action: {
+                self.sendHandler?(self.message)
+                self.message = ""
+            }, label: {
+                Image(systemName: "plus")
+                    .font(.system(size: 20))
+            })
+
+            ZStack {
+                Capsule(style: .continuous)
+                    .frame(height: 40)
+                    .foregroundColor(colorScheme == .light ? Color(#colorLiteral(red: 0.9332506061, green: 0.937307477, blue: 0.9410644174, alpha: 1)) : Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
+
+                TextField("New Message...", text: $message)
+                    .padding(.horizontal)
+            }
+
             Button(action: {
                 self.sendHandler?(self.message)
                 self.message = ""
@@ -23,18 +41,24 @@ struct MessageComposerView: View {
             })
             .disabled(message.isEmpty)
         }
-        .padding(10)
-        .overlay(
-            Capsule(style: .continuous)
-                .stroke(Color.purple, lineWidth: 2)
-        )
     }
 }
 
 struct MessageComposerView_Previews: PreviewProvider {
     static var previews: some View {
-        MessageComposerView()
-            .accentColor(.purple)
-            .previewLayout(.sizeThatFits)
+        Group {
+            MessageComposerView()
+                .padding()
+                .environment(\.colorScheme, .light)
+
+            ZStack {
+                Color.black.frame(height: 80)
+                MessageComposerView()
+                    .padding()
+                    .environment(\.colorScheme, .dark)
+            }
+        }
+        .accentColor(.purple)
+        .previewLayout(.sizeThatFits)
     }
 }
