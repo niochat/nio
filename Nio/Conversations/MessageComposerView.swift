@@ -20,7 +20,6 @@ struct MessageComposerView: View {
             Capsule(style: .continuous)
                 .stroke(Color.purple, lineWidth: 2)
         )
-        .frame(minHeight: 50)
     }
 }
 

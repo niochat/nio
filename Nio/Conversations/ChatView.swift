@@ -47,7 +47,8 @@ struct ConversationView: View {
             }
 
             MessageComposerView()
-                .padding()
+                .padding(.horizontal)
+                .padding(.bottom, 10)
         }
         .navigationBarTitle(Text(conversationTitle), displayMode: .inline)
     }
