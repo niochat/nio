@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3970DC942385A8BE00EFE31B /* KeyboardObserving in Frameworks */ = {isa = PBXBuildFile; productRef = 3970DC932385A8BE00EFE31B /* KeyboardObserving */; };
 		39C931DD2384328A004449E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931DC2384328A004449E1 /* AppDelegate.swift */; };
 		39C931DF2384328A004449E1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931DE2384328A004449E1 /* SceneDelegate.swift */; };
 		39C931E12384328A004449E1 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931E02384328A004449E1 /* RootView.swift */; };
@@ -56,6 +57,7 @@
 			files = (
 				87FE3870173FD55A91B15921 /* Pods_Nio.framework in Frameworks */,
 				39C9320123847F8F004449E1 /* KeychainItem in Frameworks */,
+				3970DC942385A8BE00EFE31B /* KeyboardObserving in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +175,7 @@
 			name = Nio;
 			packageProductDependencies = (
 				39C9320023847F8F004449E1 /* KeychainItem */,
+				3970DC932385A8BE00EFE31B /* KeyboardObserving */,
 			);
 			productName = Nio;
 			productReference = 39C931D92384328A004449E1 /* Nio.app */;
@@ -204,6 +207,7 @@
 			mainGroup = 39C931D023843289004449E1;
 			packageReferences = (
 				39C931FF23847F8F004449E1 /* XCRemoteSwiftPackageReference "keychain-item" */,
+				3970DC922385A8BE00EFE31B /* XCRemoteSwiftPackageReference "KeyboardObserving" */,
 			);
 			productRefGroup = 39C931DA2384328A004449E1 /* Products */;
 			projectDirPath = "";
@@ -503,6 +507,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3970DC922385A8BE00EFE31B /* XCRemoteSwiftPackageReference "KeyboardObserving" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nickffox/KeyboardObserving.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.1;
+			};
+		};
 		39C931FF23847F8F004449E1 /* XCRemoteSwiftPackageReference "keychain-item" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/objcio/keychain-item";
@@ -514,6 +526,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3970DC932385A8BE00EFE31B /* KeyboardObserving */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3970DC922385A8BE00EFE31B /* XCRemoteSwiftPackageReference "KeyboardObserving" */;
+			productName = KeyboardObserving;
+		};
 		39C9320023847F8F004449E1 /* KeychainItem */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 39C931FF23847F8F004449E1 /* XCRemoteSwiftPackageReference "keychain-item" */;

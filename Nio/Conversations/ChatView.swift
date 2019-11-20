@@ -1,4 +1,5 @@
 import SwiftUI
+import KeyboardObserving
 
 struct StubMessage: Identifiable {
     var id: Int
@@ -51,6 +52,7 @@ struct ConversationView: View {
                 .padding(.bottom, 10)
         }
         .navigationBarTitle(Text(conversationTitle), displayMode: .inline)
+        .keyboardObserving()
     }
 }
 
