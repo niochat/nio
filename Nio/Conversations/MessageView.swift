@@ -39,12 +39,12 @@ struct MessageView: View {
                 Spacer()
             }
             VStack(alignment: .leading) {
-                if !message.isMe {
-                    Text(message.sender)
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                        .padding(.bottom, 5)
-                }
+//                if !message.isMe {
+//                    Text(message.sender)
+//                        .font(.caption)
+//                        .foregroundColor(.gray)
+//                        .padding(.bottom, 5)
+//                }
                 if message.message.containsOnlyEmoji && message.message.count <= 3 {
                     Text(message.message)
                         .font(.system(size: 60))
