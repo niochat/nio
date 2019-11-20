@@ -6,7 +6,10 @@ struct MessageComposerView: View {
     var body: some View {
         HStack {
             TextField("Message...", text: $message)
-            Button(action: { }, label: {
+            Button(action: {
+                messages.append(StubMessage(id: messages.count, sender: "Neo", message: self.message))
+                self.message = ""
+            }, label: {
                 Image(systemName: "paperplane.fill")
                     .font(.system(size: 20))
             })

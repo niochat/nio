@@ -25,7 +25,7 @@ struct StubMessage: Identifiable {
 }
 
 //swiftlint:disable line_length
-let messages = [
+var messages = [
     StubMessage(id: 0, sender: "Morpheus", message: "This line is tapped, so I must be brief. They got to you first, but they’ve underestimated how important you are. If they knew what I know, you’d probably be dead."),
     StubMessage(id: 1, sender: "Neo", message: "What are you talking about. What… what is happening to me?"),
     StubMessage(id: 2, sender: "Morpheus", message: "You are The One, Neo. You see, you may have spent the last few years looking for me, but I’ve spent my entire life looking for you. Now do you still want to meet?"),
