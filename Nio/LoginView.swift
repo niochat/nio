@@ -53,7 +53,7 @@ struct LoginView: View {
 
 private struct LoginTitleView: View {
     var body: some View {
-        let purpleTitle = Text("Nio").foregroundColor(.purple)
+        let purpleTitle = Text("Nio").foregroundColor(.accentColor)
 
         return VStack {
             (Text("👋 Welcome to ") + purpleTitle + Text("!"))
@@ -74,7 +74,7 @@ private struct LoginForm: View {
             HStack(alignment: .center) {
                 Text("Username")
                     .font(Font.body.smallCaps())
-                    .foregroundColor(.purple)
+                    .foregroundColor(.accentColor)
                 TextField("t.anderson", text: $username)
             }
             .padding([.horizontal, .bottom])
@@ -82,7 +82,7 @@ private struct LoginForm: View {
             HStack(alignment: .center) {
                 Text("Password")
                     .font(Font.body.smallCaps())
-                    .foregroundColor(.purple)
+                    .foregroundColor(.accentColor)
                 SecureField("********", text: $password)
             }
             .padding([.horizontal, .bottom])
@@ -90,7 +90,7 @@ private struct LoginForm: View {
             HStack(alignment: .center) {
                 Text("Homeserver")
                     .font(Font.body.smallCaps())
-                    .foregroundColor(.purple)
+                    .foregroundColor(.accentColor)
                 TextField("matrix.org", text: $homeserver)
                     .keyboardType(.URL)
             }
