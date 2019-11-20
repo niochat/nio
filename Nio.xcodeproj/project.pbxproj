@@ -24,6 +24,7 @@
 		39C932072384BB13004449E1 /* ConversationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C932062384BB13004449E1 /* ConversationListView.swift */; };
 		39C93209238553E4004449E1 /* ConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C93208238553E4004449E1 /* ConversationView.swift */; };
 		39C9320B23856033004449E1 /* MessageComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C9320A23856033004449E1 /* MessageComposerView.swift */; };
+		39D166C82385C832006DD257 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D166C72385C832006DD257 /* MessageView.swift */; };
 		87FE3870173FD55A91B15921 /* Pods_Nio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3410F361E5A713D19ECEF861 /* Pods_Nio.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +49,7 @@
 		39C932062384BB13004449E1 /* ConversationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListView.swift; sourceTree = "<group>"; };
 		39C93208238553E4004449E1 /* ConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationView.swift; sourceTree = "<group>"; };
 		39C9320A23856033004449E1 /* MessageComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageComposerView.swift; sourceTree = "<group>"; };
+		39D166C72385C832006DD257 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 			children = (
 				39C932062384BB13004449E1 /* ConversationListView.swift */,
 				39C93208238553E4004449E1 /* ConversationView.swift */,
+				39D166C72385C832006DD257 /* MessageView.swift */,
 				39C9320A23856033004449E1 /* MessageComposerView.swift */,
 			);
 			path = Conversations;
@@ -301,6 +304,7 @@
 				39C931DD2384328A004449E1 /* AppDelegate.swift in Sources */,
 				39C932072384BB13004449E1 /* ConversationListView.swift in Sources */,
 				39C93209238553E4004449E1 /* ConversationView.swift in Sources */,
+				39D166C82385C832006DD257 /* MessageView.swift in Sources */,
 				39C931FC23847986004449E1 /* KeyboardGuardian.swift in Sources */,
 				39C932032384B878004449E1 /* MainTabView.swift in Sources */,
 				39C931DF2384328A004449E1 /* SceneDelegate.swift in Sources */,
