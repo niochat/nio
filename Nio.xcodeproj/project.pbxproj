@@ -24,6 +24,7 @@
 		39C932072384BB13004449E1 /* ConversationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C932062384BB13004449E1 /* ConversationListView.swift */; };
 		39C93209238553E4004449E1 /* ConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C93208238553E4004449E1 /* ConversationView.swift */; };
 		39C9320B23856033004449E1 /* MessageComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C9320A23856033004449E1 /* MessageComposerView.swift */; };
+		39D166C62385C804006DD257 /* String+Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D166C52385C804006DD257 /* String+Emoji.swift */; };
 		39D166C82385C832006DD257 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D166C72385C832006DD257 /* MessageView.swift */; };
 		87FE3870173FD55A91B15921 /* Pods_Nio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3410F361E5A713D19ECEF861 /* Pods_Nio.framework */; };
 /* End PBXBuildFile section */
@@ -49,6 +50,7 @@
 		39C932062384BB13004449E1 /* ConversationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListView.swift; sourceTree = "<group>"; };
 		39C93208238553E4004449E1 /* ConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationView.swift; sourceTree = "<group>"; };
 		39C9320A23856033004449E1 /* MessageComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageComposerView.swift; sourceTree = "<group>"; };
+		39D166C52385C804006DD257 /* String+Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Emoji.swift"; sourceTree = "<group>"; };
 		39D166C72385C832006DD257 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,6 +96,7 @@
 				39C931F423846966004449E1 /* LoginView.swift */,
 				39C932022384B878004449E1 /* MainTabView.swift */,
 				39C932052384BAA0004449E1 /* Conversations */,
+				39D166C42385C7F6006DD257 /* Extensions */,
 				39C931F8238478DB004449E1 /* Utility */,
 				39C931E22384328B004449E1 /* Assets.xcassets */,
 				39C931EA2384328B004449E1 /* Info.plist */,
@@ -138,6 +141,14 @@
 				39C9320A23856033004449E1 /* MessageComposerView.swift */,
 			);
 			path = Conversations;
+			sourceTree = "<group>";
+		};
+		39D166C42385C7F6006DD257 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				39D166C52385C804006DD257 /* String+Emoji.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		5DC5384442FBDB92C6AD5E68 /* Frameworks */ = {
@@ -303,6 +314,7 @@
 				39C9320B23856033004449E1 /* MessageComposerView.swift in Sources */,
 				39C931DD2384328A004449E1 /* AppDelegate.swift in Sources */,
 				39C932072384BB13004449E1 /* ConversationListView.swift in Sources */,
+				39D166C62385C804006DD257 /* String+Emoji.swift in Sources */,
 				39C93209238553E4004449E1 /* ConversationView.swift in Sources */,
 				39D166C82385C832006DD257 /* MessageView.swift in Sources */,
 				39C931FC23847986004449E1 /* KeyboardGuardian.swift in Sources */,

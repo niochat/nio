@@ -21,7 +21,8 @@ class StubMessageStore: ObservableObject {
         StubMessage(id: 1, sender: "Neo", message: "What are you talking about. What… what is happening to me?"),
         StubMessage(id: 2, sender: "Morpheus", message: "You are The One, Neo. You see, you may have spent the last few years looking for me, but I’ve spent my entire life looking for you. Now do you still want to meet?"),
         StubMessage(id: 3, sender: "Neo", message: "Yes."),
-        StubMessage(id: 4, sender: "Morpheus", message: "Then go to the Adams street Bridge.")
+        StubMessage(id: 4, sender: "Morpheus", message: "Then go to the Adams street Bridge."),
+        StubMessage(id: 5, sender: "Neo", message: "🏃‍♀️💨")
     ]
 
     func append(message: String) {

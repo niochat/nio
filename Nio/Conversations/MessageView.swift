@@ -45,11 +45,17 @@ struct MessageView: View {
                         .foregroundColor(.gray)
                         .padding(.bottom, 5)
                 }
-                Text(message.message)
-                    .foregroundColor(textColor)
-                    .padding(10)
-                    .background(backgroundColor)
-                    .cornerRadius(15)
+                if message.message.containsOnlyEmoji && message.message.count <= 3 {
+                    Text(message.message)
+                        .font(.system(size: 60))
+                        .padding(10)
+                } else {
+                    Text(message.message)
+                        .foregroundColor(textColor)
+                        .padding(10)
+                        .background(backgroundColor)
+                        .cornerRadius(15)
+                }
             }
         }
     }
