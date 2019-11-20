@@ -19,6 +19,8 @@
 		39C931FC23847986004449E1 /* KeyboardGuardian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931FB23847986004449E1 /* KeyboardGuardian.swift */; };
 		39C931FE23847E7F004449E1 /* MatrixStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931FD23847E7F004449E1 /* MatrixStore.swift */; };
 		39C9320123847F8F004449E1 /* KeychainItem in Frameworks */ = {isa = PBXBuildFile; productRef = 39C9320023847F8F004449E1 /* KeychainItem */; };
+		39C932032384B878004449E1 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C932022384B878004449E1 /* MainTabView.swift */; };
+		39C932072384BB13004449E1 /* ChatsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C932062384BB13004449E1 /* ChatsListView.swift */; };
 		87FE3870173FD55A91B15921 /* Pods_Nio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3410F361E5A713D19ECEF861 /* Pods_Nio.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +41,8 @@
 		39C931F92384795F004449E1 /* GeometryGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryGetter.swift; sourceTree = "<group>"; };
 		39C931FB23847986004449E1 /* KeyboardGuardian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardGuardian.swift; sourceTree = "<group>"; };
 		39C931FD23847E7F004449E1 /* MatrixStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixStore.swift; sourceTree = "<group>"; };
+		39C932022384B878004449E1 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		39C932062384BB13004449E1 /* ChatsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +84,8 @@
 				39C931DE2384328A004449E1 /* SceneDelegate.swift */,
 				39C931E02384328A004449E1 /* RootView.swift */,
 				39C931F423846966004449E1 /* LoginView.swift */,
+				39C932022384B878004449E1 /* MainTabView.swift */,
+				39C932052384BAA0004449E1 /* Chats */,
 				39C931F8238478DB004449E1 /* Utility */,
 				39C931E22384328B004449E1 /* Assets.xcassets */,
 				39C931EA2384328B004449E1 /* Info.plist */,
@@ -113,6 +119,14 @@
 				39C931FB23847986004449E1 /* KeyboardGuardian.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		39C932052384BAA0004449E1 /* Chats */ = {
+			isa = PBXGroup;
+			children = (
+				39C932062384BB13004449E1 /* ChatsListView.swift */,
+			);
+			path = Chats;
 			sourceTree = "<group>";
 		};
 		5DC5384442FBDB92C6AD5E68 /* Frameworks */ = {
@@ -274,7 +288,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				39C931DD2384328A004449E1 /* AppDelegate.swift in Sources */,
+				39C932072384BB13004449E1 /* ChatsListView.swift in Sources */,
 				39C931FC23847986004449E1 /* KeyboardGuardian.swift in Sources */,
+				39C932032384B878004449E1 /* MainTabView.swift in Sources */,
 				39C931DF2384328A004449E1 /* SceneDelegate.swift in Sources */,
 				39C931F523846966004449E1 /* LoginView.swift in Sources */,
 				39C931FE23847E7F004449E1 /* MatrixStore.swift in Sources */,

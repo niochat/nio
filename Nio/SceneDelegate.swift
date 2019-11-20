@@ -16,6 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let rootView = RootView()
             .environmentObject(mxStore)
+            .accentColor(.purple)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

@@ -6,7 +6,7 @@ struct RootView: View {
     var body: some View {
         if mxStore.isLoggedIn {
             return AnyView(
-                Text("Conversations View")
+                MainTabView()
             )
         } else {
             return AnyView(
