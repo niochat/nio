@@ -16,7 +16,6 @@ struct MessageComposerView: View {
     var body: some View {
         HStack {
             Button(action: {
-                self.sendHandler?(self.message)
                 self.message = ""
             }, label: {
                 Image(systemName: "plus")
