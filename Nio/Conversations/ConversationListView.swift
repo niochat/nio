@@ -1,11 +1,20 @@
 import SwiftUI
 
 struct ConversationListView: View {
-    @State var showingNewConversationSheet = false
+    @State private var selectedNavigationItem: SelectedNavigationItem?
+
+    var settingsButton: some View {
+        Button(action: {
+            self.selectedNavigationItem = .settings
+        }, label: {
+            Image(systemName: "person.crop.circle")
+                .font(.system(size: 20))
+        })
+    }
 
     var newConversationButton: some View {
         Button(action: {
-            self.showingNewConversationSheet.toggle()
+            self.selectedNavigationItem = .newMessage
         }, label: {
             Image(systemName: "square.and.pencil")
                 .font(.system(size: 20))
@@ -14,7 +23,7 @@ struct ConversationListView: View {
 
     var body: some View {
         NavigationView {
-            List(0..<10, id: \.self) { conversation in
+            List(0..<15, id: \.self) { conversation in
                 NavigationLink(destination: ConversationView()) {
                     VStack {
                         HStack {
@@ -39,11 +48,31 @@ struct ConversationListView: View {
                     }
                 }
             }
-            .navigationBarTitle("Conversations")
-            .navigationBarItems(trailing: newConversationButton)
+            .navigationBarTitle("Nio", displayMode: .inline)
+            .navigationBarItems(leading: settingsButton, trailing: newConversationButton)
         }
-        .sheet(isPresented: $showingNewConversationSheet) {
-            Text("New conversation")
+        .sheet(item: $selectedNavigationItem, content: { NavigationSheet(selectedItem: $0) })
+    }
+}
+
+private enum SelectedNavigationItem: Int, Identifiable {
+    case settings
+    case newMessage
+
+    var id: Int {
+        return self.rawValue
+    }
+}
+
+private struct NavigationSheet: View {
+    var selectedItem: SelectedNavigationItem
+
+    var body: some View {
+        switch selectedItem {
+        case .settings:
+            return Text("Settings")
+        case .newMessage:
+            return Text("New Message")
         }
     }
 }
