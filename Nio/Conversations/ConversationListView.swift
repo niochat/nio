@@ -21,30 +21,37 @@ struct ConversationListView: View {
         })
     }
 
+    var conversationView: ConversationView {
+        ConversationView()
+    }
+
     var body: some View {
         NavigationView {
             List(0..<15, id: \.self) { conversation in
-                NavigationLink(destination: ConversationView()) {
-                    VStack {
-                        HStack {
-                            Text("Random conversation #\(conversation)")
-                                .font(.headline)
-                            Image(systemName: "lock.slash.fill")
-                                .font(.caption)
-                                .foregroundColor(.yellow)
-                            Spacer()
-                            Text("\(conversation+10) minutes ago")
-                                .font(.caption)
+                NavigationLink(destination: self.conversationView) {
+                    HStack {
+                        Image("stub-morpheus")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 50)
+                            .mask(Circle())
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Text("Morpheus #\(conversation)")
+                                    .font(.headline)
+                                Image(systemName: "lock.slash.fill")
+                                    .font(.caption)
+                                    .foregroundColor(.yellow)
+                                Spacer()
+                                Text("\(conversation+10) minutes ago")
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
+                            }
+                            Text(self.conversationView.messageStore.messages.randomElement()!.message)
+                                .font(.subheadline)
                                 .foregroundColor(.gray)
+                                .lineLimit(2)
                         }
-                        Text("""
-                         Consequatur odit doloribus autem est aut dolor. Sunt expedita esse dolorem aut et est. \
-                         Hic voluptate modi dignissimos delectus veritatis exercitationem quo. \
-                         Voluptatem odit est rerum in. Nostrum animi dolores ad assumenda quibusdam voluptatum.
-                         """)
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                            .lineLimit(2)
                     }
                 }
             }
