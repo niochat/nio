@@ -40,19 +40,26 @@ struct ConversationView: View {
 
     @ObservedObject var messageStore = StubMessageStore()
 
+    @State private var message = ""
+
     var body: some View {
         VStack {
             List(messageStore.messages) { message in
                 MessageView(message: message)
             }
 
-            MessageComposerView()
-                .onSend { self.messageStore.append(message: $0) }
+            MessageComposerView(message: $message,
+                                onCommit: send)
                 .padding(.horizontal)
                 .padding(.bottom, 10)
         }
         .navigationBarTitle(Text(conversationTitle), displayMode: .inline)
         .keyboardObserving()
+    }
+
+    private func send() {
+        self.messageStore.append(message: message)
+        message = ""
     }
 }
 
