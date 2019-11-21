@@ -1,22 +1,15 @@
 import SwiftUI
 
 struct RootView: View {
-    @EnvironmentObject var mxStore: MatrixStore
+    @EnvironmentObject var store: MatrixStore<AppState, AppAction>
 
     var body: some View {
         Group {
-            if mxStore.isLoggedIn {
+            if store.state.isLoggedIn {
                 ConversationListView()
             } else {
-                LoginView()
+                LoginContainerView()
             }
         }
-    }
-}
-
-struct RootView_Previews: PreviewProvider {
-    static var previews: some View {
-        RootView()
-            .environmentObject(MatrixStore())
     }
 }

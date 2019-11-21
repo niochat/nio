@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct LoginView: View {
-    @EnvironmentObject var mxStore: MatrixStore
+struct LoginContainerView: View {
+    @EnvironmentObject var store: MatrixStore<AppState, AppAction>
 
     @State private var username = ""
     @State private var password = ""
@@ -9,12 +9,40 @@ struct LoginView: View {
 
     @State private var showingRegisterView = false
 
-    var loginEnabled: Bool {
+    var body: some View {
+        LoginView(username: $username,
+                  password: $password,
+                  homeserver: $homeserver,
+                  showingRegisterView: $showingRegisterView,
+                  isLoginEnabled: isLoginEnabled,
+                  onLogin: login)
+    }
+
+    private func login() {
+        guard let homeserverURL = URL(string: self.homeserver) else {
+            // TODO: Handle error
+            return
+        }
+        store.send(SideEffect.login(username: username, password: password, homeserver: homeserverURL))
+    }
+
+    private func isLoginEnabled() -> Bool {
         guard !username.isEmpty && !password.isEmpty else { return false }
         let homeserver = self.homeserver.isEmpty ? "https://matrix.org" : self.homeserver
         guard URL(string: homeserver) != nil else { return false }
         return true
     }
+}
+
+struct LoginView: View {
+    @Binding var username: String
+    @Binding var password: String
+    @Binding var homeserver: String
+
+    @Binding var showingRegisterView: Bool
+
+    let isLoginEnabled: () -> Bool
+    let onLogin: () -> Void
 
     var body: some View {
         VStack {
@@ -25,16 +53,14 @@ struct LoginView: View {
             LoginForm(username: $username, password: $password, homeserver: $homeserver)
 
             Button(action: {
-                self.mxStore.login(username: self.username,
-                                   password: self.password,
-                                   homeserver: URL(string: "https://matrix.org")!)
+                self.onLogin()
             }, label: {
                 Text("Sign in")
                     .font(.system(size: 18))
                     .bold()
             })
             .padding([.top, .bottom], 30)
-            .disabled(!loginEnabled)
+            .disabled(!isLoginEnabled())
 
             Button(action: {
                 self.showingRegisterView.toggle()
@@ -110,8 +136,12 @@ private struct FormTextField: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(username: .constant(""),
+                  password: .constant(""),
+                  homeserver: .constant(""),
+                  showingRegisterView: .constant(false),
+                  isLoginEnabled: { return false },
+                  onLogin: {})
             .accentColor(.purple)
-            .environmentObject(MatrixStore())
     }
 }

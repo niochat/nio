@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		392389892386FD3900B2E1DF /* MXClient+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389882386FD3900B2E1DF /* MXClient+Publisher.swift */; };
+		3923898B238741D700B2E1DF /* Redux.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3923898A238741D700B2E1DF /* Redux.swift */; };
 		3970DC942385A8BE00EFE31B /* KeyboardObserving in Frameworks */ = {isa = PBXBuildFile; productRef = 3970DC932385A8BE00EFE31B /* KeyboardObserving */; };
 		39C931DD2384328A004449E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931DC2384328A004449E1 /* AppDelegate.swift */; };
 		39C931DF2384328A004449E1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931DE2384328A004449E1 /* SceneDelegate.swift */; };
@@ -30,6 +32,8 @@
 		1E4E720D4D3B7FC804D870FA /* Pods-Nio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nio.release.xcconfig"; path = "Target Support Files/Pods-Nio/Pods-Nio.release.xcconfig"; sourceTree = "<group>"; };
 		2B2F4F3EBCAD5CCD1232E88A /* Pods-Nio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nio.debug.xcconfig"; path = "Target Support Files/Pods-Nio/Pods-Nio.debug.xcconfig"; sourceTree = "<group>"; };
 		3410F361E5A713D19ECEF861 /* Pods_Nio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		392389882386FD3900B2E1DF /* MXClient+Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXClient+Publisher.swift"; sourceTree = "<group>"; };
+		3923898A238741D700B2E1DF /* Redux.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Redux.swift; sourceTree = "<group>"; };
 		39C931D92384328A004449E1 /* Nio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39C931DC2384328A004449E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39C931DE2384328A004449E1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +89,7 @@
 			children = (
 				39C931DC2384328A004449E1 /* AppDelegate.swift */,
 				39C931FD23847E7F004449E1 /* MatrixStore.swift */,
+				3923898A238741D700B2E1DF /* Redux.swift */,
 				39C931DE2384328A004449E1 /* SceneDelegate.swift */,
 				39C931E02384328A004449E1 /* RootView.swift */,
 				39C931F423846966004449E1 /* LoginView.swift */,
@@ -120,8 +125,8 @@
 			children = (
 				39C932062384BB13004449E1 /* ConversationListView.swift */,
 				39C93208238553E4004449E1 /* ConversationView.swift */,
-				39D166C72385C832006DD257 /* MessageView.swift */,
 				39C9320A23856033004449E1 /* MessageComposerView.swift */,
+				39D166C72385C832006DD257 /* MessageView.swift */,
 			);
 			path = Conversations;
 			sourceTree = "<group>";
@@ -130,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				39D166C52385C804006DD257 /* String+Emoji.swift */,
+				392389882386FD3900B2E1DF /* MXClient+Publisher.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -295,6 +301,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				39C9320B23856033004449E1 /* MessageComposerView.swift in Sources */,
+				392389892386FD3900B2E1DF /* MXClient+Publisher.swift in Sources */,
+				3923898B238741D700B2E1DF /* Redux.swift in Sources */,
 				39C931DD2384328A004449E1 /* AppDelegate.swift in Sources */,
 				39C932072384BB13004449E1 /* ConversationListView.swift in Sources */,
 				39D166C62385C804006DD257 /* String+Emoji.swift in Sources */,

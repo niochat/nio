@@ -1,39 +1,26 @@
 import Foundation
 import Combine
 import SwiftMatrixSDK
-import KeychainItem
 
-class MatrixStore: ObservableObject {
-    var objectWillChange = ObservableObjectPublisher()
+class MatrixStore<State, Action>: ObservableObject {
+    @Published private(set) var state: State
 
-    init() {
-        if CommandLine.arguments.contains("-clear-keychain-on-launch") {
-            mxid = nil
-            password = nil
-            self.objectWillChange.send()
-        }
+    private let reducer: Reducer<State, Action>
+    private var cancellables: Set<AnyCancellable> = []
+
+    init(initialState: State, reducer: Reducer<State, Action>) {
+        self.state = initialState
+        self.reducer = reducer
     }
 
-    // MARK: Account Handling
-
-    @KeychainItem(account: "nio.account.mxid")
-    var mxid: String?
-
-    @KeychainItem(account: "nio.account.password")
-    var password: String?
-
-    func login(username: String, password: String, homeserver: URL) {
-        // TODO: Implement me
-        self.mxid = username
-        self.password = password
-
-        self.objectWillChange.send()
+    func send(_ action: Action) {
+        reducer.reduce(&state, action)
     }
 
-    var isLoggedIn: Bool {
-        if mxid == nil || password == nil {
-            return false
-        }
-        return true
+    func send<E: Effect>(_ effect: E) where E.Action == Action {
+        effect.mapToAction()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: send)
+            .store(in: &cancellables)
     }
 }
