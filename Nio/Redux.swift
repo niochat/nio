@@ -4,6 +4,8 @@ import SwiftMatrixSDK
 // MARK: States
 
 struct AppState {
+    var client: MXRestClient?
+
     var credentials: MXCredentials?
     var isLoggedIn: Bool {
         return credentials != nil
@@ -18,13 +20,11 @@ protocol Effect {
 }
 
 enum SideEffect: Effect {
-    case login(username: String, password: String, homeserver: URL)
+    case login(username: String, password: String, client: MXRestClient)
 
     func mapToAction() -> AnyPublisher<AppAction, Never> {
         switch self {
-        case let .login(username: username, password: password, homeserver: homeserver):
-//            return dependencies.matrixService
-            let client = MXRestClient(homeServer: homeserver, unrecognizedCertificateHandler: nil)
+        case let .login(username: username, password: password, client: client):
             return client
                 .loginPublisher(username: username, password: password)
                 .replaceError(with: MXCredentials()) // FIXME
@@ -37,6 +37,7 @@ enum SideEffect: Effect {
 // MARK: Actions
 
 enum AppAction {
+    case client(MXRestClient)
     case loggedIn(MXCredentials)
 }
 
@@ -48,6 +49,8 @@ struct Reducer<State, Action> {
 
 let appReducer: Reducer<AppState, AppAction> = Reducer { state, action in
     switch action {
+    case let .client(client):
+        state.client = client
     case let .loggedIn(credentials):
         state.credentials = credentials
     }

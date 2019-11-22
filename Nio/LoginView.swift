@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftMatrixSDK
 
 struct LoginContainerView: View {
     @EnvironmentObject var store: MatrixStore<AppState, AppAction>
@@ -23,7 +24,9 @@ struct LoginContainerView: View {
             // TODO: Handle error
             return
         }
-        store.send(SideEffect.login(username: username, password: password, homeserver: homeserverURL))
+        let client = MXRestClient(homeServer: homeserverURL, unrecognizedCertificateHandler: nil)
+        store.send(AppAction.client(client))
+        store.send(SideEffect.login(username: username, password: password, client: client))
     }
 
     private func isLoginEnabled() -> Bool {
