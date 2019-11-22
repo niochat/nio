@@ -18,6 +18,7 @@ PODS:
   - AppCenter/Crashes (2.5.1):
     - AppCenter/Core
   - GZIP (1.2.3)
+  - Keys (1.0.1)
   - libbase58 (0.1.4)
   - OLMKit (3.1.0):
     - OLMKit/olmc (= 3.1.0)
@@ -36,6 +37,7 @@ PODS:
 
 DEPENDENCIES:
   - AppCenter/Crashes
+  - Keys (from `Pods/CocoaPodsKeys`)
   - SwiftMatrixSDK
 
 SPEC REPOS:
@@ -48,15 +50,20 @@ SPEC REPOS:
     - Realm
     - SwiftMatrixSDK
 
+EXTERNAL SOURCES:
+  Keys:
+    :path: Pods/CocoaPodsKeys
+
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   AppCenter: fddcbac6e4baae3d93a196ceb0bfe0e4ce407dec
   GZIP: af5c90ef903776a7e9afe6ebebd794a84a2929d4
+  Keys: a576f4c9c1c641ca913a959a9c62ed3f215a8de9
   libbase58: 7c040313537b8c44b6e2d15586af8e21f7354efd
   OLMKit: 4ee0159d63feeb86d836fdcfefe418e163511639
   Realm: 5a1d9d47bfc101dd597668b1a8af4288a2557f6d
   SwiftMatrixSDK: 84957de558895ff562884c51572a75ae96b7c1f1
 
-PODFILE CHECKSUM: 9cddc957395f9200b04293edbc32bc2c687463c3
+PODFILE CHECKSUM: 6a882b19e25bbcee306b7ed03ff2e94c00f68aaf
 
 COCOAPODS: 1.8.4

@@ -14,6 +14,16 @@
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>MIT LICENSE Found in the repo</string>
+			<key>License</key>
+			<string>MIT</string>
+			<key>Title</key>
+			<string>Keys</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>Copyright (c) 2011-2016 Alamofire Software Foundation (http://alamofire.org/)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

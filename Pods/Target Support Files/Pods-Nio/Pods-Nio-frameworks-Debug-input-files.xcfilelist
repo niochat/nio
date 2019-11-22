@@ -1,4 +1,5 @@
 ${PODS_ROOT}/Target Support Files/Pods-Nio/Pods-Nio-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Keys-framework/Keys.framework
 ${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework
 ${BUILT_PRODUCTS_DIR}/GZIP/GZIP.framework
 ${BUILT_PRODUCTS_DIR}/OLMKit/OLMKit.framework

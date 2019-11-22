@@ -5,4 +5,11 @@ target 'Nio' do
 
   pod 'SwiftMatrixSDK'
   pod 'AppCenter/Crashes'
+
+  plugin 'cocoapods-keys', {
+    :project => 'Nio',
+    :keys => [
+      "AppCenterAPIKey",
+    ]
+  }
 end

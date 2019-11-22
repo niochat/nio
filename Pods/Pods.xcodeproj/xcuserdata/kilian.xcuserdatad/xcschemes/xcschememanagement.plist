@@ -19,6 +19,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Keys-framework.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Keys-library.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>OLMKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>

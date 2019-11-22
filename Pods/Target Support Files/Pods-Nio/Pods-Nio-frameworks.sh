@@ -161,6 +161,7 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/Keys-framework/Keys.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/GZIP/GZIP.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/OLMKit/OLMKit.framework"
@@ -169,6 +170,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/libbase58/libbase58.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/Keys-framework/Keys.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/GZIP/GZIP.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/OLMKit/OLMKit.framework"
