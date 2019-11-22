@@ -136,6 +136,7 @@ private struct FormTextField: View {
             }
         }
         .padding(.horizontal)
+        .frame(maxWidth: 400)
     }
 }
 
