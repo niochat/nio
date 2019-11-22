@@ -79,10 +79,10 @@ struct LoginView: View {
 
 private struct LoginTitleView: View {
     var body: some View {
-        let purpleTitle = Text("Nio").foregroundColor(.accentColor)
+        let nio = Text("Nio").foregroundColor(.accentColor)
 
         return VStack {
-            (Text("👋 Welcome to ") + purpleTitle + Text("!"))
+            (Text("👋 Welcome to ") + nio + Text("!"))
                 .font(.title)
                 .bold()
             Text("Sign in to your account to get started.")
