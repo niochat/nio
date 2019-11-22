@@ -1,1 +1,3 @@
-Nio.xcodeproj/xcuserdata/*
+Nio.xcodeproj/xcuserdata
+Nio.xcworkspace/xcuserdata
+Pods/Pods.xcodeproj/xcuserdata
