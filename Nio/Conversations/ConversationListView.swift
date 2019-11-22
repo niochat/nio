@@ -7,19 +7,21 @@ struct ConversationListContainerView: View {
     @State private var selectedNavigationItem: SelectedNavigationItem?
 
     var body: some View {
-        ConversationListView(selectedNavigationItem: $selectedNavigationItem)
+        ConversationListView(selectedNavigationItem: $selectedNavigationItem,
+                             conversations: store.state.recentRooms ?? [])
             .sheet(item: $selectedNavigationItem, content: { NavigationSheet(selectedItem: $0) })
-    }
-
-    init() {
-        guard let client = store.state.client else { return }
-        let session = MXSession(matrixRestClient: client)
-        store.send(SideEffect.start(session: session!))
+            .onAppear {
+                guard let client = self.store.state.client else { return }
+                let session = MXSession(matrixRestClient: client)
+                self.store.send(SideEffect.start(session: session!))
+            }
     }
 }
 
 struct ConversationListView: View {
     @Binding fileprivate var selectedNavigationItem: SelectedNavigationItem?
+
+    var conversations: [MXRoom]
 
     var settingsButton: some View {
         Button(action: {
@@ -103,6 +105,6 @@ private struct NavigationSheet: View {
 
 struct ConversationListView_Previews: PreviewProvider {
     static var previews: some View {
-        ConversationListView(selectedNavigationItem: .constant(nil))
+        ConversationListView(selectedNavigationItem: .constant(nil), conversations: [])
     }
 }
