@@ -30,13 +30,13 @@ enum SideEffect: Effect {
         switch self {
         case let .login(username: username, password: password, client: client):
             return client
-                .loginPublisher(username: username, password: password)
+                .nio_login(username: username, password: password)
                 .replaceError(with: MXCredentials()) // FIXME
                 .map { AppAction.loggedIn($0) }
                 .eraseToAnyPublisher()
         case .start(session: let session):
             return session
-                .startPublisher()
+                .nio_start()
                 .replaceError(with: MXSession()) // FIXME
                 .map { AppAction.session($0) }
                 .eraseToAnyPublisher()

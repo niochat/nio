@@ -3,7 +3,7 @@ import Combine
 import SwiftMatrixSDK
 
 extension MXSession {
-    func startPublisher() -> AnyPublisher<MXSession, Error> {
+    func nio_start() -> AnyPublisher<MXSession, Error> {
         Future<MXSession, Error> { promise in
             self.start { response in
                 switch response {

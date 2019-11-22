@@ -3,7 +3,7 @@ import Combine
 import SwiftMatrixSDK
 
 extension MXRestClient {
-    func loginPublisher(username: String, password: String) -> AnyPublisher<MXCredentials, Error> {
+    func nio_login(username: String, password: String) -> AnyPublisher<MXCredentials, Error> {
         Future<MXCredentials, Error> { promise in
             self.login(username: username, password: password) { response in
                 switch response {
