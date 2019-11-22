@@ -4,3 +4,4 @@ excluded:
 identifier_name:
   excluded:
     - id
+    - ts

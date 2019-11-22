@@ -47,32 +47,9 @@ struct ConversationListView: View {
 
     var body: some View {
         NavigationView {
-            List(0..<15, id: \.self) { conversation in
+            List(conversations) { conversation in
                 NavigationLink(destination: self.conversationView) {
-                    HStack {
-                        Image("stub-morpheus")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 50)
-                            .mask(Circle())
-                        VStack(alignment: .leading) {
-                            HStack {
-                                Text("Morpheus #\(conversation)")
-                                    .font(.headline)
-                                Image(systemName: "lock.slash.fill")
-                                    .font(.caption)
-                                    .foregroundColor(.yellow)
-                                Spacer()
-                                Text("\(conversation+10) minutes ago")
-                                    .font(.caption)
-                                    .foregroundColor(.gray)
-                            }
-                            Text(self.conversationView.messageStore.messages.randomElement()!.message)
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
-                                .lineLimit(2)
-                        }
-                    }
+                    ConversationListCell(conversation: conversation)
                 }
             }
             .navigationBarTitle("Nio", displayMode: .inline)
