@@ -1,7 +1,25 @@
 import SwiftUI
+import SwiftMatrixSDK
+
+struct ConversationListContainerView: View {
+    @EnvironmentObject var store: MatrixStore<AppState, AppAction>
+
+    @State private var selectedNavigationItem: SelectedNavigationItem?
+
+    var body: some View {
+        ConversationListView(selectedNavigationItem: $selectedNavigationItem)
+            .sheet(item: $selectedNavigationItem, content: { NavigationSheet(selectedItem: $0) })
+    }
+
+    init() {
+        guard let client = store.state.client else { return }
+        let session = MXSession(matrixRestClient: client)
+        store.send(SideEffect.start(session: session!))
+    }
+}
 
 struct ConversationListView: View {
-    @State private var selectedNavigationItem: SelectedNavigationItem?
+    @Binding fileprivate var selectedNavigationItem: SelectedNavigationItem?
 
     var settingsButton: some View {
         Button(action: {
@@ -58,7 +76,6 @@ struct ConversationListView: View {
             .navigationBarTitle("Nio", displayMode: .inline)
             .navigationBarItems(leading: settingsButton, trailing: newConversationButton)
         }
-        .sheet(item: $selectedNavigationItem, content: { NavigationSheet(selectedItem: $0) })
     }
 }
 
@@ -86,6 +103,6 @@ private struct NavigationSheet: View {
 
 struct ConversationListView_Previews: PreviewProvider {
     static var previews: some View {
-        ConversationListView()
+        ConversationListView(selectedNavigationItem: .constant(nil))
     }
 }

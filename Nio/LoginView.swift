@@ -20,8 +20,10 @@ struct LoginContainerView: View {
     }
 
     private func login() {
-        guard let homeserverURL = URL(string: self.homeserver) else {
+        let homeserver = self.homeserver.isEmpty ? "https://matrix.org" : self.homeserver
+        guard let homeserverURL = URL(string: homeserver) else {
             // TODO: Handle error
+            print("Invalid homeserver URL '\(homeserver)'")
             return
         }
         let client = MXRestClient(homeServer: homeserverURL, unrecognizedCertificateHandler: nil)

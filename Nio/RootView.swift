@@ -6,7 +6,7 @@ struct RootView: View {
     var body: some View {
         Group {
             if store.state.isLoggedIn {
-                ConversationListView()
+                ConversationListContainerView()
             } else {
                 LoginContainerView()
             }
