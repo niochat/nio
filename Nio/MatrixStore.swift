@@ -90,7 +90,11 @@ let appReducer: Reducer<AppState, AppAction> = Reducer { state, action in
     case .loginState(let loginState):
         state.loginState = loginState
     case .recentRooms:
-        state.recentRooms = MatrixServices.shared.session?.rooms
+        let recentConversations = MatrixServices.shared.session?.rooms
+            .sorted { lhs, rhs in
+                lhs.summary.lastMessageDate > rhs.summary.lastMessageDate
+            }
+        state.recentRooms = recentConversations
     case .publicRooms(let response):
         state.publicRooms = response
     }
