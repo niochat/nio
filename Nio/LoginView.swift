@@ -16,7 +16,8 @@ struct LoginContainerView: View {
                   homeserver: $homeserver,
                   showingRegisterView: $showingRegisterView,
                   isLoginEnabled: isLoginEnabled,
-                  onLogin: login)
+                  onLogin: login,
+                  loginState: store.state.loginState)
     }
 
     private func login() {
@@ -26,9 +27,7 @@ struct LoginContainerView: View {
             print("Invalid homeserver URL '\(homeserver)'")
             return
         }
-        let client = MXRestClient(homeServer: homeserverURL, unrecognizedCertificateHandler: nil)
-        store.send(AppAction.client(client))
-        store.send(SideEffect.login(username: username, password: password, client: client))
+        store.send(SideEffect.login(username: username, password: password, homeserver: homeserverURL))
     }
 
     private func isLoginEnabled() -> Bool {
@@ -48,6 +47,7 @@ struct LoginView: View {
 
     let isLoginEnabled: () -> Bool
     let onLogin: () -> Void
+    let loginState: LoginState
 
     var body: some View {
         VStack {
@@ -57,6 +57,18 @@ struct LoginView: View {
             Spacer()
             LoginForm(username: $username, password: $password, homeserver: $homeserver)
 
+            buttons
+
+            Spacer()
+        }
+        .keyboardObserving()
+        .sheet(isPresented: $showingRegisterView) {
+            Text("Registering for new accounts is not yet implemented.")
+        }
+    }
+
+    var buttons: some View {
+        VStack {
             Button(action: {
                 self.onLogin()
             }, label: {
@@ -72,12 +84,6 @@ struct LoginView: View {
             }, label: {
                 Text("Don't have an account yet?").font(.footnote)
             })
-
-            Spacer()
-        }
-        .keyboardObserving()
-        .sheet(isPresented: $showingRegisterView) {
-            Text("Registering for new accounts is not yet implemented.")
         }
     }
 }
@@ -147,7 +153,8 @@ struct LoginView_Previews: PreviewProvider {
                   homeserver: .constant(""),
                   showingRegisterView: .constant(false),
                   isLoginEnabled: { return false },
-                  onLogin: {})
+                  onLogin: {},
+                  loginState: .loggedOut)
             .accentColor(.purple)
     }
 }

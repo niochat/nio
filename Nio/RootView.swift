@@ -4,12 +4,23 @@ struct RootView: View {
     @EnvironmentObject var store: MatrixStore<AppState, AppAction>
 
     var body: some View {
-        Group {
-            if store.state.isLoggedIn {
+        switch store.state.loginState {
+        case .loggedIn:
+            return AnyView(
                 ConversationListContainerView()
-            } else {
+            )
+        case .loggedOut:
+            return AnyView(
                 LoginContainerView()
-            }
+            )
+        case .authenticating:
+            return AnyView(
+                ActivityIndicator()
+            )
+        case .failure(let error):
+            return AnyView(
+                Text(error.localizedDescription)
+            )
         }
     }
 }

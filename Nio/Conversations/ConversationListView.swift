@@ -11,9 +11,7 @@ struct ConversationListContainerView: View {
                              conversations: store.state.recentRooms ?? [])
             .sheet(item: $selectedNavigationItem, content: { NavigationSheet(selectedItem: $0) })
             .onAppear {
-                guard let client = self.store.state.client else { return }
-                let session = MXSession(matrixRestClient: client)
-                self.store.send(SideEffect.start(session: session!))
+                self.store.send(AppAction.recentRooms)
             }
     }
 }

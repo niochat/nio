@@ -28,16 +28,17 @@ class MatrixStore<State, Action>: ObservableObject {
 // MARK: States
 
 struct AppState {
-    var client: MXRestClient?
-    var session: MXSession?
-
-    var credentials: MXCredentials?
-    var isLoggedIn: Bool {
-        credentials != nil
-    }
+    var loginState: LoginState = .loggedOut
 
     var recentRooms: [MXRoom]?
     var publicRooms: MXPublicRoomsResponse?
+}
+
+enum LoginState {
+    case loggedOut
+    case authenticating
+    case failure(Error)
+    case loggedIn
 }
 
 // MARK: Side Effects
@@ -48,23 +49,16 @@ protocol Effect {
 }
 
 enum SideEffect: Effect {
-    case login(username: String, password: String, client: MXRestClient)
-    case start(session: MXSession)
+    case login(username: String, password: String, homeserver: URL)
     case publicRooms(client: MXRestClient)
 
     func mapToAction() -> AnyPublisher<AppAction, Never> {
         switch self {
-        case let .login(username: username, password: password, client: client):
-            return client
-                .nio_login(username: username, password: password)
-                .replaceError(with: MXCredentials()) // FIXME
-                .map { AppAction.loggedIn($0) }
-                .eraseToAnyPublisher()
-        case .start(session: let session):
-            return session
-                .nio_start()
-                .replaceError(with: MXSession()) // FIXME
-                .map { AppAction.session($0) }
+        case let .login(username: username, password: password, homeserver: homeserver):
+            return MatrixServices.shared
+                .login(username: username, password: password, homeserver: homeserver)
+                .replaceError(with: .loggedOut) // FIXME
+                .map { AppAction.loginState($0) }
                 .eraseToAnyPublisher()
         case .publicRooms(let client):
             return client
@@ -79,9 +73,7 @@ enum SideEffect: Effect {
 // MARK: Actions
 
 enum AppAction {
-    case client(MXRestClient)
-    case loggedIn(MXCredentials)
-    case session(MXSession)
+    case loginState(LoginState)
     case recentRooms
     case publicRooms(MXPublicRoomsResponse)
 }
@@ -93,16 +85,12 @@ struct Reducer<State, Action> {
 }
 
 let appReducer: Reducer<AppState, AppAction> = Reducer { state, action in
-    print(action)
+    print("👉 ACTION: \(action)")
     switch action {
-    case .client(let client):
-        state.client = client
-    case .loggedIn(let credentials):
-        state.credentials = credentials
-    case .session(let session):
-        state.session = session
+    case .loginState(let loginState):
+        state.loginState = loginState
     case .recentRooms:
-        state.recentRooms = state.session?.rooms
+        state.recentRooms = MatrixServices.shared.session?.rooms
     case .publicRooms(let response):
         state.publicRooms = response
     }
