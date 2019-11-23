@@ -22,13 +22,15 @@ struct ConversationListCell: View {
 
             VStack(alignment: .leading) {
                 HStack {
-                    Text(conversation.summary.displayname ?? "n/a")
-                        .font(.headline)
+                    Text(conversation.summary.displayname ?? "")
+                        .bold()
                         .lineLimit(2)
+                        .allowsTightening(true)
                     if !conversation.summary.isEncrypted {
                         Image(systemName: "lock.slash.fill")
                             .font(.caption)
                             .foregroundColor(.yellow)
+                            .opacity(0.5)
                     }
                     Spacer()
                     Text(Formatter.string(forRelativeDate: conversation.summary.lastMessageDate))
