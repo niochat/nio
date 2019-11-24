@@ -37,14 +37,15 @@ struct ConversationListCell: View {
     }
 
     var body: some View {
-        HStack {
+        HStack(alignment: .center) {
             image
 
             VStack(alignment: .leading) {
-                HStack {
+                HStack(alignment: .top) {
                     Text(title)
                         .font(.headline)
                         .lineLimit(2)
+                        .padding(.bottom, 5)
                         .allowsTightening(true)
                     Spacer()
                     Text(rightDetail)
@@ -56,6 +57,7 @@ struct ConversationListCell: View {
                         .font(.subheadline)
                         .foregroundColor(.gray)
                         .lineLimit(2)
+                        .allowsTightening(true)
                     if badge != 0 {
                         Spacer()
                         ZStack {
@@ -81,13 +83,20 @@ struct ConversationListCell_Previews: PreviewProvider {
                                  subtitle: "Red or blue 💊?",
                                  rightDetail: "10 minutes ago",
                                  badge: 2)
-                .padding()
+            ConversationListCell(title: "Morpheus",
+                                 subtitle: "Red or blue 💊?",
+                                 rightDetail: "10 minutes ago",
+                                 badge: 0)
             ConversationListCell(title: "Morpheus",
                                  subtitle: "Nesciunt quaerat voluptatem enim sunt. Provident id consequatur tempora nostrum. Sit in voluptatem consequuntur at et provident est facilis. Ut sit ad sit quam commodi qui.",
                                  rightDetail: "12:29",
                                  badge: 0)
-            .padding()
+            ConversationListCell(title: "Morpheus",
+                                 subtitle: "Nesciunt quaerat voluptatem enim sunt. Provident id consequatur tempora nostrum. Sit in voluptatem consequuntur at et provident est facilis. Ut sit ad sit quam commodi qui.",
+                                 rightDetail: "12:29",
+                                 badge: 1)
         }
+//        .padding()
         .accentColor(.purple)
         .previewLayout(.sizeThatFits)
     }
