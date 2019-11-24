@@ -17,8 +17,13 @@ extension MXCredentials {
         keychain["accessToken"] = accessToken
     }
 
+    func clear(from keychain: Keychain) {
+        keychain["homeserver"] = nil
+        keychain["userId"] = nil
+        keychain["accessToken"] = nil
+    }
+
     static func from(_ keychain: Keychain) -> MXCredentials? {
-        print("looking for existing credentials in keychain")
         guard
             let homeserver = keychain["homeserver"],
             let userId = keychain["userId"],
@@ -42,6 +47,13 @@ class MatrixServices {
     static var shared = MatrixServices()
 
     init() {
+        if CommandLine.arguments.contains("-clear-stored-credentials") {
+            print("🗑 cleared stored credentials from keychain")
+            MXCredentials
+                .from(keychain)?
+                .clear(from: keychain)
+        }
+
         if let credentials = MXCredentials.from(keychain) {
             self.store?.send(AppAction.loginState(.authenticating))
             self.start(with: credentials) { result in
