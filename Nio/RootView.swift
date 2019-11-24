@@ -19,7 +19,14 @@ struct RootView: View {
             )
         case .failure(let error):
             return AnyView(
-                Text(error.localizedDescription)
+                VStack {
+                    Text(error.localizedDescription)
+                    Button(action: {
+                        self.store.send(AppAction.loginState(.loggedOut))
+                    }, label: {
+                        Text("Go to login")
+                    })
+                }
             )
         }
     }

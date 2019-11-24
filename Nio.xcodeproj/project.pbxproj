@@ -15,6 +15,7 @@
 		3923899623888A6C00B2E1DF /* MXRoomSummary+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3923899523888A6C00B2E1DF /* MXRoomSummary+Helper.swift */; };
 		392389982388998F00B2E1DF /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389972388998F00B2E1DF /* ActivityIndicator.swift */; };
 		3923899A2388A52A00B2E1DF /* MatrixServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389992388A52A00B2E1DF /* MatrixServices.swift */; };
+		3923899F238ABA5700B2E1DF /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 3923899E238ABA5700B2E1DF /* KeychainAccess */; };
 		3970DC942385A8BE00EFE31B /* KeyboardObserving in Frameworks */ = {isa = PBXBuildFile; productRef = 3970DC932385A8BE00EFE31B /* KeyboardObserving */; };
 		39C931DD2384328A004449E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931DC2384328A004449E1 /* AppDelegate.swift */; };
 		39C931DF2384328A004449E1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931DE2384328A004449E1 /* SceneDelegate.swift */; };
@@ -25,7 +26,6 @@
 		39C931F523846966004449E1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931F423846966004449E1 /* LoginView.swift */; };
 		39C931F723846B2D004449E1 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 39C931F623846B2D004449E1 /* .swiftlint.yml */; };
 		39C931FE23847E7F004449E1 /* MatrixStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931FD23847E7F004449E1 /* MatrixStore.swift */; };
-		39C9320123847F8F004449E1 /* KeychainItem in Frameworks */ = {isa = PBXBuildFile; productRef = 39C9320023847F8F004449E1 /* KeychainItem */; };
 		39C932072384BB13004449E1 /* ConversationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C932062384BB13004449E1 /* ConversationListView.swift */; };
 		39C93209238553E4004449E1 /* ConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C93208238553E4004449E1 /* ConversationView.swift */; };
 		39C9320B23856033004449E1 /* MessageComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C9320A23856033004449E1 /* MessageComposerView.swift */; };
@@ -71,8 +71,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3923899F238ABA5700B2E1DF /* KeychainAccess in Frameworks */,
 				87FE3870173FD55A91B15921 /* Pods_Nio.framework in Frameworks */,
-				39C9320123847F8F004449E1 /* KeychainItem in Frameworks */,
 				3970DC942385A8BE00EFE31B /* KeyboardObserving in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,8 +206,8 @@
 			);
 			name = Nio;
 			packageProductDependencies = (
-				39C9320023847F8F004449E1 /* KeychainItem */,
 				3970DC932385A8BE00EFE31B /* KeyboardObserving */,
+				3923899E238ABA5700B2E1DF /* KeychainAccess */,
 			);
 			productName = Nio;
 			productReference = 39C931D92384328A004449E1 /* Nio.app */;
@@ -238,8 +238,8 @@
 			);
 			mainGroup = 39C931D023843289004449E1;
 			packageReferences = (
-				39C931FF23847F8F004449E1 /* XCRemoteSwiftPackageReference "keychain-item" */,
 				3970DC922385A8BE00EFE31B /* XCRemoteSwiftPackageReference "KeyboardObserving" */,
+				3923899D238ABA5700B2E1DF /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 			);
 			productRefGroup = 39C931DA2384328A004449E1 /* Products */;
 			projectDirPath = "";
@@ -547,6 +547,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3923899D238ABA5700B2E1DF /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.1.0;
+			};
+		};
 		3970DC922385A8BE00EFE31B /* XCRemoteSwiftPackageReference "KeyboardObserving" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/nickffox/KeyboardObserving.git";
@@ -555,26 +563,18 @@
 				minimumVersion = 0.2.1;
 			};
 		};
-		39C931FF23847F8F004449E1 /* XCRemoteSwiftPackageReference "keychain-item" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/objcio/keychain-item";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3923899E238ABA5700B2E1DF /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3923899D238ABA5700B2E1DF /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
 		3970DC932385A8BE00EFE31B /* KeyboardObserving */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3970DC922385A8BE00EFE31B /* XCRemoteSwiftPackageReference "KeyboardObserving" */;
 			productName = KeyboardObserving;
-		};
-		39C9320023847F8F004449E1 /* KeychainItem */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 39C931FF23847F8F004449E1 /* XCRemoteSwiftPackageReference "keychain-item" */;
-			productName = KeychainItem;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -11,12 +11,12 @@
         }
       },
       {
-        "package": "KeychainItem",
-        "repositoryURL": "https://github.com/objcio/keychain-item",
+        "package": "KeychainAccess",
+        "repositoryURL": "https://github.com/kishikawakatsumi/KeychainAccess",
         "state": {
           "branch": null,
-          "revision": "563fc973ee4c1fcdea646630f847a241025da3c4",
-          "version": "0.1.0"
+          "revision": "b920ad7df3c73189dcdd4aa05c540849b2010dbf",
+          "version": "4.1.0"
         }
       }
     ]

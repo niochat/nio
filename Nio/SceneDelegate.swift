@@ -13,6 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         let mxStore = MatrixStore<AppState, AppAction>(initialState: AppState(), reducer: appReducer)
+        MatrixServices.shared.store = mxStore
 
         let rootView = RootView()
             .environmentObject(mxStore)
