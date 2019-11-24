@@ -5,6 +5,7 @@ struct EventContainerView: View {
     @EnvironmentObject var store: MatrixStore<AppState, AppAction>
 
     var event: MXEvent
+    var isDirect: Bool
 
     var body: some View {
         switch MXEventType(identifier: event.type) {
@@ -13,7 +14,7 @@ struct EventContainerView: View {
             return AnyView(
                 MessageView(text: message,
                             sender: event.sender,
-                            showSender: false,
+                            showSender: !isDirect,
                             isMe: MatrixServices.shared.credentials?.userId == event.sender)
             )
         case .roomMember:

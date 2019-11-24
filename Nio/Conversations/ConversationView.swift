@@ -15,14 +15,18 @@ struct ConversationContainerView: View {
     var conversation: MXRoom
 
     var body: some View {
-        ConversationView(events: conversation.enumeratorForStoredMessagesWithType(in: Self.displayedMessageTypes)?.nextEventsBatch(50) ?? [])
-            .navigationBarTitle(Text(conversation.summary.displayname ?? ""), displayMode: .inline)
-            .keyboardObserving()
+        ConversationView(
+            events: conversation.enumeratorForStoredMessagesWithType(in: Self.displayedMessageTypes)?.nextEventsBatch(50) ?? [],
+            isDirect: conversation.isDirect
+        )
+        .navigationBarTitle(Text(conversation.summary.displayname ?? ""), displayMode: .inline)
+        .keyboardObserving()
     }
 }
 
 struct ConversationView: View {
     var events: [MXEvent]
+    var isDirect: Bool
 
     @State private var message = ""
 
@@ -30,7 +34,7 @@ struct ConversationView: View {
         VStack {
             ScrollView {
                 ForEach(events.reversed()) { event in
-                    EventContainerView(event: event)
+                    EventContainerView(event: event, isDirect: self.isDirect)
                         .padding(.horizontal)
                         .padding(.vertical, 10)
                 }
