@@ -6,10 +6,15 @@ struct ConversationListCellContainerView: View {
     var conversation: MXRoom
 
     var body: some View {
-        ConversationListCell(title: conversation.summary.displayname ?? "",
-                             subtitle: conversation.summary.lastMessageString ?? "",
-                             rightDetail: Formatter.string(forRelativeDate: conversation.summary.lastMessageDate),
-                             badge: conversation.summary.localUnreadEventCount)
+        let lastMessage = conversation
+            .enumeratorForStoredMessagesWithType(in: [kMXEventTypeStringRoomMessage])?
+            .nextEvent?
+            .content["body"] as? String ?? ""
+        let lastActivity = Formatter.string(forRelativeDate: conversation.summary.lastMessageDate)
+        return ConversationListCell(title: conversation.summary.displayname ?? "",
+                                    subtitle: lastMessage,
+                                    rightDetail: lastActivity,
+                                    badge: conversation.summary.localUnreadEventCount)
     }
 }
 
