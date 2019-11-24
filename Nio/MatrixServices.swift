@@ -69,8 +69,8 @@ class MatrixServices {
     }
 
     func login(username: String, password: String, homeserver: URL) -> AnyPublisher<LoginState, Error> {
-//        let options = MXSDKOptions.sharedInstance()
-//        options.enableCryptoWhenStartingMXSession = true
+        let options = MXSDKOptions.sharedInstance()
+        options.enableCryptoWhenStartingMXSession = true
 
         self.client = MXRestClient(homeServer: homeserver, unrecognizedCertificateHandler: nil)
 
