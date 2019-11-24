@@ -30,7 +30,7 @@
 		39C93209238553E4004449E1 /* ConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C93208238553E4004449E1 /* ConversationView.swift */; };
 		39C9320B23856033004449E1 /* MessageComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C9320A23856033004449E1 /* MessageComposerView.swift */; };
 		39D166C62385C804006DD257 /* String+Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D166C52385C804006DD257 /* String+Emoji.swift */; };
-		39D166C82385C832006DD257 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D166C72385C832006DD257 /* MessageView.swift */; };
+		39D166C82385C832006DD257 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D166C72385C832006DD257 /* EventView.swift */; };
 		87FE3870173FD55A91B15921 /* Pods_Nio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3410F361E5A713D19ECEF861 /* Pods_Nio.framework */; };
 		D37A340D2387F3EC00CE9033 /* MXSession+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37A340C2387F3EC00CE9033 /* MXSession+Publisher.swift */; };
 /* End PBXBuildFile section */
@@ -62,7 +62,7 @@
 		39C93208238553E4004449E1 /* ConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationView.swift; sourceTree = "<group>"; };
 		39C9320A23856033004449E1 /* MessageComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageComposerView.swift; sourceTree = "<group>"; };
 		39D166C52385C804006DD257 /* String+Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Emoji.swift"; sourceTree = "<group>"; };
-		39D166C72385C832006DD257 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		39D166C72385C832006DD257 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		D37A340C2387F3EC00CE9033 /* MXSession+Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXSession+Publisher.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -150,8 +150,8 @@
 				39C932062384BB13004449E1 /* ConversationListView.swift */,
 				3923898E2388707E00B2E1DF /* ConversationListCell.swift */,
 				39C93208238553E4004449E1 /* ConversationView.swift */,
+				39D166C72385C832006DD257 /* EventView.swift */,
 				39C9320A23856033004449E1 /* MessageComposerView.swift */,
-				39D166C72385C832006DD257 /* MessageView.swift */,
 			);
 			path = Conversations;
 			sourceTree = "<group>";
@@ -342,7 +342,7 @@
 				39C93209238553E4004449E1 /* ConversationView.swift in Sources */,
 				D37A340D2387F3EC00CE9033 /* MXSession+Publisher.swift in Sources */,
 				392389942388899200B2E1DF /* Formatter.swift in Sources */,
-				39D166C82385C832006DD257 /* MessageView.swift in Sources */,
+				39D166C82385C832006DD257 /* EventView.swift in Sources */,
 				39C931DF2384328A004449E1 /* SceneDelegate.swift in Sources */,
 				39C931F523846966004449E1 /* LoginView.swift in Sources */,
 				392389982388998F00B2E1DF /* ActivityIndicator.swift in Sources */,

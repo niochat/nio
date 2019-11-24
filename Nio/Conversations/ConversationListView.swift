@@ -39,14 +39,10 @@ struct ConversationListView: View {
         })
     }
 
-    var conversationView: ConversationView {
-        ConversationView()
-    }
-
     var body: some View {
         NavigationView {
             List(conversations) { conversation in
-                NavigationLink(destination: self.conversationView) {
+                NavigationLink(destination: ConversationContainerView(conversation: conversation)) {
                     ConversationListCellContainerView(conversation: conversation)
                 }
             }
