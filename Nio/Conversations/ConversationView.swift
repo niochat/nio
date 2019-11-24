@@ -28,8 +28,12 @@ struct ConversationView: View {
 
     var body: some View {
         VStack {
-            List(messageStore.messages) { message in
-                MessageView(message: message)
+            ScrollView {
+                ForEach(events.reversed()) { event in
+                    EventContainerView(event: event)
+                        .padding(.horizontal)
+                        .padding(.vertical, 10)
+                }
             }
 
             MessageComposerView(message: $message,
