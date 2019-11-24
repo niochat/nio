@@ -47,7 +47,7 @@ struct ConversationListView: View {
         NavigationView {
             List(conversations) { conversation in
                 NavigationLink(destination: self.conversationView) {
-                    ConversationListCell(conversation: conversation)
+                    ConversationListCellContainerView(conversation: conversation)
                 }
             }
             .navigationBarTitle("Nio", displayMode: .inline)
