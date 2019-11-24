@@ -79,7 +79,7 @@ struct MessageView: View {
                         .foregroundColor(.gray)
                         .padding(.bottom, 5)
                 }
-                if text.containsOnlyEmoji && text.count <= 3 {
+                if text.trimmingCharacters(in: .whitespacesAndNewlines).containsOnlyEmoji && text.count <= 3 {
                     Text(text)
                         .font(.system(size: 60))
                         .padding(10)
