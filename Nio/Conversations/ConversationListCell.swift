@@ -9,7 +9,7 @@ struct ConversationListCellContainerView: View {
         ConversationListCell(title: conversation.summary.displayname ?? "",
                              subtitle: conversation.summary.lastMessageString ?? "",
                              rightDetail: Formatter.string(forRelativeDate: conversation.summary.lastMessageDate),
-                             isUnread: conversation.summary.localUnreadEventCount != 0)
+                             badge: conversation.summary.localUnreadEventCount)
     }
 }
 
@@ -17,7 +17,7 @@ struct ConversationListCell: View {
     var title: String
     var subtitle: String
     var rightDetail: String
-    var isUnread: Bool
+    var badge: UInt
 
     var image: some View {
         ZStack {
@@ -41,20 +41,28 @@ struct ConversationListCell: View {
                         .font(.headline)
                         .lineLimit(2)
                         .allowsTightening(true)
-                    if isUnread {
-                        Circle()
-                            .foregroundColor(.blue)
-                            .frame(width: 10, height: 10)
-                    }
                     Spacer()
                     Text(rightDetail)
                         .font(.caption)
                         .foregroundColor(.gray)
                 }
-                Text(subtitle)
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                    .lineLimit(2)
+                HStack {
+                    Text(subtitle)
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                        .lineLimit(2)
+                    if badge != 0 {
+                        Spacer()
+                        ZStack {
+                            Circle()
+                                .foregroundColor(.accentColor)
+                                .frame(width: 20, height: 20)
+                            Text(String(badge))
+                                .font(.caption)
+                                .foregroundColor(.white)
+                        }
+                    }
+                }
             }
         }
     }
@@ -67,14 +75,15 @@ struct ConversationListCell_Previews: PreviewProvider {
             ConversationListCell(title: "Morpheus",
                                  subtitle: "Red or blue 💊?",
                                  rightDetail: "10 minutes ago",
-                                 isUnread: true)
+                                 badge: 2)
                 .padding()
             ConversationListCell(title: "Morpheus",
                                  subtitle: "Nesciunt quaerat voluptatem enim sunt. Provident id consequatur tempora nostrum. Sit in voluptatem consequuntur at et provident est facilis. Ut sit ad sit quam commodi qui.",
                                  rightDetail: "12:29",
-                                 isUnread: false)
+                                 badge: 0)
             .padding()
         }
+        .accentColor(.purple)
         .previewLayout(.sizeThatFits)
     }
 }
