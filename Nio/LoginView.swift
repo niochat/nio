@@ -136,9 +136,11 @@ private struct FormTextField: View {
             if isSecure {
                 SecureField(title, text: $text)
                     .padding()
+					.textContentType(.password)
             } else {
                 TextField(title, text: $text)
                     .padding()
+					.autocapitalization(.none)
             }
         }
         .padding(.horizontal)
