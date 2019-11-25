@@ -1,0 +1,21 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    RubyInline (3.12.5)
+      ZenTest (~> 4.3)
+    ZenTest (4.12.0)
+    cocoapods-keys (2.1.0)
+      dotenv
+      osx_keychain
+    dotenv (2.7.5)
+    osx_keychain (1.0.2)
+      RubyInline (~> 3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  cocoapods-keys!
+
+BUNDLED WITH
+   1.17.2
