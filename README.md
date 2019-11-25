@@ -21,7 +21,7 @@ $ pod install
 $ xed .
 ```
 
-The cocoapods-keys plugin is used for storing the API key for Microsoft AppCenter, which is bundled to gather crashlogs, explicitly nothing else (like analytics). This will be removed altogether once a first version of Nio is released to the App Store, but tracking crash information through TestFlight is unfortunately quite a pain 😕
+The cocoapods-keys plugin is used for storing the API key for Microsoft AppCenter, the SDK of which is bundled to gather crashlogs (crashlogs **only**, no analytics). This will be removed altogether once a first version of Nio is released to the App Store, but tracking crash information through TestFlight is unfortunately quite a pain 😕
 
-Running `pod install` will prompt you for your API key, feel free to enter whatever gibberish you like.
+Running `pod install` will prompt you for *your* API key, feel free to enter whatever gibberish you like.
 
