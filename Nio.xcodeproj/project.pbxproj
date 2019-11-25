@@ -55,7 +55,7 @@
 		39C931E52384328B004449E1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		39C931E82384328B004449E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		39C931EA2384328B004449E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		39C931F423846966004449E1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		39C931F423846966004449E1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; usesTabs = 0; };
 		39C931F623846B2D004449E1 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		39C931FD23847E7F004449E1 /* MatrixStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixStore.swift; sourceTree = "<group>"; };
 		39C932062384BB13004449E1 /* ConversationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListView.swift; sourceTree = "<group>"; };
@@ -98,6 +98,7 @@
 				5DC5384442FBDB92C6AD5E68 /* Frameworks */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		39C931DA2384328A004449E1 /* Products */ = {
 			isa = PBXGroup;
