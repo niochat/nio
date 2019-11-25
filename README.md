@@ -18,7 +18,7 @@ The following steps should be all that's necessary to build Nio with Xcode.
 ```bash
 $ git clone https://github.com/kiliankoe/nio.git
 $ cd nio
-$ gem install cocoapods-keys
+$ bundle install
 $ pod install
 $ xed .
 ```
