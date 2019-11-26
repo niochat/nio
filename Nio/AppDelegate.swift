@@ -1,18 +1,10 @@
 import UIKit
-import AppCenter
-import AppCenterCrashes
-import Keys
 
 //swiftlint:disable line_length
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
-        let keys = Keys.NioKeys()
-        MSAppCenter.start(keys.appCenterAPIKey, withServices: [
-            MSCrashes.self
-        ])
 
         return true
     }
