@@ -3,18 +3,15 @@ import SwiftMatrixSDK
 
 struct ConversationListCellContainerView: View {
 
-    var conversation: MXRoom
+    var room: NIORoom
 
     var body: some View {
-        let lastMessage = conversation
-            .enumeratorForStoredMessagesWithType(in: [kMXEventTypeStringRoomMessage])?
-            .nextEvent?
-            .content["body"] as? String ?? ""
-        let lastActivity = Formatter.string(forRelativeDate: conversation.summary.lastMessageDate)
-        return ConversationListCell(title: conversation.summary.displayname ?? "",
+        let lastMessage = room.lastMessage
+        let lastActivity = Formatter.string(forRelativeDate: room.summary.lastMessageDate)
+        return ConversationListCell(title: room.summary.displayname ?? "",
                                     subtitle: lastMessage,
                                     rightDetail: lastActivity,
-                                    badge: conversation.summary.localUnreadEventCount)
+                                    badge: room.summary.localUnreadEventCount)
     }
 }
 

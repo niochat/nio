@@ -4,23 +4,21 @@ import KeyboardObserving
 import SwiftMatrixSDK
 
 struct ConversationContainerView: View {
-    static var displayedMessageTypes = [
-        kMXEventTypeStringRoomMessage,
-        kMXEventTypeStringRoomMember,
-        kMXEventTypeStringRoomTopic
-    ]
-
     @EnvironmentObject var store: MatrixStore<AppState, AppAction>
 
-    var conversation: MXRoom
+    @ObservedObject var room: NIORoom
 
     var body: some View {
         ConversationView(
-            events: conversation.enumeratorForStoredMessagesWithType(in: Self.displayedMessageTypes)?.nextEventsBatch(50) ?? [],
-            isDirect: conversation.isDirect
+            events: room.events(),
+            isDirect: room.isDirect,
+            onCommit: { message in
+                self.room.send(text: message)
+            }
         )
-        .navigationBarTitle(Text(conversation.summary.displayname ?? ""), displayMode: .inline)
+        .navigationBarTitle(Text(room.summary.displayname ?? ""), displayMode: .inline)
         .keyboardObserving()
+        .onAppear { self.room.markAllAsRead() }
     }
 }
 
@@ -28,11 +26,13 @@ struct ConversationView: View {
     var events: [MXEvent]
     var isDirect: Bool
 
+    var onCommit: (String) -> Void
+
     @State private var message = ""
 
     var body: some View {
         VStack {
-            ReverseList(events, reverseItemOrder: false) { event in
+            ReverseList(events) { event in
                 EventContainerView(event: event, isDirect: self.isDirect)
                     .padding(.horizontal)
                     .padding(.vertical, 10)
@@ -46,7 +46,7 @@ struct ConversationView: View {
     }
 
     private func send() {
-//        self.messageStore.append(message: message)
+        onCommit(message)
         message = ""
     }
 }

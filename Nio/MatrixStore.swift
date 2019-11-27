@@ -30,7 +30,6 @@ class MatrixStore<State, Action>: ObservableObject {
 struct AppState {
     var loginState: LoginState = .loggedOut
 
-    var recentRooms: [MXRoom]?
     var publicRooms: MXPublicRoomsResponse?
 }
 
@@ -74,7 +73,6 @@ enum SideEffect: Effect {
 
 enum AppAction {
     case loginState(LoginState)
-    case recentRooms
     case publicRooms(MXPublicRoomsResponse)
 }
 
@@ -89,12 +87,6 @@ let appReducer: Reducer<AppState, AppAction> = Reducer { state, action in
     switch action {
     case .loginState(let loginState):
         state.loginState = loginState
-    case .recentRooms:
-        let recentConversations = MatrixServices.shared.session?.rooms
-            .sorted { lhs, rhs in
-                lhs.summary.lastMessageDate > rhs.summary.lastMessageDate
-            }
-        state.recentRooms = recentConversations
     case .publicRooms(let response):
         state.publicRooms = response
     }
