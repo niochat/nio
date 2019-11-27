@@ -8,7 +8,12 @@ class NIORecentRooms: ObservableObject {
     var listenReference: Any?
 
     func startListening() {
-        listenReference = MatrixServices.shared.session?.listenToEvents { _, _, _ in
+        // roomState is nil for presence events, just for future reference
+        listenReference = MatrixServices.shared.session?.listenToEvents { event, direction, roomState in
+            let affectedRooms = self.rooms.filter { $0.summary.roomId == event.roomId }
+            for room in affectedRooms {
+                room.add(event: event, direction: direction, roomState: roomState as? MXRoomState)
+            }
             self.objectWillChange.send()
         }
     }

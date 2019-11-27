@@ -25,23 +25,20 @@ class NIORoom: ObservableObject {
 
         let filteredEvents = currentBatch.filter { Self.displayedMessageTypes.contains($0.type) }
         self.eventCache.append(contentsOf: filteredEvents)
+    }
 
-        room.listen { event, timelineDirection, roomState in
-            print("New event of type: \(event!.type!)")
-            guard Self.displayedMessageTypes.contains(event?.type ?? "") else { return }
+    func add(event: MXEvent, direction: MXTimelineDirection, roomState: MXRoomState?) {
+        print("New event of type: \(event.type!)")
+        guard Self.displayedMessageTypes.contains(event.type ?? "") else { return }
 
-            if let event = event {
-                let direction = MXTimelineDirection(identifer: timelineDirection)
-                switch direction {
-                case .backwards:
-                    self.eventCache.insert(event, at: 0)
-                case .forwards:
-                    self.eventCache.append(event)
-                }
-            }
-
-            self.objectWillChange.send()
+        switch direction {
+        case .backwards:
+            self.eventCache.insert(event, at: 0)
+        case .forwards:
+            self.eventCache.append(event)
         }
+
+        self.objectWillChange.send()
     }
 
     private var eventCache: [MXEvent] = []
