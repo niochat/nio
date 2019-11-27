@@ -32,12 +32,10 @@ struct ConversationView: View {
 
     var body: some View {
         VStack {
-            ScrollView {
-                ForEach(events.reversed()) { event in
-                    EventContainerView(event: event, isDirect: self.isDirect)
-                        .padding(.horizontal)
-                        .padding(.vertical, 10)
-                }
+            ReverseList(events, reverseItemOrder: false) { event in
+                EventContainerView(event: event, isDirect: self.isDirect)
+                    .padding(.horizontal)
+                    .padding(.vertical, 10)
             }
 
             MessageComposerView(message: $message,
