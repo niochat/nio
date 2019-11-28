@@ -56,6 +56,14 @@ enum Formatter {
         return formatter.string(from: date)
     }
 
+    static func string(for date: Date, dateStyle: DateFormatter.Style, locale: Locale = .current) -> String {
+        string(for: date, dateStyle: dateStyle, timeStyle: .none, locale: locale)
+    }
+
+    static func string(for date: Date, timeStyle: DateFormatter.Style, locale: Locale = .current) -> String {
+        string(for: date, dateStyle: .none, timeStyle: timeStyle, locale: locale)
+    }
+
     static func string(for date: Date,
                        dateStyle: DateFormatter.Style,
                        timeStyle: DateFormatter.Style,

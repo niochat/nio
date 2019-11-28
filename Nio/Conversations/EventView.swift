@@ -15,6 +15,7 @@ struct EventContainerView: View {
                 MessageView(text: message,
                             sender: event.sender,
                             showSender: !isDirect,
+                            timestamp: Formatter.string(for: event.timestamp, timeStyle: .short),
                             isMe: MatrixServices.shared.credentials?.userId == event.sender)
             )
         case .roomMember:
@@ -37,6 +38,7 @@ struct MessageView: View {
     var text: String
     var sender: String
     var showSender = false
+    var timestamp: String
     var isMe: Bool
 
     var textColor: Color {
@@ -84,11 +86,16 @@ struct MessageView: View {
                         .font(.system(size: 60))
                         .padding(10)
                 } else {
-                    Text(text)
-                        .foregroundColor(textColor)
-                        .padding(10)
-                        .background(backgroundColor)
-                        .cornerRadius(15)
+                    HStack(alignment: .bottom) {
+                        Text(text)
+                            .foregroundColor(textColor)
+//                        Text(timestamp)
+//                            .font(.caption)
+//                            .foregroundColor(isMe ? .white : .gray)
+                    }
+                    .padding(10)
+                    .background(backgroundColor)
+                    .cornerRadius(15)
                 }
             }
             if !isMe {
