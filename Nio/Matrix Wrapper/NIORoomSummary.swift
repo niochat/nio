@@ -12,4 +12,9 @@ class NIORoomSummary: ObservableObject {
     subscript<T>(dynamicMember keyPath: KeyPath<MXRoomSummary, T>) -> T {
         summary[keyPath: keyPath]
     }
+
+    var lastMessageDate: Date {
+        let ts = Double(summary.lastMessageOriginServerTs)
+        return Date(timeIntervalSince1970: ts / 1000)
+    }
 }

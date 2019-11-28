@@ -25,7 +25,8 @@ class NIORecentRooms: ObservableObject {
     var rooms: [NIORoom] {
         MatrixServices.shared.session?
             .rooms
+            .map { NIORoom($0) }
             .sorted { $0.summary.lastMessageDate > $1.summary.lastMessageDate }
-            .map { NIORoom($0) } ?? []
+            ?? []
     }
 }
