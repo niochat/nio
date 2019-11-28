@@ -1,0 +1,12 @@
+{
+  "indentation" : {
+    "spaces" : 4
+  },
+  "lineLength" : 120,
+  "rules" : {
+    "AllPublicDeclarationsHaveDocumentation" : false,
+    "AlwaysUseLowerCamelCase" : false,
+    "NeverForceUnwrap" : false
+  },
+  "version" : 1
+}
