@@ -1,21 +1,20 @@
 import SwiftUI
 import SwiftMatrixSDK
 
-struct ConversationListCellContainerView: View {
-
+struct RoomListItemContainerView: View {
     var room: NIORoom
 
     var body: some View {
         let lastMessage = room.lastMessage
         let lastActivity = Formatter.string(forRelativeDate: room.summary.lastMessageDate)
-        return ConversationListCell(title: room.summary.displayname ?? "",
+        return RoomListItemView(title: room.summary.displayname ?? "",
                                     subtitle: lastMessage,
                                     rightDetail: lastActivity,
                                     badge: room.summary.localUnreadEventCount)
     }
 }
 
-struct ConversationListCell: View {
+struct RoomListItemView: View {
     var title: String
     var subtitle: String
     var rightDetail: String
@@ -73,22 +72,22 @@ struct ConversationListCell: View {
 }
 
 //swiftlint:disable line_length
-struct ConversationListCell_Previews: PreviewProvider {
+struct RoomListItemView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ConversationListCell(title: "Morpheus",
+            RoomListItemView(title: "Morpheus",
                                  subtitle: "Red or blue 💊?",
                                  rightDetail: "10 minutes ago",
                                  badge: 2)
-            ConversationListCell(title: "Morpheus",
+            RoomListItemView(title: "Morpheus",
                                  subtitle: "Red or blue 💊?",
                                  rightDetail: "10 minutes ago",
                                  badge: 0)
-            ConversationListCell(title: "Morpheus",
+            RoomListItemView(title: "Morpheus",
                                  subtitle: "Nesciunt quaerat voluptatem enim sunt. Provident id consequatur tempora nostrum. Sit in voluptatem consequuntur at et provident est facilis. Ut sit ad sit quam commodi qui.",
                                  rightDetail: "12:29",
                                  badge: 0)
-            ConversationListCell(title: "Morpheus",
+            RoomListItemView(title: "Morpheus",
                                  subtitle: "Nesciunt quaerat voluptatem enim sunt. Provident id consequatur tempora nostrum. Sit in voluptatem consequuntur at et provident est facilis. Ut sit ad sit quam commodi qui.",
                                  rightDetail: "12:29",
                                  badge: 1)

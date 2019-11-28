@@ -1,14 +1,14 @@
 import SwiftUI
 import SwiftMatrixSDK
 
-struct ConversationListContainerView: View {
+struct RecentRoomsContainerView: View {
     @EnvironmentObject var store: MatrixStore<AppState, AppAction>
     @ObservedObject var recentRoomStore = NIORecentRooms()
 
     @State private var selectedNavigationItem: SelectedNavigationItem?
 
     var body: some View {
-        ConversationListView(selectedNavigationItem: $selectedNavigationItem,
+        RecentRoomsView(selectedNavigationItem: $selectedNavigationItem,
                              rooms: recentRoomStore.rooms)
             .sheet(item: $selectedNavigationItem, content: { NavigationSheet(selectedItem: $0) })
             .onAppear {
@@ -17,7 +17,7 @@ struct ConversationListContainerView: View {
     }
 }
 
-struct ConversationListView: View {
+struct RecentRoomsView: View {
     @Binding fileprivate var selectedNavigationItem: SelectedNavigationItem?
 
     var rooms: [NIORoom]
@@ -43,8 +43,8 @@ struct ConversationListView: View {
     var body: some View {
         NavigationView {
             List(rooms) { room in
-                NavigationLink(destination: ConversationContainerView(room: room)) {
-                    ConversationListCellContainerView(room: room)
+                NavigationLink(destination: RoomContainerView(room: room)) {
+                    RoomListItemContainerView(room: room)
                 }
             }
             .navigationBarTitle("Nio", displayMode: .inline)
@@ -75,8 +75,8 @@ private struct NavigationSheet: View {
     }
 }
 
-struct ConversationListView_Previews: PreviewProvider {
+struct RecentRoomsView_Previews: PreviewProvider {
     static var previews: some View {
-        ConversationListView(selectedNavigationItem: .constant(nil), rooms: [])
+        RecentRoomsView(selectedNavigationItem: .constant(nil), rooms: [])
     }
 }

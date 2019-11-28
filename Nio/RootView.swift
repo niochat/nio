@@ -7,7 +7,7 @@ struct RootView: View {
         switch store.state.loginState {
         case .loggedIn:
             return AnyView(
-                ConversationListContainerView()
+                RecentRoomsContainerView()
             )
         case .loggedOut:
             return AnyView(

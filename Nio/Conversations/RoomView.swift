@@ -3,13 +3,13 @@ import Combine
 import KeyboardObserving
 import SwiftMatrixSDK
 
-struct ConversationContainerView: View {
+struct RoomContainerView: View {
     @EnvironmentObject var store: MatrixStore<AppState, AppAction>
 
     @ObservedObject var room: NIORoom
 
     var body: some View {
-        ConversationView(
+        RoomView(
             events: room.events(),
             isDirect: room.isDirect,
             onCommit: { message in
@@ -22,7 +22,7 @@ struct ConversationContainerView: View {
     }
 }
 
-struct ConversationView: View {
+struct RoomView: View {
     var events: [MXEvent]
     var isDirect: Bool
 
