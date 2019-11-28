@@ -35,7 +35,7 @@ struct RoomView: View {
             ReverseList(events) { event in
                 EventContainerView(event: event, isDirect: self.isDirect)
                     .padding(.horizontal)
-                    .padding(.vertical, 10)
+                    .padding(.vertical, 5)
             }
 
             MessageComposerView(message: $message,
