@@ -43,8 +43,8 @@ class NIORoom: ObservableObject {
 
     private var eventCache: [MXEvent] = []
 
-    func events() -> [MXEvent] {
-        return eventCache
+    func events() -> EventCollection {
+        return EventCollection(eventCache)
     }
 
     var isDirect: Bool {

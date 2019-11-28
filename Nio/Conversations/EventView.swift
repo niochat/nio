@@ -5,6 +5,7 @@ struct EventContainerView: View {
     @EnvironmentObject var store: MatrixStore<AppState, AppAction>
 
     var event: MXEvent
+    var position: GroupPosition
     var isDirect: Bool
 
     var body: some View {
@@ -14,19 +15,22 @@ struct EventContainerView: View {
             return AnyView(
                 MessageView(text: message,
                             sender: event.sender,
-                            showSender: !isDirect,
+                            showSender: !isDirect && position.showMessageSender,
                             timestamp: Formatter.string(for: event.timestamp, timeStyle: .short),
                             isMe: MatrixServices.shared.credentials?.userId == event.sender)
+                    .padding(.top, position.topMessagePadding)
             )
         case .roomMember:
             let displayname = (event.content["displayname"] as? String) ?? ""
             let membership = (event.content["membership"] as? String) ?? ""
             return AnyView(
                 GenericEventView(text: "\(displayname) \(membership)'d") // 🤷
+                    .padding(.top, position.topMessagePadding)
             )
         default:
             return AnyView(
                 GenericEventView(text: "\(event.type!): \(event.content!)")
+                    .padding(.top, position.topMessagePadding)
             )
         }
     }
@@ -116,5 +120,38 @@ struct GenericEventView: View {
                 .foregroundColor(.gray)
             Spacer()
         }
+    }
+}
+
+struct MessageView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            MessageView(text: "This is a longer demo message that needs line breaks to be displayed in its entirety.",
+                        sender: "Morpheus",
+                        showSender: false,
+                        timestamp: "12:29",
+                        isMe: false)
+            MessageView(text: "Demo message",
+                        sender: "Morpheus",
+                        showSender: true,
+                        timestamp: "12:29",
+                        isMe: false)
+            MessageView(text: "Ping",
+                        sender: "",
+                        showSender: false,
+                        timestamp: "12:29",
+                        isMe: true)
+            MessageView(text: "🐧",
+                        sender: "",
+                        showSender: false,
+                        timestamp: "12:29",
+                        isMe: true)
+            GenericEventView(text: "Ping joined")
+            GenericEventView(text: "Ping changed the topic to 'Foobar'")
+        }
+        .accentColor(.purple)
+//        .environment(\.colorScheme, .dark)
+        .padding()
+        .previewLayout(.sizeThatFits)
     }
 }

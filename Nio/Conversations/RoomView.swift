@@ -23,7 +23,7 @@ struct RoomContainerView: View {
 }
 
 struct RoomView: View {
-    var events: [MXEvent]
+    var events: EventCollection
     var isDirect: Bool
 
     var onCommit: (String) -> Void
@@ -32,10 +32,11 @@ struct RoomView: View {
 
     var body: some View {
         VStack {
-            ReverseList(events) { event in
-                EventContainerView(event: event, isDirect: self.isDirect)
-                    .padding(.horizontal)
-                    .padding(.vertical, 5)
+            ReverseList(events.wrapped) { event in
+                EventContainerView(event: event,
+                                   position: self.events.position(of: event),
+                                   isDirect: self.isDirect)
+                    .padding(.horizontal, 8)
             }
 
             MessageComposerView(message: $message,
