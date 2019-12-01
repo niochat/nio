@@ -1,40 +1,4 @@
 import SwiftUI
-import SwiftMatrixSDK
-
-struct EventContainerView: View {
-    @EnvironmentObject var store: MatrixStore<AppState, AppAction>
-
-    var event: MXEvent
-    var position: GroupPosition
-    var isDirect: Bool
-
-    var body: some View {
-        switch MXEventType(identifier: event.type) {
-        case .roomMessage:
-            let message = (event.content["body"] as? String) ?? ""
-            return AnyView(
-                MessageView(text: message,
-                            sender: event.sender,
-                            showSender: !isDirect && position.showMessageSender,
-                            timestamp: Formatter.string(for: event.timestamp, timeStyle: .short),
-                            isMe: MatrixServices.shared.credentials?.userId == event.sender)
-                    .padding(.top, position.topMessagePadding)
-            )
-        case .roomMember:
-            let displayname = (event.content["displayname"] as? String) ?? ""
-            let membership = (event.content["membership"] as? String) ?? ""
-            return AnyView(
-                GenericEventView(text: "\(displayname) \(membership)'d") // 🤷
-                    .padding(.top, position.topMessagePadding)
-            )
-        default:
-            return AnyView(
-                GenericEventView(text: "\(event.type!): \(event.content!)")
-                    .padding(.top, position.topMessagePadding)
-            )
-        }
-    }
-}
 
 struct MessageView: View {
     @Environment(\.colorScheme) var colorScheme
@@ -109,20 +73,6 @@ struct MessageView: View {
     }
 }
 
-struct GenericEventView: View {
-    var text: String
-
-    var body: some View {
-        HStack {
-            Spacer()
-            Text(text)
-                .font(.caption)
-                .foregroundColor(.gray)
-            Spacer()
-        }
-    }
-}
-
 struct MessageView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
@@ -146,8 +96,6 @@ struct MessageView_Previews: PreviewProvider {
                         showSender: false,
                         timestamp: "12:29",
                         isMe: true)
-            GenericEventView(text: "Ping joined")
-            GenericEventView(text: "Ping changed the topic to 'Foobar'")
         }
         .accentColor(.purple)
 //        .environment(\.colorScheme, .dark)
