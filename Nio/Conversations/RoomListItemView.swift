@@ -7,10 +7,19 @@ struct RoomListItemContainerView: View {
     var body: some View {
         let lastMessage = room.lastMessage
         let lastActivity = Formatter.string(forRelativeDate: room.summary.lastMessageDate)
+
+        var accessibilityLabel = ""
+        if room.isDirect {
+            accessibilityLabel = "DM with \(room.summary.displayname ?? ""), \(lastActivity) \(room.lastMessage)"
+        } else {
+            accessibilityLabel = "Room \(room.summary.displayname ?? ""), \(lastActivity) \(room.lastMessage)"
+        }
+
         return RoomListItemView(title: room.summary.displayname ?? "",
-                                    subtitle: lastMessage,
-                                    rightDetail: lastActivity,
-                                    badge: room.summary.localUnreadEventCount)
+                                subtitle: lastMessage,
+                                rightDetail: lastActivity,
+                                badge: room.summary.localUnreadEventCount)
+        .accessibility(label: Text(accessibilityLabel))
     }
 }
 
@@ -29,7 +38,7 @@ struct RoomListItemView: View {
                 .foregroundColor(.random)
         }
         .frame(width: 40, height: 40)
-
+        .accessibility(addTraits: .isImage)
     }
 
     @Environment(\.sizeCategory) var sizeCategory
@@ -65,6 +74,7 @@ struct RoomListItemView: View {
                             Text(String(badge))
                                 .font(.caption)
                                 .foregroundColor(.white)
+                                .accessibility(label: Text("\(badge) new messages"))
                         }
                     }
                 }

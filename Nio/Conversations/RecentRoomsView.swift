@@ -28,6 +28,7 @@ struct RecentRoomsView: View {
         }, label: {
             Image(systemName: "person.crop.circle")
                 .font(.system(size: 25))
+                .accessibility(label: Text("Settings"))
         })
     }
 
@@ -37,6 +38,7 @@ struct RecentRoomsView: View {
         }, label: {
             Image(systemName: "plus")
                 .font(.system(size: 25))
+                .accessibility(label: Text("New Conversation"))
         })
     }
 

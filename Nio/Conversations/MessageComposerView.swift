@@ -14,6 +14,7 @@ struct MessageComposerView: View {
             }, label: {
                 Image(systemName: "plus")
                     .font(.system(size: 20))
+                    .accessibility(label: Text("Send file"))
             })
 
             ZStack {
@@ -30,6 +31,7 @@ struct MessageComposerView: View {
             }, label: {
                 Image(systemName: "paperplane.fill")
                     .font(.system(size: 20))
+                    .accessibility(label: Text("Send"))
             })
             .disabled(message.isEmpty)
         }
