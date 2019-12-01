@@ -36,7 +36,7 @@ struct RoomView: View {
                 EventContainerView(event: event,
                                    position: self.events.position(of: event),
                                    isDirect: self.isDirect)
-                    .padding(.horizontal, 8)
+                    .padding(.horizontal)
             }
 
             MessageComposerView(message: $message,
