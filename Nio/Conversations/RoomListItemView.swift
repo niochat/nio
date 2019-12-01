@@ -32,11 +32,13 @@ struct RoomListItemView: View {
 
     }
 
+    @Environment(\.sizeCategory) var sizeCategory
+
     var body: some View {
         HStack(alignment: .center) {
             image
 
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 0) {
                 HStack(alignment: .top) {
                     Text(title)
                         .font(.headline)
@@ -68,32 +70,32 @@ struct RoomListItemView: View {
                 }
             }
         }
+        .frame(height: 60 * sizeCategory.scalingFactor)
     }
 }
 
 //swiftlint:disable line_length
 struct RoomListItemView_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
+        List {
             RoomListItemView(title: "Morpheus",
-                                 subtitle: "Red or blue 💊?",
-                                 rightDetail: "10 minutes ago",
-                                 badge: 2)
+                             subtitle: "Red or blue 💊?",
+                             rightDetail: "10 minutes ago",
+                             badge: 2)
             RoomListItemView(title: "Morpheus",
-                                 subtitle: "Red or blue 💊?",
-                                 rightDetail: "10 minutes ago",
-                                 badge: 0)
+                             subtitle: "Red or blue 💊?",
+                             rightDetail: "10 minutes ago",
+                             badge: 0)
             RoomListItemView(title: "Morpheus",
-                                 subtitle: "Nesciunt quaerat voluptatem enim sunt. Provident id consequatur tempora nostrum. Sit in voluptatem consequuntur at et provident est facilis. Ut sit ad sit quam commodi qui.",
-                                 rightDetail: "12:29",
-                                 badge: 0)
-            RoomListItemView(title: "Morpheus",
-                                 subtitle: "Nesciunt quaerat voluptatem enim sunt. Provident id consequatur tempora nostrum. Sit in voluptatem consequuntur at et provident est facilis. Ut sit ad sit quam commodi qui.",
-                                 rightDetail: "12:29",
-                                 badge: 1)
+                             subtitle: "Nesciunt quaerat voluptatem enim sunt. Provident id consequatur tempora nostrum. Sit in voluptatem consequuntur at et provident est facilis. Ut sit ad sit quam commodi qui.",
+                             rightDetail: "12:29",
+                             badge: 0)
+            RoomListItemView(title: "A very long conversation title that breaks into the second line",
+                             subtitle: "Nesciunt quaerat voluptatem enim sunt. Provident id consequatur tempora nostrum. Sit in voluptatem consequuntur at et provident est facilis. Ut sit ad sit quam commodi qui.",
+                             rightDetail: "12:29",
+                             badge: 1)
         }
-//        .padding()
+//        .environment(\.sizeCategory, .extraExtraExtraLarge)
         .accentColor(.purple)
-        .previewLayout(.sizeThatFits)
     }
 }
