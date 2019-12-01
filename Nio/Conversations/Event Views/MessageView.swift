@@ -9,6 +9,11 @@ struct MessageView: View {
     var timestamp: String
     var isMe: Bool
 
+    var textIsShortEmoji: Bool {
+        text.trimmingCharacters(in: .whitespacesAndNewlines).containsOnlyEmoji
+            && text.count <= 3
+    }
+
     var textColor: Color {
         if isMe {
             return .white
@@ -47,23 +52,31 @@ struct MessageView: View {
                     Text(sender)
                         .font(.caption)
                         .foregroundColor(.gray)
-                        .padding(.bottom, 5)
                 }
-                if text.trimmingCharacters(in: .whitespacesAndNewlines).containsOnlyEmoji && text.count <= 3 {
+                if textIsShortEmoji {
                     Text(text)
                         .font(.system(size: 60))
-                        .padding(10)
                 } else {
-                    HStack(alignment: .bottom) {
-                        Text(text)
-                            .foregroundColor(textColor)
-//                        Text(timestamp)
-//                            .font(.caption)
-//                            .foregroundColor(isMe ? .white : .gray)
+                    ZStack(alignment: .bottomTrailing) {
+                        (
+                            Text(text).foregroundColor(textColor)
+                            +
+                            // This is a spacing placeholder for the actual timestamp below.
+                            Text(" \(timestamp)")
+                                .font(.caption)
+                                .foregroundColor(.clear)
+                        )
+
+                        Text(timestamp)
+                            .font(.caption)
+                            .foregroundColor(isMe ? .white : .gray)
+                            .offset(x: 0, y: -1)
+                            .accessibility(hidden: true)
                     }
                     .padding(10)
                     .background(backgroundColor)
                     .cornerRadius(15)
+                    .padding(.top, -8)
                 }
             }
             if !isMe {
@@ -75,18 +88,23 @@ struct MessageView: View {
 
 struct MessageView_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
+        ScrollView {
             MessageView(text: "This is a longer demo message that needs line breaks to be displayed in its entirety.",
-                        sender: "Morpheus",
-                        showSender: false,
-                        timestamp: "12:29",
-                        isMe: false)
-            MessageView(text: "Demo message",
                         sender: "Morpheus",
                         showSender: true,
                         timestamp: "12:29",
                         isMe: false)
+            MessageView(text: "Demo message",
+                        sender: "Morpheus",
+                        showSender: false,
+                        timestamp: "12:29",
+                        isMe: false)
             MessageView(text: "Ping",
+                        sender: "",
+                        showSender: false,
+                        timestamp: "12:29",
+                        isMe: true)
+            MessageView(text: "Ping 2",
                         sender: "",
                         showSender: false,
                         timestamp: "12:29",
@@ -96,10 +114,15 @@ struct MessageView_Previews: PreviewProvider {
                         showSender: false,
                         timestamp: "12:29",
                         isMe: true)
+            MessageView(text: "🕴",
+                        sender: "Agent Smith",
+                        showSender: true,
+                        timestamp: "12:29",
+                        isMe: false)
         }
         .accentColor(.purple)
 //        .environment(\.colorScheme, .dark)
-        .padding()
-        .previewLayout(.sizeThatFits)
+//        .environment(\.sizeCategory, .extraExtraLarge)
+        .padding([.horizontal, .top])
     }
 }
