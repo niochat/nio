@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import SwiftUI
 import SwiftMatrixSDK
 
 class MatrixStore<State, Action>: ObservableObject {
@@ -49,6 +50,7 @@ protocol Effect {
 
 enum SideEffect: Effect {
     case login(username: String, password: String, homeserver: URL)
+    case logout
     case publicRooms(client: MXRestClient)
 
     func mapToAction() -> AnyPublisher<AppAction, Never> {
@@ -57,6 +59,11 @@ enum SideEffect: Effect {
             return MatrixServices.shared
                 .login(username: username, password: password, homeserver: homeserver)
                 .replaceError(with: .loggedOut) // FIXME
+                .map { AppAction.loginState($0) }
+                .eraseToAnyPublisher()
+        case .logout:
+            return MatrixServices.shared
+                .logout()
                 .map { AppAction.loginState($0) }
                 .eraseToAnyPublisher()
         case .publicRooms(let client):

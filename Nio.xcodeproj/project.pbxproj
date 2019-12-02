@@ -10,6 +10,7 @@
 		3902B89C2393FE6100698B87 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902B89B2393FE6100698B87 /* MessageView.swift */; };
 		3902B89E2393FE8200698B87 /* GenericEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902B89D2393FE8200698B87 /* GenericEventView.swift */; };
 		3902B8A0239410EE00698B87 /* ContentSizeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902B89F239410EE00698B87 /* ContentSizeCategory.swift */; };
+		3902B8A32395935600698B87 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902B8A22395935600698B87 /* SettingsView.swift */; };
 		392389892386FD3900B2E1DF /* MXClient+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389882386FD3900B2E1DF /* MXClient+Publisher.swift */; };
 		3923898D238859D100B2E1DF /* MX+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3923898C238859D100B2E1DF /* MX+Identifiable.swift */; };
 		3923898F2388707E00B2E1DF /* RoomListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3923898E2388707E00B2E1DF /* RoomListItemView.swift */; };
@@ -62,6 +63,7 @@
 		3902B89B2393FE6100698B87 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		3902B89D2393FE8200698B87 /* GenericEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericEventView.swift; sourceTree = "<group>"; };
 		3902B89F239410EE00698B87 /* ContentSizeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizeCategory.swift; sourceTree = "<group>"; };
+		3902B8A22395935600698B87 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		392389882386FD3900B2E1DF /* MXClient+Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXClient+Publisher.swift"; sourceTree = "<group>"; };
 		3923898C238859D100B2E1DF /* MX+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MX+Identifiable.swift"; sourceTree = "<group>"; };
 		3923898E2388707E00B2E1DF /* RoomListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListItemView.swift; sourceTree = "<group>"; };
@@ -120,6 +122,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3902B8A12395934900698B87 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				3902B8A22395935600698B87 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		3907AB482393FE0E00B25DE9 /* Event Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +211,7 @@
 				392389CA238EBB0800B2E1DF /* Shared Views */,
 				392389922388898800B2E1DF /* Utility */,
 				39C932052384BAA0004449E1 /* Conversations */,
+				3902B8A12395934900698B87 /* Settings */,
 				39D166C42385C7F6006DD257 /* Extensions */,
 				39C931E22384328B004449E1 /* Assets.xcassets */,
 				39C931EA2384328B004449E1 /* Info.plist */,
@@ -515,6 +526,7 @@
 				392389D6238F3EB200B2E1DF /* NIORoomSummary.swift in Sources */,
 				39D166C82385C832006DD257 /* EventContainerView.swift in Sources */,
 				39C931DF2384328A004449E1 /* SceneDelegate.swift in Sources */,
+				3902B8A32395935600698B87 /* SettingsView.swift in Sources */,
 				39C931F523846966004449E1 /* LoginView.swift in Sources */,
 				3902B89E2393FE8200698B87 /* GenericEventView.swift in Sources */,
 				392389982388998F00B2E1DF /* ActivityIndicator.swift in Sources */,

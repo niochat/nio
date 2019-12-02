@@ -10,7 +10,11 @@ struct RecentRoomsContainerView: View {
     var body: some View {
         RecentRoomsView(selectedNavigationItem: $selectedNavigationItem,
                              rooms: recentRoomStore.rooms)
-            .sheet(item: $selectedNavigationItem, content: { NavigationSheet(selectedItem: $0) })
+            .sheet(item: $selectedNavigationItem) {
+                NavigationSheet(selectedItem: $0)
+                    // This really shouldn't be necessary. SwiftUI bug?
+                    .environmentObject(self.store)
+            }
             .onAppear {
                 self.recentRoomStore.startListening()
             }
@@ -70,9 +74,13 @@ private struct NavigationSheet: View {
     var body: some View {
         switch selectedItem {
         case .settings:
-            return Text("Settings")
+            return AnyView(
+                SettingsView()
+            )
         case .newMessage:
-            return Text("New Message")
+            return AnyView(
+                Text("New Message")
+            )
         }
     }
 }

@@ -103,6 +103,18 @@ class MatrixServices {
         .eraseToAnyPublisher()
     }
 
+    func logout() -> AnyPublisher<LoginState, Never> {
+        self.credentials?.clear(from: keychain)
+
+        return Future { promise in
+            self.session?.logout { response in
+                MXFileStore().deleteAllData()
+                promise(.success(.loggedOut))
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+
     func start(with credentials: MXCredentials, completion: @escaping (Result<LoginState, Error>) -> Void) {
         self.credentials = credentials
         self.client = MXRestClient(credentials: self.credentials!, unrecognizedCertificateHandler: nil)
