@@ -43,16 +43,17 @@ extension MXCredentials {
 
 class MatrixServices {
     let keychain = Keychain(service: "chat.nio.credentials")
-    var store: MatrixStore<AppState, AppAction>?
+    var store: MatrixStore<AppState, AppAction>
 
     var credentials: MXCredentials?
 
     var client: MXRestClient?
     var session: MXSession?
 
-    static var shared = MatrixServices()
+    static var shared: MatrixServices!
 
-    init() {
+    init(store: MatrixStore<AppState, AppAction>) {
+        self.store = store
         if CommandLine.arguments.contains("-clear-stored-credentials") {
             print("🗑 cleared stored credentials from keychain")
             MXCredentials
@@ -61,14 +62,14 @@ class MatrixServices {
         }
 
         if let credentials = MXCredentials.from(keychain) {
-            self.store?.send(AppAction.loginState(.authenticating))
+            self.store.send(AppAction.loginState(.authenticating))
             self.start(with: credentials) { result in
                 switch result {
                 case .failure(let error):
                     print("Error on starting session with saved credentials: \(error)")
-                    self.store?.send(AppAction.loginState(.failure(error)))
+                    self.store.send(AppAction.loginState(.failure(error)))
                 case .success(let state):
-                    self.store?.send(AppAction.loginState(state))
+                    self.store.send(AppAction.loginState(state))
                 }
             }
         }

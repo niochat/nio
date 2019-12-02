@@ -15,7 +15,7 @@ struct RootView: View {
             )
         case .authenticating:
             return AnyView(
-                ActivityIndicator()
+                LoadingView()
             )
         case .failure(let error):
             return AnyView(

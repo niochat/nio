@@ -27,6 +27,7 @@ struct LoginContainerView: View {
             print("Invalid homeserver URL '\(homeserver)'")
             return
         }
+        store.send(AppAction.loginState(.authenticating))
         store.send(SideEffect.login(username: username, password: password, homeserver: homeserverURL))
     }
 
