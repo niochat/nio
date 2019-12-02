@@ -4,15 +4,16 @@ struct MessageComposerView: View {
     @Environment (\.colorScheme) var colorScheme
 
     @Binding var message: String
+    @Binding var showAttachmentPicker: Bool
 
     var onCommit: () -> Void
 
     var body: some View {
         HStack {
             Button(action: {
-
+                self.showAttachmentPicker.toggle()
             }, label: {
-                Image(systemName: "plus")
+                Image(systemName: "paperclip")
                     .font(.system(size: 20))
                     .accessibility(label: Text("Send file"))
             })
@@ -41,13 +42,17 @@ struct MessageComposerView: View {
 struct MessageComposerView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            MessageComposerView(message: .constant(""), onCommit: {})
+            MessageComposerView(message: .constant(""),
+                                showAttachmentPicker: .constant(false),
+                                onCommit: {})
                 .padding()
                 .environment(\.colorScheme, .light)
 
             ZStack {
                 Color.black.frame(height: 80)
-                MessageComposerView(message: .constant(""), onCommit: {})
+                MessageComposerView(message: .constant(""),
+                                    showAttachmentPicker: .constant(false),
+                                    onCommit: {})
                     .padding()
                     .environment(\.colorScheme, .dark)
             }
