@@ -88,7 +88,7 @@ struct MessageView: View {
 
 struct MessageView_Previews: PreviewProvider {
     static var previews: some View {
-        ScrollView {
+        Group {
             MessageView(text: "This is a longer demo message that needs line breaks to be displayed in its entirety.",
                         sender: "Morpheus",
                         showSender: true,
@@ -120,9 +120,10 @@ struct MessageView_Previews: PreviewProvider {
                         timestamp: "12:29",
                         isMe: false)
         }
+        .padding()
         .accentColor(.purple)
+        .previewLayout(.sizeThatFits)
 //        .environment(\.colorScheme, .dark)
 //        .environment(\.sizeCategory, .extraExtraLarge)
-        .padding([.horizontal, .top])
     }
 }
