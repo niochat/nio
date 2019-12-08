@@ -34,7 +34,7 @@ struct RoomListItemView: View {
             Circle()
                 .foregroundColor(.purple)
             Text(title.prefix(2).uppercased())
-                .font(.headline)
+                .font(.system(.headline, design: .rounded))
                 .foregroundColor(.white)
         }
         .frame(width: 40, height: 40)
