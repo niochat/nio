@@ -32,10 +32,10 @@ struct RoomListItemView: View {
     var image: some View {
         ZStack {
             Circle()
-                .foregroundColor(.random)
+                .foregroundColor(.purple)
             Text(title.prefix(2).uppercased())
                 .font(.headline)
-                .foregroundColor(.random)
+                .foregroundColor(.white)
         }
         .frame(width: 40, height: 40)
         .accessibility(addTraits: .isImage)
