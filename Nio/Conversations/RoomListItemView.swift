@@ -45,6 +45,7 @@ struct RoomListItemView: View {
             Circle()
                 .fill(gradient)
             Text(title.prefix(2).uppercased())
+                .multilineTextAlignment(.center)
                 .font(.system(.headline, design: .rounded))
                 .foregroundColor(.white)
         }
