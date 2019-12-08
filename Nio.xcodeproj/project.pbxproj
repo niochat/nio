@@ -15,7 +15,6 @@
 		392389892386FD3900B2E1DF /* MXClient+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389882386FD3900B2E1DF /* MXClient+Publisher.swift */; };
 		3923898D238859D100B2E1DF /* MX+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3923898C238859D100B2E1DF /* MX+Identifiable.swift */; };
 		3923898F2388707E00B2E1DF /* RoomListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3923898E2388707E00B2E1DF /* RoomListItemView.swift */; };
-		39238991238870FE00B2E1DF /* Color+random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39238990238870FE00B2E1DF /* Color+random.swift */; };
 		392389942388899200B2E1DF /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389932388899200B2E1DF /* Formatter.swift */; };
 		392389982388998F00B2E1DF /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389972388998F00B2E1DF /* ActivityIndicator.swift */; };
 		3923899A2388A52A00B2E1DF /* MatrixServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389992388A52A00B2E1DF /* MatrixServices.swift */; };
@@ -69,7 +68,6 @@
 		392389882386FD3900B2E1DF /* MXClient+Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXClient+Publisher.swift"; sourceTree = "<group>"; };
 		3923898C238859D100B2E1DF /* MX+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MX+Identifiable.swift"; sourceTree = "<group>"; };
 		3923898E2388707E00B2E1DF /* RoomListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListItemView.swift; sourceTree = "<group>"; };
-		39238990238870FE00B2E1DF /* Color+random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+random.swift"; sourceTree = "<group>"; };
 		392389932388899200B2E1DF /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		392389972388998F00B2E1DF /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		392389992388A52A00B2E1DF /* MatrixServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixServices.swift; sourceTree = "<group>"; };
@@ -267,7 +265,6 @@
 				39D166C52385C804006DD257 /* String+Emoji.swift */,
 				392389882386FD3900B2E1DF /* MXClient+Publisher.swift */,
 				3923898C238859D100B2E1DF /* MX+Identifiable.swift */,
-				39238990238870FE00B2E1DF /* Color+random.swift */,
 				393411C823904428003B49B8 /* MXEvent.swift */,
 				3902B89F239410EE00698B87 /* ContentSizeCategory.swift */,
 			);
@@ -531,7 +528,6 @@
 				39D166C62385C804006DD257 /* String+Emoji.swift in Sources */,
 				392389D4238F3E8F00B2E1DF /* NIORecentRooms.swift in Sources */,
 				3902B89C2393FE6100698B87 /* MessageView.swift in Sources */,
-				39238991238870FE00B2E1DF /* Color+random.swift in Sources */,
 				39C93209238553E4004449E1 /* RoomView.swift in Sources */,
 				392389CC238EBB1500B2E1DF /* ReverseList.swift in Sources */,
 				392389942388899200B2E1DF /* Formatter.swift in Sources */,
