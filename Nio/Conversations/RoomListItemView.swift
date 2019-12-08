@@ -29,10 +29,21 @@ struct RoomListItemView: View {
     var rightDetail: String
     var badge: UInt
 
+    var gradient: LinearGradient {
+        let tintColor: Color = .purple
+        let colors = [
+            tintColor.opacity(0.75),
+            tintColor
+        ]
+        return LinearGradient(gradient: Gradient(colors: colors),
+                       startPoint: .top,
+                       endPoint: .bottom)
+    }
+
     var image: some View {
         ZStack {
             Circle()
-                .foregroundColor(.purple)
+                .fill(gradient)
             Text(title.prefix(2).uppercased())
                 .font(.system(.headline, design: .rounded))
                 .foregroundColor(.white)
