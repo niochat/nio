@@ -30,7 +30,7 @@ struct RoomListItemView: View {
     var badge: UInt
 
     var gradient: LinearGradient {
-        let tintColor: Color = .purple
+        let tintColor: Color = .accentColor
         let colors = [
             tintColor.opacity(0.75),
             tintColor
@@ -118,6 +118,7 @@ struct RoomListItemView_Previews: PreviewProvider {
                              badge: 1)
         }
 //        .environment(\.sizeCategory, .extraExtraExtraLarge)
+//        .environment(\.colorScheme, .dark)
         .accentColor(.purple)
     }
 }
