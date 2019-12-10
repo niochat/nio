@@ -68,7 +68,7 @@ struct RoomListItemView: View {
     var titleView: some View {
         Text(title)
             .font(.headline)
-            .lineLimit(2)
+            .lineLimit(1)
             .allowsTightening(true)
     }
 
@@ -94,7 +94,7 @@ struct RoomListItemView: View {
         Text(subtitle)
             .multilineTextAlignment(.leading)
             .font(.subheadline)
-            .lineLimit(2)
+            .lineLimit(1)
             .allowsTightening(true)
             .foregroundColor(.secondary)
     }
