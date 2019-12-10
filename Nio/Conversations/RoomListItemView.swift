@@ -30,20 +30,20 @@ struct RoomListItemView: View {
     var badge: UInt
 
     var gradient: LinearGradient {
-        let tintColor: Color = .accentColor
-        let colors = [
-            tintColor.opacity(0.75),
-            tintColor
-        ]
-        return LinearGradient(gradient: Gradient(colors: colors),
-                       startPoint: .top,
-                       endPoint: .bottom)
+        let color: Color = .white
+        let colors = [color, color.opacity(0.0)]
+        return LinearGradient(
+            gradient: Gradient(colors: colors),
+            startPoint: .top,
+            endPoint: .bottom
+        )
     }
 
     var image: some View {
         ZStack {
             Circle()
-                .fill(gradient)
+                .foregroundColor(.accentColor)
+                .overlay(gradient.opacity(0.25))
             Text(title.prefix(2).uppercased())
                 .multilineTextAlignment(.center)
                 .font(.system(.headline, design: .rounded))
