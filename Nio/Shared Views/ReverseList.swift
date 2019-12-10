@@ -16,9 +16,11 @@ struct ReverseList<Element, Content>: View where Element: Identifiable, Content:
         ScrollView {
             ForEach(reverseItemOrder ? items.reversed() : items) { item in
                 self.viewForItem(item)
+                    .scaleEffect(x: -1.0, y: 1.0)
                     .rotationEffect(.degrees(180))
             }
         }
+        .scaleEffect(x: -1.0, y: 1.0)
         .rotationEffect(.degrees(180))
     }
 }
