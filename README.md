@@ -21,3 +21,12 @@ $ cd nio
 $ pod install
 $ xed .
 ```
+
+### Similar Apps
+
+You might also have fun checking out the following applications.
+
+- [Ditto](https://dittochat.org), cross-platform ReactNative based and just as purple 💜
+- [Messagerie](https://github.com/manuroe/messagerie), also built with SwiftUI
+- [Pattle](https://git.pattle.im/pattle/app), very polished cross-platform app built with Flutter
+
