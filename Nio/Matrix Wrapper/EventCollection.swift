@@ -68,3 +68,12 @@ enum GroupPosition {
         self == .start
     }
 }
+
+struct GroupBounds: OptionSet, Equatable, Hashable {
+    let rawValue: Int
+
+    static let isAtStartOfGroup: Self = .init(rawValue: 1 << 0)
+    static let isAtEndOfGroup: Self = .init(rawValue: 1 << 1)
+
+    static let isLone: Self = [.isAtStartOfGroup, .isAtEndOfGroup]
+}
