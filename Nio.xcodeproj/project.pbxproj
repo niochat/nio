@@ -286,6 +286,7 @@
 				392389882386FD3900B2E1DF /* MXClient+Publisher.swift */,
 				3923898C238859D100B2E1DF /* MX+Identifiable.swift */,
 				393411C823904428003B49B8 /* MXEvent.swift */,
+				CAC46D5C23A276700079C24F /* Color+Named.swift */,
 				3902B89F239410EE00698B87 /* ContentSizeCategory.swift */,
 				CAC46D6223A278F40079C24F /* PreviewProvider+Enumeration.swift */,
 			);
@@ -580,6 +581,7 @@
 				39C931DF2384328A004449E1 /* SceneDelegate.swift in Sources */,
 				3902B8A32395935600698B87 /* SettingsView.swift in Sources */,
 				39C931F523846966004449E1 /* LoginView.swift in Sources */,
+				CAC46D5D23A276700079C24F /* Color+Named.swift in Sources */,
 				3902B89E2393FE8200698B87 /* GenericEventView.swift in Sources */,
 				392389982388998F00B2E1DF /* ActivityIndicator.swift in Sources */,
 				CAC46D6023A276B40079C24F /* IndividuallyRoundedRectangle.swift in Sources */,
