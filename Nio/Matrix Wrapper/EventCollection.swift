@@ -14,33 +14,33 @@ struct EventCollection {
         }
 
         guard idx > wrapped.startIndex else {
-            return .start
+            return .leading
         }
 
         guard
             let sender = event.sender,
             let preSender = wrapped[wrapped.index(before: idx)].sender
         else {
-            return .notApplicable
+            return .lone
         }
 
         if sender != preSender {
-            return .start
+            return .leading
         }
 
         guard
             idx < wrapped.endIndex - 1,
             let sucSender = wrapped[wrapped.index(after: idx)].sender
         else {
-            return .end
+            return .trailing
         }
 
         if sender != sucSender {
-            return .end
+            return .trailing
         } else if sender == preSender && sender != sucSender {
-            return .end
+            return .trailing
         } else if sender == preSender && sender == sucSender {
-            return .continuation
+            return .center
         }
 
         fatalError("Non-covered position case? \(sender) \(preSender) \(sucSender)")
@@ -48,32 +48,39 @@ struct EventCollection {
 }
 
 enum GroupPosition {
-    case start
-    case continuation
-    case end
-    case notApplicable
+    case leading
+    case center
+    case trailing
+    case lone
 
+    var isLeading: Bool {
+        switch self {
+        case .leading, .lone: return true
+        case _: return false
+        }
+    }
+
+    var isTrailing: Bool {
+        switch self {
+        case .trailing, .lone: return true
+        case _: return false
+        }
+    }
+
+    // FIXME: remove once we have proper message grouping:
     var topMessagePadding: CGFloat {
         switch self {
-        case .start:
+        case .leading:
             return 8
-        case .continuation, .end:
+        case .center, .trailing:
             return 3
-        case .notApplicable:
+        case .lone:
             return 10
         }
     }
 
+    // FIXME: remove once we have proper message grouping:
     var showMessageSender: Bool {
-        self == .start
+        self == .leading
     }
-}
-
-struct GroupBounds: OptionSet, Equatable, Hashable {
-    let rawValue: Int
-
-    static let isAtStartOfGroup: Self = .init(rawValue: 1 << 0)
-    static let isAtEndOfGroup: Self = .init(rawValue: 1 << 1)
-
-    static let isLone: Self = [.isAtStartOfGroup, .isAtEndOfGroup]
 }

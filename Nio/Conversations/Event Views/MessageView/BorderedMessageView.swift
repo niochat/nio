@@ -6,7 +6,7 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
     @Environment(\.userID) var userID
 
     var model: Model
-    var bounds: GroupBounds
+    var displayStyle: MessageDisplayStyle
 
     private var isMe: Bool {
         model.sender == userID
@@ -45,36 +45,16 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
         let largeRadius: CGFloat = 15.0 * sizeCategory.scalingFactor
         let smallRadius: CGFloat = 5.0 * sizeCategory.scalingFactor
 
-        var topLeft: CGFloat = largeRadius
-        var topRight: CGFloat = largeRadius
-        var bottomLeft: CGFloat = largeRadius
-        var bottomRight: CGFloat = largeRadius
-
-        // We're right beneath another message in a group:
-        if !bounds.contains(.isAtStartOfGroup) {
-            if isMe {
-                topRight = smallRadius
-            } else {
-                topLeft = smallRadius
-            }
-        }
-
-        // We're right above another message in a group:
-        if !bounds.contains(.isAtEndOfGroup) {
-            if isMe {
-                bottomRight = smallRadius
-            } else {
-                bottomLeft = smallRadius
-            }
-        }
-
+        // We construct a left-aligned shape:
         return IndividuallyRoundedRectangle(
-            topLeft: topLeft,
-            topRight: topRight,
-            bottomLeft: bottomLeft,
-            bottomRight: bottomRight
+            topLeft: displayStyle.hasGapAbove ? largeRadius : smallRadius,
+            topRight: largeRadius,
+            bottomLeft: displayStyle.hasGapBelow ? largeRadius : smallRadius,
+            bottomRight: largeRadius
         )
             .fill(gradient).opacity(0.9)
+            // and flip it in case it's meant to be right-aligned:
+            .scaleEffect(x: isMe ? -1.0 : 1.0, y: 1.0, anchor: .center)
     }
 
     var bodyView: some View {
@@ -91,7 +71,7 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
     var body: some View {
         VStack(alignment: .trailing, spacing: 5) {
             bodyView
-            if bounds.contains(.isAtEndOfGroup) {
+            if displayStyle.hasGapBelow {
                 HStack {
                     timestampView
                 }
@@ -118,7 +98,10 @@ struct BorderedMessageView_Previews: PreviewProvider {
                 sender: sender,
                 timestamp: "12:29"
             ),
-            bounds: [.isLone]
+            displayStyle: MessageDisplayStyle(
+                hasGapAbove: true,
+                hasGapBelow: true
+            )
         )
             .padding()
             .environment(\.userID, userID)
@@ -135,7 +118,11 @@ struct BorderedMessageView_Previews: PreviewProvider {
                     sender: sender,
                     timestamp: "12:29"
                 ),
-                bounds: [.isAtStartOfGroup])
+                displayStyle: MessageDisplayStyle(
+                    hasGapAbove: true,
+                    hasGapBelow: false
+                )
+            )
             BorderedMessageView(
                 model: MessageViewModel(
                     id: "0",
@@ -143,7 +130,10 @@ struct BorderedMessageView_Previews: PreviewProvider {
                     sender: sender,
                     timestamp: "12:29"
                 ),
-                bounds: []
+                displayStyle: MessageDisplayStyle(
+                    hasGapAbove: false,
+                    hasGapBelow: false
+                )
             )
             BorderedMessageView(
                 model: MessageViewModel(
@@ -152,7 +142,10 @@ struct BorderedMessageView_Previews: PreviewProvider {
                     sender: sender,
                     timestamp: "12:29"
                 ),
-                bounds: [.isAtEndOfGroup]
+                displayStyle: MessageDisplayStyle(
+                    hasGapAbove: false,
+                    hasGapBelow: true
+                )
             )
         }
         .padding()
