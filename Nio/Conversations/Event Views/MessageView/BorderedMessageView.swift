@@ -8,7 +8,7 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
     var model: Model
     var bounds: GroupBounds
 
-    var isMe: Bool {
+    private var isMe: Bool {
         model.sender == userID
     }
 
@@ -77,15 +77,23 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
             .fill(gradient).opacity(0.9)
     }
 
+    var bodyView: some View {
+        Text(model.text)
+        .foregroundColor(textColor)
+    }
+
+    var timestampView: some View {
+        Text(model.timestamp)
+        .font(.caption)
+        .foregroundColor(textColor).opacity(0.5)
+    }
+
     var body: some View {
         VStack(alignment: .trailing, spacing: 5) {
-            Text(model.text)
-                .foregroundColor(textColor)
+            bodyView
             if bounds.contains(.isAtEndOfGroup) {
                 HStack {
-                    Text(model.timestamp)
-                        .font(.caption)
-                        .foregroundColor(textColor).opacity(0.5)
+                    timestampView
                 }
             }
         }

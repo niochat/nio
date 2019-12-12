@@ -8,6 +8,10 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
     var model: Model
     var bounds: GroupBounds
 
+    private var isMe: Bool {
+        model.sender == userID
+    }
+
     var timestampView: some View {
         Text(model.timestamp)
             .font(.caption)
@@ -21,7 +25,7 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
     }
 
     var body: some View {
-        if model.sender == userID {
+        if isMe {
             return AnyView(HStack {
                 Spacer()
                 timestampView
