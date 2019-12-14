@@ -43,6 +43,8 @@
 		39D166C82385C832006DD257 /* EventContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D166C72385C832006DD257 /* EventContainerView.swift */; };
 		87FE3870173FD55A91B15921 /* Pods_Nio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3410F361E5A713D19ECEF861 /* Pods_Nio.framework */; };
 		A329A2AF0574896611D82CC1 /* Pods_NioTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FF7D25C200D0F7228279B72 /* Pods_NioTests.framework */; };
+		CAC46D6B23A55E940079C24F /* PeekableIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D6A23A55E930079C24F /* PeekableIterator.swift */; };
+		CAC46D6D23A55EBA0079C24F /* PeekableIteratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D6C23A55EBA0079C24F /* PeekableIteratorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +99,8 @@
 		39D166C52385C804006DD257 /* String+Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Emoji.swift"; sourceTree = "<group>"; };
 		39D166C72385C832006DD257 /* EventContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventContainerView.swift; sourceTree = "<group>"; };
 		7FF7D25C200D0F7228279B72 /* Pods_NioTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NioTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAC46D6A23A55E930079C24F /* PeekableIterator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeekableIterator.swift; sourceTree = "<group>"; };
+		CAC46D6C23A55EBA0079C24F /* PeekableIteratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeekableIteratorTests.swift; sourceTree = "<group>"; };
 		E2D5B8AFEEB28F750CE393D1 /* Pods-NioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioTests.debug.xcconfig"; path = "Target Support Files/Pods-NioTests/Pods-NioTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,6 +158,7 @@
 			children = (
 				392389932388899200B2E1DF /* Formatter.swift */,
 				392389972388998F00B2E1DF /* ActivityIndicator.swift */,
+				CAC46D6A23A55E930079C24F /* PeekableIterator.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -181,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				393411D0239087D2003B49B8 /* EventCollectionTests.swift */,
+				CAC46D6C23A55EBA0079C24F /* PeekableIteratorTests.swift */,
 				393411D2239087D2003B49B8 /* Info.plist */,
 			);
 			path = NioTests;
@@ -505,6 +511,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAC46D6D23A55EBA0079C24F /* PeekableIteratorTests.swift in Sources */,
 				393411D1239087D2003B49B8 /* EventCollectionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -533,6 +540,7 @@
 				392389942388899200B2E1DF /* Formatter.swift in Sources */,
 				392389D6238F3EB200B2E1DF /* NIORoomSummary.swift in Sources */,
 				39D166C82385C832006DD257 /* EventContainerView.swift in Sources */,
+				CAC46D6B23A55E940079C24F /* PeekableIterator.swift in Sources */,
 				39C931DF2384328A004449E1 /* SceneDelegate.swift in Sources */,
 				3902B8A32395935600698B87 /* SettingsView.swift in Sources */,
 				39C931F523846966004449E1 /* LoginView.swift in Sources */,
