@@ -6,18 +6,18 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
     @Environment(\.userId) var userId
 
     var model: Model
-    var displayStyle: MessageDisplayStyle
+    var connectedEdges: ConnectedEdges
 
     private var isMe: Bool {
         model.sender == userId
     }
 
     private var topPadding: CGFloat {
-        displayStyle.hasGapAbove ? 5.0 : 0.0
+        connectedEdges.contains(.topEdge) ? 0.0 : 5.0
     }
 
     private var bottomPadding: CGFloat {
-        displayStyle.hasGapBelow ? 5.0 : 0.0
+        connectedEdges.contains(.bottomEdge) ? 0.0 : 5.0
     }
 
     var timestampView: some View {
@@ -69,10 +69,7 @@ struct BorderlessMessageView_Previews: PreviewProvider {
                 sender: sender,
                 timestamp: "12:29"
             ),
-            displayStyle: MessageDisplayStyle(
-                hasGapAbove: true,
-                hasGapBelow: true
-            )
+            connectedEdges: []
         )
             .padding()
             .environment(\.userId, userId)
@@ -89,10 +86,7 @@ struct BorderlessMessageView_Previews: PreviewProvider {
                     sender: sender,
                     timestamp: "12:29"
                 ),
-                displayStyle: MessageDisplayStyle(
-                    hasGapAbove: true,
-                    hasGapBelow: false
-                )
+                connectedEdges: [.bottomEdge]
             )
             BorderlessMessageView(
                 model: MessageViewModel(
@@ -101,10 +95,7 @@ struct BorderlessMessageView_Previews: PreviewProvider {
                     sender: sender,
                     timestamp: "12:29"
                 ),
-                displayStyle: MessageDisplayStyle(
-                    hasGapAbove: false,
-                    hasGapBelow: false
-                )
+                connectedEdges: [.topEdge, .bottomEdge]
             )
             BorderlessMessageView(
                 model: MessageViewModel(
@@ -113,10 +104,7 @@ struct BorderlessMessageView_Previews: PreviewProvider {
                     sender: sender,
                     timestamp: "12:29"
                 ),
-                displayStyle: MessageDisplayStyle(
-                    hasGapAbove: false,
-                    hasGapBelow: true
-                )
+                connectedEdges: [.topEdge]
             )
         }
         .padding()

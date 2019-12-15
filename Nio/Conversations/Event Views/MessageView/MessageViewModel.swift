@@ -13,33 +13,6 @@ extension MessageViewModelProtocol {
     }
 }
 
-struct MessageDisplayStyle {
-    var hasGapAbove: Bool
-    var hasGapBelow: Bool
-
-    init(hasGapAbove: Bool, hasGapBelow: Bool) {
-        self.hasGapAbove = hasGapAbove
-        self.hasGapBelow = hasGapBelow
-    }
-
-    init(groupPosition: GroupPosition) {
-        switch groupPosition {
-        case .leading:
-            self.hasGapAbove = true
-            self.hasGapBelow = false
-        case .center:
-            self.hasGapAbove = false
-            self.hasGapBelow = false
-        case .trailing:
-            self.hasGapAbove = false
-            self.hasGapBelow = true
-        case .lone:
-            self.hasGapAbove = true
-            self.hasGapBelow = true
-        }
-    }
-}
-
 struct MessageViewModel: MessageViewModelProtocol {
     enum Error: Swift.Error {
         case invalidEventType(MXEventType)

@@ -45,7 +45,7 @@ struct RoomView: View {
         VStack {
             ReverseList(events.wrapped) { event in
                 EventContainerView(event: event,
-                                   position: self.events.position(of: event),
+                                   connectedEdges: self.events.connectedEdges(of: event),
                                    isDirect: self.isDirect)
                     .padding(.horizontal)
             }
