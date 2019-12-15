@@ -8,7 +8,7 @@ struct RootView: View {
         case .loggedIn(let userId):
             return AnyView(
                 RecentRoomsContainerView()
-                .environment(\.userID, userId)
+                .environment(\.userId, userId)
             )
         case .loggedOut:
             return AnyView(

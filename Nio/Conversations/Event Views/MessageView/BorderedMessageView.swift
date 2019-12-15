@@ -3,24 +3,24 @@ import SwiftUI
 struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @Environment(\.sizeCategory) var sizeCategory: ContentSizeCategory
-    @Environment(\.userID) var userID
+    @Environment(\.userId) var userId
 
     var model: Model
     var displayStyle: MessageDisplayStyle
 
     private var isMe: Bool {
-        model.sender == userID
+        model.sender == userId
     }
 
     var textColor: Color {
-        guard model.sender == userID else {
+        guard model.sender == userId else {
             return .primary
         }
         return .white
     }
 
     var backgroundColor: Color {
-        guard model.sender == userID else {
+        guard model.sender == userId else {
             return .borderedMessageBackground
         }
         return .accentColor
@@ -90,7 +90,7 @@ struct BorderedMessageView_Previews: PreviewProvider {
         var timestamp: String
     }
 
-    static func lone(sender: String, userID: String) -> some View {
+    static func lone(sender: String, userId: String) -> some View {
         BorderedMessageView(
             model: MessageViewModel(
                 id: "0",
@@ -104,11 +104,11 @@ struct BorderedMessageView_Previews: PreviewProvider {
             )
         )
             .padding()
-            .environment(\.userID, userID)
+            .environment(\.userId, userId)
     }
 
-    static func grouped(sender: String, userID: String) -> some View {
-        let alignment: HorizontalAlignment = (sender == userID) ? .trailing : .leading
+    static func grouped(sender: String, userId: String) -> some View {
+        let alignment: HorizontalAlignment = (sender == userId) ? .trailing : .leading
 
         return VStack(alignment: alignment, spacing: 3) {
             BorderedMessageView(
@@ -149,29 +149,29 @@ struct BorderedMessageView_Previews: PreviewProvider {
             )
         }
         .padding()
-        .environment(\.userID, userID)
+        .environment(\.userId, userId)
     }
 
     static var previews: some View {
         Group {
             enumeratingColorSchemes {
-                lone(sender: "John Doe", userID: "Jane Doe")
+                lone(sender: "John Doe", userId: "Jane Doe")
             }
             .previewDisplayName("Incoming Lone Messages")
 
             enumeratingColorSchemes {
-                lone(sender: "Jane Doe", userID: "Jane Doe")
+                lone(sender: "Jane Doe", userId: "Jane Doe")
             }
             .previewDisplayName("Outgoing Lone Messages")
 
-            grouped(sender: "John Doe", userID: "Jane Doe")
+            grouped(sender: "John Doe", userId: "Jane Doe")
             .previewDisplayName("Incoming Grouped Messages")
 
-            grouped(sender: "Jane Doe", userID: "Jane Doe")
+            grouped(sender: "Jane Doe", userId: "Jane Doe")
             .previewDisplayName("Outgoing Grouped Messages")
 
             enumeratingSizeCategories {
-                lone(sender: "John Doe", userID: "Jane Doe")
+                lone(sender: "John Doe", userId: "Jane Doe")
             }
             .previewDisplayName("Incoming Messages")
         }

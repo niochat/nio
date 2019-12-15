@@ -5,7 +5,7 @@ struct UserIDKey: EnvironmentKey {
 }
 
 extension EnvironmentValues {
-    var userID: String {
+    var userId: String {
         get {
             return self[UserIDKey.self]
         }
