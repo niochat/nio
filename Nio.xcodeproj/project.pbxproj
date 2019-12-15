@@ -47,6 +47,7 @@
 		CAC46D6D23A55EBA0079C24F /* PeekableIteratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D6C23A55EBA0079C24F /* PeekableIteratorTests.swift */; };
 		CAC46D6F23A56BBE0079C24F /* GroupingIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D6E23A56BBE0079C24F /* GroupingIterator.swift */; };
 		CAC46D7123A56BFB0079C24F /* GroupingIteratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D7023A56BFB0079C24F /* GroupingIteratorTests.swift */; };
+		CAC46D7723A6CB6C0079C24F /* MXEventType+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D7623A6CB6C0079C24F /* MXEventType+Equatable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +106,7 @@
 		CAC46D6C23A55EBA0079C24F /* PeekableIteratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeekableIteratorTests.swift; sourceTree = "<group>"; };
 		CAC46D6E23A56BBE0079C24F /* GroupingIterator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupingIterator.swift; sourceTree = "<group>"; };
 		CAC46D7023A56BFB0079C24F /* GroupingIteratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupingIteratorTests.swift; sourceTree = "<group>"; };
+		CAC46D7623A6CB6C0079C24F /* MXEventType+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXEventType+Equatable.swift"; sourceTree = "<group>"; };
 		E2D5B8AFEEB28F750CE393D1 /* Pods-NioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioTests.debug.xcconfig"; path = "Target Support Files/Pods-NioTests/Pods-NioTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -279,6 +281,7 @@
 				3923898C238859D100B2E1DF /* MX+Identifiable.swift */,
 				393411C823904428003B49B8 /* MXEvent.swift */,
 				3902B89F239410EE00698B87 /* ContentSizeCategory.swift */,
+				CAC46D7623A6CB6C0079C24F /* MXEventType+Equatable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 				39C932072384BB13004449E1 /* RecentRoomsView.swift in Sources */,
 				CAC46D6F23A56BBE0079C24F /* GroupingIterator.swift in Sources */,
 				3923899A2388A52A00B2E1DF /* MatrixServices.swift in Sources */,
+				CAC46D7723A6CB6C0079C24F /* MXEventType+Equatable.swift in Sources */,
 				393411C723903C94003B49B8 /* EventCollection.swift in Sources */,
 				3902B8A52395A77800698B87 /* LoadingView.swift in Sources */,
 				3902B8A0239410EE00698B87 /* ContentSizeCategory.swift in Sources */,
