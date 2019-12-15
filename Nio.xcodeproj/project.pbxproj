@@ -45,6 +45,8 @@
 		A329A2AF0574896611D82CC1 /* Pods_NioTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FF7D25C200D0F7228279B72 /* Pods_NioTests.framework */; };
 		CAC46D6B23A55E940079C24F /* PeekableIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D6A23A55E930079C24F /* PeekableIterator.swift */; };
 		CAC46D6D23A55EBA0079C24F /* PeekableIteratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D6C23A55EBA0079C24F /* PeekableIteratorTests.swift */; };
+		CAC46D6F23A56BBE0079C24F /* GroupingIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D6E23A56BBE0079C24F /* GroupingIterator.swift */; };
+		CAC46D7123A56BFB0079C24F /* GroupingIteratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D7023A56BFB0079C24F /* GroupingIteratorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +103,8 @@
 		7FF7D25C200D0F7228279B72 /* Pods_NioTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NioTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAC46D6A23A55E930079C24F /* PeekableIterator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeekableIterator.swift; sourceTree = "<group>"; };
 		CAC46D6C23A55EBA0079C24F /* PeekableIteratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeekableIteratorTests.swift; sourceTree = "<group>"; };
+		CAC46D6E23A56BBE0079C24F /* GroupingIterator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupingIterator.swift; sourceTree = "<group>"; };
+		CAC46D7023A56BFB0079C24F /* GroupingIteratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupingIteratorTests.swift; sourceTree = "<group>"; };
 		E2D5B8AFEEB28F750CE393D1 /* Pods-NioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioTests.debug.xcconfig"; path = "Target Support Files/Pods-NioTests/Pods-NioTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,6 +163,7 @@
 				392389932388899200B2E1DF /* Formatter.swift */,
 				392389972388998F00B2E1DF /* ActivityIndicator.swift */,
 				CAC46D6A23A55E930079C24F /* PeekableIterator.swift */,
+				CAC46D6E23A56BBE0079C24F /* GroupingIterator.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -187,6 +192,7 @@
 			children = (
 				393411D0239087D2003B49B8 /* EventCollectionTests.swift */,
 				CAC46D6C23A55EBA0079C24F /* PeekableIteratorTests.swift */,
+				CAC46D7023A56BFB0079C24F /* GroupingIteratorTests.swift */,
 				393411D2239087D2003B49B8 /* Info.plist */,
 			);
 			path = NioTests;
@@ -513,6 +519,7 @@
 			files = (
 				CAC46D6D23A55EBA0079C24F /* PeekableIteratorTests.swift in Sources */,
 				393411D1239087D2003B49B8 /* EventCollectionTests.swift in Sources */,
+				CAC46D7123A56BFB0079C24F /* GroupingIteratorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,6 +535,7 @@
 				393411C923904428003B49B8 /* MXEvent.swift in Sources */,
 				3923898D238859D100B2E1DF /* MX+Identifiable.swift in Sources */,
 				39C932072384BB13004449E1 /* RecentRoomsView.swift in Sources */,
+				CAC46D6F23A56BBE0079C24F /* GroupingIterator.swift in Sources */,
 				3923899A2388A52A00B2E1DF /* MatrixServices.swift in Sources */,
 				393411C723903C94003B49B8 /* EventCollection.swift in Sources */,
 				3902B8A52395A77800698B87 /* LoadingView.swift in Sources */,
