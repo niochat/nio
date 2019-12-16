@@ -73,9 +73,7 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
             bodyView
             if !connectedEdges.contains(.bottomEdge) {
                 // It's the last message in a group, so show a timestamp:
-                HStack {
-                    timestampView
-                }
+                timestampView
             }
         }
         .padding(10)
