@@ -41,13 +41,19 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
     var body: some View {
         if isMe {
             return AnyView(HStack {
-                timestampView
+                if !connectedEdges.contains(.bottomEdge) {
+                    // It's the last message in a group, so show a timestamp:
+                    timestampView
+                }
                 contentView
             })
         } else {
             return AnyView(HStack {
                 contentView
-                timestampView
+                if !connectedEdges.contains(.bottomEdge) {
+                    // It's the last message in a group, so show a timestamp:
+                    timestampView
+                }
             })
         }
     }
