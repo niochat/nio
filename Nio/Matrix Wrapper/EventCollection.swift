@@ -8,63 +8,48 @@ struct EventCollection {
         self.wrapped = events
     }
 
-    func position(of event: MXEvent) -> GroupPosition {
+    func connectedEdges(of event: MXEvent) -> ConnectedEdges {
         guard let idx = wrapped.firstIndex(of: event) else {
             fatalError("Event not found in EventCollection")
         }
 
         guard idx > wrapped.startIndex else {
-            return .start
+            return .bottomEdge
         }
 
         guard
             let sender = event.sender,
             let preSender = wrapped[wrapped.index(before: idx)].sender
         else {
-            return .notApplicable
+            return []
         }
 
         if sender != preSender {
-            return .start
+            return .bottomEdge
         }
 
         guard
             idx < wrapped.endIndex - 1,
             let sucSender = wrapped[wrapped.index(after: idx)].sender
         else {
-            return .end
+            return .topEdge
         }
 
         if sender != sucSender {
-            return .end
+            return .topEdge
         } else if sender == preSender && sender != sucSender {
-            return .end
+            return .topEdge
         } else if sender == preSender && sender == sucSender {
-            return .continuation
+            return [.topEdge, .bottomEdge]
         }
 
         fatalError("Non-covered position case? \(sender) \(preSender) \(sucSender)")
     }
 }
 
-enum GroupPosition {
-    case start
-    case continuation
-    case end
-    case notApplicable
+struct ConnectedEdges: OptionSet {
+    let rawValue: Int
 
-    var topMessagePadding: CGFloat {
-        switch self {
-        case .start:
-            return 8
-        case .continuation, .end:
-            return 3
-        case .notApplicable:
-            return 10
-        }
-    }
-
-    var showMessageSender: Bool {
-        self == .start
-    }
+    static let topEdge: Self = .init(rawValue: 1 << 0)
+    static let bottomEdge: Self = .init(rawValue: 1 << 1)
 }

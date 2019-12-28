@@ -38,7 +38,7 @@ enum LoginState {
     case loggedOut
     case authenticating
     case failure(Error)
-    case loggedIn
+    case loggedIn(userId: String)
 }
 
 // MARK: Side Effects

@@ -5,32 +5,33 @@ struct EventContainerView: View {
     @EnvironmentObject var store: MatrixStore<AppState, AppAction>
 
     var event: MXEvent
-    var position: GroupPosition
+    var connectedEdges: ConnectedEdges
     var isDirect: Bool
 
     var body: some View {
         switch MXEventType(identifier: event.type) {
         case .roomMessage:
-            let message = (event.content["body"] as? String) ?? ""
+            // FIXME: remove
+            // swiftlint:disable:next force_try
+            let messageModel = try! MessageViewModel(event: event)
             return AnyView(
-                MessageView(text: message,
-                            sender: event.sender,
-                            showSender: !isDirect && position.showMessageSender,
-                            timestamp: Formatter.string(for: event.timestamp, timeStyle: .short),
-                            isMe: MatrixServices.shared.credentials?.userId == event.sender)
-                    .padding(.top, position.topMessagePadding)
+                MessageView(
+                    model: .constant(messageModel),
+                    connectedEdges: []
+                )
+                    .padding(.top, 10)
             )
         case .roomMember:
             let displayname = (event.content["displayname"] as? String) ?? ""
             let membership = (event.content["membership"] as? String) ?? ""
             return AnyView(
                 GenericEventView(text: "\(displayname) \(membership)'d") // 🤷
-                    .padding(.top, position.topMessagePadding)
+                    .padding(.top, 10)
             )
         default:
             return AnyView(
                 GenericEventView(text: "\(event.type!): \(event.content!)")
-                    .padding(.top, position.topMessagePadding)
+                    .padding(.top, 10)
             )
         }
     }

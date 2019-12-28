@@ -5,9 +5,10 @@ struct RootView: View {
 
     var body: some View {
         switch store.state.loginState {
-        case .loggedIn:
+        case .loggedIn(let userId):
             return AnyView(
                 RecentRoomsContainerView()
+                .environment(\.userId, userId)
             )
         case .loggedOut:
             return AnyView(

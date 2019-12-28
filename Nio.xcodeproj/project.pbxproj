@@ -50,6 +50,13 @@
 		CAC46D7323A6AE890079C24F /* TypedEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D7223A6AE890079C24F /* TypedEvents.swift */; };
 		CAC46D7723A6CB6C0079C24F /* MXEventType+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D7623A6CB6C0079C24F /* MXEventType+Equatable.swift */; };
 		CAC46D7923A6D4B90079C24F /* TypedEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D7823A6D4B90079C24F /* TypedEventsTests.swift */; };
+		CAC46D5723A272D10079C24F /* BorderlessMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D5423A272D10079C24F /* BorderlessMessageView.swift */; };
+		CAC46D5823A272D10079C24F /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D5523A272D10079C24F /* MessageViewModel.swift */; };
+		CAC46D5923A272D10079C24F /* BorderedMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D5623A272D10079C24F /* BorderedMessageView.swift */; };
+		CAC46D5B23A2734C0079C24F /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D5A23A2734C0079C24F /* EnvironmentValues.swift */; };
+		CAC46D5D23A276700079C24F /* Color+Named.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D5C23A276700079C24F /* Color+Named.swift */; };
+		CAC46D6023A276B40079C24F /* IndividuallyRoundedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D5F23A276B30079C24F /* IndividuallyRoundedRectangle.swift */; };
+		CAC46D6323A278F40079C24F /* PreviewProvider+Enumeration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D6223A278F40079C24F /* PreviewProvider+Enumeration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +118,13 @@
 		CAC46D7223A6AE890079C24F /* TypedEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypedEvents.swift; sourceTree = "<group>"; };
 		CAC46D7623A6CB6C0079C24F /* MXEventType+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXEventType+Equatable.swift"; sourceTree = "<group>"; };
 		CAC46D7823A6D4B90079C24F /* TypedEventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypedEventsTests.swift; sourceTree = "<group>"; };
+		CAC46D5423A272D10079C24F /* BorderlessMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderlessMessageView.swift; sourceTree = "<group>"; };
+		CAC46D5523A272D10079C24F /* MessageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
+		CAC46D5623A272D10079C24F /* BorderedMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderedMessageView.swift; sourceTree = "<group>"; };
+		CAC46D5A23A2734C0079C24F /* EnvironmentValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
+		CAC46D5C23A276700079C24F /* Color+Named.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Named.swift"; sourceTree = "<group>"; };
+		CAC46D5F23A276B30079C24F /* IndividuallyRoundedRectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndividuallyRoundedRectangle.swift; sourceTree = "<group>"; };
+		CAC46D6223A278F40079C24F /* PreviewProvider+Enumeration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PreviewProvider+Enumeration.swift"; sourceTree = "<group>"; };
 		E2D5B8AFEEB28F750CE393D1 /* Pods-NioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioTests.debug.xcconfig"; path = "Target Support Files/Pods-NioTests/Pods-NioTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,8 +170,8 @@
 		3907AB482393FE0E00B25DE9 /* Event Views */ = {
 			isa = PBXGroup;
 			children = (
+				CAC46D5323A272D10079C24F /* MessageView */,
 				39D166C72385C832006DD257 /* EventContainerView.swift */,
-				3902B89B2393FE6100698B87 /* MessageView.swift */,
 				3902B89D2393FE8200698B87 /* GenericEventView.swift */,
 			);
 			path = "Event Views";
@@ -237,6 +251,7 @@
 				39C931E02384328A004449E1 /* RootView.swift */,
 				3902B8A62395A78100698B87 /* Authentication */,
 				392389D0238F2E6200B2E1DF /* Matrix Wrapper */,
+				CAC46D5E23A276B30079C24F /* Shapes */,
 				392389CA238EBB0800B2E1DF /* Shared Views */,
 				392389922388898800B2E1DF /* Utility */,
 				39C932052384BAA0004449E1 /* Conversations */,
@@ -282,12 +297,15 @@
 		39D166C42385C7F6006DD257 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				CAC46D5A23A2734C0079C24F /* EnvironmentValues.swift */,
 				39D166C52385C804006DD257 /* String+Emoji.swift */,
 				392389882386FD3900B2E1DF /* MXClient+Publisher.swift */,
 				3923898C238859D100B2E1DF /* MX+Identifiable.swift */,
 				393411C823904428003B49B8 /* MXEvent.swift */,
+				CAC46D5C23A276700079C24F /* Color+Named.swift */,
 				3902B89F239410EE00698B87 /* ContentSizeCategory.swift */,
 				CAC46D7623A6CB6C0079C24F /* MXEventType+Equatable.swift */,
+				CAC46D6223A278F40079C24F /* PreviewProvider+Enumeration.swift */
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -299,6 +317,25 @@
 				7FF7D25C200D0F7228279B72 /* Pods_NioTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CAC46D5323A272D10079C24F /* MessageView */ = {
+			isa = PBXGroup;
+			children = (
+				3902B89B2393FE6100698B87 /* MessageView.swift */,
+				CAC46D5423A272D10079C24F /* BorderlessMessageView.swift */,
+				CAC46D5523A272D10079C24F /* MessageViewModel.swift */,
+				CAC46D5623A272D10079C24F /* BorderedMessageView.swift */,
+			);
+			path = MessageView;
+			sourceTree = "<group>";
+		};
+		CAC46D5E23A276B30079C24F /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				CAC46D5F23A276B30079C24F /* IndividuallyRoundedRectangle.swift */,
+			);
+			path = Shapes;
 			sourceTree = "<group>";
 		};
 		E59A03343DCFE20D3EC045F7 /* Pods */ = {
@@ -538,12 +575,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				39C9320B23856033004449E1 /* MessageComposerView.swift in Sources */,
+				CAC46D5923A272D10079C24F /* BorderedMessageView.swift in Sources */,
 				392389892386FD3900B2E1DF /* MXClient+Publisher.swift in Sources */,
 				392389D2238F2E6F00B2E1DF /* NIORoom.swift in Sources */,
 				3923898F2388707E00B2E1DF /* RoomListItemView.swift in Sources */,
 				39C931DD2384328A004449E1 /* AppDelegate.swift in Sources */,
 				393411C923904428003B49B8 /* MXEvent.swift in Sources */,
 				3923898D238859D100B2E1DF /* MX+Identifiable.swift in Sources */,
+				CAC46D5B23A2734C0079C24F /* EnvironmentValues.swift in Sources */,
 				39C932072384BB13004449E1 /* RecentRoomsView.swift in Sources */,
 				CAC46D6F23A56BBE0079C24F /* GroupingIterator.swift in Sources */,
 				3923899A2388A52A00B2E1DF /* MatrixServices.swift in Sources */,
@@ -554,17 +593,22 @@
 				39D166C62385C804006DD257 /* String+Emoji.swift in Sources */,
 				392389D4238F3E8F00B2E1DF /* NIORecentRooms.swift in Sources */,
 				3902B89C2393FE6100698B87 /* MessageView.swift in Sources */,
+				CAC46D5723A272D10079C24F /* BorderlessMessageView.swift in Sources */,
 				39C93209238553E4004449E1 /* RoomView.swift in Sources */,
 				392389CC238EBB1500B2E1DF /* ReverseList.swift in Sources */,
 				392389942388899200B2E1DF /* Formatter.swift in Sources */,
+				CAC46D6323A278F40079C24F /* PreviewProvider+Enumeration.swift in Sources */,
 				392389D6238F3EB200B2E1DF /* NIORoomSummary.swift in Sources */,
 				39D166C82385C832006DD257 /* EventContainerView.swift in Sources */,
 				CAC46D6B23A55E940079C24F /* PeekableIterator.swift in Sources */,
+				CAC46D5823A272D10079C24F /* MessageViewModel.swift in Sources */,
 				39C931DF2384328A004449E1 /* SceneDelegate.swift in Sources */,
 				3902B8A32395935600698B87 /* SettingsView.swift in Sources */,
 				39C931F523846966004449E1 /* LoginView.swift in Sources */,
+				CAC46D5D23A276700079C24F /* Color+Named.swift in Sources */,
 				3902B89E2393FE8200698B87 /* GenericEventView.swift in Sources */,
 				392389982388998F00B2E1DF /* ActivityIndicator.swift in Sources */,
+				CAC46D6023A276B40079C24F /* IndividuallyRoundedRectangle.swift in Sources */,
 				39C931FE23847E7F004449E1 /* MatrixStore.swift in Sources */,
 				CAC46D7323A6AE890079C24F /* TypedEvents.swift in Sources */,
 				39C931E12384328A004449E1 /* RootView.swift in Sources */,

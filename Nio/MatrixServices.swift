@@ -132,7 +132,8 @@ class MatrixServices {
                     case .failure(let error):
                         completion(.failure(error))
                     case .success:
-                        completion(.success(.loggedIn))
+                        let userId = credentials.userId!
+                        completion(.success(.loggedIn(userId: userId)))
                     }
                 }
             }
