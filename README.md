@@ -30,3 +30,9 @@ You might also have fun checking out the following applications.
 - [Messagerie](https://github.com/manuroe/messagerie), also built with SwiftUI
 - [Pattle](https://git.pattle.im/pattle/app), very polished cross-platform app built with Flutter
 
+### Why "Nio"?
+
+*Nio* is short for *Niobe* (albeit pronounced differently), captain of the ship *Logos* in the [Matrix trilogy](https://en.wikipedia.org/wiki/The_Matrix_(franchise)). Additionally it's a homonym of *Neo*, because there's definitely not enough Matrix projects jumping on that pun train already.
+
+The abbreviation NIO is also commonly used to refer to the term *non-blocking IO*. I find this entertaining for a messaging client, which is essentially a human IO interface.
+
