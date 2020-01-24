@@ -1,4 +1,4 @@
-name: Swift
+name: Build & Test
 
 on: [push]
 
@@ -7,11 +7,11 @@ jobs:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Build
+    - name: Prerequisites
       run: |
         gem install cocoapods xcpretty
         pod install
-        xcodebuild -workspace Nio.xcworkspace -scheme Nio build | xcpretty
+    - name: Build
+      run: xcodebuild -workspace Nio.xcworkspace -scheme Nio -allowProvisioningUpdates build | xcpretty
     - name: Test
-      run: |
-        xcodebuild -workspace Nio.xcworkspace -scheme Nio test -destination 'platform=iOS Simulator,name=iPhone 11' | xcpretty
+      run: xcodebuild -workspace Nio.xcworkspace -scheme Nio test -destination 'platform=iOS Simulator,name=iPhone 11' | xcpretty
