@@ -1,0 +1,22 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build_and_test:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Prerequisites
+      run: |
+        brew install swiftlint
+        gem install cocoapods xcpretty
+        pod install
+    - name: Build
+      run: |
+        set -o pipefail
+        xcodebuild -workspace Nio.xcworkspace -scheme Nio -destination 'platform=iOS Simulator,name=iPhone 11' build | xcpretty --color
+    - name: Test
+      run: |
+        set -o pipefail
+        xcodebuild -workspace Nio.xcworkspace -scheme Nio -destination 'platform=iOS Simulator,name=iPhone 11' test | xcpretty --color --test
