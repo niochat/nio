@@ -12,6 +12,6 @@ jobs:
         gem install cocoapods xcpretty
         pod install
     - name: Build
-      run: xcodebuild -workspace Nio.xcworkspace -scheme Nio -allowProvisioningUpdates build | xcpretty
+      run: xcodebuild -workspace Nio.xcworkspace -scheme Nio -destination 'platform=iOS Simulator,name=iPhone 11' build | xcpretty
     - name: Test
-      run: xcodebuild -workspace Nio.xcworkspace -scheme Nio test -destination 'platform=iOS Simulator,name=iPhone 11' | xcpretty
+      run: xcodebuild -workspace Nio.xcworkspace -scheme Nio -destination 'platform=iOS Simulator,name=iPhone 11' test | xcpretty
