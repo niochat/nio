@@ -3,7 +3,7 @@ name: CI
 on: [push]
 
 jobs:
-  build:
+  build&test:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v1
@@ -15,9 +15,7 @@ jobs:
       run: |
         set -o pipefail
         xcodebuild -workspace Nio.xcworkspace -scheme Nio -destination 'platform=iOS Simulator,name=iPhone 11' build | xcpretty --color
-        exit $?
     - name: Test
       run: |
         set -o pipefail
         xcodebuild -workspace Nio.xcworkspace -scheme Nio -destination 'platform=iOS Simulator,name=iPhone 11' test | xcpretty --color --test
-        exit $?
