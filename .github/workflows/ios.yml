@@ -1,4 +1,4 @@
-name: Build & Test
+name: CI
 
 on: [push]
 
@@ -9,6 +9,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Prerequisites
       run: |
+        set -o pipefail
         gem install cocoapods xcpretty
         pod install
     - name: Build
