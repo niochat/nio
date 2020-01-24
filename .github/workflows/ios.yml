@@ -9,10 +9,15 @@ jobs:
     - uses: actions/checkout@v1
     - name: Prerequisites
       run: |
-        set -o pipefail
         gem install cocoapods xcpretty
         pod install
     - name: Build
-      run: xcodebuild -workspace Nio.xcworkspace -scheme Nio -destination 'platform=iOS Simulator,name=iPhone 11' build | xcpretty
+      run: |
+        set -o pipefail
+        xcodebuild -workspace Nio.xcworkspace -scheme Nio -destination 'platform=iOS Simulator,name=iPhone 11' build | xcpretty --color
+        exit $?
     - name: Test
-      run: xcodebuild -workspace Nio.xcworkspace -scheme Nio -destination 'platform=iOS Simulator,name=iPhone 11' test | xcpretty
+      run: |
+        set -o pipefail
+        xcodebuild -workspace Nio.xcworkspace -scheme Nio -destination 'platform=iOS Simulator,name=iPhone 11' test | xcpretty --color --test
+        exit $?
