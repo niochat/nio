@@ -30,95 +30,142 @@ struct RoomListItemView: View {
     var badge: UInt
 
     var gradient: LinearGradient {
-        let tintColor: Color = .accentColor
-        let colors = [
-            tintColor.opacity(0.75),
-            tintColor
-        ]
-        return LinearGradient(gradient: Gradient(colors: colors),
-                       startPoint: .top,
-                       endPoint: .bottom)
+        let color: Color = .white
+        let colors = [color.opacity(0.3), color.opacity(0.0)]
+        return LinearGradient(
+            gradient: Gradient(colors: colors),
+            startPoint: .top,
+            endPoint: .bottom
+        )
     }
 
-    var image: some View {
-        ZStack {
-            Circle()
-                .fill(gradient)
-            Text(title.prefix(2).uppercased())
-                .multilineTextAlignment(.center)
-                .font(.system(.headline, design: .rounded))
-                .foregroundColor(.white)
+    var imageView: some View {
+        Text(title.prefix(2).uppercased())
+            .multilineTextAlignment(.center)
+            .font(.system(.headline, design: .rounded))
+            .lineLimit(1)
+            .allowsTightening(true)
+            .padding(10 * sizeCategory.scalingFactor)
+            .aspectRatio(1.0, contentMode: .fill)
+            .foregroundColor(.white)
+            .background(
+                Circle()
+                    .foregroundColor(.accentColor)
+                    .overlay(Circle().fill(self.gradient))
+            )
+            .accessibility(addTraits: .isImage)
+    }
+
+    var topView: some View {
+        HStack(alignment: .top) {
+            titleView
+            Spacer()
+            timeAgoView
         }
-        .frame(width: 40, height: 40)
-        .accessibility(addTraits: .isImage)
+            .padding(.bottom, 5)
+    }
+
+    var titleView: some View {
+        Text(title)
+            .font(.headline)
+            .lineLimit(1)
+            .allowsTightening(true)
+    }
+
+    var timeAgoView: some View {
+        Text(rightDetail)
+            .font(.caption)
+            .lineLimit(1)
+            .allowsTightening(true)
+            .foregroundColor(.secondary)
+    }
+
+    var bottomView: some View {
+        HStack {
+            subtitleView
+            if badge != 0 {
+                Spacer()
+                badgeView
+            }
+        }
+    }
+
+    var subtitleView: some View {
+        Text(subtitle)
+            .multilineTextAlignment(.leading)
+            .font(.subheadline)
+            .lineLimit(1)
+            .allowsTightening(true)
+            .foregroundColor(.secondary)
+    }
+
+    var badgeView: some View {
+        Text(String(self.badge))
+            .font(.caption)
+            .lineLimit(1)
+            .allowsTightening(true)
+            .foregroundColor(.white)
+            // Make sure we get enough "breathing air" around the number:
+            .padding(.vertical, 3 * sizeCategory.scalingFactor)
+            .padding(.horizontal, 6 * sizeCategory.scalingFactor)
+            .accessibility(label: Text("\(self.badge) new messages"))
+            .background(
+                GeometryReader { geometry in
+                    Capsule()
+                        .foregroundColor(.accentColor)
+                        .overlay(Capsule().fill(self.gradient))
+                        // Make sure the capsule always remains wider than its tall:
+                        .frame(minWidth: geometry.size.height)
+                }
+            )
     }
 
     @Environment(\.sizeCategory) var sizeCategory
 
     var body: some View {
         HStack(alignment: .center) {
-            image
+            imageView
 
             VStack(alignment: .leading, spacing: 0) {
-                HStack(alignment: .top) {
-                    Text(title)
-                        .font(.headline)
-                        .lineLimit(2)
-                        .padding(.bottom, 5)
-                        .allowsTightening(true)
-                    Spacer()
-                    Text(rightDetail)
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                }
-                HStack {
-                    Text(subtitle)
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                        .lineLimit(2)
-                        .allowsTightening(true)
-                    if badge != 0 {
-                        Spacer()
-                        ZStack {
-                            Circle()
-                                .foregroundColor(.accentColor)
-                                .frame(width: 20, height: 20)
-                            Text(String(badge))
-                                .font(.caption)
-                                .foregroundColor(.white)
-                                .accessibility(label: Text("\(badge) new messages"))
-                        }
-                    }
-                }
+                topView
+                bottomView
             }
         }
-        .frame(height: 60 * sizeCategory.scalingFactor)
+        .padding([.vertical], 5 * sizeCategory.scalingFactor)
     }
 }
 
 //swiftlint:disable line_length
 struct RoomListItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            RoomListItemView(title: "Morpheus",
-                             subtitle: "Red or blue 💊?",
-                             rightDetail: "10 minutes ago",
-                             badge: 2)
-            RoomListItemView(title: "Morpheus",
-                             subtitle: "Red or blue 💊?",
-                             rightDetail: "10 minutes ago",
-                             badge: 0)
-            RoomListItemView(title: "Morpheus",
-                             subtitle: "Nesciunt quaerat voluptatem enim sunt. Provident id consequatur tempora nostrum. Sit in voluptatem consequuntur at et provident est facilis. Ut sit ad sit quam commodi qui.",
-                             rightDetail: "12:29",
-                             badge: 0)
-            RoomListItemView(title: "A very long conversation title that breaks into the second line",
-                             subtitle: "Nesciunt quaerat voluptatem enim sunt. Provident id consequatur tempora nostrum. Sit in voluptatem consequuntur at et provident est facilis. Ut sit ad sit quam commodi qui.",
-                             rightDetail: "12:29",
-                             badge: 1)
+    static func unreadCount() -> UInt {
+        guard Bool.random() else {
+            return 0
         }
-//        .environment(\.sizeCategory, .extraExtraExtraLarge)
-//        .environment(\.colorScheme, .dark)
+        // Random number between 10^0.0 and 10^4.0:
+        return UInt(pow(10.0, Double.random(in: 0.0..<4.0)))
+    }
+
+    static var list: some View {
+        List {
+            ForEach(ContentSizeCategory.allCases, id: \.self) { contentSizeCategory in
+                RoomListItemView(
+                    title: "Morpheus",
+                    subtitle: "Red or blue 💊?",
+                    rightDetail: "10m ago",
+                    badge: unreadCount()
+                )
+                .environment(\.sizeCategory, contentSizeCategory)
+            }
+        }
+    }
+
+    static var previews: some View {
+        Group {
+            list
+                .environment(\.colorScheme, .light)
+            list
+                .environment(\.colorScheme, .dark)
+        }
         .accentColor(.purple)
     }
 }
