@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftMatrixSDK
+import SDWebImageSwiftUI
 
 struct RoomListItemContainerView: View {
     var room: NIORoom
@@ -18,7 +19,8 @@ struct RoomListItemContainerView: View {
         return RoomListItemView(title: room.summary.displayname ?? "",
                                 subtitle: lastMessage,
                                 rightDetail: lastActivity,
-                                badge: room.summary.localUnreadEventCount)
+                                badge: room.summary.localUnreadEventCount,
+                                roomAvatar: MXURL(mxContentURI: room.summary.avatar))
         .accessibility(label: Text(accessibilityLabel))
     }
 }
@@ -28,6 +30,7 @@ struct RoomListItemView: View {
     var subtitle: String
     var rightDetail: String
     var badge: UInt
+    var roomAvatar: MXURL?
 
     var gradient: LinearGradient {
         let tintColor: Color = .accentColor
@@ -40,7 +43,7 @@ struct RoomListItemView: View {
                        endPoint: .bottom)
     }
 
-    var image: some View {
+    var prefixAvatar: some View {
         ZStack {
             Circle()
                 .fill(gradient)
@@ -51,6 +54,23 @@ struct RoomListItemView: View {
         }
         .frame(width: 40, height: 40)
         .accessibility(addTraits: .isImage)
+    }
+
+    var image: some View {
+        if let avatarURL = roomAvatar?.contentURL {
+            return AnyView(
+                WebImage(url: avatarURL)
+                    .resizable()
+                    .placeholder { prefixAvatar }
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 40, height: 40)
+                    .mask(Circle())
+            )
+        } else {
+            return AnyView(
+                prefixAvatar
+            )
+        }
     }
 
     @Environment(\.sizeCategory) var sizeCategory
@@ -103,19 +123,23 @@ struct RoomListItemView_Previews: PreviewProvider {
             RoomListItemView(title: "Morpheus",
                              subtitle: "Red or blue 💊?",
                              rightDetail: "10 minutes ago",
-                             badge: 2)
+                             badge: 2,
+                             roomAvatar: .demo)
             RoomListItemView(title: "Morpheus",
                              subtitle: "Red or blue 💊?",
                              rightDetail: "10 minutes ago",
-                             badge: 0)
+                             badge: 0,
+                             roomAvatar: .demo)
             RoomListItemView(title: "Morpheus",
                              subtitle: "Nesciunt quaerat voluptatem enim sunt. Provident id consequatur tempora nostrum. Sit in voluptatem consequuntur at et provident est facilis. Ut sit ad sit quam commodi qui.",
                              rightDetail: "12:29",
-                             badge: 0)
+                             badge: 0,
+                             roomAvatar: .demo)
             RoomListItemView(title: "A very long conversation title that breaks into the second line",
                              subtitle: "Nesciunt quaerat voluptatem enim sunt. Provident id consequatur tempora nostrum. Sit in voluptatem consequuntur at et provident est facilis. Ut sit ad sit quam commodi qui.",
                              rightDetail: "12:29",
-                             badge: 1)
+                             badge: 1,
+                             roomAvatar: .demo)
         }
 //        .environment(\.sizeCategory, .extraExtraExtraLarge)
 //        .environment(\.colorScheme, .dark)
