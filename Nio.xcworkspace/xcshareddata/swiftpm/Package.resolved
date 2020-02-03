@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/SDWebImage/SDWebImageSwiftUI.git",
         "state": {
           "branch": null,
-          "revision": "a3f30bafdcee6ca2aeec58da3ab249e075f268f0",
-          "version": "0.10.0"
+          "revision": "963dac42e74d0e352a8f010ec300b304828bb8d9",
+          "version": "1.0.0-beta2"
         }
       }
     ]
