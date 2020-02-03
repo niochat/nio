@@ -59,7 +59,7 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
 
     var bodyView: some View {
         Text(model.text)
-        .foregroundColor(textColor)
+            .foregroundColor(textColor)
     }
 
     var timestampView: some View {
@@ -69,7 +69,7 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
     }
 
     var body: some View {
-        VStack(alignment: .trailing, spacing: 5) {
+        VStack(alignment: isMe ? .trailing : .leading, spacing: 5) {
             bodyView
             if !connectedEdges.contains(.bottomEdge) {
                 // It's the last message in a group, so show a timestamp:
