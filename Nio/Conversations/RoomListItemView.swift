@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftMatrixSDK
+import SDWebImageSwiftUI
 
 struct RoomListItemContainerView: View {
     var room: NIORoom
@@ -18,7 +19,8 @@ struct RoomListItemContainerView: View {
         return RoomListItemView(title: room.summary.displayname ?? "",
                                 subtitle: lastMessage,
                                 rightDetail: lastActivity,
-                                badge: room.summary.localUnreadEventCount)
+                                badge: room.summary.localUnreadEventCount,
+                                roomAvatar: MXURL(mxContentURI: room.summary.avatar))
         .accessibility(label: Text(accessibilityLabel))
     }
 }
@@ -28,6 +30,7 @@ struct RoomListItemView: View {
     var subtitle: String
     var rightDetail: String
     var badge: UInt
+    var roomAvatar: MXURL?
 
     var gradient: LinearGradient {
         let color: Color = .white
@@ -39,7 +42,7 @@ struct RoomListItemView: View {
         )
     }
 
-    var imageView: some View {
+    var prefixAvatar: some View {
         Text(title.prefix(2).uppercased())
             .multilineTextAlignment(.center)
             .font(.system(.headline, design: .rounded))
@@ -62,7 +65,7 @@ struct RoomListItemView: View {
             Spacer()
             timeAgoView
         }
-            .padding(.bottom, 5)
+        .padding(.bottom, 5)
     }
 
     var titleView: some View {
@@ -120,11 +123,28 @@ struct RoomListItemView: View {
             )
     }
 
+    var image: some View {
+        if let avatarURL = roomAvatar?.contentURL {
+            return AnyView(
+                WebImage(url: avatarURL)
+                    .resizable()
+                    .placeholder { prefixAvatar }
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 40, height: 40)
+                    .mask(Circle())
+            )
+        } else {
+            return AnyView(
+                prefixAvatar
+            )
+        }
+    }
+
     @Environment(\.sizeCategory) var sizeCategory
 
     var body: some View {
         HStack(alignment: .center) {
-            imageView
+            image
 
             VStack(alignment: .leading, spacing: 0) {
                 topView
@@ -135,7 +155,6 @@ struct RoomListItemView: View {
     }
 }
 
-//swiftlint:disable line_length
 struct RoomListItemView_Previews: PreviewProvider {
     static func unreadCount() -> UInt {
         guard Bool.random() else {
@@ -152,7 +171,8 @@ struct RoomListItemView_Previews: PreviewProvider {
                     title: "Morpheus",
                     subtitle: "Red or blue 💊?",
                     rightDetail: "10m ago",
-                    badge: unreadCount()
+                    badge: unreadCount(),
+                    roomAvatar: .nioIcon
                 )
                 .environment(\.sizeCategory, contentSizeCategory)
             }
