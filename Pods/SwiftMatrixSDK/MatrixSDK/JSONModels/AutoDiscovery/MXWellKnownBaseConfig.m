@@ -39,4 +39,22 @@
     return wellKnownBaseConfig;
 }
 
+
+#pragma mark - NSCoding
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    if (self)
+    {
+        _baseUrl = [aDecoder decodeObjectForKey:@"base_url"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:_baseUrl forKey:@"base_url"];
+}
+
 @end

@@ -16,12 +16,13 @@
 
 #import "MXIdentityServerRestClient.h"
 
+#import <AFNetworking/AFNetworking.h>
+#import <OLMKit/OLMUtility.h>
+
 #import "MXHTTPClient.h"
 #import "MXError.h"
 #import "MXTools.h"
-#import "OLMUtility.h"
 #import "MXEncryptedAttachments.h"
-#import <AFNetworking/AFNetworking.h>
 
 #pragma mark - Constants definitions
 
@@ -140,7 +141,14 @@ NSString *const MXIdentityServerRestClientErrorDomain = @"org.matrix.sdk.MXIdent
                                           {
                                               __block NSString *token;
                                               [self dispatchProcessing:^{
-                                                  MXJSONModelSetString(token, JSONResponse[@"access_token"]);
+                                                  NSString *token;
+                                                  MXJSONModelSetString(token, JSONResponse[@"token"]);
+
+                                                  // The spec is `token`, but we used `access_token` for a Sydent release :/
+                                                  if (!token)
+                                                  {
+                                                      MXJSONModelSetString(token, JSONResponse[@"access_token"]);
+                                                  }
                                               } andCompletion:^{
                                                   success(token);
                                               }];

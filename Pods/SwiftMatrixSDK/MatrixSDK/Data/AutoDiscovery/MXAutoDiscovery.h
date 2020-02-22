@@ -54,6 +54,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (MXHTTPOperation*)findClientConfig:(void (^)(MXDiscoveredClientConfig *discoveredClientConfig))complete
                              failure:(void (^)(NSError *error))failure;;
 
+/**
+ Get the wellknwon data of the homeserver.
+
+ @param success A block object called when the operation succeeds. It provides
+                the wellknown data.
+ @param failure A block object called when the operation fails.
+
+ @return a MXHTTPOperation instance.
+ */
+- (MXHTTPOperation*)wellKnow:(void (^)(MXWellKnown *wellKnown))success
+                     failure:(void (^)(NSError *error))failure;
+
 @end
 
 NS_ASSUME_NONNULL_END

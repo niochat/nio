@@ -24,7 +24,7 @@ PODS:
   - Realm (3.17.3):
     - Realm/Headers (= 3.17.3)
   - Realm/Headers (3.17.3)
-  - SwiftMatrixSDK (0.15.0):
+  - SwiftMatrixSDK (0.15.2):
     - AFNetworking (~> 3.2.0)
     - GZIP (~> 1.2.2)
     - libbase58 (~> 0.1.4)
@@ -49,7 +49,7 @@ SPEC CHECKSUMS:
   libbase58: 7c040313537b8c44b6e2d15586af8e21f7354efd
   OLMKit: 4ee0159d63feeb86d836fdcfefe418e163511639
   Realm: 5a1d9d47bfc101dd597668b1a8af4288a2557f6d
-  SwiftMatrixSDK: 84957de558895ff562884c51572a75ae96b7c1f1
+  SwiftMatrixSDK: 5d7d7acd2b9d77353f537b045a10d48d9be4f004
 
 PODFILE CHECKSUM: 7654f63f8e7dcf18aede12a702f1d49d41820f61
 

@@ -809,7 +809,7 @@ RLM_ARRAY_TYPE(MXRealmOlmInboundGroupSession)
 
             if (realmSession)
             {
-                realmSession.backedUp = @(YES);
+                realmSession.backedUp = YES;
 
                 [realm addOrUpdateObject:realmSession];
             }

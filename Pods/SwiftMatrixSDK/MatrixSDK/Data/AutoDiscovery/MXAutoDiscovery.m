@@ -60,7 +60,7 @@
     NSLog(@"[MXAutoDiscovery] findClientConfig: %@", restClient.homeserver);
 
     MXHTTPOperation *operation;
-    operation = [restClient wellKnow:^(MXWellKnown *wellKnown) {
+    operation = [self wellKnow:^(MXWellKnown *wellKnown) {
 
         if (!wellKnown.homeServer.baseUrl)
         {
@@ -106,6 +106,13 @@
     }];
 
     return operation;
+}
+
+- (MXHTTPOperation*)wellKnow:(void (^)(MXWellKnown *wellKnown))success
+                     failure:(void (^)(NSError *error))failure
+{
+    NSLog(@"[MXAutoDiscovery] wellKnow: %@", restClient.homeserver);
+    return [restClient wellKnow:success failure:failure];
 }
 
 

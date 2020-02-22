@@ -37,6 +37,20 @@ public extension MXSession {
 
 
     /**
+     Start fetching events from the home server with a filter object.
+
+     - parameters:
+        - filter: The filter to use.
+        - completion: A block object called when the operation completes. In case of failure during
+     the initial sync, the session state is `MXSessionStateInitialSyncFailed`.
+        - response: Indicates whether the operation was successful.
+     */
+    @nonobjc func start(withSyncFilter filter: MXFilterJSONModel, completion: @escaping (_ response: MXResponse<Void>) -> Void) {
+        __start(withSyncFilter:filter, onServerSyncDone: currySuccess(completion), failure: curryFailure(completion))
+    }
+
+
+    /**
      Perform an events stream catchup in background (by keeping user offline).
      
      - parameters:

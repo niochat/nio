@@ -344,6 +344,14 @@
     return 0;
 }
 
+- (MXWellKnown *)homeserverWellknown
+{
+    return nil;
+}
+- (void)storeHomeserverWellknown:(nonnull MXWellKnown *)homeserverWellknown
+{
+}
+
 - (void)close
 {
     [paginationTokens removeAllObjects];

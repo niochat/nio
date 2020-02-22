@@ -18,6 +18,7 @@
 
 #import "MXEnumConstants.h"
 #import "MXCredentials.h"
+#import "MXWellKnown.h"
 #import "MXEvent.h"
 #import "MXReceiptData.h"
 #import "MXUser.h"
@@ -269,6 +270,21 @@
  live events.
  */
 @property (nonatomic) NSString * _Nullable eventStreamToken;
+
+
+#pragma mark - Homeserver information
+
+/**
+ Retrieve the homeserver .well-known data.
+ */
+@property (nonatomic, readonly) MXWellKnown * _Nullable homeserverWellknown;
+
+/**
+ Store the homeserver .well-known data.
+
+ @param homeserverWellknown the .well-known data to store.
+ */
+- (void)storeHomeserverWellknown:(nonnull MXWellKnown*)homeserverWellknown;
 
 
 @optional

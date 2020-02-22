@@ -21,15 +21,33 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * https://matrix.org/docs/spec/client_server/r0.4.0.html#server-discovery
- *
- * {
- *     "base_url": "https://matrix.org"
- * }
- */
-@interface MXWellKnownBaseConfig : MXJSONModel<NSCoding>
+ MSC1957: Integration manager discovery
 
-@property (nonatomic) NSString *baseUrl;
+ "m.integrations": {
+    "managers": [
+        {
+            "api_url": "https://integrations.example.org",
+            "ui_url": "https://integrations.example.org/ui"
+        },
+        {
+            "api_url": "https://bots.example.org"
+        }
+    ]
+ }
+ */
+@class MXWellknownIntegrationsManager;
+
+@interface MXWellknownIntegrations : MXJSONModel<NSCoding>
+
+@property (nonatomic) NSArray<MXWellknownIntegrationsManager*> *managers;
+
+@end
+
+
+@interface MXWellknownIntegrationsManager : MXJSONModel<NSCoding>
+
+@property (nonatomic) NSString *apiUrl;
+@property (nonatomic, nullable) NSString *uiUrl;
 
 @end
 

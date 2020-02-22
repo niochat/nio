@@ -168,6 +168,7 @@
 #import "MXLoginTerms.h"
 #import "MXWellKnown.h"
 #import "MXWellKnownBaseConfig.h"
+#import "MXWellknownIntegrations.h"
 #import "MXEventContentRelatesTo.h"
 #import "MXEventAnnotation.h"
 #import "MXEventAnnotationChunk.h"

@@ -14,6 +14,8 @@
  limitations under the License.
  */
 
+#if TARGET_OS_IPHONE
+
 #import <Foundation/Foundation.h>
 
 @class AVAudioSession;
@@ -46,3 +48,5 @@
 - (void)audioSessionDidDeactivate:(AVAudioSession *)audioSession;
 
 @end
+
+#endif

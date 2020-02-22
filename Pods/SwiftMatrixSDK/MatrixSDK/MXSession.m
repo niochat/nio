@@ -47,7 +47,7 @@
 
 #pragma mark - Constants definitions
 
-const NSString *MatrixSDKVersion = @"0.15.0";
+const NSString *MatrixSDKVersion = @"0.15.2";
 NSString *const kMXSessionStateDidChangeNotification = @"kMXSessionStateDidChangeNotification";
 NSString *const kMXSessionNewRoomNotification = @"kMXSessionNewRoomNotification";
 NSString *const kMXSessionWillLeaveRoomNotification = @"kMXSessionWillLeaveRoomNotification";
@@ -147,6 +147,11 @@ typedef void (^MXOnResumeDone)(void);
      For debug, indicate if the first sync after the MXSession startup is done.
      */
     BOOL firstSyncDone;
+
+    /**
+     The tool to refresh the homeserver wellknown data.
+     */
+    MXAutoDiscovery *autoDiscovery;
     
     /**
      Queue of requested direct room change operations ([MXSession setRoom:directWithUserId:]
@@ -573,6 +578,12 @@ typedef void (^MXOnResumeDone)(void);
             failure(error);
             
         }];
+    }
+
+    // Get wellknown data only at the login time
+    if (!self.homeserverWellknown)
+    {
+        [self refreshHomeserverWellknown:nil failure:nil];
     }
 }
 
@@ -3478,6 +3489,35 @@ typedef void (^MXOnResumeDone)(void);
     MXJSONModelSetString(accountDataIdentityServer, content[kMXAccountDataKeyIdentityServer]);
 
     return accountDataIdentityServer;
+}
+
+
+#pragma mark - Homeserver information
+- (MXWellKnown *)homeserverWellknown
+{
+    return _store.homeserverWellknown;
+}
+
+- (MXHTTPOperation *)refreshHomeserverWellknown:(void (^)(MXWellKnown *))success
+                                        failure:(void (^)(NSError *))failure
+{
+    NSLog(@"[MXSession] refreshHomeserverWellknown");
+    if (!autoDiscovery)
+    {
+        autoDiscovery = [[MXAutoDiscovery alloc] initWithUrl:matrixRestClient.homeserver];
+    }
+
+    MXWeakify(self);
+    return [autoDiscovery wellKnow:^(MXWellKnown * _Nonnull wellKnown) {
+        MXStrongifyAndReturnIfNil(self);
+
+        [self.store storeHomeserverWellknown:wellKnown];
+
+        if (success)
+        {
+            success(wellKnown);
+        }
+    } failure:failure];
 }
 
 

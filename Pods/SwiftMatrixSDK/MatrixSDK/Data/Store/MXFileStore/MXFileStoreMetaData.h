@@ -16,6 +16,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "MXWellKnown.h"
+
 @interface MXFileStoreMetaData : NSObject <NSCoding, NSCopying>
 
 /**
@@ -48,5 +50,10 @@
  User account data
  */
 @property (nonatomic) NSDictionary *userAccountData;
+
+/**
+ The homeserver .well-known.
+ */
+@property (nonatomic) MXWellKnown *homeserverWellknown;
 
 @end

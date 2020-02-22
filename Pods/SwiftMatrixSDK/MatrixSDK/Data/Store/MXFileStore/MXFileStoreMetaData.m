@@ -32,6 +32,8 @@
 
         NSNumber *version = dict[@"version"];
         _version = [version unsignedIntegerValue];
+
+        _homeserverWellknown = dict[@"wellknown"];
     }
     return self;
 }
@@ -58,6 +60,10 @@
     if (_userAccountData)
     {
         dict[@"userAccountData"] = _userAccountData;
+    }
+    if (_homeserverWellknown)
+    {
+        dict[@"wellknown"] = _homeserverWellknown;
     }
 
     [aCoder encodeObject:dict forKey:@"dict"];

@@ -24,13 +24,14 @@
 @interface MXMemoryStore()
 {
     NSString *eventStreamToken;
+    MXWellKnown *homeserverWellknown;
 }
 @end
 
 
 @implementation MXMemoryStore
 
-@synthesize eventStreamToken, userAccountData, syncFilterId;
+@synthesize eventStreamToken, userAccountData, syncFilterId, homeserverWellknown;
 
 - (instancetype)init
 {
@@ -270,6 +271,11 @@
     }
    
     return count;
+}
+
+- (void)storeHomeserverWellknown:(nonnull MXWellKnown *)wellknown
+{
+    homeserverWellknown = wellknown;
 }
 
 - (BOOL)isPermanent

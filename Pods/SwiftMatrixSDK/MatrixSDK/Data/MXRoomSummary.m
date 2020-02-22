@@ -676,7 +676,7 @@ NSString *const kMXRoomSummaryDidChangeNotification = @"kMXRoomSummaryDidChangeN
     {
         lastMessageData[@"lastMessageAttributedString"] = _lastMessageAttributedString;
     }
-    if (_lastMessageString)
+    if (_lastMessageOthers)
     {
         lastMessageData[@"lastMessageOthers"] = _lastMessageOthers;
     }

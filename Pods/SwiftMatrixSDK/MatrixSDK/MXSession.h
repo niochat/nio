@@ -1353,6 +1353,25 @@ typedef void (^MXOnBackgroundSyncFail)(NSError *error);
 - (NSString*)accountDataIdentityServer;
 
 
+#pragma mark - Homeserver information
+
+/**
+ The homeserver .well-known data.
+ */
+@property (nonatomic, readonly) MXWellKnown *homeserverWellknown;
+
+/**
+ Refresh self.homeserverWellknown.
+
+ @param success A block object called when the operation succeeds.
+ @param failure A block object called when the operation fails.
+
+ @return a MXHTTPOperation instance.
+ */
+- (MXHTTPOperation*)refreshHomeserverWellknown:(void (^)(MXWellKnown *homeserverWellknown))success
+                                       failure:(void (^)(NSError *error))failure;
+
+
 #pragma mark - Matrix filters
 /**
  Set a Matrix filter.

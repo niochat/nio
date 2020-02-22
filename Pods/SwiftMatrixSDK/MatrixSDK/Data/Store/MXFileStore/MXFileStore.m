@@ -408,6 +408,19 @@ static NSUInteger preloadOptions;
     }
 }
 
+- (MXWellKnown *)homeserverWellknown
+{
+    return metaData.homeserverWellknown;
+}
+
+- (void)storeHomeserverWellknown:(nonnull MXWellKnown *)wellknown
+{
+    if (metaData)
+    {
+        metaData.homeserverWellknown = wellknown;
+        metaDataHasChanged = YES;
+    }
+}
 
 - (BOOL)isPermanent
 {

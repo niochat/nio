@@ -18,6 +18,7 @@
 
 #import "MXJSONModel.h"
 #import "MXWellKnownBaseConfig.h"
+#import "MXWellknownIntegrations.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -33,11 +34,13 @@ NS_ASSUME_NONNULL_BEGIN
  *     }
  * }
  */
-@interface MXWellKnown : MXJSONModel
+@interface MXWellKnown : MXJSONModel<NSCoding>
 
 @property (nonatomic) MXWellKnownBaseConfig *homeServer;
 
 @property (nonatomic, nullable) MXWellKnownBaseConfig *identityServer;
+
+@property (nonatomic, nullable) MXWellknownIntegrations *integrations;
 
 @end
 
