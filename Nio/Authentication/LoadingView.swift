@@ -3,10 +3,8 @@ import SwiftUI
 struct LoadingView: View {
     var loadingMessages = [
         "Reticulating splines...",
-        "Don't panic 👍",
         "Discomfrobulating messages...",
         "❤️",
-        "This is going to be legen... wait for it...",
         "There is no spoon."
     ]
 
