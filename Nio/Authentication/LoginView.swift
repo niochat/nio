@@ -22,7 +22,14 @@ struct LoginContainerView: View {
 
     private func login() {
         let homeserver = self.homeserver.isEmpty ? "https://matrix.org" : self.homeserver
-        guard let homeserverURL = URL(string: homeserver) else {
+
+        // Make sure we prefix the homeserver URL with the correct protocol.
+        var homeserverUrlString = homeserver.replacingOccurrences(of: "http://", with: "https://")
+        if !homeserverUrlString.contains("https://") {
+            homeserverUrlString = "https://\(homeserverUrlString)"
+        }
+
+        guard let homeserverURL = URL(string: homeserverUrlString) else {
             // TODO: Handle error
             print("Invalid homeserver URL '\(homeserver)'")
             return
