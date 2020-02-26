@@ -59,6 +59,7 @@
 		CAC46D7323A6AE890079C24F /* TypedEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D7223A6AE890079C24F /* TypedEvents.swift */; };
 		CAC46D7723A6CB6C0079C24F /* MXEventType+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D7623A6CB6C0079C24F /* MXEventType+Equatable.swift */; };
 		CAC46D7923A6D4B90079C24F /* TypedEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D7823A6D4B90079C24F /* TypedEventsTests.swift */; };
+		D3FEFD5324065F9B00A6D7F0 /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FEFD5224065F9B00A6D7F0 /* MultilineTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +129,7 @@
 		CAC46D7223A6AE890079C24F /* TypedEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypedEvents.swift; sourceTree = "<group>"; };
 		CAC46D7623A6CB6C0079C24F /* MXEventType+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXEventType+Equatable.swift"; sourceTree = "<group>"; };
 		CAC46D7823A6D4B90079C24F /* TypedEventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypedEventsTests.swift; sourceTree = "<group>"; };
+		D3FEFD5224065F9B00A6D7F0 /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 		E2D5B8AFEEB28F750CE393D1 /* Pods-NioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioTests.debug.xcconfig"; path = "Target Support Files/Pods-NioTests/Pods-NioTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -294,6 +296,7 @@
 				3923898E2388707E00B2E1DF /* RoomListItemView.swift */,
 				39C93208238553E4004449E1 /* RoomView.swift */,
 				39C9320A23856033004449E1 /* MessageComposerView.swift */,
+				D3FEFD5224065F9B00A6D7F0 /* MultilineTextField.swift */,
 				3907AB482393FE0E00B25DE9 /* Event Views */,
 			);
 			path = Conversations;
@@ -617,6 +620,7 @@
 				3902B89E2393FE8200698B87 /* GenericEventView.swift in Sources */,
 				392389982388998F00B2E1DF /* ActivityIndicator.swift in Sources */,
 				CAC46D6023A276B40079C24F /* IndividuallyRoundedRectangle.swift in Sources */,
+				D3FEFD5324065F9B00A6D7F0 /* MultilineTextField.swift in Sources */,
 				39C931FE23847E7F004449E1 /* MatrixStore.swift in Sources */,
 				CAC46D7323A6AE890079C24F /* TypedEvents.swift in Sources */,
 				39C931E12384328A004449E1 /* RootView.swift in Sources */,
