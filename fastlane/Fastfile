@@ -27,5 +27,5 @@ lane :beta do
 end
 
 after_all do |lane|
-    notify "Fastlane finished '#{lane}'"
+    notification(title: "Fastlane", message: "finished lane '#{lane}'", open: "http://appstoreconnect.apple.com")
 end
