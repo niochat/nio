@@ -21,9 +21,12 @@ struct LoginContainerView: View {
     }
 
     private func login() {
-        let homeserver = self.homeserver.isEmpty ? "https://matrix.org" : self.homeserver
+        var homeserver = self.homeserver.isEmpty ? "https://matrix.org" : self.homeserver
 
-        // Make sure we prefix the homeserver URL with the correct protocol.
+        // If there's no scheme at all, the URLComponents initializer below will think it's a path with no hostname.
+        if !homeserver.contains("//") {
+            homeserver = "https://\(homeserver)"
+        }
         var homeserverURLComponents = URLComponents(string: homeserver)
         homeserverURLComponents?.scheme = "https"
         guard let homeserverURL = homeserverURLComponents?.url else {
