@@ -13,7 +13,7 @@ class EventCollectionTests: XCTestCase {
     func testReadGroupPosition() {
         XCTAssertEqual(EventCollection([A1]).connectedEdges(of: A1), [.bottomEdge])
         XCTAssertEqual(EventCollection([A1, A2, B1]).connectedEdges(of: A2), [.topEdge])
-        XCTAssertEqual(EventCollection([A1, A2, B1]).connectedEdges(of: B1), [.topEdge])
+        XCTAssertEqual(EventCollection([A1, A2, B1]).connectedEdges(of: B1), [.bottomEdge])
         XCTAssertEqual(EventCollection([A1, A2, A3]).connectedEdges(of: A2), [.topEdge, .bottomEdge])
     }
 }
