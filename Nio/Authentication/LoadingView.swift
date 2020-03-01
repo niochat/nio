@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct LoadingView: View {
+    @EnvironmentObject var store: AccountStore
+
     var loadingMessages = [
         "🧑‍🎤 Reticulating splines",
         "🧑‍🏭 Discomfrobulating messages",
@@ -19,6 +21,12 @@ struct LoadingView: View {
                 .padding(.horizontal)
 
             Spacer()
+
+            Button(action: {
+                self.store.logout()
+            }, label: {
+                Text("Cancel").font(.callout)
+            })
         }
     }
 }
