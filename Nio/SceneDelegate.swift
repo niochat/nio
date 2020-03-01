@@ -13,10 +13,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         let accountStore = AccountStore()
+        let appSettings = AppSettings()
 
         let rootView = RootView()
             .environmentObject(accountStore)
-            .accentColor(.purple)
+            .environmentObject(appSettings)
+            .accentColor(appSettings.accentColor)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

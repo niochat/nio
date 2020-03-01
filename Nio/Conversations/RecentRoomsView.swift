@@ -3,6 +3,7 @@ import SwiftMatrixSDK
 
 struct RecentRoomsContainerView: View {
     @EnvironmentObject var store: AccountStore
+    @EnvironmentObject var settings: AppSettings
 
     @State private var selectedNavigationItem: SelectedNavigationItem?
 
@@ -13,6 +14,8 @@ struct RecentRoomsContainerView: View {
                 NavigationSheet(selectedItem: $0)
                     // This really shouldn't be necessary. SwiftUI bug?
                     .environmentObject(self.store)
+                    .environmentObject(self.settings)
+                    .accentColor(self.settings.accentColor)
             }
             .onAppear {
                 self.store.startListeningForRoomEvents()
@@ -74,7 +77,7 @@ private struct NavigationSheet: View {
         switch selectedItem {
         case .settings:
             return AnyView(
-                SettingsView()
+                SettingsContainerView()
             )
         case .newMessage:
             return AnyView(

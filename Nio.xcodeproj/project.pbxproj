@@ -29,6 +29,8 @@
 		3984654823B8D809006C173B /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3984654723B8D809006C173B /* SDWebImageSwiftUI */; };
 		39BA0721240B1A2600FD28C6 /* AccountStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA0720240B1A2600FD28C6 /* AccountStore.swift */; };
 		39BA0723240B3C9A00FD28C6 /* MXCredentials+Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA0722240B3C9A00FD28C6 /* MXCredentials+Keychain.swift */; };
+		39BA0725240B4E8D00FD28C6 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA0724240B4E8D00FD28C6 /* AppSettings.swift */; };
+		39BA0727240B534600FD28C6 /* Color+allAccent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA0726240B534600FD28C6 /* Color+allAccent.swift */; };
 		39C931DD2384328A004449E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931DC2384328A004449E1 /* AppDelegate.swift */; };
 		39C931DF2384328A004449E1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931DE2384328A004449E1 /* SceneDelegate.swift */; };
 		39C931E12384328A004449E1 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931E02384328A004449E1 /* RootView.swift */; };
@@ -96,6 +98,8 @@
 		3984654423B7ECBA006C173B /* MXURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MXURL.swift; sourceTree = "<group>"; };
 		39BA0720240B1A2600FD28C6 /* AccountStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStore.swift; sourceTree = "<group>"; };
 		39BA0722240B3C9A00FD28C6 /* MXCredentials+Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXCredentials+Keychain.swift"; sourceTree = "<group>"; };
+		39BA0724240B4E8D00FD28C6 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		39BA0726240B534600FD28C6 /* Color+allAccent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+allAccent.swift"; sourceTree = "<group>"; };
 		39C931D92384328A004449E1 /* Nio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39C931DC2384328A004449E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39C931DE2384328A004449E1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				3902B8A22395935600698B87 /* SettingsView.swift */,
+				39BA0724240B4E8D00FD28C6 /* AppSettings.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -308,6 +313,7 @@
 				CAC46D7623A6CB6C0079C24F /* MXEventType+Equatable.swift */,
 				CAC46D6223A278F40079C24F /* PreviewProvider+Enumeration.swift */,
 				39BA0722240B3C9A00FD28C6 /* MXCredentials+Keychain.swift */,
+				39BA0726240B534600FD28C6 /* Color+allAccent.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -604,12 +610,14 @@
 				39BA0723240B3C9A00FD28C6 /* MXCredentials+Keychain.swift in Sources */,
 				CAC46D6323A278F40079C24F /* PreviewProvider+Enumeration.swift in Sources */,
 				392389D6238F3EB200B2E1DF /* NIORoomSummary.swift in Sources */,
+				39BA0725240B4E8D00FD28C6 /* AppSettings.swift in Sources */,
 				39D166C82385C832006DD257 /* EventContainerView.swift in Sources */,
 				CAC46D6B23A55E940079C24F /* PeekableIterator.swift in Sources */,
 				CAC46D5823A272D10079C24F /* MessageViewModel.swift in Sources */,
 				39C931DF2384328A004449E1 /* SceneDelegate.swift in Sources */,
 				3902B8A32395935600698B87 /* SettingsView.swift in Sources */,
 				39C931F523846966004449E1 /* LoginView.swift in Sources */,
+				39BA0727240B534600FD28C6 /* Color+allAccent.swift in Sources */,
 				CAC46D5D23A276700079C24F /* Color+Named.swift in Sources */,
 				3902B89E2393FE8200698B87 /* GenericEventView.swift in Sources */,
 				392389982388998F00B2E1DF /* ActivityIndicator.swift in Sources */,
