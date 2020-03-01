@@ -16,8 +16,7 @@ struct LoginContainerView: View {
                   homeserver: $homeserver,
                   showingRegisterView: $showingRegisterView,
                   isLoginEnabled: isLoginEnabled,
-                  onLogin: login,
-                  loginState: $store.loginState)
+                  onLogin: login)
     }
 
     private func login() {
@@ -55,7 +54,6 @@ struct LoginView: View {
 
     let isLoginEnabled: () -> Bool
     let onLogin: () -> Void
-    @Binding var loginState: LoginState
 
     var body: some View {
         VStack {
@@ -164,8 +162,7 @@ struct LoginView_Previews: PreviewProvider {
                   homeserver: .constant(""),
                   showingRegisterView: .constant(false),
                   isLoginEnabled: { return false },
-                  onLogin: {},
-                  loginState: .constant(.loggedOut))
+                  onLogin: {})
             .accentColor(.purple)
     }
 }
