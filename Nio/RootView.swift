@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct RootView: View {
-    @EnvironmentObject var store: MatrixStore<AppState, AppAction>
+    @EnvironmentObject var store: AccountStore
 
     var body: some View {
-        switch store.state.loginState {
+        switch store.loginState {
         case .loggedIn(let userId):
             return AnyView(
                 RecentRoomsContainerView()
@@ -23,7 +23,7 @@ struct RootView: View {
                 VStack {
                     Text(error.localizedDescription)
                     Button(action: {
-                        self.store.send(AppAction.loginState(.loggedOut))
+                        self.store.loginState = .loggedOut
                     }, label: {
                         Text("Go to login")
                     })

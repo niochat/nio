@@ -1,14 +1,14 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @EnvironmentObject var store: MatrixStore<AppState, AppAction>
+    @EnvironmentObject var store: AccountStore
 
     var body: some View {
         NavigationView {
             List {
                 Section {
                     Button(action: {
-                        self.store.send(SideEffect.logout)
+                        self.store.logout()
                     }, label: {
                         Text("Log Out")
                     })

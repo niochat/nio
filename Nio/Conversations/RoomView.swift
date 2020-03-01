@@ -4,8 +4,6 @@ import KeyboardObserving
 import SwiftMatrixSDK
 
 struct RoomContainerView: View {
-    @EnvironmentObject var store: MatrixStore<AppState, AppAction>
-
     @ObservedObject var room: NIORoom
 
     @State var showAttachmentPicker = false

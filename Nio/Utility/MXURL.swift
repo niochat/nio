@@ -11,11 +11,7 @@ struct MXURL {
         self.mxContentURI = uri
     }
 
-    var contentURL: URL? {
-        guard let homeserver = URL(string: MatrixServices.shared.client?.homeserver ?? "") else {
-            return nil
-        }
-
+    func contentURL(on homeserver: URL) -> URL? {
         var components = URLComponents()
         components.scheme = "https"
         components.host = homeserver.host
@@ -24,7 +20,7 @@ struct MXURL {
         return components.url
     }
 
-    static var nioIcon: MXURL {
-        MXURL(mxContentURI: "mxc://matrix.org/rdElwkPTTrdZljUuKwkSEMqV")!
+    static var nioIcon: URL {
+        MXURL(mxContentURI: "mxc://matrix.org/rdElwkPTTrdZljUuKwkSEMqV")!.contentURL(on: URL(string: "https://matrix.org")!)!
     }
 }

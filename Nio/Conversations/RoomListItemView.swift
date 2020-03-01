@@ -3,6 +3,8 @@ import SwiftMatrixSDK
 import SDWebImageSwiftUI
 
 struct RoomListItemContainerView: View {
+    @EnvironmentObject var store: AccountStore
+
     var room: NIORoom
 
     var body: some View {
@@ -16,11 +18,16 @@ struct RoomListItemContainerView: View {
             accessibilityLabel = "Room \(room.summary.displayname ?? ""), \(lastActivity) \(room.lastMessage)"
         }
 
+        var roomAvatarURL: URL?
+        if let client = store.client, let homeserver = URL(string: client.homeserver) {
+            roomAvatarURL = MXURL(mxContentURI: room.summary.avatar)?.contentURL(on: homeserver)
+        }
+
         return RoomListItemView(title: room.summary.displayname ?? "",
                                 subtitle: lastMessage,
                                 rightDetail: lastActivity,
                                 badge: room.summary.localUnreadEventCount,
-                                roomAvatar: MXURL(mxContentURI: room.summary.avatar))
+                                roomAvatarURL: roomAvatarURL)
         .accessibility(label: Text(accessibilityLabel))
     }
 }
@@ -30,7 +37,7 @@ struct RoomListItemView: View {
     var subtitle: String
     var rightDetail: String
     var badge: UInt
-    var roomAvatar: MXURL?
+    var roomAvatarURL: URL?
 
     var gradient: LinearGradient {
         let color: Color = .white
@@ -124,7 +131,7 @@ struct RoomListItemView: View {
     }
 
     var image: some View {
-        if let avatarURL = roomAvatar?.contentURL {
+        if let avatarURL = roomAvatarURL {
             return AnyView(
                 WebImage(url: avatarURL)
                     .resizable()
@@ -172,7 +179,7 @@ struct RoomListItemView_Previews: PreviewProvider {
                     subtitle: "Red or blue 💊?",
                     rightDetail: "10m ago",
                     badge: unreadCount(),
-                    roomAvatar: .nioIcon
+                    roomAvatarURL: MXURL.nioIcon
                 )
                 .environment(\.sizeCategory, contentSizeCategory)
             }

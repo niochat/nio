@@ -2,21 +2,20 @@ import SwiftUI
 import SwiftMatrixSDK
 
 struct RecentRoomsContainerView: View {
-    @EnvironmentObject var store: MatrixStore<AppState, AppAction>
-    @ObservedObject var recentRoomStore = NIORecentRooms()
+    @EnvironmentObject var store: AccountStore
 
     @State private var selectedNavigationItem: SelectedNavigationItem?
 
     var body: some View {
         RecentRoomsView(selectedNavigationItem: $selectedNavigationItem,
-                             rooms: recentRoomStore.rooms)
+                        rooms: store.rooms)
             .sheet(item: $selectedNavigationItem) {
                 NavigationSheet(selectedItem: $0)
                     // This really shouldn't be necessary. SwiftUI bug?
                     .environmentObject(self.store)
             }
             .onAppear {
-                self.recentRoomStore.startListening()
+                self.store.startListeningForRoomEvents()
             }
     }
 }

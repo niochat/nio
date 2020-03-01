@@ -12,14 +12,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
-        let mxStore = MatrixStore<AppState, AppAction>(initialState: AppState(), reducer: appReducer)
-
-        // This is not cool at all, please look elsewhere >.<
-        let mxServices = MatrixServices(store: mxStore)
-        MatrixServices.shared = mxServices
+        let accountStore = AccountStore()
 
         let rootView = RootView()
-            .environmentObject(mxStore)
+            .environmentObject(accountStore)
             .accentColor(.purple)
 
         // Use a UIHostingController as window root view controller.

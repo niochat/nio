@@ -2,7 +2,7 @@ import SwiftUI
 import SwiftMatrixSDK
 
 struct LoginContainerView: View {
-    @EnvironmentObject var store: MatrixStore<AppState, AppAction>
+    @EnvironmentObject var store: AccountStore
 
     @State private var username = ""
     @State private var password = ""
@@ -17,7 +17,7 @@ struct LoginContainerView: View {
                   showingRegisterView: $showingRegisterView,
                   isLoginEnabled: isLoginEnabled,
                   onLogin: login,
-                  loginState: store.state.loginState)
+                  loginState: $store.loginState)
     }
 
     private func login() {
@@ -35,8 +35,7 @@ struct LoginContainerView: View {
             return
         }
 
-        store.send(AppAction.loginState(.authenticating))
-        store.send(SideEffect.login(username: username, password: password, homeserver: homeserverURL))
+        store.login(username: username, password: password, homeserver: homeserverURL)
     }
 
     private func isLoginEnabled() -> Bool {
@@ -56,7 +55,7 @@ struct LoginView: View {
 
     let isLoginEnabled: () -> Bool
     let onLogin: () -> Void
-    let loginState: LoginState
+    @Binding var loginState: LoginState
 
     var body: some View {
         VStack {
@@ -165,7 +164,7 @@ struct LoginView_Previews: PreviewProvider {
                   showingRegisterView: .constant(false),
                   isLoginEnabled: { return false },
                   onLogin: {},
-                  loginState: .loggedOut)
+                  loginState: .constant(.loggedOut))
             .accentColor(.purple)
     }
 }

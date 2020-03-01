@@ -2,8 +2,6 @@ import SwiftUI
 import SwiftMatrixSDK
 
 struct EventContainerView: View {
-    @EnvironmentObject var store: MatrixStore<AppState, AppAction>
-
     var event: MXEvent
     var connectedEdges: ConnectedEdges
     var isDirect: Bool
