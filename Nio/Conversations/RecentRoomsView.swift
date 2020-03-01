@@ -8,6 +8,7 @@ struct RecentRoomsContainerView: View {
 
     var body: some View {
         RecentRoomsView(selectedNavigationItem: $selectedNavigationItem,
+                        syncState: $store.syncState,
                         rooms: store.rooms)
             .sheet(item: $selectedNavigationItem) {
                 NavigationSheet(selectedItem: $0)
@@ -23,6 +24,7 @@ struct RecentRoomsContainerView: View {
 struct RecentRoomsView: View {
     @Binding fileprivate var selectedNavigationItem: SelectedNavigationItem?
 
+    @Binding var syncState: SyncState
     var rooms: [NIORoom]
 
     var settingsButton: some View {
@@ -45,11 +47,35 @@ struct RecentRoomsView: View {
         })
     }
 
+    var syncStateBar: some View {
+        switch syncState {
+        case .synchronized:
+            return AnyView(EmptyView())
+        case .synchronizing:
+            return AnyView(
+                ZStack {
+                    Color.accentColor.opacity(0.2)
+                    HStack {
+                        Text("Synchronizing")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                            .padding(3)
+                        ActivityIndicator()
+                    }
+                }
+                .frame(height: 30)
+            )
+        }
+    }
+
     var body: some View {
         NavigationView {
-            List(rooms) { room in
-                NavigationLink(destination: RoomContainerView(room: room)) {
-                    RoomListItemContainerView(room: room)
+            VStack(spacing: 0) {
+                syncStateBar
+                List(rooms) { room in
+                    NavigationLink(destination: RoomContainerView(room: room)) {
+                        RoomListItemContainerView(room: room)
+                    }
                 }
             }
             .navigationBarTitle("Nio", displayMode: .inline)
@@ -86,6 +112,6 @@ private struct NavigationSheet: View {
 
 struct RecentRoomsView_Previews: PreviewProvider {
     static var previews: some View {
-        RecentRoomsView(selectedNavigationItem: .constant(nil), rooms: [])
+        RecentRoomsView(selectedNavigationItem: .constant(nil), syncState: .constant(.synchronizing), rooms: [])
     }
 }

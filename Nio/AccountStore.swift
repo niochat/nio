@@ -10,6 +10,11 @@ enum LoginState {
     case loggedIn(userId: String)
 }
 
+enum SyncState {
+    case synchronizing
+    case synchronized
+}
+
 class AccountStore: ObservableObject {
     let keychain = Keychain(service: "chat.nio.credentials")
     var client: MXRestClient?
@@ -48,6 +53,7 @@ class AccountStore: ObservableObject {
     // MARK: - Login & Sync
 
     @Published var loginState: LoginState = .loggedOut
+    @Published var syncState: SyncState = .synchronized
 
     func login(username: String, password: String, homeserver: URL) {
         self.loginState = .authenticating
