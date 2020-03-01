@@ -65,6 +65,7 @@ class NIORoom: ObservableObject {
         guard !text.isEmpty else { return }
         //swiftlint:disable:next redundant_optional_initialization
         var localEcho: MXEvent? = nil
+        // TODO: Use localEcho to show sent message until it actually comes back
         room.sendTextMessage(text, localEcho: &localEcho) { response in
             print(response)
             self.objectWillChange.send()
