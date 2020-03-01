@@ -149,6 +149,7 @@ private struct FormTextField: View {
                 TextField(title, text: $text)
                     .padding()
                     .autocapitalization(.none)
+                    .disableAutocorrection(true)
             }
         }
         .padding(.horizontal)
