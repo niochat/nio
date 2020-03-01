@@ -2,10 +2,10 @@ import SwiftUI
 
 struct LoadingView: View {
     var loadingMessages = [
-        "Reticulating splines...",
-        "Discomfrobulating messages...",
-        "❤️",
-        "There is no spoon."
+        "🧑‍🎤 Reticulating splines",
+        "🧑‍🏭 Discomfrobulating messages",
+        "🧑‍🔧 Logging in",
+        "🧑‍💻 Restoring session"
     ]
 
     var body: some View {
@@ -14,7 +14,7 @@ struct LoadingView: View {
 
             ActivityIndicator()
 
-            Text(self.loadingMessages.randomElement() ?? "Reticulating splines...")
+            Text(self.loadingMessages.randomElement()!)
                 .bold()
                 .padding(.horizontal)
 
