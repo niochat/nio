@@ -13,8 +13,6 @@ class NIORoom: ObservableObject {
 
     @Published var summary: NIORoomSummary
 
-    var objectWillChange = ObservableObjectPublisher()
-
     init(_ room: MXRoom) {
         self.room = room
         self.summary = NIORoomSummary(room.summary)
