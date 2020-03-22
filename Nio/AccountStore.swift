@@ -96,9 +96,9 @@ class AccountStore: ObservableObject {
     func logout() {
         self.logout { result in
             switch result {
-            case .failure(let error):
-                // TODO: Logout failed, now what?
-                break
+            case .failure(_):
+                // Close the session even if the logout request failed
+                self.loginState = .loggedOut
             case .success(let state):
                 self.loginState = state
             }
