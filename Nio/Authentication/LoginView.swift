@@ -94,7 +94,7 @@ struct LoginView: View {
     }
 }
 
-private struct LoginTitleView: View {
+struct LoginTitleView: View {
     var body: some View {
         let nio = Text("Nio").foregroundColor(.accentColor)
 
@@ -107,7 +107,7 @@ private struct LoginTitleView: View {
     }
 }
 
-private struct LoginForm: View {
+struct LoginForm: View {
     @Binding var username: String
     @Binding var password: String
     @Binding var homeserver: String
