@@ -21,6 +21,7 @@ struct MXURL {
     }
 
     static var nioIcon: URL {
-        MXURL(mxContentURI: "mxc://matrix.org/rdElwkPTTrdZljUuKwkSEMqV")!.contentURL(on: URL(string: "https://matrix.org")!)!
+        MXURL(mxContentURI: "mxc://matrix.org/rdElwkPTTrdZljUuKwkSEMqV")!
+            .contentURL(on: URL(string: "https://matrix.org")!)!
     }
 }
