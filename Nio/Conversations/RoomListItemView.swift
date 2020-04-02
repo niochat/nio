@@ -19,8 +19,10 @@ struct RoomListItemContainerView: View {
         }
 
         var roomAvatarURL: URL?
-        if let client = store.client, let homeserver = URL(string: client.homeserver) {
-            roomAvatarURL = MXURL(mxContentURI: room.summary.avatar)?.contentURL(on: homeserver)
+        if let client = store.client,
+            let homeserver = URL(string: client.homeserver),
+            let avatar = room.summary.avatar {
+                roomAvatarURL = MXURL(mxContentURI: avatar)?.contentURL(on: homeserver)
         }
 
         return RoomListItemView(title: room.summary.displayname ?? "",
