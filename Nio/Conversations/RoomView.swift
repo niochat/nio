@@ -44,7 +44,7 @@ struct RoomView: View {
             ReverseList(events.wrapped) { event in
                 EventContainerView(event: event,
                                    connectedEdges: self.events.connectedEdges(of: event),
-                                   isDirect: self.isDirect)
+                                   showSender: !self.isDirect)
                     .padding(.horizontal)
             }
 

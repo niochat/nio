@@ -5,6 +5,7 @@ protocol MessageViewModelProtocol {
     var text: String { get }
     var sender: String { get }
     var timestamp: String { get }
+    var showSender: Bool { get }
 }
 
 extension MessageViewModelProtocol {
@@ -43,12 +44,15 @@ struct MessageViewModel: MessageViewModelProtocol {
         Formatter.string(for: event.timestamp, timeStyle: .short)
     }
 
+    var showSender: Bool
+
     private let event: MXEvent
 
-    public init(event: MXEvent) throws {
+    public init(event: MXEvent, showSender: Bool) throws {
         try Self.validate(event: event)
 
         self.event = event
+        self.showSender = showSender
     }
 
     private static func validate(event: MXEvent) throws {

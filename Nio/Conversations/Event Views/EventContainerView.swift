@@ -4,7 +4,7 @@ import SwiftMatrixSDK
 struct EventContainerView: View {
     var event: MXEvent
     var connectedEdges: ConnectedEdges
-    var isDirect: Bool
+    var showSender: Bool
 
     private var topPadding: CGFloat {
         connectedEdges.contains(.topEdge) ? 2.0 : 8.0
@@ -19,7 +19,8 @@ struct EventContainerView: View {
         case .roomMessage:
             // FIXME: remove
             // swiftlint:disable:next force_try
-            let messageModel = try! MessageViewModel(event: event)
+            let messageModel = try! MessageViewModel(event: event,
+                                                     showSender: showSender)
             return AnyView(
                 MessageView(
                     model: .constant(messageModel),

@@ -62,6 +62,17 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
             .foregroundColor(textColor)
     }
 
+    var senderView: some View {
+        if model.showSender && !isMe && connectedEdges == .bottomEdge {
+            return AnyView(
+                Text(model.sender)
+                    .font(.caption)
+            )
+        } else {
+            return AnyView(EmptyView())
+        }
+    }
+
     var timestampView: some View {
         Text(model.timestamp)
         .font(.caption)
@@ -69,15 +80,18 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
     }
 
     var body: some View {
-        VStack(alignment: isMe ? .trailing : .leading, spacing: 5) {
-            bodyView
-            if !connectedEdges.contains(.bottomEdge) {
-                // It's the last message in a group, so show a timestamp:
-                timestampView
+        VStack(alignment: .leading, spacing: 5) {
+            senderView
+            VStack(alignment: isMe ? .trailing : .leading, spacing: 5) {
+                bodyView
+                if !connectedEdges.contains(.bottomEdge) {
+                    // It's the last message in a group, so show a timestamp:
+                    timestampView
+                }
             }
+            .padding(10)
+            .background(background)
         }
-        .padding(10)
-        .background(background)
     }
 }
 
@@ -87,15 +101,17 @@ struct BorderedMessageView_Previews: PreviewProvider {
         var text: String
         var sender: String
         var timestamp: String
+        var showSender: Bool
     }
 
-    static func lone(sender: String, userId: String) -> some View {
+    static func lone(sender: String, userId: String, showSender: Bool) -> some View {
         BorderedMessageView(
             model: MessageViewModel(
                 id: "0",
                 text: "Lorem ipsum dolor sit amet!",
                 sender: sender,
-                timestamp: "12:29"
+                timestamp: "12:29",
+                showSender: showSender
             ),
             connectedEdges: []
         )
@@ -103,7 +119,7 @@ struct BorderedMessageView_Previews: PreviewProvider {
             .environment(\.userId, userId)
     }
 
-    static func grouped(sender: String, userId: String) -> some View {
+    static func grouped(sender: String, userId: String, showSender: Bool) -> some View {
         let alignment: HorizontalAlignment = (sender == userId) ? .trailing : .leading
 
         return VStack(alignment: alignment, spacing: 3) {
@@ -112,7 +128,8 @@ struct BorderedMessageView_Previews: PreviewProvider {
                     id: "0",
                     text: "This is a message",
                     sender: sender,
-                    timestamp: "12:29"
+                    timestamp: "12:29",
+                    showSender: showSender
                 ),
                 connectedEdges: [.bottomEdge]
             )
@@ -121,7 +138,8 @@ struct BorderedMessageView_Previews: PreviewProvider {
                     id: "0",
                     text: "that's quickly followed",
                     sender: sender,
-                    timestamp: "12:29"
+                    timestamp: "12:29",
+                    showSender: showSender
                 ),
                 connectedEdges: [.topEdge, .bottomEdge]
             )
@@ -130,7 +148,8 @@ struct BorderedMessageView_Previews: PreviewProvider {
                     id: "0",
                     text: "by some more messages.",
                     sender: sender,
-                    timestamp: "12:29"
+                    timestamp: "12:29",
+                    showSender: showSender
                 ),
                 connectedEdges: [.topEdge]
             )
@@ -142,23 +161,23 @@ struct BorderedMessageView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             enumeratingColorSchemes {
-                lone(sender: "John Doe", userId: "Jane Doe")
+                lone(sender: "John Doe", userId: "Jane Doe", showSender: false)
             }
             .previewDisplayName("Incoming Lone Messages")
 
             enumeratingColorSchemes {
-                lone(sender: "Jane Doe", userId: "Jane Doe")
+                lone(sender: "Jane Doe", userId: "Jane Doe", showSender: false)
             }
             .previewDisplayName("Outgoing Lone Messages")
 
-            grouped(sender: "John Doe", userId: "Jane Doe")
+            grouped(sender: "John Doe", userId: "Jane Doe", showSender: true)
             .previewDisplayName("Incoming Grouped Messages")
 
-            grouped(sender: "Jane Doe", userId: "Jane Doe")
+            grouped(sender: "Jane Doe", userId: "Jane Doe", showSender: false)
             .previewDisplayName("Outgoing Grouped Messages")
 
             enumeratingSizeCategories {
-                lone(sender: "John Doe", userId: "Jane Doe")
+                lone(sender: "John Doe", userId: "Jane Doe", showSender: false)
             }
             .previewDisplayName("Incoming Messages")
         }

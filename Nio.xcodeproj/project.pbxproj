@@ -330,9 +330,9 @@
 		CAC46D5323A272D10079C24F /* MessageView */ = {
 			isa = PBXGroup;
 			children = (
+				CAC46D5523A272D10079C24F /* MessageViewModel.swift */,
 				3902B89B2393FE6100698B87 /* MessageView.swift */,
 				CAC46D5423A272D10079C24F /* BorderlessMessageView.swift */,
-				CAC46D5523A272D10079C24F /* MessageViewModel.swift */,
 				CAC46D5623A272D10079C24F /* BorderedMessageView.swift */,
 			);
 			path = MessageView;
