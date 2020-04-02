@@ -17,6 +17,13 @@ struct EventContainerView: View {
     var body: some View {
         switch MXEventType(identifier: event.type) {
         case .roomMessage:
+            guard !event.isRedactedEvent() else {
+                let reason = (event.redactedBecause["content"] as? [AnyHashable: Any])?["body"] ?? "n/a"
+                return AnyView(
+                    GenericEventView(text: "🗑 Redacted because of: \(reason)")
+                )
+            }
+            
             // FIXME: remove
             // swiftlint:disable:next force_try
             let messageModel = try! MessageViewModel(event: event,
