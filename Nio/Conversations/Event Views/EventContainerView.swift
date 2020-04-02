@@ -6,6 +6,14 @@ struct EventContainerView: View {
     var connectedEdges: ConnectedEdges
     var isDirect: Bool
 
+    private var topPadding: CGFloat {
+        connectedEdges.contains(.topEdge) ? 2.0 : 8.0
+    }
+
+    private var bottomPadding: CGFloat {
+        connectedEdges.contains(.bottomEdge) ? 2.0 : 8.0
+    }
+
     var body: some View {
         switch MXEventType(identifier: event.type) {
         case .roomMessage:
@@ -17,7 +25,8 @@ struct EventContainerView: View {
                     model: .constant(messageModel),
                     connectedEdges: connectedEdges
                 )
-                    .padding(.top, 10)
+                .padding(.top, topPadding)
+                .padding(.bottom, bottomPadding)
             )
         case .roomMember:
             let displayname = (event.content["displayname"] as? String) ?? ""
