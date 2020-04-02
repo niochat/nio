@@ -15,6 +15,9 @@ struct RoomContainerView: View {
             showAttachmentPicker: $showAttachmentPicker,
             onCommit: { message in
                 self.room.send(text: message)
+            },
+            onRedact: { eventId, reason in
+                self.room.redact(eventId: eventId, reason: reason)
             }
         )
         .navigationBarTitle(Text(room.summary.displayname ?? ""), displayMode: .inline)
@@ -37,7 +40,11 @@ struct RoomView: View {
     @Binding var showAttachmentPicker: Bool
     var onCommit: (String) -> Void
 
+    var onRedact: (String, String?) -> Void
+
     @State private var message = ""
+
+    @Environment(\.userId) var userId
 
     var body: some View {
         VStack {
@@ -46,6 +53,14 @@ struct RoomView: View {
                                    connectedEdges: self.events.connectedEdges(of: event),
                                    showSender: !self.isDirect)
                     .padding(.horizontal)
+                    .contextMenu {
+                        EventContextMenu(event: event,
+                                         userId: self.userId,
+                                         onReact: { },
+                                         onReply: { },
+                                         onEdit: { },
+                                         onRedact: { self.onRedact(event.eventId, nil) })
+                    }
             }
 
             MessageComposerView(message: $message,

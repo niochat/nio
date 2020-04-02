@@ -71,6 +71,12 @@ class NIORoom: ObservableObject {
         self.objectWillChange.send()
     }
 
+    func redact(eventId: String, reason: String?) {
+        room.redactEvent(eventId, reason: reason) { response in
+            self.objectWillChange.send()
+        }
+    }
+
     func markAllAsRead() {
         room.markAllAsRead()
     }
