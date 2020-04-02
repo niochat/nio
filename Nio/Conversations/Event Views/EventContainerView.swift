@@ -15,7 +15,7 @@ struct EventContainerView: View {
             return AnyView(
                 MessageView(
                     model: .constant(messageModel),
-                    connectedEdges: []
+                    connectedEdges: connectedEdges
                 )
                     .padding(.top, 10)
             )
