@@ -59,8 +59,9 @@ struct RoomView: View {
 
     var body: some View {
         VStack {
-            ReverseList(events.wrapped) { event in
+            ReverseList(events.renderableEvents) { event in
                 EventContainerView(event: event,
+                                   reactions: self.events.reactions(for: event),
                                    connectedEdges: self.events.connectedEdges(of: event),
                                    showSender: !self.isDirect)
                     .padding(.horizontal)

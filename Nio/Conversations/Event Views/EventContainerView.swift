@@ -3,6 +3,7 @@ import SwiftMatrixSDK
 
 struct EventContainerView: View {
     var event: MXEvent
+    var reactions: [String]
     var connectedEdges: ConnectedEdges
     var showSender: Bool
 
@@ -23,10 +24,11 @@ struct EventContainerView: View {
                     GenericEventView(text: "🗑 Redacted because of: \(reason)")
                 )
             }
-            
+
             // FIXME: remove
             // swiftlint:disable:next force_try
             let messageModel = try! MessageViewModel(event: event,
+                                                     reactions: reactions,
                                                      showSender: showSender)
             return AnyView(
                 MessageView(

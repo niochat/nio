@@ -82,18 +82,24 @@ struct BorderlessMessageView_Previews: PreviewProvider {
         var id: String
         var text: String
         var sender: String
-        var timestamp: String
         var showSender: Bool
+        var timestamp: String
+        var reactions: [String]
     }
 
-    static func lone(sender: String, userId: String, showSender: Bool) -> some View {
+    static func lone(sender: String,
+                     userId: String,
+                     showSender: Bool,
+                     reactions: [String]
+    ) -> some View {
         BorderlessMessageView(
             model: MessageViewModel(
                 id: "0",
                 text: "🐧",
                 sender: sender,
+                showSender: showSender,
                 timestamp: "12:29",
-                showSender: showSender
+                reactions: reactions
             ),
             connectedEdges: []
         )
@@ -101,7 +107,11 @@ struct BorderlessMessageView_Previews: PreviewProvider {
             .environment(\.userId, userId)
     }
 
-    static func grouped(sender: String, userId: String, showSender: Bool) -> some View {
+    static func grouped(sender: String,
+                        userId: String,
+                        showSender: Bool,
+                        reactions: [String]
+    ) -> some View {
         let alignment: HorizontalAlignment = (sender == userId) ? .trailing : .leading
 
         return VStack(alignment: alignment, spacing: 3) {
@@ -110,8 +120,9 @@ struct BorderlessMessageView_Previews: PreviewProvider {
                     id: "0",
                     text: "🐶",
                     sender: sender,
+                    showSender: showSender,
                     timestamp: "12:29",
-                    showSender: showSender
+                    reactions: reactions
                 ),
                 connectedEdges: [.bottomEdge]
             )
@@ -120,8 +131,9 @@ struct BorderlessMessageView_Previews: PreviewProvider {
                     id: "0",
                     text: "🦊",
                     sender: sender,
+                    showSender: showSender,
                     timestamp: "12:29",
-                    showSender: showSender
+                    reactions: reactions
                 ),
                 connectedEdges: [.topEdge, .bottomEdge]
             )
@@ -130,8 +142,9 @@ struct BorderlessMessageView_Previews: PreviewProvider {
                     id: "0",
                     text: "🐻",
                     sender: sender,
+                    showSender: showSender,
                     timestamp: "12:29",
-                    showSender: showSender
+                    reactions: reactions
                 ),
                 connectedEdges: [.topEdge]
             )
@@ -143,23 +156,38 @@ struct BorderlessMessageView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             enumeratingColorSchemes {
-                lone(sender: "John Doe", userId: "Jane Doe", showSender: false)
+                lone(sender: "John Doe",
+                     userId: "Jane Doe",
+                     showSender: false,
+                     reactions: [])
             }
             .previewDisplayName("Incoming Lone Messages")
 
             enumeratingColorSchemes {
-                lone(sender: "Jane Doe", userId: "Jane Doe", showSender: false)
+                lone(sender: "Jane Doe",
+                     userId: "Jane Doe",
+                     showSender: false,
+                     reactions: [])
             }
             .previewDisplayName("Outgoing Lone Messages")
 
-            grouped(sender: "John Doe", userId: "Jane Doe", showSender: true)
+            grouped(sender: "John Doe",
+                    userId: "Jane Doe",
+                    showSender: true,
+                    reactions: [])
             .previewDisplayName("Incoming Grouped Messages")
 
-            grouped(sender: "Jane Doe", userId: "Jane Doe", showSender: false)
+            grouped(sender: "Jane Doe",
+                    userId: "Jane Doe",
+                    showSender: false,
+                    reactions: [])
             .previewDisplayName("Outgoing Grouped Messages")
 
             enumeratingSizeCategories {
-                lone(sender: "John Doe", userId: "Jane Doe", showSender: false)
+                lone(sender: "John Doe",
+                     userId: "Jane Doe",
+                     showSender: false,
+                     reactions: [])
             }
             .previewDisplayName("Incoming Messages")
         }

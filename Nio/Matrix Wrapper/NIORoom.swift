@@ -3,12 +3,6 @@ import Combine
 import SwiftMatrixSDK
 
 class NIORoom: ObservableObject {
-    static var displayedMessageTypes = [
-        kMXEventTypeStringRoomMessage,
-        kMXEventTypeStringRoomMember,
-        kMXEventTypeStringRoomTopic
-    ]
-
     private var room: MXRoom
 
     @Published var summary: NIORoomSummary
@@ -21,13 +15,11 @@ class NIORoom: ObservableObject {
         let currentBatch = enumerator?.nextEventsBatch(200) ?? []
         print("Got \(currentBatch.count) events.")
 
-        let filteredEvents = currentBatch.filter { Self.displayedMessageTypes.contains($0.type) }
-        self.eventCache.append(contentsOf: filteredEvents)
+        self.eventCache.append(contentsOf: currentBatch)
     }
 
     func add(event: MXEvent, direction: MXTimelineDirection, roomState: MXRoomState?) {
         print("New event of type: \(event.type!)")
-        guard Self.displayedMessageTypes.contains(event.type ?? "") else { return }
 
         switch direction {
         case .backwards:
