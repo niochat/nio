@@ -4,13 +4,20 @@ protocol MessageViewModelProtocol {
     var id: String { get }
     var text: String { get }
     var sender: String { get }
-    var timestamp: String { get }
     var showSender: Bool { get }
+    var timestamp: String { get }
+    var reactions: [String] { get }
 }
 
 extension MessageViewModelProtocol {
     var isEmoji: Bool {
         (text.count <= 3) && text.containsOnlyEmoji
+    }
+
+    var groupedReactions: [(String, Int)] {
+        reactions
+            .reduce(into: [:]) { counts, reaction in counts[reaction, default: 0] += 1 }
+            .sorted { $0.1 > $1.1 }
     }
 }
 
@@ -40,19 +47,22 @@ struct MessageViewModel: MessageViewModelProtocol {
         event.sender
     }
 
+    var showSender: Bool
+
     var timestamp: String {
         Formatter.string(for: event.timestamp, timeStyle: .short)
     }
 
-    var showSender: Bool
+    var reactions: [String]
 
     private let event: MXEvent
 
-    public init(event: MXEvent, showSender: Bool) throws {
+    public init(event: MXEvent, reactions: [String], showSender: Bool) throws {
         try Self.validate(event: event)
 
         self.event = event
         self.showSender = showSender
+        self.reactions = reactions
     }
 
     private static func validate(event: MXEvent) throws {

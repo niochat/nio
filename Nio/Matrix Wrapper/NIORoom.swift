@@ -3,12 +3,6 @@ import Combine
 import SwiftMatrixSDK
 
 class NIORoom: ObservableObject {
-    static var displayedMessageTypes = [
-        kMXEventTypeStringRoomMessage,
-        kMXEventTypeStringRoomMember,
-        kMXEventTypeStringRoomTopic
-    ]
-
     private var room: MXRoom
 
     @Published var summary: NIORoomSummary
@@ -21,13 +15,11 @@ class NIORoom: ObservableObject {
         let currentBatch = enumerator?.nextEventsBatch(200) ?? []
         print("Got \(currentBatch.count) events.")
 
-        let filteredEvents = currentBatch.filter { Self.displayedMessageTypes.contains($0.type) }
-        self.eventCache.append(contentsOf: filteredEvents)
+        self.eventCache.append(contentsOf: currentBatch)
     }
 
     func add(event: MXEvent, direction: MXTimelineDirection, roomState: MXRoomState?) {
         print("New event of type: \(event.type!)")
-        guard Self.displayedMessageTypes.contains(event.type ?? "") else { return }
 
         switch direction {
         case .backwards:
@@ -69,6 +61,17 @@ class NIORoom: ObservableObject {
             self.objectWillChange.send()
         }
         self.objectWillChange.send()
+    }
+
+    func react(toEventId eventId: String, emoji: String) {
+        // swiftlint:disable:next force_try
+        let content = try! ReactionEvent(eventId: eventId, key: emoji).encodeContent()
+        //swiftlint:disable:next redundant_optional_initialization
+        var localEcho: MXEvent? = nil
+        room.sendEvent(.reaction, content: content, localEcho: &localEcho) { response in
+            print(response)
+            self.objectWillChange.send()
+        }
     }
 
     func redact(eventId: String, reason: String?) {

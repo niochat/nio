@@ -26,10 +26,10 @@ private struct EventContextMenuViewModel {
             kMXEventTypeStringRoomMessage
         ]
 
-//        if reactableEvents.contains(event.type) {
-//            canReact = true
+        if reactableEvents.contains(event.type) {
+            canReact = true
 //            canReply = true
-//        }
+        }
 
         if event.sender == userId && reactableEvents.contains(event.type) {
 //            canEdit = true

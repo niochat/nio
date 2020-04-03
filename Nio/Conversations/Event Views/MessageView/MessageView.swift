@@ -54,18 +54,25 @@ struct MessageView_Previews: PreviewProvider {
         var id: String
         var text: String
         var sender: String
-        var timestamp: String
         var showSender: Bool
+        var timestamp: String
+        var reactions: [String]
     }
 
-    static func message(text: String, sender: String, userId: String, showSender: Bool) -> some View {
+    static func message(text: String,
+                        sender: String,
+                        userId: String,
+                        showSender: Bool,
+                        reactions: [String]
+    ) -> some View {
         MessageView(
             model: .constant(MessageViewModel(
                 id: "0",
                 text: text,
                 sender: sender,
+                showSender: showSender,
                 timestamp: "12:29",
-                showSender: showSender
+                reactions: reactions
             )),
             connectedEdges: []
         )
@@ -79,14 +86,16 @@ struct MessageView_Previews: PreviewProvider {
                 text: "Hi there!",
                 sender: "John Doe",
                 userId: "Jane Doe",
-                showSender: true
+                showSender: true,
+                reactions: []
             )
 
             message(
                 text: "👋",
                 sender: "John Doe",
                 userId: "Jane Doe",
-                showSender: false
+                showSender: false,
+                reactions: []
             )
         }
         .accentColor(.purple)
