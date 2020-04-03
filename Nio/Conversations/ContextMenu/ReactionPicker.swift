@@ -6,10 +6,19 @@ struct ReactionPicker: View {
     var picked: (String) -> Void
 
     var body: some View {
-        HStack {
-            ForEach(emoji, id: \.self) { emoji in
-                Button(action: { self.picked(emoji) },
-                       label: { Text(emoji) })
+        VStack {
+            Text("Tap on an emoji to send that reaction.")
+                .foregroundColor(.gray)
+                .font(.headline)
+                .padding(.bottom, 30)
+            HStack(spacing: 10) {
+                ForEach(emoji, id: \.self) { emoji in
+                    Button(action: { self.picked(emoji) },
+                           label: {
+                        Text(emoji)
+                            .font(.largeTitle)
+                    })
+                }
             }
         }
     }
