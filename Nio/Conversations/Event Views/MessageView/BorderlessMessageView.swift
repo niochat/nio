@@ -12,14 +12,6 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
         model.sender == userId
     }
 
-    private var topPadding: CGFloat {
-        connectedEdges.contains(.topEdge) ? 0.0 : 5.0
-    }
-
-    private var bottomPadding: CGFloat {
-        connectedEdges.contains(.bottomEdge) ? 0.0 : 5.0
-    }
-
     var timestampView: some View {
         Text(model.timestamp)
             .font(.caption)
@@ -34,8 +26,6 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
 
     var contentView: some View {
         emojiView
-            .padding(.top, topPadding)
-            .padding(.bottom, bottomPadding)
     }
 
     var senderView: some View {
@@ -49,23 +39,74 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
         }
     }
 
+    var gradient: LinearGradient {
+        let color: Color = .borderedMessageBackground
+        let colors: [Color]
+        if colorScheme == .dark {
+            colors = [color.opacity(1.0), color.opacity(0.85)]
+        } else {
+            colors = [color.opacity(0.85), color.opacity(1.0)]
+        }
+        return LinearGradient(
+            gradient: Gradient(colors: colors),
+            startPoint: .top,
+            endPoint: .bottom
+        )
+    }
+
+    var reactionsView: some View {
+        Group {
+            if model.reactions.isEmpty {
+                EmptyView()
+            } else {
+                HStack(spacing: 3) {
+                    ForEach(model.groupedReactions, id: \.0) { (emoji, count) in
+                        HStack(spacing: 1) {
+                            Text(emoji)
+                                .font(.caption)
+                            Text(String(count))
+                                .font(.callout)
+                        }
+                        .padding(.vertical, 2)
+                        .padding(.horizontal, 6)
+                        .background(
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(self.gradient)
+                                .shadow(radius: 1)
+                        )
+                    }
+                }
+            }
+        }
+    }
+
     var bodyView: some View {
         if isMe {
-            return AnyView(HStack {
-                if !connectedEdges.contains(.bottomEdge) {
-                    // It's the last message in a group, so show a timestamp:
-                    timestampView
+            return AnyView(
+                VStack(alignment: .trailing, spacing: 0) {
+                    HStack {
+                        if !connectedEdges.contains(.bottomEdge) {
+                            // It's the last message in a group, so show a timestamp:
+                            timestampView
+                        }
+                        contentView
+                    }
+                    reactionsView
                 }
-                contentView
-            })
+            )
         } else {
-            return AnyView(HStack {
-                contentView
-                if !connectedEdges.contains(.bottomEdge) {
-                    // It's the last message in a group, so show a timestamp:
-                    timestampView
+            return AnyView(
+                VStack(alignment: .leading, spacing: 0) {
+                    HStack {
+                        contentView
+                        if !connectedEdges.contains(.bottomEdge) {
+                            // It's the last message in a group, so show a timestamp:
+                            timestampView
+                        }
+                    }
+                    reactionsView
                 }
-            })
+            )
         }
     }
 
@@ -159,7 +200,7 @@ struct BorderlessMessageView_Previews: PreviewProvider {
                 lone(sender: "John Doe",
                      userId: "Jane Doe",
                      showSender: false,
-                     reactions: [])
+                     reactions: ["❤️", "🥳", "🥳"])
             }
             .previewDisplayName("Incoming Lone Messages")
 
@@ -167,14 +208,14 @@ struct BorderlessMessageView_Previews: PreviewProvider {
                 lone(sender: "Jane Doe",
                      userId: "Jane Doe",
                      showSender: false,
-                     reactions: [])
+                     reactions: ["🥳"])
             }
             .previewDisplayName("Outgoing Lone Messages")
 
             grouped(sender: "John Doe",
                     userId: "Jane Doe",
                     showSender: true,
-                    reactions: [])
+                    reactions: ["💜", "💜"])
             .previewDisplayName("Incoming Grouped Messages")
 
             grouped(sender: "Jane Doe",

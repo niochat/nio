@@ -80,22 +80,30 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
     }
 
     var reactionsView: some View {
-        HStack(spacing: 3) {
-            ForEach(model.groupedReactions, id: \.0) { (emoji, count) in
-                    HStack(spacing: 1) {
-                        Text(emoji)
-                            .font(.caption)
-                        Text(String(count))
-                            .foregroundColor(self.textColor)
-                            .font(.callout)
+        // The conditional EmptyView here exists since SwiftUI apparently decides
+        // to give space to the HStack even if it's empty, which looks awkward.
+        Group {
+            if model.reactions.isEmpty {
+                EmptyView()
+            } else {
+                HStack(spacing: 3) {
+                    ForEach(model.groupedReactions, id: \.0) { (emoji, count) in
+                        HStack(spacing: 1) {
+                            Text(emoji)
+                                .font(.caption)
+                            Text(String(count))
+                                .foregroundColor(self.textColor)
+                                .font(.callout)
+                        }
+                        .padding(.vertical, 2)
+                        .padding(.horizontal, 6)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(self.gradient)
+                                .shadow(radius: 1)
+                        )
                     }
-                    .padding(.vertical, 2)
-                    .padding(.horizontal, 6)
-                    .background(
-                        RoundedRectangle(cornerRadius: 20)
-                            .fill(self.gradient)
-                            .shadow(radius: 1)
-                    )
+                }
             }
         }
     }
@@ -103,7 +111,7 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
             senderView
-            ZStack(alignment: isMe ? .bottomTrailing : .bottomLeading) {
+            VStack(alignment: isMe ? .trailing : .leading, spacing: 3) {
                 VStack(alignment: isMe ? .trailing : .leading, spacing: 5) {
                     bodyView
                     if !connectedEdges.contains(.bottomEdge) {
@@ -114,10 +122,9 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
                 .padding(10)
                 .background(background)
 
-                reactionsView.offset(x: 5, y: 15)
+                reactionsView
             }
         }
-        .padding(.bottom, model.reactions.isEmpty ? 0 : 15)
     }
 }
 
