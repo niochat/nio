@@ -17,7 +17,7 @@ extension MessageViewModelProtocol {
     var groupedReactions: [(String, Int)] {
         reactions
             .reduce(into: [:]) { counts, reaction in counts[reaction, default: 0] += 1 }
-            .sorted { $0.1 < $1.1 }
+            .sorted { $0.1 > $1.1 }
     }
 }
 
