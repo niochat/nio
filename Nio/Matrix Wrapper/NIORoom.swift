@@ -71,6 +71,17 @@ class NIORoom: ObservableObject {
         self.objectWillChange.send()
     }
 
+    func react(toEventId eventId: String, emoji: String) {
+        // swiftlint:disable:next force_try
+        let content = try! ReactionEvent(eventId: eventId, key: emoji).encodeContent()
+        //swiftlint:disable:next redundant_optional_initialization
+        var localEcho: MXEvent? = nil
+        room.sendEvent(.reaction, content: content, localEcho: &localEcho) { response in
+            print(response)
+            self.objectWillChange.send()
+        }
+    }
+
     func redact(eventId: String, reason: String?) {
         room.redactEvent(eventId, reason: reason) { response in
             self.objectWillChange.send()

@@ -7,6 +7,7 @@ struct RoomContainerView: View {
     @ObservedObject var room: NIORoom
 
     @State var showAttachmentPicker = false
+    @State var eventToReactTo: String?
 
     var body: some View {
         RoomView(
@@ -16,6 +17,9 @@ struct RoomContainerView: View {
             onCommit: { message in
                 self.room.send(text: message)
             },
+            onReact: { eventId in
+                self.eventToReactTo = eventId
+            },
             onRedact: { eventId, reason in
                 self.room.redact(eventId: eventId, reason: reason)
             }
@@ -24,6 +28,12 @@ struct RoomContainerView: View {
         .keyboardObserving()
         .actionSheet(isPresented: $showAttachmentPicker) {
             self.attachmentPickerSheet
+        }
+        .sheet(item: $eventToReactTo) { eventId in
+            ReactionPicker { reaction in
+                self.room.react(toEventId: eventId, emoji: reaction)
+                self.eventToReactTo = nil
+            }
         }
         .onAppear { self.room.markAllAsRead() }
     }
@@ -40,6 +50,7 @@ struct RoomView: View {
     @Binding var showAttachmentPicker: Bool
     var onCommit: (String) -> Void
 
+    var onReact: (String) -> Void
     var onRedact: (String, String?) -> Void
 
     @State private var message = ""
@@ -56,7 +67,7 @@ struct RoomView: View {
                     .contextMenu {
                         EventContextMenu(event: event,
                                          userId: self.userId,
-                                         onReact: { },
+                                         onReact: { self.onReact(event.eventId) },
                                          onReply: { },
                                          onEdit: { },
                                          onRedact: { self.onRedact(event.eventId, nil) })
