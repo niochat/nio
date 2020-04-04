@@ -47,7 +47,7 @@ struct EventContainerView: View {
             )
         default:
             return AnyView(
-                GenericEventView(text: "\(event.type!): \(event.content!)")
+                GenericEventView(text: "\(event.type!)\n\(event.content!)")
                     .padding(.top, 10)
             )
         }
