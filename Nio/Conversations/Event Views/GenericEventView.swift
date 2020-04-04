@@ -11,6 +11,7 @@ struct GenericEventView: View {
                 .foregroundColor(.gray)
             Spacer()
         }
+        .padding(.vertical, 3)
     }
 }
 
@@ -19,6 +20,12 @@ struct GenericEventView_Previews: PreviewProvider {
         Group {
             GenericEventView(text: "Ping joined")
             GenericEventView(text: "Ping changed the topic to '🐧'")
+
+            VStack(spacing: 0) {
+                GenericEventView(text: "Ping joined")
+                GenericEventView(text: "Ping joined")
+                GenericEventView(text: "Ping joined")
+            }
         }
         .accentColor(.purple)
 //        .environment(\.colorScheme, .dark)
