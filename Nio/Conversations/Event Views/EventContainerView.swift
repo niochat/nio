@@ -19,9 +19,9 @@ struct EventContainerView: View {
         switch MXEventType(identifier: event.type) {
         case .roomMessage:
             guard !event.isRedactedEvent() else {
-                let reason = (event.redactedBecause["content"] as? [AnyHashable: Any])?["body"] ?? "n/a"
+                let reason = (event.redactedBecause["content"] as? [AnyHashable: Any])?["body"] as? String
                 return AnyView(
-                    GenericEventView(text: "🗑 Redacted because of: \(reason)")
+                    RedactionView(model: .init(sender: event.sender, reason: reason))
                 )
             }
 
