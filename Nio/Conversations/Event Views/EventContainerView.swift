@@ -21,7 +21,7 @@ struct EventContainerView: View {
             guard !event.isRedactedEvent() else {
                 let reason = (event.redactedBecause["content"] as? [AnyHashable: Any])?["body"] as? String
                 return AnyView(
-                    RedactionView(model: .init(sender: event.sender, reason: reason))
+                    RedactionEventView(model: .init(sender: event.sender, reason: reason))
                 )
             }
 
@@ -39,11 +39,10 @@ struct EventContainerView: View {
                 .padding(.bottom, bottomPadding)
             )
         case .roomMember:
-            let displayname = (event.content["displayname"] as? String) ?? ""
+            let affectedUser = (event.content["displayname"] as? String)
             let membership = (event.content["membership"] as? String) ?? ""
             return AnyView(
-                GenericEventView(text: "\(displayname) \(membership)'d") // 🤷
-                    .padding(.top, 10)
+                RoomMemberEventView(sender: event.sender, affectedUser: affectedUser, membership: membership)
             )
         default:
             return AnyView(

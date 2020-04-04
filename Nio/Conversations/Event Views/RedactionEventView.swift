@@ -1,9 +1,9 @@
 import SwiftUI
 
-struct RedactionView: View {
+struct RedactionEventView: View {
     struct ViewModel {
-        var sender: String
-        var reason: String?
+        let sender: String
+        let reason: String?
     }
 
     var model: ViewModel
@@ -29,12 +29,12 @@ struct RedactionView: View {
 struct RedactionView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            RedactionView(model: .init(sender: "Jane Doe", reason: nil))
-            RedactionView(model: .init(sender: "Jane Doe", reason: "Totally valid reason with longer text"))
+            RedactionEventView(model: .init(sender: "Jane Doe", reason: nil))
+            RedactionEventView(model: .init(sender: "Jane Doe", reason: "Totally valid reason with longer text"))
             VStack(spacing: 0) {
-                RedactionView(model: .init(sender: "Jane Doe", reason: nil))
-                RedactionView(model: .init(sender: "Jane Doe", reason: "some reason"))
-                RedactionView(model: .init(sender: "Jane Doe", reason: nil))
+                RedactionEventView(model: .init(sender: "Jane Doe", reason: nil))
+                RedactionEventView(model: .init(sender: "Jane Doe", reason: "some reason"))
+                RedactionEventView(model: .init(sender: "Jane Doe", reason: nil))
             }
         }
         .padding()

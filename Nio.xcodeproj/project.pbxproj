@@ -16,7 +16,8 @@
 		39222199243689D6004D8794 /* ReactionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39222198243689D6004D8794 /* ReactionEvent.swift */; };
 		3922219D24368B25004D8794 /* CustomEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3922219C24368B25004D8794 /* CustomEvent.swift */; };
 		392221A02437285B004D8794 /* ReactionPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3922219F2437285B004D8794 /* ReactionPicker.swift */; };
-		392221AA2438083C004D8794 /* RedactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392221A92438083C004D8794 /* RedactionView.swift */; };
+		392221AA2438083C004D8794 /* RedactionEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392221A92438083C004D8794 /* RedactionEventView.swift */; };
+		392221AC2438149D004D8794 /* RoomMemberEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392221AB2438149D004D8794 /* RoomMemberEventView.swift */; };
 		392389892386FD3900B2E1DF /* MXClient+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389882386FD3900B2E1DF /* MXClient+Publisher.swift */; };
 		3923898D238859D100B2E1DF /* MX+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3923898C238859D100B2E1DF /* MX+Identifiable.swift */; };
 		3923898F2388707E00B2E1DF /* RoomListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3923898E2388707E00B2E1DF /* RoomListItemView.swift */; };
@@ -91,7 +92,8 @@
 		39222198243689D6004D8794 /* ReactionEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionEvent.swift; sourceTree = "<group>"; };
 		3922219C24368B25004D8794 /* CustomEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEvent.swift; sourceTree = "<group>"; };
 		3922219F2437285B004D8794 /* ReactionPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionPicker.swift; sourceTree = "<group>"; };
-		392221A92438083C004D8794 /* RedactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedactionView.swift; sourceTree = "<group>"; };
+		392221A92438083C004D8794 /* RedactionEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedactionEventView.swift; sourceTree = "<group>"; };
+		392221AB2438149D004D8794 /* RoomMemberEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomMemberEventView.swift; sourceTree = "<group>"; };
 		392389882386FD3900B2E1DF /* MXClient+Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXClient+Publisher.swift"; sourceTree = "<group>"; };
 		3923898C238859D100B2E1DF /* MX+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MX+Identifiable.swift"; sourceTree = "<group>"; };
 		3923898E2388707E00B2E1DF /* RoomListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListItemView.swift; sourceTree = "<group>"; };
@@ -189,7 +191,8 @@
 			children = (
 				39D166C72385C832006DD257 /* EventContainerView.swift */,
 				CAC46D5323A272D10079C24F /* MessageView */,
-				392221A92438083C004D8794 /* RedactionView.swift */,
+				392221AB2438149D004D8794 /* RoomMemberEventView.swift */,
+				392221A92438083C004D8794 /* RedactionEventView.swift */,
 				3902B89D2393FE8200698B87 /* GenericEventView.swift */,
 			);
 			path = "Event Views";
@@ -637,10 +640,11 @@
 				3902B89C2393FE6100698B87 /* MessageView.swift in Sources */,
 				CAC46D5723A272D10079C24F /* BorderlessMessageView.swift in Sources */,
 				39C93209238553E4004449E1 /* RoomView.swift in Sources */,
-				392221AA2438083C004D8794 /* RedactionView.swift in Sources */,
+				392221AA2438083C004D8794 /* RedactionEventView.swift in Sources */,
 				392389CC238EBB1500B2E1DF /* ReverseList.swift in Sources */,
 				392389942388899200B2E1DF /* Formatter.swift in Sources */,
 				39BA0723240B3C9A00FD28C6 /* MXCredentials+Keychain.swift in Sources */,
+				392221AC2438149D004D8794 /* RoomMemberEventView.swift in Sources */,
 				CAC46D6323A278F40079C24F /* PreviewProvider+Enumeration.swift in Sources */,
 				39222199243689D6004D8794 /* ReactionEvent.swift in Sources */,
 				392389D6238F3EB200B2E1DF /* NIORoomSummary.swift in Sources */,
