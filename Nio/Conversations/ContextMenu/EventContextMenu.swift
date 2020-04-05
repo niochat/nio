@@ -31,6 +31,7 @@ private struct EventContextMenuViewModel {
 //            canReply = true
         }
 
+        // TODO: Redacting messages is a powerlevel thing, you can't only redact your own.
         if event.sender == userId && reactableEvents.contains(event.type) {
 //            canEdit = true
             canRedact = true
