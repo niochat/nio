@@ -5,24 +5,40 @@ import SwiftMatrixSDK
 //swiftlint:disable identifier_name
 
 class EventCollectionTests: XCTestCase {
-    var A1 = MockEvent(sender: "A", eventId: "A1")
-    var A2 = MockEvent(sender: "A", eventId: "A2")
-    var A3 = MockEvent(sender: "A", eventId: "A3")
-    var B1 = MockEvent(sender: "B", eventId: "B1")
+    func testReadConnectedEdges() {
+        let m = kMXEventTypeStringRoomMessage
 
-    func testReadGroupPosition() {
-        XCTAssertEqual(EventCollection([A1]).connectedEdges(of: A1), [.bottomEdge])
-        XCTAssertEqual(EventCollection([A1, A2, B1]).connectedEdges(of: A2), [.topEdge])
-        XCTAssertEqual(EventCollection([A1, A2, B1]).connectedEdges(of: B1), [.bottomEdge])
-        XCTAssertEqual(EventCollection([A1, A2, A3]).connectedEdges(of: A2), [.topEdge, .bottomEdge])
+        let m1 = MockEvent(sender: "A", type: m, timestamp: 0, isRedacted: false)
+        let m2 = MockEvent(sender: "A", type: m, timestamp: 0, isRedacted: false)
+        let m3 = MockEvent(sender: "A", type: m, timestamp: 0, isRedacted: false)
+
+        let events = [m1, m2, m3]
+
+        XCTAssertEqual(EventCollection(events).connectedEdges(of: m1), [.bottomEdge])
+        XCTAssertEqual(EventCollection(events).connectedEdges(of: m2), [.topEdge, .bottomEdge])
+        XCTAssertEqual(EventCollection(events).connectedEdges(of: m3), [.topEdge])
+
+        // FIXME: This obviously needs to cover all cases.
     }
 }
 
 class MockEvent: MXEvent {
-    init(sender: String, eventId: String) {
+    init(sender: String, type: String, timestamp: UInt64, isRedacted: Bool) {
+        self._type = type
+        self.isRedacted = isRedacted
         super.init()
         self.sender = sender
-        self.eventId = eventId
+        self.originServerTs = 1000 * timestamp
+    }
+
+    var _type: String
+    override var type: String! {
+        _type
+    }
+
+    var isRedacted: Bool
+    override func isRedactedEvent() -> Bool {
+        isRedacted
     }
 
     required init?(coder: NSCoder) {

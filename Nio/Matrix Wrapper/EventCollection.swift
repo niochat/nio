@@ -4,55 +4,20 @@ import SwiftMatrixSDK
 struct EventCollection {
     var wrapped: [MXEvent]
 
-    var renderableEvents: [MXEvent] {
-        let renderableEventTypes = [
-            kMXEventTypeStringRoomMessage,
-            kMXEventTypeStringRoomMember,
-            kMXEventTypeStringRoomTopic
-        ]
-        return wrapped.filter { renderableEventTypes.contains($0.type) }
-    }
-
     init(_ events: [MXEvent]) {
         self.wrapped = events
     }
 
-    func connectedEdges(of event: MXEvent) -> ConnectedEdges {
-        guard let idx = wrapped.firstIndex(of: event) else {
-            fatalError("Event not found in EventCollection")
-        }
+    static let renderableEventTypes = [
+        kMXEventTypeStringRoomMessage,
+        kMXEventTypeStringRoomMember,
+        kMXEventTypeStringRoomTopic
+    ]
 
-        guard idx > wrapped.startIndex else {
-            return .bottomEdge
-        }
-
-        guard
-            let sender = event.sender,
-            let preSender = wrapped[wrapped.index(before: idx)].sender
-        else {
-            return []
-        }
-
-        if sender != preSender {
-            return .bottomEdge
-        }
-
-        guard
-            idx < wrapped.endIndex - 1,
-            let sucSender = wrapped[wrapped.index(after: idx)].sender
-        else {
-            return .topEdge
-        }
-
-        if sender != sucSender {
-            return .topEdge
-        } else if sender == preSender && sender != sucSender {
-            return .topEdge
-        } else if sender == preSender && sender == sucSender {
-            return [.topEdge, .bottomEdge]
-        }
-
-        fatalError("Non-covered position case? \(sender) \(preSender) \(sucSender)")
+    /// Events that can be directly rendered in the timeline with a corresponding view. This for example does not include reactions, which are instead rendered
+    /// as accessories on their corresponding related events.
+    var renderableEvents: [MXEvent] {
+        wrapped.filter { Self.renderableEventTypes.contains($0.type) }
     }
 
     func relatedEvents(of event: MXEvent) -> [MXEvent] {
@@ -64,6 +29,61 @@ struct EventCollection {
         relatedEvents(of: event)
             .filter { $0.type == kMXEventTypeStringReaction }
             .compactMap { ($0.content["m.relates_to"] as? [String: Any])?["key"] as? String }
+    }
+}
+
+// MARK: Grouping
+
+extension EventCollection {
+    static let groupableEventTypes = [
+        kMXEventTypeStringRoomMessage,
+    ]
+
+    func connectedEdges(of event: MXEvent) -> ConnectedEdges {
+        guard let idx = wrapped.firstIndex(of: event) else {
+            fatalError("Event not found in event collection.")
+        }
+
+        guard idx >= wrapped.startIndex else {
+            return []
+        }
+
+        // Note to self: `first(where:)` should not filter redacted messages here, since that would skip them and base
+        // the decision on the message event before that, possibly wrapping the redaction inside the group. Redacted
+        // state is checked separately.
+        let precedingMessageEvent = wrapped[..<idx]
+            .reversed()
+            .first { Self.groupableEventTypes.contains($0.type) }
+
+        let succeedingMessageEvent = wrapped[wrapped.index(after: idx)...]
+            .first { Self.groupableEventTypes.contains($0.type) }
+
+        let isPrecedingRedacted = precedingMessageEvent?.isRedactedEvent() ?? false
+        let isSucceedingRedacted = succeedingMessageEvent?.isRedactedEvent() ?? false
+
+        // If a message is sent within this time interval, it is considered to be part of the current group.
+        let timeIntervalBeforeNewGroup: TimeInterval = 3*60
+        let precedingInterval = precedingMessageEvent.map { event.timestamp.timeIntervalSince($0.timestamp) } ?? 10000
+        let succeedingInterval = succeedingMessageEvent?.timestamp.timeIntervalSince(event.timestamp) ?? 10000
+
+        let groupedWithPreceding = event.sender == precedingMessageEvent?.sender
+            && !isPrecedingRedacted
+            && precedingInterval < timeIntervalBeforeNewGroup
+
+        let groupedWithSucceeding = event.sender == succeedingMessageEvent?.sender
+            && !isSucceedingRedacted
+            && succeedingInterval < timeIntervalBeforeNewGroup
+
+        switch (groupedWithPreceding, groupedWithSucceeding) {
+        case (false, false):
+            return []
+        case (true, false):
+            return .topEdge
+        case (false, true):
+            return .bottomEdge
+        case (true, true):
+            return [.topEdge, .bottomEdge]
+        }
     }
 }
 
