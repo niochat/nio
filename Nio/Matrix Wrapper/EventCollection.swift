@@ -24,11 +24,21 @@ struct EventCollection {
         wrapped.filter { $0.relatesTo?.eventId == event.eventId }
     }
 
-    // FIXME: For the love of god...
-    func reactions(for event: MXEvent) -> [String] {
+    func reactions(for event: MXEvent) -> [Reaction] {
         relatedEvents(of: event)
             .filter { $0.type == kMXEventTypeStringReaction }
-            .compactMap { ($0.content["m.relates_to"] as? [String: Any])?["key"] as? String }
+            .compactMap { event in
+                guard let sender = event.sender,
+                    let relatesToContent = event.content["m.relates_to"] as? [String: Any],
+                    let reaction = relatesToContent["key"] as? String
+                else {
+                    return nil
+                }
+                return Reaction(sender: sender,
+                                timestamp: event.timestamp,
+                                reaction: reaction)
+            }
+
     }
 }
 

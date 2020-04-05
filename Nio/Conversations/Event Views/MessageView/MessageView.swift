@@ -56,14 +56,14 @@ struct MessageView_Previews: PreviewProvider {
         var sender: String
         var showSender: Bool
         var timestamp: String
-        var reactions: [String]
+        var reactions: [Reaction]
     }
 
     static func message(text: String,
                         sender: String,
                         userId: String,
                         showSender: Bool,
-                        reactions: [String]
+                        reactions: [Reaction]
     ) -> some View {
         MessageView(
             model: .constant(MessageViewModel(

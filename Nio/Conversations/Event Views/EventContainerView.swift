@@ -3,7 +3,7 @@ import SwiftMatrixSDK
 
 struct EventContainerView: View {
     var event: MXEvent
-    var reactions: [String]
+    var reactions: [Reaction]
     var connectedEdges: ConnectedEdges
     var showSender: Bool
 

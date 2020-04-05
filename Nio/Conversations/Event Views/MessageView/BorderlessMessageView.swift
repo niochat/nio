@@ -54,32 +54,6 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
         )
     }
 
-    var reactionsView: some View {
-        Group {
-            if model.reactions.isEmpty {
-                EmptyView()
-            } else {
-                HStack(spacing: 3) {
-                    ForEach(model.groupedReactions, id: \.0) { (emoji, count) in
-                        HStack(spacing: 1) {
-                            Text(emoji)
-                                .font(.caption)
-                            Text(String(count))
-                                .font(.callout)
-                        }
-                        .padding(.vertical, 2)
-                        .padding(.horizontal, 6)
-                        .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(self.gradient)
-                                .shadow(radius: 1)
-                        )
-                    }
-                }
-            }
-        }
-    }
-
     var bodyView: some View {
         if isMe {
             return AnyView(
@@ -91,7 +65,7 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
                         }
                         contentView
                     }
-                    reactionsView
+                    GroupedReactionsView(reactions: model.reactions)
                 }
             )
         } else {
@@ -104,7 +78,7 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
                             timestampView
                         }
                     }
-                    reactionsView
+                    GroupedReactionsView(reactions: model.reactions)
                 }
             )
         }
@@ -125,13 +99,19 @@ struct BorderlessMessageView_Previews: PreviewProvider {
         var sender: String
         var showSender: Bool
         var timestamp: String
-        var reactions: [String]
+        var reactions: [Reaction]
     }
+
+    // swiftlint:disable identifier_name
+    static var 💜 = Reaction(sender: "Jane", timestamp: Date(), reaction: "💜")
+    static var 🚀 = Reaction(sender: "Jane", timestamp: Date(), reaction: "🚀")
+    static var 👍 = Reaction(sender: "John", timestamp: Date(), reaction: "👍")
+    // swiftlint:enable identifier_name
 
     static func lone(sender: String,
                      userId: String,
                      showSender: Bool,
-                     reactions: [String]
+                     reactions: [Reaction]
     ) -> some View {
         BorderlessMessageView(
             model: MessageViewModel(
@@ -151,7 +131,7 @@ struct BorderlessMessageView_Previews: PreviewProvider {
     static func grouped(sender: String,
                         userId: String,
                         showSender: Bool,
-                        reactions: [String]
+                        reactions: [Reaction]
     ) -> some View {
         let alignment: HorizontalAlignment = (sender == userId) ? .trailing : .leading
 
@@ -200,7 +180,7 @@ struct BorderlessMessageView_Previews: PreviewProvider {
                 lone(sender: "John Doe",
                      userId: "Jane Doe",
                      showSender: false,
-                     reactions: ["❤️", "🥳", "🥳"])
+                     reactions: [💜, 💜, 🚀, 👍])
             }
             .previewDisplayName("Incoming Lone Messages")
 
@@ -208,14 +188,14 @@ struct BorderlessMessageView_Previews: PreviewProvider {
                 lone(sender: "Jane Doe",
                      userId: "Jane Doe",
                      showSender: false,
-                     reactions: ["🥳"])
+                     reactions: [🚀])
             }
             .previewDisplayName("Outgoing Lone Messages")
 
             grouped(sender: "John Doe",
                     userId: "Jane Doe",
                     showSender: true,
-                    reactions: ["💜", "💜"])
+                    reactions: [💜, 💜])
             .previewDisplayName("Incoming Grouped Messages")
 
             grouped(sender: "Jane Doe",

@@ -81,35 +81,6 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
         .foregroundColor(textColor).opacity(0.5)
     }
 
-    var reactionsView: some View {
-        // The conditional EmptyView here exists since SwiftUI apparently decides
-        // to give space to the HStack even if it's empty, which looks awkward.
-        Group {
-            if model.reactions.isEmpty {
-                EmptyView()
-            } else {
-                HStack(spacing: 3) {
-                    ForEach(model.groupedReactions, id: \.0) { (emoji, count) in
-                        HStack(spacing: 1) {
-                            Text(emoji)
-                                .font(.caption)
-                            Text(String(count))
-                                .foregroundColor(self.textColor)
-                                .font(.callout)
-                        }
-                        .padding(.vertical, 2)
-                        .padding(.horizontal, 6)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(self.gradient)
-                                .shadow(radius: 1)
-                        )
-                    }
-                }
-            }
-        }
-    }
-
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
             senderView
@@ -124,7 +95,7 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
                 .padding(10)
                 .background(background)
 
-                reactionsView
+                GroupedReactionsView(reactions: model.reactions)
             }
         }
     }
@@ -137,14 +108,14 @@ struct BorderedMessageView_Previews: PreviewProvider {
         var sender: String
         var showSender: Bool
         var timestamp: String
-        var reactions: [String]
+        var reactions: [Reaction]
     }
 
     static func lone(sender: String,
                      text: String = "Lorem ipsum dolor sit amet!",
                      userId: String,
                      showSender: Bool,
-                     reactions: [String]
+                     reactions: [Reaction]
     ) -> some View {
         BorderedMessageView(
             model: MessageViewModel(
@@ -164,7 +135,7 @@ struct BorderedMessageView_Previews: PreviewProvider {
     static func grouped(sender: String,
                         userId: String,
                         showSender: Bool,
-                        reactions: [String]
+                        reactions: [Reaction]
     ) -> some View {
         let alignment: HorizontalAlignment = (sender == userId) ? .trailing : .leading
 
@@ -207,6 +178,12 @@ struct BorderedMessageView_Previews: PreviewProvider {
         .environment(\.userId, userId)
     }
 
+    // swiftlint:disable identifier_name
+    static var 💜 = Reaction(sender: "Jane", timestamp: Date(), reaction: "💜")
+    static var 🚀 = Reaction(sender: "Jane", timestamp: Date(), reaction: "🚀")
+    static var 👍 = Reaction(sender: "John", timestamp: Date(), reaction: "👍")
+    // swiftlint:enable identifier_name
+
     static var previews: some View {
         Group {
             enumeratingColorSchemes {
@@ -214,7 +191,7 @@ struct BorderedMessageView_Previews: PreviewProvider {
                      text: "Lorem",
                      userId: "Jane Doe",
                      showSender: false,
-                     reactions: ["💜", "💜", "👍", "🥳"])
+                     reactions: [💜, 💜, 👍])
             }
             .previewDisplayName("Incoming Lone Messages")
 
@@ -222,14 +199,14 @@ struct BorderedMessageView_Previews: PreviewProvider {
                 lone(sender: "Jane Doe",
                      userId: "Jane Doe",
                      showSender: false,
-                     reactions: ["❤️", "❤️", "👍", "🥳"])
+                     reactions: [🚀, 👍])
             }
             .previewDisplayName("Outgoing Lone Messages")
 
             grouped(sender: "John Doe",
                     userId: "Jane Doe",
                     showSender: true,
-                    reactions: ["❤️", "❤️", "👍", "🥳"])
+                    reactions: [💜, 💜, 🚀, 👍])
             .previewDisplayName("Incoming Grouped Messages")
 
             grouped(sender: "Jane Doe",
@@ -242,7 +219,7 @@ struct BorderedMessageView_Previews: PreviewProvider {
                 lone(sender: "John Doe",
                      userId: "Jane Doe",
                      showSender: false,
-                     reactions: ["🚀"])
+                     reactions: [🚀])
             }
             .previewDisplayName("Incoming Messages")
         }
