@@ -90,7 +90,7 @@ struct EventContextMenu: View {
             }
             if model.canRedact {
                 Button(action: onRedact, label: {
-                    Text("Redact")
+                    Text("Remove")
                     Image(systemName: "trash")
                 })
             }
