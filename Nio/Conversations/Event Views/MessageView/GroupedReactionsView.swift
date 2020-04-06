@@ -21,6 +21,10 @@ private struct ReactionGroup: Identifiable {
     var id: String {
         reaction
     }
+
+    func containsReaction(from sender: String) -> Bool {
+        reactions.contains { $0.sender == sender }
+    }
 }
 
 struct GroupedReactionsView: View {
@@ -68,13 +72,6 @@ struct GroupedReactionsView: View {
         self.model = ViewModel(reactions: reactions)
     }
 
-    fileprivate func textColor(for reactionGroup: ReactionGroup) -> Color {
-        if reactionGroup.reactions.contains(where: { $0.sender == userId }) {
-            return .white
-        }
-        return .primary
-    }
-
     fileprivate func backgroundColor(for reactionGroup: ReactionGroup) -> Color {
         if reactionGroup.reactions.contains(where: { $0.sender == userId }) {
             return .accentColor
@@ -97,6 +94,17 @@ struct GroupedReactionsView: View {
         )
     }
 
+    fileprivate func backgroundOverlay(for group: ReactionGroup) -> some View {
+        if group.containsReaction(from: userId) {
+            return AnyView(
+                RoundedRectangle(cornerRadius: 30)
+                    .stroke(self.backgroundColor(for: group), lineWidth: 2)
+            )
+        } else {
+            return AnyView(EmptyView())
+        }
+    }
+
     @State private var showReactionDetails = false
 
     var body: some View {
@@ -104,19 +112,22 @@ struct GroupedReactionsView: View {
             if model.reactions.isEmpty {
                 EmptyView()
             } else {
-                HStack(spacing: 3) {
+                HStack(spacing: 4) {
                     ForEach(model.groupedReactions) { group in
                         HStack(spacing: 1) {
                             Text(group.reaction)
                                 .font(.headline)
                             Text(String(group.count))
-                                .foregroundColor(self.textColor(for: group))
                                 .font(.callout)
                         }
                         .padding(.vertical, 4)
                         .padding(.horizontal, 8)
-                        .background(RoundedRectangle(cornerRadius: 10)
-                        .fill(self.backgroundGradient(for: group)))
+                        .background(
+                            RoundedRectangle(cornerRadius: 30)
+                                .foregroundColor(self.backgroundColor(for: group))
+                                .opacity(group.containsReaction(from: self.userId) ? 0.3 : 0.7)
+                                .overlay(self.backgroundOverlay(for: group))
+                        )
                     }
                 }
                 .onLongPressGesture {
@@ -144,17 +155,32 @@ struct GroupedReactionsView: View {
 
 struct GroupedReactionsView_Previews: PreviewProvider {
     static var previews: some View {
-        GroupedReactionsView(reactions: [
-            .init(sender: "John", timestamp: Date(), reaction: "❤️"),
-            .init(sender: "Jane", timestamp: Date(), reaction: "❤️"),
-            .init(sender: "John", timestamp: Date(), reaction: "🥳"),
-            .init(sender: "John", timestamp: Date(), reaction: "🚀"),
-            .init(sender: "John", timestamp: Date(), reaction: "🥳"),
-            .init(sender: "John", timestamp: Date(), reaction: "🗑"),
-        ])
+        Group {
+            GroupedReactionsView(reactions: [
+                .init(sender: "John", timestamp: Date(), reaction: "❤️"),
+                .init(sender: "Jane", timestamp: Date(), reaction: "❤️"),
+                .init(sender: "Jane", timestamp: Date(), reaction: "💜"),
+                .init(sender: "John", timestamp: Date(), reaction: "🥳"),
+                .init(sender: "John", timestamp: Date(), reaction: "🚀"),
+                .init(sender: "John", timestamp: Date(), reaction: "🥳"),
+                .init(sender: "John", timestamp: Date(), reaction: "🗑"),
+            ])
+            .padding()
+            GroupedReactionsView(reactions: [
+                .init(sender: "John", timestamp: Date(), reaction: "❤️"),
+                .init(sender: "Jane", timestamp: Date(), reaction: "❤️"),
+                .init(sender: "Jane", timestamp: Date(), reaction: "💜"),
+                .init(sender: "John", timestamp: Date(), reaction: "🥳"),
+                .init(sender: "John", timestamp: Date(), reaction: "🚀"),
+                .init(sender: "John", timestamp: Date(), reaction: "🥳"),
+                .init(sender: "John", timestamp: Date(), reaction: "🗑"),
+            ])
+            .padding()
+            .background(Color.backgroundColor(for: .dark))
+            .environment(\.colorScheme, .dark)
+        }
         .environment(\.userId, "Jane")
         .accentColor(.purple)
-        .padding()
         .previewLayout(.sizeThatFits)
     }
 }
