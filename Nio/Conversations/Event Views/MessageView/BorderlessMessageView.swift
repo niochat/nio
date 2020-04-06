@@ -89,10 +89,10 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
         VStack(alignment: .leading, spacing: 5) {
             senderView
             bodyView
+            .contextMenu(ContextMenu(menuItems: {
+                EventContextMenu(model: contextMenuModel)
+            }))
         }
-        .contextMenu(ContextMenu(menuItems: {
-            EventContextMenu(model: contextMenuModel)
-        }))
     }
 }
 
