@@ -72,7 +72,7 @@ extension EventCollection {
         let isSucceedingRedacted = succeedingMessageEvent?.isRedactedEvent() ?? false
 
         // If a message is sent within this time interval, it is considered to be part of the current group.
-        let timeIntervalBeforeNewGroup: TimeInterval = 3*60
+        let timeIntervalBeforeNewGroup: TimeInterval = 5*60
         let precedingInterval = precedingMessageEvent.map { event.timestamp.timeIntervalSince($0.timestamp) } ?? 10000
         let succeedingInterval = succeedingMessageEvent?.timestamp.timeIntervalSince(event.timestamp) ?? 10000
 
