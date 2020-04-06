@@ -7,13 +7,6 @@ private struct EventContextMenuViewModel {
     var canEdit: Bool
     var canRedact: Bool
 
-    init(canReact: Bool, canReply: Bool, canEdit: Bool, canRedact: Bool) {
-        self.canReact = canReact
-        self.canReply = canReply
-        self.canEdit = canEdit
-        self.canRedact = canRedact
-    }
-
     init(event: MXEvent, userId: String) {
         var canReact = false
         var canReply = false
@@ -32,15 +25,17 @@ private struct EventContextMenuViewModel {
         }
 
         // TODO: Redacting messages is a powerlevel thing, you can't only redact your own.
-        if event.sender == userId && reactableEvents.contains(event.type) {
+        if event.sender == userId
+            && reactableEvents.contains(event.type)
+            && !event.isRedactedEvent() {
 //            canEdit = true
             canRedact = true
         }
 
-        self.init(canReact: canReact,
-                  canReply: canReply,
-                  canEdit: canEdit,
-                  canRedact: canRedact)
+        self.canReact = canReact
+        self.canReply = canReply
+        self.canEdit = canEdit
+        self.canRedact = canRedact
     }
 }
 
@@ -53,6 +48,15 @@ struct EventContextMenu: View {
     var onReply: Action
     var onEdit: Action
     var onRedact: Action
+
+    init(model: EventContextMenuModel) {
+        self.init(event: model.event,
+                  userId: model.userId,
+                  onReact: model.onReact,
+                  onReply: model.onReply,
+                  onEdit: model.onEdit,
+                  onRedact: model.onRedact)
+    }
 
     init(event: MXEvent,
          userId: String,

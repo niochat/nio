@@ -63,16 +63,15 @@ struct RoomView: View {
                 EventContainerView(event: event,
                                    reactions: self.events.reactions(for: event),
                                    connectedEdges: self.events.connectedEdges(of: event),
-                                   showSender: !self.isDirect)
+                                   showSender: !self.isDirect,
+                                   contextMenuModel: EventContextMenuModel(
+                                    event: event,
+                                    userId: self.userId,
+                                    onReact: { self.onReact(event.eventId) },
+                                    onReply: { },
+                                    onEdit: { },
+                                    onRedact: { self.onRedact(event.eventId, nil) }))
                     .padding(.horizontal)
-                    .contextMenu {
-                        EventContextMenu(event: event,
-                                         userId: self.userId,
-                                         onReact: { self.onReact(event.eventId) },
-                                         onReply: { },
-                                         onEdit: { },
-                                         onRedact: { self.onRedact(event.eventId, nil) })
-                    }
             }
 
             MessageComposerView(message: $message,

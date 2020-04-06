@@ -6,6 +6,7 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
     @Environment(\.userId) var userId
 
     var model: Model
+    var contextMenuModel: EventContextMenuModel
     var connectedEdges: ConnectedEdges
 
     private var isMe: Bool {
@@ -94,6 +95,9 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
                 }
                 .padding(10)
                 .background(background)
+                .contextMenu(ContextMenu(menuItems: {
+                    EventContextMenu(model: contextMenuModel)
+                }))
 
                 GroupedReactionsView(reactions: model.reactions)
             }
@@ -126,6 +130,7 @@ struct BorderedMessageView_Previews: PreviewProvider {
                 timestamp: "12:29",
                 reactions: reactions
             ),
+            contextMenuModel: .previewModel,
             connectedEdges: []
         )
             .padding()
@@ -149,6 +154,7 @@ struct BorderedMessageView_Previews: PreviewProvider {
                     timestamp: "12:29",
                     reactions: reactions
                 ),
+                contextMenuModel: .previewModel,
                 connectedEdges: [.bottomEdge]
             )
             BorderedMessageView(
@@ -160,6 +166,7 @@ struct BorderedMessageView_Previews: PreviewProvider {
                     timestamp: "12:29",
                     reactions: reactions
                 ),
+                contextMenuModel: .previewModel,
                 connectedEdges: [.topEdge, .bottomEdge]
             )
             BorderedMessageView(
@@ -171,6 +178,7 @@ struct BorderedMessageView_Previews: PreviewProvider {
                     timestamp: "12:29",
                     reactions: reactions
                 ),
+                contextMenuModel: .previewModel,
                 connectedEdges: [.topEdge]
             )
         }

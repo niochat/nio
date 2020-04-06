@@ -6,6 +6,7 @@ struct MessageView<Model>: View where Model: MessageViewModelProtocol {
     @Environment(\.userId) var userId
 
     @Binding var model: Model
+    var contextMenuModel: EventContextMenuModel
     var connectedEdges: ConnectedEdges
 
     private var isMe: Bool {
@@ -16,6 +17,7 @@ struct MessageView<Model>: View where Model: MessageViewModelProtocol {
         if model.isEmoji {
             let messageView = BorderlessMessageView(
                 model: model,
+                contextMenuModel: contextMenuModel,
                 connectedEdges: connectedEdges
             )
             if isMe {
@@ -32,6 +34,7 @@ struct MessageView<Model>: View where Model: MessageViewModelProtocol {
         } else {
             let messageView = BorderedMessageView(
                 model: model,
+                contextMenuModel: contextMenuModel,
                 connectedEdges: connectedEdges
             )
             if isMe {
@@ -74,6 +77,7 @@ struct MessageView_Previews: PreviewProvider {
                 timestamp: "12:29",
                 reactions: reactions
             )),
+            contextMenuModel: .previewModel,
             connectedEdges: []
         )
             .padding()

@@ -6,6 +6,7 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
     @Environment(\.userId) var userId
 
     var model: Model
+    var contextMenuModel: EventContextMenuModel
     var connectedEdges: ConnectedEdges
 
     private var isMe: Bool {
@@ -89,6 +90,9 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
             senderView
             bodyView
         }
+        .contextMenu(ContextMenu(menuItems: {
+            EventContextMenu(model: contextMenuModel)
+        }))
     }
 }
 
@@ -122,6 +126,7 @@ struct BorderlessMessageView_Previews: PreviewProvider {
                 timestamp: "12:29",
                 reactions: reactions
             ),
+            contextMenuModel: .previewModel,
             connectedEdges: []
         )
             .padding()
@@ -145,6 +150,7 @@ struct BorderlessMessageView_Previews: PreviewProvider {
                     timestamp: "12:29",
                     reactions: reactions
                 ),
+                contextMenuModel: .previewModel,
                 connectedEdges: [.bottomEdge]
             )
             BorderlessMessageView(
@@ -156,6 +162,7 @@ struct BorderlessMessageView_Previews: PreviewProvider {
                     timestamp: "12:29",
                     reactions: reactions
                 ),
+                contextMenuModel: .previewModel,
                 connectedEdges: [.topEdge, .bottomEdge]
             )
             BorderlessMessageView(
@@ -167,6 +174,7 @@ struct BorderlessMessageView_Previews: PreviewProvider {
                     timestamp: "12:29",
                     reactions: reactions
                 ),
+                contextMenuModel: .previewModel,
                 connectedEdges: [.topEdge]
             )
         }

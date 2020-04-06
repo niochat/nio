@@ -6,6 +6,7 @@ struct EventContainerView: View {
     var reactions: [Reaction]
     var connectedEdges: ConnectedEdges
     var showSender: Bool
+    var contextMenuModel: EventContextMenuModel
 
     private var topPadding: CGFloat {
         connectedEdges.contains(.topEdge) ? 2.0 : 8.0
@@ -34,6 +35,7 @@ struct EventContainerView: View {
             return AnyView(
                 MessageView(
                     model: .constant(messageModel),
+                    contextMenuModel: contextMenuModel,
                     connectedEdges: connectedEdges
                 )
                 .padding(.top, topPadding)
