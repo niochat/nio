@@ -21,6 +21,7 @@
 		392221AE243A0508004D8794 /* GroupedReactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392221AD243A0508004D8794 /* GroupedReactionsView.swift */; };
 		392221B0243A6F8E004D8794 /* EventContextMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392221AF243A6F8E004D8794 /* EventContextMenuModel.swift */; };
 		392221B2243D0CCC004D8794 /* RoomTopicEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392221B1243D0CCC004D8794 /* RoomTopicEventView.swift */; };
+		392221B4243D1627004D8794 /* RoomPowerLevelsEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392221B3243D1627004D8794 /* RoomPowerLevelsEventView.swift */; };
 		392389892386FD3900B2E1DF /* MXClient+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389882386FD3900B2E1DF /* MXClient+Publisher.swift */; };
 		3923898D238859D100B2E1DF /* MX+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3923898C238859D100B2E1DF /* MX+Identifiable.swift */; };
 		3923898F2388707E00B2E1DF /* RoomListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3923898E2388707E00B2E1DF /* RoomListItemView.swift */; };
@@ -100,6 +101,7 @@
 		392221AD243A0508004D8794 /* GroupedReactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedReactionsView.swift; sourceTree = "<group>"; };
 		392221AF243A6F8E004D8794 /* EventContextMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventContextMenuModel.swift; sourceTree = "<group>"; };
 		392221B1243D0CCC004D8794 /* RoomTopicEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTopicEventView.swift; sourceTree = "<group>"; };
+		392221B3243D1627004D8794 /* RoomPowerLevelsEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomPowerLevelsEventView.swift; sourceTree = "<group>"; };
 		392389882386FD3900B2E1DF /* MXClient+Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXClient+Publisher.swift"; sourceTree = "<group>"; };
 		3923898C238859D100B2E1DF /* MX+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MX+Identifiable.swift"; sourceTree = "<group>"; };
 		3923898E2388707E00B2E1DF /* RoomListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListItemView.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				CAC46D5323A272D10079C24F /* MessageView */,
 				392221AB2438149D004D8794 /* RoomMemberEventView.swift */,
 				392221B1243D0CCC004D8794 /* RoomTopicEventView.swift */,
+				392221B3243D1627004D8794 /* RoomPowerLevelsEventView.swift */,
 				392221A92438083C004D8794 /* RedactionEventView.swift */,
 				3902B89D2393FE8200698B87 /* GenericEventView.swift */,
 			);
@@ -656,6 +659,7 @@
 				392389942388899200B2E1DF /* Formatter.swift in Sources */,
 				39BA0723240B3C9A00FD28C6 /* MXCredentials+Keychain.swift in Sources */,
 				392221AC2438149D004D8794 /* RoomMemberEventView.swift in Sources */,
+				392221B4243D1627004D8794 /* RoomPowerLevelsEventView.swift in Sources */,
 				CAC46D6323A278F40079C24F /* PreviewProvider+Enumeration.swift in Sources */,
 				39222199243689D6004D8794 /* ReactionEvent.swift in Sources */,
 				392389D6238F3EB200B2E1DF /* NIORoomSummary.swift in Sources */,
