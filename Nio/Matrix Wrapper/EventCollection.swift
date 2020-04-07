@@ -11,11 +11,11 @@ struct EventCollection {
     static let renderableEventTypes = [
         kMXEventTypeStringRoomMessage,
         kMXEventTypeStringRoomMember,
-        kMXEventTypeStringRoomTopic
+        kMXEventTypeStringRoomTopic,
     ]
 
-    /// Events that can be directly rendered in the timeline with a corresponding view. This for example does not include reactions, which are instead rendered
-    /// as accessories on their corresponding related events.
+    /// Events that can be directly rendered in the timeline with a corresponding view. This for example does not
+    /// include reactions, which are instead rendered as accessories on their corresponding related events.
     var renderableEvents: [MXEvent] {
         wrapped.filter { Self.renderableEventTypes.contains($0.type) }
     }

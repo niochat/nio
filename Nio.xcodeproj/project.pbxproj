@@ -20,6 +20,7 @@
 		392221AC2438149D004D8794 /* RoomMemberEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392221AB2438149D004D8794 /* RoomMemberEventView.swift */; };
 		392221AE243A0508004D8794 /* GroupedReactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392221AD243A0508004D8794 /* GroupedReactionsView.swift */; };
 		392221B0243A6F8E004D8794 /* EventContextMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392221AF243A6F8E004D8794 /* EventContextMenuModel.swift */; };
+		392221B2243D0CCC004D8794 /* RoomTopicEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392221B1243D0CCC004D8794 /* RoomTopicEventView.swift */; };
 		392389892386FD3900B2E1DF /* MXClient+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389882386FD3900B2E1DF /* MXClient+Publisher.swift */; };
 		3923898D238859D100B2E1DF /* MX+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3923898C238859D100B2E1DF /* MX+Identifiable.swift */; };
 		3923898F2388707E00B2E1DF /* RoomListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3923898E2388707E00B2E1DF /* RoomListItemView.swift */; };
@@ -98,6 +99,7 @@
 		392221AB2438149D004D8794 /* RoomMemberEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomMemberEventView.swift; sourceTree = "<group>"; };
 		392221AD243A0508004D8794 /* GroupedReactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedReactionsView.swift; sourceTree = "<group>"; };
 		392221AF243A6F8E004D8794 /* EventContextMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventContextMenuModel.swift; sourceTree = "<group>"; };
+		392221B1243D0CCC004D8794 /* RoomTopicEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTopicEventView.swift; sourceTree = "<group>"; };
 		392389882386FD3900B2E1DF /* MXClient+Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXClient+Publisher.swift"; sourceTree = "<group>"; };
 		3923898C238859D100B2E1DF /* MX+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MX+Identifiable.swift"; sourceTree = "<group>"; };
 		3923898E2388707E00B2E1DF /* RoomListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListItemView.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				39D166C72385C832006DD257 /* EventContainerView.swift */,
 				CAC46D5323A272D10079C24F /* MessageView */,
 				392221AB2438149D004D8794 /* RoomMemberEventView.swift */,
+				392221B1243D0CCC004D8794 /* RoomTopicEventView.swift */,
 				392221A92438083C004D8794 /* RedactionEventView.swift */,
 				3902B89D2393FE8200698B87 /* GenericEventView.swift */,
 			);
@@ -640,6 +643,7 @@
 				CAC46D6F23A56BBE0079C24F /* GroupingIterator.swift in Sources */,
 				CAC46D7723A6CB6C0079C24F /* MXEventType+Equatable.swift in Sources */,
 				393411C723903C94003B49B8 /* EventCollection.swift in Sources */,
+				392221B2243D0CCC004D8794 /* RoomTopicEventView.swift in Sources */,
 				3902B8A52395A77800698B87 /* LoadingView.swift in Sources */,
 				3902B8A0239410EE00698B87 /* ContentSizeCategory.swift in Sources */,
 				39D166C62385C804006DD257 /* String+Emoji.swift in Sources */,

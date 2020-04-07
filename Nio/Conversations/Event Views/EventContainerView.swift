@@ -47,6 +47,11 @@ struct EventContainerView: View {
             return AnyView(
                 RoomMemberEventView(sender: event.sender, affectedUser: affectedUser, membership: membership)
             )
+        case .roomTopic:
+            let topic = (event.content["topic"] as? String) ?? ""
+            return AnyView(
+                RoomTopicEventView(sender: event.sender, topic: topic)
+            )
         default:
             return AnyView(
                 GenericEventView(text: "\(event.type!)\n\(event.content!)")
