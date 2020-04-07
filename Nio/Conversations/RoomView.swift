@@ -52,6 +52,7 @@ struct RoomView: View {
 
     var onReact: (String) -> Void
     var onRedact: (String, String?) -> Void
+    @State private var eventToRedact: String?
 
     @State private var message = ""
 
@@ -70,7 +71,7 @@ struct RoomView: View {
                                     onReact: { self.onReact(event.eventId) },
                                     onReply: { },
                                     onEdit: { },
-                                    onRedact: { self.onRedact(event.eventId, nil) }))
+                                    onRedact: { self.eventToRedact = event.eventId }))
                     .padding(.horizontal)
             }
 
@@ -79,6 +80,12 @@ struct RoomView: View {
                                 onCommit: send)
                 .padding(.horizontal)
                 .padding(.bottom, 10)
+        }
+        .alert(item: $eventToRedact) { eventId in
+            Alert(title: Text("Remove?"),
+                  message: Text("Are you sure you want to remove this message?"),
+                  primaryButton: .destructive(Text("Remove"), action: { self.onRedact(eventId, nil) }),
+                  secondaryButton: .cancel())
         }
     }
 
