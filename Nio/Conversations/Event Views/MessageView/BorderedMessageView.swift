@@ -2,6 +2,7 @@ import SwiftUI
 
 struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
+    @Environment(\.colorSchemeContrast) var colorSchemeContrast: ColorSchemeContrast
     @Environment(\.sizeCategory) var sizeCategory: ContentSizeCategory
     @Environment(\.userId) var userId
 
@@ -14,10 +15,10 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
     }
 
     var textColor: Color {
-        guard model.sender == userId else {
-            return .primary
+        if model.sender == userId {
+            return .lightText(for: colorScheme, with: colorSchemeContrast)
         }
-        return .white
+        return .primaryText(for: colorScheme, with: colorSchemeContrast)
     }
 
     var backgroundColor: Color {
@@ -79,7 +80,8 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
     var timestampView: some View {
         Text(model.timestamp)
         .font(.caption)
-        .foregroundColor(textColor).opacity(0.5)
+        .foregroundColor(textColor)
+        .opacity(colorSchemeContrast == .standard ? 0.5 : 1.0)
     }
 
     var body: some View {

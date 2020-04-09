@@ -35,6 +35,9 @@ struct RoomListItemContainerView: View {
 }
 
 struct RoomListItemView: View {
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+    @Environment(\.colorSchemeContrast) var colorSchemeContrast: ColorSchemeContrast
+
     var title: String
     var subtitle: String
     var rightDetail: String
@@ -59,7 +62,7 @@ struct RoomListItemView: View {
             .allowsTightening(true)
             .padding(10 * sizeCategory.scalingFactor)
             .aspectRatio(1.0, contentMode: .fill)
-            .foregroundColor(.white)
+            .foregroundColor(.lightText(for: colorScheme, with: colorSchemeContrast))
             .background(
                 Circle()
                     .foregroundColor(.accentColor)
@@ -116,7 +119,7 @@ struct RoomListItemView: View {
             .font(.caption)
             .lineLimit(1)
             .allowsTightening(true)
-            .foregroundColor(.white)
+            .foregroundColor(.lightText(for: colorScheme, with: colorSchemeContrast))
             // Make sure we get enough "breathing air" around the number:
             .padding(.vertical, 3 * sizeCategory.scalingFactor)
             .padding(.horizontal, 6 * sizeCategory.scalingFactor)
