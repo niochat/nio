@@ -42,10 +42,8 @@ struct EventContainerView: View {
                 .padding(.bottom, bottomPadding)
             )
         case .roomMember:
-            let affectedUser = (event.content["displayname"] as? String)
-            let membership = (event.content["membership"] as? String) ?? ""
             return AnyView(
-                RoomMemberEventView(sender: event.sender, affectedUser: affectedUser, membership: membership)
+                RoomMemberEventView(model: .init(event: event))
             )
         case .roomTopic:
             let topic = (event.content["topic"] as? String) ?? ""
