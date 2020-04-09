@@ -13,6 +13,7 @@ struct EventCollection {
         kMXEventTypeStringRoomMember,
         kMXEventTypeStringRoomTopic,
         kMXEventTypeStringRoomPowerLevels,
+        kMXEventTypeStringRoomName,
     ]
 
     /// Events that can be directly rendered in the timeline with a corresponding view. This for example does not

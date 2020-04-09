@@ -54,6 +54,10 @@ struct EventContainerView: View {
             return AnyView(
                 RoomPowerLevelsEventView(model: .init(event: event))
             )
+        case .roomName:
+            return AnyView(
+                RoomNameEventView(model: .init(event: event))
+            )
         default:
             return AnyView(
                 GenericEventView(text: "\(event.type!)\n\(event.content!)")
