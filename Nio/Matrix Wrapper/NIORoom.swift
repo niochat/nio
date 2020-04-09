@@ -3,7 +3,7 @@ import Combine
 import SwiftMatrixSDK
 
 class NIORoom: ObservableObject {
-    private var room: MXRoom
+    var room: MXRoom
 
     @Published var summary: NIORoomSummary
 

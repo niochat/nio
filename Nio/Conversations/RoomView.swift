@@ -36,6 +36,7 @@ struct RoomContainerView: View {
             }
         }
         .onAppear { self.room.markAllAsRead() }
+        .environmentObject(room)
     }
 
     var attachmentPickerSheet: ActionSheet {
@@ -44,6 +45,9 @@ struct RoomContainerView: View {
 }
 
 struct RoomView: View {
+    @Environment(\.userId) var userId
+    @EnvironmentObject var room: NIORoom
+
     var events: EventCollection
     var isDirect: Bool
 
@@ -55,8 +59,6 @@ struct RoomView: View {
     @State private var eventToRedact: String?
 
     @State private var message = ""
-
-    @Environment(\.userId) var userId
 
     var body: some View {
         VStack {
@@ -74,7 +76,9 @@ struct RoomView: View {
                                     onRedact: { self.eventToRedact = event.eventId }))
                     .padding(.horizontal)
             }
-
+            if !(room.room.typingUsers?.filter { $0 != userId }.isEmpty ?? false) {
+                TypingIndicatorView()
+            }
             MessageComposerView(message: $message,
                                 showAttachmentPicker: $showAttachmentPicker,
                                 onCommit: send)

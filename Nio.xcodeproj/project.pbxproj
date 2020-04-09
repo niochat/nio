@@ -38,6 +38,7 @@
 		3970DC942385A8BE00EFE31B /* KeyboardObserving in Frameworks */ = {isa = PBXBuildFile; productRef = 3970DC932385A8BE00EFE31B /* KeyboardObserving */; };
 		3984654523B7ECBA006C173B /* MXURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984654423B7ECBA006C173B /* MXURL.swift */; };
 		3984654823B8D809006C173B /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3984654723B8D809006C173B /* SDWebImageSwiftUI */; };
+		39B834C0243FC42000AE1EA0 /* TypingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B834BF243FC42000AE1EA0 /* TypingIndicatorView.swift */; };
 		39BA0721240B1A2600FD28C6 /* AccountStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA0720240B1A2600FD28C6 /* AccountStore.swift */; };
 		39BA0723240B3C9A00FD28C6 /* MXCredentials+Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA0722240B3C9A00FD28C6 /* MXCredentials+Keychain.swift */; };
 		39BA0725240B4E8D00FD28C6 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA0724240B4E8D00FD28C6 /* AppSettings.swift */; };
@@ -118,6 +119,7 @@
 		393411D0239087D2003B49B8 /* EventCollectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionTests.swift; sourceTree = "<group>"; };
 		393411D2239087D2003B49B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3984654423B7ECBA006C173B /* MXURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MXURL.swift; sourceTree = "<group>"; };
+		39B834BF243FC42000AE1EA0 /* TypingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingIndicatorView.swift; sourceTree = "<group>"; };
 		39BA0720240B1A2600FD28C6 /* AccountStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStore.swift; sourceTree = "<group>"; };
 		39BA0722240B3C9A00FD28C6 /* MXCredentials+Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXCredentials+Keychain.swift"; sourceTree = "<group>"; };
 		39BA0724240B4E8D00FD28C6 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				39C93208238553E4004449E1 /* RoomView.swift */,
 				3922219E24372834004D8794 /* ContextMenu */,
 				39C9320A23856033004449E1 /* MessageComposerView.swift */,
+				39B834BF243FC42000AE1EA0 /* TypingIndicatorView.swift */,
 				3907AB482393FE0E00B25DE9 /* Event Views */,
 			);
 			path = Conversations;
@@ -636,6 +639,7 @@
 				39C9320B23856033004449E1 /* MessageComposerView.swift in Sources */,
 				CAC46D5923A272D10079C24F /* BorderedMessageView.swift in Sources */,
 				39BA0721240B1A2600FD28C6 /* AccountStore.swift in Sources */,
+				39B834C0243FC42000AE1EA0 /* TypingIndicatorView.swift in Sources */,
 				392389892386FD3900B2E1DF /* MXClient+Publisher.swift in Sources */,
 				3984654523B7ECBA006C173B /* MXURL.swift in Sources */,
 				392389D2238F2E6F00B2E1DF /* NIORoom.swift in Sources */,
