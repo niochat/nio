@@ -78,16 +78,7 @@ struct RoomMemberEventView: View {
     }
 
     var body: some View {
-        HStack {
-            Spacer()
-            VStack {
-                Text(text)
-                    .font(.caption)
-                    .foregroundColor(.gray)
-            }
-            Spacer()
-        }
-        .padding(.vertical, 3)
+        GenericEventView(text: text)
     }
 }
 

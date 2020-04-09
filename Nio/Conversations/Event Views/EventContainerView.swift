@@ -46,9 +46,8 @@ struct EventContainerView: View {
                 RoomMemberEventView(model: .init(event: event))
             )
         case .roomTopic:
-            let topic = (event.content["topic"] as? String) ?? ""
             return AnyView(
-                RoomTopicEventView(sender: event.sender, topic: topic)
+                RoomTopicEventView(model: .init(event: event))
             )
         case .roomPowerLevels:
             return AnyView(

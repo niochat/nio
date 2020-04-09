@@ -59,19 +59,18 @@ struct RoomPowerLevelsEventView: View {
             let sender = event.sender ?? ""
             self.init(sender: sender, changes: changes)
         }
+
+        var combined: String {
+            changes
+                .map { "\(sender) changed the power level of \($0.name) from \($0.oldName) to \($0.newName)" }
+                .joined(separator: "\n")
+        }
     }
 
     var model: ViewModel
 
     var body: some View {
-        VStack {
-            ForEach(model.changes) { change in
-                Text("\(self.model.sender) changed the power level of \(change.name) from \(change.oldName) to \(change.newName).")
-                    .font(.caption)
-                    .foregroundColor(.gray)
-            }
-        }
-        .padding(.vertical, 3)
+        GenericEventView(text: model.combined)
     }
 }
 

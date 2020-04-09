@@ -25,6 +25,7 @@ struct RedactionEventView: View {
                 if model.reason != nil {
                     Text("\(model.reason!)")
                         .foregroundColor(.gray)
+                        .font(.callout)
                 }
             }
             Spacer()
@@ -58,7 +59,7 @@ struct RedactionView_Previews: PreviewProvider {
                                                 reason: "some reason"))
                 RedactionEventView(model: .init(sender: "John Doe",
                                                 redactor: "Jane Doe",
-                                                reason: nil))
+                                                reason: "spam spam spam"))
             }
             .previewDisplayName("spacing")
         }
