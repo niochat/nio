@@ -2,7 +2,7 @@ import SwiftUI
 
 struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol {
     @Environment(\.colorScheme) var colorScheme
-    @Environment(\.sizeCategory) var sizeCategory: ContentSizeCategory
+    @Environment(\.sizeCategory) var sizeCategory
     @Environment(\.userId) var userId
 
     var model: Model

@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
-    @Environment(\.colorSchemeContrast) var colorSchemeContrast: ColorSchemeContrast
-    @Environment(\.sizeCategory) var sizeCategory: ContentSizeCategory
+    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.colorSchemeContrast) var colorSchemeContrast
+    @Environment(\.sizeCategory) var sizeCategory
     @Environment(\.userId) var userId
 
     var model: Model
