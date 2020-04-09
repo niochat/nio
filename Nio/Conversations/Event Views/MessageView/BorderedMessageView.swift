@@ -53,9 +53,9 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
             bottomLeft: connectedEdges.contains(.bottomEdge) ? smallRadius : largeRadius,
             bottomRight: largeRadius
         )
-            .fill(gradient).opacity(0.9)
-            // and flip it in case it's meant to be right-aligned:
-            .scaleEffect(x: isMe ? -1.0 : 1.0, y: 1.0, anchor: .center)
+        .fill(gradient).opacity(0.9)
+        // and flip it in case it's meant to be right-aligned:
+        .scaleEffect(x: isMe ? -1.0 : 1.0, y: 1.0, anchor: .center)
     }
 
     var bodyView: some View {
