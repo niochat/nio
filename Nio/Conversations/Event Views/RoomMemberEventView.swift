@@ -57,6 +57,9 @@ struct RoomMemberEventView: View {
         case "join":
             // FIXME: This flow is ridiculous.
             if let previous = model.previous {
+                guard previous.membership != "invite" else {
+                    return "\(model.current.displayName) joined"
+                }
                 if previous.displayName != model.current.displayName {
                     return "\(previous.displayName) changed their display name to \(model.current.displayName)"
                 }
