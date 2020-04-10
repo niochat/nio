@@ -14,6 +14,12 @@ struct RoomMemberEventView: View {
         let current: User
         let previous: User?
 
+        var hasUserInfoDifference: Bool {
+            guard let previous = previous else { return false }
+            return current.displayName == previous.displayName
+                || current.avatarURL?.mxContentURI == previous.avatarURL?.mxContentURI
+        }
+
         init(sender: String,
              current: User,
              previous: User?) {
@@ -34,12 +40,10 @@ struct RoomMemberEventView: View {
                 membership: event.content(valueFor: "membership") ?? ""
             )
 
-            if event.prevContent != nil {
-                self.previous = User(
-                    displayName: event.prevContent(valueFor: "displayname") ?? "",
-                    avatarURL: event.prevContent(valueFor: "avatar_url").flatMap(MXURL.init),
-                    membership: event.prevContent(valueFor: "membership") ?? ""
-                )
+            if let prevDisplayname: String = event.prevContent(valueFor: "displayname"),
+                let prevMembership: String = event.prevContent(valueFor: "membership") {
+                let prevAvatarURL: MXURL? = event.prevContent(valueFor: "avatar_url").flatMap(MXURL.init)
+                self.previous = User(displayName: prevDisplayname, avatarURL: prevAvatarURL, membership: prevMembership)
             } else {
                 self.previous = nil
             }
@@ -56,7 +60,7 @@ struct RoomMemberEventView: View {
             return "\(model.current.displayName) left"
         case "join":
             // FIXME: This flow is ridiculous.
-            if let previous = model.previous {
+            if model.hasUserInfoDifference, let previous = model.previous {
                 guard previous.membership != "invite" else {
                     return "\(model.current.displayName) joined"
                 }
@@ -65,6 +69,9 @@ struct RoomMemberEventView: View {
                 }
                 if let previousAvatarURL = previous.avatarURL {
                     if previousAvatarURL.mxContentURI != model.current.avatarURL?.mxContentURI {
+                        if model.current.avatarURL == nil {
+                            return "\(model.current.displayName) removed their profile picture"
+                        }
                         return "\(previous.displayName) updated their profile picture"
                     } else {
                         return "Unknown join state event: \(model.sender)"
