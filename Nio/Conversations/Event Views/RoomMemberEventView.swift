@@ -16,8 +16,8 @@ struct RoomMemberEventView: View {
 
         var hasUserInfoDifference: Bool {
             guard let previous = previous else { return false }
-            return current.displayName == previous.displayName
-                || current.avatarURL?.mxContentURI == previous.avatarURL?.mxContentURI
+            return current.displayName != previous.displayName
+                || current.avatarURL?.mxContentURI != previous.avatarURL?.mxContentURI
         }
 
         init(sender: String,
@@ -60,6 +60,7 @@ struct RoomMemberEventView: View {
             return "\(model.current.displayName) left"
         case "join":
             // FIXME: This flow is ridiculous.
+            // Add tests (and refactor)!
             if model.hasUserInfoDifference, let previous = model.previous {
                 guard previous.membership != "invite" else {
                     return "\(model.current.displayName) joined"
