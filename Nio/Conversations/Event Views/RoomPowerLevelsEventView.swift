@@ -21,11 +21,11 @@ struct RoomPowerLevelsEventView: View {
                 }
             }
 
-            var oldName: String {
+            var oldLevelName: String {
                 old.map { levelName($0) } ?? "Default"
             }
 
-            var newName: String {
+            var newLevelName: String {
                 levelName(new)
             }
         }
@@ -62,7 +62,12 @@ struct RoomPowerLevelsEventView: View {
 
         var combined: String {
             changes
-                .map { "\(sender) changed the power level of \($0.name) from \($0.oldName) to \($0.newName)" }
+                .map {
+                    if sender == $0.name {
+                        return "\(sender) changed their power level from \($0.oldLevelName) to \($0.newLevelName)"
+                    }
+                    return "\(sender) changed the power level of \($0.name) from \($0.oldLevelName) to \($0.newLevelName)"
+                }
                 .joined(separator: "\n")
         }
     }
