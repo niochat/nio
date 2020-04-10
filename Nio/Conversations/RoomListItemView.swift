@@ -184,7 +184,7 @@ struct RoomListItemView_Previews: PreviewProvider {
                     subtitle: "Red or blue 💊?",
                     rightDetail: "10m ago",
                     badge: unreadCount(),
-                    roomAvatarURL: MXURL.nioIcon
+                    roomAvatarURL: MXURL.nioIconURL
                 )
                 .environment(\.sizeCategory, contentSizeCategory)
             }

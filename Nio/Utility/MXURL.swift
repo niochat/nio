@@ -19,9 +19,14 @@ struct MXURL {
         components.path = "/_matrix/media/r0/download/\(contentHost)/\(mxContentURI.lastPathComponent)"
         return components.url
     }
+}
 
-    static var nioIcon: URL {
+extension MXURL {
+    static var nioIconURL: URL {
+        Self.nioIcon.contentURL(on: URL(string: "https://matrix.org")!)!
+    }
+
+    static var nioIcon: MXURL {
         MXURL(mxContentURI: "mxc://matrix.org/rdElwkPTTrdZljUuKwkSEMqV")!
-            .contentURL(on: URL(string: "https://matrix.org")!)!
     }
 }

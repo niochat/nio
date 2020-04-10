@@ -88,7 +88,7 @@ struct RoomMemberEventView: View {
     }
 
     var body: some View {
-        GenericEventView(text: text)
+        GenericEventView(text: text, image: model.current.avatarURL)
     }
 }
 
