@@ -14,6 +14,9 @@
 		3902B8A52395A77800698B87 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902B8A42395A77800698B87 /* LoadingView.swift */; };
 		3921175124412FDE00892B00 /* RoomMemberEventViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3921175024412FDE00892B00 /* RoomMemberEventViewTests.swift */; };
 		392117542441327E00892B00 /* MockEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392117532441327E00892B00 /* MockEvent.swift */; };
+		392117572442556700892B00 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 392117592442556700892B00 /* Localizable.strings */; };
+		3921175C244255D600892B00 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3921175B244255D600892B00 /* swiftgen.yml */; };
+		3921175F244256AF00892B00 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3921175E244256AF00892B00 /* Strings.swift */; };
 		3922219624366989004D8794 /* EventContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3922219524366989004D8794 /* EventContextMenu.swift */; };
 		39222199243689D6004D8794 /* ReactionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39222198243689D6004D8794 /* ReactionEvent.swift */; };
 		3922219D24368B25004D8794 /* CustomEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3922219C24368B25004D8794 /* CustomEvent.swift */; };
@@ -98,6 +101,10 @@
 		3902B8A42395A77800698B87 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		3921175024412FDE00892B00 /* RoomMemberEventViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomMemberEventViewTests.swift; sourceTree = "<group>"; };
 		392117532441327E00892B00 /* MockEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEvent.swift; sourceTree = "<group>"; };
+		392117582442556700892B00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3921175A2442558400892B00 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3921175B244255D600892B00 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = SOURCE_ROOT; };
+		3921175E244256AF00892B00 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		3922219524366989004D8794 /* EventContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventContextMenu.swift; sourceTree = "<group>"; };
 		39222198243689D6004D8794 /* ReactionEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionEvent.swift; sourceTree = "<group>"; };
 		3922219C24368B25004D8794 /* CustomEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEvent.swift; sourceTree = "<group>"; };
@@ -225,6 +232,14 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
+		3921175D2442563A00892B00 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				3921175E244256AF00892B00 /* Strings.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
 		39222197243689CB004D8794 /* Custom Events */ = {
 			isa = PBXGroup;
 			children = (
@@ -326,6 +341,7 @@
 				39C932052384BAA0004449E1 /* Conversations */,
 				3902B8A12395934900698B87 /* Settings */,
 				39D166C42385C7F6006DD257 /* Extensions */,
+				3921175D2442563A00892B00 /* Generated */,
 				39C931E22384328B004449E1 /* Assets.xcassets */,
 				39C931EA2384328B004449E1 /* Info.plist */,
 				39C931F3238449C2004449E1 /* Supporting Files */,
@@ -346,7 +362,9 @@
 			isa = PBXGroup;
 			children = (
 				39C931F623846B2D004449E1 /* .swiftlint.yml */,
+				3921175B244255D600892B00 /* swiftgen.yml */,
 				39C931E72384328B004449E1 /* LaunchScreen.storyboard */,
+				392117592442556700892B00 /* Localizable.strings */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -451,6 +469,7 @@
 			buildConfigurationList = 39C931ED2384328B004449E1 /* Build configuration list for PBXNativeTarget "Nio" */;
 			buildPhases = (
 				3B30D3B15955D3087BA94018 /* [CP] Check Pods Manifest.lock */,
+				39211760244256C300892B00 /* Swiftgen */,
 				39C931F0238447D2004449E1 /* Swiftlint */,
 				39C931D523843289004449E1 /* Sources */,
 				39C931D623843289004449E1 /* Frameworks */,
@@ -497,6 +516,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = 39C931D023843289004449E1;
 			packageReferences = (
@@ -526,16 +546,36 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				392117572442556700892B00 /* Localizable.strings in Resources */,
 				39C931F723846B2D004449E1 /* .swiftlint.yml in Resources */,
 				39C931E92384328B004449E1 /* LaunchScreen.storyboard in Resources */,
 				39C931E62384328B004449E1 /* Preview Assets.xcassets in Resources */,
 				39C931E32384328B004449E1 /* Assets.xcassets in Resources */,
+				3921175C244255D600892B00 /* swiftgen.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		39211760244256C300892B00 /* Swiftgen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftgen;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftgen >/dev/null; then\n  swiftgen\nelse\n  echo \"warning: Swiftgen not installed, download from https://github.com/SwiftGen/SwiftGen\"\nfi\n";
+		};
 		39C931F0238447D2004449E1 /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -693,6 +733,7 @@
 				CAC46D5823A272D10079C24F /* MessageViewModel.swift in Sources */,
 				39C931DF2384328A004449E1 /* SceneDelegate.swift in Sources */,
 				3902B8A32395935600698B87 /* SettingsView.swift in Sources */,
+				3921175F244256AF00892B00 /* Strings.swift in Sources */,
 				3922219D24368B25004D8794 /* CustomEvent.swift in Sources */,
 				392221B0243A6F8E004D8794 /* EventContextMenuModel.swift in Sources */,
 				3922219624366989004D8794 /* EventContextMenu.swift in Sources */,
@@ -718,6 +759,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		392117592442556700892B00 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				392117582442556700892B00 /* en */,
+				3921175A2442558400892B00 /* de */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		39C931E72384328B004449E1 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -775,6 +825,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -835,6 +886,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

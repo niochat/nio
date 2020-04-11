@@ -34,7 +34,7 @@ struct RecentRoomsView: View {
         }, label: {
             Image(systemName: "person.crop.circle")
                 .font(.system(size: 25))
-                .accessibility(label: Text("Settings"))
+                .accessibility(label: Text(L10n.RecentRooms.AccessibilityLabel.settings))
         })
     }
 
@@ -44,7 +44,7 @@ struct RecentRoomsView: View {
         }, label: {
             Image(systemName: "plus")
                 .font(.system(size: 25))
-                .accessibility(label: Text("New Conversation"))
+                .accessibility(label: Text(L10n.RecentRooms.AccessibilityLabel.newConversation))
         })
     }
 
@@ -81,7 +81,7 @@ private struct NavigationSheet: View {
             )
         case .newMessage:
             return AnyView(
-                Text("New Message")
+                Text(L10n.RecentRooms.newMessagePlaceholder)
             )
         }
     }

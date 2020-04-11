@@ -14,15 +14,15 @@ struct RoomPowerLevelsEventView: View {
 
             private func levelName(_ level: Int) -> String {
                 switch level {
-                case 0: return "Default"
-                case 50: return "Moderator"
-                case 100: return "Admin"
-                default: return "Custom (\(level))"
+                case 0: return L10n.RoomPowerLevel.default
+                case 50: return L10n.RoomPowerLevel.moderator
+                case 100: return L10n.RoomPowerLevel.admin
+                default: return L10n.RoomPowerLevel.custom(level)
                 }
             }
 
             var oldLevelName: String {
-                old.map { levelName($0) } ?? "Default"
+                old.map { levelName($0) } ?? L10n.RoomPowerLevel.default
             }
 
             var newLevelName: String {
@@ -64,9 +64,9 @@ struct RoomPowerLevelsEventView: View {
             changes
                 .map {
                     if sender == $0.name {
-                        return "\(sender) changed their power level from \($0.oldLevelName) to \($0.newLevelName)"
+                        return L10n.Event.RoomPowerLevel.changeSelf(sender, $0.oldLevelName, $0.newLevelName)
                     }
-                    return "\(sender) changed the power level of \($0.name) from \($0.oldLevelName) to \($0.newLevelName)"
+                    return L10n.Event.RoomPowerLevel.changeOther(sender, $0.name, $0.oldLevelName, $0.newLevelName)
                 }
                 .joined(separator: "\n")
         }

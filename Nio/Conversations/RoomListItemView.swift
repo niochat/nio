@@ -8,14 +8,15 @@ struct RoomListItemContainerView: View {
     var room: NIORoom
 
     var body: some View {
+        let roomName = room.summary.displayname ?? ""
         let lastMessage = room.lastMessage
         let lastActivity = Formatter.string(forRelativeDate: room.summary.lastMessageDate)
 
         var accessibilityLabel = ""
         if room.isDirect {
-            accessibilityLabel = "DM with \(room.summary.displayname ?? ""), \(lastActivity) \(room.lastMessage)"
+            accessibilityLabel = L10n.RecentRooms.AccessibilityLabel.dm(roomName, lastActivity, lastMessage)
         } else {
-            accessibilityLabel = "Room \(room.summary.displayname ?? ""), \(lastActivity) \(room.lastMessage)"
+            accessibilityLabel = L10n.RecentRooms.AccessibilityLabel.room(roomName, lastActivity, lastMessage)
         }
 
         var roomAvatarURL: URL?
@@ -123,7 +124,7 @@ struct RoomListItemView: View {
             // Make sure we get enough "breathing air" around the number:
             .padding(.vertical, 3 * sizeCategory.scalingFactor)
             .padding(.horizontal, 6 * sizeCategory.scalingFactor)
-            .accessibility(label: Text("\(self.badge) new messages"))
+            .accessibility(label: Text(L10n.RecentRooms.AccessibilityLabel.newMessageBadge(Int(self.badge))))
             .background(
                 GeometryReader { geometry in
                     Capsule()

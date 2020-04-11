@@ -76,25 +76,25 @@ struct EventContextMenu: View {
         Group {
             if model.canReact {
                 Button(action: onReact, label: {
-                    Text("Add Reaction")
+                    Text(L10n.Event.ContextMenu.addReaction)
                     Image(systemName: "smiley")
                 })
             }
             if model.canReply {
                 Button(action: onReply, label: {
-                    Text("Reply")
+                    Text(L10n.Event.ContextMenu.reply)
                     Image(systemName: "arrowshape.turn.up.left")
                 })
             }
             if model.canEdit {
                 Button(action: onEdit, label: {
-                    Text("Edit")
+                    Text(L10n.Event.ContextMenu.edit)
                     Image(systemName: "pencil")
                 })
             }
             if model.canRedact {
                 Button(action: onRedact, label: {
-                    Text("Remove")
+                    Text(L10n.Event.ContextMenu.remove)
                     Image(systemName: "trash")
                 })
             }

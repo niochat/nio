@@ -25,7 +25,7 @@ struct RootView: View {
                     Button(action: {
                         self.store.loginState = .loggedOut
                     }, label: {
-                        Text("Back to Login")
+                        Text(L10n.Login.failureBackToLogin)
                     })
                 }
             )

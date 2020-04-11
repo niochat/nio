@@ -17,7 +17,7 @@ struct SettingsView: View {
         NavigationView {
             Form {
                 Section {
-                    Picker(selection: $accentColor, label: Text("Accent Color")) {
+                    Picker(selection: $accentColor, label: Text(L10n.Settings.accentColor)) {
                         ForEach(Color.allAccentOptions, id: \.self) { color in
                             HStack {
                                 Circle()
@@ -34,11 +34,11 @@ struct SettingsView: View {
                     Button(action: {
                         self.logoutAction()
                     }, label: {
-                        Text("Log Out")
+                        Text(L10n.Settings.logOut)
                     })
                 }
             }
-            .navigationBarTitle("Settings", displayMode: .inline)
+            .navigationBarTitle(Text(L10n.Settings.title), displayMode: .inline)
         }
     }
 }

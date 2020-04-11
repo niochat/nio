@@ -69,7 +69,7 @@ struct LoginView: View {
         }
         .keyboardObserving()
         .sheet(isPresented: $showingRegisterView) {
-            Text("Registering for new accounts is not yet implemented.")
+            Text(L10n.Login.registerNotYetImplemented)
         }
     }
 
@@ -78,7 +78,7 @@ struct LoginView: View {
             Button(action: {
                 self.onLogin()
             }, label: {
-                Text("Sign in")
+                Text(L10n.Login.signIn)
                     .font(.system(size: 18))
                     .bold()
             })
@@ -88,7 +88,7 @@ struct LoginView: View {
             Button(action: {
                 self.showingRegisterView.toggle()
             }, label: {
-                Text("Don't have an account yet?").font(.footnote)
+                Text(L10n.Login.openRegistrationPrompt).font(.footnote)
             })
         }
     }
@@ -99,10 +99,10 @@ struct LoginTitleView: View {
         let nio = Text("Nio").foregroundColor(.accentColor)
 
         return VStack {
-            (Text("👋 Welcome to ") + nio + Text("!"))
+            (Text(L10n.Login.welcomeHeader) + nio + Text("!"))
                 .font(.title)
                 .bold()
-            Text("Sign in to your account to get started.")
+            Text(L10n.Login.welcomeMessage)
         }
     }
 }
@@ -114,12 +114,12 @@ struct LoginForm: View {
 
     var body: some View {
         VStack {
-            FormTextField(title: "Username", text: $username)
+            FormTextField(title: L10n.Login.Form.username, text: $username)
 
-            FormTextField(title: "Password", text: $password, isSecure: true)
+            FormTextField(title: L10n.Login.Form.password, text: $password, isSecure: true)
 
-            FormTextField(title: "Homeserver", text: $homeserver)
-            Text("Homeserver is optional if you're using matrix.org.")
+            FormTextField(title: L10n.Login.Form.homeserver, text: $homeserver)
+            Text(L10n.Login.Form.homeserverOptionalExplanation)
                 .font(.caption)
                 .foregroundColor(.gray)
         }
@@ -129,7 +129,7 @@ struct LoginForm: View {
 private struct FormTextField: View {
     @Environment(\.colorScheme) var colorScheme
 
-    var title: LocalizedStringKey
+    var title: String
     @Binding var text: String
 
     var isSecure = false

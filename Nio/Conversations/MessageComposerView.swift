@@ -15,7 +15,7 @@ struct MessageComposerView: View {
             }, label: {
                 Image(systemName: "paperclip")
                     .font(.system(size: 20))
-                    .accessibility(label: Text("Send file"))
+                    .accessibility(label: Text(L10n.Composer.AccessibilityLabel.sendFile))
             })
 
             ZStack {
@@ -23,7 +23,7 @@ struct MessageComposerView: View {
                     .frame(height: 40)
                     .foregroundColor(colorScheme == .light ? Color(#colorLiteral(red: 0.9332506061, green: 0.937307477, blue: 0.9410644174, alpha: 1)) : Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
 
-                TextField("New Message...", text: $message, onCommit: onCommit)
+                TextField(L10n.Composer.newMessage, text: $message, onCommit: onCommit)
                     .padding(.horizontal)
             }
 
@@ -32,7 +32,7 @@ struct MessageComposerView: View {
             }, label: {
                 Image(systemName: "paperplane.fill")
                     .font(.system(size: 20))
-                    .accessibility(label: Text("Send"))
+                    .accessibility(label: Text(L10n.Composer.AccessibilityLabel.send))
             })
             .disabled(message.isEmpty)
         }

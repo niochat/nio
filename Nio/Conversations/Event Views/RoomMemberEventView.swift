@@ -56,38 +56,38 @@ struct RoomMemberEventView: View {
         var text: String {
             switch current.membership {
             case "invite":
-                return "\(sender) invited \(current.displayName)"
+                return L10n.Event.RoomMember.invited(sender, current.displayName)
             case "leave":
-                return "\(current.displayName) left"
+                return L10n.Event.RoomMember.left(current.displayName)
             case "ban":
-                return "\(sender) banned \(current.displayName)"
+                return L10n.Event.RoomMember.ban(sender, current.displayName)
             case "join":
                 // FIXME: This flow is ridiculous.
                 // Add tests (and refactor)!
                 if hasUserInfoDifference, let previous = previous {
                     guard previous.membership != "invite" else {
-                        return "\(current.displayName) joined"
+                        return L10n.Event.RoomMember.joined(current.displayName)
                     }
                     if previous.displayName != current.displayName {
-                        return "\(previous.displayName) changed their display name to \(current.displayName)"
+                        return L10n.Event.RoomMember.changeName(previous.displayName, current.displayName)
                     }
                     if let previousAvatarURL = previous.avatarURL {
                         if previousAvatarURL.mxContentURI != current.avatarURL?.mxContentURI {
                             if current.avatarURL == nil {
-                                return "\(current.displayName) removed their profile picture"
+                                return L10n.Event.RoomMember.removeAvatar(current.displayName)
                             }
-                            return "\(previous.displayName) updated their profile picture"
+                            return L10n.Event.RoomMember.changeAvatar(previous.displayName)
                         } else {
-                            return "Unknown join state event: \(sender)"
+                            return L10n.Event.RoomMember.unknownState("join event \(sender)")
                         }
                     } else {
-                        return "\(current.displayName) set their profile picture"
+                        return L10n.Event.RoomMember.setAvatar(current.displayName)
                     }
                 } else {
-                    return "\(current.displayName) joined"
+                    return L10n.Event.RoomMember.joined(current.displayName)
                 }
             default:
-                return "Unknown state event: \(sender) \(current.membership)"
+                return L10n.Event.RoomMember.unknownState("\(sender) \(current.membership)")
             }
         }
     }

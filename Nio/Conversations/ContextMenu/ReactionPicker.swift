@@ -7,7 +7,7 @@ struct ReactionPicker: View {
 
     var body: some View {
         VStack {
-            Text("Tap on an emoji to send that reaction.")
+            Text(L10n.ReactionPicker.title)
                 .foregroundColor(.gray)
                 .font(.headline)
                 .padding(.bottom, 30)

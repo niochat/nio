@@ -14,16 +14,16 @@ struct RedactionEventView: View {
             Spacer()
             VStack {
                 if model.sender == model.redactor {
-                    Text("🗑 Message removed by \(model.redactor)")
+                    Text(L10n.Event.Redaction.redactSelf(model.redactor))
                         .font(.caption)
                         .foregroundColor(.gray)
                 } else {
-                    Text("🗑 \(model.redactor) removed \(model.sender)'s message")
+                    Text(L10n.Event.Redaction.redactOther(model.redactor, model.sender))
                         .font(.caption)
                         .foregroundColor(.gray)
                 }
                 if model.reason != nil {
-                    Text("\(model.reason!)")
+                    Text(L10n.Event.reason(model.reason!))
                         .foregroundColor(.gray)
                         .font(.callout)
                 }

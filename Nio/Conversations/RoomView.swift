@@ -40,7 +40,7 @@ struct RoomContainerView: View {
     }
 
     var attachmentPickerSheet: ActionSheet {
-        ActionSheet(title: Text("Not yet implemented"))
+        ActionSheet(title: Text(L10n.Room.attachmentPlaceholder))
     }
 }
 
@@ -86,9 +86,9 @@ struct RoomView: View {
                 .padding(.bottom, 10)
         }
         .alert(item: $eventToRedact) { eventId in
-            Alert(title: Text("Remove?"),
-                  message: Text("Are you sure you want to remove this message?"),
-                  primaryButton: .destructive(Text("Remove"), action: { self.onRedact(eventId, nil) }),
+            Alert(title: Text(L10n.Room.Remove.title),
+                  message: Text(L10n.Room.Remove.message),
+                  primaryButton: .destructive(Text(L10n.Room.Remove.action), action: { self.onRedact(eventId, nil) }),
                   secondaryButton: .cancel())
         }
     }

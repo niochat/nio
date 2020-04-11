@@ -12,15 +12,15 @@ struct RoomTopicEventView: View {
         }
 
         init(event: MXEvent) {
-            self.init(sender: event.sender ?? "unknown",
-                      topic: event.content(valueFor: "topic") ?? "unknown")
+            self.init(sender: event.sender ?? L10n.Event.unknownSenderFallback,
+                      topic: event.content(valueFor: "topic") ?? "")
         }
     }
 
     let model: ViewModel
 
     var body: some View {
-        GenericEventView(text: "\(model.sender) changed the topic to \(model.topic)")
+        GenericEventView(text: L10n.Event.RoomTopic.change(model.sender, model.topic))
     }
 }
 

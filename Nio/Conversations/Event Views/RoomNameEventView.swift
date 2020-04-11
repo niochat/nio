@@ -9,7 +9,7 @@ struct RoomNameEventView: View {
 
         init(event: MXEvent) {
             self.sender = event.sender ?? ""
-            self.newName = event.content(valueFor: "name") ?? "unknown"
+            self.newName = event.content(valueFor: "name") ?? L10n.Event.unknownRoomNameFallback
             self.oldName = event.prevContent(valueFor: "name")
         }
 
@@ -24,9 +24,9 @@ struct RoomNameEventView: View {
 
     var body: some View {
         if let oldName = model.oldName {
-            return GenericEventView(text: "\(model.sender) changed the room name from \(oldName) to \(model.newName)")
+            return GenericEventView(text: L10n.Event.RoomName.changeName(model.sender, oldName, model.newName))
         }
-        return GenericEventView(text: "\(model.sender) changed the room name to \(model.newName)")
+        return GenericEventView(text: L10n.Event.RoomName.setName(model.sender, model.newName))
     }
 }
 
