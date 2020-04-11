@@ -44,9 +44,10 @@ class RoomMemberEventViewTests: XCTestCase {
         XCTAssertEqual(joinEvent.text, "Jane joined")
     }
 
-    // Disabled for now, since it can't be implemented until usernames are correctly handled.
-    // Otherwise I'd show every leave event as a kick event 🤦‍♀️
-    func _testKickEvent() {
+    func testKickEvent() throws {
+        // Disabled for now, since it can't be implemented until usernames are correctly handled.
+        // Otherwise I'd show every leave event as a kick event 🤦‍♀️
+        throw XCTSkip()
         let kickEvent = Model(
             sender: "Jane",
             current: .init(
