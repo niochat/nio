@@ -18,6 +18,25 @@ class RoomMemberEventViewTests: XCTestCase {
         XCTAssertEqual(inviteEvent.text, "Jane invited John")
     }
 
+    // Disabled for now, see testKickEvent below.
+    //swiftlint:disable:next identifier_name
+    func _testWithdrawInviteEvent() {
+        let withdrawInviteEvent = Model(
+            sender: "Jane",
+            current: .init(
+                displayName: "John",
+                avatarURL: nil,
+                membership: "leave",
+                reason: nil),
+            previous: .init(
+                displayName: "John",
+                avatarURL: nil,
+                membership: "invite",
+                reason: nil)
+        )
+        XCTAssertEqual(withdrawInviteEvent.text, "Jane withdrew John's invitation.")
+    }
+
     func testLeaveEvent() {
         let leaveEvent = Model(
             sender: "Jane",
@@ -44,10 +63,10 @@ class RoomMemberEventViewTests: XCTestCase {
         XCTAssertEqual(joinEvent.text, "Jane joined")
     }
 
-    func testKickEvent() throws {
-        // Disabled for now, since it can't be implemented until usernames are correctly handled.
-        // Otherwise I'd show every leave event as a kick event 🤦‍♀️
-        throw XCTSkip()
+    // Disabled for now, since it can't be implemented until usernames are correctly handled.
+    // Otherwise I'd show every leave event as a kick event 🤦‍♀️
+    //swiftlint:disable:next identifier_name
+    func _testKickEvent() throws {
         let kickEvent = Model(
             sender: "Jane",
             current: .init(
