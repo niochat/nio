@@ -48,7 +48,7 @@ struct MediaEventView: View {
         Text(model.timestamp)
         .font(.caption)
         .foregroundColor(.white)
-        .shadow(color: .black, radius: 3, x: 1, y: 1)
+        .shadow(color: .black, radius: 3)
     }
 
     var senderView: some View {
