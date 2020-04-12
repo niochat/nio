@@ -27,6 +27,12 @@ struct EventContainerView: View {
                 )
             }
 
+            if event.isMediaAttachment() {
+                return AnyView(
+                    MediaEventView(model: .init(event: event, showSender: showSender))
+                )
+            }
+
             // FIXME: remove
             // swiftlint:disable:next force_try
             let messageModel = try! MessageViewModel(event: event,

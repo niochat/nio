@@ -17,6 +17,7 @@
 		392117572442556700892B00 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 392117592442556700892B00 /* Localizable.strings */; };
 		3921175C244255D600892B00 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3921175B244255D600892B00 /* swiftgen.yml */; };
 		3921175F244256AF00892B00 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3921175E244256AF00892B00 /* Strings.swift */; };
+		3921176224435E0000892B00 /* MediaEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3921176124435E0000892B00 /* MediaEventView.swift */; };
 		3922219624366989004D8794 /* EventContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3922219524366989004D8794 /* EventContextMenu.swift */; };
 		39222199243689D6004D8794 /* ReactionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39222198243689D6004D8794 /* ReactionEvent.swift */; };
 		3922219D24368B25004D8794 /* CustomEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3922219C24368B25004D8794 /* CustomEvent.swift */; };
@@ -105,6 +106,7 @@
 		3921175A2442558400892B00 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3921175B244255D600892B00 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = SOURCE_ROOT; };
 		3921175E244256AF00892B00 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		3921176124435E0000892B00 /* MediaEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaEventView.swift; sourceTree = "<group>"; };
 		3922219524366989004D8794 /* EventContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventContextMenu.swift; sourceTree = "<group>"; };
 		39222198243689D6004D8794 /* ReactionEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionEvent.swift; sourceTree = "<group>"; };
 		3922219C24368B25004D8794 /* CustomEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEvent.swift; sourceTree = "<group>"; };
@@ -418,6 +420,7 @@
 				CAC46D5423A272D10079C24F /* BorderlessMessageView.swift */,
 				CAC46D5623A272D10079C24F /* BorderedMessageView.swift */,
 				392221AD243A0508004D8794 /* GroupedReactionsView.swift */,
+				3921176124435E0000892B00 /* MediaEventView.swift */,
 			);
 			path = MessageView;
 			sourceTree = "<group>";
@@ -732,6 +735,7 @@
 				CAC46D6B23A55E940079C24F /* PeekableIterator.swift in Sources */,
 				CAC46D5823A272D10079C24F /* MessageViewModel.swift in Sources */,
 				39C931DF2384328A004449E1 /* SceneDelegate.swift in Sources */,
+				3921176224435E0000892B00 /* MediaEventView.swift in Sources */,
 				3902B8A32395935600698B87 /* SettingsView.swift in Sources */,
 				3921175F244256AF00892B00 /* Strings.swift in Sources */,
 				3922219D24368B25004D8794 /* CustomEvent.swift in Sources */,

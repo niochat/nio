@@ -8,7 +8,9 @@ struct RootView: View {
         case .loggedIn(let userId):
             return AnyView(
                 RecentRoomsContainerView()
-                .environment(\.userId, userId)
+                    .environment(\.userId, userId)
+                    // Can this ever be nil? And if so, what happens with the default fallback?
+                    .environment(\.homeserver, (store.client?.homeserver.flatMap(URL.init)) ?? HomeserverKey.defaultValue)
             )
         case .loggedOut:
             return AnyView(
