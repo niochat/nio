@@ -3,10 +3,10 @@
        align="right" width="128" height="128" />
 </h1>
 
-Nio is an upcoming matrix client for iOS.
-
 [![Matrix](https://img.shields.io/matrix/niochat:matrix.org?logo=matrix&style=flat)](https://matrix.to/#/#niochat:matrix.org)
 [![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/kiliankoe/nio?label=latest%20tag)](https://github.com/kiliankoe/nio/releases)
+
+Nio is an upcoming matrix client for iOS.
 
 For the time being this project is still very much a work in progress. For updates, please check by in our matrix room → [#niochat:matrix.org](https://matrix.to/#/#niochat:matrix.org).
 
