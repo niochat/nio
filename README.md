@@ -9,7 +9,7 @@ For the time being this project is still very much a work in progress. For updat
 
 Want to give it a spin? Join the public [TestFlight Beta](https://testflight.apple.com/join/KlXr3kKz). Help with [translating the app](https://poeditor.com/join/project/cKGF6Gswvx) into other languages is also very much appreciated!
 
-![screenshot](https://user-images.githubusercontent.com/2625584/69572401-5a3a5380-0fc4-11ea-840b-73faf4932052.png)
+![screenshot](https://nio.chat/screenshots.png)
 
 ### Getting Started
 
