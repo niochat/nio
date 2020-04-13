@@ -5,6 +5,9 @@
 
 Nio is an upcoming matrix client for iOS.
 
+[![Matrix](https://img.shields.io/matrix/niochat:matrix.org?logo=matrix&style=flat)](https://matrix.to/#/#niochat:matrix.org)
+[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/kiliankoe/nio?label=latest%20tag)](https://github.com/kiliankoe/nio/releases)
+
 For the time being this project is still very much a work in progress. For updates, please check by in our matrix room → [#niochat:matrix.org](https://matrix.to/#/#niochat:matrix.org).
 
 Want to give it a spin? Join the public [TestFlight Beta](https://testflight.apple.com/join/KlXr3kKz). Help with [translating the app](https://poeditor.com/join/project/cKGF6Gswvx) into other languages is also very much appreciated!
