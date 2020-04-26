@@ -46,9 +46,14 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
     }
 
     var contentEditedView: some View {
-        VStack {
-            emojiView
-            editedView
+        HStack(alignment: .bottom) {
+            if isMe {
+                editedView
+                emojiView
+            } else {
+                emojiView
+                editedView
+            }
         }
     }
 
