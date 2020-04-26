@@ -46,7 +46,7 @@ struct EventContainerView: View {
                 )
             }
 
-            if event.isEdit() {
+            guard !event.isEdit() else {
                 return AnyView(EmptyView())
             }
 
