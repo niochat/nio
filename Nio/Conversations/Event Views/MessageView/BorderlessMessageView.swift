@@ -2,12 +2,21 @@ import SwiftUI
 
 struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol {
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.colorSchemeContrast) var colorSchemeContrast
     @Environment(\.sizeCategory) var sizeCategory
     @Environment(\.userId) var userId
 
     var model: Model
     var contextMenuModel: EventContextMenuModel
     var connectedEdges: ConnectedEdges
+    var isEdited = false
+
+    var textColor: Color {
+        if model.sender == userId {
+            return .lightText(for: colorScheme, with: colorSchemeContrast)
+        }
+        return .primaryText(for: colorScheme, with: colorSchemeContrast)
+    }
 
     private var isMe: Bool {
         model.sender == userId
@@ -25,8 +34,22 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
         .font(.system(size: 60 * sizeCategory.scalingFactor))
     }
 
+    var editedView: some View {
+        Text("(" + L10n.Event.edit + ")")
+            .font(.caption)
+            .foregroundColor(textColor)
+            .opacity(colorSchemeContrast == .standard ? 0.5 : 1.0)
+    }
+
     var contentView: some View {
         emojiView
+    }
+
+    var contentEditedView: some View {
+        VStack {
+            emojiView
+            editedView
+        }
     }
 
     var senderView: some View {
@@ -64,7 +87,11 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
                             // It's the last message in a group, so show a timestamp:
                             timestampView
                         }
-                        contentView
+                        if isEdited {
+                            contentEditedView
+                        } else {
+                            contentView
+                        }
                     }
                     GroupedReactionsView(reactions: model.reactions)
                 }
@@ -73,7 +100,11 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
             return AnyView(
                 VStack(alignment: .leading, spacing: 0) {
                     HStack {
-                        contentView
+                        if isEdited {
+                            contentEditedView
+                        } else {
+                            contentView
+                        }
                         if !connectedEdges.contains(.bottomEdge) {
                             // It's the last message in a group, so show a timestamp:
                             timestampView

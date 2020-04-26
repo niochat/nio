@@ -6,6 +6,7 @@ struct EventContainerView: View {
     var reactions: [Reaction]
     var connectedEdges: ConnectedEdges
     var showSender: Bool
+    var edits: [MXEvent]
     var contextMenuModel: EventContextMenuModel
 
     private var topPadding: CGFloat {
@@ -25,6 +26,27 @@ struct EventContainerView: View {
                 return AnyView(
                     RedactionEventView(model: .init(sender: event.sender, redactor: redactor, reason: reason))
                 )
+            }
+
+            guard !event.contentHasBeenEdited() else {
+                print("EDITED")
+                let messageModel = try! MessageViewModel(event: edits.last ?? event,
+                                                         reactions: reactions,
+                                                         showSender: showSender)
+                return AnyView(
+                    MessageView(
+                        model: .constant(messageModel),
+                        contextMenuModel: contextMenuModel,
+                        connectedEdges: connectedEdges,
+                        isEdited: true
+                    )
+                    .padding(.top, topPadding)
+                    .padding(.bottom, bottomPadding)
+                )
+            }
+
+            if event.isEdit() {
+                return AnyView(EmptyView())
             }
 
             if event.isMediaAttachment() {

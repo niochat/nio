@@ -67,6 +67,7 @@ struct RoomView: View {
                                    reactions: self.events.reactions(for: event),
                                    connectedEdges: self.events.connectedEdges(of: event),
                                    showSender: !self.isDirect,
+                                   edits: self.events.relatedEvents(of: event),
                                    contextMenuModel: EventContextMenuModel(
                                     event: event,
                                     userId: self.userId,

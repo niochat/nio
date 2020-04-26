@@ -9,6 +9,7 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
     var model: Model
     var contextMenuModel: EventContextMenuModel
     var connectedEdges: ConnectedEdges
+    var isEdited = false
 
     private var isMe: Bool {
         model.sender == userId
@@ -64,6 +65,17 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
             .foregroundColor(textColor)
     }
 
+    var editedBodyView: some View {
+        HStack{
+            Text(model.text)
+                .foregroundColor(textColor)
+            Text("(" + L10n.Event.edit + ")")
+                .font(.caption)
+                .foregroundColor(textColor)
+                .opacity(colorSchemeContrast == .standard ? 0.5 : 1.0)
+        }
+    }
+
     var senderView: some View {
         if model.showSender
             && !isMe
@@ -89,7 +101,11 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
             senderView
             VStack(alignment: isMe ? .trailing : .leading, spacing: 3) {
                 VStack(alignment: isMe ? .trailing : .leading, spacing: 5) {
-                    bodyView
+                    if isEdited {
+                        editedBodyView
+                    } else {
+                        bodyView
+                    }
                     if !connectedEdges.contains(.bottomEdge) {
                         // It's the last message in a group, so show a timestamp:
                         timestampView
