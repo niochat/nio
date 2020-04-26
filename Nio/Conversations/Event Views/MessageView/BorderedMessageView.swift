@@ -66,14 +66,12 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
     }
 
     var editedBodyView: some View {
-        HStack{
-            Text(model.text)
-                .foregroundColor(textColor)
-            Text("(" + L10n.Event.edit + ")")
-                .font(.caption)
-                .foregroundColor(textColor)
-                .opacity(colorSchemeContrast == .standard ? 0.5 : 1.0)
-        }
+        Text(model.text + " ")
+            .foregroundColor(textColor)
+        + Text("(" + L10n.Event.edit + ")")
+            .font(.caption)
+            .foregroundColor(textColor
+                .opacity(colorSchemeContrast == .standard ? 0.5 : 1.0))
     }
 
     var senderView: some View {
