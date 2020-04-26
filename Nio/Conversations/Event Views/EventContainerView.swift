@@ -6,6 +6,7 @@ struct EventContainerView: View {
     var reactions: [Reaction]
     var connectedEdges: ConnectedEdges
     var showSender: Bool
+    var edits: [MXEvent]
     var contextMenuModel: EventContextMenuModel
 
     private var topPadding: CGFloat {
@@ -27,22 +28,32 @@ struct EventContainerView: View {
                 )
             }
 
+            guard !event.isEdit() else {
+                return AnyView(EmptyView())
+            }
+
             if event.isMediaAttachment() {
                 return AnyView(
                     MediaEventView(model: .init(event: event, showSender: showSender))
                 )
             }
 
+            var newEvent = event
+            if event.contentHasBeenEdited() {
+                newEvent = edits.last ?? event
+            }
+            
             // FIXME: remove
             // swiftlint:disable:next force_try
-            let messageModel = try! MessageViewModel(event: event,
+            let messageModel = try! MessageViewModel(event: newEvent,
                                                      reactions: reactions,
                                                      showSender: showSender)
             return AnyView(
                 MessageView(
                     model: .constant(messageModel),
                     contextMenuModel: contextMenuModel,
-                    connectedEdges: connectedEdges
+                    connectedEdges: connectedEdges,
+                    isEdited: event.contentHasBeenEdited()
                 )
                 .padding(.top, topPadding)
                 .padding(.bottom, bottomPadding)

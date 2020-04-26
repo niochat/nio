@@ -8,6 +8,7 @@ struct MessageView<Model>: View where Model: MessageViewModelProtocol {
     @Binding var model: Model
     var contextMenuModel: EventContextMenuModel
     var connectedEdges: ConnectedEdges
+    var isEdited = false
 
     private var isMe: Bool {
         model.sender == userId
@@ -18,7 +19,8 @@ struct MessageView<Model>: View where Model: MessageViewModelProtocol {
             let messageView = BorderlessMessageView(
                 model: model,
                 contextMenuModel: contextMenuModel,
-                connectedEdges: connectedEdges
+                connectedEdges: connectedEdges,
+                isEdited: self.isEdited
             )
             if isMe {
                 return AnyView(HStack {
@@ -35,7 +37,8 @@ struct MessageView<Model>: View where Model: MessageViewModelProtocol {
             let messageView = BorderedMessageView(
                 model: model,
                 contextMenuModel: contextMenuModel,
-                connectedEdges: connectedEdges
+                connectedEdges: connectedEdges,
+                isEdited: self.isEdited
             )
             if isMe {
                 return AnyView(HStack {

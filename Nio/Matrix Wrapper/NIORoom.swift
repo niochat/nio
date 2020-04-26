@@ -45,8 +45,12 @@ class NIORoom: ObservableObject {
         let lastMessageEvent = eventCache.last {
             $0.type == kMXEventTypeStringRoomMessage
         }
-
-        return lastMessageEvent?.content["body"] as? String ?? ""
+        if lastMessageEvent?.isEdit() ?? false {
+            let newContent = lastMessageEvent?.content["m.new_content"]! as? NSDictionary
+            return newContent?["body"] as? String ?? ""
+        } else {
+            return lastMessageEvent?.content["body"] as? String ?? ""
+        }
     }
 
     // MARK: Sending Events

@@ -33,9 +33,16 @@ struct MessageViewModel: MessageViewModelProtocol {
     }
 
     var text: String {
-        return (event.content["body"] as? String).map {
-            $0.trimmingCharacters(in: .whitespacesAndNewlines)
-        } ?? "Error: expected string body"
+        if !event.isEdit() {
+            return (event.content["body"] as? String).map {
+                $0.trimmingCharacters(in: .whitespacesAndNewlines)
+            } ?? "Error: expected string body"
+        } else {
+            let newContent = event.content["m.new_content"]! as? NSDictionary
+            return (newContent?["body"] as? String).map {
+                $0.trimmingCharacters(in: .whitespacesAndNewlines)
+            } ?? "Error: expected string body"
+        }
     }
 
     var sender: String {
