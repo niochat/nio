@@ -28,24 +28,6 @@ struct EventContainerView: View {
                 )
             }
 
-            guard !event.contentHasBeenEdited() else {
-                // FIXME: remove
-                // swiftlint:disable:next force_try
-                let messageModel = try! MessageViewModel(event: edits.last ?? event,
-                                                         reactions: reactions,
-                                                         showSender: showSender)
-                return AnyView(
-                    MessageView(
-                        model: .constant(messageModel),
-                        contextMenuModel: contextMenuModel,
-                        connectedEdges: connectedEdges,
-                        isEdited: true
-                    )
-                    .padding(.top, topPadding)
-                    .padding(.bottom, bottomPadding)
-                )
-            }
-
             guard !event.isEdit() else {
                 return AnyView(EmptyView())
             }
@@ -56,16 +38,22 @@ struct EventContainerView: View {
                 )
             }
 
+            var newEvent = event
+            if event.contentHasBeenEdited() {
+                newEvent = edits.last ?? event
+            }
+            
             // FIXME: remove
             // swiftlint:disable:next force_try
-            let messageModel = try! MessageViewModel(event: event,
+            let messageModel = try! MessageViewModel(event: newEvent,
                                                      reactions: reactions,
                                                      showSender: showSender)
             return AnyView(
                 MessageView(
                     model: .constant(messageModel),
                     contextMenuModel: contextMenuModel,
-                    connectedEdges: connectedEdges
+                    connectedEdges: connectedEdges,
+                    isEdited: event.contentHasBeenEdited()
                 )
                 .padding(.top, topPadding)
                 .padding(.bottom, bottomPadding)
