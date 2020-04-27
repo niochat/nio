@@ -80,20 +80,10 @@ class NIORoom: ObservableObject {
         guard !text.isEmpty else { return }
         //swiftlint:disable:next redundant_optional_initialization
         var localEcho: MXEvent? = nil
-        let messageObject: [String: Any] = [
-            "body": "*" + text,
-            "m.new_content": [
-                "body": text,
-                "msgtype": "m.text"
-            ],
-            "m.relates_to": [
-                "event_id": eventId,
-                "rel_type": "m.replace"
-            ],
-            "msgtype": "m.text"
-        ]
+        // swiftlint:disable:next force_try
+        let content = try! EditEvent(eventId: eventId, text: text).encodeContent()
         // TODO: Use localEcho to show sent message until it actually comes back
-        room.sendMessage(withContent: messageObject, localEcho: &localEcho) { _ in
+        room.sendMessage(withContent: content, localEcho: &localEcho) { _ in
             self.objectWillChange.send()
         }
         self.objectWillChange.send()
