@@ -40,18 +40,17 @@ struct LoginContainerView: View {
     
     private func guessHomeserverURL() {
         if !username.isEmpty && homeserver.isEmpty {
-            let userparts = username.split(separator: ":")
-            if userparts.count < 2 {
-                return
-            }
-            let mxautodiscovery = MXAutoDiscovery.init(domain: String(userparts[1]))
-            mxautodiscovery?.findClientConfig({(c) in
-                if self.homeserver.isEmpty { // Check again to prevent race condition.
-                    if c.wellKnown != nil {
-                        self.homeserver = c.wellKnown!.homeServer.baseUrl
+            let userparts = username.components(separatedBy: ":")
+            guard userparts.count == 2 else { return }
+            let mxautodiscovery = MXAutoDiscovery(domain: userparts[1])
+            mxautodiscovery?.findClientConfig({ config in
+                // Check again to prevent race condition.
+                if self.homeserver.isEmpty {
+                    if let wellKnown = config.wellKnown {
+                        self.homeserver = wellKnown.homeServer.baseUrl
                     }
                 }
-            }, failure: {(e) in })
+            }, failure: {_ in })
         }
     }
 
@@ -135,7 +134,7 @@ struct LoginForm: View {
 
     var body: some View {
         VStack {
-            FormTextField(title: L10n.Login.Form.username, text: $username, onEditingChanged: { (editingChanged) in
+            FormTextField(title: L10n.Login.Form.username, text: $username, onEditingChanged: { _ in
                 self.guessHomeserverURL()
             })
 
@@ -168,7 +167,7 @@ private struct FormTextField: View {
                     .padding()
                     .textContentType(.password)
             } else {
-                TextField(title, text: $text, onEditingChanged: onEditingChanged ?? { (editingChanged) in })
+                TextField(title, text: $text, onEditingChanged: onEditingChanged ?? { _ in })
                     .padding()
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
