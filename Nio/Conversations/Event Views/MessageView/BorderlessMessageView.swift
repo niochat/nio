@@ -35,7 +35,7 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
     }
 
     var editedView: some View {
-        Text("(" + L10n.Event.edit + ")")
+        Text("(" + L10n.Event.edited + ")")
             .font(.caption)
             .foregroundColor(textColor)
             .opacity(colorSchemeContrast == .standard ? 0.5 : 1.0)

@@ -67,6 +67,8 @@
 "event.redaction.redact-self" = "🗑 Nachricht entfernt von %@";
 "event.redaction.redact-other" = "🗑 %@ hat die Nachricht von %@ entfernt";
 
+"event.edited" = "bearbeitet";
+
 "event.context-menu.add-reaction" = "Emoji hinzufügen";
 "event.context-menu.reply" = "Direkt antworten";
 "event.context-menu.edit" = "Bearbeiten";

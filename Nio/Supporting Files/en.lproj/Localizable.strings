@@ -67,7 +67,7 @@
 "event.redaction.redact-self" = "🗑 Messaged removed by %@";
 "event.redaction.redact-other" = "🗑 %@ removed %@'s message";
 
-"event.edit" = "edited";
+"event.edited" = "edited";
 
 "event.context-menu.add-reaction" = "Add Reaction";
 "event.context-menu.reply" = "Reply";

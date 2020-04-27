@@ -68,7 +68,7 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
     var editedBodyView: some View {
         Text(model.text + " ")
             .foregroundColor(textColor)
-        + Text("(" + L10n.Event.edit + ")")
+        + Text("(" + L10n.Event.edited + ")")
             .font(.caption)
             .foregroundColor(textColor
                 .opacity(colorSchemeContrast == .standard ? 0.5 : 1.0))

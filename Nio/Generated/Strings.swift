@@ -25,7 +25,7 @@ internal enum L10n {
 
   internal enum Event {
     /// edited
-    internal static let edit = L10n.tr("Localizable", "event.edit")
+    internal static let edited = L10n.tr("Localizable", "event.edited")
     /// Reason: %@
     internal static func reason(_ p1: String) -> String {
       return L10n.tr("Localizable", "event.reason", p1)
