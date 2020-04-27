@@ -42,7 +42,7 @@ struct EventContainerView: View {
             if event.contentHasBeenEdited() {
                 newEvent = edits.last ?? event
             }
-            
+
             // FIXME: remove
             // swiftlint:disable:next force_try
             let messageModel = try! MessageViewModel(event: newEvent,

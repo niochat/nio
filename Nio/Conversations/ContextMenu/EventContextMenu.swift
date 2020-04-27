@@ -28,7 +28,7 @@ private struct EventContextMenuViewModel {
         if event.sender == userId
             && reactableEvents.contains(event.type)
             && !event.isRedactedEvent() {
-//            canEdit = true
+            canEdit = true
             canRedact = true
         }
 

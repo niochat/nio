@@ -78,6 +78,30 @@ class NIORoom: ObservableObject {
         }
     }
 
+    func edit(text: String, eventId: String) {
+        guard !text.isEmpty else { return }
+        //swiftlint:disable:next redundant_optional_initialization
+        var localEcho: MXEvent? = nil
+        let messageObject: [String: Any] = [
+            "body": "*" + text,
+            "m.new_content": [
+                "body": text,
+                "msgtype": "m.text"
+            ],
+            "m.relates_to": [
+                "event_id": eventId,
+                "rel_type": "m.replace"
+            ],
+            "msgtype": "m.text"
+        ]
+        // TODO: Use localEcho to show sent message until it actually comes back
+        room.sendMessage(withContent: messageObject, localEcho: &localEcho) { response in
+            print(response)
+            self.objectWillChange.send()
+        }
+        self.objectWillChange.send()
+    }
+
     func redact(eventId: String, reason: String?) {
         room.redactEvent(eventId, reason: reason) { response in
             self.objectWillChange.send()
