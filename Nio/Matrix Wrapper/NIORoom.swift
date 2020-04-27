@@ -60,8 +60,7 @@ class NIORoom: ObservableObject {
         //swiftlint:disable:next redundant_optional_initialization
         var localEcho: MXEvent? = nil
         // TODO: Use localEcho to show sent message until it actually comes back
-        room.sendTextMessage(text, localEcho: &localEcho) { response in
-            print(response)
+        room.sendTextMessage(text, localEcho: &localEcho) { _ in
             self.objectWillChange.send()
         }
         self.objectWillChange.send()
@@ -72,10 +71,22 @@ class NIORoom: ObservableObject {
         let content = try! ReactionEvent(eventId: eventId, key: emoji).encodeContent()
         //swiftlint:disable:next redundant_optional_initialization
         var localEcho: MXEvent? = nil
-        room.sendEvent(.reaction, content: content, localEcho: &localEcho) { response in
-            print(response)
+        room.sendEvent(.reaction, content: content, localEcho: &localEcho) { _ in
             self.objectWillChange.send()
         }
+    }
+
+    func edit(text: String, eventId: String) {
+        guard !text.isEmpty else { return }
+        //swiftlint:disable:next redundant_optional_initialization
+        var localEcho: MXEvent? = nil
+        // swiftlint:disable:next force_try
+        let content = try! EditEvent(eventId: eventId, text: text).encodeContent()
+        // TODO: Use localEcho to show sent message until it actually comes back
+        room.sendMessage(withContent: content, localEcho: &localEcho) { _ in
+            self.objectWillChange.send()
+        }
+        self.objectWillChange.send()
     }
 
     func redact(eventId: String, reason: String?) {

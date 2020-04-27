@@ -22,6 +22,9 @@ struct RoomContainerView: View {
             },
             onRedact: { eventId, reason in
                 self.room.redact(eventId: eventId, reason: reason)
+            },
+            onEdit: { message, eventId in
+                self.room.edit(text: message, eventId: eventId)
             }
         )
         .navigationBarTitle(Text(room.summary.displayname ?? ""), displayMode: .inline)
@@ -56,6 +59,9 @@ struct RoomView: View {
 
     var onReact: (String) -> Void
     var onRedact: (String, String?) -> Void
+    var onEdit: (String, String) -> Void
+
+    @State private var editEventId: String?
     @State private var eventToRedact: String?
 
     @State private var message = ""
@@ -73,7 +79,7 @@ struct RoomView: View {
                                     userId: self.userId,
                                     onReact: { self.onReact(event.eventId) },
                                     onReply: { },
-                                    onEdit: { },
+                                    onEdit: { self.edit(event: event) },
                                     onRedact: { self.eventToRedact = event.eventId }))
                     .padding(.horizontal)
             }
@@ -95,8 +101,19 @@ struct RoomView: View {
     }
 
     private func send() {
-        onCommit(message)
-        message = ""
+        if editEventId == nil {
+            onCommit(message)
+            message = ""
+        } else {
+            onEdit(message, editEventId!)
+            message = ""
+            editEventId = nil
+        }
+    }
+
+    private func edit(event: MXEvent) {
+        message = event.content["body"] as? String ?? ""
+        editEventId = event.eventId
     }
 }
 
