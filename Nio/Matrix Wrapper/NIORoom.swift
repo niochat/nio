@@ -60,8 +60,7 @@ class NIORoom: ObservableObject {
         //swiftlint:disable:next redundant_optional_initialization
         var localEcho: MXEvent? = nil
         // TODO: Use localEcho to show sent message until it actually comes back
-        room.sendTextMessage(text, localEcho: &localEcho) { response in
-            print(response)
+        room.sendTextMessage(text, localEcho: &localEcho) { _ in
             self.objectWillChange.send()
         }
         self.objectWillChange.send()
@@ -72,8 +71,7 @@ class NIORoom: ObservableObject {
         let content = try! ReactionEvent(eventId: eventId, key: emoji).encodeContent()
         //swiftlint:disable:next redundant_optional_initialization
         var localEcho: MXEvent? = nil
-        room.sendEvent(.reaction, content: content, localEcho: &localEcho) { response in
-            print(response)
+        room.sendEvent(.reaction, content: content, localEcho: &localEcho) { _ in
             self.objectWillChange.send()
         }
     }
@@ -95,8 +93,7 @@ class NIORoom: ObservableObject {
             "msgtype": "m.text"
         ]
         // TODO: Use localEcho to show sent message until it actually comes back
-        room.sendMessage(withContent: messageObject, localEcho: &localEcho) { response in
-            print(response)
+        room.sendMessage(withContent: messageObject, localEcho: &localEcho) { _ in
             self.objectWillChange.send()
         }
         self.objectWillChange.send()
