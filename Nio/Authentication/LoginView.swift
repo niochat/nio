@@ -16,7 +16,8 @@ struct LoginContainerView: View {
                   homeserver: $homeserver,
                   showingRegisterView: $showingRegisterView,
                   isLoginEnabled: isLoginEnabled,
-                  onLogin: login)
+                  onLogin: login,
+                  guessHomeserverURL: guessHomeserverURL)
     }
 
     private func login() {
@@ -36,6 +37,22 @@ struct LoginContainerView: View {
 
         store.login(username: username, password: password, homeserver: homeserverURL)
     }
+    
+    private func guessHomeserverURL() {
+        if !username.isEmpty && homeserver.isEmpty {
+            let userparts = username.components(separatedBy: ":")
+            guard userparts.count == 2 else { return }
+            let mxautodiscovery = MXAutoDiscovery(domain: userparts[1])
+            mxautodiscovery?.findClientConfig({ config in
+                // Check again to prevent race condition.
+                if self.homeserver.isEmpty {
+                    if let wellKnown = config.wellKnown {
+                        self.homeserver = wellKnown.homeServer.baseUrl
+                    }
+                }
+            }, failure: {_ in })
+        }
+    }
 
     private func isLoginEnabled() -> Bool {
         guard !username.isEmpty && !password.isEmpty else { return false }
@@ -54,6 +71,7 @@ struct LoginView: View {
 
     let isLoginEnabled: () -> Bool
     let onLogin: () -> Void
+    let guessHomeserverURL: () -> Void
 
     var body: some View {
         VStack {
@@ -61,7 +79,7 @@ struct LoginView: View {
             LoginTitleView()
 
             Spacer()
-            LoginForm(username: $username, password: $password, homeserver: $homeserver)
+            LoginForm(username: $username, password: $password, homeserver: $homeserver, guessHomeserverURL: guessHomeserverURL)
 
             buttons
 
@@ -111,10 +129,14 @@ struct LoginForm: View {
     @Binding var username: String
     @Binding var password: String
     @Binding var homeserver: String
+    
+    let guessHomeserverURL: () -> Void
 
     var body: some View {
         VStack {
-            FormTextField(title: L10n.Login.Form.username, text: $username)
+            FormTextField(title: L10n.Login.Form.username, text: $username, onEditingChanged: { _ in
+                self.guessHomeserverURL()
+            })
 
             FormTextField(title: L10n.Login.Form.password, text: $password, isSecure: true)
 
@@ -131,6 +153,7 @@ private struct FormTextField: View {
 
     var title: String
     @Binding var text: String
+    var onEditingChanged: ((Bool) -> Void)?
 
     var isSecure = false
 
@@ -144,7 +167,7 @@ private struct FormTextField: View {
                     .padding()
                     .textContentType(.password)
             } else {
-                TextField(title, text: $text)
+                TextField(title, text: $text, onEditingChanged: onEditingChanged ?? { _ in })
                     .padding()
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
@@ -162,7 +185,8 @@ struct LoginView_Previews: PreviewProvider {
                   homeserver: .constant(""),
                   showingRegisterView: .constant(false),
                   isLoginEnabled: { return false },
-                  onLogin: {})
+                  onLogin: {},
+                  guessHomeserverURL: {})
             .accentColor(.purple)
     }
 }
