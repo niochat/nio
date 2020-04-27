@@ -1,0 +1,81 @@
+"login.welcome-header" = "Welkom bij ";
+"login.welcome-message" = "Log in met je account om te beginnen.";
+"login.form.username" = "Gebruikersnaam";
+"login.form.password" = "Wachtwoord";
+"login.form.homeserver" = "Homeserver";
+"login.form.homeserver-optional-explanation" = "Homeserver is optioneel als je matrix.org gebruikt.";
+"login.sign-in" = "Log in";
+"login.open-registration-prompt" = "Nog geen account?";
+"login.register-not-yet-implemented" = "Registratie voor nieuwe accounts is nog niet geïmplementeerd.";
+"login.failure-back-to-login" = "Terug naar Login";
+
+"loading.1" = "🧑‍🎤 De Matrix wordt gedecodeerd";
+"loading.2" = "🧑‍🏭 Berichten worden verzameld";
+"loading.3" = "🧑‍🔧 Inloggen";
+"loading.4" = "🧑‍💻 Herstel sessie";
+"loading.cancel" = "Annuleer";
+
+"recent-rooms.accessibility-label.settings" = "Instellingen";
+"recent-rooms.accessibility-label.new-conversation" = "Nieuw Gesprek";
+"recent-rooms.new-message-placeholder" = "Nieuw Bericht";
+// DM with $NAME, $LAST_ACTIVITY_TIMESTAMP $LAST_MESSAGE
+"recent-rooms.accessibility-label.dm" = "Direct Bericht met %@, %@ %@";
+// Room $NAME, $LAST_ACTIVITY_TIMESTAMP $LAST_MESSAGE
+"recent-rooms.accessibility-label.room" = "Kamer %@, %@ %@";
+"recent-rooms.accessibility-label.new-message-badge" = "%u nieuwe berichten";
+
+"room.attachment-placeholder" = "Nog niet geïmplementeerd";
+"room.remove.title" = "Verwijderen?";
+"room.remove.message" = "Weet u zeker dat u dit bericht wilt verwijderen?";
+"room.remove.action" = "Verwijderen";
+
+"composer.new-message" = "Nieuw Bericht...";
+"composer.accessibility-label.send-file" = "Bestand versturen";
+"composer.accessibility-label.send" = "Verstuur";
+
+"typing-indicator.single" = "%@ is aan het typen...";
+"typing-indicator.multiple" = "%@ zijn aan het typen...";
+"typing-indicator.many" = "Meerdere personen zijn aan het typen...";
+
+"event.unknown-sender-fallback" = "Onbekend";
+"event.unknown-room-name-fallback" = "Onbekend";
+
+"event.room-member.invited" = "%@ heeft %@ uitgenodigd";
+"event.room-member.left" = "%@ is weg gegaan";
+"event.room-member.kicked" = "%@ heeft %@ uit het gesprek verwijderd";
+"event.room-member.ban" = "%@ heeft %@ verbannen";
+"event.room-member.joined" = "%@ kwam erbij";
+"event.room-member.change-name" = "%@ heeft zijn/haar naam veranderd naar %@";
+"event.room-member.set-avatar" = "%@ heeft zijn/haar profielfoto ingesteld";
+"event.room-member.change-avatar" = "%@ heeft zijn/haar profielfoto aangepast";
+"event.room-member.remove-avatar" = "%@ heeft zijn/haar profielfoto verwijderd";
+"event.room-member.unknown-state" = "Onbekend evenement: %@";
+"event.reason" = "Reden: %@";
+
+"event.room-name.set-name" = "%@ heeft de kamer naam naar %@ veranderd";
+"event.room-name.change-name" = "%@ heeft de kamer naam van %@ naar %@ veranderd";
+
+"event.room-topic.change" = "%@ heeft het onderwerp veranderd naar '%@'";
+
+"room-power-level.default" = "Standaard";
+"room-power-level.moderator" = "Moderator";
+"room-power-level.admin" = "Admin";
+"room-power-level.custom" = "Aangepast (%d)";
+
+"event.room-power-level.change-self" = "%@ heeft zijn/haar rechten veranderd van %@ naar %@";
+"event.room-power-level.change-other" = "%@ heeft de rechten van %@ veranderd van %@ naar %@";
+"event.redaction.redact-self" = "🗑 Bericht verwijderd door %@";
+"event.redaction.redact-other" = "🗑 %@ verwijderde %@'s berichten";
+
+"event.edited" = "bewerkt";
+
+"event.context-menu.add-reaction" = "Voeg reactie toe";
+"event.context-menu.reply" = "Antwoorden";
+"event.context-menu.edit" = "Aanpassen";
+"event.context-menu.remove" = "Verwijderen";
+
+"reaction-picker.title" = "Tik op een emoji om de reactie te versturen.";
+
+"settings.title" = "Instellingen";
+"settings.accent-color" = "Accent kleur";
+"settings.log-out" = "Uitloggen";
