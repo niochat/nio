@@ -4,7 +4,7 @@ import SwiftMatrixSDK
 struct ReactionEvent {
     let eventId: String
     let key: String
-    let relType = "m.annotation"
+    let relType = MXEventRelationTypeAnnotation
 }
 
 extension ReactionEvent: CustomEvent {
