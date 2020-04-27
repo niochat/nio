@@ -61,9 +61,7 @@ struct RoomView: View {
     var onRedact: (String, String?) -> Void
     var onEdit: (String, String) -> Void
 
-    @State private var edited = false
-    @State private var editEventId = ""
-
+    @State private var editEventId: String?
     @State private var eventToRedact: String?
 
     @State private var message = ""
@@ -103,21 +101,19 @@ struct RoomView: View {
     }
 
     private func send() {
-        if !edited {
+        if editEventId == nil {
             onCommit(message)
             message = ""
         } else {
-            onEdit(message, editEventId)
+            onEdit(message, editEventId!)
             message = ""
-            editEventId = ""
-            edited = false
+            editEventId = nil
         }
     }
 
     private func edit(event: MXEvent) {
         message = event.content["body"] as? String ?? ""
         editEventId = event.eventId
-        edited = true
     }
 }
 
