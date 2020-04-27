@@ -10,7 +10,7 @@ struct MessageComposerView: View {
     var onCommit: () -> Void
 
     var highlightMessage: String?
-    @State var highlightMessageToggle = false
+    @Binding var highlightMessageToggle: Bool
 
     var background: some View {
         let radius: CGFloat = 15.0 * sizeCategory.scalingFactor
@@ -70,7 +70,7 @@ struct MessageComposerView_Previews: PreviewProvider {
         Group {
             MessageComposerView(message: .constant(""),
                                 showAttachmentPicker: .constant(false),
-                                onCommit: {})
+                                onCommit: {}, highlightMessageToggle: .constant(false))
                 .padding()
                 .environment(\.colorScheme, .light)
 
@@ -78,7 +78,7 @@ struct MessageComposerView_Previews: PreviewProvider {
                 Color.black.frame(height: 80)
                 MessageComposerView(message: .constant(""),
                                     showAttachmentPicker: .constant(false),
-                                    onCommit: {})
+                                    onCommit: {}, highlightMessageToggle: .constant(false))
                     .padding()
                     .environment(\.colorScheme, .dark)
             }
