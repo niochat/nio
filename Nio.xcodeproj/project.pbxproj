@@ -82,6 +82,7 @@
 		CAC46D7923A6D4B90079C24F /* TypedEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D7823A6D4B90079C24F /* TypedEventsTests.swift */; };
 		CAF2AE94245B507400D84133 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AE93245B507400D84133 /* Assets.swift */; };
 		CAF2AE92245AEEBA00D84133 /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AE91245AEEBA00D84133 /* BadgeView.swift */; };
+		CAF2AE892458EEBC00D84133 /* AttributedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AE882458EEBB00D84133 /* AttributedText.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -177,6 +178,7 @@
 		CAC46D7823A6D4B90079C24F /* TypedEventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypedEventsTests.swift; sourceTree = "<group>"; };
 		CAF2AE93245B507400D84133 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		CAF2AE91245AEEBA00D84133 /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
+		CAF2AE882458EEBB00D84133 /* AttributedText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedText.swift; sourceTree = "<group>"; };
 		E2D5B8AFEEB28F750CE393D1 /* Pods-NioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioTests.debug.xcconfig"; path = "Target Support Files/Pods-NioTests/Pods-NioTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -291,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				392389CB238EBB1400B2E1DF /* ReverseList.swift */,
+				CAF2AE882458EEBB00D84133 /* AttributedText.swift */,
 				4B0A2E46245E2EF800A79443 /* MultiLineTextView.swift */,
 			);
 			path = "Shared Views";
@@ -723,6 +726,7 @@
 				3923898F2388707E00B2E1DF /* RoomListItemView.swift in Sources */,
 				39C931DD2384328A004449E1 /* AppDelegate.swift in Sources */,
 				393411C923904428003B49B8 /* MXEvent.swift in Sources */,
+				CAF2AE892458EEBC00D84133 /* AttributedText.swift in Sources */,
 				3923898D238859D100B2E1DF /* MX+Identifiable.swift in Sources */,
 				CAC46D5B23A2734C0079C24F /* EnvironmentValues.swift in Sources */,
 				39C932072384BB13004449E1 /* RecentRoomsView.swift in Sources */,
