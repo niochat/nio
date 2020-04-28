@@ -109,6 +109,7 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
                         timestampView
                     }
                 }
+                .fixedSize(horizontal: false, vertical: true)
                 .padding(10)
                 .background(background)
                 .contextMenu(ContextMenu(menuItems: {
