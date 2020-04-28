@@ -16,6 +16,8 @@ internal enum L10n {
     /// New Message...
     internal static let newMessage = L10n.tr("Localizable", "composer.new-message")
     internal enum AccessibilityLabel {
+      /// Cancel
+      internal static let cancelEdit = L10n.tr("Localizable", "composer.accessibility-label.cancelEdit")
       /// Send
       internal static let send = L10n.tr("Localizable", "composer.accessibility-label.send")
       /// Send file

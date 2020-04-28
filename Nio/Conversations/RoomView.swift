@@ -7,7 +7,6 @@ struct RoomContainerView: View {
     @ObservedObject var room: NIORoom
 
     @State var showAttachmentPicker = false
-    @State var highlightMessageToggle = false
     @State var eventToReactTo: String?
 
     var body: some View {
@@ -15,7 +14,6 @@ struct RoomContainerView: View {
             events: room.events(),
             isDirect: room.isDirect,
             showAttachmentPicker: $showAttachmentPicker,
-            highlightMessageToggle: $highlightMessageToggle,
             onCommit: { message in
                 self.room.send(text: message)
             },
@@ -57,7 +55,6 @@ struct RoomView: View {
     var isDirect: Bool
 
     @Binding var showAttachmentPicker: Bool
-    @Binding var highlightMessageToggle: Bool
     var onCommit: (String) -> Void
 
     var onReact: (String) -> Void
@@ -94,7 +91,7 @@ struct RoomView: View {
                                 showAttachmentPicker: $showAttachmentPicker,
                                 onCommit: send,
                                 highlightMessage: highlightMessage,
-                                highlightMessageToggle: $highlightMessageToggle)
+                                onCancel: cancelEdit)
                 .padding(.horizontal)
                 .padding(.bottom, 10)
         }
@@ -115,15 +112,19 @@ struct RoomView: View {
             message = ""
             editEventId = nil
             highlightMessage = nil
-            highlightMessageToggle.toggle()
         }
     }
 
     private func edit(event: MXEvent) {
         message = event.content["body"] as? String ?? ""
         highlightMessage = message
-        highlightMessageToggle.toggle()
         editEventId = event.eventId
+    }
+
+    private func cancelEdit() {
+        editEventId = nil
+        highlightMessage = nil
+        message = ""
     }
 }
 

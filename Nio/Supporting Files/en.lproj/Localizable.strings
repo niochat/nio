@@ -32,6 +32,7 @@
 "composer.new-message" = "New Message...";
 "composer.accessibility-label.send-file" = "Send file";
 "composer.accessibility-label.send" = "Send";
+"composer.accessibility-label.cancelEdit" = "Cancel";
 
 "typing-indicator.single" = "%@ is typing...";
 "typing-indicator.multiple" = "%@ are typing...";

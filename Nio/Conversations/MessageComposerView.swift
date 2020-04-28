@@ -2,6 +2,7 @@ import SwiftUI
 
 struct MessageComposerView: View {
     @Environment (\.colorScheme) var colorScheme
+    @Environment(\.colorSchemeContrast) var colorSchemeContrast
     @Environment(\.sizeCategory) var sizeCategory
 
     @Binding var message: String
@@ -10,7 +11,11 @@ struct MessageComposerView: View {
     var onCommit: () -> Void
 
     var highlightMessage: String?
-    @Binding var highlightMessageToggle: Bool
+    var onCancel: () -> Void
+
+    var textColor: Color {
+        return .primaryText(for: colorScheme, with: colorSchemeContrast)
+    }
 
     var background: some View {
         let radius: CGFloat = 15.0 * sizeCategory.scalingFactor
@@ -20,18 +25,25 @@ struct MessageComposerView: View {
 
     var body: some View {
         VStack {
-            if self.highlightMessageToggle {
+            if self.highlightMessage != nil {
+                Text("Editing:")
+                    .frame(minWidth: 0, maxWidth: .infinity, alignment: Alignment.leading)
+                    .font(.caption)
+                    .foregroundColor(textColor
+                        .opacity(colorSchemeContrast == .standard ? 0.5 : 1.0))
                 HStack {
+                    Text(highlightMessage!)
+                        .lineLimit(3)
+                        .padding(10)
+                        .frame(minWidth: 0, maxWidth: .infinity, alignment: Alignment.leading)
+                        .background(background)
                     Button(action: {
-                        self.highlightMessageToggle.toggle()
+                        self.onCancel()
                     }, label: {
                         Image(systemName: "multiply")
                             .font(.system(size: 20))
-                            .accessibility(label: Text(L10n.Composer.AccessibilityLabel.sendFile))
+                            .accessibility(label: Text(L10n.Composer.AccessibilityLabel.cancelEdit))
                     })
-                    Text(highlightMessage!)
-                        .padding(10)
-                        .background(background)
                 }
             }
             HStack {
@@ -70,7 +82,7 @@ struct MessageComposerView_Previews: PreviewProvider {
         Group {
             MessageComposerView(message: .constant(""),
                                 showAttachmentPicker: .constant(false),
-                                onCommit: {}, highlightMessageToggle: .constant(false))
+                                onCommit: {}, onCancel: {})
                 .padding()
                 .environment(\.colorScheme, .light)
 
@@ -78,7 +90,7 @@ struct MessageComposerView_Previews: PreviewProvider {
                 Color.black.frame(height: 80)
                 MessageComposerView(message: .constant(""),
                                     showAttachmentPicker: .constant(false),
-                                    onCommit: {}, highlightMessageToggle: .constant(false))
+                                    onCommit: {}, onCancel: {})
                     .padding()
                     .environment(\.colorScheme, .dark)
             }

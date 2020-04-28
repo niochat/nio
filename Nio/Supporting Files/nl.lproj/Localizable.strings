@@ -32,6 +32,7 @@
 "composer.new-message" = "Nieuw Bericht...";
 "composer.accessibility-label.send-file" = "Bestand versturen";
 "composer.accessibility-label.send" = "Verstuur";
+"composer.accessibility-label.cancelEdit" = "Annuleer";
 
 "typing-indicator.single" = "%@ is aan het typen...";
 "typing-indicator.multiple" = "%@ zijn aan het typen...";
