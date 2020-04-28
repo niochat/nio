@@ -176,9 +176,10 @@
 		CAC46D7223A6AE890079C24F /* TypedEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypedEvents.swift; sourceTree = "<group>"; };
 		CAC46D7623A6CB6C0079C24F /* MXEventType+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXEventType+Equatable.swift"; sourceTree = "<group>"; };
 		CAC46D7823A6D4B90079C24F /* TypedEventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypedEventsTests.swift; sourceTree = "<group>"; };
+		CAF2AE93245B507400D84133 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		CAF2AE882458EEBB00D84133 /* AttributedText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedText.swift; sourceTree = "<group>"; };
 		CAF2AE91245AEEBA00D84133 /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
-		CAF2AE93245B507400D84133 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		CAF2AE8A2458EF0900D84133 /* MarkdownText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownText.swift; sourceTree = "<group>"; };
 		E2D5B8AFEEB28F750CE393D1 /* Pods-NioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioTests.debug.xcconfig"; path = "Target Support Files/Pods-NioTests/Pods-NioTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -294,6 +295,7 @@
 			children = (
 				392389CB238EBB1400B2E1DF /* ReverseList.swift */,
 				CAF2AE882458EEBB00D84133 /* AttributedText.swift */,
+				CAF2AE8A2458EF0900D84133 /* MarkdownText.swift */,
 				4B0A2E46245E2EF800A79443 /* MultiLineTextView.swift */,
 			);
 			path = "Shared Views";
@@ -726,6 +728,7 @@
 				3923898F2388707E00B2E1DF /* RoomListItemView.swift in Sources */,
 				39C931DD2384328A004449E1 /* AppDelegate.swift in Sources */,
 				393411C923904428003B49B8 /* MXEvent.swift in Sources */,
+				CAF2AE8B2458EF0900D84133 /* MarkdownText.swift in Sources */,
 				CAF2AE892458EEBC00D84133 /* AttributedText.swift in Sources */,
 				3923898D238859D100B2E1DF /* MX+Identifiable.swift in Sources */,
 				CAC46D5B23A2734C0079C24F /* EnvironmentValues.swift in Sources */,
