@@ -15,18 +15,33 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
         model.sender == userId
     }
 
-    var textColor: Color {
-        if model.sender == userId {
-            return .lightText(for: colorScheme, with: colorSchemeContrast)
+    private var linkColor: UIColor {
+        if isMe {
+            return UIColor(
+                hue: 280.0 / 360.0,
+                saturation: 1.0,
+                brightness: 0.33,
+                alpha: 1.0
+            )
+        } else {
+            return UIColor.blue
         }
-        return .primaryText(for: colorScheme, with: colorSchemeContrast)
+    }
+
+    var textColor: Color {
+        if isMe {
+            return .lightText(for: colorScheme, with: colorSchemeContrast)
+        } else {
+            return .primaryText(for: colorScheme, with: colorSchemeContrast)
+        }
     }
 
     var backgroundColor: Color {
-        guard model.sender == userId else {
+        if isMe {
+            return .accentColor
+        } else {
             return .borderedMessageBackground
         }
-        return .accentColor
     }
 
     var gradient: LinearGradient {
@@ -67,9 +82,17 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
             .padding(10)
     }
 
-    var bodyView: some View {
-        Text(model.text)
-            .foregroundColor(textColor)
+    var markdownView: some View {
+        MarkdownText(
+            markdownString: .constant(model.text),
+            linkTextAttributes: .constant([
+                .foregroundColor: linkColor,
+                .underlineStyle: NSUnderlineStyle.single.rawValue,
+            ])
+        ) { url in
+            print("Tapped URL:", url)
+            return true
+        }
     }
 
     var senderView: some View {
@@ -108,45 +131,50 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
         // ```
         VStack(alignment: isMe ? .trailing : .leading, spacing: 3) {
             senderView
-            // ZStack for drawing badges (e.g. "edited") over the message's edge, if appropriate:
-            //
+            // Vertically stack message, reactions & timestamp:
             // ```
-            //  ┌─────────────────────────────┐
-            //  │Message                      │
-            //  │                             │
-            //  │                             │
-            // ┌┴──┐                          │
-            // │   ├──────────────────────────┘
-            // └───┘
+            // ┌─────────────────────────────┐
+            // │Lorem ipsum dolor sit amet   │
+            // │consectetur adipiscing elit. │
+            // └─────────────────────────────┘
+            // ┌───────────┐
+            // │ Reactions │
+            // └───────────┘        timestamp
             // ```
-            ZStack(alignment: isMe ? .bottomLeading : .bottomTrailing) {
-                // Vertically stack message & timestamp:
+            VStack(alignment: isMe ? .trailing : .leading, spacing: 5) {
+                // ZStack for drawing badges (e.g. "edited") over the message's edge, if appropriate:
+                //
                 // ```
-                // ┌─────────────────────────────┐
-                // │Lorem ipsum dolor sit amet   │
-                // │consectetur adipiscing elit. │
-                // │                             │
-                // │                   timestamp │
-                // └─────────────────────────────┘
+                //   ┌──────────────────────────────┐
+                //   │ Lorem ipsum dolor sit amet   │
+                //   │ consectetur adipiscing elit. │
+                // ┌─┴─┐                            │
+                // │   ├────────────────────────────┘
+                // └───┘
                 // ```
-                VStack(alignment: isMe ? .trailing : .leading, spacing: 5) {
-                    bodyView
-                        .fixedSize(horizontal: false, vertical: true)
-                    if !connectedEdges.contains(.bottomEdge) {
-                        // It's the last message in a group, so show a timestamp:
-                        timestampView
+                ZStack(alignment: isMe ? .bottomLeading : .bottomTrailing) {
+                    markdownView
+                        .padding(10)
+                        .background(background)
+                        .contextMenu(ContextMenu(menuItems: {
+                            EventContextMenu(model: contextMenuModel)
+                        }))
+                    if isEdited {
+                        self.editBadgeView
+                            .offset(x: isMe ? -5 : 5, y: 5)
                     }
                 }
-                .padding(10)
-                .background(background)
-                .contextMenu(ContextMenu(menuItems: {
-                    EventContextMenu(model: contextMenuModel)
-                }))
-                if isEdited {
-                    self.editBadgeView
-                        .offset(x: isMe ? -5 : 5, y: 5)
+                GroupedReactionsView(reactions: model.reactions)
+                if !connectedEdges.contains(.bottomEdge) {
+                    // It's the last message in a group, so show a timestamp:
+                    timestampView
                 }
             }
+            .padding(10)
+            .background(background)
+            .contextMenu(ContextMenu(menuItems: {
+                EventContextMenu(model: contextMenuModel)
+            }))
             GroupedReactionsView(reactions: model.reactions)
         }
     }
