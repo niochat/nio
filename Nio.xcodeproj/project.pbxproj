@@ -80,9 +80,9 @@
 		CAC46D7323A6AE890079C24F /* TypedEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D7223A6AE890079C24F /* TypedEvents.swift */; };
 		CAC46D7723A6CB6C0079C24F /* MXEventType+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D7623A6CB6C0079C24F /* MXEventType+Equatable.swift */; };
 		CAC46D7923A6D4B90079C24F /* TypedEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D7823A6D4B90079C24F /* TypedEventsTests.swift */; };
-		CAF2AE94245B507400D84133 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AE93245B507400D84133 /* Assets.swift */; };
-		CAF2AE92245AEEBA00D84133 /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AE91245AEEBA00D84133 /* BadgeView.swift */; };
 		CAF2AE892458EEBC00D84133 /* AttributedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AE882458EEBB00D84133 /* AttributedText.swift */; };
+		CAF2AE92245AEEBA00D84133 /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AE91245AEEBA00D84133 /* BadgeView.swift */; };
+		CAF2AE94245B507400D84133 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AE93245B507400D84133 /* Assets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,9 +176,9 @@
 		CAC46D7223A6AE890079C24F /* TypedEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypedEvents.swift; sourceTree = "<group>"; };
 		CAC46D7623A6CB6C0079C24F /* MXEventType+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXEventType+Equatable.swift"; sourceTree = "<group>"; };
 		CAC46D7823A6D4B90079C24F /* TypedEventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypedEventsTests.swift; sourceTree = "<group>"; };
-		CAF2AE93245B507400D84133 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
-		CAF2AE91245AEEBA00D84133 /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
 		CAF2AE882458EEBB00D84133 /* AttributedText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedText.swift; sourceTree = "<group>"; };
+		CAF2AE91245AEEBA00D84133 /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
+		CAF2AE93245B507400D84133 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		E2D5B8AFEEB28F750CE393D1 /* Pods-NioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioTests.debug.xcconfig"; path = "Target Support Files/Pods-NioTests/Pods-NioTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -755,7 +755,6 @@
 				392389D6238F3EB200B2E1DF /* NIORoomSummary.swift in Sources */,
 				39BA0725240B4E8D00FD28C6 /* AppSettings.swift in Sources */,
 				39D166C82385C832006DD257 /* EventContainerView.swift in Sources */,
-				CAF2AE902459BEF100D84133 /* Assets.swift in Sources */,
 				CAC46D6B23A55E940079C24F /* PeekableIterator.swift in Sources */,
 				CAC46D5823A272D10079C24F /* MessageViewModel.swift in Sources */,
 				39C931DF2384328A004449E1 /* SceneDelegate.swift in Sources */,
