@@ -11,7 +11,7 @@ import SwiftUI
 import SwiftyMarkdown
 
 struct MarkdownText: View {
-	@State var markdownString: String
+    @State var markdownString: String
     @State var desiredHeight: CGFloat = 0.0
 
     let linkTapped: (URL) -> Void
