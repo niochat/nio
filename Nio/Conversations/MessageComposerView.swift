@@ -51,7 +51,7 @@ struct MessageComposerView: View {
                         }
                         Text(highlightMessage!)
                             .lineLimit(2)
-                            .padding(Edge.Set([.leading, .trailing, .bottom]), 10)
+                            .padding([.horizontal, .bottom], 10)
                             .frame(minWidth: 0, maxWidth: .infinity, alignment: Alignment.leading)
                     }
                 }.fixedSize(horizontal: false, vertical: true)
