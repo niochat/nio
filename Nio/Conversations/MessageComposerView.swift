@@ -38,9 +38,10 @@ struct MessageComposerView: View {
                     VStack {
                         HStack {
                             Text(L10n.Composer.editMessage)
-                                .frame(minWidth: 0, maxWidth: .infinity, alignment: Alignment.leading)
+                                .frame(alignment: .leading)
                                 .padding(.leading, 10)
                                 .foregroundColor(.accentColor)
+                            Spacer()
                             Button(action: {
                                 self.onCancel()
                             }, label: {
