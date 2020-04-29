@@ -1,5 +1,16 @@
 import SwiftUI
 
+struct ExDivider: View {
+    let color: Color = .accentColor
+    let width: CGFloat = 3
+    var body: some View {
+        Rectangle()
+            .fill(color)
+            .frame(width: width)
+            .edgesIgnoringSafeArea(.horizontal)
+    }
+}
+
 struct MessageComposerView: View {
     @Environment (\.colorScheme) var colorScheme
     @Environment(\.colorSchemeContrast) var colorSchemeContrast
@@ -17,34 +28,33 @@ struct MessageComposerView: View {
         return .primaryText(for: colorScheme, with: colorSchemeContrast)
     }
 
-    var background: some View {
-        let radius: CGFloat = 15.0 * sizeCategory.scalingFactor
-        return RoundedRectangle(cornerRadius: radius)
-            .fill(colorScheme == .light ? Color(#colorLiteral(red: 0.9332506061, green: 0.937307477, blue: 0.9410644174, alpha: 1)) : Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
-    }
-
     var body: some View {
         VStack {
             if self.highlightMessage != nil {
-                Text("Editing:")
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: Alignment.leading)
-                    .font(.caption)
-                    .foregroundColor(textColor
-                        .opacity(colorSchemeContrast == .standard ? 0.5 : 1.0))
+                Divider()
                 HStack {
-                    Text(highlightMessage!)
-                        .lineLimit(3)
-                        .padding(10)
-                        .frame(minWidth: 0, maxWidth: .infinity, alignment: Alignment.leading)
-                        .background(background)
-                    Button(action: {
-                        self.onCancel()
-                    }, label: {
-                        Image(systemName: "multiply")
-                            .font(.system(size: 20))
-                            .accessibility(label: Text(L10n.Composer.AccessibilityLabel.cancelEdit))
-                    })
-                }
+                    ExDivider()
+                        .background(Color.accentColor)
+                    VStack {
+                        HStack {
+                            Text(L10n.Composer.editMessage)
+                                .frame(minWidth: 0, maxWidth: .infinity, alignment: Alignment.leading)
+                                .padding(.leading, 10)
+                                .foregroundColor(.accentColor)
+                            Button(action: {
+                                self.onCancel()
+                            }, label: {
+                                Image(systemName: "multiply")
+                                    .font(.system(size: 20))
+                                    .accessibility(label: Text(L10n.Composer.AccessibilityLabel.cancelEdit))
+                            })
+                        }
+                        Text(highlightMessage!)
+                            .lineLimit(2)
+                            .padding(Edge.Set([.leading, .trailing, .bottom]), 10)
+                            .frame(minWidth: 0, maxWidth: .infinity, alignment: Alignment.leading)
+                    }
+                }.fixedSize(horizontal: false, vertical: true)
             }
             HStack {
                 Button(action: {
@@ -85,12 +95,30 @@ struct MessageComposerView_Previews: PreviewProvider {
                                 onCommit: {}, onCancel: {})
                 .padding()
                 .environment(\.colorScheme, .light)
-
+            ZStack {
+                MessageComposerView(message: .constant("Message to edit"),
+                                    showAttachmentPicker: .constant(true),
+                                    onCommit: {},
+                                    highlightMessage: "Message to edit",
+                                    onCancel: {})
+                    .padding()
+                    .environment(\.colorScheme, .light)
+            }
             ZStack {
                 Color.black.frame(height: 80)
                 MessageComposerView(message: .constant(""),
                                     showAttachmentPicker: .constant(false),
                                     onCommit: {}, onCancel: {})
+                    .padding()
+                    .environment(\.colorScheme, .dark)
+            }
+            ZStack {
+                Color.black.frame(height: 152)
+                MessageComposerView(message: .constant("Message to edit"),
+                                    showAttachmentPicker: .constant(true),
+                                    onCommit: {},
+                                    highlightMessage: "Message to edit",
+                                    onCancel: {})
                     .padding()
                     .environment(\.colorScheme, .dark)
             }

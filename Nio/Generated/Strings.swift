@@ -13,6 +13,8 @@ import Foundation
 internal enum L10n {
 
   internal enum Composer {
+    /// Edit Message:
+    internal static let editMessage = L10n.tr("Localizable", "composer.edit-message")
     /// New Message...
     internal static let newMessage = L10n.tr("Localizable", "composer.new-message")
     internal enum AccessibilityLabel {
