@@ -25,7 +25,7 @@ struct MessageComposerView: View {
     var onCancel: () -> Void
 
     var textColor: Color {
-        return .primaryText(for: colorScheme, with: colorSchemeContrast)
+        .primaryText(for: colorScheme, with: colorSchemeContrast)
     }
 
     var body: some View {
