@@ -106,9 +106,40 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
     }
 
     var body: some View {
+        // Vertical stack of:
+        //
+        // ```
+        // @sender
+        // ┌───────────────────────────┐
+        // │Message                    │
+        // └───────────────────────────┘
+        // ┌──────────┐
+        // │Reactions │
+        // └──────────┘
+        // ```
         VStack(alignment: isMe ? .trailing : .leading, spacing: 3) {
             senderView
+            // ZStack for drawing badges (e.g. "edited") over the message's edge, if appropriate:
+            //
+            // ```
+            //  ┌─────────────────────────────┐
+            //  │Message                      │
+            //  │                             │
+            //  │                             │
+            // ┌┴──┐                          │
+            // │   ├──────────────────────────┘
+            // └───┘
+            // ```
             ZStack(alignment: isMe ? .bottomLeading : .bottomTrailing) {
+                // Vertically stack message & timestamp:
+                // ```
+                // ┌─────────────────────────────┐
+                // │Lorem ipsum dolor sit amet   │
+                // │consectetur adipiscing elit. │
+                // │                             │
+                // │                   timestamp │
+                // └─────────────────────────────┘
+                // ```
                 VStack(alignment: isMe ? .trailing : .leading, spacing: 5) {
                     bodyView
                         .fixedSize(horizontal: false, vertical: true)
