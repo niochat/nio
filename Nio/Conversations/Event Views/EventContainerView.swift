@@ -43,21 +43,30 @@ struct EventContainerView: View {
                 newEvent = edits.last ?? event
             }
 
-            // FIXME: remove
-            // swiftlint:disable:next force_try
-            let messageModel = try! MessageViewModel(event: newEvent,
-                                                     reactions: reactions,
-                                                     showSender: showSender)
-            return AnyView(
-                MessageView(
-                    model: .constant(messageModel),
-                    contextMenuModel: contextMenuModel,
-                    connectedEdges: connectedEdges,
-                    isEdited: event.contentHasBeenEdited()
+            do {
+                let messageModel = try MessageViewModel(
+                    event: newEvent,
+                    reactions: reactions,
+                    showSender: showSender
                 )
-                .padding(.top, topPadding)
-                .padding(.bottom, bottomPadding)
-            )
+                return AnyView(
+                    MessageView(
+                        model: .constant(messageModel),
+                        contextMenuModel: contextMenuModel,
+                        connectedEdges: connectedEdges,
+                        isEdited: event.contentHasBeenEdited()
+                    )
+                    .padding(.top, topPadding)
+                    .padding(.bottom, bottomPadding)
+                )
+            } catch let error as MessageViewModel.Error {
+                switch error {
+                case .invalidEventType(let eventType):
+                    return AnyView(Text("⚠️ Invalid event type \(String(describing: eventType))"))
+                }
+            } catch let error {
+                return AnyView(Text("⚠️ Unknown error \(String(describing: error))"))
+            }
         case .roomMember:
             return AnyView(
                 RoomMemberEventView(model: .init(event: event))
