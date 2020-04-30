@@ -747,6 +747,7 @@
 				392389D6238F3EB200B2E1DF /* NIORoomSummary.swift in Sources */,
 				39BA0725240B4E8D00FD28C6 /* AppSettings.swift in Sources */,
 				39D166C82385C832006DD257 /* EventContainerView.swift in Sources */,
+				CAF2AE902459BEF100D84133 /* Assets.swift in Sources */,
 				CAC46D6B23A55E940079C24F /* PeekableIterator.swift in Sources */,
 				CAC46D5823A272D10079C24F /* MessageViewModel.swift in Sources */,
 				39C931DF2384328A004449E1 /* SceneDelegate.swift in Sources */,
