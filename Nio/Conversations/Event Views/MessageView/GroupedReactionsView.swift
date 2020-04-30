@@ -116,9 +116,9 @@ struct GroupedReactionsView: View {
                     ForEach(model.groupedReactions) { group in
                         HStack(spacing: 1) {
                             Text(group.reaction)
-                                .font(.headline)
+                                .font(.footnote)
                             Text(String(group.count))
-                                .font(.callout)
+                                .font(.footnote)
                         }
                         .padding(.vertical, 4)
                         .padding(.horizontal, 8)
