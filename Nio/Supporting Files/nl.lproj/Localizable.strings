@@ -30,8 +30,10 @@
 "room.remove.action" = "Verwijderen";
 
 "composer.new-message" = "Nieuw Bericht...";
+"composer.edit-message" = "Bewerk Bericht:";
 "composer.accessibility-label.send-file" = "Bestand versturen";
 "composer.accessibility-label.send" = "Verstuur";
+"composer.accessibility-label.cancelEdit" = "Annuleer";
 
 "typing-indicator.single" = "%@ is aan het typen...";
 "typing-indicator.multiple" = "%@ zijn aan het typen...";

@@ -30,8 +30,10 @@
 "room.remove.action" = "Remove";
 
 "composer.new-message" = "New Message...";
+"composer.edit-message" = "Edit Message:";
 "composer.accessibility-label.send-file" = "Send file";
 "composer.accessibility-label.send" = "Send";
+"composer.accessibility-label.cancelEdit" = "Cancel";
 
 "typing-indicator.single" = "%@ is typing...";
 "typing-indicator.multiple" = "%@ are typing...";

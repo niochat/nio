@@ -72,6 +72,9 @@ extension EventCollection {
 
         let isPrecedingRedacted = precedingMessageEvent?.isRedactedEvent() ?? false
         let isSucceedingRedacted = succeedingMessageEvent?.isRedactedEvent() ?? false
+        let isPrecedingEdited = precedingMessageEvent?.isEdit() ?? false
+        let isSucceedingEdited = succeedingMessageEvent?.isEdit() ?? false
+
 
         // If a message is sent within this time interval, it is considered to be part of the current group.
         let timeIntervalBeforeNewGroup: TimeInterval = 5*60
@@ -81,10 +84,12 @@ extension EventCollection {
         let groupedWithPreceding = event.sender == precedingMessageEvent?.sender
             && !isPrecedingRedacted
             && precedingInterval < timeIntervalBeforeNewGroup
+            && !isPrecedingEdited
 
         let groupedWithSucceeding = event.sender == succeedingMessageEvent?.sender
             && !isSucceedingRedacted
             && succeedingInterval < timeIntervalBeforeNewGroup
+            && !isSucceedingEdited
 
         switch (groupedWithPreceding, groupedWithSucceeding) {
         case (false, false):

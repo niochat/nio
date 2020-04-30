@@ -65,6 +65,7 @@ struct RoomView: View {
     @State private var eventToRedact: String?
 
     @State private var message = ""
+    @State private var highlightMessage: String?
 
     var body: some View {
         VStack {
@@ -88,7 +89,9 @@ struct RoomView: View {
             }
             MessageComposerView(message: $message,
                                 showAttachmentPicker: $showAttachmentPicker,
-                                onCommit: send)
+                                onCommit: send,
+                                highlightMessage: highlightMessage,
+                                onCancel: cancelEdit)
                 .padding(.horizontal)
                 .padding(.bottom, 10)
         }
@@ -108,12 +111,20 @@ struct RoomView: View {
             onEdit(message, editEventId!)
             message = ""
             editEventId = nil
+            highlightMessage = nil
         }
     }
 
     private func edit(event: MXEvent) {
         message = event.content["body"] as? String ?? ""
+        highlightMessage = message
         editEventId = event.eventId
+    }
+
+    private func cancelEdit() {
+        editEventId = nil
+        highlightMessage = nil
+        message = ""
     }
 }
 

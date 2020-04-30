@@ -30,8 +30,10 @@
 "room.remove.action" = "Entfernen";
 
 "composer.new-message" = "Neue Nachricht...";
+"composer.edit-message" = ":";
 "composer.accessibility-label.send-file" = "Anhang sendne";
 "composer.accessibility-label.send" = "Senden";
+"composer.accessibility-label.cancelEdit" = "";
 
 "typing-indicator.single" = "%@ tippt...";
 "typing-indicator.multiple" = "%@ tippen...";

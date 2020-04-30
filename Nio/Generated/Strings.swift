@@ -13,9 +13,13 @@ import Foundation
 internal enum L10n {
 
   internal enum Composer {
+    /// Edit Message:
+    internal static let editMessage = L10n.tr("Localizable", "composer.edit-message")
     /// New Message...
     internal static let newMessage = L10n.tr("Localizable", "composer.new-message")
     internal enum AccessibilityLabel {
+      /// Cancel
+      internal static let cancelEdit = L10n.tr("Localizable", "composer.accessibility-label.cancelEdit")
       /// Send
       internal static let send = L10n.tr("Localizable", "composer.accessibility-label.send")
       /// Send file
