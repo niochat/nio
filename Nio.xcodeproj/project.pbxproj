@@ -81,6 +81,7 @@
 		CAC46D7723A6CB6C0079C24F /* MXEventType+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D7623A6CB6C0079C24F /* MXEventType+Equatable.swift */; };
 		CAC46D7923A6D4B90079C24F /* TypedEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D7823A6D4B90079C24F /* TypedEventsTests.swift */; };
 		CAF2AE94245B507400D84133 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AE93245B507400D84133 /* Assets.swift */; };
+		CAF2AE92245AEEBA00D84133 /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AE91245AEEBA00D84133 /* BadgeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,6 +176,7 @@
 		CAC46D7623A6CB6C0079C24F /* MXEventType+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXEventType+Equatable.swift"; sourceTree = "<group>"; };
 		CAC46D7823A6D4B90079C24F /* TypedEventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypedEventsTests.swift; sourceTree = "<group>"; };
 		CAF2AE93245B507400D84133 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		CAF2AE91245AEEBA00D84133 /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
 		E2D5B8AFEEB28F750CE393D1 /* Pods-NioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioTests.debug.xcconfig"; path = "Target Support Files/Pods-NioTests/Pods-NioTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -230,6 +232,7 @@
 				392221B5243F88FD004D8794 /* RoomNameEventView.swift */,
 				392221A92438083C004D8794 /* RedactionEventView.swift */,
 				3902B89D2393FE8200698B87 /* GenericEventView.swift */,
+				CAF2AE91245AEEBA00D84133 /* BadgeView.swift */,
 			);
 			path = "Event Views";
 			sourceTree = "<group>";
@@ -742,6 +745,7 @@
 				39BA0723240B3C9A00FD28C6 /* MXCredentials+Keychain.swift in Sources */,
 				392221AC2438149D004D8794 /* RoomMemberEventView.swift in Sources */,
 				392221B4243D1627004D8794 /* RoomPowerLevelsEventView.swift in Sources */,
+				CAF2AE92245AEEBA00D84133 /* BadgeView.swift in Sources */,
 				CAC46D6323A278F40079C24F /* PreviewProvider+Enumeration.swift in Sources */,
 				39222199243689D6004D8794 /* ReactionEvent.swift in Sources */,
 				392389D6238F3EB200B2E1DF /* NIORoomSummary.swift in Sources */,

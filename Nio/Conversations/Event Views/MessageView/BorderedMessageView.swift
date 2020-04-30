@@ -11,7 +11,7 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
     var connectedEdges: ConnectedEdges
     var isEdited = false
 
-    private var isMe: Bool {
+    var isMe: Bool {
         model.sender == userId
     }
 
@@ -60,6 +60,13 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
         .scaleEffect(x: isMe ? -1.0 : 1.0, y: 1.0, anchor: .center)
     }
 
+    var timestampView: some View {
+        Text(model.timestamp)
+            .font(.caption)
+            .foregroundColor(.secondary)
+            .padding(10)
+    }
+
     var bodyView: some View {
         Text(model.text)
             .foregroundColor(textColor)
@@ -78,31 +85,13 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
         }
     }
 
-    var timestampView: some View {
-        Text(model.timestamp)
-        .font(.caption)
-        .foregroundColor(textColor)
-        .opacity(colorSchemeContrast == .standard ? 0.5 : 1.0)
-    }
-
     var editBadgeView: some View {
-        let lineWidth: CGFloat = 3.0
-
-        let circle = Circle()
-            .stroke(Color.backgroundColor(for: colorScheme), lineWidth: lineWidth)
-            .overlay(
-                Circle()
-                    .fill(backgroundColor)
-            )
-            .padding(lineWidth)
-
-        let image = Image(Asset.Badge.edited.name)
-            .aspectRatio(contentMode: .fit)
-            .foregroundColor(.backgroundColor(for: colorScheme))
-            .padding(4.0)
-            .background(circle)
-
-        return image
+        let foregroundColor = Color.backgroundColor(for: colorScheme)
+        return BadgeView(
+            image: Image(Asset.Badge.edited.name),
+            foregroundColor: foregroundColor,
+            backgroundColor: backgroundColor
+        )
     }
 
     var body: some View {

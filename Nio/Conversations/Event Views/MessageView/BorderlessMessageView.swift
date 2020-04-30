@@ -18,7 +18,7 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
         return .primaryText(for: colorScheme, with: colorSchemeContrast)
     }
 
-    private var isMe: Bool {
+    var isMe: Bool {
         model.sender == userId
     }
 
@@ -45,14 +45,12 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
         emojiView
     }
 
-    var contentEditedView: some View {
-        HStack(alignment: .bottom) {
-            if isMe {
-                editedView
-                emojiView
-            } else {
-                emojiView
-                editedView
+    var conditionalBadgedContentView: some View {
+        ZStack(alignment: isMe ? .bottomLeading : .bottomTrailing) {
+            contentView
+            if isEdited {
+                self.editBadgeView
+                    .offset(x: isMe ? -5 : 5, y: 5)
             }
         }
     }
@@ -83,41 +81,45 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
         )
     }
 
+    var backgroundColor: Color {
+        guard model.sender == userId else {
+            return .borderedMessageBackground
+        }
+        return .accentColor
+    }
+
+    var editBadgeView: some View {
+        let foregroundColor = Color.backgroundColor(for: colorScheme)
+        return BadgeView(
+            image: Image(Asset.Badge.edited.name),
+            foregroundColor: foregroundColor,
+            backgroundColor: backgroundColor
+        )
+    }
+
     var bodyView: some View {
-        if isMe {
-            return AnyView(
-                VStack(alignment: .trailing, spacing: 0) {
+        VStack(alignment: isMe ? .trailing : .leading, spacing: 0) {
+            if isMe {
+                AnyView {
                     HStack {
-                        if !connectedEdges.contains(.bottomEdge) {
-                            // It's the last message in a group, so show a timestamp:
-                            timestampView
+                        if !self.connectedEdges.contains(.bottomEdge) {
+                            self.timestampView
                         }
-                        if isEdited {
-                            contentEditedView
-                        } else {
-                            contentView
+                        self.conditionalBadgedContentView
+                    }
+                }
+            } else {
+                AnyView {
+                    HStack {
+                        self.conditionalBadgedContentView
+                        if !self.connectedEdges.contains(.bottomEdge) {
+                            self.timestampView
                         }
                     }
-                    GroupedReactionsView(reactions: model.reactions)
                 }
-            )
-        } else {
-            return AnyView(
-                VStack(alignment: .leading, spacing: 0) {
-                    HStack {
-                        if isEdited {
-                            contentEditedView
-                        } else {
-                            contentView
-                        }
-                        if !connectedEdges.contains(.bottomEdge) {
-                            // It's the last message in a group, so show a timestamp:
-                            timestampView
-                        }
-                    }
-                    GroupedReactionsView(reactions: model.reactions)
-                }
-            )
+            }
+
+            GroupedReactionsView(reactions: model.reactions)
         }
     }
 
