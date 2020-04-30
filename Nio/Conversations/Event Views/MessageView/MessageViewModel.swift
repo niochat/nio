@@ -69,10 +69,7 @@ struct MessageViewModel: MessageViewModelProtocol {
 
     private static func validate(event: MXEvent) throws {
         let eventType = MXEventType(identifier: event.type)
-        // FIXME: Replace with simple `eventType == .roomMessage`
-        // once https://github.com/matrix-org/matrix-ios-sdk/pull/755 is part of a release (presumably v0.15.3):
-
-        guard case .roomMessage = eventType else {
+        guard eventType == .roomMessage else {
             throw Error.invalidEventType(eventType)
         }
     }
