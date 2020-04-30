@@ -65,15 +65,6 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
             .foregroundColor(textColor)
     }
 
-    var editedBodyView: some View {
-        Text(model.text + " ")
-            .foregroundColor(textColor)
-        + Text("(" + L10n.Event.edited + ")")
-            .font(.caption)
-            .foregroundColor(textColor
-                .opacity(colorSchemeContrast == .standard ? 0.5 : 1.0))
-    }
-
     var senderView: some View {
         if model.showSender
             && !isMe
@@ -94,30 +85,49 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
         .opacity(colorSchemeContrast == .standard ? 0.5 : 1.0)
     }
 
+    var editBadgeView: some View {
+        let lineWidth: CGFloat = 3.0
+
+        let circle = Circle()
+            .stroke(Color.backgroundColor(for: colorScheme), lineWidth: lineWidth)
+            .overlay(
+                Circle()
+                    .fill(backgroundColor)
+            )
+            .padding(lineWidth)
+
+        let image = Image(Asset.Badge.edited.name)
+            .aspectRatio(contentMode: .fit)
+            .foregroundColor(.backgroundColor(for: colorScheme))
+            .padding(4.0)
+            .background(circle)
+
+        return image
+    }
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
+        VStack(alignment: isMe ? .trailing : .leading, spacing: 3) {
             senderView
-            VStack(alignment: isMe ? .trailing : .leading, spacing: 3) {
+            ZStack(alignment: isMe ? .bottomLeading : .bottomTrailing) {
                 VStack(alignment: isMe ? .trailing : .leading, spacing: 5) {
-                    if isEdited {
-                        editedBodyView
-                    } else {
-                        bodyView
-                    }
+                    bodyView
+                        .fixedSize(horizontal: false, vertical: true)
                     if !connectedEdges.contains(.bottomEdge) {
                         // It's the last message in a group, so show a timestamp:
                         timestampView
                     }
                 }
-                .fixedSize(horizontal: false, vertical: true)
                 .padding(10)
                 .background(background)
                 .contextMenu(ContextMenu(menuItems: {
                     EventContextMenu(model: contextMenuModel)
                 }))
-
-                GroupedReactionsView(reactions: model.reactions)
+                if isEdited {
+                    self.editBadgeView
+                        .offset(x: isMe ? -5 : 5, y: 5)
+                }
             }
+            GroupedReactionsView(reactions: model.reactions)
         }
     }
 }
