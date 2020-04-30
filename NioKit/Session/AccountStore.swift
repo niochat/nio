@@ -180,23 +180,16 @@ public class AccountStore: ObservableObject {
 
     var listenReferenceRoom: Any?
 
-    func pagenate(room: NIORoom, event: MXEvent) {
-        room.room.liveTimeline { timeline in
-            self.listenReferenceRoom = timeline?.listenToEvents { event, direction, roomState in
-                print(event)
+    func paginate(room: NIORoom, event: MXEvent) {
+        let timeline = room.room.timeline(onEvent: event.eventId)
+        listenReferenceRoom = timeline?.listenToEvents { event, direction, roomState in
+            if direction == .backwards {
                 room.add(event: event, direction: direction, roomState: roomState)
-                self.objectWillChange.send()
             }
-            timeline?.resetPagination()
-            let canPage = timeline?.canPaginate(.backwards) ?? false
-            if canPage {
-                timeline?.paginate(20, direction: .backwards, onlyFromStore: false) {response in
-                    if response.isSuccess {
-                        print(response.value)
-                        //room.add(event: response.value, direction: .backwards, roomState: nil)
-                    }
-                }
-            }
+            self.objectWillChange.send()
+        }
+        timeline?.resetPaginationAroundInitialEvent(withLimit: 40) { _ in
+            self.objectWillChange.send()
         }
     }
 }

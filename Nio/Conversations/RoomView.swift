@@ -133,9 +133,8 @@ struct RoomView: View {
                                     }))
                     .padding(.horizontal)
                     .onAppear(perform: {
-                        if !self.firstMessage {
-                            self.firstMessage = true
-                            self.store.pagenate(room: self.room, event: event)
+                        if self.events.renderableEventsWithoutEdited.first!.eventId == event.eventId! {
+                            self.store.paginate(room: self.room, event: event)
                         }
                     })
             }
