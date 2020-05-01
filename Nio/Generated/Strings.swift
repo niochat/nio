@@ -146,8 +146,6 @@ internal enum L10n {
     internal static let failureBackToLogin = L10n.tr("Localizable", "login.failure-back-to-login")
     /// Don't have an account yet?
     internal static let openRegistrationPrompt = L10n.tr("Localizable", "login.open-registration-prompt")
-    /// Registering for new accounts is not yet implemented.
-    internal static let registerNotYetImplemented = L10n.tr("Localizable", "login.register-not-yet-implemented")
     /// Sign in
     internal static let signIn = L10n.tr("Localizable", "login.sign-in")
     /// 👋 Welcome to 

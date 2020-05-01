@@ -6,7 +6,6 @@
 "login.form.homeserver-optional-explanation" = "Der Homeserver ist optional falls du auf matrix.org registriert bist.";
 "login.sign-in" = "Anmelden";
 "login.open-registration-prompt" = "Du hast noch kein Benutzerkonto?";
-"login.register-not-yet-implemented" = "Registrierung für neue Konten ist noch nicht implementiert.";
 "login.failure-back-to-login" = "Zurück zur Anmeldung";
 
 "registration.header" = "Erstelle ein neues Matrix-Konto";

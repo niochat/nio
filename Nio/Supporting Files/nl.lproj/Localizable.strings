@@ -6,7 +6,6 @@
 "login.form.homeserver-optional-explanation" = "Homeserver is optioneel als je matrix.org gebruikt.";
 "login.sign-in" = "Log in";
 "login.open-registration-prompt" = "Nog geen account?";
-"login.register-not-yet-implemented" = "Registratie voor nieuwe accounts is nog niet geïmplementeerd.";
 "login.failure-back-to-login" = "Terug naar Login";
 
 "registration.header" = "Registreer een nieuwe Matrix account";
