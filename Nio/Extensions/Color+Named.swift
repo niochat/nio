@@ -1,11 +1,7 @@
 import SwiftUI
 
 extension Color {
-    private enum CustomNames {
-        static let borderedMessageBackground: String = "borderedMessageBackground"
-    }
-
-    static var borderedMessageBackground: Color = .init(CustomNames.borderedMessageBackground)
+    static var borderedMessageBackground: Color = .init(Asset.Color.borderedMessageBackground.name)
 
     static func backgroundColor(for colorScheme: ColorScheme) -> Color {
         if colorScheme == .dark {
