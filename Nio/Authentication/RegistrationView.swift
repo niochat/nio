@@ -98,8 +98,13 @@ struct RegistrationView: View {
             LoginFormTextField(placeholder: L10n.Login.Form.homeserver,
                                text: $homeserver,
                                buttonIcon: "shuffle",
-                               buttonAction: { self.homeserver = Self.randomServerSuggestions.randomElement()! })
-                .padding(.horizontal)
+                               buttonAction: {
+                                self.homeserver = Self.randomServerSuggestions
+                                    .filter { $0 != self.homeserver }
+                                    .randomElement()!
+                               }
+            )
+            .padding(.horizontal)
         }
     }
 
