@@ -9,6 +9,12 @@
 "login.register-not-yet-implemented" = "Registrierung für neue Konten ist noch nicht implementiert.";
 "login.failure-back-to-login" = "Zurück zur Anmeldung";
 
+"registration.header" = "Erstelle ein neues Matrix-Konto";
+"registration.explanation" = "Matrix ist ein dezentralisiertes Netzwerk, wie E-Mail, d.h. es gibt keinen einzelnen Server, sondern viele, die miteinander kommunizieren. Du brauchst ein Konto auf einem davon, um mit anderen Benutzern zu kommunizieren.";
+"registration.confirm-password" = "Passwort bestätigen";
+"registration.homeserver-explanation" = "Du kannst dieses Feld verwenden, um ein Konto auf einem bestimmten Matrix-Server zu erstellen. Tippe auf den Shuffle-Button, um einen Zufallsvorschlag zu erhalten, oder lasse das Feld leer, um ein Konto auf matrix.org zu erstellen.";
+"registration.register" = "Registrieren";
+
 "loading.1" = "🧑‍🎤 Die Matrix wird entschlüsselt";
 "loading.2" = "🧑‍🏭 Nachrichten werden auseinander gefriemelt";
 "loading.3" = "🧑‍🔧 Anmeldung läuft";
