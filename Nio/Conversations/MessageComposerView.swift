@@ -61,8 +61,9 @@ struct MessageComposerView: View {
                 Button(action: {
                     self.showAttachmentPicker.toggle()
                 }, label: {
-                    Image(systemName: "paperclip")
-                        .font(.system(size: 20))
+                    Image(Asset.Icon.paperclip.name)
+                        .resizable()
+                        .frame(width: 30.0, height: 30.0)
                         .accessibility(label: Text(L10n.Composer.AccessibilityLabel.sendFile))
                 })
 
@@ -78,8 +79,9 @@ struct MessageComposerView: View {
                 Button(action: {
                     self.onCommit()
                 }, label: {
-                    Image(systemName: "paperplane.fill")
-                        .font(.system(size: 20))
+                    Image(Asset.Icon.paperplane.name)
+                        .resizable()
+                        .frame(width: 30.0, height: 30.0)
                         .accessibility(label: Text(L10n.Composer.AccessibilityLabel.send))
                 })
                 .disabled(message.isEmpty)

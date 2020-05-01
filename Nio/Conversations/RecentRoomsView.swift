@@ -32,8 +32,9 @@ struct RecentRoomsView: View {
         Button(action: {
             self.selectedNavigationItem = .settings
         }, label: {
-            Image(systemName: "person.crop.circle")
-                .font(.system(size: 25))
+            Image(Asset.Icon.user.name)
+                .resizable()
+                .frame(width: 30.0, height: 30.0)
                 .accessibility(label: Text(L10n.RecentRooms.AccessibilityLabel.settings))
         })
     }
@@ -42,8 +43,9 @@ struct RecentRoomsView: View {
         Button(action: {
             self.selectedNavigationItem = .newMessage
         }, label: {
-            Image(systemName: "plus")
-                .font(.system(size: 25))
+            Image(Asset.Icon.addRoom.name)
+                .resizable()
+                .frame(width: 30.0, height: 30.0)
                 .accessibility(label: Text(L10n.RecentRooms.AccessibilityLabel.newConversation))
         })
     }

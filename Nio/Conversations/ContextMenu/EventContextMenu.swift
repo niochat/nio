@@ -77,25 +77,33 @@ struct EventContextMenu: View {
             if model.canReact {
                 Button(action: onReact, label: {
                     Text(L10n.Event.ContextMenu.addReaction)
-                    Image(systemName: "smiley")
+                    Image(Asset.Icon.smiley.name)
+                        .resizable()
+                        .frame(width: 30.0, height: 30.0)
                 })
             }
             if model.canReply {
                 Button(action: onReply, label: {
                     Text(L10n.Event.ContextMenu.reply)
-                    Image(systemName: "arrowshape.turn.up.left")
+                    Image(Asset.Icon.Arrow.upLeft.name)
+                        .resizable()
+                        .frame(width: 30.0, height: 30.0)
                 })
             }
             if model.canEdit {
                 Button(action: onEdit, label: {
                     Text(L10n.Event.ContextMenu.edit)
-                    Image(systemName: "pencil")
+                    Image(Asset.Icon.pencil.name)
+                        .resizable()
+                        .frame(width: 30.0, height: 30.0)
                 })
             }
             if model.canRedact {
                 Button(action: onRedact, label: {
                     Text(L10n.Event.ContextMenu.remove)
-                    Image(systemName: "trash")
+                    Image(Asset.Icon.trash.name)
+                        .resizable()
+                        .frame(width: 30.0, height: 30.0)
                 })
             }
         }
