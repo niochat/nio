@@ -10,7 +10,7 @@ struct RootView: View {
                 RecentRoomsContainerView()
                     .environment(\.userId, userId)
                     // Can this ever be nil? And if so, what happens with the default fallback?
-                    .environment(\.homeserver, (store.client?.homeserver.flatMap(URL.init)) ?? HomeserverKey.defaultValue)
+                    .environment(\.homeserver, (store.client?.homeserver.flatMap(URL.init(string:))) ?? HomeserverKey.defaultValue)
             )
         case .loggedOut:
             return AnyView(

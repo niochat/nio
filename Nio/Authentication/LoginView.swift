@@ -3,6 +3,7 @@ import SwiftMatrixSDK
 
 struct LoginContainerView: View {
     @EnvironmentObject var store: AccountStore
+    @EnvironmentObject var settings: AppSettings
 
     @State private var username = ""
     @State private var password = ""
@@ -18,18 +19,16 @@ struct LoginContainerView: View {
                   isLoginEnabled: isLoginEnabled,
                   onLogin: login,
                   guessHomeserverURL: guessHomeserverURL)
+        .sheet(isPresented: $showingRegisterView) {
+            RegistrationContainerView()
+                .accentColor(self.settings.accentColor)
+                .environmentObject(self.store)
+        }
     }
 
     private func login() {
-        var homeserver = self.homeserver.isEmpty ? "https://matrix.org" : self.homeserver
-
-        // If there's no scheme at all, the URLComponents initializer below will think it's a path with no hostname.
-        if !homeserver.contains("//") {
-            homeserver = "https://\(homeserver)"
-        }
-        var homeserverURLComponents = URLComponents(string: homeserver)
-        homeserverURLComponents?.scheme = "https"
-        guard let homeserverURL = homeserverURLComponents?.url else {
+        let homeserver = self.homeserver.isEmpty ? "https://matrix.org" : self.homeserver
+        guard let homeserverURL = URL(homeserverString: homeserver) else {
             // TODO: Handle error
             print("Invalid homeserver URL '\(homeserver)'")
             return
@@ -86,9 +85,6 @@ struct LoginView: View {
             Spacer()
         }
         .keyboardObserving()
-        .sheet(isPresented: $showingRegisterView) {
-            Text(L10n.Login.registerNotYetImplemented)
-        }
     }
 
     var buttons: some View {
@@ -117,6 +113,7 @@ struct LoginTitleView: View {
         let nio = Text("Nio").foregroundColor(.accentColor)
 
         return VStack {
+            // FIXME: This probably breaks localisation.
             (Text(L10n.Login.welcomeHeader) + nio + Text("!"))
                 .font(.title)
                 .bold()
@@ -129,52 +126,29 @@ struct LoginForm: View {
     @Binding var username: String
     @Binding var password: String
     @Binding var homeserver: String
-    
+
     let guessHomeserverURL: () -> Void
 
     var body: some View {
         VStack {
-            FormTextField(title: L10n.Login.Form.username, text: $username, onEditingChanged: { _ in
-                self.guessHomeserverURL()
-            })
+            LoginFormTextField(placeholder: L10n.Login.Form.username,
+                               text: $username,
+                               onEditingChanged: { _ in self.guessHomeserverURL() })
+            .padding(.horizontal)
 
-            FormTextField(title: L10n.Login.Form.password, text: $password, isSecure: true)
+            LoginFormTextField(placeholder: L10n.Login.Form.password,
+                               text: $password,
+                               isSecure: true)
+            .padding(.horizontal)
 
-            FormTextField(title: L10n.Login.Form.homeserver, text: $homeserver)
+            LoginFormTextField(placeholder: L10n.Login.Form.homeserver,
+                               text: $homeserver)
+            .padding(.horizontal)
+
             Text(L10n.Login.Form.homeserverOptionalExplanation)
                 .font(.caption)
                 .foregroundColor(.gray)
         }
-    }
-}
-
-private struct FormTextField: View {
-    @Environment(\.colorScheme) var colorScheme
-
-    var title: String
-    @Binding var text: String
-    var onEditingChanged: ((Bool) -> Void)?
-
-    var isSecure = false
-
-    var body: some View {
-        ZStack {
-            Capsule(style: .continuous)
-                .foregroundColor(colorScheme == .light ? Color(#colorLiteral(red: 0.9395676295, green: 0.9395676295, blue: 0.9395676295, alpha: 1)) : Color(#colorLiteral(red: 0.2293992357, green: 0.2293992357, blue: 0.2293992357, alpha: 1)))
-                .frame(height: 50)
-            if isSecure {
-                SecureField(title, text: $text)
-                    .padding()
-                    .textContentType(.password)
-            } else {
-                TextField(title, text: $text, onEditingChanged: onEditingChanged ?? { _ in })
-                    .padding()
-                    .autocapitalization(.none)
-                    .disableAutocorrection(true)
-            }
-        }
-        .padding(.horizontal)
-        .frame(maxWidth: 400)
     }
 }
 

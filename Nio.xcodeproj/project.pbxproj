@@ -41,6 +41,9 @@
 		393411C723903C94003B49B8 /* EventCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393411C623903C94003B49B8 /* EventCollection.swift */; };
 		393411C923904428003B49B8 /* MXEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393411C823904428003B49B8 /* MXEvent.swift */; };
 		393411D1239087D2003B49B8 /* EventCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393411D0239087D2003B49B8 /* EventCollectionTests.swift */; };
+		3955DD31245B81A200827F07 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3955DD30245B81A200827F07 /* RegistrationView.swift */; };
+		3955DD33245B824E00827F07 /* LoginFormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3955DD32245B824E00827F07 /* LoginFormTextField.swift */; };
+		3955DD35245B9D2100827F07 /* URL+Homeserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3955DD34245B9D2100827F07 /* URL+Homeserver.swift */; };
 		3970DC942385A8BE00EFE31B /* KeyboardObserving in Frameworks */ = {isa = PBXBuildFile; productRef = 3970DC932385A8BE00EFE31B /* KeyboardObserving */; };
 		3984654523B7ECBA006C173B /* MXURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984654423B7ECBA006C173B /* MXURL.swift */; };
 		3984654823B8D809006C173B /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3984654723B8D809006C173B /* SDWebImageSwiftUI */; };
@@ -133,6 +136,9 @@
 		393411D0239087D2003B49B8 /* EventCollectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionTests.swift; sourceTree = "<group>"; };
 		393411D2239087D2003B49B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3955DD36245C371C00827F07 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		3955DD30245B81A200827F07 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		3955DD32245B824E00827F07 /* LoginFormTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormTextField.swift; sourceTree = "<group>"; };
+		3955DD34245B9D2100827F07 /* URL+Homeserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Homeserver.swift"; sourceTree = "<group>"; };
 		3984654423B7ECBA006C173B /* MXURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MXURL.swift; sourceTree = "<group>"; };
 		3997DCCF245732F000763C07 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		39B834BF243FC42000AE1EA0 /* TypingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingIndicatorView.swift; sourceTree = "<group>"; };
@@ -210,6 +216,8 @@
 			isa = PBXGroup;
 			children = (
 				39C931F423846966004449E1 /* LoginView.swift */,
+				3955DD30245B81A200827F07 /* RegistrationView.swift */,
+				3955DD32245B824E00827F07 /* LoginFormTextField.swift */,
 				3902B8A42395A77800698B87 /* LoadingView.swift */,
 			);
 			path = Authentication;
@@ -404,6 +412,7 @@
 				CAC46D6223A278F40079C24F /* PreviewProvider+Enumeration.swift */,
 				39BA0722240B3C9A00FD28C6 /* MXCredentials+Keychain.swift */,
 				39BA0726240B534600FD28C6 /* Color+allAccent.swift */,
+				3955DD34245B9D2100827F07 /* URL+Homeserver.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -709,11 +718,13 @@
 				392389892386FD3900B2E1DF /* MXClient+Publisher.swift in Sources */,
 				3984654523B7ECBA006C173B /* MXURL.swift in Sources */,
 				392389D2238F2E6F00B2E1DF /* NIORoom.swift in Sources */,
+				3955DD33245B824E00827F07 /* LoginFormTextField.swift in Sources */,
 				4B058B5624573A570059BC75 /* EditEvent.swift in Sources */,
 				392221AE243A0508004D8794 /* GroupedReactionsView.swift in Sources */,
 				3923898F2388707E00B2E1DF /* RoomListItemView.swift in Sources */,
 				39C931DD2384328A004449E1 /* AppDelegate.swift in Sources */,
 				393411C923904428003B49B8 /* MXEvent.swift in Sources */,
+				3955DD35245B9D2100827F07 /* URL+Homeserver.swift in Sources */,
 				3923898D238859D100B2E1DF /* MX+Identifiable.swift in Sources */,
 				CAC46D5B23A2734C0079C24F /* EnvironmentValues.swift in Sources */,
 				39C932072384BB13004449E1 /* RecentRoomsView.swift in Sources */,
@@ -733,6 +744,7 @@
 				392389CC238EBB1500B2E1DF /* ReverseList.swift in Sources */,
 				392389942388899200B2E1DF /* Formatter.swift in Sources */,
 				39BA0723240B3C9A00FD28C6 /* MXCredentials+Keychain.swift in Sources */,
+				3955DD31245B81A200827F07 /* RegistrationView.swift in Sources */,
 				392221AC2438149D004D8794 /* RoomMemberEventView.swift in Sources */,
 				392221B4243D1627004D8794 /* RoomPowerLevelsEventView.swift in Sources */,
 				CAC46D6323A278F40079C24F /* PreviewProvider+Enumeration.swift in Sources */,
