@@ -45,6 +45,33 @@ class AccountStore: ObservableObject {
         self.session?.removeListener(self.listenReference)
     }
 
+    // MARK: - Registration
+
+    func register(username: String, password: String, homeserver: URL) {
+        self.loginState = .authenticating
+
+        self.client = MXRestClient(homeServer: homeserver, unrecognizedCertificateHandler: nil)
+        self.client?.register(username: username, password: password) { response in
+            switch response {
+            case .failure(let error):
+                self.loginState = .failure(error)
+            case .success(let credentials):
+                self.credentials = credentials
+                credentials.save(to: self.keychain)
+
+                self.sync { result in
+                    switch result {
+                    case .failure(let error):
+                        // Does this make sense? The login itself didn't fail, but syncing did.
+                        self.loginState = .failure(error)
+                    case .success(let state):
+                        self.loginState = state
+                    }
+                }
+            }
+        }
+    }
+
     // MARK: - Login & Sync
 
     @Published var loginState: LoginState = .loggedOut

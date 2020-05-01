@@ -6,8 +6,13 @@
 "login.form.homeserver-optional-explanation" = "Homeserver is optional if you're using matrix.org.";
 "login.sign-in" = "Sign in";
 "login.open-registration-prompt" = "Don't have an account yet?";
-"login.register-not-yet-implemented" = "Registering for new accounts is not yet implemented.";
 "login.failure-back-to-login" = "Back to Login";
+
+"registration.header" = "Register a new Matrix account";
+"registration.explanation" = "Matrix is a decentralized network, like E-Mail, meaning there's no single server but many that talk to each other. You'll need an account on one of them to talk to other users.";
+"registration.confirm-password" = "Confirm password";
+"registration.homeserver-explanation" = "You can use this to create an account on a specific Matrix server. Tap the shuffle button to get a random suggestion or leave it empty to create your account on matrix.org.";
+"registration.register" = "Register";
 
 "loading.1" = "🧑‍🎤 Reticulating splines";
 "loading.2" = "🧑‍🏭 Discomfrobulating messages";

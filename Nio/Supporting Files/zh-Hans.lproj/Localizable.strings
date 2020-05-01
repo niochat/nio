@@ -6,8 +6,13 @@
 "login.form.homeserver-optional-explanation" = "若是matrix.org，则不必填写主服务器。";
 "login.sign-in" = "登录";
 "login.open-registration-prompt" = "还没有账户？";
-"login.register-not-yet-implemented" = "新账户注册功能尚未被实现。";
 "login.failure-back-to-login" = "返回登录页面";
+
+"registration.header" = "注册一个新的Matrix账户";
+"registration.explanation" = "Matrix就像电子邮箱一样，是一个分散式的网络。这意味着没有一个唯一的服务器，而是有很多服务器在相互对话。你只须在其中一个服务器上拥有账号就能与其他用户交流。";
+"registration.confirm-password" = "确认密码";
+"registration.homeserver-explanation" = "你可以用它来在特定的Matrix服务器上创建账户。点击􀊝来获得随机的服务器建议，或留空以在matrix.org上创建账户。";
+"registration.register" = "注册";
 
 "loading.1" = "🧑‍🎤 少女祈祷中";
 "loading.2" = "🧑‍🏭 正在给长者+1s";
@@ -27,7 +32,7 @@
 "room.attachment-placeholder" = "此特性尚未被实现。";
 "room.remove.title" = "删除？";
 "room.remove.message" = "你确定要删除这条消息吗？";
-"room.remove.action" = "删除";;
+"room.remove.action" = "删除";
 
 "composer.new-message" = "新信息...";
 "composer.edit-message" = "编辑信息：";

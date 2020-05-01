@@ -146,8 +146,6 @@ internal enum L10n {
     internal static let failureBackToLogin = L10n.tr("Localizable", "login.failure-back-to-login")
     /// Don't have an account yet?
     internal static let openRegistrationPrompt = L10n.tr("Localizable", "login.open-registration-prompt")
-    /// Registering for new accounts is not yet implemented.
-    internal static let registerNotYetImplemented = L10n.tr("Localizable", "login.register-not-yet-implemented")
     /// Sign in
     internal static let signIn = L10n.tr("Localizable", "login.sign-in")
     /// 👋 Welcome to 
@@ -192,6 +190,19 @@ internal enum L10n {
       /// Settings
       internal static let settings = L10n.tr("Localizable", "recent-rooms.accessibility-label.settings")
     }
+  }
+
+  internal enum Registration {
+    /// Confirm password
+    internal static let confirmPassword = L10n.tr("Localizable", "registration.confirm-password")
+    /// Matrix is a decentralized network, like E-Mail, meaning there's no single server but many that talk to each other. You'll need an account on one of them to talk to other users.
+    internal static let explanation = L10n.tr("Localizable", "registration.explanation")
+    /// Register a new Matrix account
+    internal static let header = L10n.tr("Localizable", "registration.header")
+    /// You can use this to create an account on a specific Matrix server. Tap the shuffle button to get a random suggestion or leave it empty to create your account on matrix.org.
+    internal static let homeserverExplanation = L10n.tr("Localizable", "registration.homeserver-explanation")
+    /// Register
+    internal static let register = L10n.tr("Localizable", "registration.register")
   }
 
   internal enum Room {

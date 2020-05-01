@@ -6,8 +6,13 @@
 "login.form.homeserver-optional-explanation" = "Homeserver is optioneel als je matrix.org gebruikt.";
 "login.sign-in" = "Log in";
 "login.open-registration-prompt" = "Nog geen account?";
-"login.register-not-yet-implemented" = "Registratie voor nieuwe accounts is nog niet geïmplementeerd.";
 "login.failure-back-to-login" = "Terug naar Login";
+
+"registration.header" = "Registreer een nieuwe Matrix account";
+"registration.explanation" = "Matrix is een gedecentraliseerd netwerk, zoals E-Mail, wat betekent dat er niet één enkele server is, maar meerdere die met elkaar praten. Je hebt een account nodig op één van hen om met andere gebruikers te kunnen praten.";
+"registration.confirm-password" = "Bevestig wachtwoord";
+"registration.homeserver-explanation" = "U kunt dit gebruiken om een account aan te maken op een specifieke Matrix-server. Tik op de shuffle-knop om een willekeurige suggestie te krijgen of laat het leeg om uw account aan te maken op matrix.org.";
+"registration.register" = "Registreer";
 
 "loading.1" = "🧑‍🎤 De Matrix wordt gedecodeerd";
 "loading.2" = "🧑‍🏭 Berichten worden verzameld";
