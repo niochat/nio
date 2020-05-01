@@ -1,0 +1,83 @@
+"login.welcome-header" = "👋 欢迎来到";
+"login.welcome-message" = "登录账户来开始使用。";
+"login.form.username" = "用户名";
+"login.form.password" = "密码";
+"login.form.homeserver" = "主服务器";
+"login.form.homeserver-optional-explanation" = "若是matrix.org，则不必填写主服务器。";
+"login.sign-in" = "登录";
+"login.open-registration-prompt" = "还没有账户？";
+"login.register-not-yet-implemented" = "新账户注册功能尚未被实现。";
+"login.failure-back-to-login" = "返回登录页面";
+
+"loading.1" = "🧑‍🎤 少女祈祷中";
+"loading.2" = "🧑‍🏭 正在给长者+1s";
+"loading.3" = "🧑‍🔧 登录中";
+"loading.4" = "🧑‍💻 正在恢复会话";
+"loading.cancel" = "取消";
+
+"recent-rooms.accessibility-label.settings" = "设置";
+"recent-rooms.accessibility-label.new-conversation" = "新对话";
+"recent-rooms.new-message-placeholder" = "新信息";
+/*DM with $NAME, $LAST_ACTIVITY_TIMESTAMP $LAST_MESSAGE*/
+"recent-rooms.accessibility-label.dm" = "私聊%@, %@ %@";
+/*Room $NAME, $LAST_ACTIVITY_TIMESTAMP $LAST_MESSAGE*/
+"recent-rooms.accessibility-label.room" = "房间%@, %@ %@";
+"recent-rooms.accessibility-label.new-message-badge" = "%u条新信息";
+
+"room.attachment-placeholder" = "此特性尚未被实现。";
+"room.remove.title" = "删除？";
+"room.remove.message" = "你确定要删除这条消息吗？";
+"room.remove.action" = "删除";;
+
+"composer.new-message" = "新信息...";
+"composer.edit-message" = "编辑信息：";
+"composer.accessibility-label.send-file" = "发送文件";
+"composer.accessibility-label.send" = "发送";
+"composer.accessibility-label.cancelEdit" = "取消";
+
+"typing-indicator.single" = "%@正在输入...";
+"typing-indicator.multiple" = "%@正在输入...";
+"typing-indicator.many" = "多位正在输入...";
+
+"event.unknown-sender-fallback" = "未知发送者";
+"event.unknown-room-name-fallback" = "未知房间名";
+
+"event.room-member.invited" = "%@邀请了%@";
+"event.room-member.left" = "%@离开了";
+"event.room-member.kicked" = "%@踢出了%@";
+"event.room-member.ban" = "%@封禁了%@";
+"event.room-member.joined" = "%@加入了";
+"event.room-member.change-name" = "%@将其显示名称改为了%@";
+"event.room-member.set-avatar" = "%@设置了头像";
+"event.room-member.change-avatar" = "%@更新了头像";
+"event.room-member.remove-avatar" = "%@移除了头像";
+"event.room-member.unknown-state" = "未知成员事件状态：%@";
+"event.reason" = "原因：%@";
+
+"event.room-name.set-name" = "%@将组名设为了%@";
+"event.room-name.change-name" = "%@将组名由%@改为了%@";
+
+"event.room-topic.change" = "%@将主题改为了'%@'";
+
+"room-power-level.default" = "默认";
+"room-power-level.moderator" = "协管员";
+"room-power-level.admin" = "管理员";
+"room-power-level.custom" = "自定义（%d）";
+"event.room-power-level.change-self" = "%@将其权力等级由%@改为了%@";
+"event.room-power-level.change-other" = "%@将%@的权力等级由%@改为了%@";
+
+"event.redaction.redact-self" = "🗑 被%@删除的消息";
+"event.redaction.redact-other" = "🗑 %@删除了%@的消息";
+
+"event.edited" = "已编辑";
+
+"event.context-menu.add-reaction" = "添加反应";
+"event.context-menu.reply" = "回复";
+"event.context-menu.edit" = "编辑";
+"event.context-menu.remove" = "删除";
+
+"reaction-picker.title" = "点击表情以发送反应。";
+
+"settings.title" = "设置";
+"settings.accent-color" = "主颜色";
+"settings.log-out" = "注销";

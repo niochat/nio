@@ -132,6 +132,7 @@
 		393411CE239087D2003B49B8 /* NioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		393411D0239087D2003B49B8 /* EventCollectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionTests.swift; sourceTree = "<group>"; };
 		393411D2239087D2003B49B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3955DD36245C371C00827F07 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3984654423B7ECBA006C173B /* MXURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MXURL.swift; sourceTree = "<group>"; };
 		3997DCCF245732F000763C07 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		39B834BF243FC42000AE1EA0 /* TypingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingIndicatorView.swift; sourceTree = "<group>"; };
@@ -525,6 +526,7 @@
 				Base,
 				de,
 				nl,
+				"zh-Hans",
 			);
 			mainGroup = 39C931D023843289004449E1;
 			packageReferences = (
@@ -775,6 +777,7 @@
 				392117582442556700892B00 /* en */,
 				3921175A2442558400892B00 /* de */,
 				3997DCCF245732F000763C07 /* nl */,
+				3955DD36245C371C00827F07 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
