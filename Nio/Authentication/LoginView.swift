@@ -134,21 +134,19 @@ struct LoginForm: View {
             LoginFormTextField(placeholder: L10n.Login.Form.username,
                                text: $username,
                                onEditingChanged: { _ in self.guessHomeserverURL() })
-            .padding(.horizontal)
 
             LoginFormTextField(placeholder: L10n.Login.Form.password,
                                text: $password,
                                isSecure: true)
-            .padding(.horizontal)
 
             LoginFormTextField(placeholder: L10n.Login.Form.homeserver,
                                text: $homeserver)
-            .padding(.horizontal)
 
             Text(L10n.Login.Form.homeserverOptionalExplanation)
                 .font(.caption)
                 .foregroundColor(.gray)
         }
+        .padding(.horizontal)
     }
 }
 
