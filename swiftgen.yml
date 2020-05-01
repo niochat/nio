@@ -4,3 +4,10 @@ strings:
   outputs:
     - templateName: structured-swift4
       output: Nio/Generated/Strings.swift
+
+xcassets:
+  inputs: "Nio/Assets.xcassets"
+  filter: .+\.xcassets$
+  outputs:
+    - templateName: swift4
+      output: Nio/Generated/Assets.swift
