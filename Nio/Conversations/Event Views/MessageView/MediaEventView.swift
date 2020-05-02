@@ -47,8 +47,6 @@ struct MediaEventView: View {
     var timestampView: some View {
         Text(model.timestamp)
         .font(.caption)
-        .foregroundColor(.white)
-        .shadow(color: .black, radius: 3)
     }
 
     var senderView: some View {
@@ -63,27 +61,17 @@ struct MediaEventView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
-            senderView
-            HStack {
-                if isMe {
-                    Spacer()
-                }
-                ZStack(alignment: isMe ? .bottomTrailing : .bottomLeading) {
-                    WebImage(url: urls.first!, isAnimating: .constant(true))
-                        .resizable()
-                        .indicator(.activity)
-                        .scaledToFit()
-                        .frame(width: UIScreen.main.bounds.size.width - 100)
-                        .mask(RoundedRectangle(cornerRadius: 15))
-                    timestampView
-                        .padding(6)
-                }
-                if !isMe {
-                    Spacer()
-                }
-            }
+        VStack(alignment: self.isMe ? .trailing : .leading, spacing: 5) {
+            self.senderView
+            WebImage(url: self.urls.first!, isAnimating: .constant(true))
+                .resizable()
+                .indicator(.activity)
+                .scaledToFit()
+                .mask(RoundedRectangle(cornerRadius: 15))
+            self.timestampView
         }
+        .frame(maxWidth: UIScreen.main.bounds.width * 0.75,
+               maxHeight: UIScreen.main.bounds.height * 0.75)
     }
 }
 

@@ -41,6 +41,8 @@ struct EventContainerView: View {
             if event.isMediaAttachment() {
                 return AnyView(
                     MediaEventView(model: .init(event: event, showSender: showSender))
+                    .padding(.top, topPadding)
+                    .padding(.bottom, bottomPadding)
                 )
             }
 
