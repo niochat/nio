@@ -91,6 +91,7 @@
 		CAF2AE94245B507400D84133 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AE93245B507400D84133 /* Assets.swift */; };
 		CAF2AE9D245DF4B400D84133 /* CommonMarkAttributedString in Frameworks */ = {isa = PBXBuildFile; productRef = CAF2AE9C245DF4B400D84133 /* CommonMarkAttributedString */; };
 		CAFCB323245F6E6700869320 /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFCB322245F6E6700869320 /* NSAttributedString+Extensions.swift */; };
+		CAF2AE97245DB15B00D84133 /* RoomEventStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AE96245DB15B00D84133 /* RoomEventStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -194,6 +195,7 @@
 		CAF2AE91245AEEBA00D84133 /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
 		CAF2AE93245B507400D84133 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		CAFCB322245F6E6700869320 /* NSAttributedString+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extensions.swift"; sourceTree = "<group>"; };
+		CAF2AE96245DB15B00D84133 /* RoomEventStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomEventStore.swift; sourceTree = "<group>"; };
 		E2D5B8AFEEB28F750CE393D1 /* Pods-NioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioTests.debug.xcconfig"; path = "Target Support Files/Pods-NioTests/Pods-NioTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -372,6 +374,7 @@
 				39C931DE2384328A004449E1 /* SceneDelegate.swift */,
 				39C931E02384328A004449E1 /* RootView.swift */,
 				CADF661D246149B900F5063F /* Models */,
+				CAF2AE96245DB15B00D84133 /* RoomEventStore.swift */,
 				3902B8A62395A78100698B87 /* Authentication */,
 				392389D0238F2E6200B2E1DF /* Matrix Wrapper */,
 				CAC46D5E23A276B30079C24F /* Shapes */,
@@ -781,6 +784,7 @@
 				CAC46D7723A6CB6C0079C24F /* MXEventType+Equatable.swift in Sources */,
 				393411C723903C94003B49B8 /* EventCollection.swift in Sources */,
 				392221B2243D0CCC004D8794 /* RoomTopicEventView.swift in Sources */,
+				CAF2AE97245DB15B00D84133 /* RoomEventStore.swift in Sources */,
 				3902B8A52395A77800698B87 /* LoadingView.swift in Sources */,
 				CADF662424614A3300F5063F /* ReactionGroupView.swift in Sources */,
 				392221B6243F88FD004D8794 /* RoomNameEventView.swift in Sources */,
