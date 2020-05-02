@@ -1,12 +1,11 @@
 import Foundation
 import Combine
-
 import SwiftMatrixSDK
 
 // Implementation heavily inspired by [Messagerie](https://github.com/manuroe/messagerie).
 
-class MatrixSession {
-    let matrixAccount: MatrixAccount
+class Session {
+    let matrixAccount: Account
     let matrixRestClient: MXRestClient
     let session: MXSession
 
@@ -14,7 +13,7 @@ class MatrixSession {
         MXMediaManager(homeServer: matrixAccount.homeserver.absoluteString)
     }()
 
-    init(account: MatrixAccount) {
+    init(account: Account) {
         self.matrixAccount = account
 
         let credentials = MXCredentials(homeServer: account.homeserver.absoluteString,

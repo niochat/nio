@@ -5,24 +5,24 @@ import SwiftMatrixSDK
 
 // Implementation heavily inspired by [Messagerie](https://github.com/manuroe/messagerie).
 
-class MatrixTimeline {
+class Timeline {
     private let subject = PassthroughSubject<EventUpdate, Never>()
     var publisher: AnyPublisher<EventUpdate, Never> {
         subject.eraseToAnyPublisher()
     }
 
-    private let session: MatrixSession
+    private let session: Session
     private let mxSession: MXSession
     private let roomId: String
 
     private var timeline: MXEventTimeline?
 
-    private lazy var eventFactory: MatrixEventFactory = {
-        MatrixEventFactory(session: self.session)
+    private lazy var eventFactory: EventFactory = {
+        EventFactory(session: self.session)
     }()
 
     private lazy var processingQueue: DispatchQueue = {
-        DispatchQueue(label: "chat.nio.MatrixTimeline.\(self.roomId)")
+        DispatchQueue(label: "chat.nio.Timeline.\(self.roomId)")
     }()
 
     private var remainingMessagesToPaginate: Int?
@@ -30,7 +30,7 @@ class MatrixTimeline {
         remainingMessagesToPaginate != nil
     }
 
-    init(session: MatrixSession, roomId: String) {
+    init(session: Session, roomId: String) {
         self.session = session
         self.roomId = roomId
         self.mxSession = session.session

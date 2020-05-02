@@ -2,10 +2,10 @@ import SwiftMatrixSDK
 
 // Implementation heavily inspired by [Messagerie](https://github.com/manuroe/messagerie).
 
-struct MatrixEventFactory {
-    let session: MatrixSession
+struct EventFactory {
+    let session: Session
 
-    func event(from event: MXEvent, direction: MXTimelineDirection, roomState: MXRoomState) -> MatrixEvent? {
+    func event(from event: MXEvent, direction: MXTimelineDirection, roomState: MXRoomState) -> Event? {
         guard let eventId = event.eventId, let messageContent = self.content(from: event) else { return nil }
 
         let senderDisplayName = roomState.members.memberName(event.sender)
@@ -15,15 +15,15 @@ struct MatrixEventFactory {
             .avatarUrl
             .flatMap { self.session.mediaURL(for: $0, size: CGSize(width: 100, height: 100)) }
 
-        return MatrixEvent(eventId: eventId,
-                           sender: event.sender,
-                           senderDisplayName: senderDisplayName,
-                           senderAvatar: senderAvatar,
-                           content: messageContent,
-                           timestamp: event.timestamp)
+        return Event(eventId: eventId,
+                     sender: event.sender,
+                     senderDisplayName: senderDisplayName,
+                     senderAvatar: senderAvatar,
+                     content: messageContent,
+                     timestamp: event.timestamp)
     }
 
-    private func content(from event: MXEvent) -> MatrixEvent.Content? {
+    private func content(from event: MXEvent) -> Event.Content? {
         guard let type = event.type else { return nil }
         let eventType = MXEventType(identifier: type)
 
@@ -37,8 +37,8 @@ struct MatrixEventFactory {
     }
 }
 
-extension MatrixEventFactory {
-    private func roomMessageContent(from event: MXEvent, messageType: MXMessageType) -> MatrixEvent.Content? {
+extension EventFactory {
+    private func roomMessageContent(from event: MXEvent, messageType: MXMessageType) -> Event.Content? {
         switch messageType {
         case .text:
             // swiftlint:disable:next force_cast

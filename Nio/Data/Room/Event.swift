@@ -3,7 +3,7 @@ import SwiftMatrixSDK
 
 // Implementation heavily inspired by [Messagerie](https://github.com/manuroe/messagerie).
 
-struct MatrixEvent: Identifiable {
+struct Event: Identifiable {
     var id: String {
         eventId
     }
@@ -21,7 +21,7 @@ struct MatrixEvent: Identifiable {
     var timestamp: Date
 }
 
-extension MatrixEvent {
+extension Event {
     enum Content {
         case text(String)
         case image(url: URL, size: CGSize)

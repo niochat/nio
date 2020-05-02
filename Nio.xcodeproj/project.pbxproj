@@ -12,13 +12,13 @@
 		3902B8A0239410EE00698B87 /* ContentSizeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902B89F239410EE00698B87 /* ContentSizeCategory.swift */; };
 		3902B8A32395935600698B87 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902B8A22395935600698B87 /* SettingsView.swift */; };
 		3902B8A52395A77800698B87 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902B8A42395A77800698B87 /* LoadingView.swift */; };
-		390D6382245CDFB200B8F640 /* MatrixSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390D6381245CDFB200B8F640 /* MatrixSession.swift */; };
-		390D6384245CE23900B8F640 /* MatrixAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390D6383245CE23900B8F640 /* MatrixAccount.swift */; };
-		390D6386245CE2A300B8F640 /* MatrixSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390D6385245CE2A300B8F640 /* MatrixSessionManager.swift */; };
-		390D638A245CE35900B8F640 /* MatrixTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390D6389245CE35900B8F640 /* MatrixTimeline.swift */; };
+		390D6382245CDFB200B8F640 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390D6381245CDFB200B8F640 /* Session.swift */; };
+		390D6384245CE23900B8F640 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390D6383245CE23900B8F640 /* Account.swift */; };
+		390D6386245CE2A300B8F640 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390D6385245CE2A300B8F640 /* SessionManager.swift */; };
+		390D638A245CE35900B8F640 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390D6389245CE35900B8F640 /* Timeline.swift */; };
 		390D638E245CE3A200B8F640 /* EventUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390D638D245CE3A200B8F640 /* EventUpdate.swift */; };
-		390D6390245CE3C400B8F640 /* MatrixEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390D638F245CE3C400B8F640 /* MatrixEvent.swift */; };
-		390D6392245CF0C900B8F640 /* MatrixEventFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390D6391245CF0C900B8F640 /* MatrixEventFactory.swift */; };
+		390D6390245CE3C400B8F640 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390D638F245CE3C400B8F640 /* Event.swift */; };
+		390D6392245CF0C900B8F640 /* EventFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390D6391245CF0C900B8F640 /* EventFactory.swift */; };
 		3921175124412FDE00892B00 /* RoomMemberEventViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3921175024412FDE00892B00 /* RoomMemberEventViewTests.swift */; };
 		392117542441327E00892B00 /* MockEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392117532441327E00892B00 /* MockEvent.swift */; };
 		392117572442556700892B00 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 392117592442556700892B00 /* Localizable.strings */; };
@@ -111,13 +111,13 @@
 		3902B89F239410EE00698B87 /* ContentSizeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizeCategory.swift; sourceTree = "<group>"; };
 		3902B8A22395935600698B87 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3902B8A42395A77800698B87 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		390D6381245CDFB200B8F640 /* MatrixSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixSession.swift; sourceTree = "<group>"; };
-		390D6383245CE23900B8F640 /* MatrixAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixAccount.swift; sourceTree = "<group>"; };
-		390D6385245CE2A300B8F640 /* MatrixSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixSessionManager.swift; sourceTree = "<group>"; };
-		390D6389245CE35900B8F640 /* MatrixTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixTimeline.swift; sourceTree = "<group>"; };
+		390D6381245CDFB200B8F640 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		390D6383245CE23900B8F640 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		390D6385245CE2A300B8F640 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		390D6389245CE35900B8F640 /* Timeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
 		390D638D245CE3A200B8F640 /* EventUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventUpdate.swift; sourceTree = "<group>"; };
-		390D638F245CE3C400B8F640 /* MatrixEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixEvent.swift; sourceTree = "<group>"; };
-		390D6391245CF0C900B8F640 /* MatrixEventFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixEventFactory.swift; sourceTree = "<group>"; };
+		390D638F245CE3C400B8F640 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		390D6391245CF0C900B8F640 /* EventFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFactory.swift; sourceTree = "<group>"; };
 		3921175024412FDE00892B00 /* RoomMemberEventViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomMemberEventViewTests.swift; sourceTree = "<group>"; };
 		392117532441327E00892B00 /* MockEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEvent.swift; sourceTree = "<group>"; };
 		392117582442556700892B00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -263,9 +263,9 @@
 		390D6387245CE33C00B8F640 /* Account */ = {
 			isa = PBXGroup;
 			children = (
-				390D6381245CDFB200B8F640 /* MatrixSession.swift */,
-				390D6383245CE23900B8F640 /* MatrixAccount.swift */,
-				390D6385245CE2A300B8F640 /* MatrixSessionManager.swift */,
+				390D6381245CDFB200B8F640 /* Session.swift */,
+				390D6385245CE2A300B8F640 /* SessionManager.swift */,
+				390D6383245CE23900B8F640 /* Account.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -273,10 +273,10 @@
 		390D6388245CE34500B8F640 /* Room */ = {
 			isa = PBXGroup;
 			children = (
-				390D6389245CE35900B8F640 /* MatrixTimeline.swift */,
+				390D6389245CE35900B8F640 /* Timeline.swift */,
 				390D638D245CE3A200B8F640 /* EventUpdate.swift */,
-				390D6391245CF0C900B8F640 /* MatrixEventFactory.swift */,
-				390D638F245CE3C400B8F640 /* MatrixEvent.swift */,
+				390D6391245CF0C900B8F640 /* EventFactory.swift */,
+				390D638F245CE3C400B8F640 /* Event.swift */,
 			);
 			path = Room;
 			sourceTree = "<group>";
@@ -771,7 +771,7 @@
 				3923898D238859D100B2E1DF /* MX+Identifiable.swift in Sources */,
 				CAC46D5B23A2734C0079C24F /* EnvironmentValues.swift in Sources */,
 				39C932072384BB13004449E1 /* RecentRoomsView.swift in Sources */,
-				390D6390245CE3C400B8F640 /* MatrixEvent.swift in Sources */,
+				390D6390245CE3C400B8F640 /* Event.swift in Sources */,
 				390D638E245CE3A200B8F640 /* EventUpdate.swift in Sources */,
 				CAC46D6F23A56BBE0079C24F /* GroupingIterator.swift in Sources */,
 				CAC46D7723A6CB6C0079C24F /* MXEventType+Equatable.swift in Sources */,
@@ -782,11 +782,11 @@
 				4B0A2E47245E2EF800A79443 /* MultiLineTextView.swift in Sources */,
 				3902B8A0239410EE00698B87 /* ContentSizeCategory.swift in Sources */,
 				39D166C62385C804006DD257 /* String+Emoji.swift in Sources */,
-				390D6382245CDFB200B8F640 /* MatrixSession.swift in Sources */,
+				390D6382245CDFB200B8F640 /* Session.swift in Sources */,
 				392221A02437285B004D8794 /* ReactionPicker.swift in Sources */,
 				3902B89C2393FE6100698B87 /* MessageView.swift in Sources */,
 				CAC46D5723A272D10079C24F /* BorderlessMessageView.swift in Sources */,
-				390D638A245CE35900B8F640 /* MatrixTimeline.swift in Sources */,
+				390D638A245CE35900B8F640 /* Timeline.swift in Sources */,
 				39C93209238553E4004449E1 /* RoomView.swift in Sources */,
 				392221AA2438083C004D8794 /* RedactionEventView.swift in Sources */,
 				392389CC238EBB1500B2E1DF /* ReverseList.swift in Sources */,
@@ -797,7 +797,7 @@
 				CAF2AE92245AEEBA00D84133 /* BadgeView.swift in Sources */,
 				CAC46D6323A278F40079C24F /* PreviewProvider+Enumeration.swift in Sources */,
 				39222199243689D6004D8794 /* ReactionEvent.swift in Sources */,
-				390D6392245CF0C900B8F640 /* MatrixEventFactory.swift in Sources */,
+				390D6392245CF0C900B8F640 /* EventFactory.swift in Sources */,
 				392389D6238F3EB200B2E1DF /* NIORoomSummary.swift in Sources */,
 				39BA0725240B4E8D00FD28C6 /* AppSettings.swift in Sources */,
 				39D166C82385C832006DD257 /* EventContainerView.swift in Sources */,
@@ -819,8 +819,8 @@
 				392389982388998F00B2E1DF /* ActivityIndicator.swift in Sources */,
 				CAC46D6023A276B40079C24F /* IndividuallyRoundedRectangle.swift in Sources */,
 				CAC46D7323A6AE890079C24F /* TypedEvents.swift in Sources */,
-				390D6386245CE2A300B8F640 /* MatrixSessionManager.swift in Sources */,
-				390D6384245CE23900B8F640 /* MatrixAccount.swift in Sources */,
+				390D6386245CE2A300B8F640 /* SessionManager.swift in Sources */,
+				390D6384245CE23900B8F640 /* Account.swift in Sources */,
 				39C931E12384328A004449E1 /* RootView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

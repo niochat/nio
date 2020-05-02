@@ -1,6 +1,6 @@
 import SwiftMatrixSDK
 
 enum EventUpdate {
-    case backwards(events: [MatrixEvent])
-    case forwards(events: [MatrixEvent])
+    case backwards(events: [Event])
+    case forwards(events: [Event])
 }
