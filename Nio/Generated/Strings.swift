@@ -53,7 +53,7 @@ internal enum L10n {
       internal static func redactOther(_ p1: String, _ p2: String) -> String {
         return L10n.tr("Localizable", "event.redaction.redact-other", p1, p2)
       }
-      /// 🗑 Messaged removed by %@
+      /// 🗑 Message removed by %@
       internal static func redactSelf(_ p1: String) -> String {
         return L10n.tr("Localizable", "event.redaction.redact-self", p1)
       }
