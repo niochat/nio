@@ -68,11 +68,14 @@ struct MessageViewModel: MessageViewModelProtocol {
     }
 
     private static func validate(event: MXEvent) throws {
+        // NOTE: For as long as https://github.com/matrix-org/matrix-ios-sdk/pull/843
+        // remains unresolved keep in mind that
+        // `.keyVerificationStart`, `.keyVerificationAccept`, `.keyVerificationKey`,
+        // `.keyVerificationMac`, `.keyVerificationCancel` & `.reaction`
+        // may get wrongly recognized as `.custom(…)`, instead.
+        // FIXME: Remove comment when linked bug fix has been merged.
         let eventType = MXEventType(identifier: event.type)
-        // FIXME: Replace with simple `eventType == .roomMessage`
-        // once https://github.com/matrix-org/matrix-ios-sdk/pull/755 is part of a release (presumably v0.15.3):
-
-        guard case .roomMessage = eventType else {
+        guard eventType == .roomMessage else {
             throw Error.invalidEventType(eventType)
         }
     }
