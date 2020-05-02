@@ -39,6 +39,7 @@
 #import "MXContentScanEncryptedBody.h"
 #import "MXAggregationPaginatedResponse.h"
 #import "MXPusher.h"
+#import "MXRoomCreationParameters.h"
 
 #pragma mark - Constants definitions
 /**
@@ -1183,34 +1184,19 @@ typedef MXHTTPOperation* (^MXRestClientIdentityServerAccessTokenHandler)(void (^
                        success:(void (^)(MXCreateRoomResponse *response))success
                        failure:(void (^)(NSError *error))failure NS_SWIFT_UNAVAILABLE("TEST");
 
-
 /**
  Create a room.
 
- @param name (optional) the room name.
- @param visibility (optional) the visibility of the room in the current HS's room directory.
- @param roomAlias (optional) the room alias on the home server the room will be created.
- @param topic (optional) the room topic.
- @param inviteArray (optional) A list of user IDs to invite to the room. This will tell the server to invite everyone in the list to the newly created room.
- @param invite3PIDArray (optional) A list of objects representing third party IDs to invite into the room.
- @param isDirect This flag makes the server set the is_direct flag on the m.room.member events sent to the users in invite and invite_3pid (Use NO by default).
- @param preset (optional) Convenience parameter for setting various default state events based on a preset.
+ @param parameters the parameters.
 
  @param success A block object called when the operation succeeds. It provides a MXCreateRoomResponse object.
  @param failure A block object called when the operation fails.
 
  @return a MXHTTPOperation instance.
  */
-- (MXHTTPOperation*)createRoom:(NSString*)name
-                    visibility:(MXRoomDirectoryVisibility)visibility
-                     roomAlias:(NSString*)roomAlias
-                         topic:(NSString*)topic
-                        invite:(NSArray<NSString*>*)inviteArray
-                    invite3PID:(NSArray<MXInvite3PID*>*)invite3PIDArray
-                      isDirect:(BOOL)isDirect
-                        preset:(MXRoomPreset)preset
-                       success:(void (^)(MXCreateRoomResponse *response))success
-                       failure:(void (^)(NSError *error))failure NS_REFINED_FOR_SWIFT;
+- (MXHTTPOperation*)createRoomWithParameters:(MXRoomCreationParameters*)parameters
+                                     success:(void (^)(MXCreateRoomResponse *response))success
+                                     failure:(void (^)(NSError *error))failure NS_REFINED_FOR_SWIFT;
 
 /**
  Create a room.
@@ -2031,6 +2017,20 @@ typedef MXHTTPOperation* (^MXRestClientIdentityServerAccessTokenHandler)(void (^
                        failure:(void (^)(NSError *error))failure NS_REFINED_FOR_SWIFT;
 
 /**
+ Upload signatures of device keys.
+
+ @param signatures the signatures content.
+
+ @param success A block object called when the operation succeeds.
+ @param failure A block object called when the operation fails.
+
+ @return a MXHTTPOperation instance.
+ */
+- (MXHTTPOperation*)uploadKeySignatures:(NSDictionary*)signatures
+                                success:(void (^)(void))success
+                                failure:(void (^)(NSError *error))failure;
+
+/**
  Download device keys.
 
  @param userIds list of users to get keys for.
@@ -2376,6 +2376,37 @@ typedef MXHTTPOperation* (^MXRestClientIdentityServerAccessTokenHandler)(void (^
                                 authParams:(NSDictionary*)authParameters
                                    success:(void (^)(void))success
                                    failure:(void (^)(NSError *error))failure NS_REFINED_FOR_SWIFT;
+
+
+#pragma mark - Cross-Signing
+
+/**
+ Get an authentication session to upload cross-signing keys.
+
+ @param success A block object called when the operation succeeds. It provides the server response
+ as an MXAuthenticationSession instance.
+ @param failure A block object called when the operation fails.
+
+ @return a MXHTTPOperation instance.
+ */
+- (MXHTTPOperation*)authSessionToUploadDeviceSigningKeys:(void (^)(MXAuthenticationSession *authSession))success
+                                                 failure:(void (^)(NSError *error))failure;
+
+/**
+ Upload cross-signing keys.
+
+ @param keys A dictionary containing keys.
+ @param authParameters The additional authentication information for the user-interactive authentication API.
+ @param success A block object called when the operation succeeds.
+ @param failure A block object called when the operation fails.
+
+ @return a MXHTTPOperation instance.
+ */
+- (MXHTTPOperation*)uploadDeviceSigningKeys:(NSDictionary *)keys
+                                 authParams:(NSDictionary*)authParameters
+                                    success:(void (^)(void))success
+                                    failure:(void (^)(NSError *error))failure;
+
 
 #pragma mark - Groups
     

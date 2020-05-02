@@ -14,19 +14,14 @@
  limitations under the License.
  */
 
-#import "MXJSONModel.h"
+#import "MXKeyVerificationJSONModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
  Sent by both devices to send their ephemeral Curve25519 public key the other device.
  */
-@interface MXKeyVerificationKey : MXJSONModel
-
-/**
- The ID of the transaction that the message is part of.
- */
-@property (nonatomic) NSString *transactionId;
+@interface MXKeyVerificationKey : MXKeyVerificationJSONModel
 
 /**
  The device’s ephemeral public key, as an unpadded base64 string.

@@ -21,7 +21,7 @@ import Foundation
 public struct MX3PID {
     
     /// Types of third-party identifiers.
-    public enum Medium {
+    public enum Medium: Equatable, Hashable {
         case email
         case msisdn
         case other(String)

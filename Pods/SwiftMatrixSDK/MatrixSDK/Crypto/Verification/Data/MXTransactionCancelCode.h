@@ -68,6 +68,9 @@ NS_ASSUME_NONNULL_BEGIN
 // The user does not match
 + (instancetype)userMismatchError;
 
+// The QR code is invalid
++ (instancetype)qrCodeInvalid;
+
 @end
 
 NS_ASSUME_NONNULL_END

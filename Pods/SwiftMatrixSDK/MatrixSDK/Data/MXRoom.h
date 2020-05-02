@@ -42,6 +42,7 @@
 
 @class MXRoom;
 @class MXSession;
+@class MXUsersTrustLevelSummary;
 
 #pragma mark - Notifications
 
@@ -1095,5 +1096,14 @@ FOUNDATION_EXPORT NSString *const kMXRoomDidFlushDataNotification;
  @return a NSComparisonResult value: NSOrderedDescending if otherRoom is more recent than self.
  */
 - (NSComparisonResult)compareLastMessageEventOriginServerTs:(MXRoom *)otherRoom;
+
+/**
+ Provides a summary of members trust level for an encrypted room.
+
+ @param forceDownload YES to fetch data from the homeserver. NO to retrieve stored data.
+ @param success A block object called when the operation succeeds. It provides a summary of members trust level for an encrypted room..
+ @param failure A block object called when the operation fails.
+ */
+- (void)membersTrustLevelSummaryWithForceDownload:(BOOL)forceDownload success:(void (^)(MXUsersTrustLevelSummary *usersTrustLevelSummary))success failure:(void (^)(NSError *error))failure;
 
 @end

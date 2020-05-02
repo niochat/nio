@@ -15,7 +15,8 @@
  */
 
 #import "MXSASTransaction.h"
-#import "MXDeviceVerificationTransaction_Private.h"
+#import "MXKeyVerificationTransaction_Private.h"
+#import "MXSASKeyVerificationStart.h"
 
 #import <OLMKit/OLMKit.h>
 
@@ -29,15 +30,20 @@ FOUNDATION_EXPORT NSArray<NSString*> *kKnownMacs;
 FOUNDATION_EXPORT NSArray<NSString*> *kKnownShortCodes;
 
 /**
- The `MXDeviceVerificationTransaction` extension exposes internal operations.
+ The `MXKeyVerificationTransaction` extension exposes internal operations.
  */
 @interface MXSASTransaction ()
 
 @property (nonatomic) OLMSAS *olmSAS;
+@property (nonatomic, nullable) MXSASKeyVerificationStart *startContent;
 @property (nonatomic) MXKeyVerificationAccept *accepted;
 
 @property (nonatomic, nullable) MXKeyVerificationMac *myMac;
 @property (nonatomic, nullable) MXKeyVerificationMac *theirMac;
+
+- (void)handleAccept:(MXKeyVerificationAccept*)acceptContent;
+- (void)handleKey:(MXKeyVerificationKey*)keyContent;
+- (void)handleMac:(MXKeyVerificationMac*)macContent;
 
 - (NSString*)hashUsingAgreedHashMethod:(NSString*)string;
 - (NSData*)generateSasBytesWithTheirPublicKey:(NSString*)theirPublicKey requestingDevice:(MXDeviceInfo*)requestingDevice otherDevice:(MXDeviceInfo*)otherDevice;

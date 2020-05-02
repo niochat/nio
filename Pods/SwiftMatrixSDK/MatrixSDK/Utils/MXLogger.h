@@ -1,5 +1,6 @@
 /*
  Copyright 2015 OpenMarket Ltd
+ Copyright 2020 The Matrix.org Foundation C.I.C
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -34,6 +35,17 @@
  @param redirectNSLogToFiles YES to enable the redirection.
  */
 + (void)redirectNSLogToFiles:(BOOL)redirectNSLogToFiles;
+
+/**
+ Redirect NSLog output to MXLogger files.
+ 
+ It is advised to condition this redirection in '#if (!isatty(STDERR_FILENO))' block to enable
+ it only when the device is not attached to the debugger.
+ 
+ @param redirectNSLogToFiles YES to enable the redirection.
+ @param numberOfFiles number of files to keep (default is 10).
+ */
++ (void)redirectNSLogToFiles:(BOOL)redirectNSLogToFiles numberOfFiles:(NSUInteger)numberOfFiles;
 
 /**
  Delete all log files.

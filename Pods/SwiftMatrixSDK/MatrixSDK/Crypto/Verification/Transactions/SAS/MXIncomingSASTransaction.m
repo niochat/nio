@@ -16,17 +16,14 @@
 
 #import "MXIncomingSASTransaction.h"
 #import "MXSASTransaction_Private.h"
+#import "MXIncomingSASTransaction_Private.h"
 
-#import "MXDeviceVerificationManager_Private.h"
+#import "MXKeyVerificationManager_Private.h"
 #import "MXCrypto_Private.h"
 
 #import "MXCryptoTools.h"
 #import "NSArray+MatrixSDK.h"
 #import "MXTools.h"
-
-@interface MXIncomingSASTransaction ()
-
-@end
 
 @implementation MXIncomingSASTransaction
 
@@ -85,11 +82,33 @@
 
 #pragma mark - SDK-Private methods -
 
-- (nullable instancetype)initWithOtherDevice:(MXDeviceInfo *)otherDevice startEvent:(MXEvent *)event andManager:(MXDeviceVerificationManager *)manager
+- (nullable instancetype)initWithOtherDevice:(MXDeviceInfo *)otherDevice startEvent:(MXEvent *)event andManager:(MXKeyVerificationManager *)manager
 {
-    self = [super initWithOtherDevice:otherDevice startEvent:event andManager:manager];
+    MXSASKeyVerificationStart *startContent;
+    MXJSONModelSetMXJSONModel(startContent, MXSASKeyVerificationStart, event.content);
+    if (!startContent || !startContent.isValid)
+    {
+        NSLog(@"[MXKeyVerificationTransaction]: ERROR: Invalid start event: %@", event);
+        return nil;
+    }
+    
+    self = [super initWithOtherDevice:otherDevice andManager:manager];
     if (self)
     {
+        self.startContent = startContent;
+        self.transactionId = startContent.transactionId;
+        
+        // Detect verification by DM
+        if (startContent.relatedEventId)
+        {
+            [self setDirectMessageTransportInRoom:event.roomId originalEvent:startContent.relatedEventId];
+        }
+        
+        // It would have been nice to timeout from the event creation date
+        // but we do not receive the information. originServerTs = 0
+        // So, use the time when we receive it instead
+        //_creationDate = [NSDate dateWithTimeIntervalSince1970: (event.originServerTs / 1000)];
+        
         // Check validity
         if (![self.startContent.method isEqualToString:MXKeyVerificationMethodSAS]
             || ![self.startContent.shortAuthenticationString containsObject:MXKeyVerificationSASModeDecimal])
@@ -122,6 +141,13 @@
     if (self.state != MXSASTransactionStateWaitForPartnerKey)
     {
         NSLog(@"[MXKeyVerification][MXIncomingSASTransaction] handleKey: wrong state: %@. keyContent: %@", self, keyContent);
+        [self cancelWithCancelCode:MXTransactionCancelCode.unexpectedMessage];
+        return;
+    }
+    
+    if (!keyContent.isValid)
+    {
+        NSLog(@"[MXKeyVerification][MXIncomingSASTransaction] handleKey: key content is invalid. keyContent: %@", keyContent);
         [self cancelWithCancelCode:MXTransactionCancelCode.unexpectedMessage];
         return;
     }

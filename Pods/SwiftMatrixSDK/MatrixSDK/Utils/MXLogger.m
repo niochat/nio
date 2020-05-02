@@ -1,6 +1,7 @@
 /*
  Copyright 2015 OpenMarket Ltd
-
+ Copyright 2020 The Matrix.org Foundation C.I.C
+ 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
@@ -31,6 +32,11 @@ static NSString *subLogName;
 #pragma mark - NSLog redirection
 + (void)redirectNSLogToFiles:(BOOL)redirectNSLogToFiles
 {
+    [self redirectNSLogToFiles:redirectNSLogToFiles numberOfFiles:10];
+}
+
++ (void)redirectNSLogToFiles:(BOOL)redirectNSLogToFiles numberOfFiles:(NSUInteger)numberOfFiles
+{
     if (redirectNSLogToFiles)
     {
         NSMutableString *log = [NSMutableString string];
@@ -45,8 +51,8 @@ static NSString *subLogName;
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSString *logsFolderPath = [MXLogger logsFolderPath];
 
-        // Do a circular buffer based on 10 files
-        for (NSInteger index = 8; index >= 0; index--)
+        // Do a circular buffer based on X files
+        for (NSInteger index = numberOfFiles - 2; index >= 0; index--)
         {
             NSString *nsLogPathOlder;
             NSString *nsLogPathCurrent;

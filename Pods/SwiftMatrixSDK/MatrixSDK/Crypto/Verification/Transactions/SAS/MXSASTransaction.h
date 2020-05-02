@@ -14,7 +14,7 @@
  limitations under the License.
  */
 
-#import "MXDeviceVerificationTransaction.h"
+#import "MXKeyVerificationTransaction.h"
 
 #import "MXEmojiRepresentation.h"
 
@@ -48,7 +48,7 @@ typedef enum : NSUInteger
 /**
  An handler on an interactive device verification based on Short Authentication Code.
  */
-@interface MXSASTransaction : MXDeviceVerificationTransaction
+@interface MXSASTransaction : MXKeyVerificationTransaction
 
 @property (nonatomic) MXSASTransactionState state;
 

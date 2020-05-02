@@ -97,7 +97,7 @@ NSString *const kMXCallStateDidChange = @"kMXCallStateDidChange";
 
         _callId = [[NSUUID UUID] UUIDString];
         _callUUID = [NSUUID UUID];
-        _callerId = callManager.mxSession.myUser.userId;
+        _callerId = callManager.mxSession.myUserId;
 
         _state = MXCallStateFledgling;
         _endReason = MXCallEndReasonUnknown;
@@ -184,13 +184,13 @@ NSString *const kMXCallStateDidChange = @"kMXCallStateDidChange";
         {
             callInviteEventContent = [MXCallInviteEventContent modelFromJSON:event.content];
 
-            if (![event.sender isEqualToString:_callSignalingRoom.mxSession.myUser.userId])
+            if (![event.sender isEqualToString:_callSignalingRoom.mxSession.myUserId])
             {
                 // Incoming call
 
                 _callId = callInviteEventContent.callId;
                 _callerId = event.sender;
-                calleeId = callManager.mxSession.myUser.userId;
+                calleeId = callManager.mxSession.myUserId;
                 _isIncoming = YES;
 
                 // Store if it is voice or video call
@@ -286,7 +286,7 @@ NSString *const kMXCallStateDidChange = @"kMXCallStateDidChange";
 
         case MXEventTypeCallCandidates:
         {
-            if (NO == [event.sender isEqualToString:_callSignalingRoom.mxSession.myUser.userId])
+            if (NO == [event.sender isEqualToString:_callSignalingRoom.mxSession.myUserId])
             {
                 MXCallCandidatesEventContent *content = [MXCallCandidatesEventContent modelFromJSON:event.content];
 
@@ -681,7 +681,7 @@ NSString *const kMXCallStateDidChange = @"kMXCallStateDidChange";
     // Determine call end reason
     if (event)
     {
-        if ([event.sender isEqualToString:callManager.mxSession.myUser.userId])
+        if ([event.sender isEqualToString:callManager.mxSession.myUserId])
             _endReason = MXCallEndReasonHangupElsewhere;
         else if (!self.isEstablished && !self.isIncoming)
             _endReason = MXCallEndReasonBusy;

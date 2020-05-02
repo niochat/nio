@@ -15,8 +15,21 @@
  */
 
 #import "MXAggregationPaginatedResponse.h"
+#import "MXAggregationPaginatedResponse_Private.h"
 
 @implementation MXAggregationPaginatedResponse
+
+- (instancetype)initWithOriginalEvent:(MXEvent*)originalEvent chunk:(NSArray<MXEvent*> *)chunk nextBatch:(NSString *)nextBatch;
+{
+    self = [super init];
+    if (self)
+    {
+        _originalEvent = originalEvent;
+        _chunk = chunk;
+        _nextBatch = nextBatch;
+    }
+    return self;
+}
 
 + (instancetype)modelFromJSON:(NSDictionary *)JSONDictionary
 {

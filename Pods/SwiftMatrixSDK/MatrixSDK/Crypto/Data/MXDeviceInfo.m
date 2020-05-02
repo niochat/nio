@@ -15,7 +15,11 @@
  limitations under the License.
  */
 
-#import "MXDeviceInfo.h"
+#import "MXDeviceInfo_Private.h"
+
+#pragma mark - Constants
+
+NSString *const MXDeviceInfoTrustLevelDidChangeNotification = @"MXDeviceInfoTrustLevelDidChangeNotification";
 
 @implementation MXDeviceInfo
 
@@ -25,7 +29,7 @@
     if (self)
     {
         _deviceId = deviceId;
-        _verified = MXDeviceUnknown;
+        _trustLevel = [MXDeviceTrustLevel new];
     }
     return self;
 }
@@ -46,6 +50,39 @@
     return _unsignedData[@"device_display_name"];
 }
 
+- (MXDeviceVerification)verified
+{
+    return self.trustLevel.localVerificationStatus;
+}
+
+
+#pragma mark - SDK-Private methods
+
+- (void)setTrustLevel:(MXDeviceTrustLevel *)trustLevel
+{
+    _trustLevel = trustLevel;
+}
+
+- (BOOL)updateTrustLevel:(MXDeviceTrustLevel*)trustLevel
+{
+    BOOL updated = NO;
+
+    if (![_trustLevel isEqual:trustLevel])
+    {
+        _trustLevel = trustLevel;
+        updated = YES;
+        [self didUpdateTrustLevel];
+    }
+
+    return updated;
+}
+
+- (void)didUpdateTrustLevel
+{
+    dispatch_async(dispatch_get_main_queue(),^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:MXDeviceInfoTrustLevelDidChangeNotification object:self userInfo:nil];
+    });
+}
 
 #pragma mark - MXJSONModel
 + (id)modelFromJSON:(NSDictionary *)JSONDictionary
@@ -122,10 +159,19 @@
     {
         _deviceId = [aDecoder decodeObjectForKey:@"deviceId"];
         _userId = [aDecoder decodeObjectForKey:@"userId"];
+        _algorithms = [aDecoder decodeObjectForKey:@"algorithms"];
         _keys = [aDecoder decodeObjectForKey:@"keys"];
         _signatures = [aDecoder decodeObjectForKey:@"signatures"];
         _unsignedData = [aDecoder decodeObjectForKey:@"unsignedData"];
-        _verified = [(NSNumber*)[aDecoder decodeObjectForKey:@"verified"] unsignedIntegerValue];
+        _trustLevel = [aDecoder decodeObjectForKey:@"trustLevel"];
+        if (!_trustLevel)
+        {
+            // Manage migration from old data schema
+            MXDeviceVerification verified = [(NSNumber*)[aDecoder decodeObjectForKey:@"verified"] unsignedIntegerValue];
+
+            _trustLevel = [MXDeviceTrustLevel trustLevelWithLocalVerificationStatus:verified
+                                                               crossSigningVerified:NO];
+        }
     }
     return self;
 }
@@ -136,6 +182,10 @@
     if (_userId)
     {
         [aCoder encodeObject:_userId forKey:@"userId"];
+    }
+    if (_algorithms)
+    {
+        [aCoder encodeObject:_algorithms forKey:@"algorithms"];
     }
     if (_keys)
     {
@@ -149,12 +199,39 @@
     {
         [aCoder encodeObject:_unsignedData forKey:@"unsignedData"];
     }
-    [aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_verified] forKey:@"verified"];
+    [aCoder encodeObject:_trustLevel forKey:@"trustLevel"];
+}
+
+- (BOOL)isEqual:(id)object
+{
+    if (self == object)
+    {
+        return YES;
+    }
+
+    if (![object isKindOfClass:MXDeviceInfo.class])
+    {
+        return NO;
+    }
+    
+    return [self isEqualToDeviceInfo:(MXDeviceInfo *)object];
+}
+
+- (BOOL)isEqualToDeviceInfo:(MXDeviceInfo *)other
+{
+    return
+    [_deviceId isEqualToString:other.deviceId]
+    && [_userId isEqualToString:other.userId]
+    && [_algorithms isEqualToArray:other.algorithms]
+    && [_keys isEqualToDictionary:other.keys]
+    && [_signatures isEqualToDictionary:other.signatures]
+    && [_unsignedData isEqualToDictionary:other.unsignedData]
+    && [_trustLevel isEqual:other.trustLevel];
 }
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"%@:%@ - curve25519: %@ (verified: %@)", _userId, _deviceId, self.identityKey, @(_verified)];
+    return [NSString stringWithFormat:@"%@:%@ - curve25519: %@ (trustLevel: %@)", _userId, _deviceId, self.identityKey, _trustLevel];
 }
 
 @end

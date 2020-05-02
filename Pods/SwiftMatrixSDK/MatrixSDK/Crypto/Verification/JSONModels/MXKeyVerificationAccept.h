@@ -14,19 +14,14 @@
  limitations under the License.
  */
 
-#import "MXJSONModel.h"
+#import "MXKeyVerificationJSONModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
  Sent by Bob to accept a verification from a previously sent m.key.verification.start message.
  */
-@interface MXKeyVerificationAccept : MXJSONModel
-
-/**
- The transaction ID from the m.key.verification.start message.
- */
-@property (nonatomic) NSString *transactionId;
+@interface MXKeyVerificationAccept : MXKeyVerificationJSONModel
 
 /**
  The key agreement protocol that Bob’s device has selected to use,

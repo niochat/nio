@@ -24,7 +24,7 @@
 #import "MXTools.h"
 #import "MXCryptoTools.h"
 
-NSUInteger const kMXRealmCryptoStoreVersion = 10;
+NSUInteger const kMXRealmCryptoStoreVersion = 12;
 
 static NSString *const kMXRealmCryptoStoreFolder = @"MXRealmCryptoStore";
 
@@ -41,10 +41,19 @@ static NSString *const kMXRealmCryptoStoreFolder = @"MXRealmCryptoStore";
 @end
 RLM_ARRAY_TYPE(MXRealmDeviceInfo)
 
+@interface MXRealmCrossSigningInfo : RLMObject
+@property NSData *data;
+@end
+
+@implementation MXRealmCrossSigningInfo
+@end
+RLM_ARRAY_TYPE(MXRealmCrossSigningInfo)
+
 
 @interface MXRealmUser : RLMObject
 @property (nonatomic) NSString *userId;
 @property RLMArray<MXRealmDeviceInfo *><MXRealmDeviceInfo> *devices;
+@property MXRealmCrossSigningInfo *crossSigningKeys;
 @end
 
 @implementation MXRealmUser
@@ -238,14 +247,28 @@ RLM_ARRAY_TYPE(MXRealmOlmInboundGroupSession)
 
 @end
 
+
+@interface MXRealmSecret : RLMObject
+@property NSString *secretId;
+@property NSString *secret;
+@end
+
+@implementation MXRealmSecret
+
++ (NSString *)primaryKey
+{
+    return @"secretId";
+}
+@end
+RLM_ARRAY_TYPE(MXRealmSecret)
+
+
 #pragma mark - MXRealmCryptoStore
 
 @interface MXRealmCryptoStore ()
 {
-    /**
-     The user id.
-     */
     NSString *userId;
+    NSString *deviceId;
 }
 
 /**
@@ -267,7 +290,7 @@ RLM_ARRAY_TYPE(MXRealmOlmInboundGroupSession)
 
 + (BOOL)hasDataForCredentials:(MXCredentials*)credentials
 {
-    RLMRealm *realm = [MXRealmCryptoStore realmForUser:credentials.userId];
+    RLMRealm *realm = [MXRealmCryptoStore realmForUser:credentials.userId andDevice:credentials.deviceId];
     return (nil != [MXRealmOlmAccount objectsInRealm:realm where:@"userId = %@", credentials.userId].firstObject);
 }
 
@@ -275,7 +298,7 @@ RLM_ARRAY_TYPE(MXRealmOlmInboundGroupSession)
 {
     NSLog(@"[MXRealmCryptoStore] createStore for %@:%@", credentials.userId, credentials.deviceId);
 
-    RLMRealm *realm = [MXRealmCryptoStore realmForUser:credentials.userId];
+    RLMRealm *realm = [MXRealmCryptoStore realmForUser:credentials.userId andDevice:credentials.deviceId];
 
     MXRealmOlmAccount *account = [[MXRealmOlmAccount alloc] initWithValue:@{
                                                                           @"userId" : credentials.userId,
@@ -293,7 +316,7 @@ RLM_ARRAY_TYPE(MXRealmOlmInboundGroupSession)
 {
     NSLog(@"[MXRealmCryptoStore] deleteStore for %@:%@", credentials.userId, credentials.deviceId);
 
-    RLMRealm *realm = [MXRealmCryptoStore realmForUser:credentials.userId];
+    RLMRealm *realm = [MXRealmCryptoStore realmForUser:credentials.userId andDevice:credentials.deviceId];
 
     [realm transactionWithBlock:^{
         [realm deleteAllObjects];
@@ -308,6 +331,7 @@ RLM_ARRAY_TYPE(MXRealmOlmInboundGroupSession)
     if (self)
     {
         userId = credentials.userId;
+        deviceId = credentials.deviceId;
 
         MXRealmOlmAccount *account = self.accountInCurrentThread;
         if (!account)
@@ -332,7 +356,7 @@ RLM_ARRAY_TYPE(MXRealmOlmInboundGroupSession)
 
 - (RLMRealm *)realm
 {
-    return [MXRealmCryptoStore realmForUser:userId];
+    return [MXRealmCryptoStore realmForUser:userId andDevice:deviceId];
 }
 
 - (MXRealmOlmAccount*)accountInCurrentThread
@@ -530,6 +554,66 @@ RLM_ARRAY_TYPE(MXRealmOlmInboundGroupSession)
     }];
 }
 
+
+#pragma mark - Cross-signing keys
+
+- (void)storeCrossSigningKeys:(MXCrossSigningInfo*)crossSigningInfo
+{
+    RLMRealm *realm = self.realm;
+
+    [realm transactionWithBlock:^{
+
+        MXRealmUser *realmUser = [MXRealmUser objectsInRealm:realm where:@"userId = %@", crossSigningInfo.userId].firstObject;
+        if (!realmUser)
+        {
+            realmUser = [[MXRealmUser alloc] initWithValue:@{
+                                                             @"userId": crossSigningInfo.userId,
+                                                             }];
+
+            [realm addObject:realmUser];
+        }
+
+        MXRealmCrossSigningInfo *realmCrossSigningKeys = [[MXRealmCrossSigningInfo alloc] initWithValue:@{
+                                                                                                    @"data": [NSKeyedArchiver archivedDataWithRootObject:crossSigningInfo]
+                                                                                                   }];
+        if (realmUser.crossSigningKeys)
+        {
+            // Remove orphan MXRealmCrossSigningInfo objects from the DB
+            [realm deleteObject:realmUser.crossSigningKeys];
+        }
+        
+        realmUser.crossSigningKeys = realmCrossSigningKeys;
+    }];
+}
+
+- (MXCrossSigningInfo*)crossSigningKeysForUser:(NSString*)userId
+{
+    MXCrossSigningInfo *crossSigningKeys;
+
+    MXRealmUser *realmUser = [MXRealmUser objectsInRealm:self.realm where:@"userId = %@", userId].firstObject;
+    if (realmUser)
+    {
+        crossSigningKeys = [NSKeyedUnarchiver unarchiveObjectWithData:realmUser.crossSigningKeys.data];
+    }
+
+    return crossSigningKeys;
+}
+
+- (NSArray<MXCrossSigningInfo *> *)crossSigningKeys
+{
+    NSMutableArray<MXCrossSigningInfo*> *crossSigningKeys = [NSMutableArray array];
+    
+    for (MXRealmCrossSigningInfo *realmCrossSigningKey in [MXRealmCrossSigningInfo allObjectsInRealm:self.realm])
+    {
+        [crossSigningKeys addObject:[NSKeyedUnarchiver unarchiveObjectWithData:realmCrossSigningKey.data]];
+    }
+    
+    return crossSigningKeys;
+}
+
+
+#pragma mark - Message keys
+
 - (void)storeAlgorithmForRoom:(NSString*)roomId algorithm:(NSString*)algorithm
 {
     __block BOOL isNew = NO;
@@ -604,7 +688,7 @@ RLM_ARRAY_TYPE(MXRealmOlmInboundGroupSession)
 
 - (void)storeSession:(MXOlmSession*)session forDevice:(NSString*)deviceKey
 {
-    BOOL isNew = NO;
+    __block BOOL isNew = NO;
     NSDate *startDate = [NSDate date];
 
     RLMRealm *realm = self.realm;
@@ -619,6 +703,7 @@ RLM_ARRAY_TYPE(MXRealmOlmInboundGroupSession)
         else
         {
             // Create it
+            isNew = YES;
             realmOlmSession = [[MXRealmOlmSession alloc] initWithValue:@{
                                                                          @"sessionId": session.session.sessionIdentifier,
                                                                          @"deviceKey": deviceKey,
@@ -886,6 +971,18 @@ RLM_ARRAY_TYPE(MXRealmOlmInboundGroupSession)
     return request;
 }
 
+- (NSArray<MXOutgoingRoomKeyRequest*> *)allOutgoingRoomKeyRequestsWithState:(MXRoomKeyRequestState)state
+{
+    NSMutableArray<MXOutgoingRoomKeyRequest*> *allOutgoingRoomKeyRequests = [NSMutableArray array];
+    
+    for (MXRealmOutgoingRoomKeyRequest *realmOutgoingRoomKeyRequest in [MXRealmOutgoingRoomKeyRequest allObjectsInRealm:self.realm])
+    {
+        [allOutgoingRoomKeyRequests addObject:realmOutgoingRoomKeyRequest.outgoingRoomKeyRequest];
+    }
+    
+    return allOutgoingRoomKeyRequests;
+}
+
 - (void)storeOutgoingRoomKeyRequest:(MXOutgoingRoomKeyRequest*)request
 {
     RLMRealm *realm = self.realm;
@@ -1000,6 +1097,38 @@ RLM_ARRAY_TYPE(MXRealmOlmInboundGroupSession)
     return incomingRoomKeyRequests;
 }
 
+
+#pragma mark - Secret storage
+
+- (void)storeSecret:(NSString*)secret withSecretId:(NSString*)secretId
+{
+    RLMRealm *realm = self.realm;
+    [realm transactionWithBlock:^{
+        
+        MXRealmSecret *realmSecret =
+        [[MXRealmSecret alloc] initWithValue:@{
+                                               @"secretId": secretId,
+                                               @"secret": secret,
+                                               }];
+        [realm addOrUpdateObject:realmSecret];
+    }];
+}
+
+- (NSString*)secretWithSecretId:(NSString*)secretId
+{
+    RLMResults<MXRealmSecret *> *realmSecrets = [MXRealmSecret objectsInRealm:self.realm where:@"secretId = %@", secretId];
+    return realmSecrets.firstObject.secret;
+}
+
+- (void)deleteSecretWithSecretId:(NSString*)secretId
+{
+    RLMRealm *realm = self.realm;
+    [realm transactionWithBlock:^{
+        [realm deleteObjects:[MXRealmSecret objectsInRealm:self.realm where:@"secretId = %@", secretId]];
+    }];
+}
+
+
 #pragma mark - Crypto settings
 
 - (BOOL)globalBlacklistUnverifiedDevices
@@ -1017,7 +1146,7 @@ RLM_ARRAY_TYPE(MXRealmOlmInboundGroupSession)
 }
 
 #pragma mark - Private methods
-+ (RLMRealm*)realmForUser:(NSString*)userId
++ (RLMRealm*)realmForUser:(NSString*)userId andDevice:(NSString*)deviceId
 {
     // Each user has its own db file.
     // Else, it can lead to issue with primary keys.
@@ -1042,9 +1171,17 @@ RLM_ARRAY_TYPE(MXRealmOlmInboundGroupSession)
         NSLog(@"[MXRealmCryptoStore] On simulator, create the file tree used by Realm. Error: %@", error);
     }
 #endif
-
+    
     // Default db file URL: use the default directory, but replace the filename with the userId.
-    NSURL *defaultRealmFileURL = [[defaultRealmPathURL URLByAppendingPathComponent:userId]
+    NSString *realmFile = userId;
+    if (MXTools.isRunningUnitTests)
+    {
+        // Append the device id for unit tests so that we can run e2e tests 
+        // with users with several devices
+        realmFile = [NSString stringWithFormat:@"%@-%@", userId, deviceId];
+    }
+
+    NSURL *defaultRealmFileURL = [[defaultRealmPathURL URLByAppendingPathComponent:realmFile]
                               URLByAppendingPathExtension:@"realm"];
     
     // Check for a potential application group id.
@@ -1106,13 +1243,15 @@ RLM_ARRAY_TYPE(MXRealmOlmInboundGroupSession)
     // Manage only our objects in this realm 
     config.objectClasses = @[
                              MXRealmDeviceInfo.class,
+                             MXRealmCrossSigningInfo.class,
                              MXRealmUser.class,
                              MXRealmRoomAlgorithm.class,
                              MXRealmOlmSession.class,
-                             MXRealmOlmInboundGroupSession.class,
+                             MXRealmOlmInboundGroupSession.class,   
                              MXRealmOlmAccount.class,
                              MXRealmOutgoingRoomKeyRequest.class,
-                             MXRealmIncomingRoomKeyRequest.class
+                             MXRealmIncomingRoomKeyRequest.class,
+                             MXRealmSecret.class,
                              ];
 
     config.schemaVersion = kMXRealmCryptoStoreVersion;
@@ -1281,6 +1420,31 @@ RLM_ARRAY_TYPE(MXRealmOlmInboundGroupSession)
 
                     // This schema update needs a fix of cleanDuplicatedDevicesInRealm introduced in schema #8.
                     cleanDuplicatedDevices = YES;
+                }
+
+                case 10:
+                    NSLog(@"[MXRealmCryptoStore] Migration from schema #10 -> #11: Nothing to do (added optional MXRealmUser.crossSigningKeys)");
+
+                case 11:
+                {
+                    NSLog(@"[MXRealmCryptoStore] Migration from schema #10 -> #11");
+
+                    // Because of https://github.com/vector-im/riot-ios/issues/2896, algorithms were not stored
+                    // Fix it by defaulting to usual values
+                    NSLog(@"[MXRealmCryptoStore]    Fix missing algorithms to all MXRealmDeviceInfo objects");
+
+                    [migration enumerateObjects:MXRealmDeviceInfo.className block:^(RLMObject *oldObject, RLMObject *newObject) {
+
+                        MXDeviceInfo *device = [NSKeyedUnarchiver unarchiveObjectWithData:oldObject[@"deviceInfoData"]];
+                        if (!device.algorithms)
+                        {
+                            device.algorithms = @[
+                                                  kMXCryptoOlmAlgorithm,
+                                                  kMXCryptoMegolmAlgorithm
+                                                  ];
+                        }
+                        newObject[@"deviceInfoData"] = [NSKeyedArchiver archivedDataWithRootObject:device];
+                    }];
                 }
             }
         }

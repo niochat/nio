@@ -127,6 +127,23 @@
     return list;
 }
 
+- (NSArray<MXEvent*>*)relationsForEvent:(NSString*)eventId relationType:(NSString*)relationType
+{
+    NSMutableArray<MXEvent*>* referenceEvents = [NSMutableArray new];
+    
+    for (MXEvent* event in messages)
+    {
+        MXEventContentRelatesTo *relatesTo = event.relatesTo;
+        
+        if (relatesTo && [relatesTo.eventId isEqualToString:eventId] && [relatesTo.relationType isEqualToString:relationType])
+        {
+            [referenceEvents addObject:event];
+        }
+    }
+    
+    return referenceEvents;
+}
+
 - (void)storeOutgoingMessage:(MXEvent*)outgoingMessage
 {
     // Sanity check: prevent from adding multiple occurrences of the same object.

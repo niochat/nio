@@ -105,11 +105,16 @@ NSCharacterSet *uriComponentCharset;
                                 kMXEventTypeStringCallHangup,
                                 kMXEventTypeStringSticker,
                                 kMXEventTypeStringRoomTombStone,
+                                kMXEventTypeStringKeyVerificationRequest,
+                                kMXEventTypeStringKeyVerificationReady,
                                 kMXEventTypeStringKeyVerificationStart,
                                 kMXEventTypeStringKeyVerificationAccept,
                                 kMXEventTypeStringKeyVerificationKey,
                                 kMXEventTypeStringKeyVerificationMac,
                                 kMXEventTypeStringKeyVerificationCancel,
+                                kMXEventTypeStringKeyVerificationDone,
+                                kMXEventTypeStringSecretRequest,
+                                kMXEventTypeStringSecretSend,
                                 ];
 
         NSMutableDictionary *map = [NSMutableDictionary dictionaryWithCapacity:eventTypeMapEnumToString.count];
@@ -743,6 +748,16 @@ static NSMutableDictionary *fileExtensionByContentType = nil;
 {
     NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
     return [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+}
+
++ (BOOL)isRunningUnitTests
+{
+#if DEBUG
+    NSDictionary* environment = [[NSProcessInfo processInfo] environment];
+    return (environment[@"XCTestConfigurationFilePath"] != nil);
+#else
+    return NO;
+#endif
 }
 
 @end

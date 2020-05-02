@@ -399,7 +399,7 @@
                     NSDictionary *content = [self contentOfEvent:event];
 
                     // Compute my user membership indepently from MXRoomMembers
-                    if ([userId isEqualToString:mxSession.myUser.userId])
+                    if ([userId isEqualToString:mxSession.myUserId])
                     {
                         MXRoomMember *roomMember = [[MXRoomMember alloc] initWithMXEvent:event andEventContent:content];
                         _membership = roomMember.membership;

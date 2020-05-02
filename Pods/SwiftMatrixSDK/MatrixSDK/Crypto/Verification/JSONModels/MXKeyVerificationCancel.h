@@ -14,7 +14,7 @@
  limitations under the License.
  */
 
-#import "MXJSONModel.h"
+#import "MXKeyVerificationJSONModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,12 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  Upon receiving an m.key.verification.cancel message, if the transaction ID refers to a current verification,
  then the device must cancel the verification and should inform the user of the reason.
  */
-@interface MXKeyVerificationCancel : MXJSONModel
-
-/**
- The transaction ID from the m.key.verification.start message.
- */
-@property (nonatomic) NSString *transactionId;
+@interface MXKeyVerificationCancel : MXKeyVerificationJSONModel
 
 /**
  Machine-readable reason for cancelling (MXKeyVerificationCancelCodeXxx).

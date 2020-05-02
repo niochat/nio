@@ -27,7 +27,7 @@ import Foundation
  Custom events types, out of the specification, may exist. In this case,
  `MXEventTypeString` must be checked.
  */
-public enum MXEventType {
+public enum MXEventType: Equatable, Hashable {
     case roomName
     case roomTopic
     case roomAvatar
@@ -63,6 +63,7 @@ public enum MXEventType {
     case keyVerificationKey
     case keyVerificationMac
     case keyVerificationCancel
+    case keyVerificationDone
 
     case custom(String)
     
@@ -102,6 +103,7 @@ public enum MXEventType {
         case .keyVerificationKey: return kMXEventTypeStringKeyVerificationKey
         case .keyVerificationMac: return kMXEventTypeStringKeyVerificationMac
         case .keyVerificationCancel: return kMXEventTypeStringKeyVerificationCancel
+        case .keyVerificationDone: return kMXEventTypeStringKeyVerificationDone
             
         // Swift converts any constant with the suffix "Notification" as the type `Notification.Name`
         // The original value can be reached using the `rawValue` property.
@@ -120,7 +122,7 @@ public enum MXEventType {
 
 
 /// Types of messages
-public enum MXMessageType {
+public enum MXMessageType: Equatable, Hashable {
     case text, emote, notice, image, audio, video, location, file
     case custom(String)
     
@@ -146,7 +148,7 @@ public enum MXMessageType {
 
 
 /// Membership definitions
-public enum MXMembership {
+public enum MXMembership: Equatable, Hashable {
     case unknown, invite, join, leave, ban
     
     public var identifier: __MXMembership {

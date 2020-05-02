@@ -149,6 +149,16 @@
  */
 - (id<MXEventsEnumerator> _Nonnull)messagesEnumeratorForRoom:(nonnull NSString*)roomId withTypeIn:(nullable NSArray*)types;
 
+/**
+ Get events related to a specific event.
+ 
+ @param eventId The event id of the event to find.
+ @param roomId The room id.
+ @param relationType The related events relation type desired.
+ @return An array of events related to the given event id.
+ */
+- (NSArray<MXEvent*>* _Nonnull)relationsForEvent:(nonnull NSString*)eventId inRoom:(nonnull NSString*)roomId relationType:(nonnull NSString*)relationType;
+
 
 #pragma mark - Matrix users
 /**

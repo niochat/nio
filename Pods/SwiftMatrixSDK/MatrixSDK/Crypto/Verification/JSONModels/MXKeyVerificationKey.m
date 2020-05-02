@@ -16,31 +16,24 @@
 
 #import "MXKeyVerificationKey.h"
 
+
 @implementation MXKeyVerificationKey
 
 + (instancetype)modelFromJSON:(NSDictionary *)JSONDictionary
 {
-    MXKeyVerificationKey *model = [MXKeyVerificationKey new];
+    MXKeyVerificationKey *model = [[MXKeyVerificationKey alloc] initWithJSONDictionary:JSONDictionary];
     if (model)
     {
-        MXJSONModelSetString(model.transactionId, JSONDictionary[@"transaction_id"]);
         MXJSONModelSetString(model.key, JSONDictionary[@"key"]);
     }
 
-    // Sanitiy check
-    if (!model.transactionId.length)
-    {
-        model = nil;
-    }
-    
     return model;
 }
 
 - (NSDictionary *)JSONDictionary
 {
-    NSMutableDictionary *JSONDictionary = [NSMutableDictionary dictionary];
-    JSONDictionary[@"transaction_id"] = _transactionId;
-
+    NSMutableDictionary *JSONDictionary = self.JSONDictionaryWithTransactionId;
+    
     if (_key)
     {
         JSONDictionary[@"key"] = _key;

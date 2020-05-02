@@ -278,6 +278,8 @@ Determine if an incoming messages is a prekey message matching an existing sessi
  @param roomId the room in which the message was received.
  @param senderKey the base64-encoded curve25519 key of the sender.
  @param sessionId the session identifier.
+ @param chainIndex The chain index at which to export the session.
+                   If nil, export at the first index we know about.
 
  @return a dictinary {
      chain_index: number,
@@ -286,7 +288,7 @@ Determine if an incoming messages is a prekey message matching an existing sessi
      sender_claimed_ed25519_key: string
  } details of the session key. The key is a base64-encoded megolm key in export format.
  */
-- (NSDictionary*)getInboundGroupSessionKey:(NSString*)roomId senderKey:(NSString*)senderKey sessionId:(NSString*)sessionId;
+- (NSDictionary*)getInboundGroupSessionKey:(NSString*)roomId senderKey:(NSString*)senderKey sessionId:(NSString*)sessionId chainIndex:(NSNumber*)chainIndex;
 
 
 #pragma mark - Utilities

@@ -62,6 +62,14 @@
 - (void)removeOperation:(MXDeviceListOperation *)operation;
 
 /**
+ Check if the pool will download keys these users.
+ 
+ @param userIds an array of users.
+ @return YES if the pool contains all users.
+ */
+- (BOOL)hasUsers:(NSArray<NSString*>*)userIds;
+
+/**
  Launch the download request for all users identified by all MXDeviceListOperation children.
  */
 - (void)downloadKeys:(NSString *)token complete:(void (^)(NSDictionary<NSString *, NSDictionary *> *failedUserIds))complete;

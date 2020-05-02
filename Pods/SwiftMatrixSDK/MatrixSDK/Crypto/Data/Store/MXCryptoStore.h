@@ -28,6 +28,7 @@
 #import "MXOlmSession.h"
 #import "MXOlmInboundGroupSession.h"
 #import "MXDeviceInfo.h"
+#import "MXCrossSigningInfo.h"
 #import "MXOutgoingRoomKeyRequest.h"
 #import "MXIncomingRoomKeyRequest.h"
 
@@ -170,6 +171,34 @@
  */
 - (void)storeDeviceTrackingStatus:(NSDictionary<NSString*, NSNumber*>*)statusMap;
 
+
+#pragma mark - Cross-signing keys
+
+/**
+ Store cross signing keys for a user.
+
+ @param crossSigningInfo The user's cross signing keys.
+ */
+- (void)storeCrossSigningKeys:(MXCrossSigningInfo*)crossSigningInfo;
+
+/**
+ Retrieve the cross signing keys for a user.
+
+ @param userId The user's id.
+ @return the cross signing keys.
+ */
+- (MXCrossSigningInfo*)crossSigningKeysForUser:(NSString*)userId;
+
+/**
+ Return all cross-signing keys we know about.
+ 
+ @return all cross signing keys.
+ */
+- (NSArray<MXCrossSigningInfo*> *)crossSigningKeys;
+
+
+#pragma mark - Message keys
+
 /**
  Store the crypto algorithm for a room.
 
@@ -291,6 +320,14 @@
 - (MXOutgoingRoomKeyRequest*)outgoingRoomKeyRequestWithState:(MXRoomKeyRequestState)state;
 
 /**
+ Get all outgoing key requests that match the state.
+ 
+ @param state to look for.
+ @return a MXOutgoingRoomKeyRequest matching the request, or nil if not found.
+ */
+- (NSArray<MXOutgoingRoomKeyRequest*> *)allOutgoingRoomKeyRequestsWithState:(MXRoomKeyRequestState)state;
+
+/**
  Store an outgoing room key request.
 
  @param request the room key request to store.
@@ -346,6 +383,33 @@
  @return a map userId -> deviceId -> [MXIncomingRoomKeyRequest*].
  */
 - (MXUsersDevicesMap<NSArray<MXIncomingRoomKeyRequest *> *> *)incomingRoomKeyRequests;
+
+
+#pragma mark - Secret storage
+
+/**
+ Store a secret.
+ 
+ @param secret the secret.
+ @param secretId the id of the secret.
+ */
+- (void)storeSecret:(NSString*)secret withSecretId:(NSString*)secretId;
+
+/**
+ Retrieve a secret.
+ 
+ @param secretId the id of the secret.
+ @return the secret. Nil if the secret does not exist.
+ */
+- (NSString*)secretWithSecretId:(NSString*)secretId;
+
+
+/**
+ Delete a secret.
+ 
+ @param secretId the id of the secret.
+ */
+- (void)deleteSecretWithSecretId:(NSString*)secretId;
 
 
 #pragma mark - Crypto settings

@@ -82,4 +82,9 @@
     return [[MXTransactionCancelCode alloc] initWithValue:@"m.user_error" humanReadable:@"User mismatch"];
 }
 
++ (instancetype)qrCodeInvalid
+{
+    return [[MXTransactionCancelCode alloc] initWithValue:@"m.qr_code.invalid" humanReadable:@"Invalid QR code"];
+}
+
 @end

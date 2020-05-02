@@ -359,7 +359,7 @@ static NSUInteger requestCount = 0;
     NSDate *startDate = [NSDate date];
     NSUInteger requestNumber = requestCount++;
 
-    NSLog(@"[MXHTTPClient] #%@ - %@", @(requestNumber), path);
+    NSLog(@"[MXHTTPClient] #%@ - %@ %@", @(requestNumber), httpMethod, path);
 
     mxHTTPOperation.numberOfTries++;
     mxHTTPOperation.operation = [httpManager dataTaskWithRequest:request uploadProgress:^(NSProgress * _Nonnull theUploadProgress) {
@@ -375,7 +375,7 @@ static NSUInteger requestCount = 0;
     } downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull theResponse, NSDictionary *JSONResponse, NSError * _Nullable error) {
         NSHTTPURLResponse *response = (NSHTTPURLResponse*)theResponse;
 
-        NSLog(@"[MXHTTPClient] #%@ - %@ completed in %.0fms" ,@(requestNumber), path, [[NSDate date] timeIntervalSinceDate:startDate] * 1000);
+        NSLog(@"[MXHTTPClient] #%@ - %@ %@ completed in %.0fms" ,@(requestNumber), httpMethod, path, [[NSDate date] timeIntervalSinceDate:startDate] * 1000);
 
         if (!weakself)
         {

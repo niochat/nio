@@ -21,6 +21,7 @@
 #import "MXEventDecryptionResult.h"
 #import "MXEncryptedContentFile.h"
 #import "MXEventRelations.h"
+#import "MXEventReferenceChunk.h"
 
 #pragma mark - Constants definitions
 
@@ -61,11 +62,16 @@ NSString *const kMXEventTypeStringCallAnswer            = @"m.call.answer";
 NSString *const kMXEventTypeStringCallHangup            = @"m.call.hangup";
 NSString *const kMXEventTypeStringSticker               = @"m.sticker";
 NSString *const kMXEventTypeStringRoomTombStone         = @"m.room.tombstone";
+NSString *const kMXEventTypeStringKeyVerificationRequest= @"m.key.verification.request";
+NSString *const kMXEventTypeStringKeyVerificationReady  = @"m.key.verification.ready";
 NSString *const kMXEventTypeStringKeyVerificationStart  = @"m.key.verification.start";
 NSString *const kMXEventTypeStringKeyVerificationAccept = @"m.key.verification.accept";
 NSString *const kMXEventTypeStringKeyVerificationKey    = @"m.key.verification.key";
 NSString *const kMXEventTypeStringKeyVerificationMac    = @"m.key.verification.mac";
 NSString *const kMXEventTypeStringKeyVerificationCancel = @"m.key.verification.cancel";
+NSString *const kMXEventTypeStringKeyVerificationDone   = @"m.key.verification.done";
+NSString *const kMXEventTypeStringSecretRequest         = @"m.secret.request";
+NSString *const kMXEventTypeStringSecretSend            = @"m.secret.send";
 
 NSString *const kMXMessageTypeText          = @"m.text";
 NSString *const kMXMessageTypeEmote         = @"m.emote";
@@ -76,6 +82,7 @@ NSString *const kMXMessageTypeVideo         = @"m.video";
 NSString *const kMXMessageTypeLocation      = @"m.location";
 NSString *const kMXMessageTypeFile          = @"m.file";
 NSString *const kMXMessageTypeServerNotice  = @"m.server_notice";
+NSString *const kMXMessageTypeKeyVerificationRequest = @"m.key.verification.request";
 
 NSString *const MXEventRelationTypeAnnotation = @"m.annotation";
 NSString *const MXEventRelationTypeReference = @"m.reference";
@@ -613,6 +620,47 @@ NSString *const kMXEventIdentifierKey = @"kMXEventIdentifierKey";
     }
     
     return editedEvent;
+}
+
+- (MXEvent*)eventWithNewReferenceRelation:(MXEvent*)referenceEvent
+{
+    MXEvent *newEvent;
+
+    MXEventReferenceChunk *references = self.unsignedData.relations.reference;
+    NSMutableArray<MXEventReference*> *newChunk = [references.chunk mutableCopy] ?: [NSMutableArray new];
+
+    MXEventReference *newReference = [[MXEventReference alloc] initWithEventId:referenceEvent.eventId type:referenceEvent.type];
+    [newChunk addObject:newReference];
+
+    MXEventReferenceChunk *newReferences = [[MXEventReferenceChunk alloc] initWithChunk:newChunk
+                                                                                  count:references.count + 1
+                                                                                limited:references.limited];
+
+    NSDictionary *newReferenceDict = newReferences.JSONDictionary;
+
+    NSMutableDictionary *newEventDict = [self.JSONDictionary mutableCopy];
+    if (self.unsignedData.relations)
+    {
+        newEventDict[@"unsigned"][@"m.relations"][@"m.reference"] = newReferenceDict;
+    }
+    else if (self.unsignedData)
+    {
+        newEventDict[@"unsigned"][@"m.relations"] = @{
+                                                         @"m.reference": newReferenceDict
+                                                         };
+    }
+    else
+    {
+        newEventDict[@"unsigned"] = @{
+                                      @"m.relations": @{
+                                              @"m.reference": newReferenceDict
+                                              }
+                                      };
+    }
+
+    newEvent = [MXEvent modelFromJSON:newEventDict];
+    
+    return newEvent;
 }
 
 - (NSComparisonResult)compareOriginServerTs:(MXEvent *)otherEvent

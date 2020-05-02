@@ -19,6 +19,7 @@
 
 
 #import "MXDeviceInfo.h"
+#import "MXCrossSigningInfo.h"
 #import "MXCryptoConstants.h"
 #import "MXEventDecryptionResult.h"
 
@@ -27,8 +28,12 @@
 #import "MXIncomingRoomKeyRequest.h"
 #import "MXIncomingRoomKeyRequestCancellation.h"
 
+#import "MXSecretShareManager.h"
+
 #import "MXKeyBackup.h"
-#import "MXDeviceVerificationManager.h"
+#import "MXKeyVerificationManager.h"
+#import "MXCrossSigning.h"
+#import "MXUsersTrustLevelSummary.h"
 
 @class MXSession;
 
@@ -50,6 +55,11 @@ FOUNDATION_EXPORT NSString *const kMXCryptoRoomKeyRequestNotificationRequestKey;
 FOUNDATION_EXPORT NSString *const kMXCryptoRoomKeyRequestCancellationNotification;
 FOUNDATION_EXPORT NSString *const kMXCryptoRoomKeyRequestCancellationNotificationRequestKey;
 
+/**
+ Notification name sent when users devices list are updated. Provides user ids and their corresponding updated devices.
+ Give an associated userInfo dictionary of type NSDictionary<NSString*, NSArray<MXDeviceInfo*>*>.
+ */
+extern NSString *const MXDeviceListDidUpdateUsersDevicesNotification;
 
 /**
  A `MXCrypto` class instance manages the end-to-end crypto for a MXSession instance.
@@ -86,7 +96,17 @@ FOUNDATION_EXPORT NSString *const kMXCryptoRoomKeyRequestCancellationNotificatio
 /**
  The device verification manager.
  */
-@property (nonatomic, readonly) MXDeviceVerificationManager *deviceVerificationManager;
+@property (nonatomic, readonly) MXKeyVerificationManager *keyVerificationManager;
+
+/**
+ The secret share manager.
+ */
+@property (nonatomic, readonly) MXSecretShareManager *secretShareManager;
+
+/**
+ The cross-signing manager.
+ */
+@property (nonatomic, readonly) MXCrossSigning *crossSigning;
 
 /**
  Create a new crypto instance and data for the given user.
@@ -206,6 +226,9 @@ FOUNDATION_EXPORT NSString *const kMXCryptoRoomKeyRequestCancellationNotificatio
  */
 - (MXDeviceInfo *)eventDeviceInfo:(MXEvent*)event;
 
+
+#pragma mark - Local trust
+
 /**
  Update the blocked/verified state of the given device
 
@@ -231,7 +254,49 @@ FOUNDATION_EXPORT NSString *const kMXCryptoRoomKeyRequestCancellationNotificatio
                complete:(void (^)(void))complete;
 
 /**
- Get the device keys for a list of users.
+ Update the verification state of the given user.
+ 
+ @param verificationStatus the new verification status.
+ @param userId the user.
+ 
+ @param success A block object called when the operation succeeds.
+ @param failure A block object called when the operation fails.
+ */
+- (void)setUserVerification:(BOOL)verificationStatus forUser:(NSString*)userId
+                    success:(void (^)(void))success
+                    failure:(void (^)(NSError *error))failure;
+
+
+#pragma mark - Cross-signing trust
+
+- (MXUserTrustLevel*)trustLevelForUser:(NSString*)userId;
+- (MXDeviceTrustLevel*)deviceTrustLevelForDevice:(NSString*)deviceId ofUser:(NSString*)userId;
+
+
+/**
+ Get a summary of users trust level (trusted users and devices count).
+
+ @param userIds The user ids.
+ @param success A block object called when the operation succeeds.
+ @param failure A block object called when the operation fails.
+ */
+- (void)trustLevelSummaryForUserIds:(NSArray<NSString*>*)userIds
+                            success:(void (^)(MXUsersTrustLevelSummary *usersTrustLevelSummary))success
+                            failure:(void (^)(NSError *error))failure;
+
+/**
+ Get the stored summary of users trust level (trusted users and devices count).
+ 
+ @param userIds The user ids.
+ @param onComplete the callback called once operation is done.
+ */
+- (void)trustLevelSummaryForUserIds:(NSArray<NSString*>*)userIds onComplete:(void (^)(MXUsersTrustLevelSummary *trustLevelSummary))onComplete;
+
+
+#pragma mark - Users keys
+
+/**
+ Get the device and cross-sigining keys for a list of users.
 
  Keys will be downloaded from the matrix homeserver and stored into the crypto store
  if the information in the store is not up-to-date.
@@ -247,8 +312,37 @@ FOUNDATION_EXPORT NSString *const kMXCryptoRoomKeyRequestCancellationNotificatio
  */
 - (MXHTTPOperation*)downloadKeys:(NSArray<NSString*>*)userIds
                    forceDownload:(BOOL)forceDownload
-                         success:(void (^)(MXUsersDevicesMap<MXDeviceInfo*> *usersDevicesInfoMap))success
+                         success:(void (^)(MXUsersDevicesMap<MXDeviceInfo*> *usersDevicesInfoMap,
+                                           NSDictionary<NSString* /* userId*/, MXCrossSigningInfo*> *crossSigningKeysMap))success
                          failure:(void (^)(NSError *error))failure;
+
+/**
+ Get the stored cross-siging information of a user.
+
+ @param userId The user.
+ @return the cross-signing information if any.
+ */
+- (MXCrossSigningInfo *)crossSigningKeysForUser:(NSString*)userId;
+
+
+/**
+ Retrieve the known devices for a user.
+
+ @param userId The user id.
+ @return A map from device id to 'MXDevice' object for the device or nil if we
+         haven't managed to get a list of devices for this user yet.
+ */
+- (NSDictionary<NSString*, MXDeviceInfo*>*)devicesForUser:(NSString*)userId;
+
+/**
+ Get the stored information about a device.
+
+ @param deviceId The device.
+ @param userId The device user.
+ @return the device if any.
+ */
+- (MXDeviceInfo *)deviceWithDeviceId:(NSString*)deviceId ofUser:(NSString*)userId;
+
 
 /**
  Reset replay attack data for the given timeline.
@@ -273,6 +367,14 @@ FOUNDATION_EXPORT NSString *const kMXCryptoRoomKeyRequestCancellationNotificatio
  @param onComplete the callback called once operation is done.
  */
 - (void)deleteStore:(void (^)(void))onComplete;
+
+
+#pragma mark - Gossipping
+
+/**
+ Make requests to get key private keys from other user's devices.
+ */
+- (void)requestAllPrivateKeys;
 
 
 #pragma mark - import/export
@@ -369,6 +471,23 @@ FOUNDATION_EXPORT NSString *const kMXCryptoRoomKeyRequestCancellationNotificatio
  @param onComplete A block object called when the operation completes.
  */
 - (void)ignoreAllPendingKeyRequestsFromUser:(NSString*)userId andDevice:(NSString*)deviceId onComplete:(void (^)(void))onComplete;
+
+/**
+ Enable or disable outgoing key share requests.
+ Enabled by default
+ 
+ @param enabled the new enable state.
+ @param onComplete the block called when the operation completes
+ */
+- (void)setOutgoingKeyRequestsEnabled:(BOOL)enabled onComplete:(void (^)(void))onComplete;
+- (BOOL)isOutgoingKeyRequestsEnabled;
+
+/**
+ Automatically re-enable outgoing key share requests once another device has been verified.
+ 
+ Default is YES.
+ */
+@property (nonatomic) BOOL enableOutgoingKeyRequestsOnceSelfVerificationDone;
 
 /**
  Rerequest the encryption keys required to decrypt an event.
