@@ -18,6 +18,12 @@ struct EventContainerView: View {
     }
 
     var body: some View {
+        // NOTE: For as long as https://github.com/matrix-org/matrix-ios-sdk/pull/843
+        // remains unresolved keep in mind that
+        // `.keyVerificationStart`, `.keyVerificationAccept`, `.keyVerificationKey`,
+        // `.keyVerificationMac`, `.keyVerificationCancel` & `.reaction`
+        // may get wrongly recognized as `.custom(…)`, instead.
+        // FIXME: Remove comment when linked bug fix has been merged.
         switch MXEventType(identifier: event.type) {
         case .roomMessage:
             guard !event.isRedactedEvent() else {
