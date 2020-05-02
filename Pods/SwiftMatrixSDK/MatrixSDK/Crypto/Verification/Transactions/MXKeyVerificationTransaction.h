@@ -27,18 +27,29 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Notification sent when the transaction has been updated.
  */
-FOUNDATION_EXPORT NSString * _Nonnull const MXDeviceVerificationTransactionDidChangeNotification;
+FOUNDATION_EXPORT NSString * _Nonnull const MXKeyVerificationTransactionDidChangeNotification;
+
+typedef NS_ENUM(NSInteger, MXKeyVerificationTransport) {
+    MXKeyVerificationTransportToDevice = 0,
+    MXKeyVerificationTransportDirectMessage,
+};
 
 
 /**
  An handler on an interactive device verification.
  */
-@interface MXDeviceVerificationTransaction: NSObject
+@interface MXKeyVerificationTransaction: NSObject
 
 /**
  The transaction id.
  */
 @property (nonatomic, readonly) NSString *transactionId;
+
+/**
+ Transport layer.
+ Default is by to_device events.
+ */
+@property (nonatomic, readonly) MXKeyVerificationTransport transport;
 
 /**
  YES for an incoming verification request.
@@ -75,13 +86,30 @@ FOUNDATION_EXPORT NSString * _Nonnull const MXDeviceVerificationTransactionDidCh
  */
 @property (nonatomic, nullable) NSError *error;
 
-
 /**
  Cancel this transaction.
 
  @param code the cancellation reason
  */
 - (void)cancelWithCancelCode:(MXTransactionCancelCode*)code;
+
+/**
+ Cancel this transaction.
+ 
+ @param code the cancellation reason
+ @param success A block object called when the operation succeeds.
+ @param failure A block object called when the operation fails.
+ */
+- (void)cancelWithCancelCode:(MXTransactionCancelCode *)code
+                     success:(void (^)(void))success
+                     failure:(void (^)(NSError *error))failure;
+
+
+#pragma mark - Transport layer
+#pragma mark Direct message
+
+@property (nonatomic, nullable, readonly) NSString *dmRoomId;
+@property (nonatomic, nullable, readonly) NSString *dmEventId;
 
 @end
 

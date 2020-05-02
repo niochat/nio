@@ -2,6 +2,7 @@
  Copyright 2016 OpenMarket Ltd
  Copyright 2017 Vector Creations Ltd
  Copyright 2018 New Vector Ltd
+ Copyright 2020 The Matrix.org Foundation C.I.C
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -36,7 +37,12 @@
 #import "MXOutgoingRoomKeyRequestManager.h"
 #import "MXIncomingRoomKeyRequestManager.h"
 
-#import "MXDeviceVerificationManager_Private.h"
+#import "MXSecretShareManager_Private.h"
+
+#import "MXKeyVerificationManager_Private.h"
+#import "MXDeviceInfo_Private.h"
+#import "MXCrossSigningInfo_Private.h"
+#import "MXCrossSigning_Private.h"
 
 /**
  The store to use for crypto.
@@ -48,10 +54,13 @@ NSString *const kMXCryptoRoomKeyRequestNotificationRequestKey = @"kMXCryptoRoomK
 NSString *const kMXCryptoRoomKeyRequestCancellationNotification = @"kMXCryptoRoomKeyRequestCancellationNotification";
 NSString *const kMXCryptoRoomKeyRequestCancellationNotificationRequestKey = @"kMXCryptoRoomKeyRequestCancellationNotificationRequestKey";
 
+NSString *const MXDeviceListDidUpdateUsersDevicesNotification = @"MXDeviceListDidUpdateUsersDevicesNotification";
+
 #ifdef MX_CRYPTO
 
 // Frequency with which to check & upload one-time keys
 NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
+NSTimeInterval kMXCryptoMinForceSessionPeriod = 3600.0; // one hour
 
 @interface MXCrypto ()
 {
@@ -87,6 +96,20 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
 
     // The manager for incoming room key requests
     MXIncomingRoomKeyRequestManager *incomingRoomKeyRequestManager;
+    
+    // The date of the last time we forced establishment
+    // of a new session for each user:device.
+    MXUsersDevicesMap<NSDate*> *lastNewSessionForcedDates;
+    
+    // The dedicated queue used for decryption.
+    // This queue is used to get the key from the crypto store and decrypt the event. No more.
+    // Thus, it can respond quicker than cryptoQueue for this operation that must return
+    // synchronously for MXSession.
+    dispatch_queue_t decryptionQueue;
+    
+    // The queue to manage bulk import and export of keys.
+    // It only reads and writes keys from and to the crypto store.
+    dispatch_queue_t cargoQueue;
 }
 @end
 
@@ -233,7 +256,7 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
             MXStrongifyAndReturnIfNil(self);
 
             NSLog(@"[MXCrypto] start ###########################################################");
-            NSLog(@"[MXCrypto] uploadDeviceKeys done for %@: ", self.mxSession.myUser.userId);
+            NSLog(@"[MXCrypto] uploadDeviceKeys done for %@: ", self.mxSession.myUserId);
 
             NSLog(@"[MXCrypto]    - device id  : %@", self.store.deviceId);
             NSLog(@"[MXCrypto]    - ed25519    : %@", self.olmDevice.deviceEd25519Key);
@@ -243,10 +266,12 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
             NSLog(@"[MXCrypto] Store: %@", self.store);
             NSLog(@"[MXCrypto] ");
 
+            [self->_crossSigning refreshStateWithSuccess:nil failure:nil];
+            
             [self->outgoingRoomKeyRequestManager start];
 
             [self->_backup checkAndStartKeyBackup];
-
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 self->startOperation = nil;
                 success();
@@ -309,6 +334,9 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
 
         [self.deviceList close];
         self->_deviceList = nil;
+        
+        [self.matrixRestClient close];
+        self->_matrixRestClient = nil;
 
         [self->roomEncryptors removeAllObjects];
         self->roomEncryptors = nil;
@@ -447,7 +475,7 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
     // TODO: dispatch_async (https://github.com/matrix-org/matrix-ios-sdk/issues/205)
     // At the moment, we lock the main thread while decrypting events.
     // Fortunately, decrypting is far quicker that encrypting.
-    dispatch_sync(_decryptionQueue, ^{
+    dispatch_sync(decryptionQueue, ^{
 
         if (!event.content.count)
         {
@@ -478,6 +506,14 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
             if (error && *error)
             {
                 NSLog(@"[MXCrypto] decryptEvent: Error for %@: %@\nEvent: %@", event.eventId, *error, event.JSONDictionary);
+                
+                if ([(*error).domain isEqualToString:MXDecryptingErrorDomain]
+                    && (*error).code == MXDecryptingErrorBadEncryptedMessageCode)
+                {
+                    dispatch_async(self.cryptoQueue, ^{
+                        [self markOlmSessionForUnwedgingInEvent:event];
+                    });
+                }
             }
         }
     });
@@ -728,7 +764,7 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
         // AND we do it synchronously
         // @TODO: dispatch_async
         MXWeakify(self);
-        dispatch_sync(_decryptionQueue, ^{
+        dispatch_sync(decryptionQueue, ^{
             MXStrongifyAndReturnIfNil(self);
 
             NSString *algorithm = event.wireContent[@"algorithm"];
@@ -742,59 +778,103 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
     return device;
 }
 
+
+#pragma mark - Local trust
+
 - (void)setDeviceVerification:(MXDeviceVerification)verificationStatus forDevice:(NSString*)deviceId ofUser:(NSString*)userId
                       success:(void (^)(void))success
                       failure:(void (^)(NSError *error))failure
 {
 #ifdef MX_CRYPTO
-    
-    // Note: failure is not currently used but it would make sense the day device
-    // verification will be sync'ed with the hs.
-    MXWeakify(self);
     dispatch_async(_cryptoQueue, ^{
-        MXStrongifyAndReturnIfNil(self);
-
-        MXDeviceInfo *device = [self.store deviceWithDeviceId:deviceId forUser:userId];
-
-        // Sanity check
-        if (!device)
-        {
-            NSLog(@"[MXCrypto] setDeviceVerificationForDevice: Unknown device %@:%@", userId, deviceId);
-
-            if (success)
-            {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    success();
-                });
-            }
-            return;
-        }
-
-        if (device.verified != verificationStatus)
-        {
-            device.verified = verificationStatus;
-            [self.store storeDeviceForUser:userId device:device];
-
-            if ([userId isEqualToString:self.mxSession.myUser.userId])
-            {
-                // If one of the user's own devices is being marked as verified / unverified,
-                // check the key backup status, since whether or not we use this depends on
-                // whether it has a signature from a verified device
-                [self.backup checkAndStartKeyBackup];
-            }
-        }
-
-        if (success)
-        {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                success();
-            });
-        }
+        [self setDeviceVerification2:verificationStatus forDevice:deviceId ofUser:userId downloadIfNeeded:YES success:success failure:failure];
     });
 #else
     if (success)
     {
         success();
+    }
+#endif
+}
+
+- (void)setDeviceVerification2:(MXDeviceVerification)verificationStatus forDevice:(NSString*)deviceId ofUser:(NSString*)userId
+              downloadIfNeeded:(BOOL)downloadIfNeeded
+                       success:(void (^)(void))success
+                       failure:(void (^)(NSError *error))failure
+{
+#ifdef MX_CRYPTO
+    MXDeviceInfo *device = [self.store deviceWithDeviceId:deviceId forUser:userId];
+    
+    // Sanity check
+    if (!device)
+    {
+        if (downloadIfNeeded)
+        {
+            NSLog(@"[MXCrypto] setDeviceVerificationForDevice: Unknown device. Try to download user's keys for %@:%@", userId, deviceId);
+            [self.deviceList downloadKeys:@[userId] forceDownload:YES success:^(MXUsersDevicesMap<MXDeviceInfo *> *usersDevicesInfoMap, NSDictionary<NSString *,MXCrossSigningInfo *> *crossSigningKeysMap) {
+                [self setDeviceVerification2:verificationStatus forDevice:deviceId ofUser:userId downloadIfNeeded:NO success:success failure:failure];
+            } failure:^(NSError *error) {
+                if (failure)
+                {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        failure(error);
+                    });
+                }
+            }];
+        }
+        else
+        {
+            NSLog(@"[MXCrypto] setDeviceVerificationForDevice: Unknown device %@:%@", userId, deviceId);
+            if (failure)
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    failure(nil);
+                });
+            }
+        }
+        return;
+    }
+    
+    if (device.trustLevel.localVerificationStatus != verificationStatus)
+    {
+        MXDeviceTrustLevel *trustLevel = [MXDeviceTrustLevel trustLevelWithLocalVerificationStatus:verificationStatus
+                                                                              crossSigningVerified:device.trustLevel.isCrossSigningVerified];
+        [device updateTrustLevel:trustLevel];
+        [self.store storeDeviceForUser:userId device:device];
+        
+        if ([userId isEqualToString:self.mxSession.myUserId])
+        {
+            // If one of the user's own devices is being marked as verified / unverified,
+            // check the key backup status, since whether or not we use this depends on
+            // whether it has a signature from a verified device
+            [self.backup checkAndStartKeyBackup];
+            
+            // Manage self-verification
+            if (verificationStatus == MXDeviceVerified)
+            {
+                // This is a good time to request all private keys
+                NSLog(@"[MXCrypto] setDeviceVerificationForDevice: Request all private keys");
+                [self scheduleRequestsForAllPrivateKeys];
+                
+                // Check cross-signing
+                if (self.crossSigning.canCrossSign)
+                {
+                    // Cross-sign our own device
+                    NSLog(@"[MXCrypto] setDeviceVerificationForDevice: Mark device %@ as self verified", deviceId);
+                    [self.crossSigning crossSignDeviceWithDeviceId:deviceId success:success failure:failure];
+                    
+                    // Wait the end of cross-sign before returning
+                    return;
+                }
+            }
+        }
+    }
+    
+    if (success)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            success();
+        });
     }
 #endif
 }
@@ -812,9 +892,12 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
             {
                 MXDeviceInfo *device = [devices objectForDevice:deviceID forUser:userId];
 
-                if (device.verified == MXDeviceUnknown)
+                if (device.trustLevel.localVerificationStatus == MXDeviceUnknown)
                 {
-                    device.verified = MXDeviceUnverified;
+                    MXDeviceTrustLevel *trustLevel =
+                    [MXDeviceTrustLevel trustLevelWithLocalVerificationStatus:MXDeviceUnverified
+                                                         crossSigningVerified:device.trustLevel.isCrossSigningVerified];
+                    [device updateTrustLevel:trustLevel];
                     [self.store storeDeviceForUser:device.userId device:device];
                 }
             }
@@ -835,9 +918,181 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
 #endif
 }
 
+- (void)setUserVerification:(BOOL)verificationStatus forUser:(NSString*)userId
+                    success:(void (^)(void))success
+                    failure:(void (^)(NSError *error))failure
+{
+    // We cannot remove cross-signing trust for a user in the matrix spec
+    NSParameterAssert(verificationStatus);
+    
+#ifdef MX_CRYPTO
+    dispatch_async(_cryptoQueue, ^{
+        [self setUserVerification2:verificationStatus forUser:userId downloadIfNeeded:YES success:success failure:failure];
+    });
+#else
+    if (success)
+    {
+        success();
+    }
+#endif
+}
+
+- (void)setUserVerification2:(BOOL)verificationStatus forUser:(NSString*)userId
+            downloadIfNeeded:(BOOL)downloadIfNeeded
+                    success:(void (^)(void))success
+                    failure:(void (^)(NSError *error))failure
+{
+#ifdef MX_CRYPTO
+    MXCrossSigningInfo *crossSigningInfo = [self.store crossSigningKeysForUser:userId];
+    
+    // Sanity check
+    if (!crossSigningInfo)
+    {
+        if (downloadIfNeeded)
+        {
+            NSLog(@"[MXCrypto] setUserVerification: Unknown user. Try to download user's keys for %@", userId);
+            [self.deviceList downloadKeys:@[userId] forceDownload:YES success:^(MXUsersDevicesMap<MXDeviceInfo *> *usersDevicesInfoMap, NSDictionary<NSString *,MXCrossSigningInfo *> *crossSigningKeysMap) {
+                [self setUserVerification2:verificationStatus forUser:userId downloadIfNeeded:NO success:success failure:failure];
+            } failure:^(NSError *error) {
+                if (failure)
+                {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        failure(error);
+                    });
+                }
+            }];
+        }
+        else
+        {
+            NSLog(@"[MXCrypto] setUserVerification: Unknown user %@", userId);
+            if (failure)
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    failure(nil);
+                });
+            }
+        }
+        return;
+    }
+    
+    // Store information locally
+    if (verificationStatus != crossSigningInfo.trustLevel.isLocallyVerified)
+    {
+        MXUserTrustLevel *newTrustLevel = [MXUserTrustLevel trustLevelWithCrossSigningVerified:crossSigningInfo.trustLevel.isCrossSigningVerified
+                                                                               locallyVerified:verificationStatus];;
+        [crossSigningInfo updateTrustLevel:newTrustLevel];
+        [_store storeCrossSigningKeys:crossSigningInfo];
+    }
+    
+    // Cross-sign if possible
+    if (verificationStatus != crossSigningInfo.trustLevel.isCrossSigningVerified)
+    {
+        if (self.crossSigning.canCrossSign)
+        {
+            NSLog(@"[MXCrypto] setUserVerification: Sign user %@ as verified", userId);
+            [self.crossSigning signUserWithUserId:userId success:success failure:failure];
+            
+            // Wait the end of cross-sign before returning
+            return;
+        }
+        else
+        {
+            // Cross-signing ability should have been checked before going into this hole
+            NSLog(@"[MXCrypto] setUserVerification: Cross-signing not enabled. Current state: %@", @(self.crossSigning.state));
+            
+        }
+    }
+    
+    if (success)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            success();
+        });
+    }
+#endif
+}
+
+
+#pragma mark - Cross-signing trust
+
+- (MXUserTrustLevel*)trustLevelForUser:(NSString*)userId
+{
+    return [self.store crossSigningKeysForUser:userId].trustLevel ?: [MXUserTrustLevel new];
+}
+
+- (MXDeviceTrustLevel*)deviceTrustLevelForDevice:(NSString*)deviceId ofUser:(NSString*)userId;
+{
+    return [self.store deviceWithDeviceId:deviceId forUser:userId].trustLevel;
+}
+
+- (void)trustLevelSummaryForUserIds:(NSArray<NSString*>*)userIds
+                            success:(void (^)(MXUsersTrustLevelSummary *usersTrustLevelSummary))success
+                            failure:(void (^)(NSError *error))failure
+{
+    [self downloadKeys:userIds forceDownload:NO success:^(MXUsersDevicesMap<MXDeviceInfo *> *usersDevicesInfoMap, NSDictionary<NSString *,MXCrossSigningInfo *> *crossSigningKeysMap) {
+        
+        // Read data from the store
+        // It has been updated in the process of the downloadKeys response
+        [self trustLevelSummaryForUserIds:userIds onComplete:^(MXUsersTrustLevelSummary *trustLevelSummary) {
+            success(trustLevelSummary);
+        }];
+        
+    } failure:failure];
+}
+
+- (void)trustLevelSummaryForUserIds:(NSArray<NSString*>*)userIds onComplete:(void (^)(MXUsersTrustLevelSummary *trustLevelSummary))onComplete;
+{
+    // Use cargoQueue for potential huge read requests from the store
+    MXWeakify(self);
+    dispatch_async(cargoQueue, ^{
+        MXStrongifyAndReturnIfNil(self);
+        
+        NSUInteger usersCount = 0;
+        NSUInteger trustedUsersCount = 0;
+        NSUInteger devicesCount = 0;
+        NSUInteger trustedDevicesCount = 0;
+        
+        for (NSString *userId in userIds)
+        {
+            usersCount++;
+            
+            MXUserTrustLevel *userTrustLevel = [self trustLevelForUser:userId];
+            if (userTrustLevel.isVerified)
+            {
+                trustedUsersCount++;
+                
+                for (MXDeviceInfo *device in [self.store devicesForUser:userId].allValues)
+                {
+                    devicesCount++;
+                    if (device.trustLevel.isVerified)
+                    {
+                        trustedDevicesCount++;
+                    }
+                }
+            }
+        }
+        
+        NSProgress *trustedUsersProgress = [NSProgress progressWithTotalUnitCount:usersCount];
+        trustedUsersProgress.completedUnitCount = trustedUsersCount;
+        
+        NSProgress *trustedDevicesProgress = [NSProgress progressWithTotalUnitCount:devicesCount];
+        trustedDevicesProgress.completedUnitCount = trustedDevicesCount;
+        
+        MXUsersTrustLevelSummary *trustLevelSummary = [[MXUsersTrustLevelSummary alloc] initWithTrustedUsersProgress:trustedUsersProgress
+                                                                                           andTrustedDevicesProgress:trustedDevicesProgress];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            onComplete(trustLevelSummary);
+        });
+    });
+}
+
+#pragma mark - Users keys
+
 - (MXHTTPOperation*)downloadKeys:(NSArray<NSString*>*)userIds
                    forceDownload:(BOOL)forceDownload
-                         success:(void (^)(MXUsersDevicesMap<MXDeviceInfo*> *usersDevicesInfoMap))success
+                         success:(void (^)(MXUsersDevicesMap<MXDeviceInfo*> *usersDevicesInfoMap,
+                                           NSDictionary<NSString*, MXCrossSigningInfo*> *crossSigningKeysMap))success
                          failure:(void (^)(NSError *error))failure
 {
 #ifdef MX_CRYPTO
@@ -847,11 +1102,11 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
 
     dispatch_async(_cryptoQueue, ^{
 
-        MXHTTPOperation *operation2 = [self.deviceList downloadKeys:userIds forceDownload:forceDownload success:^(MXUsersDevicesMap<MXDeviceInfo *> *usersDevicesInfoMap) {
+        MXHTTPOperation *operation2 = [self.deviceList downloadKeys:userIds forceDownload:forceDownload success:^(MXUsersDevicesMap<MXDeviceInfo *> *usersDevicesInfoMap, NSDictionary<NSString *,MXCrossSigningInfo *> *crossSigningKeysMap) {
             if (success)
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    success(usersDevicesInfoMap);
+                    success(usersDevicesInfoMap, crossSigningKeysMap);
                 });
             }
         } failure:^(NSError *error) {
@@ -876,11 +1131,45 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
 #endif
 }
 
+-(MXCrossSigningInfo *)crossSigningKeysForUser:(NSString *)userId
+{
+    MXCrossSigningInfo *crossSigningKeys;
+
+#ifdef MX_CRYPTO
+    crossSigningKeys = [self.store crossSigningKeysForUser:userId];
+#endif
+
+    return crossSigningKeys;
+}
+
+
+- (NSDictionary<NSString*, MXDeviceInfo*>*)devicesForUser:(NSString*)userId
+{
+    NSDictionary<NSString*, MXDeviceInfo*> *devices;
+
+#ifdef MX_CRYPTO
+    devices = [self.store devicesForUser:userId];
+#endif
+
+    return devices;
+}
+
+- (MXDeviceInfo *)deviceWithDeviceId:(NSString*)deviceId ofUser:(NSString*)userId
+{
+    MXDeviceInfo *device;
+
+#ifdef MX_CRYPTO
+    device = [self.store devicesForUser:userId][deviceId];
+#endif
+
+    return device;
+}
+
 - (void)resetReplayAttackCheckInTimeline:(NSString*)timeline
 {
 #ifdef MX_CRYPTO
     MXWeakify(self);
-    dispatch_async(_decryptionQueue, ^{
+    dispatch_async(decryptionQueue, ^{
         MXStrongifyAndReturnIfNil(self);
         [self.olmDevice resetReplayAttackCheckInTimeline:timeline];
     });
@@ -891,7 +1180,7 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
 {
 #ifdef MX_CRYPTO
     MXWeakify(self);
-    dispatch_sync(_decryptionQueue, ^{
+    dispatch_sync(decryptionQueue, ^{
         MXStrongifyAndReturnIfNil(self);
 
         // Reset tracking status
@@ -932,13 +1221,54 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
 }
 
 
+#pragma mark - Gossipping
+
+- (void)requestAllPrivateKeys
+{
+    NSLog(@"[MXCrypto] requestAllPrivateKeys");
+    
+    // Request backup private keys
+    if (!self.backup.hasPrivateKeyInCryptoStore || !self.backup.enabled)
+    {
+        NSLog(@"[MXCrypto] requestAllPrivateKeys: Request key backup private keys");
+        
+        MXWeakify(self);
+        [self.backup requestPrivateKeys:^{
+            MXStrongifyAndReturnIfNil(self);
+            
+            if (self.enableOutgoingKeyRequestsOnceSelfVerificationDone)
+            {
+                [self->outgoingRoomKeyRequestManager setEnabled:YES];
+            }
+        }];
+    }
+    
+    // Check cross-signing private keys
+    if (self.crossSigning.state == MXCrossSigningStateCrossSigningExists)
+    {
+        NSLog(@"[MXCrypto] requestAllPrivateKeys: Request cross-signing private keys");
+        [self.crossSigning requestPrivateKeys];
+    }
+}
+
+- (void)scheduleRequestsForAllPrivateKeys
+{
+    // For the moment, we have no better solution than waiting a bit before making such request.
+    // This 1.5s delay lets time to the other peer to set our device as trusted
+    // so that it will accept to gossip the keys to our device.
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), _cryptoQueue, ^{
+        [self requestAllPrivateKeys];
+    });
+}
+
+
 #pragma mark - import/export
 
 - (void)exportRoomKeys:(void (^)(NSArray<NSDictionary *> *))success failure:(void (^)(NSError *))failure
 {
 #ifdef MX_CRYPTO
     MXWeakify(self);
-    dispatch_async(_decryptionQueue, ^{
+    dispatch_async(cargoQueue, ^{
         MXStrongifyAndReturnIfNil(self);
 
         NSDate *startDate = [NSDate date];
@@ -973,7 +1303,7 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
 {
 #ifdef MX_CRYPTO
     MXWeakify(self);
-    dispatch_async(_decryptionQueue, ^{
+    dispatch_async(cargoQueue, ^{
         MXStrongifyAndReturnIfNil(self);
 
         NSData *keyFile;
@@ -1031,7 +1361,7 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
 - (void)importRoomKeys:(NSArray<NSDictionary *> *)keys success:(void (^)(NSUInteger total, NSUInteger imported))success failure:(void (^)(NSError *))failure
 {
 #ifdef MX_CRYPTO
-    dispatch_async(_decryptionQueue, ^{
+    dispatch_async(cargoQueue, ^{
 
         NSLog(@"[MXCrypto] importRoomKeys:");
 
@@ -1047,7 +1377,7 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
 {
 #ifdef MX_CRYPTO
     MXWeakify(self);
-    dispatch_async(_decryptionQueue, ^{
+    dispatch_async(cargoQueue, ^{
         MXStrongifyAndReturnIfNil(self);
 
         NSLog(@"[MXCrypto] importMegolmSessionDatas: backUp: %@", @(backUp));
@@ -1058,37 +1388,40 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
         NSArray<MXOlmInboundGroupSession *>* sessions = [self.olmDevice importInboundGroupSessions:sessionDatas];
 
         NSLog(@"[MXCrypto] importMegolmSessionDatas: Imported %@ keys in store", @(sessions.count));
-
-        // Do not back up the key if it comes from a backup recovery
-        if (backUp)
-        {
-            [self.backup maybeSendKeyBackup];
-        }
-        else
-        {
-            [self.store markBackupDoneForInboundGroupSessions:sessions];
-        }
-
-        // Notify there are new keys
-        NSLog(@"[MXCrypto] importMegolmSessionDatas: Notifying about new keys...");
-        for (MXOlmInboundGroupSession *session in sessions)
-        {
-            id<MXDecrypting> alg = [self getRoomDecryptor:session.roomId algorithm:kMXCryptoMegolmAlgorithm];
-            [alg didImportRoomKey:session];
-        }
-
-        NSUInteger imported = sessions.count;
-        NSUInteger totalKeyCount = sessionDatas.count;
-
-        NSLog(@"[MXCrypto] importMegolmSessionDatas: Complete. Imported %tu keys from %tu provided keys in %.0fms", imported, totalKeyCount, [[NSDate date] timeIntervalSinceDate:startDate] * 1000);
-
-        dispatch_async(dispatch_get_main_queue(), ^{
-
-            if (success)
+        
+        dispatch_async(self.cryptoQueue, ^{
+            // Do not back up the key if it comes from a backup recovery
+            if (backUp)
             {
-                success(totalKeyCount, imported);
+                [self.backup maybeSendKeyBackup];
             }
+            else
+            {
+                [self.store markBackupDoneForInboundGroupSessions:sessions];
+            }
+            
+            // Notify there are new keys
+            NSLog(@"[MXCrypto] importMegolmSessionDatas: Notifying about new keys...");
+            for (MXOlmInboundGroupSession *session in sessions)
+            {
+                id<MXDecrypting> alg = [self getRoomDecryptor:session.roomId algorithm:kMXCryptoMegolmAlgorithm];
+                [alg didImportRoomKey:session];
+            }
+            
+            NSUInteger imported = sessions.count;
+            NSUInteger totalKeyCount = sessionDatas.count;
+            
+            NSLog(@"[MXCrypto] importMegolmSessionDatas: Complete. Imported %tu keys from %tu provided keys in %.0fms", imported, totalKeyCount, [[NSDate date] timeIntervalSinceDate:startDate] * 1000);
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                if (success)
+                {
+                    success(totalKeyCount, imported);
+                }
+            });
         });
+
     });
 #endif
 }
@@ -1096,7 +1429,7 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
 - (void)importRoomKeys:(NSData *)keyFile withPassword:(NSString *)password success:(void (^)(NSUInteger total, NSUInteger imported))success failure:(void (^)(NSError *))failure
 {
 #ifdef MX_CRYPTO
-    dispatch_async(_decryptionQueue, ^{
+    dispatch_async(cargoQueue, ^{
 
         NSLog(@"[MXCrypto] importRoomKeys:withPassord:");
 
@@ -1144,7 +1477,7 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
 
 #ifdef MX_CRYPTO
     MXWeakify(self);
-    dispatch_async(_decryptionQueue, ^{
+    dispatch_async(_cryptoQueue, ^{
         MXStrongifyAndReturnIfNil(self);
 
         MXUsersDevicesMap<NSArray<MXIncomingRoomKeyRequest *> *> *pendingKeyRequests = self->incomingRoomKeyRequestManager.pendingKeyRequests;
@@ -1161,7 +1494,7 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
                  failure:(void (^)(NSError *error))failure
 {
 #ifdef MX_CRYPTO
-    dispatch_async(_decryptionQueue, ^{
+    dispatch_async(_cryptoQueue, ^{
 
         NSLog(@"[MXCrypto] acceptKeyRequest: %@", keyRequest);
         [self acceptKeyRequestFromCryptoThread:keyRequest success:success failure:failure];
@@ -1173,7 +1506,7 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
 {
 #ifdef MX_CRYPTO
     MXWeakify(self);
-    dispatch_async(_decryptionQueue, ^{
+    dispatch_async(_cryptoQueue, ^{
         MXStrongifyAndReturnIfNil(self);
 
         NSArray<MXIncomingRoomKeyRequest *> *requests = [self->incomingRoomKeyRequestManager.pendingKeyRequests objectForDevice:deviceId forUser:userId];
@@ -1236,7 +1569,7 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
 - (void)ignoreKeyRequest:(MXIncomingRoomKeyRequest *)keyRequest onComplete:(void (^)(void))onComplete
 {
 #ifdef MX_CRYPTO
-    dispatch_async(_decryptionQueue, ^{
+    dispatch_async(_cryptoQueue, ^{
 
         NSLog(@"[MXCrypto] ignoreKeyRequest: %@", keyRequest);
         [self ignoreKeyRequestFromCryptoThread:keyRequest];
@@ -1255,7 +1588,7 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
 {
 #ifdef MX_CRYPTO
     MXWeakify(self);
-    dispatch_async(_decryptionQueue, ^{
+    dispatch_async(_cryptoQueue, ^{
         MXStrongifyAndReturnIfNil(self);
 
         NSArray<MXIncomingRoomKeyRequest *> *requests = [self->incomingRoomKeyRequestManager.pendingKeyRequests objectForDevice:deviceId forUser:userId];
@@ -1289,11 +1622,36 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
 }
 #endif
 
+
+- (void)setOutgoingKeyRequestsEnabled:(BOOL)enabled onComplete:(void (^)(void))onComplete
+{
+#ifdef MX_CRYPTO
+    MXWeakify(self);
+    dispatch_async(_cryptoQueue, ^{
+        MXStrongifyAndReturnIfNil(self);
+        
+        [self->outgoingRoomKeyRequestManager setEnabled:enabled];
+        
+        if (onComplete)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                onComplete();
+            });
+        }
+    });
+#endif
+}
+
+- (BOOL)isOutgoingKeyRequestsEnabled
+{
+    return outgoingRoomKeyRequestManager.isEnabled;
+}
+
 - (void)reRequestRoomKeyForEvent:(MXEvent *)event
 {
 #ifdef MX_CRYPTO
     MXWeakify(self);
-    dispatch_async(_decryptionQueue, ^{
+    dispatch_async(_cryptoQueue, ^{
         MXStrongifyAndReturnIfNil(self);
 
         NSLog(@"[MXCrypto] reRequestRoomKeyForEvent: %@", event.eventId);
@@ -1368,8 +1726,12 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
 
         // Default configuration
         _warnOnUnknowDevices = YES;
+        _enableOutgoingKeyRequestsOnceSelfVerificationDone = YES;
 
-        _decryptionQueue = [MXCrypto dispatchQueueForUser:_mxSession.matrixRestClient.credentials.userId];
+        decryptionQueue = [MXCrypto dispatchQueueForUser:_mxSession.matrixRestClient.credentials.userId];
+        
+        cargoQueue = dispatch_queue_create([NSString stringWithFormat:@"MXCrypto-Cargo-%@", _mxSession.myDeviceId].UTF8String, DISPATCH_QUEUE_SERIAL);
+
 
         _olmDevice = [[MXOlmDevice alloc] initWithStore:_store];
 
@@ -1395,20 +1757,23 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
         }
 
         NSString *userId = _matrixRestClient.credentials.userId;
-
-        _myDevice = [[MXDeviceInfo alloc] initWithDeviceId:deviceId];
-        _myDevice.userId = userId;
-        _myDevice.keys = @{
-                          [NSString stringWithFormat:@"ed25519:%@", deviceId]: _olmDevice.deviceEd25519Key,
-                          [NSString stringWithFormat:@"curve25519:%@", deviceId]: _olmDevice.deviceCurve25519Key,
-                          };
-        _myDevice.algorithms = [[MXCryptoAlgorithms sharedAlgorithms] supportedAlgorithms];
-        _myDevice.verified = MXDeviceVerified;
-
-        // Add our own deviceinfo to the store
-        NSMutableDictionary *myDevices = [NSMutableDictionary dictionaryWithDictionary:[_store devicesForUser:userId]];
-        myDevices[_myDevice.deviceId] = _myDevice;
-        [_store storeDevicesForUser:userId devices:myDevices];
+        
+        _myDevice = [_store deviceWithDeviceId:deviceId forUser:userId];
+        if (!_myDevice)
+        {
+            _myDevice = [[MXDeviceInfo alloc] initWithDeviceId:deviceId];
+            _myDevice.userId = userId;
+            _myDevice.keys = @{
+                               [NSString stringWithFormat:@"ed25519:%@", deviceId]: _olmDevice.deviceEd25519Key,
+                               [NSString stringWithFormat:@"curve25519:%@", deviceId]: _olmDevice.deviceCurve25519Key,
+                               };
+            _myDevice.algorithms = [[MXCryptoAlgorithms sharedAlgorithms] supportedAlgorithms];
+            [_myDevice updateTrustLevel:[MXDeviceTrustLevel trustLevelWithLocalVerificationStatus:MXDeviceVerified
+                                                                             crossSigningVerified:NO]];
+            
+            // Add our own deviceinfo to the store
+            [_store storeDeviceForUser:userId device:_myDevice];
+        }
 
         oneTimeKeyCount = -1;
 
@@ -1422,7 +1787,13 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
 
         incomingRoomKeyRequestManager = [[MXIncomingRoomKeyRequestManager alloc] initWithCrypto:self];
 
-        _deviceVerificationManager = [[MXDeviceVerificationManager alloc] initWithCrypto:self];
+        _keyVerificationManager = [[MXKeyVerificationManager alloc] initWithCrypto:self];
+        
+        _secretShareManager = [[MXSecretShareManager alloc] initWithCrypto:self];
+
+        _crossSigning = [[MXCrossSigning alloc] initWithCrypto:self];
+        
+        lastNewSessionForcedDates = [MXUsersDevicesMap new];
         
         [self registerEventHandlers];
         
@@ -1547,7 +1918,7 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
                 continue;
             }
 
-            if (device.verified == MXDeviceBlocked) {
+            if (device.trustLevel.localVerificationStatus == MXDeviceBlocked) {
                 // Don't bother setting up sessions with blocked users
                 continue;
             }
@@ -1556,10 +1927,11 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
         }
     }
 
-    return [self ensureOlmSessionsForDevices:devicesByUser success:success failure:failure];
+    return [self ensureOlmSessionsForDevices:devicesByUser force:NO success:success failure:failure];
 }
 
 - (MXHTTPOperation*)ensureOlmSessionsForDevices:(NSDictionary<NSString* /* userId */, NSArray<MXDeviceInfo*>*>*)devicesByUser
+                                          force:(BOOL)force
                                         success:(void (^)(MXUsersDevicesMap<MXOlmSessionResult*> *results))success
                                         failure:(void (^)(NSError *error))failure
 
@@ -1579,7 +1951,7 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
             NSString *key = deviceInfo.identityKey;
 
             NSString *sessionId = [_olmDevice sessionIdForDevice:key];
-            if (!sessionId)
+            if (!sessionId || force)
             {
                 [devicesWithoutSession addObject:deviceInfo];
             }
@@ -1589,7 +1961,7 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
         }
     }
 
-    NSLog(@"[MXCrypto] ensureOlmSessionsForDevices (users: %tu - devices: %tu): %@", devicesByUser.count, count, devicesByUser);
+    NSLog(@"[MXCrypto] ensureOlmSessionsForDevices (users: %tu - devices: %tu - force: %@): %@", devicesByUser.count, count, @(force), devicesByUser);
 
     if (devicesWithoutSession.count == 0)
     {
@@ -1631,7 +2003,7 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
                 for (NSString *deviceId in [keysClaimResponse.oneTimeKeys deviceIdsForUser:userId])
                 {
                     MXOlmSessionResult *olmSessionResult = [results objectForDevice:deviceId forUser:userId];
-                    if (olmSessionResult.sessionId)
+                    if (olmSessionResult.sessionId && !force)
                     {
                         // We already have a result for this device
                         continue;
@@ -1785,6 +2157,15 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
     return alg;
 }
 
+- (id<MXEncrypting>)getRoomEncryptor:(NSString*)roomId algorithm:(NSString*)algorithm
+{
+    if (![algorithm isEqualToString:kMXCryptoMegolmAlgorithm])
+    {
+        return nil;
+    }
+    return roomEncryptors[roomId];
+}
+
 - (NSDictionary*)signObject:(NSDictionary*)object
 {
     return @{
@@ -1806,6 +2187,28 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
     [outgoingRoomKeyRequestManager cancelRoomKeyRequest:requestBody];
 }
 
+- (NSDictionary*)buildMegolmKeyForwardingMessage:(NSString*)roomId senderKey:(NSString*)senderKey sessionId:(NSString*)sessionId  chainIndex:(NSNumber*)chainIndex
+{
+    NSDictionary *key = [self.olmDevice getInboundGroupSessionKey:roomId senderKey:senderKey sessionId:sessionId chainIndex:chainIndex];
+    if (key)
+    {
+        return @{
+                 @"type": kMXEventTypeStringRoomForwardedKey,
+                 @"content": @{
+                         @"algorithm": kMXCryptoMegolmAlgorithm,
+                         @"room_id": roomId,
+                         @"sender_key": senderKey,
+                         @"sender_claimed_ed25519_key": key[@"sender_claimed_ed25519_key"],
+                         @"session_id": sessionId,
+                         @"session_key": key[@"key"],
+                         @"chain_index": key[@"chain_index"],
+                         @"forwarding_curve25519_key_chain": key[@"forwarding_curve25519_key_chain"]
+                         }
+                 };
+    }
+    
+    return nil;
+}
 
 #pragma mark - Private methods
 /**
@@ -1914,8 +2317,7 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
             case MXEventTypeRoomKey:
             case MXEventTypeRoomForwardedKey:
             {
-                // Room key is used for decryption. Switch to the associated queue
-                dispatch_async(_decryptionQueue, ^{
+                dispatch_async(_cryptoQueue, ^{
                     MXStrongifyAndReturnIfNil(self);
 
                     [self onRoomKeyEvent:event];
@@ -2308,6 +2710,81 @@ NSTimeInterval kMXCryptoUploadOneTimeKeysPeriod = 60.0; // one minute
     } failure:^(NSError *error) {
         NSLog(@"[MXCrypto] uploadOneTimeKeys fails.");
         failure(error);
+    }];
+}
+
+
+#pragma mark Wedged olm sessions
+
+- (void)markOlmSessionForUnwedgingInEvent:(MXEvent*)event
+{
+    NSString *sender = event.sender;
+    NSString *deviceKey, *algorithm;
+    MXJSONModelSetString(deviceKey, event.content[@"sender_key"]);
+    MXJSONModelSetString(algorithm, event.content[@"algorithm"]);
+    
+    NSLog(@"[MXCrypto] markOlmSessionForUnwedging from %@:%@", sender, deviceKey);
+
+    if (!sender || !deviceKey || !algorithm)
+    {
+        return;
+    }
+    
+    if ([sender isEqualToString:_mxSession.myUserId]
+        && [deviceKey isEqualToString:self.olmDevice.deviceCurve25519Key])
+    {
+        NSLog(@"[MXCrypto] markOlmSessionForUnwedging: Do not unwedge ourselves");
+        return;
+    }
+    
+    // Check when we last forced a new session with this device: if we've already done so
+    // recently, don't do it again.
+    NSDate *lastNewSessionForcedDate = [lastNewSessionForcedDates objectForDevice:deviceKey forUser:sender];
+    if (lastNewSessionForcedDate
+        && -[lastNewSessionForcedDate timeIntervalSinceNow] < kMXCryptoMinForceSessionPeriod)
+    {
+        NSLog(@"[MXCrypto] markOlmSessionForUnwedging: New session already forced with device at %@. Not forcing another", lastNewSessionForcedDate);
+        return;
+    }
+
+    // Establish a new olm session with this device since we're failing to decrypt messages
+    // on a current session.
+    MXDeviceInfo *device = [_store deviceWithIdentityKey:deviceKey];
+    if (!device)
+    {
+        NSLog(@"[MXCrypto] markOlmSessionForUnwedgingInEvent: Couldn't find device for identity key %@: not re-establishing session", deviceKey);
+        return;
+    }
+    
+    NSLog(@"[MXCrypto] markOlmSessionForUnwedging from %@:%@", sender, device.deviceId);
+    
+    [lastNewSessionForcedDates setObject:[NSDate date] forUser:sender andDevice:deviceKey];
+    
+    NSDictionary *userDevice = @{
+                                 sender: @[device]
+                                 };
+    [self ensureOlmSessionsForDevices:userDevice force:YES success:^(MXUsersDevicesMap<MXOlmSessionResult *> *results) {
+        
+        // Now send a blank message on that session so the other side knows about it.
+        // (The keyshare request is sent in the clear so that won't do)
+        // We send this first such that, as long as the toDevice messages arrive in the
+        // same order we sent them, the other end will get this first, set up the new session,
+        // then get the keyshare request and send the key over this new session (because it
+        // is the session it has most recently received a message on).
+        NSDictionary *encryptedContent = [self encryptMessage:@{
+                                                                @"type": @"m.dummy"
+                                                                }
+                                                   forDevices:@[device]];
+        
+        MXUsersDevicesMap<NSDictionary*> *contentMap = [MXUsersDevicesMap new];
+        [contentMap setObject:encryptedContent forUser:sender andDevice:device.deviceId];
+        
+        [self.matrixRestClient sendToDevice:kMXEventTypeStringRoomEncrypted contentMap:contentMap txnId:nil success:nil failure:^(NSError *error) {
+            NSLog(@"[MXCrypto] markOlmSessionForUnwedgingInEvent: ERROR for sendToDevice: %@", error);
+        }];
+        
+    } failure:^(NSError *error) {
+        NSLog(@"[MXCrypto] markOlmSessionForUnwedgingInEvent: ERROR for ensureOlmSessionsForDevices: %@", error);
     }];
 }
 

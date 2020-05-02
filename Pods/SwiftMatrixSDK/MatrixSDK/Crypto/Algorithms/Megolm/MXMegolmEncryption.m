@@ -82,6 +82,10 @@
     // that even if this is non-null, it may not be ready for use (in which
     // case outboundSession.shareOperation will be non-nill.)
     MXOutboundSessionInfo *outboundSession;
+    
+    // Map of outbound sessions by sessions ID. Used if we need a particular
+    // session.
+    NSMutableDictionary<NSString*, MXOutboundSessionInfo*> *outboundSessions;
 
     NSMutableArray<MXQueuedEncryption*> *pendingEncryptions;
 
@@ -112,6 +116,7 @@
         roomId = theRoomId;
         deviceId = crypto.store.deviceId;
 
+        outboundSessions = [NSMutableDictionary dictionary];
         pendingEncryptions = [NSMutableArray array];
 
         // Default rotation periods
@@ -193,7 +198,7 @@
     // with them, which means that they will have announced any new devices via
     // an m.new_device.
     MXWeakify(self);
-    return [crypto.deviceList downloadKeys:users forceDownload:NO success:^(MXUsersDevicesMap<MXDeviceInfo *> *devices) {
+    return [crypto.deviceList downloadKeys:users forceDownload:NO success:^(MXUsersDevicesMap<MXDeviceInfo *> *devices, NSDictionary<NSString *,MXCrossSigningInfo *> *crossSigningKeysMap) {
         MXStrongifyAndReturnIfNil(self);
 
         BOOL encryptToVerifiedDevicesOnly = self->crypto.globalBlacklistUnverifiedDevices
@@ -208,15 +213,16 @@
             {
                 MXDeviceInfo *deviceInfo = [devices objectForDevice:deviceID forUser:userId];
 
-                if (self->crypto.warnOnUnknowDevices && deviceInfo.verified == MXDeviceUnknown)
+                if (!deviceInfo.trustLevel.isVerified
+                    && self->crypto.warnOnUnknowDevices && deviceInfo.trustLevel.localVerificationStatus == MXDeviceUnknown)
                 {
                     // The device is not yet known by the user
                     [unknownDevices setObject:deviceInfo forUser:userId andDevice:deviceID];
                     continue;
                 }
 
-                if (deviceInfo.verified == MXDeviceBlocked
-                    || (deviceInfo.verified != MXDeviceVerified && encryptToVerifiedDevicesOnly))
+                if (deviceInfo.trustLevel.localVerificationStatus == MXDeviceBlocked
+                    || (!deviceInfo.trustLevel.isVerified && encryptToVerifiedDevicesOnly))
                 {
                     // Remove any blocked devices
                     NSLog(@"[MXMegolmEncryption] getDevicesInRoom: blocked device: %@", deviceInfo);
@@ -284,6 +290,7 @@
     if (!session)
     {
         outboundSession = session = [self prepareNewSession];
+        outboundSessions[outboundSession.sessionId] = outboundSession;
     }
 
     if (session.shareOperation)
@@ -371,7 +378,7 @@
 
     MXHTTPOperation *operation;
     MXWeakify(self);
-    operation = [crypto ensureOlmSessionsForDevices:devicesByUser success:^(MXUsersDevicesMap<MXOlmSessionResult *> *results) {
+    operation = [crypto ensureOlmSessionsForDevices:devicesByUser force:NO success:^(MXUsersDevicesMap<MXOlmSessionResult *> *results) {
         MXStrongifyAndReturnIfNil(self);
 
         NSLog(@"[MXMegolmEncryption] shareKey: ensureOlmSessionsForDevices result (users: %tu - devices: %tu): %@", results.map.count,  results.count, results);
@@ -458,6 +465,77 @@
         }
     }];
 
+    return operation;
+}
+
+- (MXHTTPOperation*)reshareKey:(NSString*)sessionId
+                      withUser:(NSString*)userId
+                     andDevice:(NSString*)deviceId
+                     senderKey:(NSString*)senderKey
+                       success:(void (^)(void))success
+                       failure:(void (^)(NSError *error))failure
+{
+    NSLog(@"[MXMegolmEncryption] reshareKey: %@ to %@:%@", sessionId, userId, deviceId);
+    
+    MXDeviceInfo *deviceInfo = [crypto.store deviceWithDeviceId:deviceId forUser:userId];
+    if (!deviceInfo)
+    {
+        NSLog(@"[MXMegolmEncryption] reshareKey: ERROR: Unknown device");
+        failure(nil);
+        return nil;
+    }
+    
+    // Get the chain index of the key we previously sent this device
+    MXOutboundSessionInfo *obSessionInfo = outboundSessions[sessionId];
+    NSNumber *chainIndex = [obSessionInfo.sharedWithDevices objectForDevice:deviceId forUser:userId];
+    if (!chainIndex)
+    {
+        NSLog(@"[MXMegolmEncryption] reshareKey: ERROR: Never share megolm with this device");
+        failure(nil);
+        return nil;
+    }
+
+    MXHTTPOperation *operation;
+    MXWeakify(self);
+    operation = [crypto ensureOlmSessionsForDevices:@{
+                                                      userId: @[deviceInfo]
+                                                      }
+                                              force:NO
+                                            success:^(MXUsersDevicesMap<MXOlmSessionResult *> *results)
+                 {
+                     MXStrongifyAndReturnIfNil(self);
+                     
+                     MXOlmSessionResult *olmSessionResult = [results objectForDevice:deviceId forUser:userId];
+                     if (!olmSessionResult.sessionId)
+                     {
+                         // no session with this device, probably because there
+                         // were no one-time keys.
+                         //
+                         // ensureOlmSessionsForUsers has already done the logging,
+                         // so just skip it.
+                         if (success)
+                         {
+                             success();
+                         }
+                         return;
+                     }
+                     
+                     MXDeviceInfo *deviceInfo = olmSessionResult.device;
+                     
+                     NSLog(@"[MXMegolmEncryption] reshareKey: sharing keys for session %@|%@:%@ with device %@:%@", senderKey, sessionId, chainIndex, userId, deviceId);
+                     
+                     NSDictionary *payload = [self->crypto buildMegolmKeyForwardingMessage:self->roomId senderKey:senderKey sessionId:sessionId chainIndex:chainIndex];
+                    
+                     
+                     MXUsersDevicesMap<NSDictionary*> *contentMap = [[MXUsersDevicesMap alloc] init];
+                     [contentMap setObject:[self->crypto encryptMessage:payload forDevices:@[deviceInfo]]
+                                   forUser:userId andDevice:deviceId];
+                     
+                     MXHTTPOperation *operation2 = [self->crypto.matrixRestClient sendToDevice:kMXEventTypeStringRoomEncrypted contentMap:contentMap txnId:nil success:success failure:failure];
+                     [operation mutateTo:operation2];
+                     
+                 } failure:failure];
+    
     return operation;
 }
 

@@ -20,10 +20,9 @@
 
 + (instancetype)modelFromJSON:(NSDictionary *)JSONDictionary
 {
-    MXKeyVerificationAccept *model = [MXKeyVerificationAccept new];
+    MXKeyVerificationAccept *model = [[MXKeyVerificationAccept alloc] initWithJSONDictionary:JSONDictionary];
     if (model)
     {
-        MXJSONModelSetString(model.transactionId, JSONDictionary[@"transaction_id"]);
         MXJSONModelSetString(model.keyAgreementProtocol, JSONDictionary[@"key_agreement_protocol"]);
         MXJSONModelSetString(model.hashAlgorithm, JSONDictionary[@"hash"]);
         MXJSONModelSetString(model.messageAuthenticationCode, JSONDictionary[@"message_authentication_code"]);
@@ -31,19 +30,12 @@
         MXJSONModelSetString(model.commitment, JSONDictionary[@"commitment"]);
     }
 
-    // Sanitiy check
-    if (!model.transactionId.length)
-    {
-        model = nil;
-    }
-
     return model;
 }
 
 - (NSDictionary *)JSONDictionary
 {
-    NSMutableDictionary *JSONDictionary = [NSMutableDictionary dictionary];
-    JSONDictionary[@"transaction_id"] = _transactionId;
+    NSMutableDictionary *JSONDictionary = self.JSONDictionaryWithTransactionId;
 
     if (_keyAgreementProtocol)
     {

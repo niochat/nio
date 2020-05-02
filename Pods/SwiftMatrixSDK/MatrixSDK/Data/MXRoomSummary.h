@@ -22,6 +22,7 @@
 #import "MXHTTPOperation.h"
 #import "MXRoomMembersCount.h"
 #import "MXEnumConstants.h"
+#import "MXUsersTrustLevelSummary.h"
 
 @class MXSession, MXRoom, MXRoomState, MXEvent;
 @protocol MXStore;
@@ -248,6 +249,12 @@ FOUNDATION_EXPORT NSString *const kMXRoomSummaryDidChangeNotification;
  Indicate whether encryption is enabled for this room.
  */
 @property (nonatomic) BOOL isEncrypted;
+
+/**
+ If the room is E2E encrypted, indicate global trust in other users and devices in the room.
+ Nil if not yet computed or if cross-signing is not set up on the account or not trusted by this device.
+ */
+@property (nonatomic) MXUsersTrustLevelSummary *trust;
 
 /**
  The number of unread events wrote in the store which have their type listed in the MXSession.unreadEventType.

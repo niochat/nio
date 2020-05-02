@@ -1,5 +1,6 @@
 /*
  Copyright 2016 OpenMarket Ltd
+ Copyright 2020 The Matrix.org Foundation C.I.C
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -75,21 +76,6 @@
 @property (nonatomic, readonly) MXDeviceList *deviceList;
 
 /**
- The queue used for decryption.
-
- A less busy queue that can respond quicker to the UI.
-
- Encrypting the 1st event in a room is a long task (like 20s). We do not want the UI to
- wait the end of the encryption before being able to decrypt and display other messages
- of the room history.
- 
- We might miss a room key which is handled on cryptoQueue but the event will be decoded
- later once available. kMXEventDidDecryptNotification will then be sent. 
- */
-@property (nonatomic, readonly) dispatch_queue_t decryptionQueue;
-
-
-/**
  Get the device which sent an event.
 
  @param event the event to be checked.
@@ -131,6 +117,7 @@
  @param failure A block object called when the operation fails.
  */
 - (MXHTTPOperation*)ensureOlmSessionsForDevices:(NSDictionary<NSString* /* userId */, NSArray<MXDeviceInfo*>*>*)devicesByUser
+                                          force:(BOOL)force
                                       success:(void (^)(MXUsersDevicesMap<MXOlmSessionResult*> *results))success
                                       failure:(void (^)(NSError *error))failure;
 
@@ -155,6 +142,15 @@
  @return the decryptor.
  */
 - (id<MXDecrypting>)getRoomDecryptor:(NSString*)roomId algorithm:(NSString*)algorithm;
+
+/**
+ Get the encryptor for a given room and algorithm.
+ 
+ @param roomId room id for encryptor.
+ @param algorithm the crypto algorithm.
+ @return the decryptor.
+ */
+- (id<MXEncrypting>)getRoomEncryptor:(NSString*)roomId algorithm:(NSString*)algorithm;
 
 /**
  Sign the given object with our ed25519 key.
@@ -198,6 +194,9 @@
  @param requestBody parameters to match for cancellation
  */
 - (void)cancelRoomKeyRequest:(NSDictionary*)requestBody;
+
+// Create a message to forward a megolm session
+- (NSDictionary*)buildMegolmKeyForwardingMessage:(NSString*)roomId senderKey:(NSString*)senderKey sessionId:(NSString*)sessionId chainIndex:(NSNumber*)chainIndex;
 
 @end
 

@@ -329,7 +329,7 @@ NSString *const kMXCallManagerConferenceFinished = @"kMXCallManagerConferenceFin
     if (event.age < content.lifetime)
     {
         // If it is an invite from the peer, we need to create the MXCall
-        if (![event.sender isEqualToString:_mxSession.myUser.userId])
+        if (![event.sender isEqualToString:_mxSession.myUserId])
         {
             MXCall *call = [self callWithCallId:content.callId];
             if (!call)
@@ -532,7 +532,7 @@ NSString *const kMXCallManagerConferenceUserDomain  = @"matrix.org";
     else
     {
         MXRoomPowerLevels *powerLevels = roomState.powerLevels;
-        NSInteger oneSelfPowerLevel = [powerLevels powerLevelOfUserWithUserID:room.mxSession.myUser.userId];
+        NSInteger oneSelfPowerLevel = [powerLevels powerLevelOfUserWithUserID:room.mxSession.myUserId];
 
         // Only member with invite power level can create a conference call
         if (oneSelfPowerLevel >= powerLevels.invite)

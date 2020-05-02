@@ -89,7 +89,7 @@ typedef enum : NSUInteger
 - (void)close;
 
 /**
- Download the device keys for a list of users and stores the keys in the MXStore.
+ Download device and cross-sigining keys for a list of users and stores the keys in the MXStore.
 
  @param userIds The users to fetch.
  @param forceDownload Always download the keys even if cached.
@@ -100,7 +100,8 @@ typedef enum : NSUInteger
  @return a MXHTTPOperation instance. May be nil if the data is already in the store.
  */
 - (MXHTTPOperation*)downloadKeys:(NSArray<NSString*>*)userIds forceDownload:(BOOL)forceDownload
-                         success:(void (^)(MXUsersDevicesMap<MXDeviceInfo*> *usersDevicesInfoMap))success
+                         success:(void (^)(MXUsersDevicesMap<MXDeviceInfo*> *usersDevicesInfoMap,
+                                           NSDictionary<NSString* /* userId*/, MXCrossSigningInfo*> *crossSigningKeysMap))success
                          failure:(void (^)(NSError *error))failure;
 
 /**

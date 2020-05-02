@@ -20,6 +20,7 @@
 
 @class MXEventAnnotationChunk;
 @class MXEventReplace;
+@class MXEventReferenceChunk;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MXEventRelations : MXJSONModel
 
 @property (nonatomic, readonly, nullable) MXEventAnnotationChunk *annotation;
-//@property (nonatomic, readonly, nullable) MXEventReferenceChunk *reference;
+@property (nonatomic, readonly, nullable) MXEventReferenceChunk *reference;
 @property (nonatomic, readonly, nullable) MXEventReplace *replace;
 
 @end

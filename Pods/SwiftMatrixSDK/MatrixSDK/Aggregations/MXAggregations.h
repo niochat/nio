@@ -173,6 +173,29 @@ NS_ASSUME_NONNULL_BEGIN
                                   failure:(void (^)(NSError *error))failure;
 
 
+#pragma mark - References / Thread
+
+/**
+ Fetch all events that refer to a given event.
+
+ @param eventId the id of the event,
+ @param roomId the id of the room.
+ @param from the `nextBatch` returned in the previous response.
+ @param limit (optional, use -1 to not defined this value) the maximum number of messages to return.
+
+ @param success A block object called when the operation succeeds. It provides a `MXAggregationPaginatedResponse` object.
+ @param failure A block object called when the operation fails.
+
+ @return a MXHTTPOperation instance.
+ */
+- (MXHTTPOperation*)referenceEventsForEvent:(NSString*)eventId
+                                   inRoom:(NSString*)roomId
+                                     from:(nullable NSString*)from
+                                    limit:(NSUInteger)limit
+                                  success:(void (^)(MXAggregationPaginatedResponse *paginatedResponse))success
+                                  failure:(void (^)(NSError *error))failure;
+
+
 #pragma mark - Data
 
 /**

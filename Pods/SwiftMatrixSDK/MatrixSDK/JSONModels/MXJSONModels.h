@@ -24,6 +24,7 @@
 #import "MXMegolmBackupAuthData.h"
 #import "MXLoginTerms.h"
 #import "MXWellKnown.h"
+#import "MXCrossSigningInfo.h"
 
 @class MXEvent, MXDeviceInfo, MXKey, MXUser;
 
@@ -56,6 +57,11 @@ FOUNDATION_EXPORT NSString *const kMX3PIDMediumMSISDN;
      The name of the room, if any. May be nil.
      */
     @property (nonatomic) NSString *name;
+
+    /**
+     The main address of the room.
+     */
+    @property (nonatomic) NSString *canonicalAlias;
 
     /**
      Aliases of the room.
@@ -1661,6 +1667,11 @@ FOUNDATION_EXPORT NSString *const kMXPushRuleScopeStringDevice;
      The device keys per devices per users.
      */
     @property (nonatomic) MXUsersDevicesMap<MXDeviceInfo*> *deviceKeys;
+
+    /**
+     Cross-signing keys per users.
+     */
+    @property (nonatomic) NSDictionary<NSString*, MXCrossSigningInfo*> *crossSigningKeys;
 
     /**
      The failures sorted by homeservers.

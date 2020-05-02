@@ -14,16 +14,11 @@
  limitations under the License.
  */
 
-#import "MXJSONModel.h"
+#import "MXKeyVerificationJSONModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MXKeyVerificationMac : MXJSONModel
-
-/**
- The ID of the transaction that the message is part of.
- */
-@property (nonatomic) NSString *transactionId;
+@interface MXKeyVerificationMac : MXKeyVerificationJSONModel
 
 /**
  A map of key ID to the MAC of the key, as an unpadded base64 string, calculated using the MAC key.

@@ -18,7 +18,7 @@ import Foundation
 
 
 /// Represents a login flow
-public enum MXLoginFlowType {
+public enum MXLoginFlowType: Equatable, Hashable {
     case password
     case recaptcha
     case OAuth2
@@ -51,7 +51,7 @@ public enum MXLoginFlowType {
 
 
 /// Represents a mode for forwarding push notifications.
-public enum MXPusherKind {
+public enum MXPusherKind: Equatable, Hashable {
     case http, none, custom(String)
     
     public var objectValue: NSObject {
@@ -71,7 +71,7 @@ public enum MXPusherKind {
  have the highest priority.
  Some category may define implicit conditions.
  */
-public enum MXPushRuleKind {
+public enum MXPushRuleKind: Equatable, Hashable {
     case override, content, room, sender, underride
     
     public var identifier: __MXPushRuleKind {
@@ -97,7 +97,7 @@ public enum MXPushRuleKind {
  
  Push rules can be applied globally, or to a spefific device given a `profileTag`
  */
-public enum MXPushRuleScope {
+public enum MXPushRuleScope: Equatable, Hashable {
     case global, device(profileTag: String)
     
     public var identifier: String {

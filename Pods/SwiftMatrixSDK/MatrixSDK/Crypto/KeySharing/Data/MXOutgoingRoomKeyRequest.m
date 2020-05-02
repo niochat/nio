@@ -18,4 +18,24 @@
 
 @implementation MXOutgoingRoomKeyRequest
 
+- (NSString *)algorithm
+{
+    return _requestBody[@"algorithm"];
+}
+
+- (NSString *)roomId
+{
+    return _requestBody[@"room_id"];
+}
+
+- (NSString *)sessionId
+{
+    return _requestBody[@"session_id"];
+}
+
+- (NSString *)senderKey
+{
+    return _requestBody[@"sender_key"];
+}
+
 @end

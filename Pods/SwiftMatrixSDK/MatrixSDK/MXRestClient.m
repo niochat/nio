@@ -2188,64 +2188,11 @@ MXAuthAction;
     return [self createRoom:parameters success:success failure:failure];
 }
 
-- (MXHTTPOperation*)createRoom:(NSString*)name 
-                    visibility:(MXRoomDirectoryVisibility)visibility
-                     roomAlias:(NSString*)roomAlias
-                         topic:(NSString*)topic
-                        invite:(NSArray<NSString*>*)inviteArray
-                    invite3PID:(NSArray<MXInvite3PID*>*)invite3PIDArray
-                      isDirect:(BOOL)isDirect
-                        preset:(MXRoomPreset)preset
-                       success:(void (^)(MXCreateRoomResponse *response))success
-                       failure:(void (^)(NSError *error))failure
+- (MXHTTPOperation*)createRoomWithParameters:(MXRoomCreationParameters*)parameters
+                                     success:(void (^)(MXCreateRoomResponse *response))success
+                                     failure:(void (^)(NSError *error))failure
 {
-    // All parameters are optional. Fill the request parameters on demand
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-
-    if (name)
-    {
-        parameters[@"name"] = name;
-    }
-    if (visibility)
-    {
-        parameters[@"visibility"] = visibility;
-    }
-    if (roomAlias)
-    {
-        parameters[@"room_alias_name"] = roomAlias;
-    }
-    if (topic)
-    {
-        parameters[@"topic"] = topic;
-    }
-    if (inviteArray)
-    {
-        parameters[@"invite"] = inviteArray;
-    }
-    if (invite3PIDArray)
-    {
-        NSMutableArray *invite3PIDArray2 = [NSMutableArray arrayWithCapacity:invite3PIDArray.count];
-        for (MXInvite3PID *invite3PID in invite3PIDArray)
-        {
-            if (invite3PID.dictionary)
-            {
-                [invite3PIDArray2 addObject:invite3PID.dictionary];
-            }
-        }
-        
-        if (invite3PIDArray2.count)
-        {
-            parameters[@"invite_3pid"] = invite3PIDArray2;
-        }
-    }
-    if (preset)
-    {
-        parameters[@"preset"] = preset;
-    }
-    
-    parameters[@"is_direct"] = [NSNumber numberWithBool:isDirect];
-
-    return [self createRoom:parameters success:success failure:failure];
+    return [self createRoom:parameters.JSONDictionary success:success failure:failure];
 }
 
 - (MXHTTPOperation*)createRoom:(NSDictionary*)parameters
@@ -3879,7 +3826,7 @@ MXAuthAction;
                        success:(void (^)(MXKeysUploadResponse *keysUploadResponse))success
                        failure:(void (^)(NSError *error))failure
 {
-    NSString *path = [NSString stringWithFormat:@"%@/keys/upload", kMXAPIPrefixPathUnstable];
+    NSString *path = [NSString stringWithFormat:@"%@/keys/upload", kMXAPIPrefixPathR0];
     if (deviceId)
     {
         path = [NSString stringWithFormat:@"%@/%@",
@@ -3920,12 +3867,36 @@ MXAuthAction;
                                  }];
 }
 
+- (MXHTTPOperation*)uploadKeySignatures:(NSDictionary*)signatures
+                                success:(void (^)(void))success
+                                failure:(void (^)(NSError *error))failure
+{
+    MXWeakify(self);
+    return [httpClient requestWithMethod:@"POST"
+                                    path:[NSString stringWithFormat:@"%@/keys/signatures/upload", kMXAPIPrefixPathR0]
+                              parameters:signatures
+                                 success:^(NSDictionary *JSONResponse) {
+                                     MXStrongifyAndReturnIfNil(self);
+
+                                     if (success)
+                                     {
+                                         [self dispatchProcessing:nil
+                                                    andCompletion:^{
+                                                        success();
+                                                    }];
+                                     }
+                                 } failure:^(NSError *error) {
+                                     MXStrongifyAndReturnIfNil(self);
+                                     [self dispatchFailure:error inBlock:failure];
+                                 }];
+}
+
 - (MXHTTPOperation*)downloadKeysForUsers:(NSArray<NSString*>*)userIds
                                    token:(NSString *)token
                                  success:(void (^)(MXKeysQueryResponse *keysQueryResponse))success
                                  failure:(void (^)(NSError *error))failure
 {
-    NSString *path = [NSString stringWithFormat:@"%@/keys/query", kMXAPIPrefixPathUnstable];
+    NSString *path = [NSString stringWithFormat:@"%@/keys/query", kMXAPIPrefixPathR0];
 
     NSMutableDictionary *downloadQuery = [NSMutableDictionary dictionary];
     for (NSString *userID in userIds)
@@ -3967,7 +3938,7 @@ MXAuthAction;
 
 - (MXHTTPOperation *)claimOneTimeKeysForUsersDevices:(MXUsersDevicesMap<NSString *> *)usersDevicesKeyTypesMap success:(void (^)(MXKeysClaimResponse *))success failure:(void (^)(NSError *))failure
 {
-    NSString *path = [NSString stringWithFormat:@"%@/keys/claim", kMXAPIPrefixPathUnstable];
+    NSString *path = [NSString stringWithFormat:@"%@/keys/claim", kMXAPIPrefixPathR0];
 
     NSDictionary *parameters = @{
                                  @"one_time_keys": usersDevicesKeyTypesMap.map
@@ -4003,7 +3974,7 @@ MXAuthAction;
 {
     MXWeakify(self);
     return [httpClient requestWithMethod:@"GET"
-                                    path:[NSString stringWithFormat:@"%@/keys/changes", kMXAPIPrefixPathUnstable]
+                                    path:[NSString stringWithFormat:@"%@/keys/changes", kMXAPIPrefixPathR0]
                               parameters:@{
                                            @"from": fromToken,
                                            @"to": toToken
@@ -4034,7 +4005,7 @@ MXAuthAction;
 {
     MXWeakify(self);
     return [httpClient requestWithMethod:@"POST"
-                                    path:[NSString stringWithFormat:@"%@/room_keys/version", kMXAPIPrefixPathUnstable]
+                                    path:[NSString stringWithFormat:@"%@/room_keys/version", kMXAPIPrefixPathR0]
                               parameters:keyBackupVersion.JSONDictionary
                                  success:^(NSDictionary *JSONResponse) {
                                      MXStrongifyAndReturnIfNil(self);
@@ -4060,7 +4031,7 @@ MXAuthAction;
 {
     MXWeakify(self);
     return [httpClient requestWithMethod:@"PUT"
-                                    path:[NSString stringWithFormat:@"%@/room_keys/version/%@", kMXAPIPrefixPathUnstable, keyBackupVersion.version]
+                                    path:[NSString stringWithFormat:@"%@/room_keys/version/%@", kMXAPIPrefixPathR0, keyBackupVersion.version]
                               parameters:keyBackupVersion.JSONDictionary
                                  success:^(NSDictionary *JSONResponse) {
                                      MXStrongifyAndReturnIfNil(self);
@@ -4082,7 +4053,7 @@ MXAuthAction;
                                    success:(void (^)(void))success
                                    failure:(void (^)(NSError *error))failure
 {
-    NSMutableString *path = [NSMutableString stringWithFormat:@"%@/room_keys/version", kMXAPIPrefixPathUnstable];
+    NSMutableString *path = [NSMutableString stringWithFormat:@"%@/room_keys/version", kMXAPIPrefixPathR0];
     if (version)
     {
         [path appendFormat:@"/%@", version];
@@ -4112,7 +4083,7 @@ MXAuthAction;
                              success:(void (^)(MXKeyBackupVersion *keyBackupVersion))success
                              failure:(void (^)(NSError *error))failure;
 {
-    NSMutableString *path = [NSMutableString stringWithFormat:@"%@/room_keys/version", kMXAPIPrefixPathUnstable];
+    NSMutableString *path = [NSMutableString stringWithFormat:@"%@/room_keys/version", kMXAPIPrefixPathR0];
     if (version)
     {
         [path appendFormat:@"/%@", version];
@@ -4427,7 +4398,7 @@ MXAuthAction;
         return nil;
     }
 
-    NSMutableString *path = [NSMutableString stringWithFormat:@"%@/room_keys/keys", kMXAPIPrefixPathUnstable];
+    NSMutableString *path = [NSMutableString stringWithFormat:@"%@/room_keys/keys", kMXAPIPrefixPathR0];
 
     if (sessionId)
     {
@@ -4466,7 +4437,7 @@ MXAuthAction;
     }
     
     // Prepare the path by adding a random transaction id (This id is used to prevent duplicated event).
-    NSString *path = [NSString stringWithFormat:@"%@/sendToDevice/%@/%@", kMXAPIPrefixPathUnstable, eventType, txnId];
+    NSString *path = [NSString stringWithFormat:@"%@/sendToDevice/%@/%@", kMXAPIPrefixPathR0, eventType, txnId];
 
     NSDictionary *content = @{
                               @"messages": contentMap.map
@@ -4492,7 +4463,7 @@ MXAuthAction;
 {
     MXWeakify(self);
     return [httpClient requestWithMethod:@"GET"
-                                    path:[NSString stringWithFormat:@"%@/devices", kMXAPIPrefixPathUnstable]
+                                    path:[NSString stringWithFormat:@"%@/devices", kMXAPIPrefixPathR0]
                               parameters:nil
                                  success:^(NSDictionary *JSONResponse) {
                                      MXStrongifyAndReturnIfNil(self);
@@ -4518,7 +4489,7 @@ MXAuthAction;
 {
     MXWeakify(self);
     return [httpClient requestWithMethod:@"GET"
-                                    path:[NSString stringWithFormat:@"%@/devices/%@", kMXAPIPrefixPathUnstable, deviceId]
+                                    path:[NSString stringWithFormat:@"%@/devices/%@", kMXAPIPrefixPathR0, deviceId]
                               parameters:nil
                                  success:^(NSDictionary *JSONResponse) {
                                      MXStrongifyAndReturnIfNil(self);
@@ -4551,7 +4522,7 @@ MXAuthAction;
 
     MXWeakify(self);
     return [httpClient requestWithMethod:@"PUT"
-                                    path:[NSString stringWithFormat:@"%@/devices/%@", kMXAPIPrefixPathUnstable, deviceId]
+                                    path:[NSString stringWithFormat:@"%@/devices/%@", kMXAPIPrefixPathR0, deviceId]
                               parameters:parameters
                                  success:^(NSDictionary *JSONResponse) {
                                      MXStrongifyAndReturnIfNil(self);
@@ -4570,7 +4541,7 @@ MXAuthAction;
     // The request will fail with Unauthorized status code, but the auth session will be available in response data.
     MXWeakify(self);
     return [httpClient requestWithMethod:@"DELETE"
-                                    path:[NSString stringWithFormat:@"%@/devices/%@", kMXAPIPrefixPathUnstable, [MXTools encodeURIComponent:deviceId]]
+                                    path:[NSString stringWithFormat:@"%@/devices/%@", kMXAPIPrefixPathR0, [MXTools encodeURIComponent:deviceId]]
                               parameters:nil
                                  success:^(NSDictionary *JSONResponse) {
                                      MXStrongifyAndReturnIfNil(self);
@@ -4627,7 +4598,7 @@ MXAuthAction;
 
     MXWeakify(self);
     return [httpClient requestWithMethod:@"DELETE"
-                                    path:[NSString stringWithFormat:@"%@/devices/%@", kMXAPIPrefixPathUnstable, [MXTools encodeURIComponent:deviceId]]
+                                    path:[NSString stringWithFormat:@"%@/devices/%@", kMXAPIPrefixPathR0, [MXTools encodeURIComponent:deviceId]]
                               parameters:nil
                                     data:payloadData
                                  headers:@{@"Content-Type": @"application/json"}
@@ -4641,7 +4612,49 @@ MXAuthAction;
                                      [self dispatchFailure:error inBlock:failure];
                                  }];
 }
-    
+
+
+#pragma mark - Cross-Signing
+
+- (MXHTTPOperation*)authSessionToUploadDeviceSigningKeys:(void (^)(MXAuthenticationSession *authSession))success
+                                                 failure:(void (^)(NSError *error))failure
+{
+    return [self authSessionForRequestWithMethod:@"POST"
+                                            path:[NSString stringWithFormat:@"%@/keys/device_signing/upload", kMXAPIPrefixPathUnstable]
+                                      parameters:@{}
+                                         success:success
+                                         failure:failure];
+}
+
+- (MXHTTPOperation*)uploadDeviceSigningKeys:(NSDictionary *)keys
+                                 authParams:(NSDictionary*)authParameters
+                                    success:(void (^)(void))success
+                                    failure:(void (^)(NSError *error))failure
+{
+    NSMutableDictionary *parameters = [keys mutableCopy];
+    parameters[@"auth"] = authParameters;
+
+    MXWeakify(self);
+    return [httpClient requestWithMethod:@"POST"
+                                    path:[NSString stringWithFormat:@"%@/keys/device_signing/upload", kMXAPIPrefixPathUnstable]
+                              parameters:parameters
+                                 success:^(NSDictionary *JSONResponse) {
+                                     MXStrongifyAndReturnIfNil(self);
+
+                                     if (success)
+                                     {
+                                         [self dispatchProcessing:nil
+                                                    andCompletion:^{
+                                                        success();
+                                                    }];
+                                     }
+                                 } failure:^(NSError *error) {
+                                     MXStrongifyAndReturnIfNil(self);
+                                     [self dispatchFailure:error inBlock:failure];
+                                 }];
+}
+
+
 #pragma mark - Groups
 - (MXHTTPOperation*)acceptGroupInvite:(NSString*)groupId
                               success:(void (^)(void))success
@@ -4984,6 +4997,55 @@ MXAuthAction;
         });
     }
 }
+
+- (MXHTTPOperation*)authSessionForRequestWithMethod:(NSString *)httpMethod
+                                               path:(NSString *)path
+                                         parameters:(NSDictionary*)parameters
+                                            success:(void (^)(MXAuthenticationSession *authSession))success
+                                            failure:(void (^)(NSError *error))failure
+{
+    return [httpClient requestWithMethod:httpMethod
+                                    path:path
+                              parameters:parameters
+                                 success:^(NSDictionary *JSONResponse) {
+
+                                     NSLog(@"[MXRestClient] authSessionForRequestWithMethod: Warning: get an authentication session failed");
+                                     if (success)
+                                     {
+                                         [self dispatchProcessing:nil
+                                                    andCompletion:^{
+                                                        success(nil);
+                                                    }];
+                                     }
+                                 }
+                                 failure:^(NSError *error) {
+                                     __block MXAuthenticationSession *authSession;
+                                     [self dispatchProcessing:^{
+                                         if (error.userInfo[MXHTTPClientErrorResponseDataKey])
+                                         {
+                                             // The auth session should be available in response data in case of unauthorized request.
+                                             NSDictionary *JSONResponse = error.userInfo[MXHTTPClientErrorResponseDataKey];
+                                             if (JSONResponse)
+                                             {
+                                                 MXJSONModelSetMXJSONModel(authSession, MXAuthenticationSession, JSONResponse);
+                                             }
+                                         }
+                                     } andCompletion:^{
+                                         if (authSession)
+                                         {
+                                             if (success)
+                                             {
+                                                 success(authSession);
+                                             }
+                                         }
+                                         else if (failure)
+                                         {
+                                             failure(error);
+                                         }
+                                     }];
+                                 }];
+}
+
 
 
 #pragma mark - Aggregations

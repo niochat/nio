@@ -14,36 +14,34 @@
  limitations under the License.
  */
 
-#import "MXDeviceVerificationTransaction.h"
+#import "MXKeyVerificationTransaction.h"
 
 #import "MXKeyVerificationAccept.h"
 #import "MXKeyVerificationCancel.h"
 #import "MXKeyVerificationKey.h"
 #import "MXKeyVerificationMac.h"
 #import "MXKeyVerificationStart.h"
+#import "MXKeyVerificationDone.h"
 
 
-@class MXDeviceVerificationManager, MXHTTPOperation, MXEvent;
+@class MXKeyVerificationManager, MXHTTPOperation, MXEvent;
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- The `MXDeviceVerificationTransaction` extension exposes internal operations.
+ The `MXKeyVerificationTransaction` extension exposes internal operations.
  */
-@interface MXDeviceVerificationTransaction ()
+@interface MXKeyVerificationTransaction ()
 
-@property (nonatomic, readonly, weak) MXDeviceVerificationManager *manager;
-@property (nonatomic, nullable) MXKeyVerificationStart *startContent;
+@property (nonatomic, readonly, weak) MXKeyVerificationManager *manager;
+@property (nonatomic, readwrite) NSString *transactionId;
 
-- (instancetype)initWithOtherDevice:(MXDeviceInfo*)otherDevice andManager:(MXDeviceVerificationManager*)manager;
+- (instancetype)initWithOtherDevice:(MXDeviceInfo*)otherDevice andManager:(MXKeyVerificationManager*)manager;
 
-- (nullable instancetype)initWithOtherDevice:(MXDeviceInfo*)otherDevice startEvent:(MXEvent *)event andManager:(MXDeviceVerificationManager *)manager;
+- (void)setDirectMessageTransportInRoom:(NSString*)roomId originalEvent:(NSString*)eventId;
 
 - (void)didUpdateState;
-
-- (void)cancelWithCancelCodeFromCryptoQueue:(MXTransactionCancelCode *)code;
-
 
 #pragma mark - Outgoing to_device events
 - (MXHTTPOperation*)sendToOther:(NSString*)eventType content:(NSDictionary*)content
@@ -53,10 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Incoming to_device events
 
-- (void)handleAccept:(MXKeyVerificationAccept*)acceptContent;
 - (void)handleCancel:(MXKeyVerificationCancel*)cancelContent;
-- (void)handleKey:(MXKeyVerificationKey*)keyContent;
-- (void)handleMac:(MXKeyVerificationMac*)macContent;
 
 @end
 

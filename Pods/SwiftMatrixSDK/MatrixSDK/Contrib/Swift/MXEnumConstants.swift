@@ -17,7 +17,7 @@
 import Foundation
 
 
-public enum MXRoomHistoryVisibility {
+public enum MXRoomHistoryVisibility: Equatable, Hashable {
     case worldReadable, shared, invited, joined
     
     public var identifier: String {
@@ -43,7 +43,7 @@ public enum MXRoomHistoryVisibility {
  
  The default homeserver value is invite.
  */
-public enum MXRoomJoinRule {
+public enum MXRoomJoinRule: Equatable, Hashable {
     
     /// Anyone can join the room without any prior action
     case `public`
@@ -73,7 +73,7 @@ public enum MXRoomJoinRule {
 
 
 /// Room guest access. The default homeserver value is forbidden.
-public enum MXRoomGuestAccess {
+public enum MXRoomGuestAccess: Equatable, Hashable {
     
     /// Guests can join the room
     case canJoin
@@ -102,7 +102,7 @@ public enum MXRoomGuestAccess {
  Room visibility in the current homeserver directory.
  The default homeserver value is private.
  */
-public enum MXRoomDirectoryVisibility {
+public enum MXRoomDirectoryVisibility: Equatable, Hashable {
     
     /// The room is not listed in the homeserver directory
     case `private`
@@ -129,7 +129,7 @@ public enum MXRoomDirectoryVisibility {
 
 /// Room presets.
 /// Define a set of state events applied during a new room creation.
-public enum MXRoomPreset {
+public enum MXRoomPreset: Equatable, Hashable {
     
     /// join_rules is set to invite. history_visibility is set to shared.
     case privateChat
@@ -161,7 +161,7 @@ public enum MXRoomPreset {
 /**
  The direction of an event in the timeline.
  */
-public enum MXTimelineDirection {
+public enum MXTimelineDirection: Equatable, Hashable {
     
     /// Forwards when the event is added to the end of the timeline.
     /// These events come from the /sync stream or from forwards pagination.

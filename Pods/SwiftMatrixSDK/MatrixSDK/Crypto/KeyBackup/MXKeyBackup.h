@@ -271,6 +271,32 @@ FOUNDATION_EXPORT NSString *const kMXKeyBackupDidStateChangeNotification;
                              success:(nullable void (^)(NSUInteger total, NSUInteger imported))success
                              failure:(nullable void (^)(NSError *error))failure;
 
+/**
+ Restore a backup using key stored in the crypto store.
+ 
+ Check self.hasPrivateKeyInCryptoStore before using this method.
+
+ @param keyBackupVersion the backup version to restore from.
+ @param roomId the id of the room to get backup data from.
+ @param sessionId the id of the session to restore.
+
+ @param success A block object called when the operation succeeds.
+ It provides the number of found keys and the number of successfully imported keys.
+ @param failure A block object called when the operation fails.
+
+ @return a MXHTTPOperation instance.
+ */
+- (MXHTTPOperation*)restoreUsingPrivateKeyKeyBackup:(MXKeyBackupVersion*)keyBackupVersion
+                                               room:(nullable NSString*)roomId
+                                            session:(nullable NSString*)sessionId
+                                            success:(nullable void (^)(NSUInteger total, NSUInteger imported))success
+                                            failure:(nullable void (^)(NSError *error))failure;
+
+/**
+ Indicates if we have locally the private key of the current backup version.
+*/
+@property (nonatomic, readonly) BOOL hasPrivateKeyInCryptoStore;
+
 
 #pragma mark - Backup trust
 
@@ -333,6 +359,20 @@ FOUNDATION_EXPORT NSString *const kMXKeyBackupDidStateChangeNotification;
                                   success:(void (^)(void))success
                                   failure:(nullable void (^)(NSError *error))failure;
 
+
+/**
+ Request backup private keys from other devices.
+ 
+ @param deviceIds ids of device to make requests to. Nil to request all.
+ 
+ @param success A block object called when the operation succeeds.
+ @param onPrivateKeysReceived A block called when the secret has been received from another device.
+ @param failure A block object called when the operation fails.
+ */
+- (void)requestPrivateKeysToDeviceIds:(nullable NSArray<NSString*>*)deviceIds
+                              success:(void (^)(void))success
+                onPrivateKeysReceived:(void (^)(void))onPrivateKeysReceived
+                              failure:(void (^)(NSError *error))failure;
 
 #pragma mark - Backup state
 

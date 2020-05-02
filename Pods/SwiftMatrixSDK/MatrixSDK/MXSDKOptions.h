@@ -57,6 +57,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL enableCryptoWhenStartingMXSession;
 
 /**
+ Compute and maintain MXRommSummary.trust value.
+ NO by default.
+ This requires to load all room members to compute it.
+ */
+@property (nonatomic) BOOL computeE2ERoomSummaryTrust;
+
+/**
  The delegate object to receive analytics events
  
  By default, nil.

@@ -96,13 +96,22 @@
 - (id<MXEventsEnumerator>)enumeratorForMessagesWithTypeIn:(NSArray*)types;
 
 /**
- Get all events newer than the event with the passed id.
+  Get all events newer than the event with the passed id.
 
   @param eventId the event id to find.
   @param types a set of event types strings (MXEventTypeString).
   @return the messages events after an event Id
  */
 - (NSArray*)eventsAfter:(NSString *)eventId except:(NSString*)userId withTypeIn:(NSSet*)types;
+
+/**
+ Get events related to a specific event.
+
+ @param eventId The event id of the event to find.
+ @param relationType The related events relation type desired.
+ @return An array of events related to the given event id.
+ */
+- (NSArray<MXEvent*>*)relationsForEvent:(NSString*)eventId relationType:(NSString*)relationType;
 
 /**
  The text message partially typed by the user but not yet sent in the room.

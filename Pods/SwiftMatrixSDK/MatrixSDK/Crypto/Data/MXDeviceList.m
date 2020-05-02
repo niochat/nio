@@ -89,7 +89,8 @@
 }
 
 - (MXHTTPOperation*)downloadKeys:(NSArray<NSString*>*)userIds forceDownload:(BOOL)forceDownload
-                         success:(void (^)(MXUsersDevicesMap<MXDeviceInfo*> *usersDevicesInfoMap))success
+                         success:(void (^)(MXUsersDevicesMap<MXDeviceInfo*> *usersDevicesInfoMap,
+                                           NSDictionary<NSString* /* userId*/, MXCrossSigningInfo*> *crossSigningKeysMap))success
                          failure:(void (^)(NSError *error))failure
 {
     NSLog(@"[MXDeviceList] downloadKeys(forceDownload: %d) for %tu users", forceDownload, userIds.count);
@@ -185,7 +186,8 @@
             if (success)
             {
                 MXUsersDevicesMap<MXDeviceInfo *> *usersDevicesInfoMap = [self devicesForUsers:userIds];
-                success(usersDevicesInfoMap);
+                NSDictionary<NSString* , MXCrossSigningInfo*> *crossSigningKeysMap = [self crossSigningKeysForUsers:userIds];
+                success(usersDevicesInfoMap, crossSigningKeysMap);
             }
 
         } failure:failure];
@@ -193,6 +195,18 @@
         for (NSString *userId in usersToDownload)
         {
             keyDownloadsInProgressByUser[userId] = operation;
+        }
+        
+        if (currentQueryPool && doANewQuery == NO)
+        {
+            // Before reusing currentQueryPool, make sure it has all requested user ids
+            BOOL containsAllUserIds = [currentQueryPool hasUsers:operation.userIds];
+            if (containsAllUserIds == NO)
+            {
+                // It does not have all
+                // Some user ids are in nextQueryPool
+                doANewQuery = YES;
+            }
         }
 
         if (doANewQuery || !currentQueryPool)
@@ -212,7 +226,8 @@
         NSLog(@"[MXDeviceList] downloadKeys: already have all necessary keys");
         if (success)
         {
-            success([self devicesForUsers:userIds]);
+            success([self devicesForUsers:userIds],
+                    [self crossSigningKeysForUsers:userIds]);
         }
     }
 
@@ -313,7 +328,7 @@
 
     if (users.count)
     {
-        [self downloadKeys:users forceDownload:NO success:^(MXUsersDevicesMap<MXDeviceInfo *> *usersDevicesInfoMap) {
+        [self downloadKeys:users forceDownload:NO success:^(MXUsersDevicesMap<MXDeviceInfo *> *usersDevicesInfoMap, NSDictionary<NSString *,MXCrossSigningInfo *> *crossSigningKeysMap) {
             NSLog(@"[MXDeviceList] refreshOutdatedDeviceLists (users: %tu): %@", usersDevicesInfoMap.userIds.count, usersDevicesInfoMap.userIds);
         } failure:^(NSError *error) {
             NSLog(@"[MXDeviceList] refreshOutdatedDeviceLists: ERROR updating device keys for users %@", users);
@@ -350,6 +365,30 @@
 
     return usersDevicesInfoMap;
 }
+
+/**
+ Get the stored cross-signing keys for a list of user ids.
+
+ @param userIds the list of users to list keys for.
+ @return users cross-signing keys.
+ */
+- (NSDictionary<NSString* /* userId*/, MXCrossSigningInfo*> *)crossSigningKeysForUsers:(NSArray<NSString*>*)userIds
+{
+    NSMutableDictionary<NSString* , MXCrossSigningInfo*> *crossSigningKeysMap = [NSMutableDictionary dictionary];
+
+    for (NSString *userId in userIds)
+    {
+        // Retrive the data from the store
+        MXCrossSigningInfo *crossSigningKeys = [crypto.store crossSigningKeysForUser:userId];
+        if (crossSigningKeys)
+        {
+            crossSigningKeysMap[userId] = crossSigningKeys;
+        }
+    }
+
+    return crossSigningKeysMap;
+}
+
 
 - (void)startOrQueueDeviceQuery:(MXDeviceListOperation *)operation
 {

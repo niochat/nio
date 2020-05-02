@@ -57,6 +57,7 @@ FOUNDATION_EXPORT NSString *const kMXKeyEd25519Type;
 @property (nonatomic) MXUsersDevicesMap<NSString*> *signatures;
 
 - (instancetype)initWithType:(NSString*)type keyId:(NSString*)keyId value:(NSString*)value;
+- (instancetype)initWithKeyFullId:(NSString*)keyFullId value:(NSString*)value;
 
 /**
  Same as the parent [MXJSONModel JSONDictionary] but return only

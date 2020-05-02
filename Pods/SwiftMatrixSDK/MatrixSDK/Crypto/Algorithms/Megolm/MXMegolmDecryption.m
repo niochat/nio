@@ -1,6 +1,7 @@
 /*
  Copyright 2016 OpenMarket Ltd
  Copyright 2017 Vector Creations Ltd
+ Copyright 2020 The Matrix.org Foundation C.I.C
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -101,7 +102,10 @@
             // Manage OLMKit error
             if ([olmError.localizedDescription isEqualToString:@"UNKNOWN_MESSAGE_INDEX"])
             {
-                [self addEventToPendingList:event inTimeline:timeline];
+                // Do nothing more on the calling thread
+                dispatch_async(crypto.cryptoQueue, ^{
+                    [self addEventToPendingList:event inTimeline:timeline];
+                });
             }
 
             // Package olm error into MXDecryptingErrorDomain
@@ -114,7 +118,10 @@
         }
         else if ([olmError.domain isEqualToString:MXDecryptingErrorDomain] && olmError.code == MXDecryptingErrorUnknownInboundSessionIdCode)
         {
-            [self addEventToPendingList:event inTimeline:timeline];
+            // Do nothing more on the calling thread
+            dispatch_async(crypto.cryptoQueue, ^{
+                [self addEventToPendingList:event inTimeline:timeline];
+            });
         }
 
         if (error)
@@ -151,11 +158,14 @@
     {
         pendingEvents[k][timelineId] = [NSMutableDictionary dictionary];
     }
-
-    NSLog(@"[MXMegolmDecryption] addEventToPendingList: %@ in %@: %@", event.eventId, event.roomId, event.JSONDictionary);
-    pendingEvents[k][timelineId][event.eventId] = event;
-
-    [self requestKeysForEvent:event];
+    
+    if (!pendingEvents[k][timelineId][event.eventId])
+    {
+        NSLog(@"[MXMegolmDecryption] addEventToPendingList: %@ in %@ for %@", event.eventId, event.roomId, k);
+        pendingEvents[k][timelineId][event.eventId] = event;
+        
+        [self requestKeysForEvent:event];
+    }
 }
 
 - (void)onRoomKeyEvent:(MXEvent *)event
@@ -297,6 +307,7 @@
     operation = [crypto ensureOlmSessionsForDevices:@{
                                           userId: @[deviceInfo]
                                           }
+                                              force:NO
                                 success:^(MXUsersDevicesMap<MXOlmSessionResult *> *results)
      {
          MXStrongifyAndReturnIfNil(self);
@@ -323,7 +334,7 @@
 
          NSLog(@"[MXMegolmDecryption] shareKeysWithDevice: sharing keys for session %@|%@ with device %@:%@", senderKey, sessionId, userId, deviceId);
 
-         NSDictionary *payload = [self buildKeyForwardingMessage:roomId senderKey:senderKey sessionId:sessionId];
+         NSDictionary *payload = [self->crypto buildMegolmKeyForwardingMessage:roomId senderKey:senderKey sessionId:sessionId chainIndex:nil];
 
          MXDeviceInfo *deviceInfo = olmSessionResult.device;
 
@@ -371,40 +382,41 @@
                 }
                 else
                 {
+                    // Decrypt on the current thread (Must be MXCrypto.cryptoQueue)
+                    NSError *error;
+                    MXEventDecryptionResult *result = [self decryptEvent:event inTimeline:(timelineId.length ? timelineId : nil) error:&error];
+                    
+                    // And set the result on the main thread to be compatible with other modules
                     dispatch_group_enter(group);
-
-                    // Go back to the main thread to retry to decrypt from the beginning of the chain.
-                    // MXSession will then update MXEvent with clear content if successful
-                    MXWeakify(self);
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        MXStrongifyAndReturnIfNil(self);
-
-                        if (event.clearEvent)
+                        if (result)
                         {
-                            // This can happen when the event is in several timelines
-                            NSLog(@"[MXMegolmDecryption] retryDecryption: %@ already decrypted on main thread", event.eventId);
-                        }
-                        else
-                        {
-                            if ([self->crypto.mxSession decryptEvent:event inTimeline:(timelineId.length ? timelineId : nil)])
+                            if (event.clearEvent)
                             {
-                                NSLog(@"[MXMegolmDecryption] retryDecryption: successful re-decryption of %@", event.eventId);
+                                // This can happen when the event is in several timelines
+                                NSLog(@"[MXMegolmDecryption] retryDecryption: %@ already decrypted on main thread", event.eventId);
                             }
                             else
                             {
-                                NSLog(@"[MXMegolmDecryption] retryDecryption: Still can't decrypt %@. Error: %@", event.eventId, event.decryptionError);
-                                allDecrypted = NO;
+                                [event setClearData:result];
                             }
                         }
-
+                        else if (error)
+                        {
+                            NSLog(@"[MXMegolmDecryption] retryDecryption: Still can't decrypt %@. Error: %@", event.eventId, event.decryptionError);
+                            event.decryptionError = error;
+                            allDecrypted = NO;
+                        }
+                        
                         dispatch_group_leave(group);
                     });
+
                 }
             }
         }
     }
 
-    dispatch_group_notify(group, crypto.decryptionQueue, ^{
+    dispatch_group_notify(group, crypto.cryptoQueue, ^{
         complete(allDecrypted);
     });
 }
@@ -461,29 +473,6 @@
     {
         NSLog(@"[MXMegolmDecryption] requestKeysForEvent: ERROR: missing fields in event %@", event);
     }
-}
-
-- (NSDictionary*)buildKeyForwardingMessage:(NSString*)roomId senderKey:(NSString*)senderKey sessionId:(NSString*)sessionId
-{
-    NSDictionary *key = [olmDevice getInboundGroupSessionKey:roomId senderKey:senderKey sessionId:sessionId];
-    if (key)
-    {
-        return @{
-                 @"type": kMXEventTypeStringRoomForwardedKey,
-                 @"content": @{
-                         @"algorithm": kMXCryptoMegolmAlgorithm,
-                         @"room_id": roomId,
-                         @"sender_key": senderKey,
-                         @"sender_claimed_ed25519_key": key[@"sender_claimed_ed25519_key"],
-                         @"session_id": sessionId,
-                         @"session_key": key[@"key"],
-                         @"chain_index": key[@"chain_index"],
-                         @"forwarding_curve25519_key_chain": key[@"forwarding_curve25519_key_chain"]
-                         }
-                 };
-    }
-
-    return nil;
 }
 
 @end

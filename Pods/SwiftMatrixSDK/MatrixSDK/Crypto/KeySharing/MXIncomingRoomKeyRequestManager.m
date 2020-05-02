@@ -131,9 +131,27 @@
 
     if (![userId isEqualToString:crypto.matrixRestClient.credentials.userId])
     {
-        // TODO: determine if we sent this device the keys already: in
-        // which case we can do so again.
-        NSLog(@"[MXIncomingRoomKeyRequestManager] Ignoring room key request from other user for now");
+        NSString *senderKey, *sessionId;
+        MXJSONModelSetString(senderKey, body[@"sender_key"]);
+        MXJSONModelSetString(sessionId, body[@"session_id"]);
+        
+        if (!senderKey && !sessionId)
+        {
+            return;
+        }
+        
+        id<MXEncrypting> encryptor = [crypto getRoomEncryptor:roomId algorithm:alg];
+        if (!encryptor)
+        {
+            NSLog(@"[MXIncomingRoomKeyRequestManager] room key request for unknown alg %@ in room %@", alg, roomId);
+            return;
+        }
+        
+        [encryptor reshareKey:sessionId withUser:userId andDevice:deviceId senderKey:senderKey success:^{
+            
+        } failure:^(NSError *error) {
+            
+        }];
         return;
     }
 
@@ -157,7 +175,7 @@
 
     // if the device is verified already, share the keys
     MXDeviceInfo *device = [crypto.store deviceWithDeviceId:deviceId forUser:userId];
-    if (device && device.verified == MXDeviceVerified)
+    if (device && device.trustLevel.isVerified)
     {
         NSLog(@"[MXIncomingRoomKeyRequestManager] device is already verified: sharing keys");
         [decryptor shareKeysWithDevice:req success:nil failure:nil];
@@ -170,7 +188,7 @@
         NSLog(@"[MXIncomingRoomKeyRequestManager] Already have this key request, ignoring");
         return;
     }
-
+    
     // Add it to pending key requests
     [crypto.store storeIncomingRoomKeyRequest:req];
 

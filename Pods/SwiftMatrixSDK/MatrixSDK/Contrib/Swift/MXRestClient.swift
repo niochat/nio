@@ -21,7 +21,7 @@ import Foundation
 
 
 /// Represents account data type
-public enum MXAccountDataType {
+public enum MXAccountDataType: Equatable, Hashable {
     case direct
     case pushRules
     case ignoredUserList
@@ -41,7 +41,7 @@ public enum MXAccountDataType {
 
 
 /// Method of inviting a user to a room
-public enum MXRoomInvitee {
+public enum MXRoomInvitee: Equatable, Hashable {
     
     /// Invite a user by username
     case userId(String)
@@ -969,36 +969,16 @@ public extension MXRestClient {
     
     /**
      Create a room.
-     
+
      - parameters:
-        - name: The room name.
-        - visibility: The visibility of the room in the current HS's room directory.
-        - roomAlias: The room alias on the home server the room will be created.
-        - topic: The room topic.
-        - invite: A list of user IDs to invite to the room. This will tell the server to invite everyone in the list to the newly created room.
-        - invite3PID: A list of objects representing third party IDs to invite into the room.
-        - isDirect: This flag makes the server set the is_direct flag on the m.room.member events sent to the users in invite and invite_3pid.
-        - preset: Convenience parameter for setting various default state events based on a preset.
-     
+        - parameters: The parameters for room creation.
         - completion: A block object called when the operation completes.
         - response: Provides a MXCreateRoomResponse object on success.
-     
-     - returns: a MXHTTPOperation instance.
+
+     - returns: a `MXHTTPOperation` instance.
      */
-    @nonobjc @discardableResult func createRoom(name: String?,
-                                                visibility: MXRoomDirectoryVisibility?,
-                                                alias: String?,
-                                                topic: String?,
-                                                invite: [String]? = nil,
-                                                invite3PID: [MXInvite3PID]? = nil,
-                                                isDirect: Bool = false,
-                                                preset: MXRoomPreset?,
-                                                completion: @escaping (_ response: MXResponse<MXCreateRoomResponse>) -> Void) -> MXHTTPOperation {
-        
-        return __createRoom(name, visibility: nil, roomAlias: alias, topic: topic,
-                            invite: invite, invite3PID: invite3PID,
-                            isDirect: isDirect, preset: preset?.identifier,
-                            success: currySuccess(completion), failure: curryFailure(completion));
+    @nonobjc @discardableResult func createRoom(parameters: MXRoomCreationParameters, completion: @escaping (_ response: MXResponse<MXCreateRoomResponse>) -> Void) -> MXHTTPOperation {
+        return __createRoom(with: parameters, success: currySuccess(completion), failure: curryFailure(completion))
     }
     
     /**

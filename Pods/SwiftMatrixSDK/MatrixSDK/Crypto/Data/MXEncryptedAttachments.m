@@ -23,6 +23,8 @@
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonCryptor.h>
 
+#import "MXBase64Tools.h"
+
 NSString *const MXEncryptedAttachmentsErrorDomain = @"MXEncryptedAttachmentsErrorDomain";
 
 @implementation MXEncryptedAttachments
@@ -161,7 +163,7 @@ NSString *const MXEncryptedAttachmentsErrorDomain = @"MXEncryptedAttachmentsErro
         encryptedContentKey.ext = YES;
         encryptedContentKey.keyOps = @[@"encrypt", @"decrypt"];
         encryptedContentKey.kty = @"oct";
-        encryptedContentKey.k = [MXEncryptedAttachments base64ToBase64Url:[key base64EncodedStringWithOptions:0]];
+        encryptedContentKey.k = [MXBase64Tools base64ToBase64Url:[key base64EncodedStringWithOptions:0]];
         
         MXEncryptedContentFile *encryptedContentFile = [[MXEncryptedContentFile alloc] init];
         encryptedContentFile.v = @"v2";
@@ -170,7 +172,7 @@ NSString *const MXEncryptedAttachmentsErrorDomain = @"MXEncryptedAttachmentsErro
         encryptedContentFile.key = encryptedContentKey;
         encryptedContentFile.iv = [iv base64EncodedStringWithOptions:0];
         encryptedContentFile.hashes = @{
-                                        @"sha256": [MXEncryptedAttachments base64ToUnpaddedBase64:[computedSha256 base64EncodedStringWithOptions:0]],
+                                        @"sha256": [MXBase64Tools base64ToUnpaddedBase64:[computedSha256 base64EncodedStringWithOptions:0]],
                                         };
         
         success(encryptedContentFile);
@@ -212,14 +214,14 @@ NSString *const MXEncryptedAttachmentsErrorDomain = @"MXEncryptedAttachmentsErro
         return [NSError errorWithDomain:MXEncryptedAttachmentsErrorDomain code:0 userInfo:@{@"err": @"missing_sha256_hash"}];
     }
     
-    NSData *keyData = [[NSData alloc] initWithBase64EncodedString:[MXEncryptedAttachments base64UrlToBase64:fileInfo.key.k]
+    NSData *keyData = [[NSData alloc] initWithBase64EncodedString:[MXBase64Tools base64UrlToBase64:fileInfo.key.k]
                                                                    options:0];
     if (!keyData || keyData.length != kCCKeySizeAES256)
     {
         return [NSError errorWithDomain:MXEncryptedAttachmentsErrorDomain code:0 userInfo:@{@"err": @"bad_key_data"}];
     }
     
-    NSData *ivData = [[NSData alloc] initWithBase64EncodedString:[MXEncryptedAttachments padBase64:fileInfo.iv] options:0];
+    NSData *ivData = [[NSData alloc] initWithBase64EncodedString:[MXBase64Tools padBase64:fileInfo.iv] options:0];
     if (!ivData || ivData.length != kCCBlockSizeAES128)
     {
         return [NSError errorWithDomain:MXEncryptedAttachmentsErrorDomain code:0 userInfo:@{@"err": @"bad_iv_data"}];
@@ -272,7 +274,7 @@ NSString *const MXEncryptedAttachmentsErrorDomain = @"MXEncryptedAttachmentsErro
     NSMutableData *computedSha256 = [[NSMutableData alloc] initWithLength:CC_SHA256_DIGEST_LENGTH];
     CC_SHA256_Final(computedSha256.mutableBytes, &sha256ctx);
     
-    NSData *expectedSha256 = [[NSData alloc] initWithBase64EncodedString:[MXEncryptedAttachments padBase64:fileInfo.hashes[@"sha256"]] options:0];
+    NSData *expectedSha256 = [[NSData alloc] initWithBase64EncodedString:[MXBase64Tools padBase64:fileInfo.hashes[@"sha256"]] options:0];
     
     if (![computedSha256 isEqualToData:expectedSha256])
     {
@@ -280,38 +282,6 @@ NSString *const MXEncryptedAttachmentsErrorDomain = @"MXEncryptedAttachmentsErro
         return [NSError errorWithDomain:MXEncryptedAttachmentsErrorDomain code:0 userInfo:@{@"err": @"hash_mismatch"}];
     }
     return nil;
-}
-
-#pragma mark utility code
-
-+ (NSString *)base64ToUnpaddedBase64:(NSString *)base64 {
-    return [base64 stringByReplacingOccurrencesOfString:@"=" withString:@""];
-}
-
-+ (NSString *)base64UrlToBase64:(NSString *)base64Url {
-    NSString *ret = base64Url;
-    ret = [ret stringByReplacingOccurrencesOfString:@"-" withString:@"+"];
-    ret = [ret stringByReplacingOccurrencesOfString:@"_" withString:@"/"];
-    
-    // iOS needs the padding to decode base64
-    return [MXEncryptedAttachments padBase64:ret];
-}
-
-+ (NSString *)padBase64:(NSString *)unpadded {
-    NSString *ret = unpadded;
-    
-    while (ret.length % 4) {
-        ret = [ret stringByAppendingString:@"="];
-    }
-    return ret;
-}
-
-+ (NSString *)base64ToBase64Url:(NSString *)base64 {
-    NSString *ret = base64;
-    ret = [ret stringByReplacingOccurrencesOfString:@"+" withString:@"-"];
-    ret = [ret stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
-    // base64url has no padding
-    return [ret stringByReplacingOccurrencesOfString:@"=" withString:@""];
 }
 
 @end

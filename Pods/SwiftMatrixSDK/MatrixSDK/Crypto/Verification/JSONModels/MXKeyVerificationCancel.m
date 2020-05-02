@@ -16,22 +16,16 @@
 
 #import "MXKeyVerificationCancel.h"
 
+
 @implementation MXKeyVerificationCancel
 
 + (instancetype)modelFromJSON:(NSDictionary *)JSONDictionary
 {
-    MXKeyVerificationCancel *model = [MXKeyVerificationCancel new];
+    MXKeyVerificationCancel *model = [[MXKeyVerificationCancel alloc] initWithJSONDictionary:JSONDictionary];
     if (model)
     {
-        MXJSONModelSetString(model.transactionId, JSONDictionary[@"transaction_id"]);
         MXJSONModelSetString(model.code, JSONDictionary[@"code"]);
         MXJSONModelSetString(model.reason, JSONDictionary[@"reason"]);
-    }
-
-    // Sanitiy check
-    if (!model.transactionId.length)
-    {
-        model = nil;
     }
 
     return model;
@@ -39,11 +33,9 @@
 
 - (NSDictionary *)JSONDictionary
 {
-    NSMutableDictionary *JSONDictionary = [NSMutableDictionary dictionaryWithDictionary:
-                                           @{
-                                             @"transaction_id": _transactionId,
-                                             @"code": _code
-                                             }];
+    NSMutableDictionary *JSONDictionary = self.JSONDictionaryWithTransactionId;
+    JSONDictionary[@"code"] = _code;
+
     if (_reason)
     {
         JSONDictionary[@"reason"] = _reason;

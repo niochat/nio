@@ -245,7 +245,7 @@
 
         if (error)
         {
-            NSLog(@"[MXOlmDevice] encryptMessage failed: %@", error);
+            NSLog(@"[MXOlmDevice] encryptMessage failed for session id %@ and sender %@: %@", sessionId, theirDeviceIdentityKey, error);
         }
 
         [store storeSession:mxOlmSession forDevice:theirDeviceIdentityKey];
@@ -272,7 +272,7 @@
 
         if (error)
         {
-            NSLog(@"[MXOlmDevice] decryptMessage failed: %@", error);
+            NSLog(@"[MXOlmDevice] decryptMessage failed for session id %@(%@) and sender %@: %@", sessionId, @(messageType), theirDeviceIdentityKey, error);
         }
 
         [mxOlmSession didReceiveMessage];
@@ -542,7 +542,7 @@
     return YES;
 }
 
-- (NSDictionary*)getInboundGroupSessionKey:(NSString*)roomId senderKey:(NSString*)senderKey sessionId:(NSString*)sessionId
+- (NSDictionary*)getInboundGroupSessionKey:(NSString*)roomId senderKey:(NSString*)senderKey sessionId:(NSString*)sessionId chainIndex:(NSNumber*)chainIndex
 {
     NSDictionary *inboundGroupSessionKey;
 
@@ -550,16 +550,20 @@
     MXOlmInboundGroupSession *session = [self inboundGroupSessionWithId:sessionId senderKey:senderKey roomId:roomId error:&error];
     if (session)
     {
-        NSUInteger messageIndex = session.session.firstKnownIndex;
+        NSNumber *messageIndex = chainIndex;
+        if (!messageIndex)
+        {
+            messageIndex = @(session.session.firstKnownIndex);
+        }
 
         NSDictionary *claimedKeys = session.keysClaimed;
         NSString *senderEd25519Key = claimedKeys[@"ed25519"];
 
-        MXMegolmSessionData *sessionData = [session exportSessionDataAtMessageIndex:messageIndex];
+        MXMegolmSessionData *sessionData = [session exportSessionDataAtMessageIndex:[messageIndex unsignedIntegerValue]];
         NSArray<NSString*> *forwardingCurve25519KeyChain = sessionData.forwardingCurve25519KeyChain;
 
         inboundGroupSessionKey = @{
-                                   @"chain_index": @(messageIndex),
+                                   @"chain_index": messageIndex,
                                    @"key": sessionData.sessionKey,
                                    @"forwarding_curve25519_key_chain": forwardingCurve25519KeyChain ? forwardingCurve25519KeyChain : @[],
                                    @"sender_claimed_ed25519_key": senderEd25519Key ? senderEd25519Key : [NSNull null]

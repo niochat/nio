@@ -22,7 +22,7 @@
 #import "MXHTTPClient.h"
 #import "MXError.h"
 #import "MXTools.h"
-#import "MXEncryptedAttachments.h"
+#import "MXBase64Tools.h"
 
 #pragma mark - Constants definitions
 
@@ -141,7 +141,6 @@ NSString *const MXIdentityServerRestClientErrorDomain = @"org.matrix.sdk.MXIdent
                                           {
                                               __block NSString *token;
                                               [self dispatchProcessing:^{
-                                                  NSString *token;
                                                   MXJSONModelSetString(token, JSONResponse[@"token"]);
 
                                                   // The spec is `token`, but we used `access_token` for a Sydent release :/
@@ -392,7 +391,7 @@ NSString *const MXIdentityServerRestClientErrorDomain = @"org.matrix.sdk.MXIdent
                     
                     OLMUtility *olmUtility = [OLMUtility new];
                     NSString *hashedSha256ThreePid = [olmUtility sha256:[threePidConcatenation dataUsingEncoding:NSUTF8StringEncoding]];
-                    hashedTreePid = [MXEncryptedAttachments base64ToBase64Url:hashedSha256ThreePid];
+                    hashedTreePid = [MXBase64Tools base64ToBase64Url:hashedSha256ThreePid];
                     
                     threePidArrayByThreePidConcatHash[hashedTreePid] = threepidArray;
                 }

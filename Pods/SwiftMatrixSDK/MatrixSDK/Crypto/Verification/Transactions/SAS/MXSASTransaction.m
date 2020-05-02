@@ -18,7 +18,11 @@
 #import "MXSASTransaction_Private.h"
 
 #import "MXCrypto_Private.h"
-#import "MXDeviceVerificationManager_Private.h"
+#import "MXCrossSigning_Private.h"
+#import "MXKeyVerificationManager_Private.h"
+
+#import "MXKey.h"
+
 
 #pragma mark - Constants
 
@@ -101,15 +105,6 @@ static NSArray<MXEmojiRepresentation*> *kSasEmojis;
     }
 }
 
-
-- (void)cancelWithCancelCodeFromCryptoQueue:(MXTransactionCancelCode *)code
-{
-    [super cancelWithCancelCodeFromCryptoQueue:code];
-    
-    self.state = MXSASTransactionStateCancelledByMe;
-    self.reasonCancelCode = code;
-}
-
 #pragma mark - SDK-Private methods -
 
 + (void)initialize
@@ -126,7 +121,7 @@ static NSArray<MXEmojiRepresentation*> *kSasEmojis;
     });
 }
 
-- (instancetype)initWithOtherDevice:(MXDeviceInfo*)otherDevice andManager:(MXDeviceVerificationManager*)manager
+- (instancetype)initWithOtherDevice:(MXDeviceInfo*)otherDevice andManager:(MXKeyVerificationManager*)manager
 {
     self = [super initWithOtherDevice:otherDevice andManager:manager];
     if (self)
@@ -136,6 +131,17 @@ static NSArray<MXEmojiRepresentation*> *kSasEmojis;
     return self;
 }
 
+- (void)handleAccept:(MXKeyVerificationAccept*)acceptContent
+{
+    // Must be handled by the specific implementation
+    NSAssert(NO, @"%@ does not implement handleAccept", self.class);
+}
+
+- (void)handleKey:(MXKeyVerificationKey*)keyContent
+{
+    // Must be handled by the specific implementation
+    NSAssert(NO, @"%@ does not implement handleKey", self.class);
+}
 
 - (NSString*)hashUsingAgreedHashMethod:(NSString*)string
 {
@@ -204,6 +210,14 @@ static NSArray<MXEmojiRepresentation*> *kSasEmojis;
     return macUsingAgreedMethod;
 }
 
+- (void)cancelWithCancelCode:(MXTransactionCancelCode*)code
+{
+    [self cancelWithCancelCode:code success:^{
+        self.state = MXSASTransactionStateCancelledByMe;
+    } failure:^(NSError * _Nonnull error) {
+        NSLog(@"[MXKeyVerification][MXSASTransaction] Fail to cancel with error: %@", error);
+    }];
+}
 
 #pragma mark - Incoming to_device events
 
@@ -255,26 +269,53 @@ static NSArray<MXEmojiRepresentation*> *kSasEmojis;
     //  - the device ID of the device receiving the MAC,
     //  - the transaction ID, and
     //  - the key ID of the key being MAC-ed, or the string “KEY_IDS” if the item being MAC-ed is the list of key IDs.
-    NSString *baseInfo = [NSString stringWithFormat:@"MATRIX_KEY_VERIFICATION_MAC%@%@%@%@%@",
-                          device.userId, device.deviceId,
-                          otherDevice.userId, otherDevice.deviceId,
-                          self.transactionId];
+    NSString *baseInfo = [self baseInfoWithDevice:device andOtherDevice:otherDevice];
 
-    NSString *keyId = [NSString stringWithFormat:@"ed25519:%@", device.deviceId];
+    NSMutableDictionary<NSString*, NSString*> *mac;
+    NSMutableArray<NSString*>* keyList = [NSMutableArray array];
 
-    NSString *macString = [self macUsingAgreedMethod:device.fingerprint
-                                                info:[NSString stringWithFormat:@"%@%@", baseInfo, keyId]];
-    NSString *keyStrings = [self macUsingAgreedMethod:keyId
+    // MAC with own device keys
+    MXKey *deviceKey = [[MXKey alloc] initWithType:kMXKeyEd25519Type
+                                             keyId:device.deviceId
+                                             value:@""];
+    deviceKey.value = [self macUsingAgreedMethod:device.fingerprint
+                                            info:[NSString stringWithFormat:@"%@%@", baseInfo, deviceKey.keyFullId]];
+    [keyList addObject:deviceKey.keyFullId];
+
+    mac = [deviceKey.JSONDictionary mutableCopy];
+
+    // MAC with own cross-signing key
+    MXCrossSigningInfo *myUserCrossSigningKeys = self.manager.crypto.crossSigning.myUserCrossSigningKeys;
+    if (myUserCrossSigningKeys)
+    {
+        NSString *crossSigningId = myUserCrossSigningKeys.masterKeys.keys;
+        MXKey *crossSigninKey = [[MXKey alloc] initWithType:kMXKeyEd25519Type
+                                                      keyId:crossSigningId
+                                                      value:@""];
+        crossSigninKey.value = [self macUsingAgreedMethod:crossSigningId
+                                                     info:[NSString stringWithFormat:@"%@%@", baseInfo, crossSigninKey.keyFullId]];
+        [keyList addObject:crossSigninKey.keyFullId];
+
+        [mac addEntriesFromDictionary:crossSigninKey.JSONDictionary];
+    }
+
+    // MAC of the list of key IDs
+    NSString *keyListIds = [[keyList sortedArrayUsingSelector:@selector(compare:)]
+                            componentsJoinedByString:@","];
+    NSString *keyStrings = [self macUsingAgreedMethod:keyListIds
                                                  info:[NSString stringWithFormat:@"%@KEY_IDS", baseInfo]];
 
-    if (macString.length && keyStrings.length)
+    if (mac.count >= 1 && keyStrings.length)
     {
         macContent = [MXKeyVerificationMac new];
         macContent.transactionId = self.transactionId;
-        macContent.mac = @{
-                           keyId: macString
-                           };
+        macContent.mac = mac;
         macContent.keys = keyStrings;
+        
+        // TODO: To remove
+        NSLog(@"keyListIds: %@", keyListIds);
+        NSLog(@"otherUserMasterKeys: %@", myUserCrossSigningKeys.masterKeys.keys);
+        NSLog(@"info: %@", [NSString stringWithFormat:@"%@%@", baseInfo, deviceKey.keyFullId]);
     }
 
     return macContent;
@@ -284,40 +325,131 @@ static NSArray<MXEmojiRepresentation*> *kSasEmojis;
 {
     if (self.myMac && self.theirMac)
     {
-        MXKeyVerificationMac *macContent = [self macContentWithDevice:self.otherDevice
-                                                       andOtherDevice:self.manager.crypto.myDevice];
+        NSString *baseInfo = [self baseInfoWithDevice:self.otherDevice andOtherDevice:self.manager.crypto.myDevice];
 
-        if (!macContent)
-        {
-            [self cancelWithCancelCode:MXTransactionCancelCode.unexpectedMessage];
-            return;
-        }
+        // Check MAC of the list of key IDs
+        NSString *keyListIds = [[self.theirMac.mac.allKeys sortedArrayUsingSelector:@selector(compare:)]
+                                componentsJoinedByString:@","];
+        NSString *keyStrings = [self macUsingAgreedMethod:keyListIds
+                                                     info:[NSString stringWithFormat:@"%@KEY_IDS", baseInfo]];
 
-        if (![_theirMac.keys isEqualToString:macContent.keys])
-        {
-            [self cancelWithCancelCode:MXTransactionCancelCode.mismatchedKeys];
-            return;
-        }
-
-        if (![_theirMac.mac isEqualToDictionary:macContent.mac])
+        if (![self.theirMac.keys isEqualToString:keyStrings])
         {
             [self cancelWithCancelCode:MXTransactionCancelCode.mismatchedKeys];
             return;
         }
+        
 
-        [self.manager removeTransactionWithTransactionId:self.transactionId];
-        [self setDeviceAsVerified];
+        __block MXTransactionCancelCode *cancelCode;
+        dispatch_group_t group = dispatch_group_create();
+
+        for (NSString *keyFullId in self.theirMac.mac)
+        {
+            MXKey *key = [[MXKey alloc] initWithKeyFullId:keyFullId value:self.theirMac.mac[keyFullId]];
+
+            // Check MAC with device keys
+            MXDeviceInfo *device = [self.manager.crypto deviceWithDeviceId:key.keyId ofUser:self.otherDevice.userId];
+            if (device)
+            {
+                if ([key.value isEqualToString:[self macUsingAgreedMethod:device.keys[keyFullId]
+                                                                     info:[NSString stringWithFormat:@"%@%@", baseInfo, keyFullId]]])
+                {
+                    // Mark device as verified
+                    NSLog(@"[MXKeyVerification][MXSASTransaction] verifyMacs: Mark device %@ as verified", device);
+                    dispatch_group_enter(group);
+                    [self.manager.crypto setDeviceVerification:MXDeviceVerified forDevice:self.otherDeviceId ofUser:self.otherUserId success:^{
+                        dispatch_group_leave(group);
+                        
+                    } failure:^(NSError *error) {
+                        // Should never happen
+                        cancelCode = MXTransactionCancelCode.invalidMessage;
+
+                        dispatch_group_leave(group);
+                    }];
+                }
+                else
+                {
+                    NSLog(@"[MXKeyVerification][MXSASTransaction] verifyMacs: ERROR: mac for device keys do not match: %@\vs %@", self.theirMac.JSONDictionary, self.myMac.JSONDictionary);
+                    cancelCode = MXTransactionCancelCode.mismatchedKeys;
+                    break;
+                }
+            }
+            else
+            {
+                // This key is maybe a cross-signing master key
+                MXCrossSigningKey *otherUserMasterKeys= [self.manager.crypto crossSigningKeysForUser:self.otherDevice.userId].masterKeys;
+                if (otherUserMasterKeys)
+                {
+                    // Check MAC with user's MSK keys
+                    if ([key.value isEqualToString:[self macUsingAgreedMethod:otherUserMasterKeys.keys
+                                                                         info:[NSString stringWithFormat:@"%@%@", baseInfo, keyFullId]]])
+                    {
+                        // Mark user as verified
+                        NSLog(@"[MXKeyVerification][MXSASTransaction] verifyMacs: Mark user %@ as verified", self.otherDevice.userId);
+                        dispatch_group_enter(group);
+                        [self.manager.crypto setUserVerification:YES forUser:self.otherDevice.userId success:^{
+                            dispatch_group_leave(group);
+                            
+                        } failure:^(NSError *error) {
+                            // Should never happen
+                            cancelCode = MXTransactionCancelCode.invalidMessage;
+                            
+                            dispatch_group_leave(group);
+                        }];
+                    }
+                    else
+                    {
+                        NSLog(@"[MXKeyVerification][MXSASTransaction] verifyMacs: ERROR: mac for master keys do not match: %@\vs %@", self.theirMac.JSONDictionary, self.myMac.JSONDictionary);
+                        NSLog(@"keyListIds: %@", keyListIds);
+                        NSLog(@"otherUserMasterKeys: %@", otherUserMasterKeys.keys);
+                        NSLog(@"info: %@", [NSString stringWithFormat:@"%@%@", baseInfo, keyFullId]);
+                        
+                        cancelCode = MXTransactionCancelCode.mismatchedKeys;
+                        break;
+                    }
+                }
+                else
+                {
+                    // Unknown key
+                    NSLog(@"[MXKeyVerification][MXSASTransaction] verifyMacs: Could not find keys %@ to verify", keyFullId);
+                }
+            }
+        }
+
+        dispatch_group_notify(group, self.manager.crypto.cryptoQueue, ^{
+            if (cancelCode)
+            {
+                [self cancelWithCancelCode:cancelCode];
+            }
+            else
+            {
+                [self sendVerified];
+            }
+            [self.manager removeTransactionWithTransactionId:self.transactionId];
+        });
     }
 }
 
-- (void)setDeviceAsVerified
+- (NSString*)baseInfoWithDevice:(MXDeviceInfo*)device andOtherDevice:(MXDeviceInfo*)otherDevice
 {
-    [self.manager.crypto setDeviceVerification:MXDeviceVerified forDevice:self.otherDeviceId ofUser:self.otherUserId success:^{
-        self.state = MXSASTransactionStateVerified;
-    } failure:^(NSError *error) {
-        // Should never happen
-        [self cancelWithCancelCode:MXTransactionCancelCode.invalidMessage];
-    }];
+    return [NSString stringWithFormat:@"MATRIX_KEY_VERIFICATION_MAC%@%@%@%@%@",
+            device.userId, device.deviceId,
+            otherDevice.userId, otherDevice.deviceId,
+            self.transactionId];
+}
+
+- (void)sendVerified
+{
+    // Inform the other peer we are done
+    MXKeyVerificationDone *doneContent = [MXKeyVerificationDone new];
+    doneContent.transactionId = self.transactionId;
+    if (self.transport == MXKeyVerificationTransportDirectMessage)
+    {
+        doneContent.relatedEventId = self.dmEventId;
+    }
+    [self sendToOther:kMXEventTypeStringKeyVerificationDone content:doneContent.JSONDictionary success:^{} failure:^(NSError * _Nonnull error) {}];
+
+    self.state = MXSASTransactionStateVerified;
 }
 
 

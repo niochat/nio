@@ -86,6 +86,12 @@ typedef enum : NSUInteger
  */
 @property (nonatomic) NSDictionary *requestBody;
 
+// Shorcuts to requestBody data
+@property (nonatomic, readonly) NSString *algorithm;
+@property (nonatomic, readonly) NSString *roomId;
+@property (nonatomic, readonly) NSString *sessionId;
+@property (nonatomic, readonly) NSString *senderKey;
+
 /**
  The current state of this request.
  */

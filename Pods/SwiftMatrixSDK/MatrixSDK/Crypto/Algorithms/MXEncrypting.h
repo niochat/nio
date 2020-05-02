@@ -64,4 +64,25 @@
                                   success:(void (^)(NSObject *sessionInfo))success
                                   failure:(void (^)(NSError *error))failure;
 
+/**
+ Re-shares a session key with devices if the key has already been
+ sent to them.
+ 
+ @param sessionId The id of the outbound session to share.
+ @param userId The id of the user who owns the target device.
+ @param deviceId he id of the target device.
+ @param senderKey The key of the originating device for the session.
+
+ @param success A block object called when the operation succeeds.
+ @param failure A block object called when the operation fails.
+ 
+ @return a MXHTTPOperation instance.
+ */
+- (MXHTTPOperation*)reshareKey:(NSString*)sessionId
+                      withUser:(NSString*)userId
+                     andDevice:(NSString*)deviceId
+                     senderKey:(NSString*)senderKey
+                       success:(void (^)(void))success
+                       failure:(void (^)(NSError *error))failure;
+
 @end

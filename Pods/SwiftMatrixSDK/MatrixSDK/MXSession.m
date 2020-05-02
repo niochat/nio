@@ -47,7 +47,7 @@
 
 #pragma mark - Constants definitions
 
-const NSString *MatrixSDKVersion = @"0.15.2";
+const NSString *MatrixSDKVersion = @"0.16.2";
 NSString *const kMXSessionStateDidChangeNotification = @"kMXSessionStateDidChangeNotification";
 NSString *const kMXSessionNewRoomNotification = @"kMXSessionNewRoomNotification";
 NSString *const kMXSessionWillLeaveRoomNotification = @"kMXSessionWillLeaveRoomNotification";
@@ -252,6 +252,21 @@ typedef void (^MXOnResumeDone)(void);
         [self setState:MXSessionStateInitialised];
     }
     return self;
+}
+
+- (MXCredentials *)credentials
+{
+    return matrixRestClient.credentials;
+}
+
+- (NSString *)myUserId
+{
+    return matrixRestClient.credentials.userId;
+}
+
+- (NSString *)myDeviceId
+{
+    return matrixRestClient.credentials.deviceId;
 }
 
 - (void)setState:(MXSessionState)state
@@ -1770,25 +1785,18 @@ typedef void (^MXOnResumeDone)(void);
     } failure:failure];
 }
 
-- (MXHTTPOperation*)createRoom:(NSString*)name
-                    visibility:(MXRoomDirectoryVisibility)visibility
-                     roomAlias:(NSString*)roomAlias
-                         topic:(NSString*)topic
-                        invite:(NSArray<NSString*>*)inviteArray
-                    invite3PID:(NSArray<MXInvite3PID*>*)invite3PIDArray
-                      isDirect:(BOOL)isDirect
-                        preset:(MXRoomPreset)preset
-                       success:(void (^)(MXRoom *room))success
-                       failure:(void (^)(NSError *error))failure
+- (MXHTTPOperation*)createRoomWithParameters:(MXRoomCreationParameters*)parameters
+                                     success:(void (^)(MXRoom *room))success
+                                     failure:(void (^)(NSError *error))failure
 {
-    return [matrixRestClient createRoom:name visibility:visibility roomAlias:roomAlias topic:topic invite:inviteArray invite3PID:invite3PIDArray isDirect:isDirect preset:preset success:^(MXCreateRoomResponse *response) {
+    return [matrixRestClient createRoomWithParameters:parameters success:^(MXCreateRoomResponse *response) {
 
-        if (isDirect)
+        if (parameters.isDirect)
         {
             // When the flag isDirect is turned on, only one user id is expected in the inviteArray.
             // The room is considered as direct only for the first mentioned user in case of several user ids.
             // Note: It is not possible FTM to mark as direct a room with an invited third party.
-            NSString *directUserId = (inviteArray.count ? inviteArray.firstObject : nil);
+            NSString *directUserId = (parameters.inviteArray.count ? parameters.inviteArray.firstObject : nil);
             [self onCreatedDirectChat:response withUserId:directUserId success:success];
         }
         else
@@ -1956,6 +1964,29 @@ typedef void (^MXOnResumeDone)(void);
             }
         }
 
+    } failure:failure];
+}
+
+- (MXHTTPOperation*)canEnableE2EByDefaultInNewRoomWithUsers:(NSArray<NSString*>*)userIds
+                                                    success:(void (^)(BOOL canEnableE2E))success
+                                                    failure:(void (^)(NSError *error))failure
+{
+    // Check whether all users have uploaded device keys before.
+    // If so, encryption can be enabled in the new room
+    return [self.crypto downloadKeys:userIds forceDownload:NO success:^(MXUsersDevicesMap<MXDeviceInfo *> *usersDevicesInfoMap, NSDictionary<NSString *,MXCrossSigningInfo *> *crossSigningKeysMap) {
+        
+        BOOL allUsersHaveDeviceKeys = YES;
+        for (NSString *userId in userIds)
+        {
+            if ([usersDevicesInfoMap deviceIdsForUser:userId].count == 0)
+            {
+                allUsersHaveDeviceKeys = NO;
+                break;
+            }
+        }
+        
+        success(allUsersHaveDeviceKeys);
+        
     } failure:failure];
 }
 
@@ -2191,7 +2222,10 @@ typedef void (^MXOnResumeDone)(void);
 - (void)runNextDirectRoomOperation
 {
     // Dequeue the completed operation
-    [directRoomsOperationsQueue removeObjectAtIndex:0];
+    if (directRoomsOperationsQueue.count)
+    {
+        [directRoomsOperationsQueue removeObjectAtIndex:0];
+    }
 
     // And run the next one if any
     if (directRoomsOperationsQueue.firstObject)

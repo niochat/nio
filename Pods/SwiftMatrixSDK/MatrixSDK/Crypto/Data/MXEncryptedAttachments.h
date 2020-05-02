@@ -74,8 +74,4 @@ extern NSString *const MXEncryptedAttachmentsErrorDomain;
               inputStream:(NSInputStream *)inputStream
              outputStream:(NSOutputStream *)outputStream;
 
-+ (NSString *)padBase64:(NSString *)unpadded;
-
-+ (NSString *)base64ToBase64Url:(NSString *)base64;
-
 @end

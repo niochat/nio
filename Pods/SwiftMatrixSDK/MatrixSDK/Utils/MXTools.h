@@ -290,4 +290,14 @@ FOUNDATION_EXPORT NSString *const kMXToolsRegexStringForMatrixGroupIdentifier;
     } \
     typeof(var) var = weak##var
 
+
+#pragma mark - Unit testing
+
+/**
+ Check if the code is running in the unit test environment.
+ 
+ @return YES if running in the unit test environment.
+ */
++ (BOOL)isRunningUnitTests;
+
 @end

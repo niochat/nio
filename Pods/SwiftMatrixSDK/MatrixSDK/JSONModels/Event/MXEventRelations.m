@@ -17,6 +17,7 @@
 #import "MXEventRelations.h"
 
 #import "MXEventAnnotationChunk.h"
+#import "MXEventReferenceChunk.h"
 #import "MXEventReplace.h"
 #import "MXEvent.h"
 
@@ -30,14 +31,19 @@
 
     MXEventAnnotationChunk *annotation;
     MXJSONModelSetMXJSONModel(annotation, MXEventAnnotationChunk, JSONDictionary[@"m.annotation"]);
+
+    MXEventReferenceChunk *reference;
+    MXJSONModelSetMXJSONModel(reference, MXEventReferenceChunk, JSONDictionary[@"m.reference"]);
+
     
     MXEventReplace *eventReplace;
     MXJSONModelSetMXJSONModel(eventReplace, MXEventReplace, JSONDictionary[MXEventRelationTypeReplace]);
 
-    if (annotation || eventReplace)
+    if (annotation || reference || eventReplace)
     {
         relations = [MXEventRelations new];
         relations->_annotation = annotation;
+        relations->_reference = reference;
         relations->_replace = eventReplace;
     }
 
@@ -53,7 +59,12 @@
         {
             JSONDictionary[@"m.annotation"] = _annotation.JSONDictionary;                        
         }
-        
+
+        if (_reference)
+        {
+            JSONDictionary[@"m.reference"] = _reference.JSONDictionary;
+        }
+
         if (_replace)
         {
             JSONDictionary[MXEventRelationTypeReplace] = _replace.JSONDictionary;
@@ -72,6 +83,7 @@
     if (self)
     {
         _annotation = [aDecoder decodeObjectForKey:@"annotation"];
+        _reference = [aDecoder decodeObjectForKey:@"reference"];
         _replace = [aDecoder decodeObjectForKey:@"replace"];
     }
     return self;
@@ -80,6 +92,7 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
     [aCoder encodeObject:_annotation forKey:@"annotation"];
+    [aCoder encodeObject:_reference forKey:@"reference"];
     [aCoder encodeObject:_replace forKey:@"replace"];
 }
 

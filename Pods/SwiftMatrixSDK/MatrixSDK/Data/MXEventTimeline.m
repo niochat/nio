@@ -357,7 +357,10 @@ NSString *const kMXRoomInviteStateEventIdPrefix = @"invite-";
         }
 
         NSLog(@"[MXEventTimeline] paginate failed");
-        failure(error);
+        if (failure)
+        {
+            failure(error);
+        }
     }];
 
     if (messagesFromStoreCount)
@@ -863,7 +866,7 @@ NSString *const kMXRoomInviteStateEventIdPrefix = @"invite-";
     if (_isLiveTimeline && (direction == MXTimelineDirectionForwards))
     {
         // Check for local echo suppression
-        if (room.outgoingMessages.count && [event.sender isEqualToString:room.mxSession.myUser.userId])
+        if (room.outgoingMessages.count && [event.sender isEqualToString:room.mxSession.myUserId])
         {
             MXEvent *localEcho = [room pendingLocalEchoRelatedToEvent:event];
             if (localEcho)

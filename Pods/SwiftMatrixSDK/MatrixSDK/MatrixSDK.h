@@ -42,6 +42,7 @@ FOUNDATION_EXPORT NSString *MatrixSDKVersion;
 #import "MXLogger.h"
 
 #import "MXTools.h"
+#import "MXThrottler.h"
 #import "NSData+MatrixSDK.h"
 
 #import "MXSDKOptions.h"
@@ -57,6 +58,22 @@ FOUNDATION_EXPORT NSString *MatrixSDKVersion;
 #import "MXEncryptedContentFile.h"
 #import "MXEncryptedContentKey.h"
 #import "MXKeyVerificationStart.h"
+#import "MXKeyVerificationAccept.h"
+#import "MXKeyVerificationCancel.h"
+#import "MXKeyVerificationDone.h"
+#import "MXKeyVerificationKey.h"
+#import "MXKeyVerificationMac.h"
+#import "MXKeyVerificationRequestByDMJSONModel.h"
+#import "MXSASKeyVerificationStart.h"
+#import "MXQRCodeKeyVerificationStart.h"
+
+#import "MXQRCodeDataCodable.h"
+#import "MXQRCodeDataBuilder.h"
+#import "MXQRCodeDataCoder.h"
+#import "MXQRCodeData.h"
+#import "MXVerifyingAnotherUserQRCodeData.h"
+#import "MXSelfVerifyingMasterKeyTrustedQRCodeData.h"
+#import "MXSelfVerifyingMasterKeyNotTrustedQRCodeData.h"
 
 #import "MXBugReportRestClient.h"
 
@@ -74,6 +91,8 @@ FOUNDATION_EXPORT NSString *MatrixSDKVersion;
 #import "MXEventRelations.h"
 #import "MXEventAnnotationChunk.h"
 #import "MXEventAnnotation.h"
+#import "MXEventReferenceChunk.h"
+
 
 #import "MXReplyEventParser.h"
 
