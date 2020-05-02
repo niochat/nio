@@ -12,7 +12,7 @@ struct MatrixEvent: Identifiable {
 
     var sender: String
     var senderDisplayName: String
-    var senderAvatar: String?
+    var senderAvatar: URL?
 
     var isIncoming: Bool = true
 
@@ -24,13 +24,8 @@ struct MatrixEvent: Identifiable {
 extension MatrixEvent {
     enum Content {
         case text(String)
-        case image(Image)
+        case image(url: URL, size: CGSize)
 
         case unsupported(String)
-
-        struct Image {
-            let url: String
-            let size: CGSize
-        }
     }
 }

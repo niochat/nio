@@ -60,9 +60,9 @@ class MatrixSession {
         }
     }
 
-    func url(for mxcString: String,
-             size: CGSize? = nil,
-             method: MXThumbnailingMethod = MXThumbnailingMethodCrop) -> String? {
+    func mediaURL(for mxcString: String,
+                  size: CGSize? = nil,
+                  method: MXThumbnailingMethod = MXThumbnailingMethodCrop) -> URL? {
 
         var urlString: String?
         if let size = size {
@@ -71,6 +71,6 @@ class MatrixSession {
             urlString = self.mediaManager.url(ofContent: mxcString)
         }
 
-        return urlString
+        return urlString.flatMap { URL(string: $0) }
     }
 }
