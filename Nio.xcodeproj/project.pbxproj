@@ -82,7 +82,9 @@
 		CAC46D7923A6D4B90079C24F /* TypedEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D7823A6D4B90079C24F /* TypedEventsTests.swift */; };
 		CAF2AE892458EEBC00D84133 /* AttributedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AE882458EEBB00D84133 /* AttributedText.swift */; };
 		CAF2AE92245AEEBA00D84133 /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AE91245AEEBA00D84133 /* BadgeView.swift */; };
+		CAF2AE8B2458EF0900D84133 /* MarkdownText.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AE8A2458EF0900D84133 /* MarkdownText.swift */; };
 		CAF2AE94245B507400D84133 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AE93245B507400D84133 /* Assets.swift */; };
+		CAF2AE9D245DF4B400D84133 /* CommonMarkAttributedString in Frameworks */ = {isa = PBXBuildFile; productRef = CAF2AE9C245DF4B400D84133 /* CommonMarkAttributedString */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,10 +178,10 @@
 		CAC46D7223A6AE890079C24F /* TypedEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypedEvents.swift; sourceTree = "<group>"; };
 		CAC46D7623A6CB6C0079C24F /* MXEventType+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXEventType+Equatable.swift"; sourceTree = "<group>"; };
 		CAC46D7823A6D4B90079C24F /* TypedEventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypedEventsTests.swift; sourceTree = "<group>"; };
-		CAF2AE93245B507400D84133 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		CAF2AE882458EEBB00D84133 /* AttributedText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedText.swift; sourceTree = "<group>"; };
 		CAF2AE91245AEEBA00D84133 /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
 		CAF2AE8A2458EF0900D84133 /* MarkdownText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownText.swift; sourceTree = "<group>"; };
+		CAF2AE93245B507400D84133 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		E2D5B8AFEEB28F750CE393D1 /* Pods-NioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioTests.debug.xcconfig"; path = "Target Support Files/Pods-NioTests/Pods-NioTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -197,6 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3984654823B8D809006C173B /* SDWebImageSwiftUI in Frameworks */,
+				CAF2AE9D245DF4B400D84133 /* CommonMarkAttributedString in Frameworks */,
 				3923899F238ABA5700B2E1DF /* KeychainAccess in Frameworks */,
 				87FE3870173FD55A91B15921 /* Pods_Nio.framework in Frameworks */,
 				3970DC942385A8BE00EFE31B /* KeyboardObserving in Frameworks */,
@@ -507,6 +510,7 @@
 				3970DC932385A8BE00EFE31B /* KeyboardObserving */,
 				3923899E238ABA5700B2E1DF /* KeychainAccess */,
 				3984654723B8D809006C173B /* SDWebImageSwiftUI */,
+				CAF2AE9C245DF4B400D84133 /* CommonMarkAttributedString */,
 			);
 			productName = Nio;
 			productReference = 39C931D92384328A004449E1 /* Nio.app */;
@@ -547,6 +551,7 @@
 				3970DC922385A8BE00EFE31B /* XCRemoteSwiftPackageReference "KeyboardObserving" */,
 				3923899D238ABA5700B2E1DF /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				3984654623B8D809006C173B /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				CAF2AE9B245DF4B400D84133 /* XCRemoteSwiftPackageReference "CommonMarkAttributedString" */,
 			);
 			productRefGroup = 39C931DA2384328A004449E1 /* Products */;
 			projectDirPath = "";
@@ -1073,6 +1078,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		CAF2AE9B245DF4B400D84133 /* XCRemoteSwiftPackageReference "CommonMarkAttributedString" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mattt/CommonMarkAttributedString";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1090,6 +1103,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3984654623B8D809006C173B /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		CAF2AE9C245DF4B400D84133 /* CommonMarkAttributedString */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CAF2AE9B245DF4B400D84133 /* XCRemoteSwiftPackageReference "CommonMarkAttributedString" */;
+			productName = CommonMarkAttributedString;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
