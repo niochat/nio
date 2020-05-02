@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-import SwiftyMarkdown
+import CommonMarkAttributedString
 
 struct MarkdownText: View {
     @State var markdownString: String
@@ -17,7 +17,17 @@ struct MarkdownText: View {
     let linkTapped: (URL) -> Void
 
     var body: some View {
-        let attributedString = SwiftyMarkdown(string: markdownString).attributedString()
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.preferredFont(forTextStyle: .body),
+            .foregroundColor: UIColor.label,
+        ]
+
+        let attributedStringOrNil = try? NSAttributedString(
+            commonmark: markdownString,
+            attributes: attributes
+        )
+        let attributedString = attributedStringOrNil ?? NSAttributedString(string: markdownString)
+
         return AttributedText(
             attributedString: attributedString,
             height: self.$desiredHeight,
