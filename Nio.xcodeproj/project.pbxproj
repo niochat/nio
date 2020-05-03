@@ -63,6 +63,7 @@
 		39D166C62385C804006DD257 /* String+Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D166C52385C804006DD257 /* String+Emoji.swift */; };
 		39D166C82385C832006DD257 /* EventContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D166C72385C832006DD257 /* EventContainerView.swift */; };
 		4B058B5624573A570059BC75 /* EditEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B058B5524573A570059BC75 /* EditEvent.swift */; };
+		4B0A2E47245E2EF800A79443 /* MultiLineTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A2E46245E2EF800A79443 /* MultiLineTextView.swift */; };
 		87FE3870173FD55A91B15921 /* Pods_Nio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3410F361E5A713D19ECEF861 /* Pods_Nio.framework */; };
 		A329A2AF0574896611D82CC1 /* Pods_NioTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FF7D25C200D0F7228279B72 /* Pods_NioTests.framework */; };
 		CAC46D5723A272D10079C24F /* BorderlessMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D5423A272D10079C24F /* BorderlessMessageView.swift */; };
@@ -157,6 +158,7 @@
 		39D166C52385C804006DD257 /* String+Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Emoji.swift"; sourceTree = "<group>"; };
 		39D166C72385C832006DD257 /* EventContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventContainerView.swift; sourceTree = "<group>"; };
 		4B058B5524573A570059BC75 /* EditEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEvent.swift; sourceTree = "<group>"; };
+		4B0A2E46245E2EF800A79443 /* MultiLineTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiLineTextView.swift; sourceTree = "<group>"; };
 		7FF7D25C200D0F7228279B72 /* Pods_NioTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NioTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAC46D5423A272D10079C24F /* BorderlessMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderlessMessageView.swift; sourceTree = "<group>"; };
 		CAC46D5523A272D10079C24F /* MessageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				392389CB238EBB1400B2E1DF /* ReverseList.swift */,
+				4B0A2E46245E2EF800A79443 /* MultiLineTextView.swift */,
 			);
 			path = "Shared Views";
 			sourceTree = "<group>";
@@ -726,6 +729,7 @@
 				392221B2243D0CCC004D8794 /* RoomTopicEventView.swift in Sources */,
 				3902B8A52395A77800698B87 /* LoadingView.swift in Sources */,
 				392221B6243F88FD004D8794 /* RoomNameEventView.swift in Sources */,
+				4B0A2E47245E2EF800A79443 /* MultiLineTextView.swift in Sources */,
 				3902B8A0239410EE00698B87 /* ContentSizeCategory.swift in Sources */,
 				39D166C62385C804006DD257 /* String+Emoji.swift in Sources */,
 				392221A02437285B004D8794 /* ReactionPicker.swift in Sources */,
