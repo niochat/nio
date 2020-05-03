@@ -55,7 +55,7 @@ extension EventFactory {
             } else {
                 size = CGSize()
             }
-            return .image(url: imageURL, size: size)
+            return .image(.init(url: imageURL, size: size))
         default:
             return nil
         }
