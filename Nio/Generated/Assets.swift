@@ -18,6 +18,10 @@
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum Asset {
+  internal enum Badge {
+
+    internal static let edited = ImageAsset(name: "Badge/Edited")
+  }
   internal enum Color {
 
     internal static let borderedMessageBackground = ColorAsset(name: "Color/borderedMessageBackground")

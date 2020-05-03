@@ -11,7 +11,7 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
     var connectedEdges: ConnectedEdges
     var isEdited = false
 
-    private var isMe: Bool {
+    var isMe: Bool {
         model.sender == userId
     }
 
@@ -60,18 +60,16 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
         .scaleEffect(x: isMe ? -1.0 : 1.0, y: 1.0, anchor: .center)
     }
 
+    var timestampView: some View {
+        Text(model.timestamp)
+            .font(.caption)
+            .foregroundColor(.secondary)
+            .padding(10)
+    }
+
     var bodyView: some View {
         Text(model.text)
             .foregroundColor(textColor)
-    }
-
-    var editedBodyView: some View {
-        Text(model.text + " ")
-            .foregroundColor(textColor)
-        + Text("(" + L10n.Event.edited + ")")
-            .font(.caption)
-            .foregroundColor(textColor
-                .opacity(colorSchemeContrast == .standard ? 0.5 : 1.0))
     }
 
     var senderView: some View {
@@ -87,37 +85,69 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
         }
     }
 
-    var timestampView: some View {
-        Text(model.timestamp)
-        .font(.caption)
-        .foregroundColor(textColor)
-        .opacity(colorSchemeContrast == .standard ? 0.5 : 1.0)
+    var editBadgeView: some View {
+        let foregroundColor = Color.backgroundColor(for: colorScheme)
+        return BadgeView(
+            image: Image(Asset.Badge.edited.name),
+            foregroundColor: foregroundColor,
+            backgroundColor: backgroundColor
+        )
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
+        // Vertical stack of:
+        //
+        // ```
+        // @sender
+        // ┌───────────────────────────┐
+        // │Message                    │
+        // └───────────────────────────┘
+        // ┌──────────┐
+        // │Reactions │
+        // └──────────┘
+        // ```
+        VStack(alignment: isMe ? .trailing : .leading, spacing: 3) {
             senderView
-            VStack(alignment: isMe ? .trailing : .leading, spacing: 3) {
+            // ZStack for drawing badges (e.g. "edited") over the message's edge, if appropriate:
+            //
+            // ```
+            //  ┌─────────────────────────────┐
+            //  │Message                      │
+            //  │                             │
+            //  │                             │
+            // ┌┴──┐                          │
+            // │   ├──────────────────────────┘
+            // └───┘
+            // ```
+            ZStack(alignment: isMe ? .bottomLeading : .bottomTrailing) {
+                // Vertically stack message & timestamp:
+                // ```
+                // ┌─────────────────────────────┐
+                // │Lorem ipsum dolor sit amet   │
+                // │consectetur adipiscing elit. │
+                // │                             │
+                // │                   timestamp │
+                // └─────────────────────────────┘
+                // ```
                 VStack(alignment: isMe ? .trailing : .leading, spacing: 5) {
-                    if isEdited {
-                        editedBodyView
-                    } else {
-                        bodyView
-                    }
+                    bodyView
+                        .fixedSize(horizontal: false, vertical: true)
                     if !connectedEdges.contains(.bottomEdge) {
                         // It's the last message in a group, so show a timestamp:
                         timestampView
                     }
                 }
-                .fixedSize(horizontal: false, vertical: true)
                 .padding(10)
                 .background(background)
                 .contextMenu(ContextMenu(menuItems: {
                     EventContextMenu(model: contextMenuModel)
                 }))
-
-                GroupedReactionsView(reactions: model.reactions)
+                if isEdited {
+                    self.editBadgeView
+                        .offset(x: isMe ? -5 : 5, y: 5)
+                }
             }
+            GroupedReactionsView(reactions: model.reactions)
         }
     }
 }
