@@ -11,28 +11,44 @@ import SwiftUI
 import CommonMarkAttributedString
 
 struct MarkdownText: View {
-    @State var markdownString: String
-    @State var desiredHeight: CGFloat = 0.0
+    @Binding var markdownString: String
+    @Binding var linkTextAttributes: [NSAttributedString.Key: Any]
 
-    let linkTapped: (URL) -> Void
+    @State var dynamicHeight: CGFloat = 0.0
+
+    let onLinkTapped: (URL) -> Bool
+
+    internal var attributedText: Binding<NSAttributedString> {
+        Binding<NSAttributedString>(
+            get: {
+                let markdownString = self.markdownString.trimmingCharacters(in: .whitespacesAndNewlines)
+                let attributes: [NSAttributedString.Key: Any] = [
+                    NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body),
+                    NSAttributedString.Key.foregroundColor: UIColor.label,
+                ]
+                let attributedString = try? NSAttributedString(
+                    commonmark: markdownString,
+                    attributes: attributes
+                )
+                return attributedString ?? NSAttributedString(
+                    string: markdownString,
+                    attributes: attributes
+                )
+            },
+            set: {
+                self.markdownString = $0.string
+            }
+        )
+    }
 
     var body: some View {
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.preferredFont(forTextStyle: .body),
-            .foregroundColor: UIColor.label,
-        ]
-
-        let attributedStringOrNil = try? NSAttributedString(
-            commonmark: markdownString,
-            attributes: attributes
-        )
-        let attributedString = attributedStringOrNil ?? NSAttributedString(string: markdownString)
-
         return AttributedText(
-            attributedString: attributedString,
-            height: self.$desiredHeight,
-            linkTapped: self.linkTapped
+            attributedText: self.attributedText,
+            linkTextAttributes: self.$linkTextAttributes,
+            calculatedHeight: self.$dynamicHeight,
+            isEditable: false
         )
+        .frame(minHeight: dynamicHeight, maxHeight: dynamicHeight)
     }
 }
 
@@ -49,8 +65,15 @@ struct MarkdownText_Previews: PreviewProvider {
 
         [udhr]: https://www.un.org/en/universal-declaration-human-rights/ "View full version"
         """#
-        return MarkdownText(markdownString: markdownString) { url in
+        return MarkdownText(
+            markdownString: .constant(markdownString),
+            linkTextAttributes: .constant([
+                .foregroundColor: UIColor.blue,
+                .underlineStyle: NSUnderlineStyle.single.rawValue,
+            ])
+        ) { url in
             print("Tapped URL:", url)
+            return true
         }
             .padding(10.0)
             .previewLayout(.sizeThatFits)
