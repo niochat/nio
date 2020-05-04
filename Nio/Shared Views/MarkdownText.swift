@@ -1,31 +1,38 @@
-//
-//  MarkdownText.swift
-//  Nio
-//
-//  Created by Vincent Esche on 4/28/20.
-//  Copyright © 2020 Kilian Koeltzsch. All rights reserved.
-//
-
 import SwiftUI
 
 import CommonMarkAttributedString
 
 struct MarkdownText: View {
-    @Binding var markdownString: String
-    @Binding var linkTextAttributes: [NSAttributedString.Key: Any]
+    @Binding var markdown: String
 
-    @State var dynamicHeight: CGFloat = 0.0
+    @State private var calculatedHeight: CGFloat = 0.0
 
-    let onLinkTapped: (URL) -> Bool
+    let linkTextAttributes: [NSAttributedString.Key: Any]?
+
+    let onLinkInteraction: (((URL, UITextItemInteraction) -> Bool))?
+
+    public init(
+        markdown: Binding<String>,
+        linkTextAttributes: [NSAttributedString.Key: Any]? = nil,
+        onLinkInteraction: (((URL, UITextItemInteraction) -> Bool))? = nil
+    ) {
+        self._markdown = markdown
+        self.linkTextAttributes = linkTextAttributes
+        self.onLinkInteraction = onLinkInteraction
+    }
+
+    internal static var attributes: [NSAttributedString.Key: Any] {
+        [
+            NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body),
+            NSAttributedString.Key.foregroundColor: UIColor.label,
+        ]
+    }
 
     internal var attributedText: Binding<NSAttributedString> {
         Binding<NSAttributedString>(
             get: {
-                let markdownString = self.markdownString.trimmingCharacters(in: .whitespacesAndNewlines)
-                let attributes: [NSAttributedString.Key: Any] = [
-                    NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body),
-                    NSAttributedString.Key.foregroundColor: UIColor.label,
-                ]
+                let markdownString = self.markdown.trimmingCharacters(in: .whitespacesAndNewlines)
+                let attributes = Self.attributes
                 let attributedString = try? NSAttributedString(
                     commonmark: markdownString,
                     attributes: attributes
@@ -36,19 +43,32 @@ struct MarkdownText: View {
                 )
             },
             set: {
-                self.markdownString = $0.string
+                self.markdown = $0.string
             }
         )
     }
 
+    private var textContainerInset: UIEdgeInsets {
+        .init(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+    }
+
+    private var lineFragmentPadding: CGFloat {
+        0.0
+    }
+
     var body: some View {
-        return AttributedText(
+        AttributedText(
             attributedText: self.attributedText,
-            linkTextAttributes: self.$linkTextAttributes,
-            calculatedHeight: self.$dynamicHeight,
-            isEditable: false
+            isEditing: .constant(false),
+            calculatedHeight: $calculatedHeight,
+            textContainerInset: self.textContainerInset,
+            lineFragmentPadding: self.lineFragmentPadding,
+            linkTextAttributes: self.linkTextAttributes,
+            isEditable: false,
+            isScrollingEnabled: false,
+            onLinkInteraction: self.onLinkInteraction
         )
-        .frame(minHeight: dynamicHeight, maxHeight: dynamicHeight)
+        .frame(minHeight: calculatedHeight, maxHeight: calculatedHeight)
     }
 }
 
@@ -66,12 +86,12 @@ struct MarkdownText_Previews: PreviewProvider {
         [udhr]: https://www.un.org/en/universal-declaration-human-rights/ "View full version"
         """#
         return MarkdownText(
-            markdownString: .constant(markdownString),
-            linkTextAttributes: .constant([
+            markdown: .constant(markdownString),
+            linkTextAttributes: [
                 .foregroundColor: UIColor.blue,
                 .underlineStyle: NSUnderlineStyle.single.rawValue,
-            ])
-        ) { url in
+            ]
+        ) { url, _ in
             print("Tapped URL:", url)
             return true
         }
