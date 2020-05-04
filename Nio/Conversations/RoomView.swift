@@ -66,6 +66,7 @@ struct RoomView: View {
 
     @State private var message = ""
     @State private var highlightMessage: String?
+    @State private var isEditingMessage: Bool = false
 
     var body: some View {
         VStack {
@@ -87,11 +88,14 @@ struct RoomView: View {
             if !(room.room.typingUsers?.filter { $0 != userId }.isEmpty ?? false) {
                 TypingIndicatorView()
             }
-            MessageComposerView(message: $message,
-                                showAttachmentPicker: $showAttachmentPicker,
-                                onCommit: send,
-                                highlightMessage: highlightMessage,
-                                onCancel: cancelEdit)
+            MessageComposerView(
+                message: $message,
+                showAttachmentPicker: $showAttachmentPicker,
+                isEditing: $isEditingMessage,
+                highlightMessage: highlightMessage,
+                onCancel: cancelEdit,
+                onCommit: send
+            )
                 .padding(.horizontal)
                 .padding(.bottom, 10)
         }

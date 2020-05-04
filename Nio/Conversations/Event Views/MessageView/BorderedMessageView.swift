@@ -84,12 +84,12 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
 
     var markdownView: some View {
         MarkdownText(
-            markdownString: .constant(model.text),
-            linkTextAttributes: .constant([
+            markdown: .constant(model.text),
+            linkTextAttributes: [
                 .foregroundColor: linkColor,
                 .underlineStyle: NSUnderlineStyle.single.rawValue,
-            ])
-        ) { url in
+            ]
+        ) { url, _ in
             print("Tapped URL:", url)
             return true
         }
