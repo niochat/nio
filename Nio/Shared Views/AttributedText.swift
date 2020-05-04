@@ -8,95 +8,136 @@
 
 import SwiftUI
 
-// Adapted from https://stackoverflow.com/a/60441078/227536
-
 struct AttributedText: UIViewRepresentable {
-    class HeightUITextView: UITextView {
-        @Binding var height: CGFloat
+    typealias UIViewType = UITextView
 
-        init(height: Binding<CGFloat>) {
-            _height = height
-            super.init(frame: .zero, textContainer: nil)
-        }
+    @Binding var attributedText: NSAttributedString
+    @Binding var linkTextAttributes: [NSAttributedString.Key: Any]
 
-        required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
+    @Binding var calculatedHeight: CGFloat
 
-        override func layoutSubviews() {
-            super.layoutSubviews()
-            let maxSize = CGSize(width: frame.size.width,
-                                 height: CGFloat.greatestFiniteMagnitude)
-            let newSize = sizeThatFits(maxSize)
-            if height != newSize.height {
-                height = newSize.height
-            }
-        }
-    }
+    @State var isEditable: Bool
 
-    class Coordinator: NSObject, UITextViewDelegate {
-        var parent: AttributedText
+    var onDone: (() -> Void)?
+    var onLinkTapped: ((URL) -> Bool)?
 
-        init(_ view: AttributedText) {
-            parent = view
-        }
+    func makeUIView(context: UIViewRepresentableContext<AttributedText>) -> UITextView {
+        let textView = UITextView()
 
-        func textView(_ textView: UITextView,
-                      shouldInteractWith URL: URL,
-                      in characterRange: NSRange,
-                      interaction: UITextItemInteraction
-        ) -> Bool {
-            parent.linkTapped(URL)
-            return false
-        }
-    }
+        textView.attributedText = attributedText
+        textView.linkTextAttributes = linkTextAttributes
 
-    let attributedString: NSAttributedString
+        textView.textContainer.lineBreakMode = .byCharWrapping
+        textView.textContainer.lineFragmentPadding = 0.0
 
-    @Binding var height: CGFloat
-
-    let linkTapped: (URL) -> Void
-
-    public func makeUIView(context: Context) -> UITextView {
-        let textView = HeightUITextView(height: $height)
-
-        textView.attributedText = attributedString
+        textView.font = UIFont.preferredFont(forTextStyle: .body)
         textView.backgroundColor = .clear
-        textView.isEditable = false
-        textView.isUserInteractionEnabled = true
-        textView.delegate = context.coordinator
-        textView.isScrollEnabled = false
-        textView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        textView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        textView.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        textView.dataDetectorTypes = .link
-        textView.textContainerInset = .zero
-        textView.textContainer.lineFragmentPadding = 0
 
-        self.updateHeightFor(textView: textView)
+        textView.isEditable = self.isEditable
+        textView.isSelectable = true
+        textView.isScrollEnabled = false
+
+        textView.dataDetectorTypes = .link
+        textView.delegate = context.coordinator
+
+        if onDone != nil {
+            textView.returnKeyType = .done
+        }
+
+        textView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
 
         return textView
     }
 
-    public func updateUIView(_ textView: UITextView, context: Context) {
-        if textView.attributedText != attributedString {
-            textView.attributedText = attributedString
+    func updateUIView(_ textView: UITextView, context: UIViewRepresentableContext<AttributedText>) {
+        if textView.attributedText != self.attributedText {
+            textView.attributedText = self.attributedText
         }
 
-        self.updateHeightFor(textView: textView)
+//        if textView.window != nil, !textView.isFirstResponder, self.isEditable {
+//            textView.becomeFirstResponder()
+//        }
+
+        textView.isEditable = self.isEditable
+
+        AttributedText.recalculateHeight(textView: textView, result: $calculatedHeight)
     }
 
-    private func updateHeightFor(textView: UITextView) {
-        let fixedWidth = textView.frame.size.width
-        let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+    fileprivate static func recalculateHeight(textView: UITextView, result: Binding<CGFloat>) {
+//        let maxWidth = min(textView.contentSize.width, textView.bounds.size.width)
+        let maxWidth = textView.frame.size.width
+        let boundarySize = CGSize(
+            width: maxWidth,
+            height: CGFloat.greatestFiniteMagnitude
+        )
+        let newSize = textView.sizeThatFits(boundarySize)
+
+        guard result.wrappedValue != newSize.height else {
+            return
+        }
 
         DispatchQueue.main.async {
-            self.height = newSize.height
+            // must be called asynchronously:
+            result.wrappedValue = newSize.height
         }
     }
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+        return Coordinator(
+            attributedText: $attributedText,
+            height: $calculatedHeight,
+            onDone: onDone,
+            onLinkTapped: onLinkTapped
+        )
+    }
+
+    final class Coordinator: NSObject, UITextViewDelegate {
+        var attributedText: Binding<NSAttributedString>
+        var calculatedHeight: Binding<CGFloat>
+
+        var onDone: (() -> Void)?
+        var onLinkTapped: ((URL) -> Bool)?
+
+        init(
+            attributedText: Binding<NSAttributedString>,
+            height: Binding<CGFloat>,
+            onDone: (() -> Void)? = nil,
+            onLinkTapped: ((URL) -> Bool)? = nil
+        ) {
+            self.attributedText = attributedText
+            self.calculatedHeight = height
+            self.onDone = onDone
+            self.onLinkTapped = onLinkTapped
+        }
+
+        func textViewDidChange(_ textView: UITextView) {
+            attributedText.wrappedValue = textView.attributedText
+            AttributedText.recalculateHeight(textView: textView, result: calculatedHeight)
+        }
+
+        func textView(
+            _ textView: UITextView,
+            shouldChangeTextIn range: NSRange,
+            replacementText text: String
+        ) -> Bool {
+            guard let onDone = self.onDone, text == "\n" else {
+                return true
+            }
+
+            textView.resignFirstResponder()
+            onDone()
+
+            return false
+        }
+
+        func textView(
+            _ textView: UITextView,
+            shouldInteractWith url: URL,
+            in characterRange: NSRange,
+            interaction: UITextItemInteraction
+        ) -> Bool {
+            return onLinkTapped?(url) ?? false
+        }
     }
 }
 
@@ -105,11 +146,19 @@ struct AttributedText_Previews: PreviewProvider {
         let attributedString = NSAttributedString(
             string: "Hello world!",
             attributes: [
-                NSAttributedString.Key.font: UIFont.labelFontSize,
+                NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body),
                 NSAttributedString.Key.foregroundColor: UIColor.red,
             ]
         )
-        return AttributedText(attributedString: attributedString, height: .constant(0)) { _ in }
+        return AttributedText(
+            attributedText: .constant(attributedString),
+            linkTextAttributes: .constant([
+                .foregroundColor: UIColor.blue,
+                .underlineStyle: NSUnderlineStyle.single.rawValue,
+            ]),
+            calculatedHeight: .constant(0),
+            isEditable: false
+        )
             .previewLayout(.sizeThatFits)
     }
 }

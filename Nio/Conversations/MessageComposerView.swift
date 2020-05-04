@@ -19,6 +19,23 @@ struct MessageComposerView: View {
     @Binding var message: String
     @Binding var showAttachmentPicker: Bool
 
+    internal var internalAttributedMessage: Binding<NSAttributedString> {
+        Binding<NSAttributedString>(
+            get: {
+                NSAttributedString(
+                    string: self.message,
+                    attributes: [
+                        NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body),
+                        NSAttributedString.Key.foregroundColor: UIColor.label,
+                    ]
+                )
+            },
+            set: {
+                self.message = $0.string
+            }
+        )
+    }
+
     var onCommit: () -> Void
 
     var highlightMessage: String?
@@ -98,7 +115,7 @@ struct MessageComposerView: View {
                             .padding(.leading, 20)
                             .padding(.top, -2)
                     }
-                    MultilineTextField("", text: $message, onCommit: nil)
+                    MultilineTextField("", attributedText: internalAttributedMessage, onCommit: nil)
                         .padding(.horizontal)
                         .background(background)
                     }

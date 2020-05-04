@@ -84,9 +84,14 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
 
     var markdownView: some View {
         MarkdownText(
-            markdownString: model.text
+            markdownString: .constant(model.text),
+            linkTextAttributes: .constant([
+                .foregroundColor: linkColor,
+                .underlineStyle: NSUnderlineStyle.single.rawValue,
+            ])
         ) { url in
             print("Tapped URL:", url)
+            return true
         }
     }
 
@@ -118,37 +123,36 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
         // ```
         // @sender
         // ┌───────────────────────────┐
-        // │ Message                   │
+        // │Message                    │
         // └───────────────────────────┘
-        // ┌───────────┐
-        // │ Reactions │
-        // └───────────┘
-        //                    timestamp
+        // ┌──────────┐
+        // │Reactions │
+        // └──────────┘
+        // timestamp
         // ```
         VStack(alignment: isMe ? .trailing : .leading, spacing: 3) {
             senderView
-            // ZStack for drawing badges (e.g. "edited") over the message's edge, if appropriate:
-            //
-            // ```
-            //   ┌──────────────────────────────┐
-            //   │ Lorem ipsum dolor sit amet   │
-            //   │ consectetur adipiscing elit. │
-            // ┌─┴─┐                            │
-            // │   ├────────────────────────────┘
-            // └───┘
-            // ```
-            ZStack(alignment: isMe ? .bottomLeading : .bottomTrailing) {
-                markdownView
-                    .padding(5)
-                    .background(background)
-                    .contextMenu(ContextMenu(menuItems: {
-                        EventContextMenu(model: contextMenuModel)
-                    }))
-                if isEdited {
-                    self.editBadgeView
-                        .offset(x: isMe ? -5 : 5, y: 5)
+                // ZStack for drawing badges (e.g. "edited") over the message's edge, if appropriate:
+                //
+                // ```
+                //  ┌───────────────────────────────┐
+                //  │  Lorem ipsum dolor sit amet   │
+                //  │  consectetur adipiscing elit. │
+                // ┌┴┐──────────────────────────────┘
+                // └─┘
+                // ```
+                ZStack(alignment: isMe ? .bottomLeading : .bottomTrailing) {
+                    markdownView
+                        .padding(10)
+                        .background(background)
+                        .contextMenu(ContextMenu(menuItems: {
+                            EventContextMenu(model: contextMenuModel)
+                        }))
+                    if isEdited {
+                        self.editBadgeView
+                            .offset(x: isMe ? -5 : 5, y: 5)
+                    }
                 }
-            }
             GroupedReactionsView(reactions: model.reactions)
             if !connectedEdges.contains(.bottomEdge) {
                 // It's the last message in a group, so show a timestamp:
