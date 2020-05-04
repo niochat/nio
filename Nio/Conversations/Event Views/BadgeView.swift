@@ -17,6 +17,7 @@ struct BadgeView: View {
             .padding(lineWidth)
 
         return image
+            .resizable()
             .aspectRatio(contentMode: .fit)
             .foregroundColor(foregroundColor)
             .padding(4.0)
