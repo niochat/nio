@@ -1,32 +1,6 @@
 import SwiftUI
 import SwiftMatrixSDK
 
-struct Reaction: Identifiable {
-    let sender: String
-    let timestamp: Date
-    let reaction: String
-
-    var id: Int {
-        timestamp.hashValue
-            ^ sender.hashValue
-            ^ reaction.hashValue
-    }
-}
-
-private struct ReactionGroup: Identifiable {
-    let reaction: String
-    let count: Int
-    let reactions: [Reaction]
-
-    var id: String {
-        reaction
-    }
-
-    func containsReaction(from sender: String) -> Bool {
-        reactions.contains { $0.sender == sender }
-    }
-}
-
 struct GroupedReactionsView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @Environment(\.userId) var userId
@@ -108,46 +82,27 @@ struct GroupedReactionsView: View {
     @State private var showReactionDetails = false
 
     var body: some View {
-        Group {
-            if model.reactions.isEmpty {
-                EmptyView()
-            } else {
-                HStack(spacing: 4) {
-                    ForEach(model.groupedReactions) { group in
-                        HStack(spacing: 1) {
-                            Text(group.reaction)
-                                .font(.footnote)
-                            Text(String(group.count))
-                                .font(.footnote)
-                        }
-                        .padding(.vertical, 4)
-                        .padding(.horizontal, 8)
-                        .background(
-                            RoundedRectangle(cornerRadius: 30)
-                                .foregroundColor(self.backgroundColor(for: group))
-                                .opacity(group.containsReaction(from: self.userId) ? 0.3 : 0.7)
-                                .overlay(self.backgroundOverlay(for: group))
-                        )
+        HStack(spacing: 5) {
+            ForEach(self.model.groupedReactions) { group in
+                ReactionGroupView(
+                    text: group.reaction,
+                    count: group.count,
+                    backgroundColor: self.backgroundColor(for: group)
+                )
+            }
+        }
+        .onLongPressGesture {
+            self.showReactionDetails.toggle()
+        }
+        .sheet(isPresented: self.$showReactionDetails) {
+            NavigationView {
+                List {
+                    ForEach(self.model.reactions) { reaction in
+                        ReactionsListItemView(reaction: reaction)
+                        .background(Color(Asset.Colors.Background.secondary))
                     }
                 }
-                .onLongPressGesture {
-                    self.showReactionDetails.toggle()
-                }
-                .sheet(isPresented: $showReactionDetails) {
-                    NavigationView {
-                        List(self.model.reactions) { reaction in
-                            HStack {
-                                Text(reaction.reaction)
-                                Text(reaction.sender)
-                                Spacer()
-                                Text(Formatter.string(for: reaction.timestamp, dateStyle: .short, timeStyle: .short))
-                                    .foregroundColor(.gray)
-                                    .font(.footnote)
-                            }
-                        }
-                        .navigationBarTitle("Reactions", displayMode: .inline)
-                    }
-                }
+                    .navigationBarTitle("Reactions", displayMode: .inline)
             }
         }
     }
@@ -156,28 +111,19 @@ struct GroupedReactionsView: View {
 struct GroupedReactionsView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            GroupedReactionsView(reactions: [
-                .init(sender: "John", timestamp: Date(), reaction: "❤️"),
-                .init(sender: "Jane", timestamp: Date(), reaction: "❤️"),
-                .init(sender: "Jane", timestamp: Date(), reaction: "💜"),
-                .init(sender: "John", timestamp: Date(), reaction: "🥳"),
-                .init(sender: "John", timestamp: Date(), reaction: "🚀"),
-                .init(sender: "John", timestamp: Date(), reaction: "🥳"),
-                .init(sender: "John", timestamp: Date(), reaction: "🗑"),
-            ])
-            .padding()
-            GroupedReactionsView(reactions: [
-                .init(sender: "John", timestamp: Date(), reaction: "❤️"),
-                .init(sender: "Jane", timestamp: Date(), reaction: "❤️"),
-                .init(sender: "Jane", timestamp: Date(), reaction: "💜"),
-                .init(sender: "John", timestamp: Date(), reaction: "🥳"),
-                .init(sender: "John", timestamp: Date(), reaction: "🚀"),
-                .init(sender: "John", timestamp: Date(), reaction: "🥳"),
-                .init(sender: "John", timestamp: Date(), reaction: "🗑"),
-            ])
-            .padding()
-            .background(Color.backgroundColor(for: .dark))
-            .environment(\.colorScheme, .dark)
+            enumeratingColorSchemes {
+                GroupedReactionsView(reactions: [
+                    .init(id: "0", sender: "John", timestamp: Date(), reaction: "❤️"),
+                    .init(id: "1", sender: "Jane", timestamp: Date(), reaction: "❤️"),
+                    .init(id: "2", sender: "Jane", timestamp: Date(), reaction: "💜"),
+                    .init(id: "3", sender: "John", timestamp: Date(), reaction: "🥳"),
+                    .init(id: "4", sender: "John", timestamp: Date(), reaction: "🚀"),
+                    .init(id: "5", sender: "John", timestamp: Date(), reaction: "🥳"),
+                    .init(id: "6", sender: "John", timestamp: Date(), reaction: "🗑"),
+                ])
+                .padding()
+                .background(Color(Asset.Colors.Background.primary))
+            }
         }
         .environment(\.userId, "Jane")
         .accentColor(.purple)

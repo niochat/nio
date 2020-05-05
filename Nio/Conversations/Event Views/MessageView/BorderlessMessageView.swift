@@ -145,9 +145,9 @@ struct BorderlessMessageView_Previews: PreviewProvider {
     }
 
     // swiftlint:disable identifier_name
-    static var 💜 = Reaction(sender: "Jane", timestamp: Date(), reaction: "💜")
-    static var 🚀 = Reaction(sender: "Jane", timestamp: Date(), reaction: "🚀")
-    static var 👍 = Reaction(sender: "John", timestamp: Date(), reaction: "👍")
+    static var 💜 = Reaction(id: "0", sender: "Jane", timestamp: Date(), reaction: "💜")
+    static var 🚀 = Reaction(id: "1", sender: "Jane", timestamp: Date(), reaction: "🚀")
+    static var 👍 = Reaction(id: "2", sender: "John", timestamp: Date(), reaction: "👍")
     // swiftlint:enable identifier_name
 
     static func lone(sender: String,
