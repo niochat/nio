@@ -115,6 +115,8 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
             foregroundColor: foregroundColor,
             backgroundColor: backgroundColor
         )
+            .frame(width: 20.0, height: 20.0)
+            .offset(x: isMe ? -6 : 6, y: 6)
     }
 
     var body: some View {
@@ -132,27 +134,27 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
         // ```
         VStack(alignment: isMe ? .trailing : .leading, spacing: 3) {
             senderView
-                // ZStack for drawing badges (e.g. "edited") over the message's edge, if appropriate:
-                //
-                // ```
-                //  ┌───────────────────────────────┐
-                //  │  Lorem ipsum dolor sit amet   │
-                //  │  consectetur adipiscing elit. │
-                // ┌┴┐──────────────────────────────┘
-                // └─┘
-                // ```
-                ZStack(alignment: isMe ? .bottomLeading : .bottomTrailing) {
-                    markdownView
-                        .padding(10)
-                        .background(background)
-                        .contextMenu(ContextMenu(menuItems: {
-                            EventContextMenu(model: contextMenuModel)
-                        }))
-                    if isEdited {
-                        self.editBadgeView
-                            .offset(x: isMe ? -5 : 5, y: 5)
-                    }
+            // ZStack for drawing badges (e.g. "edited")
+            // over the message's edge, if appropriate:
+            //
+            // ```
+            //  ┌───────────────────────────────┐
+            //  │  Lorem ipsum dolor sit amet   │
+            //  │  consectetur adipiscing elit. │
+            // ┌┴┐──────────────────────────────┘
+            // └─┘
+            // ```
+            ZStack(alignment: isMe ? .bottomLeading : .bottomTrailing) {
+                markdownView
+                    .padding(10)
+                    .background(background)
+                    .contextMenu(ContextMenu(menuItems: {
+                        EventContextMenu(model: contextMenuModel)
+                    }))
+                if isEdited {
+                    self.editBadgeView
                 }
+            }
             GroupedReactionsView(reactions: model.reactions)
             if !connectedEdges.contains(.bottomEdge) {
                 // It's the last message in a group, so show a timestamp:
