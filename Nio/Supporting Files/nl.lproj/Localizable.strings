@@ -23,6 +23,8 @@
 // Room $NAME, $LAST_ACTIVITY_TIMESTAMP $LAST_MESSAGE
 "recent-rooms.accessibility-label.room" = "Kamer %@, %@ %@";
 "recent-rooms.accessibility-label.new-message-badge" = "%u nieuwe berichten";
+"recent-rooms.remove-chat.alert-title" = "Gesprek Verwijderen";
+"recent-rooms.remove-chat.alert-body" = "Weet u zeker dat dit gesprek wilt verewijderen? Deze actie can niet ongedaan gemaakt worden.";
 
 "room.attachment-placeholder" = "Nog niet geïmplementeerd";
 "room.remove.title" = "Verwijderen?";

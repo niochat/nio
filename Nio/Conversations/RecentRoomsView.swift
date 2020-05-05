@@ -67,8 +67,8 @@ struct RecentRoomsView: View {
                 }
             .alert(isPresented: $showConfirm) {
                 Alert(
-                    title: Text("Delete Room"),
-                    message: Text("Are you sure you want to delete this room?"),
+                    title: Text(L10n.RecentRooms.RemoveChat.alertTitle),
+                    message: Text(L10n.RecentRooms.RemoveChat.alertBody),
                     primaryButton: .destructive(
                         Text(L10n.Room.Remove.action),
                         action: {

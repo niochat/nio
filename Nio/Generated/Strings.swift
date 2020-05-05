@@ -192,6 +192,12 @@ internal enum L10n {
       /// Settings
       internal static let settings = L10n.tr("Localizable", "recent-rooms.accessibility-label.settings")
     }
+    internal enum RemoveChat {
+      /// Are you sure you want to delete this room? This action cannot be undone.
+      internal static let alertBody = L10n.tr("Localizable", "recent-rooms.remove-chat.alert-body")
+      /// Delete Chat
+      internal static let alertTitle = L10n.tr("Localizable", "recent-rooms.remove-chat.alert-title")
+    }
   }
 
   internal enum Room {
