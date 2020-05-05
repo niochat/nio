@@ -165,6 +165,11 @@ internal enum L10n {
     }
   }
 
+  internal enum NewConversation {
+    /// New Chat
+    internal static let title = L10n.tr("Localizable", "new-conversation.title")
+  }
+
   internal enum ReactionPicker {
     /// Tap on an emoji to send that reaction.
     internal static let title = L10n.tr("Localizable", "reaction-picker.title")

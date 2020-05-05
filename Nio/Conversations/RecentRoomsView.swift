@@ -53,7 +53,7 @@ struct RecentRoomsView: View {
 
     var newConversationButton: some View {
         Button(action: {
-            self.selectedNavigationItem = .newMessage
+            self.selectedNavigationItem = .newConversation
         }, label: {
             Image(Asset.Icon.addRoom.name)
                 .resizable()
@@ -166,7 +166,7 @@ struct RoomsListSection: View {
 
 private enum SelectedNavigationItem: Int, Identifiable {
     case settings
-    case newMessage
+    case newConversation
 
     var id: Int {
         return self.rawValue
@@ -182,9 +182,9 @@ private struct NavigationSheet: View {
             return AnyView(
                 SettingsContainerView()
             )
-        case .newMessage:
+        case .newConversation:
             return AnyView(
-                Text(L10n.RecentRooms.newMessagePlaceholder)
+                NewConversationContainerView()
             )
         }
     }
