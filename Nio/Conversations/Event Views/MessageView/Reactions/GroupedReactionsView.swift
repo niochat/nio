@@ -99,7 +99,6 @@ struct GroupedReactionsView: View {
                 List {
                     ForEach(self.model.reactions) { reaction in
                         ReactionsListItemView(reaction: reaction)
-                        .background(Color(Asset.Colors.Background.secondary))
                     }
                 }
                     .navigationBarTitle("Reactions", displayMode: .inline)
@@ -122,7 +121,6 @@ struct GroupedReactionsView_Previews: PreviewProvider {
                     .init(id: "6", sender: "John", timestamp: Date(), reaction: "🗑"),
                 ])
                 .padding()
-                .background(Color(Asset.Colors.Background.primary))
             }
         }
         .environment(\.userId, "Jane")
