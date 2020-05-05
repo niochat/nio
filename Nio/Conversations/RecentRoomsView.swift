@@ -24,7 +24,12 @@ struct RecentRoomsContainerView: View {
 }
 
 struct RecentRoomsView: View {
+    @EnvironmentObject var store: AccountStore
+
     @Binding fileprivate var selectedNavigationItem: SelectedNavigationItem?
+
+    @State private var showConfirm = false
+    @State var deleteId: Int?
 
     var rooms: [NIORoom]
 
@@ -52,14 +57,41 @@ struct RecentRoomsView: View {
 
     var body: some View {
         NavigationView {
-            List(rooms) { room in
-                NavigationLink(destination: RoomContainerView(room: room)) {
-                    RoomListItemContainerView(room: room)
+            List {
+                ForEach(rooms) { room in
+                    NavigationLink(destination: RoomContainerView(room: room)) {
+                        RoomListItemContainerView(room: room)
+                    }
                 }
+                .onDelete(perform: setDeletIndex)
+                }
+            .alert(isPresented: $showConfirm) {
+                Alert(
+                    title: Text("Delete Room"),
+                    message: Text("Are you sure you want to delete this room?"),
+                    primaryButton: .destructive(
+                        Text(L10n.Room.Remove.action),
+                        action: {
+                            self.delete()
+                    }),
+                secondaryButton: .cancel())
             }
             .navigationBarTitle("Nio", displayMode: .inline)
             .navigationBarItems(leading: settingsButton, trailing: newConversationButton)
         }
+    }
+
+    func setDeletIndex(at offsets: IndexSet) {
+        self.showConfirm = true
+        for offset in offsets {
+            self.deleteId = offset
+        }
+    }
+
+    func delete() {
+        self.store.session?.leaveRoom(self.rooms[self.deleteId!].room.roomId, completion: { _ in
+                return
+        })
     }
 }
 
