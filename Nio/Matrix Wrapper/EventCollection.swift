@@ -30,15 +30,20 @@ struct EventCollection {
         relatedEvents(of: event)
             .filter { $0.type == kMXEventTypeStringReaction }
             .compactMap { event in
-                guard let sender = event.sender,
+                guard
+                    let id = event.eventId,
+                    let sender = event.sender,
                     let relatesToContent = event.content["m.relates_to"] as? [String: Any],
                     let reaction = relatesToContent["key"] as? String
                 else {
                     return nil
                 }
-                return Reaction(sender: sender,
-                                timestamp: event.timestamp,
-                                reaction: reaction)
+                return Reaction(
+                    id: id,
+                    sender: sender,
+                    timestamp: event.timestamp,
+                    reaction: reaction
+                )
             }
 
     }
@@ -74,7 +79,6 @@ extension EventCollection {
         let isSucceedingRedacted = succeedingMessageEvent?.isRedactedEvent() ?? false
         let isPrecedingEdited = precedingMessageEvent?.isEdit() ?? false
         let isSucceedingEdited = succeedingMessageEvent?.isEdit() ?? false
-
 
         // If a message is sent within this time interval, it is considered to be part of the current group.
         let timeIntervalBeforeNewGroup: TimeInterval = 5*60
