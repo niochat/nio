@@ -63,8 +63,8 @@ struct RecentRoomsView: View {
                         RoomListItemContainerView(room: room)
                     }
                 }
-                .onDelete(perform: setDeletIndex)
-                }
+                .onDelete(perform: setDeleteIndex)
+            }
             .alert(isPresented: $showConfirm) {
                 Alert(
                     title: Text(L10n.RecentRooms.RemoveChat.alertTitle),
@@ -81,7 +81,7 @@ struct RecentRoomsView: View {
         }
     }
 
-    func setDeletIndex(at offsets: IndexSet) {
+    func setDeleteIndex(at offsets: IndexSet) {
         self.showConfirm = true
         for offset in offsets {
             self.deleteId = offset
@@ -89,9 +89,9 @@ struct RecentRoomsView: View {
     }
 
     func delete() {
-        self.store.session?.leaveRoom(self.rooms[self.deleteId!].room.roomId, completion: { _ in
-                return
-        })
+        self.store.session?.leaveRoom(self.rooms[self.deleteId!].room.roomId) { _ in
+            return
+        }
     }
 }
 
