@@ -23,6 +23,8 @@
 // Room $NAME, $LAST_ACTIVITY_TIMESTAMP $LAST_MESSAGE
 "recent-rooms.accessibility-label.room" = "Raum %@, %@ %@";
 "recent-rooms.accessibility-label.new-message-badge" = "%u neue Nachrichten";
+"recent-rooms.remove-chat.alert-title" = "Delete Chat";
+"recent-rooms.remove-chat.alert-body" = "Are you sure you want to delete this room? This action cannot be undone.";
 
 "room.attachment-placeholder" = "Noch nicht implementiert";
 "room.remove.title" = "Entfernen?";
