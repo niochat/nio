@@ -100,21 +100,17 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
     var bodyView: some View {
         VStack(alignment: isMe ? .trailing : .leading, spacing: 0) {
             if isMe {
-                AnyView {
-                    HStack {
-                        if !self.connectedEdges.contains(.bottomEdge) {
-                            self.timestampView
-                        }
-                        self.conditionalBadgedContentView
-                    }
+                HStack {
+                    if !self.connectedEdges.contains(.bottomEdge) {
+                        self.timestampView
+                   }
+                    self.conditionalBadgedContentView
                 }
             } else {
-                AnyView {
-                    HStack {
-                        self.conditionalBadgedContentView
-                        if !self.connectedEdges.contains(.bottomEdge) {
-                            self.timestampView
-                        }
+                HStack {
+                    self.conditionalBadgedContentView
+                    if !self.connectedEdges.contains(.bottomEdge) {
+                        self.timestampView
                     }
                 }
             }
