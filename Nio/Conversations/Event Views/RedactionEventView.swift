@@ -9,19 +9,20 @@ struct RedactionEventView: View {
 
     var model: ViewModel
 
+    var redactionText: String {
+        if model.sender == model.redactor {
+            return "🗑 \(L10n.Event.Redaction.redactSelf(model.redactor))"
+        }
+        return "🗑 \(L10n.Event.Redaction.redactOther(model.redactor, model.sender))"
+    }
+
     var body: some View {
         HStack {
             Spacer()
             VStack {
-                if model.sender == model.redactor {
-                    Text(L10n.Event.Redaction.redactSelf(model.redactor))
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                } else {
-                    Text(L10n.Event.Redaction.redactOther(model.redactor, model.sender))
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                }
+                Text(redactionText)
+                    .font(.caption)
+                    .foregroundColor(.gray)
                 if model.reason != nil {
                     Text(L10n.Event.reason(model.reason!))
                         .foregroundColor(.gray)

@@ -66,8 +66,8 @@
 "event.room-power-level.change-self" = "%@ hat deren Rechte von %@ auf %@ geändert";
 "event.room-power-level.change-other" = "%@ hat die Rechte von %@ von %@ auf %@ geändert";
 
-"event.redaction.redact-self" = "🗑 Nachricht entfernt von %@";
-"event.redaction.redact-other" = "🗑 %@ hat die Nachricht von %@ entfernt";
+"event.redaction.redact-self" = "Nachricht entfernt von %@";
+"event.redaction.redact-other" = "%@ hat die Nachricht von %@ entfernt";
 
 "event.edited" = "bearbeitet";
 

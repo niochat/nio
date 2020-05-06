@@ -66,8 +66,8 @@
 "event.room-power-level.change-self" = "%@将其权力等级由%@改为了%@";
 "event.room-power-level.change-other" = "%@将%@的权力等级由%@改为了%@";
 
-"event.redaction.redact-self" = "🗑 被%@删除的消息";
-"event.redaction.redact-other" = "🗑 %@删除了%@的消息";
+"event.redaction.redact-self" = "被%@删除的消息";
+"event.redaction.redact-other" = "%@删除了%@的消息";
 
 "event.edited" = "已编辑";
 

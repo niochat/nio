@@ -63,11 +63,11 @@
 "room-power-level.moderator" = "Moderator";
 "room-power-level.admin" = "Admin";
 "room-power-level.custom" = "Aangepast (%d)";
-
 "event.room-power-level.change-self" = "%@ heeft zijn/haar rechten veranderd van %@ naar %@";
 "event.room-power-level.change-other" = "%@ heeft de rechten van %@ veranderd van %@ naar %@";
-"event.redaction.redact-self" = "🗑 Bericht verwijderd door %@";
-"event.redaction.redact-other" = "🗑 %@ verwijderde %@'s berichten";
+
+"event.redaction.redact-self" = "Bericht verwijderd door %@";
+"event.redaction.redact-other" = "%@ verwijderde %@'s berichten";
 
 "event.edited" = "bewerkt";
 

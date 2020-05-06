@@ -49,11 +49,11 @@ internal enum L10n {
       internal static let reply = L10n.tr("Localizable", "event.context-menu.reply")
     }
     internal enum Redaction {
-      /// 🗑 %@ removed %@'s message
+      /// %@ removed %@'s message
       internal static func redactOther(_ p1: String, _ p2: String) -> String {
         return L10n.tr("Localizable", "event.redaction.redact-other", p1, p2)
       }
-      /// 🗑 Message removed by %@
+      /// Message removed by %@
       internal static func redactSelf(_ p1: String) -> String {
         return L10n.tr("Localizable", "event.redaction.redact-self", p1)
       }
@@ -129,13 +129,13 @@ internal enum L10n {
   }
 
   internal enum Loading {
-    /// 🧑‍🎤 Reticulating splines
+    /// Reticulating splines
     internal static let _1 = L10n.tr("Localizable", "loading.1")
-    /// 🧑‍🏭 Discomfrobulating messages
+    /// Discomfrobulating messages
     internal static let _2 = L10n.tr("Localizable", "loading.2")
-    /// 🧑‍🔧 Logging in
+    /// Logging in
     internal static let _3 = L10n.tr("Localizable", "loading.3")
-    /// 🧑‍💻 Restoring session
+    /// Restoring session
     internal static let _4 = L10n.tr("Localizable", "loading.4")
     /// Cancel
     internal static let cancel = L10n.tr("Localizable", "loading.cancel")
@@ -150,7 +150,7 @@ internal enum L10n {
     internal static let registerNotYetImplemented = L10n.tr("Localizable", "login.register-not-yet-implemented")
     /// Sign in
     internal static let signIn = L10n.tr("Localizable", "login.sign-in")
-    /// 👋 Welcome to 
+    /// Welcome to 
     internal static let welcomeHeader = L10n.tr("Localizable", "login.welcome-header")
     /// Sign in to your account to get started.
     internal static let welcomeMessage = L10n.tr("Localizable", "login.welcome-message")

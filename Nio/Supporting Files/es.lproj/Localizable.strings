@@ -66,8 +66,8 @@
 "event.room-power-level.change-self" = "%@ cambió su nivel de %@ a %@";
 "event.room-power-level.change-other" = "%@ cambió el nivel de %@ de %@ a %@";
 
-"event.redaction.redact-self" = "🗑 Mensaje eliminado por %@";
-"event.redaction.redact-other" = "🗑 %@ eliminó el mensaje de %@";
+"event.redaction.redact-self" = "Mensaje eliminado por %@";
+"event.redaction.redact-other" = "%@ eliminó el mensaje de %@";
 
 "event.edited" = "editado";
 
