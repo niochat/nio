@@ -10,7 +10,7 @@ Nio is an upcoming matrix client for iOS.
 
 For the time being this project is still very much a work in progress. For updates, please check by in our matrix room → [#niochat:matrix.org](https://matrix.to/#/#niochat:matrix.org).
 
-Want to give it a spin? Join the public [TestFlight Beta](https://testflight.apple.com/join/KlXr3kKz). Help with [translating the app](https://poeditor.com/join/project/cKGF6Gswvx) into other languages is also very much appreciated!
+Want to give it a spin? Join the public [TestFlight Beta](https://testflight.apple.com/join/KlXr3kKz).
 
 ![screenshot](https://nio.chat/screenshots.png)
 
@@ -24,6 +24,13 @@ $ cd nio
 $ pod install
 $ xed .
 ```
+
+### Translations
+
+If you can help translate Nio into other languages your help would be much appreciated! Translation files are available on [translate.riot.im](https://translate.riot.im/engage/nio).
+
+[![Translation status](https://translate.riot.im/widgets/nio/-/nio/multi-auto.svg)](https://translate.riot.im/engage/nio/?utm_source=widget)
+
 
 ### Similar Apps
 
