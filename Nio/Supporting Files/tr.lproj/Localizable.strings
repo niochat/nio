@@ -1,21 +1,21 @@
-"login.welcome-header" = "Welcome to ";
-"login.welcome-message" = "Sign in to your account to get started.";
-"login.form.username" = "Username";
-"login.form.password" = "Password";
-"login.form.homeserver" = "Homeserver";
-"login.form.homeserver-optional-explanation" = "Homeserver is optional if you're using matrix.org.";
-"login.sign-in" = "Sign in";
-"login.open-registration-prompt" = "Don't have an account yet?";
-"login.register-not-yet-implemented" = "Registering for new accounts is not yet implemented.";
+"login.welcome-header" = "Hoşgeldiniz ";
+"login.welcome-message" = "Başlamak için hesabınıza giriş yapınız.";
+"login.form.username" = "Kullanıcı Adı";
+"login.form.password" = "Şifre";
+"login.form.homeserver" = "Ana sunucu";
+"login.form.homeserver-optional-explanation" = "Eğer matrix.org kullanıyorsanız ana sunucu opsiyoneldir.";
+"login.sign-in" = "Giriş yap";
+"login.open-registration-prompt" = "Henüz bir hesabın yok mu?";
+"login.register-not-yet-implemented" = "Kayıt olma özelliği henüz eklenmedi.";
 "login.failure-back-to-login" = "Back to Login";
 "loading.1" = "Reticulating splines";
 "loading.2" = "Discomfrobulating messages";
-"loading.3" = "Logging in";
+"loading.3" = "Giriş yapılıyor";
 "loading.4" = "Restoring session";
-"loading.cancel" = "Cancel";
-"recent-rooms.accessibility-label.settings" = "Settings";
-"recent-rooms.accessibility-label.new-conversation" = "New Conversation";
-"recent-rooms.new-message-placeholder" = "New Message";
+"loading.cancel" = "İptal";
+"recent-rooms.accessibility-label.settings" = "Ayarlar";
+"recent-rooms.accessibility-label.new-conversation" = "Yeni sohbet";
+"recent-rooms.new-message-placeholder" = "Yeni mesaj";
 // DM with $NAME, $LAST_ACTIVITY_TIMESTAMP $LAST_MESSAGE
 "recent-rooms.accessibility-label.dm" = "DM with %@, %@ %@";
 // Room $NAME, $LAST_ACTIVITY_TIMESTAMP $LAST_MESSAGE
