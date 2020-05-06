@@ -27,7 +27,7 @@
 "room.attachment-placeholder" = "此特性尚未被实现。";
 "room.remove.title" = "删除？";
 "room.remove.message" = "你确定要删除这条消息吗？";
-"room.remove.action" = "删除";;
+"room.remove.action" = "删除";
 
 "composer.new-message" = "新信息...";
 "composer.edit-message" = "编辑信息：";
