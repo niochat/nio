@@ -9,10 +9,10 @@
 "login.register-not-yet-implemented" = "新账户注册功能尚未被实现。";
 "login.failure-back-to-login" = "返回登录页面";
 
-"loading.1" = "🧑‍🎤 少女祈祷中";
-"loading.2" = "🧑‍🏭 正在给长者+1s";
-"loading.3" = "🧑‍🔧 登录中";
-"loading.4" = "🧑‍💻 正在恢复会话";
+"loading.1" = "少女祈祷中";
+"loading.2" = "正在给长者+1s";
+"loading.3" = "登录中";
+"loading.4" = "正在恢复会话";
 "loading.cancel" = "取消";
 
 "recent-rooms.accessibility-label.settings" = "设置";

@@ -9,10 +9,10 @@
 "login.register-not-yet-implemented" = "Registrar nuevas cuentas aun no está implementado.";
 "login.failure-back-to-login" = "Volver a Conexión";
 
-"loading.1" = "🧑‍🎤 Reticulando engranajes";
-"loading.2" = "🧑‍🏭 Descomfrobulando mensajes";
-"loading.3" = "🧑‍🔧 Conectando";
-"loading.4" = "🧑‍💻 Restaurando sesión";
+"loading.1" = "Reticulando engranajes";
+"loading.2" = "Descomfrobulando mensajes";
+"loading.3" = "Conectando";
+"loading.4" = "Restaurando sesión";
 "loading.cancel" = "Cancelar";
 
 "recent-rooms.accessibility-label.settings" = "Ajustes";

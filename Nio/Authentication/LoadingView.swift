@@ -3,6 +3,13 @@ import SwiftUI
 struct LoadingView: View {
     @EnvironmentObject var store: AccountStore
 
+    var loadingEmoji = [
+        "🧑‍🎤",
+        "🧑‍🏭",
+        "🧑‍🔧",
+        "🧑‍💻",
+    ]
+
     var loadingMessages = [
         L10n.Loading._1,
         L10n.Loading._2,
@@ -10,13 +17,17 @@ struct LoadingView: View {
         L10n.Loading._4,
     ]
 
+    var randomLoadingMessage: String {
+        "\(loadingEmoji.randomElement()!) \(loadingMessages.randomElement()!)"
+    }
+
     var body: some View {
         VStack {
             Spacer()
 
             ActivityIndicator()
 
-            Text(self.loadingMessages.randomElement()!)
+            Text(self.randomLoadingMessage)
                 .bold()
                 .padding(.horizontal)
 

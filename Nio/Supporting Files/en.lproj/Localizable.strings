@@ -9,10 +9,10 @@
 "login.register-not-yet-implemented" = "Registering for new accounts is not yet implemented.";
 "login.failure-back-to-login" = "Back to Login";
 
-"loading.1" = "🧑‍🎤 Reticulating splines";
-"loading.2" = "🧑‍🏭 Discomfrobulating messages";
-"loading.3" = "🧑‍🔧 Logging in";
-"loading.4" = "🧑‍💻 Restoring session";
+"loading.1" = "Reticulating splines";
+"loading.2" = "Discomfrobulating messages";
+"loading.3" = "Logging in";
+"loading.4" = "Restoring session";
 "loading.cancel" = "Cancel";
 
 "recent-rooms.accessibility-label.settings" = "Settings";

@@ -9,10 +9,10 @@
 "login.register-not-yet-implemented" = "Registrierung für neue Konten ist noch nicht implementiert.";
 "login.failure-back-to-login" = "Zurück zur Anmeldung";
 
-"loading.1" = "🧑‍🎤 Die Matrix wird entschlüsselt";
-"loading.2" = "🧑‍🏭 Nachrichten werden auseinander gefriemelt";
-"loading.3" = "🧑‍🔧 Anmeldung läuft";
-"loading.4" = "🧑‍💻 Sitzung wird wiederhergestellt";
+"loading.1" = "Die Matrix wird entschlüsselt";
+"loading.2" = "Nachrichten werden auseinander gefriemelt";
+"loading.3" = "Anmeldung läuft";
+"loading.4" = "Sitzung wird wiederhergestellt";
 "loading.cancel" = "Abbrechen";
 
 "recent-rooms.accessibility-label.settings" = "Einstellungen";
