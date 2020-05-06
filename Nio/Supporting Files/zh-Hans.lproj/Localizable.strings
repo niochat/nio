@@ -1,4 +1,4 @@
-"login.welcome-header" = "👋 欢迎来到";
+"login.welcome-header" = "欢迎来到";
 "login.welcome-message" = "登录账户来开始使用。";
 "login.form.username" = "用户名";
 "login.form.password" = "密码";

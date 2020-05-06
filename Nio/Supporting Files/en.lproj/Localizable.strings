@@ -1,4 +1,4 @@
-"login.welcome-header" = "👋 Welcome to ";
+"login.welcome-header" = "Welcome to ";
 "login.welcome-message" = "Sign in to your account to get started.";
 "login.form.username" = "Username";
 "login.form.password" = "Password";

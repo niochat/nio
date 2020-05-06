@@ -1,4 +1,4 @@
-"login.welcome-header" = "👋 Willkommen in ";
+"login.welcome-header" = "Willkommen in ";
 "login.welcome-message" = "Melde dich mit deinem Benutzerkonto an um loszulegen.";
 "login.form.username" = "Benutzername";
 "login.form.password" = "Passwort";

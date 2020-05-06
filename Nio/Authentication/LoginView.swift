@@ -117,7 +117,7 @@ struct LoginTitleView: View {
         let nio = Text("Nio").foregroundColor(.accentColor)
 
         return VStack {
-            (Text(L10n.Login.welcomeHeader) + nio + Text("!"))
+            (Text("👋") + Text(L10n.Login.welcomeHeader) + nio + Text("!"))
                 .font(.title)
                 .bold()
             Text(L10n.Login.welcomeMessage)
