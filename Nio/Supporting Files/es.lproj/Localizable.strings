@@ -1,5 +1,5 @@
 "login.welcome-header" = "Bienvenido a ";
-"login.welcome-message" = "Conecte a su cuenta para empezar";
+"login.welcome-message" = "Conecte a su cuenta para empezar.";
 "login.form.username" = "Usuario";
 "login.form.password" = "Contraseña";
 "login.form.homeserver" = "Servidor";
@@ -8,13 +8,11 @@
 "login.open-registration-prompt" = "¿Aun no dispone de una cuenta?";
 "login.register-not-yet-implemented" = "Registrar nuevas cuentas aun no está implementado.";
 "login.failure-back-to-login" = "Volver a Conexión";
-
 "loading.1" = "Reticulando engranajes";
 "loading.2" = "Descomfrobulando mensajes";
 "loading.3" = "Conectando";
 "loading.4" = "Restaurando sesión";
 "loading.cancel" = "Cancelar";
-
 "recent-rooms.accessibility-label.settings" = "Ajustes";
 "recent-rooms.accessibility-label.new-conversation" = "Nueva Conversación";
 "recent-rooms.new-message-placeholder" = "Nuevo Mensaje";
@@ -23,25 +21,20 @@
 /*Room $NAME, $LAST_ACTIVITY_TIMESTAMP $LAST_MESSAGE*/
 "recent-rooms.accessibility-label.room" = "Sala %@, %@ %@";
 "recent-rooms.accessibility-label.new-message-badge" = "%u nuevos mensajes";
-
 "room.attachment-placeholder" = "Aun no implementado";
 "room.remove.title" = "¿Eliminar?";
 "room.remove.message" = "¿Está seguro de que desea eliminar este mensaje?";
 "room.remove.action" = "Eliminar";
-
 "composer.new-message" = "Nuevo mensaje...";
 "composer.edit-message" = "Editar Mensaje:";
 "composer.accessibility-label.send-file" = "Enviar archivo";
 "composer.accessibility-label.send" = "Enviar";
 "composer.accessibility-label.cancelEdit" = "Cancelar";
-
 "typing-indicator.single" = "%@ está escribiendo...";
 "typing-indicator.multiple" = "%@ están escribiendo...";
 "typing-indicator.many" = "Múltiples usuarios están escribiendo...";
-
 "event.unknown-sender-fallback" = "Desconocido";
 "event.unknown-room-name-fallback" = "Desconocido";
-
 "event.room-member.invited" = "%@ invitó a %@";
 "event.room-member.left" = "%@ abandonó la sala";
 "event.room-member.kicked" = "%@ expulsó a %@";
@@ -53,31 +46,23 @@
 "event.room-member.remove-avatar" = "%@ eliminó su foto de perfil";
 "event.room-member.unknown-state" = "Evento de estado desconocido: %@";
 "event.reason" = "Razón: %@";
-
 "event.room-name.set-name" = "%@ fijó el nombre de la sala a %@";
 "event.room-name.change-name" = "%@ cambió el nombre de la sala de %@ a %@";
-
 "event.room-topic.change" = "%@ cambió el asunto a '%@'";
-
 "room-power-level.default" = "Valor por defecto";
 "room-power-level.moderator" = "Moderador";
 "room-power-level.admin" = "Administrador";
 "room-power-level.custom" = "Personalizado (%d)";
 "event.room-power-level.change-self" = "%@ cambió su nivel de %@ a %@";
 "event.room-power-level.change-other" = "%@ cambió el nivel de %@ de %@ a %@";
-
 "event.redaction.redact-self" = "Mensaje eliminado por %@";
 "event.redaction.redact-other" = "%@ eliminó el mensaje de %@";
-
 "event.edited" = "editado";
-
 "event.context-menu.add-reaction" = "Añadir Reacción";
 "event.context-menu.reply" = "Responder";
 "event.context-menu.edit" = "Editar";
 "event.context-menu.remove" = "Eliminar";
-
 "reaction-picker.title" = "Seleccione un emoji como reacción.";
-
 "settings.title" = "Ajustes";
 "settings.accent-color" = "Color destacado";
 "settings.log-out" = "Desconectar";
