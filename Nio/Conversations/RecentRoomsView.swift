@@ -24,7 +24,19 @@ struct RecentRoomsContainerView: View {
 }
 
 struct RecentRoomsView: View {
+    @EnvironmentObject var store: AccountStore
+
     @Binding fileprivate var selectedNavigationItem: SelectedNavigationItem?
+
+    @State private var showConfirm = false
+    @State private var leaveId: Int?
+    private var roomToLeave: NIORoom? {
+        guard
+            let leaveId = self.leaveId,
+            rooms.count > leaveId
+        else { return nil }
+        return self.rooms[leaveId]
+    }
 
     var rooms: [NIORoom]
 
@@ -52,14 +64,43 @@ struct RecentRoomsView: View {
 
     var body: some View {
         NavigationView {
-            List(rooms) { room in
-                NavigationLink(destination: RoomContainerView(room: room)) {
-                    RoomListItemContainerView(room: room)
+            List {
+                ForEach(rooms) { room in
+                    NavigationLink(destination: RoomContainerView(room: room)) {
+                        RoomListItemContainerView(room: room)
+                    }
                 }
+                .onDelete(perform: setLeaveIndex)
+            }
+            .alert(isPresented: $showConfirm) {
+                Alert(
+                    title: Text(L10n.RecentRooms.Leave.alertTitle),
+                    message: Text(L10n.RecentRooms.Leave.alertBody(
+                        roomToLeave?.summary.displayname
+                            ?? roomToLeave?.summary.roomId
+                            ?? "")),
+                    primaryButton: .destructive(
+                        Text(L10n.Room.Remove.action),
+                        action: {
+                            self.leaveRoom()
+                    }),
+                secondaryButton: .cancel())
             }
             .navigationBarTitle("Nio", displayMode: .inline)
             .navigationBarItems(leading: settingsButton, trailing: newConversationButton)
         }
+    }
+
+    func setLeaveIndex(at offsets: IndexSet) {
+        self.showConfirm = true
+        for offset in offsets {
+            self.leaveId = offset
+        }
+    }
+
+    func leaveRoom() {
+        guard let leaveId = self.leaveId, rooms.count > leaveId else { return }
+        self.store.session?.leaveRoom(self.rooms[leaveId].room.roomId) { _ in }
     }
 }
 

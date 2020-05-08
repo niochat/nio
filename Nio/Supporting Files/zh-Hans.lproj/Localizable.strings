@@ -21,6 +21,8 @@
 /*Room $NAME, $LAST_ACTIVITY_TIMESTAMP $LAST_MESSAGE*/
 "recent-rooms.accessibility-label.room" = "房间%@, %@ %@";
 "recent-rooms.accessibility-label.new-message-badge" = "%u条新信息";
+"recent-rooms.leave.alert-title" = "留有余地";
+"recent-rooms.leave.alert-body" = "你确定要留下\"%@\"吗？这个动作是无法撤销的。";
 "room.attachment-placeholder" = "此特性尚未被实现。";
 "room.remove.title" = "删除？";
 "room.remove.message" = "你确定要删除这条消息吗？";

@@ -192,6 +192,14 @@ internal enum L10n {
       /// Settings
       internal static let settings = L10n.tr("Localizable", "recent-rooms.accessibility-label.settings")
     }
+    internal enum Leave {
+      /// Are you sure you want to leave '%@'? This action cannot be undone.
+      internal static func alertBody(_ p1: String) -> String {
+        return L10n.tr("Localizable", "recent-rooms.leave.alert-body", p1)
+      }
+      /// Leave Room
+      internal static let alertTitle = L10n.tr("Localizable", "recent-rooms.leave.alert-title")
+    }
   }
 
   internal enum Room {
