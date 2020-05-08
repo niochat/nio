@@ -37,12 +37,12 @@ struct MediaEventView: View {
             self.timestamp = Formatter.string(for: event.timestamp, timeStyle: .short)
             self.showSender = showSender
 
-            if let infoDict: [String: Any] = event.content(valueFor: "info") {
-                if let width = infoDict["w"] as? Double,
-                    let height = infoDict["h"] as? Double {
+            if let info: [String: Any] = event.content(valueFor: "info") {
+                if let width = info["w"] as? Double,
+                    let height = info["h"] as? Double {
                     self.size = CGSize(width: width, height: height)
                 }
-                if let blurhash = infoDict["xyz.amorgan.blurhash"] as? String {
+                if let blurhash = info["xyz.amorgan.blurhash"] as? String {
                     self.blurhash = blurhash
                 }
             }
