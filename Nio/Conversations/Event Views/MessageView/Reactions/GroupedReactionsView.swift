@@ -88,7 +88,9 @@ struct GroupedReactionsView: View {
                     text: group.reaction,
                     count: group.count,
                     backgroundColor: self.backgroundColor(for: group)
+                        .opacity(group.containsReaction(from: self.userId) ? 0.3 : 0.7)
                 )
+                .overlay(self.backgroundOverlay(for: group))
             }
         }
         .onLongPressGesture {
