@@ -53,21 +53,6 @@ struct GroupedReactionsView: View {
         return .borderedMessageBackground
     }
 
-    fileprivate func backgroundGradient(for reactionGroup: ReactionGroup) -> LinearGradient {
-        let color: Color = backgroundColor(for: reactionGroup)
-        let colors: [Color]
-        if colorScheme == .dark {
-            colors = [color.opacity(1.0), color.opacity(0.85)]
-        } else {
-            colors = [color.opacity(0.85), color.opacity(1.0)]
-        }
-        return LinearGradient(
-            gradient: Gradient(colors: colors),
-            startPoint: .top,
-            endPoint: .bottom
-        )
-    }
-
     fileprivate func backgroundOverlay(for group: ReactionGroup) -> some View {
         if group.containsReaction(from: userId) {
             return AnyView(
