@@ -21,6 +21,8 @@
 /*Room $NAME, $LAST_ACTIVITY_TIMESTAMP $LAST_MESSAGE*/
 "recent-rooms.accessibility-label.room" = "Sala %@, %@ %@";
 "recent-rooms.accessibility-label.new-message-badge" = "%u nuevos mensajes";
+"recent-rooms.leave.alert-title" = "Deje la habitación";
+"recent-rooms.leave.alert-body" = "¿Estás seguro de que quieres dejar '%@'? Esta acción no puede deshacerse.";
 "room.attachment-placeholder" = "Aun no implementado";
 "room.remove.title" = "¿Eliminar?";
 "room.remove.message" = "¿Está seguro de que desea eliminar este mensaje?";
