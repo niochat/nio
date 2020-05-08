@@ -79,7 +79,6 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
         Text(model.timestamp)
             .font(.caption)
             .foregroundColor(.secondary)
-            .padding(10)
     }
 
     var markdownView: some View {
