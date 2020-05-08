@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "BlurHash",
+        "repositoryURL": "https://github.com/niochat/BlurHash",
+        "state": {
+          "branch": null,
+          "revision": "1c54f004fa1314ebcf678fad33381afb449a79b9",
+          "version": "0.1.0"
+        }
+      },
+      {
         "package": "CommonMark",
         "repositoryURL": "https://github.com/SwiftDocOrg/CommonMark.git",
         "state": {

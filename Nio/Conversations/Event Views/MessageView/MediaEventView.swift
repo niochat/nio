@@ -1,6 +1,7 @@
 import SwiftUI
 import class SwiftMatrixSDK.MXEvent
 import SDWebImageSwiftUI
+import BlurHash
 
 struct MediaEventView: View {
     @Environment(\.userId) var userId
@@ -11,15 +12,21 @@ struct MediaEventView: View {
         let sender: String
         let showSender: Bool
         let timestamp: String
+        var size: CGSize?
+        var blurhash: String?
 
         init(mediaURLs: [String],
              sender: String,
              showSender: Bool,
-             timestamp: String) {
+             timestamp: String,
+             size: CGSize?,
+             blurhash: String?) {
             self.mediaURLs = mediaURLs.compactMap(MXURL.init)
             self.sender = sender
             self.showSender = showSender
             self.timestamp = timestamp
+            self.size = size
+            self.blurhash = blurhash
         }
 
         init(event: MXEvent, showSender: Bool) {
@@ -29,10 +36,29 @@ struct MediaEventView: View {
             self.sender = event.sender ?? ""
             self.timestamp = Formatter.string(for: event.timestamp, timeStyle: .short)
             self.showSender = showSender
+
+            if let infoDict: [String: Any] = event.content(valueFor: "info") {
+                if let width = infoDict["w"] as? Double,
+                    let height = infoDict["h"] as? Double {
+                    self.size = CGSize(width: width, height: height)
+                }
+                if let blurhash = infoDict["xyz.amorgan.blurhash"] as? String {
+                    self.blurhash = blurhash
+                }
+            }
         }
     }
 
     let model: ViewModel
+
+    var placeholder: UIImage {
+        guard
+            let size = model.size,
+            let blurhash = model.blurhash,
+            let img = UIImage(blurHash: blurhash, size: size)
+        else { return UIImage() }
+        return img
+    }
 
     var urls: [URL] {
         model.mediaURLs.compactMap { mediaURL in
@@ -65,6 +91,7 @@ struct MediaEventView: View {
             self.senderView
             WebImage(url: self.urls.first!, isAnimating: .constant(true))
                 .resizable()
+                .placeholder(Image(uiImage: self.placeholder))
                 .indicator(.activity)
                 .scaledToFit()
                 .mask(RoundedRectangle(cornerRadius: 15))
