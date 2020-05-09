@@ -26,7 +26,8 @@
 "recent-rooms.leave.alert-title" = "Gesprek Verwijderen";
 "recent-rooms.leave.alert-body" = "Weet u zeker dat je '%@' wilt verlaten? Deze actie can niet ongedaan gemaakt worden.";
 
-"room.attachment-placeholder" = "Nog niet geïmplementeerd";
+"room.attachment.select-type" = "Selecteer type bijlage";
+"room.attachment.type-photo" = "Stuur foto";
 "room.remove.title" = "Verwijderen?";
 "room.remove.message" = "Weet u zeker dat u dit bericht wilt verwijderen?";
 "room.remove.action" = "Verwijderen";

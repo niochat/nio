@@ -95,6 +95,22 @@ class NIORoom: ObservableObject {
         }
     }
 
+    func sendImage(image: UIImage) {
+        guard let imageData = image.jpeg(.lowest) else { return }
+        //swiftlint:disable:next redundant_optional_initialization
+        var localEcho: MXEvent? = nil
+        // TODO: Use localEcho to show sent message until it actually comes back
+        room.sendImage(
+            data: imageData,
+            size: image.size,
+            mimeType: "image/jpeg",
+            thumbnail: image,
+            localEcho: &localEcho
+        ) {_ in
+            self.objectWillChange.send()
+        }
+    }
+
     func markAllAsRead() {
         room.markAllAsRead()
     }
@@ -103,5 +119,19 @@ class NIORoom: ObservableObject {
 extension NIORoom: Identifiable {
     var id: ObjectIdentifier {
         room.id
+    }
+}
+
+extension UIImage {
+    enum JPEGQuality: CGFloat {
+        case lowest  = 0
+        case low     = 0.25
+        case medium  = 0.5
+        case high    = 0.75
+        case highest = 1
+    }
+
+    func jpeg(_ jpegQuality: JPEGQuality) -> Data? {
+        return jpegData(compressionQuality: jpegQuality.rawValue)
     }
 }

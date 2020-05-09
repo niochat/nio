@@ -7,6 +7,7 @@ struct RoomContainerView: View {
     @ObservedObject var room: NIORoom
 
     @State var showAttachmentPicker = false
+    @State var showImagePicker = false
     @State var eventToReactTo: String?
 
     var body: some View {
@@ -40,10 +41,24 @@ struct RoomContainerView: View {
         }
         .onAppear { self.room.markAllAsRead() }
         .environmentObject(room)
+        .background(EmptyView()
+            .sheet(isPresented: $showImagePicker) {
+                ImagePicker(sourceType: .photoLibrary) { image in
+                    self.room.sendImage(image: image)
+                }
+            }
+        )
     }
 
     var attachmentPickerSheet: ActionSheet {
-        ActionSheet(title: Text(L10n.Room.attachmentPlaceholder))
+        ActionSheet(
+            title: Text(L10n.Room.Attachment.selectType), buttons: [
+                .default(Text(L10n.Room.Attachment.typePhoto), action: {
+                    self.showImagePicker = true
+                }),
+                .cancel()
+            ]
+        )
     }
 }
 

@@ -26,7 +26,8 @@
 "recent-rooms.leave.alert-title" = "Leave Room";
 "recent-rooms.leave.alert-body" = "Are you sure you want to leave '%@'? This action cannot be undone.";
 
-"room.attachment-placeholder" = "Not yet implemented";
+"room.attachment.select-type" = "Select type of attachment";
+"room.attachment.type-photo" = "Send photo";
 "room.remove.title" = "Remove?";
 "room.remove.message" = "Are you sure you want to remove this message?";
 "room.remove.action" = "Remove";
