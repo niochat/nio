@@ -23,8 +23,8 @@
 "recent-rooms.accessibility-label.new-message-badge" = "%u nuevos mensajes";
 "recent-rooms.leave.alert-title" = "Deje la habitación";
 "recent-rooms.leave.alert-body" = "¿Estás seguro de que quieres dejar '%@'? Esta acción no puede deshacerse.";
-"room.attachment.select-type" = "";
-"room.attachment.type-photo" = "";
+"room.attachment.select-type" = "Envíe el archivo adjunto";
+"room.attachment.type-photo" = "Foto";
 "room.remove.title" = "¿Eliminar?";
 "room.remove.message" = "¿Está seguro de que desea eliminar este mensaje?";
 "room.remove.action" = "Eliminar";
