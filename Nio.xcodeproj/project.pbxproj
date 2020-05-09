@@ -12,6 +12,7 @@
 		3902B8A0239410EE00698B87 /* ContentSizeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902B89F239410EE00698B87 /* ContentSizeCategory.swift */; };
 		3902B8A32395935600698B87 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902B8A22395935600698B87 /* SettingsView.swift */; };
 		3902B8A52395A77800698B87 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902B8A42395A77800698B87 /* LoadingView.swift */; };
+		390D63A42465F62D00B8F640 /* BlurHash in Frameworks */ = {isa = PBXBuildFile; productRef = 390D63A32465F62D00B8F640 /* BlurHash */; };
 		3921175124412FDE00892B00 /* RoomMemberEventViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3921175024412FDE00892B00 /* RoomMemberEventViewTests.swift */; };
 		392117542441327E00892B00 /* MockEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392117532441327E00892B00 /* MockEvent.swift */; };
 		392117572442556700892B00 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 392117592442556700892B00 /* Localizable.strings */; };
@@ -210,6 +211,7 @@
 				3984654823B8D809006C173B /* SDWebImageSwiftUI in Frameworks */,
 				CAF2AE9D245DF4B400D84133 /* CommonMarkAttributedString in Frameworks */,
 				3923899F238ABA5700B2E1DF /* KeychainAccess in Frameworks */,
+				390D63A42465F62D00B8F640 /* BlurHash in Frameworks */,
 				87FE3870173FD55A91B15921 /* Pods_Nio.framework in Frameworks */,
 				3970DC942385A8BE00EFE31B /* KeyboardObserving in Frameworks */,
 			);
@@ -540,6 +542,7 @@
 				3923899E238ABA5700B2E1DF /* KeychainAccess */,
 				3984654723B8D809006C173B /* SDWebImageSwiftUI */,
 				CAF2AE9C245DF4B400D84133 /* CommonMarkAttributedString */,
+				390D63A32465F62D00B8F640 /* BlurHash */,
 			);
 			productName = Nio;
 			productReference = 39C931D92384328A004449E1 /* Nio.app */;
@@ -582,6 +585,7 @@
 				3923899D238ABA5700B2E1DF /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				3984654623B8D809006C173B /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				CAF2AE9B245DF4B400D84133 /* XCRemoteSwiftPackageReference "CommonMarkAttributedString" */,
+				390D63A22465F62C00B8F640 /* XCRemoteSwiftPackageReference "BlurHash" */,
 			);
 			productRefGroup = 39C931DA2384328A004449E1 /* Products */;
 			projectDirPath = "";
@@ -1089,6 +1093,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		390D63A22465F62C00B8F640 /* XCRemoteSwiftPackageReference "BlurHash" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/niochat/BlurHash";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
 		3923899D238ABA5700B2E1DF /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
@@ -1124,6 +1136,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		390D63A32465F62D00B8F640 /* BlurHash */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 390D63A22465F62C00B8F640 /* XCRemoteSwiftPackageReference "BlurHash" */;
+			productName = BlurHash;
+		};
 		3923899E238ABA5700B2E1DF /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3923899D238ABA5700B2E1DF /* XCRemoteSwiftPackageReference "KeychainAccess" */;
