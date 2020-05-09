@@ -26,7 +26,8 @@
 "recent-rooms.leave.alert-title" = "Raum verlassen";
 "recent-rooms.leave.alert-body" = "Bist du sicher, dass du '%@' verlassen möchtest? Dies kann nicht rückgängig gemacht werden.";
 
-"room.attachment-placeholder" = "Noch nicht implementiert";
+"room.attachment.select-type" = "Anhang senden";
+"room.attachment.type-photo" = "Bild";
 "room.remove.title" = "Entfernen?";
 "room.remove.message" = "Bist du sicher, dass du diese Nachricht entfernen möchtest?";
 "room.remove.action" = "Entfernen";

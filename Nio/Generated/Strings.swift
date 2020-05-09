@@ -203,8 +203,12 @@ internal enum L10n {
   }
 
   internal enum Room {
-    /// Not yet implemented
-    internal static let attachmentPlaceholder = L10n.tr("Localizable", "room.attachment-placeholder")
+    internal enum Attachment {
+      /// Send attachment
+      internal static let selectType = L10n.tr("Localizable", "room.attachment.select-type")
+      /// Photo
+      internal static let typePhoto = L10n.tr("Localizable", "room.attachment.type-photo")
+    }
     internal enum Remove {
       /// Remove
       internal static let action = L10n.tr("Localizable", "room.remove.action")
