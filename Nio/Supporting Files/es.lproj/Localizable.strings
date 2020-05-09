@@ -24,7 +24,7 @@
 "recent-rooms.leave.alert-title" = "Deje la habitación";
 "recent-rooms.leave.alert-body" = "¿Estás seguro de que quieres dejar '%@'? Esta acción no puede deshacerse.";
 "room.attachment.select-type" = "";
-"room.attachment.type-photo" = "";UL
+"room.attachment.type-photo" = "";
 "room.remove.title" = "¿Eliminar?";
 "room.remove.message" = "¿Está seguro de que desea eliminar este mensaje?";
 "room.remove.action" = "Eliminar";

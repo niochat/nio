@@ -204,9 +204,9 @@ internal enum L10n {
 
   internal enum Room {
     internal enum Attachment {
-      /// Select type of attachment
+      /// Send attachment
       internal static let selectType = L10n.tr("Localizable", "room.attachment.select-type")
-      /// Send photo
+      /// Photo
       internal static let typePhoto = L10n.tr("Localizable", "room.attachment.type-photo")
     }
     internal enum Remove {
