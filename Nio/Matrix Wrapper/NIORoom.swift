@@ -106,7 +106,7 @@ class NIORoom: ObservableObject {
             mimeType: "image/jpeg",
             thumbnail: image,
             localEcho: &localEcho
-        ) {_ in
+        ) { _ in
             self.objectWillChange.send()
         }
     }
