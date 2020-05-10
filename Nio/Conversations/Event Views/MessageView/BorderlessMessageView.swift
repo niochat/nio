@@ -34,13 +34,6 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
         .font(.system(size: 60 * sizeCategory.scalingFactor))
     }
 
-    var editedView: some View {
-        Text("(" + L10n.Event.edited + ")")
-            .font(.caption)
-            .foregroundColor(textColor)
-            .opacity(colorSchemeContrast == .standard ? 0.5 : 1.0)
-    }
-
     var contentView: some View {
         emojiView
     }
