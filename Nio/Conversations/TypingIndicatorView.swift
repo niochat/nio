@@ -63,7 +63,7 @@ struct TypingIndicatorView_Previews: PreviewProvider {
             .environment(\.colorScheme, .dark)
 
             TypingIndicatorView(typingUsers: ["Jane Doe", "John Doe"])
-                .environment(\.sizeCategory, .accessibilityLarge)
+            .environment(\.sizeCategory, .accessibilityLarge)
         }
         .previewLayout(.sizeThatFits)
     }
