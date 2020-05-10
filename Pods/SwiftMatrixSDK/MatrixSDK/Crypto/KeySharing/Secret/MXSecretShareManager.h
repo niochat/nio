@@ -49,7 +49,8 @@ extern const struct MXSecretId {
  @param deviceIds ids of device to make request. Nil to request all.
  
  @param success A block object called when the operation succeeds. It provides the id of the request.
- @param onSecretReceived A block called when the secret has been received from another device
+ @param onSecretReceived A block called when the secret has been received from another device.
+                         Must return YES if the secret is valid.
  @param failure A block object called when the operation fails.
  
  @return a MXHTTPOperation instance.
@@ -57,7 +58,7 @@ extern const struct MXSecretId {
 - (MXHTTPOperation *)requestSecret:(NSString*)secretId
                        toDeviceIds:(nullable NSArray<NSString*>*)deviceIds
                            success:(void (^)(NSString *requestId))success
-                  onSecretReceived:(void (^)(NSString *secret))onSecretReceived
+                  onSecretReceived:(BOOL (^)(NSString *secret))onSecretReceived
                            failure:(void (^)(NSError *error))failure;
 
 /**

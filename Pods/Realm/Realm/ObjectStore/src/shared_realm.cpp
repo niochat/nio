@@ -21,7 +21,6 @@
 #include "impl/collection_notifier.hpp"
 #include "impl/realm_coordinator.hpp"
 #include "impl/transact_log_handler.hpp"
-#include "util/fifo.hpp"
 
 #include "audit.hpp"
 #include "binding_context.hpp"
@@ -35,6 +34,8 @@
 
 #include <realm/history.hpp>
 #include <realm/util/scope_exit.hpp>
+#include <realm/util/fifo_helper.hpp>
+
 
 #if REALM_ENABLE_SYNC
 #include "sync/impl/sync_file.hpp"
@@ -541,14 +542,15 @@ void Realm::update_schema(Schema schema, uint64_t version, MigrationFunction mig
         initialization_function(shared_from_this());
     }
 
-    if (!in_transaction) {
-        commit_transaction();
-    }
-
     m_schema = std::move(schema);
+    m_new_schema = ObjectStore::schema_from_group(read_group());
     m_schema_version = ObjectStore::get_schema_version(read_group());
     m_dynamic_schema = false;
     m_coordinator->clear_schema_cache_and_set_schema_version(version);
+
+    if (!in_transaction)
+        commit_transaction();
+
     notify_schema_changed();
 }
 

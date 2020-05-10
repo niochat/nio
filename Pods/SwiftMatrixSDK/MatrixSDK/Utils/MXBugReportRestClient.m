@@ -289,7 +289,7 @@
 
 - (void)cancel
 {
-    [manager invalidateSessionCancelingTasks:YES];
+    [manager invalidateSessionCancelingTasks:YES resetSession:NO];
 
     _state = MXBugReportStateReady;
 

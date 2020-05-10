@@ -4,7 +4,7 @@ GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking/AFNetworking.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/GZIP/GZIP.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/OLMKit/OLMKit.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/Realm/Realm.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/SwiftMatrixSDK/SwiftMatrixSDK.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/libbase58/libbase58.framework/Headers"
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
 LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Realm/core"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"c++" -l"z" -framework "AFNetworking" -framework "CoreGraphics" -framework "GZIP" -framework "MobileCoreServices" -framework "OLMKit" -framework "Realm" -framework "Security" -framework "SwiftMatrixSDK" -framework "SystemConfiguration" -framework "libbase58"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"c++" -l"z" -framework "AFNetworking" -framework "GZIP" -framework "OLMKit" -framework "Realm" -framework "Security" -framework "SwiftMatrixSDK" -framework "libbase58"
 OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)

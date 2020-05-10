@@ -224,13 +224,13 @@ public:
         /// For testing purposes only.
         bool disable_upload_activation_delay = false;
 
-        /// If enable_upload_log_compaction is true, every changeset will be
+        /// If `disable_upload_compaction` is true, every changeset will be
         /// compacted before it is uploaded to the server. Compaction will
         /// reduce the size of a changeset if the same field is set multiple
         /// times or if newly created objects are deleted within the same
         /// transaction. Log compaction increeses CPU usage and memory
         /// consumption.
-        bool enable_upload_log_compaction = true;
+        bool disable_upload_compaction = false;
 
         /// Set the `TCP_NODELAY` option on all TCP/IP sockets. This disables
         /// the Nagle algorithm. Disabling it, can in some cases be used to
@@ -403,8 +403,7 @@ public:
                                    int preverify_ok,
                                    int depth);
 
-    class Config {
-    public:
+    struct Config {
         Config() {}
 
         /// server_address is the fully qualified host name, or IP address of
@@ -658,6 +657,31 @@ public:
             bool require_recent_state_realm = true;
         };
         util::Optional<ClientReset> client_reset_config;
+
+        struct ProxyConfig {
+            enum class Type { HTTP, HTTPS } type;
+            std::string address;
+            port_type port;
+        };
+        util::Optional<ProxyConfig> proxy_config;
+
+        /// Set to true to disable the upload process for this session. This
+        /// includes the sending of empty UPLOAD messages.
+        ///
+        /// This feature exists exclusively for testing purposes at this time.
+        bool disable_upload = false;
+
+        /// Set to true to disable sending of empty UPLOAD messages for this
+        /// session.
+        ///
+        /// This feature exists exclusively for testing purposes at this time.
+        bool disable_empty_upload = false;
+
+        /// Set to true to cause the integration of the first received changeset
+        /// (in a DOWNLOAD message) to fail.
+        ///
+        /// This feature exists exclusively for testing purposes at this time.
+        bool simulate_integration_error = false;
     };
 
     /// \brief Start a new session for the specified client-side Realm.
@@ -1234,11 +1258,14 @@ enum class Client::Error {
     missing_protocol_feature    = 128, ///< Requested feature missing in negotiated protocol version
     bad_serial_transact_status  = 129, ///< Bad status of serialized transaction (TRANSACT)
     bad_object_id_substitutions = 130, ///< Bad encoded object identifier substitutions (TRANSACT)
+    http_tunnel_failed          = 131, ///< Failed to establish HTTP tunnel with configured proxy
 };
 
 const std::error_category& client_error_category() noexcept;
 
 std::error_code make_error_code(Client::Error) noexcept;
+
+std::ostream& operator<<(std::ostream& os, Session::Config::ProxyConfig::Type);
 
 } // namespace sync
 } // namespace realm

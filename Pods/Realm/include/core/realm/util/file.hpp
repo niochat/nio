@@ -33,6 +33,7 @@
 #endif
 
 #if defined(_MSC_VER) && _MSC_VER >= 1900 // compiling with at least Visual Studio 2015
+#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING // switch to <filesystem> once we switch to C++17
 #include <experimental/filesystem>
 namespace std {
     namespace filesystem = std::experimental::filesystem::v1;
@@ -879,7 +880,7 @@ private:
 
 /// Used for any I/O related exception. Note the derived exception
 /// types that are used for various specific types of errors.
-class File::AccessError : public std::runtime_error {
+class File::AccessError : public ExceptionWithBacktrace<std::runtime_error> {
 public:
     AccessError(const std::string& msg, const std::string& path);
 
@@ -887,7 +888,7 @@ public:
     /// no associated file system path, or if the file system path is unknown.
     std::string get_path() const;
 
-    const char* what() const noexcept
+    const char* message() const noexcept
     {
         m_buffer = std::runtime_error::what();
         if (m_path.size() > 0)
@@ -1109,7 +1110,10 @@ inline void File::MapBase::remap(const File& f, AccessMode a, size_t size, int m
 {
     REALM_ASSERT(m_addr);
 
-    m_addr = f.remap(m_addr, m_size, a, size, map_flags);
+    //m_addr = f.remap(m_addr, m_size, a, size, map_flags);
+    // missing sync() here?
+    unmap();
+    map(f, a, size, map_flags);
     m_size = size;
     m_fd = f.m_fd;
 }
@@ -1252,7 +1256,7 @@ inline void File::Streambuf::flush()
 }
 
 inline File::AccessError::AccessError(const std::string& msg, const std::string& path)
-    : std::runtime_error(msg)
+    : ExceptionWithBacktrace<std::runtime_error>(msg)
     , m_path(path)
 {
 }

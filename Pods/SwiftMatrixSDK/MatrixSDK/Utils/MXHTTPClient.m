@@ -778,7 +778,7 @@ static NSUInteger requestCount = 0;
 - (void)cancel
 {
     NSLog(@"[MXHTTPClient] cancel");
-    [httpManager invalidateSessionCancelingTasks:YES];
+    [httpManager invalidateSessionCancelingTasks:YES resetSession:YES];
 }
 
 - (void)setUpNetworkReachibility

@@ -52,7 +52,7 @@ static NSArray<MXEventTypeString> *kMXSecretShareEventTypes;
 - (MXHTTPOperation *)requestSecret:(NSString*)secretId
                        toDeviceIds:(nullable NSArray<NSString*>*)deviceIds
                            success:(void (^)(NSString *requestId))success
-                  onSecretReceived:(void (^)(NSString *secret))onSecretReceived
+                  onSecretReceived:(BOOL (^)(NSString *secret))onSecretReceived
                            failure:(void (^)(NSError *error))failure
 {
     NSLog(@"[MXSecretShareManager] requestSecret: %@ to %@", secretId, deviceIds);
@@ -408,9 +408,15 @@ static NSArray<MXEventTypeString> *kMXSecretShareEventTypes;
         return;
     }
     
-    pendingRequest.onSecretReceivedBlock(shareSend.secret);
-    
-    [self cancelRequestWithRequestId:shareSend.requestId success:^{} failure:^(NSError * _Nonnull error) {}];
+    if (pendingRequest.onSecretReceivedBlock(shareSend.secret))
+    {
+        NSLog(@"[MXSecretShareManager] handleSecretSendEvent: Secret has been validated. Cancel the request %@", shareSend.requestId);
+        [self cancelRequestWithRequestId:shareSend.requestId success:^{} failure:^(NSError * _Nonnull error) {}];
+    }
+    else
+    {
+        NSLog(@"[MXSecretShareManager] handleSecretSendEvent: Not valid secret. Keep request %@ on", shareSend.requestId);
+    }
 }
 
 @end

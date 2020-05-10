@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) MXSecretShareRequest *request;
 @property (nonatomic, nullable) NSArray<NSString *> *requestedDeviceIds;
-@property (nonatomic, copy) void (^onSecretReceivedBlock)(NSString *secret);
+@property (nonatomic, copy) BOOL (^onSecretReceivedBlock)(NSString *secret);
 
 @end
 

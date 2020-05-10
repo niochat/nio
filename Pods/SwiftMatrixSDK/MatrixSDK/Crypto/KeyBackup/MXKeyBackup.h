@@ -360,6 +360,8 @@ FOUNDATION_EXPORT NSString *const kMXKeyBackupDidStateChangeNotification;
                                   failure:(nullable void (^)(NSError *error))failure;
 
 
+#pragma mark - Private keys sharing
+
 /**
  Request backup private keys from other devices.
  
