@@ -83,11 +83,10 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
 
     var editBadgeView: some View {
         let foregroundColor = Color.backgroundColor(for: colorScheme)
-        return BadgeView(
-            image: Image(Asset.Badge.edited.name),
-            foregroundColor: foregroundColor,
-            backgroundColor: backgroundColor
-        )
+        return BadgeView(image: Image(Asset.Badge.edited.name),
+                         foregroundColor: foregroundColor,
+                         backgroundColor: backgroundColor)
+            .frame(width: 20.0, height: 20.0)
     }
 
     var bodyView: some View {
