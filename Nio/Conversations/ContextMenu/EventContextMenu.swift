@@ -19,14 +19,14 @@ private struct EventContextMenuViewModel {
             kMXEventTypeStringRoomMessage
         ]
 
-        if reactableEvents.contains(event.type) {
+        if reactableEvents.contains(event.type ?? "") {
             canReact = true
 //            canReply = true
         }
 
         // TODO: Redacting messages is a powerlevel thing, you can't only redact your own.
         if event.sender == userId
-            && reactableEvents.contains(event.type)
+            && reactableEvents.contains(event.type ?? "")
             && !event.isRedactedEvent() {
             canEdit = true
             canRedact = true
