@@ -7,7 +7,6 @@ struct ReactionGroupView: View {
     let backgroundColor: Color
 
     public init(text: String, count: Int, backgroundColor: Color) {
-        assert(text.isSingleEmoji, "Expected single emoji")
         assert(count > 0, "Expected non-zero positive integer")
 
         self.text = text
