@@ -11,13 +11,6 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
     var connectedEdges: ConnectedEdges
     var isEdited = false
 
-    var textColor: Color {
-        if model.sender == userId {
-            return .lightText(for: colorScheme, with: colorSchemeContrast)
-        }
-        return .primaryText(for: colorScheme, with: colorSchemeContrast)
-    }
-
     var isMe: Bool {
         model.sender == userId
     }

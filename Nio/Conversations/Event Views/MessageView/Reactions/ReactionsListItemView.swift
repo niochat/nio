@@ -18,12 +18,9 @@ struct ReactionsListItemView: View {
     var body: some View {
         HStack {
             Text(self.reaction.reaction)
-                .foregroundColor(Color.primaryText(for: colorScheme, with: colorSchemeContrast))
             Text(self.reaction.sender)
-                .foregroundColor(Color.primaryText(for: colorScheme, with: colorSchemeContrast))
             Spacer()
             Text(timestamp)
-                .foregroundColor(Color.primaryText(for: colorScheme, with: colorSchemeContrast))
                 .font(.footnote)
         }
     }
