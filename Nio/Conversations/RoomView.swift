@@ -101,7 +101,7 @@ struct RoomView: View {
                     .padding(.horizontal)
             }
             if !(room.room.typingUsers?.filter { $0 != userId }.isEmpty ?? false) {
-                TypingIndicatorView()
+                TypingIndicatorContainerView()
             }
             MessageComposerView(
                 message: $message,
