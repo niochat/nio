@@ -28,14 +28,6 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
         }
     }
 
-    var textColor: Color {
-        if isMe {
-            return .lightText(for: colorScheme, with: colorSchemeContrast)
-        } else {
-            return .primaryText(for: colorScheme, with: colorSchemeContrast)
-        }
-    }
-
     var backgroundColor: Color {
         if isMe {
             return .accentColor
@@ -84,6 +76,7 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
     var markdownView: some View {
         MarkdownText(
             markdown: .constant(model.text),
+            textColor: .messageTextColor(for: colorScheme, isOutgoing: isMe),
             linkTextAttributes: [
                 .foregroundColor: linkColor,
                 .underlineStyle: NSUnderlineStyle.single.rawValue,

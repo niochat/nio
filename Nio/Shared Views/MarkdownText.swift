@@ -4,6 +4,7 @@ import CommonMarkAttributedString
 
 struct MarkdownText: View {
     @Binding var markdown: String
+    var textColor: UIColor
 
     @State private var calculatedHeight: CGFloat = 0.0
 
@@ -13,18 +14,20 @@ struct MarkdownText: View {
 
     public init(
         markdown: Binding<String>,
+        textColor: UIColor,
         linkTextAttributes: [NSAttributedString.Key: Any]? = nil,
         onLinkInteraction: (((URL, UITextItemInteraction) -> Bool))? = nil
     ) {
         self._markdown = markdown
+        self.textColor = textColor.resolvedColor(with: .current)
         self.linkTextAttributes = linkTextAttributes
         self.onLinkInteraction = onLinkInteraction
     }
 
-    internal static var attributes: [NSAttributedString.Key: Any] {
+    internal var attributes: [NSAttributedString.Key: Any] {
         [
             NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body),
-            NSAttributedString.Key.foregroundColor: UIColor.label,
+            NSAttributedString.Key.foregroundColor: self.textColor,
         ]
     }
 
@@ -32,7 +35,7 @@ struct MarkdownText: View {
         Binding<NSAttributedString>(
             get: {
                 let markdownString = self.markdown.trimmingCharacters(in: .whitespacesAndNewlines)
-                let attributes = Self.attributes
+                let attributes = self.attributes
                 let attributedString = try? NSAttributedString(
                     commonmark: markdownString,
                     attributes: attributes
@@ -87,6 +90,7 @@ struct MarkdownText_Previews: PreviewProvider {
         """#
         return MarkdownText(
             markdown: .constant(markdownString),
+            textColor: .messageTextColor(for: .light, isOutgoing: false),
             linkTextAttributes: [
                 .foregroundColor: UIColor.blue,
                 .underlineStyle: NSUnderlineStyle.single.rawValue,

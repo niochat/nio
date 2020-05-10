@@ -10,27 +10,24 @@ extension Color {
             return .white
         }
     }
+}
 
-    static func lightText(for colorScheme: ColorScheme,
-                          with colorSchemeContrast: ColorSchemeContrast) -> Color {
-        if colorSchemeContrast == .standard {
+extension UIColor {
+    /// Color of text that is shown on top of the accent color, e.g. badges.
+    static func textOnAccentColor(for colorScheme: ColorScheme) -> UIColor {
+        messageTextColor(for: colorScheme, isOutgoing: true)
+    }
+
+    static func messageTextColor(for colorScheme: ColorScheme,
+                                 isOutgoing: Bool) -> UIColor {
+        if isOutgoing {
             return .white
         }
         switch colorScheme {
-        case .light:
-            return .white
         case .dark:
-            return .black
-        @unknown default:
             return .white
+        default:
+            return .black
         }
-    }
-
-    static func primaryText(for colorScheme: ColorScheme,
-                            with colorSchemeContrast: ColorSchemeContrast) -> Color {
-        if colorSchemeContrast == .standard {
-            return .primary
-        }
-        return .black
     }
 }

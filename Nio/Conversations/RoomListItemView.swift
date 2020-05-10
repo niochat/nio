@@ -63,7 +63,7 @@ struct RoomListItemView: View {
             .allowsTightening(true)
             .padding(10 * sizeCategory.scalingFactor)
             .aspectRatio(1.0, contentMode: .fill)
-            .foregroundColor(.lightText(for: colorScheme, with: colorSchemeContrast))
+            .foregroundColor(.init(UIColor.textOnAccentColor(for: colorScheme)))
             .background(
                 Circle()
                     .foregroundColor(.accentColor)
@@ -120,7 +120,7 @@ struct RoomListItemView: View {
             .font(.caption)
             .lineLimit(1)
             .allowsTightening(true)
-            .foregroundColor(.lightText(for: colorScheme, with: colorSchemeContrast))
+            .foregroundColor(.init(UIColor.textOnAccentColor(for: colorScheme)))
             // Make sure we get enough "breathing air" around the number:
             .padding(.vertical, 3 * sizeCategory.scalingFactor)
             .padding(.horizontal, 6 * sizeCategory.scalingFactor)

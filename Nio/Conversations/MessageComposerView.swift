@@ -44,10 +44,6 @@ struct MessageComposerView: View {
     var onCancel: () -> Void
     var onCommit: () -> Void
 
-    var textColor: Color {
-        .primaryText(for: colorScheme, with: colorSchemeContrast)
-    }
-
     var backgroundColor: Color {
         colorScheme == .light ? Color(#colorLiteral(red: 0.9332506061, green: 0.937307477, blue: 0.9410644174, alpha: 1)) : Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1))
     }
