@@ -38,9 +38,9 @@
 "composer.accessibility-label.send" = "Senden";
 "composer.accessibility-label.cancelEdit" = "Abbrechen";
 
-"typing-indicator.single" = "%@ tippt...";
-"typing-indicator.multiple" = "%@ tippen...";
-"typing-indicator.many" = "Mehrere Leute tippen...";
+"typing-indicator.single" = "%@ tippt";
+"typing-indicator.multiple" = "%@ und %@ tippen";
+"typing-indicator.many" = "Mehrere Leute tippen";
 
 "event.unknown-sender-fallback" = "Unbekannt";
 "event.unknown-room-name-fallback" = "Unbekannt";

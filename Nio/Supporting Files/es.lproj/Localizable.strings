@@ -33,9 +33,9 @@
 "composer.accessibility-label.send-file" = "Enviar archivo";
 "composer.accessibility-label.send" = "Enviar";
 "composer.accessibility-label.cancelEdit" = "Cancelar";
-"typing-indicator.single" = "%@ está escribiendo...";
-"typing-indicator.multiple" = "%@ están escribiendo...";
-"typing-indicator.many" = "Múltiples usuarios están escribiendo...";
+"typing-indicator.single" = "%@ está escribiendo";
+"typing-indicator.multiple" = "%@ y %@ están escribiendo";
+"typing-indicator.many" = "Múltiples personas están escribiendo";
 "event.unknown-sender-fallback" = "Desconocido";
 "event.unknown-room-name-fallback" = "Desconocido";
 "event.room-member.invited" = "%@ invitó a %@";

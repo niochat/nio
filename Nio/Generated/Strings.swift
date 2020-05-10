@@ -242,15 +242,15 @@ internal enum L10n {
   }
 
   internal enum TypingIndicator {
-    /// Several people are typing...
+    /// Several people are typing
     internal static let many = L10n.tr("Localizable", "typing-indicator.many")
-    /// %@ are typing...
-    internal static func multiple(_ p1: String) -> String {
-      return L10n.tr("Localizable", "typing-indicator.multiple", p1)
-    }
-    /// %@ is typing...
+    /// %@ is typing
     internal static func single(_ p1: String) -> String {
       return L10n.tr("Localizable", "typing-indicator.single", p1)
+    }
+    /// %@ and %@ are typing
+    internal static func two(_ p1: String, _ p2: String) -> String {
+      return L10n.tr("Localizable", "typing-indicator.two", p1, p2)
     }
   }
 }

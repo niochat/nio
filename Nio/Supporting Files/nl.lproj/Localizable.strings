@@ -38,9 +38,9 @@
 "composer.accessibility-label.send" = "Verstuur";
 "composer.accessibility-label.cancelEdit" = "Annuleer";
 
-"typing-indicator.single" = "%@ is aan het typen...";
-"typing-indicator.multiple" = "%@ zijn aan het typen...";
-"typing-indicator.many" = "Meerdere personen zijn aan het typen...";
+"typing-indicator.single" = "%@ is aan het typen";
+"typing-indicator.multiple" = "%@ en %@ zijn aan het typen";
+"typing-indicator.many" = "Meerdere personen zijn aan het typen";
 
 "event.unknown-sender-fallback" = "Onbekend";
 "event.unknown-room-name-fallback" = "Onbekend";

@@ -38,9 +38,9 @@
 "composer.accessibility-label.send" = "Send";
 "composer.accessibility-label.cancelEdit" = "Cancel";
 
-"typing-indicator.single" = "%@ is typing...";
-"typing-indicator.multiple" = "%@ are typing...";
-"typing-indicator.many" = "Several people are typing...";
+"typing-indicator.single" = "%@ is typing";
+"typing-indicator.two" = "%@ and %@ are typing";
+"typing-indicator.many" = "Several people are typing";
 
 "event.unknown-sender-fallback" = "Unknown";
 "event.unknown-room-name-fallback" = "Unknown";
