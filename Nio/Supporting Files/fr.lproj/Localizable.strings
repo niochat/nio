@@ -28,9 +28,9 @@
 "composer.accessibility-label.send-file" = "Envoyer un fichier";
 "composer.accessibility-label.send" = "Envoyer";
 "composer.accessibility-label.cancelEdit" = "Annuler";
-"typing-indicator.single" = "%@ écrit…";
+"typing-indicator.single" = "%@ écrit";
 "typing-indicator.multiple" = "%@ écrivent...";
-"typing-indicator.many" = "Plusieurs personnes écrivent...";
+"typing-indicator.many" = "Plusieurs personnes écrivent";
 "event.unknown-sender-fallback" = "Inconnu";
 "event.unknown-room-name-fallback" = "Inconnu";
 "event.room-member.invited" = "%@ a invité %@";
