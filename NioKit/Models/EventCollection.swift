@@ -1,10 +1,10 @@
 import Foundation
 import SwiftMatrixSDK
 
-struct EventCollection {
-    var wrapped: [MXEvent]
+public struct EventCollection {
+    internal var wrapped: [MXEvent]
 
-    init(_ events: [MXEvent]) {
+    public init(_ events: [MXEvent]) {
         self.wrapped = events
     }
 
@@ -18,15 +18,15 @@ struct EventCollection {
 
     /// Events that can be directly rendered in the timeline with a corresponding view. This for example does not
     /// include reactions, which are instead rendered as accessories on their corresponding related events.
-    var renderableEvents: [MXEvent] {
+    public var renderableEvents: [MXEvent] {
         wrapped.filter { Self.renderableEventTypes.contains($0.type) }
     }
 
-    func relatedEvents(of event: MXEvent) -> [MXEvent] {
+    public func relatedEvents(of event: MXEvent) -> [MXEvent] {
         wrapped.filter { $0.relatesTo?.eventId == event.eventId }
     }
 
-    func reactions(for event: MXEvent) -> [Reaction] {
+    public func reactions(for event: MXEvent) -> [Reaction] {
         relatedEvents(of: event)
             .filter { $0.type == kMXEventTypeStringReaction }
             .compactMap { event in
@@ -52,11 +52,11 @@ struct EventCollection {
 // MARK: Grouping
 
 extension EventCollection {
-    static let groupableEventTypes = [
+    public static let groupableEventTypes = [
         kMXEventTypeStringRoomMessage,
     ]
 
-    func connectedEdges(of event: MXEvent) -> ConnectedEdges {
+    public func connectedEdges(of event: MXEvent) -> ConnectedEdges {
         guard let idx = wrapped.firstIndex(of: event) else {
             fatalError("Event not found in event collection.")
         }
@@ -108,9 +108,13 @@ extension EventCollection {
     }
 }
 
-struct ConnectedEdges: OptionSet {
-    let rawValue: Int
+public struct ConnectedEdges: OptionSet {
+    public let rawValue: Int
 
-    static let topEdge: Self = .init(rawValue: 1 << 0)
-    static let bottomEdge: Self = .init(rawValue: 1 << 1)
+    public static let topEdge: Self = .init(rawValue: 1 << 0)
+    public static let bottomEdge: Self = .init(rawValue: 1 << 1)
+
+    public init(rawValue: Int) {
+        self.rawValue = rawValue
+    }
 }

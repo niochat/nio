@@ -2,10 +2,12 @@ import SwiftUI
 import SwiftMatrixSDK
 import SDWebImageSwiftUI
 
+import NioKit
+
 struct RoomListItemContainerView: View {
     @EnvironmentObject var store: AccountStore
 
-    var room: NIORoom
+    public var room: NIORoom
 
     var body: some View {
         let roomName = room.summary.displayname ?? ""

@@ -1,5 +1,7 @@
 import SwiftUI
 
+import NioKit
+
 struct MessageView<Model>: View where Model: MessageViewModelProtocol {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.sizeCategory) var sizeCategory: ContentSizeCategory

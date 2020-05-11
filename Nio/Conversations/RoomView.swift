@@ -3,6 +3,8 @@ import Combine
 import KeyboardObserving
 import SwiftMatrixSDK
 
+import NioKit
+
 struct RoomContainerView: View {
     @ObservedObject var room: NIORoom
 

@@ -1,6 +1,8 @@
 import SwiftUI
 import SwiftMatrixSDK
 
+import NioKit
+
 struct EventContainerView: View {
     var event: MXEvent
     var reactions: [Reaction]

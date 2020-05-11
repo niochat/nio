@@ -13,3 +13,13 @@ target 'NioTests' do
   use_frameworks!
   common
 end
+
+target 'NioKit' do
+  use_frameworks!
+  common
+end
+
+target 'NioKitTests' do
+  use_frameworks!
+  common
+end

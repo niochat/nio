@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftMatrixSDK
+import NioKit
 
 struct GroupedReactionsView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme

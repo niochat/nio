@@ -1,10 +1,10 @@
 import SwiftUI
 
-struct ReactionGroupView: View {
-    let text: String
-    let count: Int
+public struct ReactionGroupView: View {
+    public let text: String
+    public let count: Int
 
-    let backgroundColor: Color
+    public let backgroundColor: Color
 
     public init(text: String, count: Int, backgroundColor: Color) {
         assert(count > 0, "Expected non-zero positive integer")
@@ -14,7 +14,7 @@ struct ReactionGroupView: View {
         self.backgroundColor = backgroundColor
     }
 
-    var body: some View {
+    public var body: some View {
         return HStack(spacing: 1) {
             Text(self.text)
             Text(String(self.count))

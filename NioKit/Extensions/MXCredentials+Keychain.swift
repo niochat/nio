@@ -2,7 +2,7 @@ import SwiftMatrixSDK
 import KeychainAccess
 
 extension MXCredentials {
-    func save(to keychain: Keychain) {
+    public func save(to keychain: Keychain) {
         guard
             let homeserver = self.homeServer,
             let userId = self.userId,
@@ -17,14 +17,14 @@ extension MXCredentials {
         keychain["deviceId"] = deviceId
     }
 
-    func clear(from keychain: Keychain) {
+    public func clear(from keychain: Keychain) {
         keychain["homeserver"] = nil
         keychain["userId"] = nil
         keychain["accessToken"] = nil
         keychain["deviceId"] = nil
     }
 
-    static func from(_ keychain: Keychain) -> MXCredentials? {
+    public static func from(_ keychain: Keychain) -> MXCredentials? {
         guard
             let homeserver = keychain["homeserver"],
             let userId = keychain["userId"],
@@ -33,7 +33,11 @@ extension MXCredentials {
         else {
             return nil
         }
-        let credentials = MXCredentials(homeServer: homeserver, userId: userId, accessToken: accessToken)
+        let credentials = MXCredentials(
+            homeServer: homeserver,
+            userId: userId,
+            accessToken: accessToken
+        )
         credentials.deviceId = deviceId
         return credentials
     }

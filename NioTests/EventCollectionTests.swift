@@ -1,6 +1,8 @@
 import XCTest
 import SwiftMatrixSDK
+
 @testable import Nio
+@testable import NioKit
 
 //swiftlint:disable identifier_name
 

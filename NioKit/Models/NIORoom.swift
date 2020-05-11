@@ -1,13 +1,33 @@
 import Foundation
 import Combine
+
 import SwiftMatrixSDK
 
-class NIORoom: ObservableObject {
-    var room: MXRoom
+public class NIORoom: ObservableObject {
+    public var room: MXRoom
 
-    @Published var summary: NIORoomSummary
+    @Published
+    public var summary: NIORoomSummary
 
-    init(_ room: MXRoom) {
+    internal var eventCache: [MXEvent] = []
+
+    public var isDirect: Bool {
+        room.isDirect
+    }
+
+    public var lastMessage: String {
+        let lastMessageEvent = eventCache.last {
+            $0.type == kMXEventTypeStringRoomMessage
+        }
+        if lastMessageEvent?.isEdit() ?? false {
+            let newContent = lastMessageEvent?.content["m.new_content"]! as? NSDictionary
+            return newContent?["body"] as? String ?? ""
+        } else {
+            return lastMessageEvent?.content["body"] as? String ?? ""
+        }
+    }
+    
+    public init(_ room: MXRoom) {
         self.room = room
         self.summary = NIORoomSummary(room.summary)
 
@@ -18,7 +38,7 @@ class NIORoom: ObservableObject {
         self.eventCache.append(contentsOf: currentBatch)
     }
 
-    func add(event: MXEvent, direction: MXTimelineDirection, roomState: MXRoomState?) {
+    public func add(event: MXEvent, direction: MXTimelineDirection, roomState: MXRoomState?) {
         print("New event of type: \(event.type!)")
 
         switch direction {
@@ -31,31 +51,13 @@ class NIORoom: ObservableObject {
         self.objectWillChange.send()
     }
 
-    private var eventCache: [MXEvent] = []
-
-    func events() -> EventCollection {
+    public func events() -> EventCollection {
         return EventCollection(eventCache)
-    }
-
-    var isDirect: Bool {
-        room.isDirect
-    }
-
-    var lastMessage: String {
-        let lastMessageEvent = eventCache.last {
-            $0.type == kMXEventTypeStringRoomMessage
-        }
-        if lastMessageEvent?.isEdit() ?? false {
-            let newContent = lastMessageEvent?.content["m.new_content"]! as? NSDictionary
-            return newContent?["body"] as? String ?? ""
-        } else {
-            return lastMessageEvent?.content["body"] as? String ?? ""
-        }
     }
 
     // MARK: Sending Events
 
-    func send(text: String) {
+    public func send(text: String) {
         guard !text.isEmpty else { return }
         //swiftlint:disable:next redundant_optional_initialization
         var localEcho: MXEvent? = nil
@@ -66,7 +68,7 @@ class NIORoom: ObservableObject {
         self.objectWillChange.send()
     }
 
-    func react(toEventId eventId: String, emoji: String) {
+    public func react(toEventId eventId: String, emoji: String) {
         // swiftlint:disable:next force_try
         let content = try! ReactionEvent(eventId: eventId, key: emoji).encodeContent()
         //swiftlint:disable:next redundant_optional_initialization
@@ -76,7 +78,7 @@ class NIORoom: ObservableObject {
         }
     }
 
-    func edit(text: String, eventId: String) {
+    public func edit(text: String, eventId: String) {
         guard !text.isEmpty else { return }
         //swiftlint:disable:next redundant_optional_initialization
         var localEcho: MXEvent? = nil
@@ -89,13 +91,13 @@ class NIORoom: ObservableObject {
         self.objectWillChange.send()
     }
 
-    func redact(eventId: String, reason: String?) {
+    public func redact(eventId: String, reason: String?) {
         room.redactEvent(eventId, reason: reason) { response in
             self.objectWillChange.send()
         }
     }
 
-    func sendImage(image: UIImage) {
+    public func sendImage(image: UIImage) {
         guard let imageData = image.jpeg(.lowest) else { return }
         //swiftlint:disable:next redundant_optional_initialization
         var localEcho: MXEvent? = nil
@@ -111,19 +113,19 @@ class NIORoom: ObservableObject {
         }
     }
 
-    func markAllAsRead() {
+    public func markAllAsRead() {
         room.markAllAsRead()
     }
 }
 
 extension NIORoom: Identifiable {
-    var id: ObjectIdentifier {
+    public var id: ObjectIdentifier {
         room.id
     }
 }
 
 extension UIImage {
-    enum JPEGQuality: CGFloat {
+    public enum JPEGQuality: CGFloat {
         case lowest  = 0
         case low     = 0.25
         case medium  = 0.5
@@ -131,7 +133,7 @@ extension UIImage {
         case highest = 1
     }
 
-    func jpeg(_ jpegQuality: JPEGQuality) -> Data? {
+    public func jpeg(_ jpegQuality: JPEGQuality) -> Data? {
         return jpegData(compressionQuality: jpegQuality.rawValue)
     }
 }
