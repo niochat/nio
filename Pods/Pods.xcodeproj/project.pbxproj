@@ -23,7 +23,7 @@
 		03DD88A65312B52DE7B5C52B1EBFB03B /* pickle.h in Headers */ = {isa = PBXBuildFile; fileRef = CD6D492580D29DB9456D95C8C728C777 /* pickle.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		047EA6760D20FB3BF886B90965E04DE9 /* MXLoginPolicy.h in Headers */ = {isa = PBXBuildFile; fileRef = CAB37BDF054CF9A19D294192FA51C7A2 /* MXLoginPolicy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		052EECE7D753F37F47B2707C5C75D89F /* account.hh in Headers */ = {isa = PBXBuildFile; fileRef = A5487DBE20AFDB8DFEE7B82C3A6C753A /* account.hh */; settings = {ATTRIBUTES = (Project, ); }; };
-		05589E69A4CC873F48657190DC85E715 /* Pods-NioTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EA584B23FAF0684A1BA8F4281EBCADE1 /* Pods-NioTests-dummy.m */; };
+		05589E69A4CC873F48657190DC85E715 /* Pods-NioTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB63C8B6A0957C32ADC669CD6F83943 /* Pods-NioTests-dummy.m */; };
 		055CB3DA90720510DF13B67FF4F571F2 /* MXRoomSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EF6E8671868A1EFA9E7E37D63ACFDB /* MXRoomSummary.m */; };
 		057A949D6D6FA340C8F29CB41CB411E4 /* MXMegolmBackupCreationInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C592A2A6D9E9A982D8DB1BAF1BDC1B4 /* MXMegolmBackupCreationInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		05E1F7F2C531E10E1615CC65F7A8C8CE /* OLMUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 708D94B39F117F1FBE8CE0F429051D30 /* OLMUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -93,7 +93,7 @@
 		188017F725B43970E7ACE6AB8EF78536 /* RLMProperty_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F288D9AAB9216A1701793356F0FF35B /* RLMProperty_Private.h */; };
 		1881EAAC9CB5B6C34B7AE3D0557197D6 /* MXPushRuleConditionChecker.h in Headers */ = {isa = PBXBuildFile; fileRef = B6D7674F818D5BC5C559B253A74341F5 /* MXPushRuleConditionChecker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		18CA059FF9C3924116E3D5FD74C581EC /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4707DEF07552CC49F3B8B5CE719A60B4 /* AFNetworking.framework */; };
-		18EBF3A92B0351C92A31F9E4D36BB94E /* Pods-Nio-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A4ED3646E3DD9AA225E537CA76AB264 /* Pods-Nio-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		18EBF3A92B0351C92A31F9E4D36BB94E /* Pods-Nio-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C0C4ACDB23913F3B289641D0A630B2D4 /* Pods-Nio-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		193937B8765E069B6840E374D80EEF7E /* RLMSchema_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = E32DC433DC9C724FF32AEC4C70F59A70 /* RLMSchema_Private.h */; };
 		193F49E3D11E5D0ADBFFA5DD83464882 /* OLMSerializable.h in Headers */ = {isa = PBXBuildFile; fileRef = 08C8A1FD84282B14D98ECDD44DABC811 /* OLMSerializable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		198E8A870879305729B9CF2B61E0E753 /* MXReplyEventFormattedBodyParts.h in Headers */ = {isa = PBXBuildFile; fileRef = 909F11ED1D54692FBAFF752F451C1167 /* MXReplyEventFormattedBodyParts.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -101,6 +101,7 @@
 		19D44B3F8F8CB10DEEDCDD0958455518 /* RLMListBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 219379ED171C007D6CD4D1C6DE2498DB /* RLMListBase.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"4.4.1\"' -D__ASSERTMACROS__ -DREALM_ENABLE_SYNC"; }; };
 		1A259D3A0A2AF1483AF227B0F621B399 /* OLMKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A14DA82BA4A51E0B25CD1B3D03B6E09E /* OLMKit.m */; settings = {COMPILER_FLAGS = "-g -O3 -DOLMLIB_VERSION_MAJOR=3 -DOLMLIB_VERSION_MINOR=1 -DOLMLIB_VERSION_PATCH=0"; }; };
 		1A63B63F36883B0C1CD7D6A08DF256A7 /* RLMAccessor.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FA82348E82740A7B6912D870C5D8BE /* RLMAccessor.h */; };
+		1A82B13F8B566A6AB489EEB8E545025B /* Pods-NioKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 799E353310F8BA716B35BC67EFAB6058 /* Pods-NioKit-dummy.m */; };
 		1AEAF56FFB5514A45522C40EF3AF386A /* MXEncryptedContentFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E5FD47BD3403948C682FEA950BDD424 /* MXEncryptedContentFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B6E9323A6C7065234CC6CC7FB630EB6 /* MXPushRuleDisplayNameCondtionChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = FEADB071507AC3B0979EBA0C3024ACBF /* MXPushRuleDisplayNameCondtionChecker.m */; };
 		1B965D9D0E33C7CCBBFA059C6C36BA00 /* MXSendReplyEventDefaultStringLocalizations.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D86E52220123F9E4FF14E67950F05F1 /* MXSendReplyEventDefaultStringLocalizations.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -297,7 +298,7 @@
 		56C06D233617A2A9EDCDBEB98F5B4F60 /* MXRoomSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C467C8A1E1059C3355EAA4A76392054C /* MXRoomSummary.swift */; };
 		56D505115501AE98C712D61327D2F965 /* results_notifier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 970EEAD2C05B6E1973DB5955F315B2D3 /* results_notifier.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"4.4.1\"' -D__ASSERTMACROS__ -DREALM_ENABLE_SYNC"; }; };
 		57A6467BA187DE26E9976800BEEBF6E7 /* MXContentScanEncryptedBody.h in Headers */ = {isa = PBXBuildFile; fileRef = A8EBE5B3236BA612D4C32A36465F46DC /* MXContentScanEncryptedBody.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		587C13BE2120942E6AEB4F886D82D30D /* Pods-NioTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 37A97CFF265B83FB74BF8536A08DCBE2 /* Pods-NioTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		587C13BE2120942E6AEB4F886D82D30D /* Pods-NioTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F595427A9CCB8E7942E36B6CABE3366 /* Pods-NioTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5898EA25918438BC0B55CB66BC8CD7D1 /* MXDiscoveredClientConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = E9063DAA79B11AFFCD98876A6A3AA474 /* MXDiscoveredClientConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		58A3289F513C33D6DE123AE8A5763155 /* ratchet.hh in Headers */ = {isa = PBXBuildFile; fileRef = 2448C2F61CA82B16966211ED339692CB /* ratchet.hh */; settings = {ATTRIBUTES = (Project, ); }; };
 		58B0BEF9C065F4B0BAA12A03FE470E01 /* MXDeviceTrustLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 483072B730C4D26D3CA02ABBD94AA40C /* MXDeviceTrustLevel.m */; };
@@ -455,6 +456,7 @@
 		88FBD38AC76DAC39E395870C0F9B99C9 /* MXKeyVerificationCancel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8ADF0BD36744D1CA307E89B48CB00B3 /* MXKeyVerificationCancel.m */; };
 		894E6C8959335A0E633AAF48FE8DFB32 /* collection_change_builder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C55DF7C51C1A9AAB83009B8434C55A44 /* collection_change_builder.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"4.4.1\"' -D__ASSERTMACROS__ -DREALM_ENABLE_SYNC"; }; };
 		89883BA47C48093B6B0ABDA65B60BCFF /* OLMSAS.h in Headers */ = {isa = PBXBuildFile; fileRef = A599B50F6557FB61B36A97DCEF3F3070 /* OLMSAS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8A6F8062CC2953A6DEA1AA9F33747D9A /* Pods-NioKitTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 991C4EA12F4F97D86AD01A2093A1A590 /* Pods-NioKitTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B290F28FA12EAECB9C6853AFD5577F6 /* MXReactionCountChange.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E1692C789DCB51EE554D608D2CC2CBC /* MXReactionCountChange.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B7F74832A3DA427B86825399469BCF5 /* MXCrossSigningInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 69094470CB94941A823945220CEDF2B4 /* MXCrossSigningInfo.m */; };
 		8B9D79678AFC2313BDBB37E4C08C5AC5 /* OLMPkMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = BCD433E291170EA244604827FCCE0D44 /* OLMPkMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -521,6 +523,7 @@
 		9D6008F35B584B542D6A7B354B43454F /* MXReactionOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A136D344F7EFE8D18E26D4F01C55659F /* MXReactionOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9D601768E5DFFEBBEB56B870E7CBC37F /* MXNoStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E6F98E9FF14158790D76D670AA4A023 /* MXNoStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9D7899383F4DD75992B3905EF2127868 /* MXRealmAggregationsMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 968E90200607725DFEC7AB6357D70376 /* MXRealmAggregationsMapper.m */; };
+		9DE9ED1694BFD5DE0CC2C9D441057CF2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9362671A4079F1F940044B819D7F0F /* Foundation.framework */; };
 		9E3271D44B1F59AFF83FF04B9BFE7952 /* MXCallKitAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC7B87F0E58B996E3AA5FEF3F0A3E68 /* MXCallKitAdapter.m */; };
 		A0358656EE0B274D5B5D4ED79CA742D3 /* MXRoomMembersCount.m in Sources */ = {isa = PBXBuildFile; fileRef = FD394AB77FB8EDBD9A7A4B2A6E95A2B1 /* MXRoomMembersCount.m */; };
 		A03947E2532F4C18B7CD773C099E46BC /* MXAggregationPaginatedResponse_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = CC9F337606F6223F6772D94A7D40E8E4 /* MXAggregationPaginatedResponse_Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -600,6 +603,7 @@
 		B79A160F7B2E9984A6708A4C5A8979BF /* MXServiceTermsRestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E87A0CA55D03369B1B5DFAB0A97FF1F0 /* MXServiceTermsRestClient.m */; };
 		B80CAAC6DC6ACB98AFA2D5FED2D71682 /* RLMCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 364BAC7D1E83D639DEFAF2A60746DCBB /* RLMCollection.h */; };
 		B83B1CA17424975882DA1066536E112B /* AFImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = B6101665FCA253853A98ACFDC18191FC /* AFImageDownloader.m */; };
+		B90B63E89D32235DD78F5C714DB5AE42 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9362671A4079F1F940044B819D7F0F /* Foundation.framework */; };
 		B9B8A1BA926789F0F07587883E1CAD81 /* libbase58-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F7538C0263E5F7FE03DB6EA373A52B0F /* libbase58-dummy.m */; };
 		BA86AF1E7D261AAF8811DD8D6ADBE6C4 /* MXAggregations.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E0A036D4F012AD9A53DF31A4047B917 /* MXAggregations.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BB06F071CA59E0724C78696487E6B431 /* MXHTTPOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C7EC63545EC1C6B7C2CF0C1CF7FD1A6 /* MXHTTPOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -719,7 +723,7 @@
 		E490595679D9CC074466B556BD4CA28E /* MXCryptoTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9509E4418BA9DE9BB1D71736DBD542 /* MXCryptoTools.m */; };
 		E5F653E3E06D31A32F0F351E9D978773 /* primitive_list_notifier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B462858CD253149E2B6C2BBE249696EF /* primitive_list_notifier.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"4.4.1\"' -D__ASSERTMACROS__ -DREALM_ENABLE_SYNC"; }; };
 		E651D078D875325B92375A227AEB50A2 /* MXDecrypting.h in Headers */ = {isa = PBXBuildFile; fileRef = 378794B3598B867A41CD30344B496B06 /* MXDecrypting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E679DA5A5E79AC40245A455DF8F5169D /* Pods-Nio-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5BD80BDB3D820DC337B8F6DD70066D /* Pods-Nio-dummy.m */; };
+		E679DA5A5E79AC40245A455DF8F5169D /* Pods-Nio-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 446B8390EB95D50C90EE96CD0B7F7022 /* Pods-Nio-dummy.m */; };
 		E6BC0F9F99EA12D59A8B8B53D20B8C67 /* MXPushRuleEventMatchConditionChecker.h in Headers */ = {isa = PBXBuildFile; fileRef = B19AC0B49B4C9029F69C5A6616C817C2 /* MXPushRuleEventMatchConditionChecker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E71393DA472E1CF5DF4180F958ACB537 /* MXOutgoingRoomKeyRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 49E7F81FD810DCA5F4F9423664EA4020 /* MXOutgoingRoomKeyRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E74EC5645053D164B02D613C6A1143CD /* MXPeekingRoom.h in Headers */ = {isa = PBXBuildFile; fileRef = D64527390E2D8B79EA92BF9EC94AEDE7 /* MXPeekingRoom.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -750,6 +754,7 @@
 		EDE0907FA6F81F338BACD6BCDA48E6C5 /* RLMRealm+Sync.h in Copy . Public Headers */ = {isa = PBXBuildFile; fileRef = E5DA28A37D76CE2682F2019F47F3DFF6 /* RLMRealm+Sync.h */; };
 		EDF267D62808253C93019D85AC1335FC /* MXCrossSigning_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = E7D0C2AB889D60E2D9D174E743B1D09D /* MXCrossSigning_Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EDFBC697D1B5F713A6AA7B3BA85D3177 /* pickle_encoding.c in Sources */ = {isa = PBXBuildFile; fileRef = E577344E4973443266B53058C3E1F61C /* pickle_encoding.c */; settings = {COMPILER_FLAGS = "-g -O3 -DOLMLIB_VERSION_MAJOR=3 -DOLMLIB_VERSION_MINOR=1 -DOLMLIB_VERSION_PATCH=0 -g -O3 -DOLMLIB_VERSION_MAJOR=3 -DOLMLIB_VERSION_MINOR=1 -DOLMLIB_VERSION_PATCH=0 -std=c99 -fPIC"; }; };
+		EE293A493CD8EABD65674FA195D73949 /* Pods-NioKitTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = ABFD324D4865408FD17AC300D2B6BF67 /* Pods-NioKitTests-dummy.m */; };
 		EE445B29E6D0E0B573FA2633D49C6F51 /* RLMSyncUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 522D7E1D866EE45B776EC8794DB73667 /* RLMSyncUtil.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"4.4.1\"' -D__ASSERTMACROS__ -DREALM_ENABLE_SYNC"; }; };
 		EE8E03E96DF155BE4CF42E5FDEA6E1DB /* MXAllowedCertificates.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F74FBEFFAACB0C88DA0334E454A3D4E /* MXAllowedCertificates.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EEC5644157CAB9372198988D470620D4 /* RLMRealm.h in Headers */ = {isa = PBXBuildFile; fileRef = DBBFFDBF02F7E92EF5EDA2DB391935FA /* RLMRealm.h */; };
@@ -792,6 +797,7 @@
 		F94D0868DE530EA194849B3044606F78 /* MXSecretShareSend.m in Sources */ = {isa = PBXBuildFile; fileRef = D810098FF7B0E9BE92032A8F1C16DC96 /* MXSecretShareSend.m */; };
 		F97EBB3CC145921AF5CF779EB825437F /* MXEventReferenceChunk.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AB66BB4429DE595C7933ADBD6A043E9 /* MXEventReferenceChunk.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA1DD59826A6D412F78FA6BA7F3ECDBC /* message.hh in Headers */ = {isa = PBXBuildFile; fileRef = 32A7A4A6F1CED2AE6042FE59F2630040 /* message.hh */; settings = {ATTRIBUTES = (Project, ); }; };
+		FA38C627870884502A783A0380D0B4E1 /* Pods-NioKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A5559338F5E4810D28B60D6C23A74780 /* Pods-NioKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA92D6D7C46EF097BCC909B7C1CCBF87 /* MXCryptoStore.h in Headers */ = {isa = PBXBuildFile; fileRef = E4CD6452120E08CDFEE9646246598E1E /* MXCryptoStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FB488BD2A928FA10E29BF06EC9E17D79 /* MXRoomAccountData.h in Headers */ = {isa = PBXBuildFile; fileRef = D0D0A4188542D1878D74020097E5C557 /* MXRoomAccountData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FB7F0392FF151B59EE9B21CD2BDF0AC2 /* MXImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D54A2A1EB6C7E83C1B3866E1EA29E0C /* MXImage.swift */; };
@@ -817,12 +823,40 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		024198AC9D087E4C248EB6A5CBE8DFE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 33DF254002528458CD19A971568F13CD;
+			remoteInfo = libbase58;
+		};
 		041A470AD29B973332AF895D92ED30DF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 98111E6E185137E6FA53F88A71819FD1;
 			remoteInfo = OLMKit;
+		};
+		066E5D92710AF64D4FA6A7F68BE186D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B74CDB737C067B57BDC5065CE0E2CDC;
+			remoteInfo = GZIP;
+		};
+		0E579C9D2F026F0544A30B3A6CB12C2D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 33DF254002528458CD19A971568F13CD;
+			remoteInfo = libbase58;
+		};
+		179DA51FE12B6386EC2A9483A0F0DD60 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B74CDB737C067B57BDC5065CE0E2CDC;
+			remoteInfo = GZIP;
 		};
 		1D255A893B9BB963A9CD4FA81BE6BC1D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -873,6 +907,27 @@
 			remoteGlobalIDString = 68494F30B4A13F8E5E88BCCAEC25B0A4;
 			remoteInfo = Realm;
 		};
+		3F851C4573D5EF975BE530782FB885A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 68494F30B4A13F8E5E88BCCAEC25B0A4;
+			remoteInfo = Realm;
+		};
+		54EB48C2B213B21EDF49556E7EA07CEF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 68494F30B4A13F8E5E88BCCAEC25B0A4;
+			remoteInfo = Realm;
+		};
+		57CA4B06055ED2CBED11727D2E5F2C32 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0130B3724283586C0E9D2A112D4F2AA1;
+			remoteInfo = AFNetworking;
+		};
 		7E50870C654729DA3DBEBAC6D3C8CDC5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
@@ -893,6 +948,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 33DF254002528458CD19A971568F13CD;
 			remoteInfo = libbase58;
+		};
+		927C63B97041127CF92E6AB3ABB5A205 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 98111E6E185137E6FA53F88A71819FD1;
+			remoteInfo = OLMKit;
 		};
 		96CBD530766FF4AADE5517D314B44189 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -915,6 +977,13 @@
 			remoteGlobalIDString = 98111E6E185137E6FA53F88A71819FD1;
 			remoteInfo = OLMKit;
 		};
+		C22EDE5EC4942929E65A7A2588CCA395 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 98111E6E185137E6FA53F88A71819FD1;
+			remoteInfo = OLMKit;
+		};
 		CAF60AE90B02ECA95E4DB02DD8A2C4C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
@@ -929,12 +998,33 @@
 			remoteGlobalIDString = 8B74CDB737C067B57BDC5065CE0E2CDC;
 			remoteInfo = GZIP;
 		};
+		D95F881B4E88A6FB118BF5D01352180F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 74CED425E395F817E42D059CE9F151FF;
+			remoteInfo = SwiftMatrixSDK;
+		};
+		E78DF54BC1E32B4E55C6997B5D47DCC1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 74CED425E395F817E42D059CE9F151FF;
+			remoteInfo = SwiftMatrixSDK;
+		};
 		EFD267EEF784C8CB2B4F906D14B478AD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8B74CDB737C067B57BDC5065CE0E2CDC;
 			remoteInfo = GZIP;
+		};
+		F83EB3FDBDC4AF8CDE0E3266C9391869 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0130B3724283586C0E9D2A112D4F2AA1;
+			remoteInfo = AFNetworking;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1009,6 +1099,7 @@
 
 /* Begin PBXFileReference section */
 		0030B86732141FFD8EBE3AF8A0759338 /* MXKeyVerification.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXKeyVerification.m; path = MatrixSDK/Crypto/Verification/Status/MXKeyVerification.m; sourceTree = "<group>"; };
+		0043A78BF7562AAD280050CEC170967C /* Pods-NioKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NioKit-Info.plist"; sourceTree = "<group>"; };
 		0047BD761AA167A1CD2507791184C95B /* MXJSONModels.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXJSONModels.m; path = MatrixSDK/JSONModels/MXJSONModels.m; sourceTree = "<group>"; };
 		008962A283BE0DD82DE46FABAAD2639F /* MXEventAnnotationChunk.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXEventAnnotationChunk.h; path = MatrixSDK/JSONModels/Event/MXEventAnnotationChunk.h; sourceTree = "<group>"; };
 		00E752EC28B8E692790A03B9C28B90A4 /* MXScanRealmFileProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXScanRealmFileProvider.h; path = MatrixSDK/ContentScan/Data/Store/Realm/RealmProvider/MXScanRealmFileProvider.h; sourceTree = "<group>"; };
@@ -1016,7 +1107,6 @@
 		013625A38649AD4C74C4F57FFA4C48D3 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIRefreshControl+AFNetworking.m"; path = "UIKit+AFNetworking/UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		016695E7FB0EB2F057ED7C637CD41C33 /* OLMUtility.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OLMUtility.m; path = xcode/OLMKit/OLMUtility.m; sourceTree = "<group>"; };
 		018539AF78F720E055D396D366F246BF /* MXMemoryRoomStore.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXMemoryRoomStore.m; path = MatrixSDK/Data/Store/MXMemoryStore/MXMemoryRoomStore.m; sourceTree = "<group>"; };
-		01FAED35E1DA64065EE3169099C75538 /* Pods-NioTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-NioTests.modulemap"; sourceTree = "<group>"; };
 		020554B909AB682DD9155D80823C70DD /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLRequestSerialization.h; path = AFNetworking/AFURLRequestSerialization.h; sourceTree = "<group>"; };
 		0310451E3B74D226735B7E0D0E47D6CD /* RLMObject.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = RLMObject.mm; path = Realm/RLMObject.mm; sourceTree = "<group>"; };
 		0319AE2FBF7F4269E1802C308EEA4299 /* Realm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Realm.release.xcconfig; sourceTree = "<group>"; };
@@ -1033,6 +1123,7 @@
 		06C71EE64E3DF8BB0CF3F6A4FC31C847 /* MXWellKnownBaseConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXWellKnownBaseConfig.h; path = MatrixSDK/JSONModels/AutoDiscovery/MXWellKnownBaseConfig.h; sourceTree = "<group>"; };
 		07174ABC8D650984C4D404BBCD1A8A64 /* MXRealmCryptoStore.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXRealmCryptoStore.m; path = MatrixSDK/Crypto/Data/Store/MXRealmCryptoStore/MXRealmCryptoStore.m; sourceTree = "<group>"; };
 		074EA58D038C7521B5B8C43C1ED52918 /* MXContentScanEncryptedBody.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXContentScanEncryptedBody.m; path = MatrixSDK/ContentScan/Data/MXContentScanEncryptedBody.m; sourceTree = "<group>"; };
+		07FA8287C600917B03B9CBF5810BF407 /* Pods-NioKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NioKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		08ABE92BDCBE87978C919BBEFB68BD41 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFHTTPSessionManager.h; path = AFNetworking/AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		08C8A1FD84282B14D98ECDD44DABC811 /* OLMSerializable.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OLMSerializable.h; path = xcode/OLMKit/OLMSerializable.h; sourceTree = "<group>"; };
 		09081426E95526EC00C10715B87045D9 /* sync_manager.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = sync_manager.cpp; path = Realm/ObjectStore/src/sync/sync_manager.cpp; sourceTree = "<group>"; };
@@ -1042,6 +1133,7 @@
 		09975D443155C7511FCA81D0929B663A /* MXOlmSessionResult.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXOlmSessionResult.m; path = MatrixSDK/Crypto/Data/MXOlmSessionResult.m; sourceTree = "<group>"; };
 		09DFF6FC5CB28B24EFE31A88B8E91605 /* AFSecurityPolicy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFSecurityPolicy.h; path = AFNetworking/AFSecurityPolicy.h; sourceTree = "<group>"; };
 		09E9C024481535F7DC4D188B39DB1542 /* MXIdentityServerHashDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXIdentityServerHashDetails.h; path = MatrixSDK/JSONModels/IdentityServer/MXIdentityServerHashDetails.h; sourceTree = "<group>"; };
+		0AB63C8B6A0957C32ADC669CD6F83943 /* Pods-NioTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-NioTests-dummy.m"; sourceTree = "<group>"; };
 		0C18CB6BE111739042BDEE99E0ECE47B /* MXMegolmBackupAuthData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXMegolmBackupAuthData.m; path = MatrixSDK/Crypto/KeyBackup/Data/MXMegolmBackupAuthData.m; sourceTree = "<group>"; };
 		0D0CE315FE24DE188BF3E1F312C8D067 /* MXReactionOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXReactionOperation.m; path = MatrixSDK/Aggregations/Data/MXReactionOperation.m; sourceTree = "<group>"; };
 		0D54A2A1EB6C7E83C1B3866E1EA29E0C /* MXImage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MXImage.swift; path = MatrixSDK/Contrib/Swift/MXImage.swift; sourceTree = "<group>"; };
@@ -1050,7 +1142,6 @@
 		0E2C51212BF314F7FF382F2B012895FF /* session.hh */ = {isa = PBXFileReference; includeInIndex = 1; name = session.hh; path = include/olm/session.hh; sourceTree = "<group>"; };
 		0E9509E4418BA9DE9BB1D71736DBD542 /* MXCryptoTools.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXCryptoTools.m; path = MatrixSDK/Crypto/Utils/MXCryptoTools.m; sourceTree = "<group>"; };
 		0EBD86CD35976881D0FC37C705C5DA28 /* MXKeyVerificationRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXKeyVerificationRequest.h; path = MatrixSDK/Crypto/Verification/Requests/MXKeyVerificationRequest.h; sourceTree = "<group>"; };
-		0EE42175BDC87430359F3FCD15F7EEDB /* Pods-NioTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NioTests.release.xcconfig"; sourceTree = "<group>"; };
 		0F2762553AEA1E5C8CD77C1BE57DFBD2 /* MXPushRuleEventMatchConditionChecker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXPushRuleEventMatchConditionChecker.m; path = MatrixSDK/NotificationCenter/Checker/MXPushRuleEventMatchConditionChecker.m; sourceTree = "<group>"; };
 		0F5E6E6FFB1D2077DC24FEB0A232DF17 /* MXCall.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXCall.m; path = MatrixSDK/VoIP/MXCall.m; sourceTree = "<group>"; };
 		0F65FBA76B85F1B42020ADB1A0F554AF /* results.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = results.cpp; path = Realm/ObjectStore/src/results.cpp; sourceTree = "<group>"; };
@@ -1113,14 +1204,15 @@
 		2065057452CC785316761CEA27408DCD /* MXRecoveryKey.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXRecoveryKey.m; path = MatrixSDK/Crypto/KeyBackup/MXRecoveryKey.m; sourceTree = "<group>"; };
 		20A06F78664C7BCFD7A5719327C11E4C /* UIActivityIndicatorView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIActivityIndicatorView+AFNetworking.h"; path = "UIKit+AFNetworking/UIActivityIndicatorView+AFNetworking.h"; sourceTree = "<group>"; };
 		219379ED171C007D6CD4D1C6DE2498DB /* RLMListBase.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = RLMListBase.mm; path = Realm/RLMListBase.mm; sourceTree = "<group>"; };
+		21EFC94F920176F45E4417A3501A36C0 /* Pods-Nio-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Nio-frameworks.sh"; sourceTree = "<group>"; };
 		2208540CBF59C66022BEA8840616B3EE /* MXRealmMediaScanMapper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXRealmMediaScanMapper.h; path = MatrixSDK/ContentScan/Data/Store/Realm/Media/MXRealmMediaScanMapper.h; sourceTree = "<group>"; };
 		220EDDE0A0039B81450A4A0D1176AD2B /* MXServerNotices.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXServerNotices.h; path = MatrixSDK/Utils/MXServerNotices.h; sourceTree = "<group>"; };
 		22280E62A5D7DC8393567C7C102C0AC2 /* MXEventListener.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXEventListener.h; path = MatrixSDK/Data/MXEventListener.h; sourceTree = "<group>"; };
 		22423F87AB31080AE7EF18E07FF41F82 /* MXCryptoConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXCryptoConstants.h; path = MatrixSDK/Crypto/Data/MXCryptoConstants.h; sourceTree = "<group>"; };
-		22656AA62A0BFBDE9F9F57636EB5EFCE /* Pods-Nio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Nio.debug.xcconfig"; sourceTree = "<group>"; };
 		2267D604E48A73772C0FD3EBFAA1389E /* MXKeyVerificationStatusResolver.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXKeyVerificationStatusResolver.h; path = MatrixSDK/Crypto/Verification/Status/MXKeyVerificationStatusResolver.h; sourceTree = "<group>"; };
 		226CE52C67B83BF2DBEE7CFA0547374A /* MXIdentityServerHashDetails.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXIdentityServerHashDetails.m; path = MatrixSDK/JSONModels/IdentityServer/MXIdentityServerHashDetails.m; sourceTree = "<group>"; };
 		23B0F8AC2E6D95CD1634F23058DC4309 /* MXRoomSummaryUpdater.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXRoomSummaryUpdater.m; path = MatrixSDK/Data/MXRoomSummaryUpdater.m; sourceTree = "<group>"; };
+		23B2244A7AD98A97E4614EDFAD4BA17F /* Pods_NioKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_NioKit.framework; path = "Pods-NioKit.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2448C2F61CA82B16966211ED339692CB /* ratchet.hh */ = {isa = PBXFileReference; includeInIndex = 1; name = ratchet.hh; path = include/olm/ratchet.hh; sourceTree = "<group>"; };
 		253F52E3ABB96F5749BDDD85192A8739 /* MXUser.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXUser.h; path = MatrixSDK/Data/MXUser.h; sourceTree = "<group>"; };
 		2554C9C6976DF887965E0D4157BB30AD /* MXMatrixVersions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXMatrixVersions.m; path = MatrixSDK/JSONModels/MXMatrixVersions.m; sourceTree = "<group>"; };
@@ -1150,6 +1242,7 @@
 		2D053E4750FFA667997A4EBBC0266C6B /* MXMatrixVersions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXMatrixVersions.h; path = MatrixSDK/JSONModels/MXMatrixVersions.h; sourceTree = "<group>"; };
 		2D25F3FEAA5B60F9ACE1F3CF710FABB2 /* sync_permission.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = sync_permission.cpp; path = Realm/ObjectStore/src/sync/sync_permission.cpp; sourceTree = "<group>"; };
 		2D6FC2CD47A410839EEA3AB7BC2685F3 /* inbound_group_session.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = inbound_group_session.h; path = include/olm/inbound_group_session.h; sourceTree = "<group>"; };
+		2D81448D97B761B89D26AB6F2FE18F8D /* Pods_NioKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_NioKitTests.framework; path = "Pods-NioKitTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DFAAB3C0208D68F5DDFF58A0CE5CAEA /* MXAutoDiscovery.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXAutoDiscovery.m; path = MatrixSDK/Data/AutoDiscovery/MXAutoDiscovery.m; sourceTree = "<group>"; };
 		2E08610CC49846D4A7694264CDCC1F77 /* MXSelfVerifyingMasterKeyNotTrustedQRCodeData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXSelfVerifyingMasterKeyNotTrustedQRCodeData.h; path = MatrixSDK/Crypto/Verification/Data/MXSelfVerifyingMasterKeyNotTrustedQRCodeData.h; sourceTree = "<group>"; };
 		2E0A036D4F012AD9A53DF31A4047B917 /* MXAggregations.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXAggregations.h; path = MatrixSDK/Aggregations/MXAggregations.h; sourceTree = "<group>"; };
@@ -1172,6 +1265,7 @@
 		32CD5D4C49510A16490BD3F64975F93B /* MXKeyVerificationRequestByToDeviceJSONModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXKeyVerificationRequestByToDeviceJSONModel.h; path = MatrixSDK/Crypto/Verification/JSONModels/MXKeyVerificationRequestByToDeviceJSONModel.h; sourceTree = "<group>"; };
 		3319353DF32605315F5D1006D956268D /* MXAntivirusScanStatusFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXAntivirusScanStatusFormatter.m; path = MatrixSDK/ContentScan/Data/MXAntivirusScanStatusFormatter.m; sourceTree = "<group>"; };
 		33B1AC8C5229DE6078877E0FF601BCAC /* MXKeyVerificationStatusResolver.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXKeyVerificationStatusResolver.m; path = MatrixSDK/Crypto/Verification/Status/MXKeyVerificationStatusResolver.m; sourceTree = "<group>"; };
+		33E61EBFA1E7EF536C6058CD7DF8F107 /* Pods-NioKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NioKit.debug.xcconfig"; sourceTree = "<group>"; };
 		34004B691EA55294CC6821D976B7A42F /* MXRoomPowerLevels.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MXRoomPowerLevels.swift; path = MatrixSDK/Contrib/Swift/JSONModels/MXRoomPowerLevels.swift; sourceTree = "<group>"; };
 		347D2745D6ED008D72B52B2822B2A4A7 /* MXOutgoingSASTransaction.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXOutgoingSASTransaction.m; path = MatrixSDK/Crypto/Verification/Transactions/SAS/MXOutgoingSASTransaction.m; sourceTree = "<group>"; };
 		34C5F9DEA1845CE84DBFA410CE261524 /* OLMAccount.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OLMAccount.h; path = xcode/OLMKit/OLMAccount.h; sourceTree = "<group>"; };
@@ -1186,22 +1280,24 @@
 		37794326A50E41A178AABB031D65AF05 /* MXEventReferenceChunk.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXEventReferenceChunk.m; path = MatrixSDK/JSONModels/Event/MXEventReferenceChunk.m; sourceTree = "<group>"; };
 		378794B3598B867A41CD30344B496B06 /* MXDecrypting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXDecrypting.h; path = MatrixSDK/Crypto/Algorithms/MXDecrypting.h; sourceTree = "<group>"; };
 		378A04C1432F0B758F786C37803BEAB8 /* MXSecretShareManager_Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXSecretShareManager_Private.h; path = MatrixSDK/Crypto/KeySharing/Secret/MXSecretShareManager_Private.h; sourceTree = "<group>"; };
-		37A97CFF265B83FB74BF8536A08DCBE2 /* Pods-NioTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-NioTests-umbrella.h"; sourceTree = "<group>"; };
 		37B49D31F9F1A42F4654BE155B95EDCA /* RLMSyncSubscription.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMSyncSubscription.h; path = include/RLMSyncSubscription.h; sourceTree = "<group>"; };
 		3840232F94FB660B861DC5DDAF9DC75F /* RLMSyncManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMSyncManager.h; path = include/RLMSyncManager.h; sourceTree = "<group>"; };
 		387D89A6B1004C1A096FD9655B259047 /* MXScanRealmFileProvider.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXScanRealmFileProvider.m; path = MatrixSDK/ContentScan/Data/Store/Realm/RealmProvider/MXScanRealmFileProvider.m; sourceTree = "<group>"; };
 		387F71BC6B483AB5726BE62E95922366 /* MXKeyVerificationByToDeviceRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXKeyVerificationByToDeviceRequest.m; path = MatrixSDK/Crypto/Verification/Requests/MXKeyVerificationByToDeviceRequest.m; sourceTree = "<group>"; };
+		388219E126FE3589E4DE9B5D1CCDAC5B /* Pods-NioKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NioKitTests.release.xcconfig"; sourceTree = "<group>"; };
 		39852E79AD9F658E6433112BFBC4BF34 /* MXAggregatedEditsUpdater.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXAggregatedEditsUpdater.h; path = MatrixSDK/Aggregations/MXAggregatedEditsUpdater.h; sourceTree = "<group>"; };
 		39C846F42CFA088CEAD6519967BAADDA /* MXBugReportRestClient.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXBugReportRestClient.h; path = MatrixSDK/Utils/MXBugReportRestClient.h; sourceTree = "<group>"; };
 		3A01563D4A6609FD6EDC1CDEED1616D3 /* MXQRCodeTransaction.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXQRCodeTransaction.m; path = MatrixSDK/Crypto/Verification/Transactions/QRCode/MXQRCodeTransaction.m; sourceTree = "<group>"; };
 		3A3420F81ACC31F7E38A945E2070C613 /* MXMediaManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXMediaManager.h; path = MatrixSDK/Utils/Media/MXMediaManager.h; sourceTree = "<group>"; };
 		3AD09BD94B09F6B7B28180D9AA52918A /* MXKeyBackupData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXKeyBackupData.h; path = MatrixSDK/Crypto/KeyBackup/Data/MXKeyBackupData.h; sourceTree = "<group>"; };
 		3B15FF209966B54128DBEC5C0BBA38EF /* MXAggregationPaginatedResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXAggregationPaginatedResponse.h; path = MatrixSDK/JSONModels/Aggregations/MXAggregationPaginatedResponse.h; sourceTree = "<group>"; };
+		3B763B94771D9E6B3E867930680AD979 /* Pods-NioTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-NioTests-frameworks.sh"; sourceTree = "<group>"; };
 		3BF5723E0A0374ECD8CD047017BBDD47 /* MXCredentials.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXCredentials.h; path = MatrixSDK/Data/MXCredentials.h; sourceTree = "<group>"; };
 		3C1303961714DFD8377C0E5460822663 /* MXMegolmExportEncryption.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXMegolmExportEncryption.m; path = MatrixSDK/Crypto/Utils/MXMegolmExportEncryption.m; sourceTree = "<group>"; };
 		3C98A274213461D9E182F8448887DC87 /* MXKeyVerificationReady.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXKeyVerificationReady.m; path = MatrixSDK/Crypto/Verification/JSONModels/MXKeyVerificationReady.m; sourceTree = "<group>"; };
 		3D31E748AF80E5D3B2EB0B08A96703D5 /* RLMMigration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMMigration.h; path = include/RLMMigration.h; sourceTree = "<group>"; };
 		3D4BBB84827AB69BCF8B43E27062CBCF /* MXReactionCount.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXReactionCount.h; path = MatrixSDK/Aggregations/Data/MXReactionCount.h; sourceTree = "<group>"; };
+		3D62CC845635DBE484A2594EA01AA0A3 /* Pods-NioTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NioTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		3D9EB69628C9A61EB7D1DEB9E97FE905 /* MXKeyVerificationRequest_Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXKeyVerificationRequest_Private.h; path = MatrixSDK/Crypto/Verification/Requests/MXKeyVerificationRequest_Private.h; sourceTree = "<group>"; };
 		3DF471D03D8A497D0BE1D8CD81A39723 /* MXQRCodeDataCoder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXQRCodeDataCoder.m; path = MatrixSDK/Crypto/Verification/Data/MXQRCodeDataCoder.m; sourceTree = "<group>"; };
 		3E1AAD3891B39F679CC80B7AD75E9DBC /* MXRoomPowerLevels.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXRoomPowerLevels.h; path = MatrixSDK/JSONModels/MXRoomPowerLevels.h; sourceTree = "<group>"; };
@@ -1210,10 +1306,11 @@
 		3E7AFB885B6C0B9851F896696DF07964 /* MXEventDecryptionResult.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXEventDecryptionResult.h; path = MatrixSDK/Crypto/Algorithms/MXEventDecryptionResult.h; sourceTree = "<group>"; };
 		3F4C71EB938264D8EFDB77216D63BF95 /* OLMOutboundGroupSession.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OLMOutboundGroupSession.m; path = xcode/OLMKit/OLMOutboundGroupSession.m; sourceTree = "<group>"; };
 		3F59407FED71C073D349E4CB0B3A6616 /* OLMPkMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OLMPkMessage.m; path = xcode/OLMKit/OLMPkMessage.m; sourceTree = "<group>"; };
+		3F595427A9CCB8E7942E36B6CABE3366 /* Pods-NioTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-NioTests-umbrella.h"; sourceTree = "<group>"; };
 		3FE64A1F897726108390A32C49C1B5CE /* MXRoomMember.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MXRoomMember.swift; path = MatrixSDK/Contrib/Swift/Data/MXRoomMember.swift; sourceTree = "<group>"; };
 		3FE9B5792481B5CBC4E7C4A213CB905E /* MXOlmDevice.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXOlmDevice.h; path = MatrixSDK/Crypto/MXOlmDevice.h; sourceTree = "<group>"; };
+		4003A3C5495F7D2556364BAE3A8D11B6 /* Pods-NioKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NioKit.release.xcconfig"; sourceTree = "<group>"; };
 		40676140DBEFE39C37F19605CAA44F9D /* MXFilterJSONModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXFilterJSONModel.h; path = MatrixSDK/Data/Filters/MXFilterJSONModel.h; sourceTree = "<group>"; };
-		40842C25013615F6D1DCD8927AB8194C /* Pods-Nio-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Nio-frameworks.sh"; sourceTree = "<group>"; };
 		4141BE82D8A5E4A132B222733E86FF50 /* OLMKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = OLMKit.modulemap; sourceTree = "<group>"; };
 		41486ED9D41E00E0B2E7871367D209AD /* crypto.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto.h; path = include/olm/crypto.h; sourceTree = "<group>"; };
 		41697213C17DD0C2B2B91983C6478352 /* aes.c */ = {isa = PBXFileReference; includeInIndex = 1; name = aes.c; path = "lib/crypto-algorithms/aes.c"; sourceTree = "<group>"; };
@@ -1224,8 +1321,10 @@
 		423FC9676AEA7C578D75C2508B533C98 /* MXEnumConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXEnumConstants.h; path = MatrixSDK/MXEnumConstants.h; sourceTree = "<group>"; };
 		4390D3FF381858646A173C55CBCB09F4 /* RLMObjectBase_Dynamic.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMObjectBase_Dynamic.h; path = include/RLMObjectBase_Dynamic.h; sourceTree = "<group>"; };
 		43A816CE71E1F9506053C23C12F94AB8 /* OLMMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OLMMessage.m; path = xcode/OLMKit/OLMMessage.m; sourceTree = "<group>"; };
+		446B8390EB95D50C90EE96CD0B7F7022 /* Pods-Nio-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Nio-dummy.m"; sourceTree = "<group>"; };
 		4483E6DB01BF23EAA50789652C723A5B /* GZIP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GZIP.debug.xcconfig; sourceTree = "<group>"; };
 		457DCB5EC6E8F384504EF9219D12D560 /* sync_session.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = sync_session.cpp; path = Realm/ObjectStore/src/sync/sync_session.cpp; sourceTree = "<group>"; };
+		45E2FDE4A1DC83812F8C619961061487 /* Pods-Nio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Nio.debug.xcconfig"; sourceTree = "<group>"; };
 		4626CAAD74AEE27B9A0A928BB6722AA4 /* MXCryptoAlgorithms.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXCryptoAlgorithms.h; path = MatrixSDK/Crypto/Algorithms/MXCryptoAlgorithms.h; sourceTree = "<group>"; };
 		462C961079F2D40FBE38ED7018A6ECD7 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+AFNetworking.m"; path = "UIKit+AFNetworking/UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		46AE76FE4B8E894E80282BC7C0A46BBA /* MXRoomPredecessorInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXRoomPredecessorInfo.h; path = MatrixSDK/JSONModels/MXRoomPredecessorInfo.h; sourceTree = "<group>"; };
@@ -1298,12 +1397,10 @@
 		5BFA814C2E99AD13DA0A8C4C5B8712CE /* RLMConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMConstants.h; path = include/RLMConstants.h; sourceTree = "<group>"; };
 		5C164F7F6F6437C71DC42E2FED078395 /* MXRoomPredecessorInfo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXRoomPredecessorInfo.m; path = MatrixSDK/JSONModels/MXRoomPredecessorInfo.m; sourceTree = "<group>"; };
 		5C3566907BC5B4B47945A0536E56F7B9 /* error.c */ = {isa = PBXFileReference; includeInIndex = 1; name = error.c; path = src/error.c; sourceTree = "<group>"; };
-		5C5BD80BDB3D820DC337B8F6DD70066D /* Pods-Nio-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Nio-dummy.m"; sourceTree = "<group>"; };
 		5C90AB813788D2FB3F6430B032BA911A /* MXJSONModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXJSONModel.h; path = MatrixSDK/JSONModels/MXJSONModel.h; sourceTree = "<group>"; };
 		5C9673D618E2D74731BE05D3862D7099 /* MXServerNoticeContent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXServerNoticeContent.h; path = MatrixSDK/JSONModels/MXServerNoticeContent.h; sourceTree = "<group>"; };
 		5CA0FE98B90992586FC3491C2ED365A7 /* cipher.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = cipher.cpp; path = src/cipher.cpp; sourceTree = "<group>"; };
 		5D23CF00C7DE073510EA24EBDA52EDA5 /* RLMQueryUtil.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = RLMQueryUtil.mm; path = Realm/RLMQueryUtil.mm; sourceTree = "<group>"; };
-		5D45BE05F687AEC63099A5BC1ED2CFE8 /* Pods-Nio.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Nio.modulemap"; sourceTree = "<group>"; };
 		5D86E52220123F9E4FF14E67950F05F1 /* MXSendReplyEventDefaultStringLocalizations.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXSendReplyEventDefaultStringLocalizations.h; path = MatrixSDK/Data/MXSendReplyEventDefaultStringLocalizations.h; sourceTree = "<group>"; };
 		5DE8B03E1B8DEACFF9D90DCEA0D157DD /* MXRoomAccountData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXRoomAccountData.m; path = MatrixSDK/Data/MXRoomAccountData.m; sourceTree = "<group>"; };
 		5E2D37711639F9DD77CA12DBA80077DA /* MXReactionCountChangeListener.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXReactionCountChangeListener.m; path = MatrixSDK/Aggregations/Data/MXReactionCountChangeListener.m; sourceTree = "<group>"; };
@@ -1312,7 +1409,9 @@
 		5F35B2B579E20E0B5133867E54E1803E /* MXFileStore.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXFileStore.m; path = MatrixSDK/Data/Store/MXFileStore/MXFileStore.m; sourceTree = "<group>"; };
 		5F4E2A59EC6C32E901EFD4805FC4A937 /* MXRoomCreateContent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXRoomCreateContent.m; path = MatrixSDK/JSONModels/MXRoomCreateContent.m; sourceTree = "<group>"; };
 		5F7952550532B66B3799C004949071B2 /* MXEventEditsListener.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXEventEditsListener.m; path = MatrixSDK/Aggregations/Data/MXEventEditsListener.m; sourceTree = "<group>"; };
+		5F93A57F4922FAE09A8D64FF636D522D /* Pods-Nio.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Nio.modulemap"; sourceTree = "<group>"; };
 		5F9F9C5875F098DEB806C3A8389998F8 /* SwiftMatrixSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftMatrixSDK.release.xcconfig; sourceTree = "<group>"; };
+		5FB52A02E79A763443F31949293694C6 /* Pods-NioTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NioTests-Info.plist"; sourceTree = "<group>"; };
 		5FB623C0AB8B64953D192CA34E8BA21E /* MXKeyBackupPassword.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXKeyBackupPassword.m; path = MatrixSDK/Crypto/KeyBackup/MXKeyBackupPassword.m; sourceTree = "<group>"; };
 		5FE4A18530FB6A4424AE5CC456144365 /* libbase58-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "libbase58-umbrella.h"; sourceTree = "<group>"; };
 		5FEB3E868B53AF49D0F5CAD1D0733EF5 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFSecurityPolicy.m; path = AFNetworking/AFSecurityPolicy.m; sourceTree = "<group>"; };
@@ -1320,10 +1419,12 @@
 		60195C7EA378E12C6AFB0DB171F9559B /* MXReplyEventBodyParts.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXReplyEventBodyParts.m; path = MatrixSDK/Data/ReplyEvent/Parser/MXReplyEventBodyParts.m; sourceTree = "<group>"; };
 		607D5F149F0781D66A23FE13EEE99B4C /* MXRestClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MXRestClient.swift; path = MatrixSDK/Contrib/Swift/MXRestClient.swift; sourceTree = "<group>"; };
 		607DB7A8ABCCF59787CCE4F5FD9608F8 /* MXServiceTerms.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXServiceTerms.m; path = MatrixSDK/NotificationCenter/ServiceTerms/MXServiceTerms.m; sourceTree = "<group>"; };
+		60A818E98D61109379EFBEAF0EEB38D8 /* Pods-NioKit-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-NioKit-acknowledgements.markdown"; sourceTree = "<group>"; };
 		60CA590A85014351D0827C94FFBD1C0B /* MXFileStoreMetaData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXFileStoreMetaData.m; path = MatrixSDK/Data/Store/MXFileStore/MXFileStoreMetaData.m; sourceTree = "<group>"; };
 		611361B9B15D5764D8C5CCE41F7FB71F /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFNetworkReachabilityManager.m; path = AFNetworking/AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
 		61259D14ABA850A0F0EFFEE5592BAB49 /* MXEventsByTypesEnumeratorOnArray.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXEventsByTypesEnumeratorOnArray.h; path = MatrixSDK/Data/EventsEnumerator/MXEventsByTypesEnumeratorOnArray.h; sourceTree = "<group>"; };
 		614F5B2514300E74EFEED7ACFA258713 /* MXGroup.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXGroup.m; path = MatrixSDK/Data/MXGroup.m; sourceTree = "<group>"; };
+		6158F50C2955E1BBA6E80FC4E660A5ED /* Pods-NioKitTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-NioKitTests.modulemap"; sourceTree = "<group>"; };
 		615AB7BBF956C8C3294482C535B2D16F /* MXReactionCountChangeListener.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXReactionCountChangeListener.h; path = MatrixSDK/Aggregations/Data/MXReactionCountChangeListener.h; sourceTree = "<group>"; };
 		62019655EDA9A21B00BB950F7A87993F /* MXCallManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXCallManager.m; path = MatrixSDK/VoIP/MXCallManager.m; sourceTree = "<group>"; };
 		621575EF3985153463D95EA361615799 /* MX3PidAddSession.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MX3PidAddSession.h; path = MatrixSDK/ThreePidAdd/MX3PidAddSession.h; sourceTree = "<group>"; };
@@ -1335,7 +1436,6 @@
 		6329A0F998793D905A50D01FCBCF75C2 /* MXRealmCryptoStore.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXRealmCryptoStore.h; path = MatrixSDK/Crypto/Data/Store/MXRealmCryptoStore/MXRealmCryptoStore.h; sourceTree = "<group>"; };
 		636C8C7EC9B733587D7D0C6FE03432E2 /* MXIncomingRoomKeyRequestManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXIncomingRoomKeyRequestManager.h; path = MatrixSDK/Crypto/KeySharing/MXIncomingRoomKeyRequestManager.h; sourceTree = "<group>"; };
 		639E846A180AAC0B6FD25CB49D93961A /* MXSASTransaction.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXSASTransaction.m; path = MatrixSDK/Crypto/Verification/Transactions/SAS/MXSASTransaction.m; sourceTree = "<group>"; };
-		64CBC7DF76FE7078F7BEAC028D3E28A5 /* Pods-Nio-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Nio-acknowledgements.plist"; sourceTree = "<group>"; };
 		64D1D0F2D25E33D8A01A5A2F2FC90158 /* MXKeyVerificationDone.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXKeyVerificationDone.h; path = MatrixSDK/Crypto/Verification/JSONModels/MXKeyVerificationDone.h; sourceTree = "<group>"; };
 		65E3E37CA0C8A9FBD7DC4A643B8AE51D /* MXDeviceListOperationsPool.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXDeviceListOperationsPool.h; path = MatrixSDK/Crypto/Data/MXDeviceListOperationsPool.h; sourceTree = "<group>"; };
 		661CDE8C71B311540955D94A8CCC65BD /* transact_log_handler.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = transact_log_handler.cpp; path = Realm/ObjectStore/src/impl/transact_log_handler.cpp; sourceTree = "<group>"; };
@@ -1371,7 +1471,6 @@
 		6FCA71376A99DE2C0220389692471D2B /* MXPusher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXPusher.h; path = MatrixSDK/JSONModels/Push/MXPusher.h; sourceTree = "<group>"; };
 		6FD3A7A2AE8B58C79E76020C4AC48E6C /* MXLoginPolicyData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXLoginPolicyData.m; path = MatrixSDK/JSONModels/Authentication/MXLoginPolicyData.m; sourceTree = "<group>"; };
 		7032EEA126426FC60AE6F9DB3E073FF5 /* partial_sync.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = partial_sync.cpp; path = Realm/ObjectStore/src/sync/partial_sync.cpp; sourceTree = "<group>"; };
-		707DD0239296E1133553B0F6FB806B55 /* Pods-NioTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-NioTests-frameworks.sh"; sourceTree = "<group>"; };
 		708D94B39F117F1FBE8CE0F429051D30 /* OLMUtility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OLMUtility.h; path = xcode/OLMKit/OLMUtility.h; sourceTree = "<group>"; };
 		732618AD879F710F65CFA4FC1D1352E2 /* MXRealmAggregationsMapper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXRealmAggregationsMapper.h; path = MatrixSDK/Aggregations/Data/Store/Realm/MXRealmAggregationsMapper.h; sourceTree = "<group>"; };
 		7376B0F0B50A832C60A9E6925A4F5ECA /* MXRealmReactionCount.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXRealmReactionCount.m; path = MatrixSDK/Aggregations/Data/Store/Realm/MXRealmReactionCount.m; sourceTree = "<group>"; };
@@ -1384,6 +1483,7 @@
 		755189D26B3FB4D4E262D2CC5979B59C /* MXFileRoomStore.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXFileRoomStore.m; path = MatrixSDK/Data/Store/MXFileStore/MXFileRoomStore.m; sourceTree = "<group>"; };
 		75C2EDFADC7A309CDC5CB60F33B410BB /* MXFilterJSONModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXFilterJSONModel.m; path = MatrixSDK/Data/Filters/MXFilterJSONModel.m; sourceTree = "<group>"; };
 		75EA9FFA8B451D0127A5AC0DB5863084 /* MX3PidAddManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MX3PidAddManager.swift; path = MatrixSDK/Contrib/Swift/ThreePidAdd/MX3PidAddManager.swift; sourceTree = "<group>"; };
+		76860B887F2631D6DF02E43051D7E71F /* Pods-NioKitTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NioKitTests-Info.plist"; sourceTree = "<group>"; };
 		770147BAD98B0A74009927E3D51AA2AC /* MXUserTrustLevel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXUserTrustLevel.h; path = MatrixSDK/Crypto/Data/Trust/MXUserTrustLevel.h; sourceTree = "<group>"; };
 		774845BB8EA055DB567345A3BD4600C4 /* RLMJSONModels.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RLMJSONModels.m; path = Realm/RLMJSONModels.m; sourceTree = "<group>"; };
 		778CFB7ED95897A3CFAF7EBE9A120583 /* MXSelfVerifyingMasterKeyTrustedQRCodeData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXSelfVerifyingMasterKeyTrustedQRCodeData.m; path = MatrixSDK/Crypto/Verification/Data/MXSelfVerifyingMasterKeyTrustedQRCodeData.m; sourceTree = "<group>"; };
@@ -1394,6 +1494,7 @@
 		78B41E5BCC0A6EFE54AFE8BB20B7262D /* MXRealmEventScan.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXRealmEventScan.h; path = MatrixSDK/ContentScan/Data/Store/Realm/Event/MXRealmEventScan.h; sourceTree = "<group>"; };
 		7945C2B2960D5C4F57C5F33E83556B0D /* MXEventUnsignedData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXEventUnsignedData.h; path = MatrixSDK/JSONModels/Event/MXEventUnsignedData.h; sourceTree = "<group>"; };
 		798F71DFDC287EF020BEE5A6253E5F1E /* RLMSyncPermission.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMSyncPermission.h; path = include/RLMSyncPermission.h; sourceTree = "<group>"; };
+		799E353310F8BA716B35BC67EFAB6058 /* Pods-NioKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-NioKit-dummy.m"; sourceTree = "<group>"; };
 		79EE1732A0179D0B86C9A22829B9AF22 /* MXIdentityServerRestClient.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXIdentityServerRestClient.m; path = MatrixSDK/IdentityServer/MXIdentityServerRestClient.m; sourceTree = "<group>"; };
 		79FB4619F8DA4E2CD32F9EDE6ADA7E00 /* MXKeyVerificationKey.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXKeyVerificationKey.h; path = MatrixSDK/Crypto/Verification/JSONModels/MXKeyVerificationKey.h; sourceTree = "<group>"; };
 		7A8080A2DE35B7C05F29B677D4807961 /* RLMRealmConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMRealmConfiguration.h; path = include/RLMRealmConfiguration.h; sourceTree = "<group>"; };
@@ -1432,14 +1533,13 @@
 		871118B3C77919A3840DA3402A890928 /* Realm.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Realm.modulemap; sourceTree = "<group>"; };
 		87561C570E4581CDEA35C198D3290292 /* RLMMigration.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = RLMMigration.mm; path = Realm/RLMMigration.mm; sourceTree = "<group>"; };
 		87AD0209605266310B266B356CDD42B1 /* MXIncomingRoomKeyRequestCancellation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXIncomingRoomKeyRequestCancellation.m; path = MatrixSDK/Crypto/KeySharing/Data/MXIncomingRoomKeyRequestCancellation.m; sourceTree = "<group>"; };
+		883ED0BD469991379269BC3C06BDFB74 /* Pods-NioKitTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NioKitTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		88B12DDD4C3EA06021FA2BFB62A30108 /* ratchet.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = ratchet.cpp; path = src/ratchet.cpp; sourceTree = "<group>"; };
 		88D2A9F1817CF696F5DAD3DDEC32AF94 /* OLMPkEncryption.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OLMPkEncryption.m; path = xcode/OLMKit/OLMPkEncryption.m; sourceTree = "<group>"; };
 		8929207408529E89EB047451E52CEA1A /* MXQueuedEncryption.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXQueuedEncryption.m; path = MatrixSDK/Crypto/Data/MXQueuedEncryption.m; sourceTree = "<group>"; };
 		894D4BEA6EEF6D7A938D9212F298964A /* MXAccountData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXAccountData.m; path = MatrixSDK/Data/MXAccountData.m; sourceTree = "<group>"; };
-		89F4EEDB5CA5EE0A686B9F05F3DBC761 /* Pods-Nio-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Nio-acknowledgements.markdown"; sourceTree = "<group>"; };
 		8A2001F1FD6E1629C57D046F54460138 /* Pods_NioTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_NioTests.framework; path = "Pods-NioTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A269626D0E3BB486486652034C17E75 /* MXReplyEventParts.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXReplyEventParts.h; path = MatrixSDK/Data/ReplyEvent/Parser/MXReplyEventParts.h; sourceTree = "<group>"; };
-		8A4ED3646E3DD9AA225E537CA76AB264 /* Pods-Nio-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Nio-umbrella.h"; sourceTree = "<group>"; };
 		8A5C358B1633E21188843D5DB184D2D4 /* MXQRCodeData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXQRCodeData.h; path = MatrixSDK/Crypto/Verification/Data/MXQRCodeData.h; sourceTree = "<group>"; };
 		8A5C948D70D50A56DEF10C9AC361D4CB /* sas.c */ = {isa = PBXFileReference; includeInIndex = 1; name = sas.c; path = src/sas.c; sourceTree = "<group>"; };
 		8B1CA3770B494235859E4CD6BC145C28 /* MXAggregationsStore.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXAggregationsStore.h; path = MatrixSDK/Aggregations/Data/Store/MXAggregationsStore.h; sourceTree = "<group>"; };
@@ -1483,16 +1583,18 @@
 		970EEAD2C05B6E1973DB5955F315B2D3 /* results_notifier.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = results_notifier.cpp; path = Realm/ObjectStore/src/impl/results_notifier.cpp; sourceTree = "<group>"; };
 		97263BA53A84789543E5A2EB0FFD6DD9 /* libbase58.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = libbase58.h; sourceTree = "<group>"; };
 		97436D057118E7FA9D4D3CEC1E5156EB /* MXError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXError.h; path = MatrixSDK/MXError.h; sourceTree = "<group>"; };
+		97533A9DD6D13D8E4CA5E382CED19133 /* Pods-NioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NioTests.debug.xcconfig"; sourceTree = "<group>"; };
 		977493838FAF55628BBD76FC285FC629 /* MXKeyVerificationJSONModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXKeyVerificationJSONModel.m; path = MatrixSDK/Crypto/Verification/JSONModels/MXKeyVerificationJSONModel.m; sourceTree = "<group>"; };
 		97910CBDA2F9CA6F42CFC8F7F28909F6 /* RLMObjectSchema.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = RLMObjectSchema.mm; path = Realm/RLMObjectSchema.mm; sourceTree = "<group>"; };
 		9805A4BBEAE97CF2870F01525EEE6990 /* MXKeyVerificationStart.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXKeyVerificationStart.h; path = MatrixSDK/Crypto/Verification/JSONModels/MXKeyVerificationStart.h; sourceTree = "<group>"; };
 		98E29ED2FDC9E065FDE7DDC542749807 /* MXEvent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXEvent.m; path = MatrixSDK/JSONModels/MXEvent.m; sourceTree = "<group>"; };
 		98F6A3CC039FB4FB05087CAD40785B68 /* MXRoomSummary.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXRoomSummary.h; path = MatrixSDK/Data/MXRoomSummary.h; sourceTree = "<group>"; };
+		991C4EA12F4F97D86AD01A2093A1A590 /* Pods-NioKitTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-NioKitTests-umbrella.h"; sourceTree = "<group>"; };
 		9922510F5BD989375D189A8271639699 /* Realm-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Realm-Info.plist"; sourceTree = "<group>"; };
 		9982A346D0035CE58A47AA67C792E38E /* libbase58-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "libbase58-prefix.pch"; sourceTree = "<group>"; };
-		99C8BBE0EC6B6A8A89D8DE8AEB316D6C /* Pods-Nio-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Nio-Info.plist"; sourceTree = "<group>"; };
 		99EDFAFA0C35B5AA0E8CA58EE5D071F1 /* RLMAccessor.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = RLMAccessor.mm; path = Realm/RLMAccessor.mm; sourceTree = "<group>"; };
 		9A60D2B3599CA391A6D72787B2D6D291 /* RLMSyncUser.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = RLMSyncUser.mm; path = Realm/RLMSyncUser.mm; sourceTree = "<group>"; };
+		9A6A0108E8F950EE816E404AA911E98F /* Pods-NioTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-NioTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		9A9645545C344752086D6520E2AA6C53 /* NSArray+MatrixSDK.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSArray+MatrixSDK.m"; path = "MatrixSDK/Utils/Categories/NSArray+MatrixSDK.m"; sourceTree = "<group>"; };
 		9AB66BB4429DE595C7933ADBD6A043E9 /* MXEventReferenceChunk.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXEventReferenceChunk.h; path = MatrixSDK/JSONModels/Event/MXEventReferenceChunk.h; sourceTree = "<group>"; };
 		9AD3F0781493A7E8A378A2FFE3C7A87F /* RLMRealmUtil.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = RLMRealmUtil.mm; path = Realm/RLMRealmUtil.mm; sourceTree = "<group>"; };
@@ -1500,7 +1602,6 @@
 		9D03EA01831F9BD9CF11285C26322011 /* RLMNetworkClient.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = RLMNetworkClient.mm; path = Realm/RLMNetworkClient.mm; sourceTree = "<group>"; };
 		9D3579940EA1E1804DBDCA22142BD586 /* MXSecretShareManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXSecretShareManager.h; path = MatrixSDK/Crypto/KeySharing/Secret/MXSecretShareManager.h; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9DF76AC22540193D61269D30D64AC449 /* Pods-NioTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NioTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		9E00E1EEC34BB958DCEABC0FBE3D8D7A /* MXDeviceListOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXDeviceListOperation.h; path = MatrixSDK/Crypto/Data/MXDeviceListOperation.h; sourceTree = "<group>"; };
 		9EB1F4F10BD89FC60B5E726D7142A10B /* MXMyUser.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXMyUser.m; path = MatrixSDK/Data/MXMyUser.m; sourceTree = "<group>"; };
 		9EE8FA1E8FE49949CDE69D104725E9F9 /* MXFilter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXFilter.h; path = MatrixSDK/Data/Filters/MXFilter.h; sourceTree = "<group>"; };
@@ -1532,6 +1633,7 @@
 		A4FA15D44DF6BAC7550EDEED10862AA3 /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = AFNetworking.framework; path = AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4FC3070FDB94F27168631327F7A956E /* MXBackgroundModeHandler.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXBackgroundModeHandler.h; path = MatrixSDK/Utils/MXBackgroundModeHandler.h; sourceTree = "<group>"; };
 		A5487DBE20AFDB8DFEE7B82C3A6C753A /* account.hh */ = {isa = PBXFileReference; includeInIndex = 1; name = account.hh; path = include/olm/account.hh; sourceTree = "<group>"; };
+		A5559338F5E4810D28B60D6C23A74780 /* Pods-NioKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-NioKit-umbrella.h"; sourceTree = "<group>"; };
 		A576B3413CA6114B99C5615B26DBC682 /* MXIncomingRoomKeyRequestManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXIncomingRoomKeyRequestManager.m; path = MatrixSDK/Crypto/KeySharing/MXIncomingRoomKeyRequestManager.m; sourceTree = "<group>"; };
 		A599B50F6557FB61B36A97DCEF3F3070 /* OLMSAS.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OLMSAS.h; path = xcode/OLMKit/OLMSAS.h; sourceTree = "<group>"; };
 		A62BF3D5A95F3E42BB498309649D6DB1 /* MXEventContentRelatesTo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXEventContentRelatesTo.m; path = MatrixSDK/JSONModels/Event/Content/MXEventContentRelatesTo.m; sourceTree = "<group>"; };
@@ -1547,8 +1649,10 @@
 		A94FEFCB1ED465227154BC081FAC9D08 /* Realm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Realm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9EF74E75EAE954B6A836A4D18A43348 /* MXEventReference.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXEventReference.m; path = MatrixSDK/JSONModels/Event/MXEventReference.m; sourceTree = "<group>"; };
 		AA9E2BB0AAA5B3590DEA41914D94EA8C /* MXRealmEventScan.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXRealmEventScan.m; path = MatrixSDK/ContentScan/Data/Store/Realm/Event/MXRealmEventScan.m; sourceTree = "<group>"; };
+		AB51F31A88F2D784207EA45ED6B1C78F /* Pods-NioKit-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NioKit-acknowledgements.plist"; sourceTree = "<group>"; };
 		AB8EF0D102DCA4F31C84FCD855FBAAF8 /* MXEncrypting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXEncrypting.h; path = MatrixSDK/Crypto/Algorithms/MXEncrypting.h; sourceTree = "<group>"; };
 		ABA4D551D91C5A978F9E67AD2DA0CBFA /* MXAggregatedReferencesUpdater.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXAggregatedReferencesUpdater.h; path = MatrixSDK/Aggregations/MXAggregatedReferencesUpdater.h; sourceTree = "<group>"; };
+		ABFD324D4865408FD17AC300D2B6BF67 /* Pods-NioKitTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-NioKitTests-dummy.m"; sourceTree = "<group>"; };
 		AC2AB2DCD4A10890C8C6B7C180A2855D /* MXEventScan.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXEventScan.m; path = MatrixSDK/ContentScan/Data/MXEventScan.m; sourceTree = "<group>"; };
 		AC37F36EFACDDA75E558A2E6027EB7B8 /* MXSessionEventListener.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXSessionEventListener.h; path = MatrixSDK/Data/MXSessionEventListener.h; sourceTree = "<group>"; };
 		AC4663966682280133C59B2BB2C35925 /* NSObject+sortedKeys.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSObject+sortedKeys.m"; path = "MatrixSDK/Lib/NSObject+sortedKeys.m"; sourceTree = "<group>"; };
@@ -1565,6 +1669,7 @@
 		B06CE0821CA108E6C4ED16DACB71FB30 /* MXCrossSigningTools.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXCrossSigningTools.h; path = MatrixSDK/Crypto/CrossSigning/MXCrossSigningTools.h; sourceTree = "<group>"; };
 		B13C1E820E0C80D1781B992F860DB37F /* GZIP-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GZIP-prefix.pch"; sourceTree = "<group>"; };
 		B17337B2013CC00E4F12D817C1A0EE3C /* MXUsersTrustLevelSummary.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXUsersTrustLevelSummary.m; path = MatrixSDK/Crypto/Data/Trust/MXUsersTrustLevelSummary.m; sourceTree = "<group>"; };
+		B17EC99872CCE5A601F954A40711EED7 /* Pods-Nio-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Nio-acknowledgements.markdown"; sourceTree = "<group>"; };
 		B19AC0B49B4C9029F69C5A6616C817C2 /* MXPushRuleEventMatchConditionChecker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXPushRuleEventMatchConditionChecker.h; path = MatrixSDK/NotificationCenter/Checker/MXPushRuleEventMatchConditionChecker.h; sourceTree = "<group>"; };
 		B1EF6E8671868A1EFA9E7E37D63ACFDB /* MXRoomSummary.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXRoomSummary.m; path = MatrixSDK/Data/MXRoomSummary.m; sourceTree = "<group>"; };
 		B239387A5BD38A7EAA505F2D6C69196C /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImageView+AFNetworking.h"; path = "UIKit+AFNetworking/UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
@@ -1576,6 +1681,7 @@
 		B4F7917F50ED817BC524576EA1876D9C /* MXNotificationCenter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXNotificationCenter.m; path = MatrixSDK/NotificationCenter/MXNotificationCenter.m; sourceTree = "<group>"; };
 		B514521681C18C54EAE9521BF24C2729 /* MXAggregatedReactionsUpdater.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXAggregatedReactionsUpdater.m; path = MatrixSDK/Aggregations/MXAggregatedReactionsUpdater.m; sourceTree = "<group>"; };
 		B55FB7DFC73421FD1A576BB525283490 /* MXRoomMember.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXRoomMember.m; path = MatrixSDK/Data/MXRoomMember.m; sourceTree = "<group>"; };
+		B56129C8EDE5CA486D83AF647E626289 /* Pods-NioTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-NioTests.modulemap"; sourceTree = "<group>"; };
 		B572A93F05C74AB50584BE067596B41A /* OLMAccount_Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OLMAccount_Private.h; path = xcode/OLMKit/OLMAccount_Private.h; sourceTree = "<group>"; };
 		B578E5778DFBBDD657C4E9BE2899BC57 /* object_store.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = object_store.cpp; path = Realm/ObjectStore/src/object_store.cpp; sourceTree = "<group>"; };
 		B5974D7A37E8596F14E61EEF5EF0D3A0 /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLResponseSerialization.h; path = AFNetworking/AFURLResponseSerialization.h; sourceTree = "<group>"; };
@@ -1606,6 +1712,7 @@
 		BCD433E291170EA244604827FCCE0D44 /* OLMPkMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OLMPkMessage.h; path = xcode/OLMKit/OLMPkMessage.h; sourceTree = "<group>"; };
 		BDC8F4928FFEB9DAE9ECEA0696232E87 /* olm.hh */ = {isa = PBXFileReference; includeInIndex = 1; name = olm.hh; path = include/olm/olm.hh; sourceTree = "<group>"; };
 		BE45277C6D5CB6EF162B942E6C49D2FA /* MXCrypto_Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXCrypto_Private.h; path = MatrixSDK/Crypto/MXCrypto_Private.h; sourceTree = "<group>"; };
+		BE7CAEEE66CA3C2FAE650464EB104852 /* Pods-NioTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NioTests.release.xcconfig"; sourceTree = "<group>"; };
 		BED8EDF3D806344156AF50E75ABEB001 /* pk.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pk.h; path = include/olm/pk.h; sourceTree = "<group>"; };
 		BEF5DE601B1D8DA3359B502545490AA4 /* MXDecryptionResult.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXDecryptionResult.h; path = MatrixSDK/Crypto/Algorithms/MXDecryptionResult.h; sourceTree = "<group>"; };
 		BF3228E09F8BBD8AFDCF6E0B5B9F5C2D /* error.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = error.h; path = include/olm/error.h; sourceTree = "<group>"; };
@@ -1614,6 +1721,7 @@
 		C01D1224C69F522DDCAF71C315057112 /* MXPusher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXPusher.m; path = MatrixSDK/JSONModels/Push/MXPusher.m; sourceTree = "<group>"; };
 		C0ADB80AA5BF49FC1B3E62945D028032 /* MXCrossSigning.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXCrossSigning.m; path = MatrixSDK/Crypto/CrossSigning/MXCrossSigning.m; sourceTree = "<group>"; };
 		C0AFB5FF2363187BEE9808F0743CA880 /* MXPusherData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXPusherData.m; path = MatrixSDK/JSONModels/Push/MXPusherData.m; sourceTree = "<group>"; };
+		C0C4ACDB23913F3B289641D0A630B2D4 /* Pods-Nio-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Nio-umbrella.h"; sourceTree = "<group>"; };
 		C175EE8F88A312EBB59783931E6C0D4C /* MXKeyVerificationMac.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXKeyVerificationMac.h; path = MatrixSDK/Crypto/Verification/JSONModels/MXKeyVerificationMac.h; sourceTree = "<group>"; };
 		C176E3F9D23B1CA2E822C60E9F7DD4A8 /* RLMArray.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMArray.h; path = include/RLMArray.h; sourceTree = "<group>"; };
 		C1CAB68A62C7A19624431CAD53C1EB4E /* MXOutgoingRoomKeyRequestManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXOutgoingRoomKeyRequestManager.h; path = MatrixSDK/Crypto/KeySharing/MXOutgoingRoomKeyRequestManager.h; sourceTree = "<group>"; };
@@ -1628,6 +1736,7 @@
 		C43E87AD0FB6111EBF8B9C189C8A0D7E /* async_open_task.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = async_open_task.cpp; path = Realm/ObjectStore/src/sync/async_open_task.cpp; sourceTree = "<group>"; };
 		C467C8A1E1059C3355EAA4A76392054C /* MXRoomSummary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MXRoomSummary.swift; path = MatrixSDK/Contrib/Swift/Data/MXRoomSummary.swift; sourceTree = "<group>"; };
 		C50ED57555BC570DBEF4CB0C2B23596C /* MXServerNotices.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXServerNotices.m; path = MatrixSDK/Utils/MXServerNotices.m; sourceTree = "<group>"; };
+		C53AD76E055153BA2A769EF7F5D00D01 /* Pods-NioKitTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-NioKitTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		C544F0CA979BAF710DF4A6BEFF02846F /* RLMRealm.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = RLMRealm.mm; path = Realm/RLMRealm.mm; sourceTree = "<group>"; };
 		C55DF7C51C1A9AAB83009B8434C55A44 /* collection_change_builder.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = collection_change_builder.cpp; path = Realm/ObjectStore/src/impl/collection_change_builder.cpp; sourceTree = "<group>"; };
 		C608C44664102C5230916D4E34B3C9BA /* RLMRealmConfiguration_Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMRealmConfiguration_Private.h; path = include/RLMRealmConfiguration_Private.h; sourceTree = "<group>"; };
@@ -1653,7 +1762,6 @@
 		CD020D46086E2E478175182ABB4ED939 /* MXCall.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXCall.h; path = MatrixSDK/VoIP/MXCall.h; sourceTree = "<group>"; };
 		CD60B13F850889E3FCDDF920EFFA1024 /* RLMSyncUtil_Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMSyncUtil_Private.h; path = include/RLMSyncUtil_Private.h; sourceTree = "<group>"; };
 		CD6D492580D29DB9456D95C8C728C777 /* pickle.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pickle.h; path = include/olm/pickle.h; sourceTree = "<group>"; };
-		CDCA22A0D59D9D76E59A49020217C89B /* Pods-NioTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-NioTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		CE00158A204CC9B3DED11808A578F75C /* AFURLSessionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLSessionManager.m; path = AFNetworking/AFURLSessionManager.m; sourceTree = "<group>"; };
 		CE1DE9C09723D41711B402232163F2B4 /* RLMResults.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMResults.h; path = include/RLMResults.h; sourceTree = "<group>"; };
 		CE301A312CF1C9B0543550615E360845 /* Pods_Nio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Nio.framework; path = "Pods-Nio.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1728,7 +1836,6 @@
 		E1CC046B45ADBC486245744E333744BD /* RLMOptionalBase.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = RLMOptionalBase.mm; path = Realm/RLMOptionalBase.mm; sourceTree = "<group>"; };
 		E1D75696217F7A6BFA653C5ED5651552 /* OLMSession.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OLMSession.m; path = xcode/OLMKit/OLMSession.m; sourceTree = "<group>"; };
 		E208C9D70C02C2939EEA0066638AA5A7 /* UIButton+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIButton+AFNetworking.m"; path = "UIKit+AFNetworking/UIButton+AFNetworking.m"; sourceTree = "<group>"; };
-		E2351D73E2D9B95EC2F73A3C3EF4262B /* Pods-NioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NioTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E2CDEB4655998019BDFB96C0CB27BAEF /* shared_realm.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = shared_realm.cpp; path = Realm/ObjectStore/src/shared_realm.cpp; sourceTree = "<group>"; };
 		E2F7FE3E82EF6F0FB5973A24D66C56B7 /* RLMThreadSafeReference.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = RLMThreadSafeReference.mm; path = Realm/RLMThreadSafeReference.mm; sourceTree = "<group>"; };
 		E32DC433DC9C724FF32AEC4C70F59A70 /* RLMSchema_Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMSchema_Private.h; path = include/RLMSchema_Private.h; sourceTree = "<group>"; };
@@ -1741,6 +1848,7 @@
 		E577344E4973443266B53058C3E1F61C /* pickle_encoding.c */ = {isa = PBXFileReference; includeInIndex = 1; name = pickle_encoding.c; path = src/pickle_encoding.c; sourceTree = "<group>"; };
 		E5DA28A37D76CE2682F2019F47F3DFF6 /* RLMRealm+Sync.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "RLMRealm+Sync.h"; path = "include/RLMRealm+Sync.h"; sourceTree = "<group>"; };
 		E5EDFCD63E73203A661259944AD51927 /* AFNetworking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AFNetworking.release.xcconfig; sourceTree = "<group>"; };
+		E623AD87823D2791ACF9954BF07B80F7 /* Pods-NioKitTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-NioKitTests-frameworks.sh"; sourceTree = "<group>"; };
 		E63D44490543FB469A36C3D246F9638E /* sync_metadata.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = sync_metadata.cpp; path = Realm/ObjectStore/src/sync/impl/sync_metadata.cpp; sourceTree = "<group>"; };
 		E6AA64CADEC9F4D2D5BCBBE9B20E8EC9 /* RLMSwiftSupport.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RLMSwiftSupport.m; path = Realm/RLMSwiftSupport.m; sourceTree = "<group>"; };
 		E6DCF96A76B30BCD8FE5B21202ED1562 /* OLMPkDecryption.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OLMPkDecryption.m; path = xcode/OLMKit/OLMPkDecryption.m; sourceTree = "<group>"; };
@@ -1751,7 +1859,6 @@
 		E821306206267B7A40F5CC801FCF2A3D /* MXRoom.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MXRoom.swift; path = MatrixSDK/Contrib/Swift/Data/MXRoom.swift; sourceTree = "<group>"; };
 		E82B8AF95613FCAA5505599FEA317BE2 /* schema.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = schema.cpp; path = Realm/ObjectStore/src/schema.cpp; sourceTree = "<group>"; };
 		E87A0CA55D03369B1B5DFAB0A97FF1F0 /* MXServiceTermsRestClient.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXServiceTermsRestClient.m; path = MatrixSDK/NotificationCenter/ServiceTerms/MXServiceTermsRestClient.m; sourceTree = "<group>"; };
-		E87B8E4DCA1B22851107F7ADC26C14E7 /* Pods-NioTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NioTests-Info.plist"; sourceTree = "<group>"; };
 		E89F0438B38AAC7D62C14EF4A8462587 /* MXMemoryStore.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXMemoryStore.m; path = MatrixSDK/Data/Store/MXMemoryStore/MXMemoryStore.m; sourceTree = "<group>"; };
 		E8A25AD99F5D6927B32496DA20691651 /* MXCallStackCall.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXCallStackCall.h; path = MatrixSDK/VoIP/CallStack/MXCallStackCall.h; sourceTree = "<group>"; };
 		E8ADF6B5FA62CBE49DBADF16B03AC1DA /* MXCallAudioSessionConfigurator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXCallAudioSessionConfigurator.h; path = MatrixSDK/VoIP/CallStack/MXCallAudioSessionConfigurator.h; sourceTree = "<group>"; };
@@ -1759,7 +1866,6 @@
 		E9063DAA79B11AFFCD98876A6A3AA474 /* MXDiscoveredClientConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXDiscoveredClientConfig.h; path = MatrixSDK/Data/AutoDiscovery/MXDiscoveredClientConfig.h; sourceTree = "<group>"; };
 		E9981CC5CCFF8D568FFE285D769B97E2 /* MXCryptoTools.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXCryptoTools.h; path = MatrixSDK/Crypto/Utils/MXCryptoTools.h; sourceTree = "<group>"; };
 		E9B1C75511544C32B78D38B8141DFF66 /* MXUIKitBackgroundTask.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXUIKitBackgroundTask.h; path = MatrixSDK/Utils/MXUIKitBackgroundTask.h; sourceTree = "<group>"; };
-		EA584B23FAF0684A1BA8F4281EBCADE1 /* Pods-NioTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-NioTests-dummy.m"; sourceTree = "<group>"; };
 		EBC2A1F2CD7D4DBB137B51EFBD02BCD7 /* MXOutgoingSASTransaction.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXOutgoingSASTransaction.h; path = MatrixSDK/Crypto/Verification/Transactions/SAS/MXOutgoingSASTransaction.h; sourceTree = "<group>"; };
 		EBEBF4EAEFE4B78C99AEFF8736654042 /* MXCrossSigningInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXCrossSigningInfo.h; path = MatrixSDK/Crypto/CrossSigning/Data/MXCrossSigningInfo.h; sourceTree = "<group>"; };
 		EC0EA4FA623ABEFB46A2F20C4E2B3679 /* MXSASTransaction.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXSASTransaction.h; path = MatrixSDK/Crypto/Verification/Transactions/SAS/MXSASTransaction.h; sourceTree = "<group>"; };
@@ -1782,6 +1888,7 @@
 		F15DD05E3984284B2B6F9E54FA3F2DDB /* MXPeekingRoomSummary.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXPeekingRoomSummary.h; path = MatrixSDK/Data/MXPeekingRoomSummary.h; sourceTree = "<group>"; };
 		F168889B1031BFE747D2C73F3F091418 /* MXAllowedCertificates.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXAllowedCertificates.m; path = MatrixSDK/Utils/MXAllowedCertificates.m; sourceTree = "<group>"; };
 		F1879124EC40A55C1021754BA499A62B /* MXSession.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXSession.m; path = MatrixSDK/MXSession.m; sourceTree = "<group>"; };
+		F1B9943110B475E7ECFA6FC1BB870E55 /* Pods-Nio-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Nio-Info.plist"; sourceTree = "<group>"; };
 		F1C8088E501A1C440D210A819D3F3D65 /* MXKeyBackupData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXKeyBackupData.m; path = MatrixSDK/Crypto/KeyBackup/Data/MXKeyBackupData.m; sourceTree = "<group>"; };
 		F2594591D89642CB45108584BA95BB5C /* RLMUpdateChecker.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = RLMUpdateChecker.mm; path = Realm/RLMUpdateChecker.mm; sourceTree = "<group>"; };
 		F3F039FBD668B523E22531BF57CF0205 /* MXDecryptionResult.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXDecryptionResult.m; path = MatrixSDK/Crypto/Algorithms/MXDecryptionResult.m; sourceTree = "<group>"; };
@@ -1795,14 +1902,16 @@
 		F7CEF1FD86CC4EF2FCB6FFC26C51EB78 /* message.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = message.cpp; path = src/message.cpp; sourceTree = "<group>"; };
 		F81C47D45A2747502E3BA88E118C7582 /* MXOlmSessionResult.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXOlmSessionResult.h; path = MatrixSDK/Crypto/Data/MXOlmSessionResult.h; sourceTree = "<group>"; };
 		F831190259FD877577CDB487A10B0CB2 /* NSError+RLMSync.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSError+RLMSync.m"; path = "Realm/NSError+RLMSync.m"; sourceTree = "<group>"; };
+		F864F1B04ECF45BB1C28AB709D312553 /* Pods-Nio-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Nio-acknowledgements.plist"; sourceTree = "<group>"; };
 		F86B585AE52F6888307D769C7558C319 /* MXPeekingRoom.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXPeekingRoom.m; path = MatrixSDK/Data/MXPeekingRoom.m; sourceTree = "<group>"; };
 		F8D42E38F0EA0896B87C2EC0F83BFA3A /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLRequestSerialization.m; path = AFNetworking/AFURLRequestSerialization.m; sourceTree = "<group>"; };
 		FA6214C2007E7964A46705B1FC29A65C /* MXRoomSummaryUpdater.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXRoomSummaryUpdater.h; path = MatrixSDK/Data/MXRoomSummaryUpdater.h; sourceTree = "<group>"; };
 		FAB1ABC6B729C94CFF2B9EC9CDC71F21 /* AFURLSessionManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLSessionManager.h; path = AFNetworking/AFURLSessionManager.h; sourceTree = "<group>"; };
 		FB3CF07DFDB457DC477DD171CABBA0B5 /* MXRealmMediaScanStore.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXRealmMediaScanStore.m; path = MatrixSDK/ContentScan/Data/Store/Realm/Media/MXRealmMediaScanStore.m; sourceTree = "<group>"; };
+		FB3F2299551BAF564D80685E4C7EFC2A /* Pods-Nio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Nio.release.xcconfig"; sourceTree = "<group>"; };
 		FC7ABFFF356270FA06559417D9317BCA /* OLMKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = OLMKit.debug.xcconfig; sourceTree = "<group>"; };
 		FC8C968D219A6B9800A44DFEAAB72F20 /* MXRoomFilter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MXRoomFilter.h; path = MatrixSDK/Data/Filters/MXRoomFilter.h; sourceTree = "<group>"; };
-		FCA59FC8B49B0FE03134DEE803C0A5AA /* Pods-Nio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Nio.release.xcconfig"; sourceTree = "<group>"; };
+		FCD79088A5B243334C802BD9F04196E9 /* Pods-NioKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-NioKit.modulemap"; sourceTree = "<group>"; };
 		FD2B9486B62BC0C6874BC83249800D09 /* libbase58-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "libbase58-Info.plist"; sourceTree = "<group>"; };
 		FD394AB77FB8EDBD9A7A4B2A6E95A2B1 /* MXRoomMembersCount.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXRoomMembersCount.m; path = MatrixSDK/Data/MXRoomMembersCount.m; sourceTree = "<group>"; };
 		FD80245C599AD8F9AA0219A1D1127693 /* MXWellKnown.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MXWellKnown.m; path = MatrixSDK/JSONModels/AutoDiscovery/MXWellKnown.m; sourceTree = "<group>"; };
@@ -1819,6 +1928,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0558A11745F22CFDB0F36B70E68ED761 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B90B63E89D32235DD78F5C714DB5AE42 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1BB5362831FC744A78A71A68132D0FCF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1873,6 +1990,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AFE5403E68B50A5323D8476BCF278B8B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9DE9ED1694BFD5DE0CC2C9D441057CF2 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BB221DDFA6B8080E554617356144B408 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1892,6 +2017,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		020AF99199F0AB4DA8FE6B8B268C43DF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A4FA15D44DF6BAC7550EDEED10862AA3 /* AFNetworking.framework */,
+				03B2B5E9613A8428254F160937DA95CC /* GZIP.framework */,
+				BAA2CE670AFB37918E89C290031E24D1 /* libbase58.framework */,
+				A38C567E594B39489D249B9DCA7F926E /* OLMKit.framework */,
+				CE301A312CF1C9B0543550615E360845 /* Pods_Nio.framework */,
+				23B2244A7AD98A97E4614EDFAD4BA17F /* Pods_NioKit.framework */,
+				2D81448D97B761B89D26AB6F2FE18F8D /* Pods_NioKitTests.framework */,
+				8A2001F1FD6E1629C57D046F54460138 /* Pods_NioTests.framework */,
+				921BE4A82C4A7A5C72A0C6F8B8FEF200 /* Realm.framework */,
+				6271731CF29AB4310EB8BDA541A5B790 /* SwiftMatrixSDK.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		2350330809DCE49275520FEC60739711 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -1920,21 +2062,37 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		2538EFD040556A045D9FEB55D3DA4B60 /* Pods-NioTests */ = {
+		27DC3F706FA210F6EDFDA412812B7F1A /* Pods-NioKit */ = {
 			isa = PBXGroup;
 			children = (
-				01FAED35E1DA64065EE3169099C75538 /* Pods-NioTests.modulemap */,
-				CDCA22A0D59D9D76E59A49020217C89B /* Pods-NioTests-acknowledgements.markdown */,
-				9DF76AC22540193D61269D30D64AC449 /* Pods-NioTests-acknowledgements.plist */,
-				EA584B23FAF0684A1BA8F4281EBCADE1 /* Pods-NioTests-dummy.m */,
-				707DD0239296E1133553B0F6FB806B55 /* Pods-NioTests-frameworks.sh */,
-				E87B8E4DCA1B22851107F7ADC26C14E7 /* Pods-NioTests-Info.plist */,
-				37A97CFF265B83FB74BF8536A08DCBE2 /* Pods-NioTests-umbrella.h */,
-				E2351D73E2D9B95EC2F73A3C3EF4262B /* Pods-NioTests.debug.xcconfig */,
-				0EE42175BDC87430359F3FCD15F7EEDB /* Pods-NioTests.release.xcconfig */,
+				FCD79088A5B243334C802BD9F04196E9 /* Pods-NioKit.modulemap */,
+				60A818E98D61109379EFBEAF0EEB38D8 /* Pods-NioKit-acknowledgements.markdown */,
+				AB51F31A88F2D784207EA45ED6B1C78F /* Pods-NioKit-acknowledgements.plist */,
+				799E353310F8BA716B35BC67EFAB6058 /* Pods-NioKit-dummy.m */,
+				0043A78BF7562AAD280050CEC170967C /* Pods-NioKit-Info.plist */,
+				A5559338F5E4810D28B60D6C23A74780 /* Pods-NioKit-umbrella.h */,
+				33E61EBFA1E7EF536C6058CD7DF8F107 /* Pods-NioKit.debug.xcconfig */,
+				4003A3C5495F7D2556364BAE3A8D11B6 /* Pods-NioKit.release.xcconfig */,
 			);
-			name = "Pods-NioTests";
-			path = "Target Support Files/Pods-NioTests";
+			name = "Pods-NioKit";
+			path = "Target Support Files/Pods-NioKit";
+			sourceTree = "<group>";
+		};
+		30C438103FE822324DBAC89A4B13D67D /* Pods-NioKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				6158F50C2955E1BBA6E80FC4E660A5ED /* Pods-NioKitTests.modulemap */,
+				C53AD76E055153BA2A769EF7F5D00D01 /* Pods-NioKitTests-acknowledgements.markdown */,
+				883ED0BD469991379269BC3C06BDFB74 /* Pods-NioKitTests-acknowledgements.plist */,
+				ABFD324D4865408FD17AC300D2B6BF67 /* Pods-NioKitTests-dummy.m */,
+				E623AD87823D2791ACF9954BF07B80F7 /* Pods-NioKitTests-frameworks.sh */,
+				76860B887F2631D6DF02E43051D7E71F /* Pods-NioKitTests-Info.plist */,
+				991C4EA12F4F97D86AD01A2093A1A590 /* Pods-NioKitTests-umbrella.h */,
+				07FA8287C600917B03B9CBF5810BF407 /* Pods-NioKitTests.debug.xcconfig */,
+				388219E126FE3589E4DE9B5D1CCDAC5B /* Pods-NioKitTests.release.xcconfig */,
+			);
+			name = "Pods-NioKitTests";
+			path = "Target Support Files/Pods-NioKitTests";
 			sourceTree = "<group>";
 		};
 		3D1A3A90103C97C4BA4279B19214DBCA /* Reachability */ = {
@@ -1946,21 +2104,6 @@
 			name = Reachability;
 			sourceTree = "<group>";
 		};
-		43EA6979DE3EE4251AA40901C8682836 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A4FA15D44DF6BAC7550EDEED10862AA3 /* AFNetworking.framework */,
-				03B2B5E9613A8428254F160937DA95CC /* GZIP.framework */,
-				BAA2CE670AFB37918E89C290031E24D1 /* libbase58.framework */,
-				A38C567E594B39489D249B9DCA7F926E /* OLMKit.framework */,
-				CE301A312CF1C9B0543550615E360845 /* Pods_Nio.framework */,
-				8A2001F1FD6E1629C57D046F54460138 /* Pods_NioTests.framework */,
-				921BE4A82C4A7A5C72A0C6F8B8FEF200 /* Realm.framework */,
-				6271731CF29AB4310EB8BDA541A5B790 /* SwiftMatrixSDK.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		452F197B83A58DF3582BA45BD055C754 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -1968,6 +2111,23 @@
 				A439B8DAAA2A68ED264E04055C75C434 /* Security.framework */,
 			);
 			name = iOS;
+			sourceTree = "<group>";
+		};
+		482DD8AC3A04F7E1D7C3C46494587B5D /* Pods-Nio */ = {
+			isa = PBXGroup;
+			children = (
+				5F93A57F4922FAE09A8D64FF636D522D /* Pods-Nio.modulemap */,
+				B17EC99872CCE5A601F954A40711EED7 /* Pods-Nio-acknowledgements.markdown */,
+				F864F1B04ECF45BB1C28AB709D312553 /* Pods-Nio-acknowledgements.plist */,
+				446B8390EB95D50C90EE96CD0B7F7022 /* Pods-Nio-dummy.m */,
+				21EFC94F920176F45E4417A3501A36C0 /* Pods-Nio-frameworks.sh */,
+				F1B9943110B475E7ECFA6FC1BB870E55 /* Pods-Nio-Info.plist */,
+				C0C4ACDB23913F3B289641D0A630B2D4 /* Pods-Nio-umbrella.h */,
+				45E2FDE4A1DC83812F8C619961061487 /* Pods-Nio.debug.xcconfig */,
+				FB3F2299551BAF564D80685E4C7EFC2A /* Pods-Nio.release.xcconfig */,
+			);
+			name = "Pods-Nio";
+			path = "Target Support Files/Pods-Nio";
 			sourceTree = "<group>";
 		};
 		4D3640C2F1AE5B4B809D88C3939FA784 /* libbase58 */ = {
@@ -2107,6 +2267,34 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/SwiftMatrixSDK";
+			sourceTree = "<group>";
+		};
+		644FA6B5AD469EC6959601662AF1999C /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				482DD8AC3A04F7E1D7C3C46494587B5D /* Pods-Nio */,
+				27DC3F706FA210F6EDFDA412812B7F1A /* Pods-NioKit */,
+				30C438103FE822324DBAC89A4B13D67D /* Pods-NioKitTests */,
+				68B9A5BA83A076D3B95D0B6F5F5AB326 /* Pods-NioTests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		68B9A5BA83A076D3B95D0B6F5F5AB326 /* Pods-NioTests */ = {
+			isa = PBXGroup;
+			children = (
+				B56129C8EDE5CA486D83AF647E626289 /* Pods-NioTests.modulemap */,
+				9A6A0108E8F950EE816E404AA911E98F /* Pods-NioTests-acknowledgements.markdown */,
+				3D62CC845635DBE484A2594EA01AA0A3 /* Pods-NioTests-acknowledgements.plist */,
+				0AB63C8B6A0957C32ADC669CD6F83943 /* Pods-NioTests-dummy.m */,
+				3B763B94771D9E6B3E867930680AD979 /* Pods-NioTests-frameworks.sh */,
+				5FB52A02E79A763443F31949293694C6 /* Pods-NioTests-Info.plist */,
+				3F595427A9CCB8E7942E36B6CABE3366 /* Pods-NioTests-umbrella.h */,
+				97533A9DD6D13D8E4CA5E382CED19133 /* Pods-NioTests.debug.xcconfig */,
+				BE7CAEEE66CA3C2FAE650464EB104852 /* Pods-NioTests.release.xcconfig */,
+			);
+			name = "Pods-NioTests";
+			path = "Target Support Files/Pods-NioTests";
 			sourceTree = "<group>";
 		};
 		7C6B896F0B23DA9E46F6B87E145AA34D /* Support Files */ = {
@@ -2726,15 +2914,6 @@
 			name = NSURLSession;
 			sourceTree = "<group>";
 		};
-		A4F4E8FF986A458793E40CA6D582CB2F /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				AE1877561CB1F1EC07B759103ED03C52 /* Pods-Nio */,
-				2538EFD040556A045D9FEB55D3DA4B60 /* Pods-NioTests */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
 		AB7BB57D3041BB7685DB8357F0929BEA /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -2748,23 +2927,6 @@
 			);
 			name = AFNetworking;
 			path = AFNetworking;
-			sourceTree = "<group>";
-		};
-		AE1877561CB1F1EC07B759103ED03C52 /* Pods-Nio */ = {
-			isa = PBXGroup;
-			children = (
-				5D45BE05F687AEC63099A5BC1ED2CFE8 /* Pods-Nio.modulemap */,
-				89F4EEDB5CA5EE0A686B9F05F3DBC761 /* Pods-Nio-acknowledgements.markdown */,
-				64CBC7DF76FE7078F7BEAC028D3E28A5 /* Pods-Nio-acknowledgements.plist */,
-				5C5BD80BDB3D820DC337B8F6DD70066D /* Pods-Nio-dummy.m */,
-				40842C25013615F6D1DCD8927AB8194C /* Pods-Nio-frameworks.sh */,
-				99C8BBE0EC6B6A8A89D8DE8AEB316D6C /* Pods-Nio-Info.plist */,
-				8A4ED3646E3DD9AA225E537CA76AB264 /* Pods-Nio-umbrella.h */,
-				22656AA62A0BFBDE9F9F57636EB5EFCE /* Pods-Nio.debug.xcconfig */,
-				FCA59FC8B49B0FE03134DEE803C0A5AA /* Pods-Nio.release.xcconfig */,
-			);
-			name = "Pods-Nio";
-			path = "Target Support Files/Pods-Nio";
 			sourceTree = "<group>";
 		};
 		B0EA5E98434BD10E7FF6C6B12BAE4B11 /* Support Files */ = {
@@ -2837,8 +2999,8 @@
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				23F5E1EAE3AA0F51AAD9FF106D5385C9 /* Frameworks */,
 				D99F2CCD7A0E9A49EFBFC5A82A91F473 /* Pods */,
-				43EA6979DE3EE4251AA40901C8682836 /* Products */,
-				A4F4E8FF986A458793E40CA6D582CB2F /* Targets Support Files */,
+				020AF99199F0AB4DA8FE6B8B268C43DF /* Products */,
+				644FA6B5AD469EC6959601662AF1999C /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -3350,6 +3512,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9AB8DDFF83BE4BDD7DB529095A3A9428 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA38C627870884502A783A0380D0B4E1 /* Pods-NioKit-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B9ECBAE3144164158FDC62D90C3CEFDB /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -3373,6 +3543,14 @@
 				3CA0C9185ED4469D427AA53B26E1B18F /* UIProgressView+AFNetworking.h in Headers */,
 				2AB5C7D99BD529942B2C81AB0CD8A600 /* UIRefreshControl+AFNetworking.h in Headers */,
 				07E08C56386C02093F27CF28E4D01F11 /* WKWebView+AFNetworking.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9D9F1DFCCC75A8F444E410D5BAA537D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A6F8062CC2953A6DEA1AA9F33747D9A /* Pods-NioKitTests-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3542,6 +3720,54 @@
 			productReference = 8A2001F1FD6E1629C57D046F54460138 /* Pods_NioTests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		BDC15DCA36B1067152A09D02A41D1554 /* Pods-NioKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DDA04F7A26738F50E9231E174168E932 /* Build configuration list for PBXNativeTarget "Pods-NioKit" */;
+			buildPhases = (
+				9AB8DDFF83BE4BDD7DB529095A3A9428 /* Headers */,
+				76BE0758308B5F053FA28C42B0CAF6A8 /* Sources */,
+				AFE5403E68B50A5323D8476BCF278B8B /* Frameworks */,
+				654A26BF39993A3206A4592FAFE1DF0B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				696EF672A86D3B1F9FA314F95409AD2D /* PBXTargetDependency */,
+				C70A3F5726EC62708E09140A7D84F407 /* PBXTargetDependency */,
+				563E9D9B2C8FFF059567C6332939CB0E /* PBXTargetDependency */,
+				4A9AE2DBF9D37FAA33545C1AE7086A66 /* PBXTargetDependency */,
+				FF71F22433ABBD1312C4E0AC4C9A4CDB /* PBXTargetDependency */,
+				F114EF140DE3EEACD56124020B228AAF /* PBXTargetDependency */,
+			);
+			name = "Pods-NioKit";
+			productName = "Pods-NioKit";
+			productReference = 23B2244A7AD98A97E4614EDFAD4BA17F /* Pods_NioKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		CCE9976CA81E92848E9DE9A32E26A929 /* Pods-NioKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F00F13E12EAE8D71C489F31899370BCC /* Build configuration list for PBXNativeTarget "Pods-NioKitTests" */;
+			buildPhases = (
+				D9D9F1DFCCC75A8F444E410D5BAA537D /* Headers */,
+				5985C73B87D6A9EA5C8C074012C4E68D /* Sources */,
+				0558A11745F22CFDB0F36B70E68ED761 /* Frameworks */,
+				6684302EFA1B1D4465CDEA22B173A298 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				25E6B5AC275BA29F21C62862B895CAD6 /* PBXTargetDependency */,
+				142DCF02F791D0F2B2AA7ED4294F6CF7 /* PBXTargetDependency */,
+				7676E0675A323AC4C8ADF5CD7A21FED7 /* PBXTargetDependency */,
+				8F04D660B3F586FBF5888CB43228F2BD /* PBXTargetDependency */,
+				292EC531B57B244EE33442EFF6658407 /* PBXTargetDependency */,
+				A99E6FD219BA3630097FDBF977325100 /* PBXTargetDependency */,
+			);
+			name = "Pods-NioKitTests";
+			productName = "Pods-NioKitTests";
+			productReference = 2D81448D97B761B89D26AB6F2FE18F8D /* Pods_NioKitTests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -3560,7 +3786,7 @@
 				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 43EA6979DE3EE4251AA40901C8682836 /* Products */;
+			productRefGroup = 020AF99199F0AB4DA8FE6B8B268C43DF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -3569,6 +3795,8 @@
 				33DF254002528458CD19A971568F13CD /* libbase58 */,
 				98111E6E185137E6FA53F88A71819FD1 /* OLMKit */,
 				703B287032573E7E99F7759270B0B28F /* Pods-Nio */,
+				BDC15DCA36B1067152A09D02A41D1554 /* Pods-NioKit */,
+				CCE9976CA81E92848E9DE9A32E26A929 /* Pods-NioKitTests */,
 				9FA5BEA9BEDD4F03194CA8D6B1191C88 /* Pods-NioTests */,
 				68494F30B4A13F8E5E88BCCAEC25B0A4 /* Realm */,
 				74CED425E395F817E42D059CE9F151FF /* SwiftMatrixSDK */,
@@ -3606,6 +3834,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		5AAFF4E9A7FD5CC955CC94BDE27FBA95 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		654A26BF39993A3206A4592FAFE1DF0B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6684302EFA1B1D4465CDEA22B173A298 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3703,6 +3945,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5985C73B87D6A9EA5C8C074012C4E68D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE293A493CD8EABD65674FA195D73949 /* Pods-NioKitTests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6F66130117A5CA2EFE69F1739F512499 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3723,6 +3973,14 @@
 				02937E01710489D6668D0C3700E8EADA /* UIProgressView+AFNetworking.m in Sources */,
 				01BEB06B4E262DCEA7A94F4206311BF9 /* UIRefreshControl+AFNetworking.m in Sources */,
 				951B6669114E3C8D2E4961AFE2BB6647 /* WKWebView+AFNetworking.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76BE0758308B5F053FA28C42B0CAF6A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A82B13F8B566A6AB489EEB8E545025B /* Pods-NioKit-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4075,6 +4333,24 @@
 			target = 0130B3724283586C0E9D2A112D4F2AA1 /* AFNetworking */;
 			targetProxy = 30E1A0217B79D98419CD3304D2AE6CB1 /* PBXContainerItemProxy */;
 		};
+		142DCF02F791D0F2B2AA7ED4294F6CF7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GZIP;
+			target = 8B74CDB737C067B57BDC5065CE0E2CDC /* GZIP */;
+			targetProxy = 066E5D92710AF64D4FA6A7F68BE186D9 /* PBXContainerItemProxy */;
+		};
+		25E6B5AC275BA29F21C62862B895CAD6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AFNetworking;
+			target = 0130B3724283586C0E9D2A112D4F2AA1 /* AFNetworking */;
+			targetProxy = 57CA4B06055ED2CBED11727D2E5F2C32 /* PBXContainerItemProxy */;
+		};
+		292EC531B57B244EE33442EFF6658407 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftMatrixSDK;
+			target = 74CED425E395F817E42D059CE9F151FF /* SwiftMatrixSDK */;
+			targetProxy = D95F881B4E88A6FB118BF5D01352180F /* PBXContainerItemProxy */;
+		};
 		31375670FDF7E0B8936B94116115486E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Realm;
@@ -4099,6 +4375,18 @@
 			target = 33DF254002528458CD19A971568F13CD /* libbase58 */;
 			targetProxy = 2A300BED10B177366F9AAF31CF85966A /* PBXContainerItemProxy */;
 		};
+		4A9AE2DBF9D37FAA33545C1AE7086A66 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Realm;
+			target = 68494F30B4A13F8E5E88BCCAEC25B0A4 /* Realm */;
+			targetProxy = 3F851C4573D5EF975BE530782FB885A2 /* PBXContainerItemProxy */;
+		};
+		563E9D9B2C8FFF059567C6332939CB0E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OLMKit;
+			target = 98111E6E185137E6FA53F88A71819FD1 /* OLMKit */;
+			targetProxy = 927C63B97041127CF92E6AB3ABB5A205 /* PBXContainerItemProxy */;
+		};
 		5BAAB15DA2F6275662DAF6D726A10B86 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = libbase58;
@@ -4110,6 +4398,12 @@
 			name = SwiftMatrixSDK;
 			target = 74CED425E395F817E42D059CE9F151FF /* SwiftMatrixSDK */;
 			targetProxy = 38713920F1EED600D250852408743EA1 /* PBXContainerItemProxy */;
+		};
+		696EF672A86D3B1F9FA314F95409AD2D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AFNetworking;
+			target = 0130B3724283586C0E9D2A112D4F2AA1 /* AFNetworking */;
+			targetProxy = F83EB3FDBDC4AF8CDE0E3266C9391869 /* PBXContainerItemProxy */;
 		};
 		6D177939484B0DC1F0D90C65FB76070E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4129,6 +4423,12 @@
 			target = 98111E6E185137E6FA53F88A71819FD1 /* OLMKit */;
 			targetProxy = BE99704AACD78E928FDAE4691E8AB1D8 /* PBXContainerItemProxy */;
 		};
+		7676E0675A323AC4C8ADF5CD7A21FED7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OLMKit;
+			target = 98111E6E185137E6FA53F88A71819FD1 /* OLMKit */;
+			targetProxy = C22EDE5EC4942929E65A7A2588CCA395 /* PBXContainerItemProxy */;
+		};
 		870019D89BAF5C7A288C6F3D7B0BC93D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = OLMKit;
@@ -4140,6 +4440,18 @@
 			name = GZIP;
 			target = 8B74CDB737C067B57BDC5065CE0E2CDC /* GZIP */;
 			targetProxy = 30C9504921ACF6B150EDB5E975F4ABE8 /* PBXContainerItemProxy */;
+		};
+		8F04D660B3F586FBF5888CB43228F2BD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Realm;
+			target = 68494F30B4A13F8E5E88BCCAEC25B0A4 /* Realm */;
+			targetProxy = 54EB48C2B213B21EDF49556E7EA07CEF /* PBXContainerItemProxy */;
+		};
+		A99E6FD219BA3630097FDBF977325100 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libbase58;
+			target = 33DF254002528458CD19A971568F13CD /* libbase58 */;
+			targetProxy = 0E579C9D2F026F0544A30B3A6CB12C2D /* PBXContainerItemProxy */;
 		};
 		BD3E25E0AABFB1C754A7BBFB68F31E30 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4153,6 +4465,12 @@
 			target = 74CED425E395F817E42D059CE9F151FF /* SwiftMatrixSDK */;
 			targetProxy = 96CBD530766FF4AADE5517D314B44189 /* PBXContainerItemProxy */;
 		};
+		C70A3F5726EC62708E09140A7D84F407 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GZIP;
+			target = 8B74CDB737C067B57BDC5065CE0E2CDC /* GZIP */;
+			targetProxy = 179DA51FE12B6386EC2A9483A0F0DD60 /* PBXContainerItemProxy */;
+		};
 		D05CA2433D514B59DFA849FE0610E78B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Realm;
@@ -4165,18 +4483,68 @@
 			target = 33DF254002528458CD19A971568F13CD /* libbase58 */;
 			targetProxy = 7E50870C654729DA3DBEBAC6D3C8CDC5 /* PBXContainerItemProxy */;
 		};
+		F114EF140DE3EEACD56124020B228AAF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libbase58;
+			target = 33DF254002528458CD19A971568F13CD /* libbase58 */;
+			targetProxy = 024198AC9D087E4C248EB6A5CBE8DFE6 /* PBXContainerItemProxy */;
+		};
 		FCD1D41F804EBE6F291754A0CF537FFC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = AFNetworking;
 			target = 0130B3724283586C0E9D2A112D4F2AA1 /* AFNetworking */;
 			targetProxy = 86ACF9D40D4E75EFB099E0B4CD06809B /* PBXContainerItemProxy */;
 		};
+		FF71F22433ABBD1312C4E0AC4C9A4CDB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftMatrixSDK;
+			target = 74CED425E395F817E42D059CE9F151FF /* SwiftMatrixSDK */;
+			targetProxy = E78DF54BC1E32B4E55C6997B5D47DCC1 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		115835144BA7EB49F3A4510704A5B96C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 33E61EBFA1E7EF536C6058CD7DF8F107 /* Pods-NioKit.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-NioKit/Pods-NioKit-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-NioKit/Pods-NioKit.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		284B95C2FB049B0ADED0EED000B9B9A6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E2351D73E2D9B95EC2F73A3C3EF4262B /* Pods-NioTests.debug.xcconfig */;
+			baseConfigurationReference = 97533A9DD6D13D8E4CA5E382CED19133 /* Pods-NioTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -4353,9 +4721,48 @@
 			};
 			name = Debug;
 		};
+		4607E25B4FD7314F9BB505BD4ED1F871 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 388219E126FE3589E4DE9B5D1CCDAC5B /* Pods-NioKitTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-NioKitTests/Pods-NioKitTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-NioKitTests/Pods-NioKitTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		595735FC9AB1CEB75952F8F6350538D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 22656AA62A0BFBDE9F9F57636EB5EFCE /* Pods-Nio.debug.xcconfig */;
+			baseConfigurationReference = 45E2FDE4A1DC83812F8C619961061487 /* Pods-Nio.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -4393,7 +4800,7 @@
 		};
 		5AD888848E2D8ECEC3BDC3011E71F95B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FCA59FC8B49B0FE03134DEE803C0A5AA /* Pods-Nio.release.xcconfig */;
+			baseConfigurationReference = FB3F2299551BAF564D80685E4C7EFC2A /* Pods-Nio.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -4501,6 +4908,44 @@
 			};
 			name = Debug;
 		};
+		8CF37DE660568DDAEE33385090ABC379 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 07FA8287C600917B03B9CBF5810BF407 /* Pods-NioKitTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-NioKitTests/Pods-NioKitTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-NioKitTests/Pods-NioKitTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		939F1A8F6BCEB7F9F64D9EEE50CAE014 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4602,7 +5047,7 @@
 		};
 		A69DBC263ED8A4303BC0FB7E71AEFCF5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0EE42175BDC87430359F3FCD15F7EEDB /* Pods-NioTests.release.xcconfig */;
+			baseConfigurationReference = BE7CAEEE66CA3C2FAE650464EB104852 /* Pods-NioTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -4740,6 +5185,45 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B6152C31BFEEC9B31102AF57A8740E74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4003A3C5495F7D2556364BAE3A8D11B6 /* Pods-NioKit.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-NioKit/Pods-NioKit-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-NioKit/Pods-NioKit.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -4958,6 +5442,24 @@
 			buildConfigurations = (
 				976AE85EDB1F4A00F208EB2FB0B5EEEA /* Debug */,
 				B516657C930BC3085EE627ABE74CD048 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DDA04F7A26738F50E9231E174168E932 /* Build configuration list for PBXNativeTarget "Pods-NioKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				115835144BA7EB49F3A4510704A5B96C /* Debug */,
+				B6152C31BFEEC9B31102AF57A8740E74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F00F13E12EAE8D71C489F31899370BCC /* Build configuration list for PBXNativeTarget "Pods-NioKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CF37DE660568DDAEE33385090ABC379 /* Debug */,
+				4607E25B4FD7314F9BB505BD4ED1F871 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
