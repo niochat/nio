@@ -34,7 +34,7 @@
 "composer.accessibility-label.send" = "发送";
 "composer.accessibility-label.cancelEdit" = "取消";
 "typing-indicator.single" = "%@正在输入";
-"typing-indicator.multiple" = "%@和%@正在输入";
+"typing-indicator.two" = "%@和%@正在输入";
 "typing-indicator.many" = "多位正在输入";
 "event.unknown-sender-fallback" = "未知发送者";
 "event.unknown-room-name-fallback" = "未知房间名";

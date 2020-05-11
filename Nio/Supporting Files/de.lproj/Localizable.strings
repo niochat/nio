@@ -39,7 +39,7 @@
 "composer.accessibility-label.cancelEdit" = "Abbrechen";
 
 "typing-indicator.single" = "%@ tippt";
-"typing-indicator.multiple" = "%@ und %@ tippen";
+"typing-indicator.two" = "%@ und %@ tippen";
 "typing-indicator.many" = "Mehrere Leute tippen";
 
 "event.unknown-sender-fallback" = "Unbekannt";
