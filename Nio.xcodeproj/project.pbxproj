@@ -1030,7 +1030,6 @@
 				CAC46D7723A6CB6C0079C24F /* MXEventType+Equatable.swift in Sources */,
 				393411C723903C94003B49B8 /* EventCollection.swift in Sources */,
 				392221B2243D0CCC004D8794 /* RoomTopicEventView.swift in Sources */,
-				CAF2AE97245DB15B00D84133 /* RoomState.swift in Sources */,
 				3902B8A52395A77800698B87 /* LoadingView.swift in Sources */,
 				CADF662424614A3300F5063F /* ReactionGroupView.swift in Sources */,
 				392221B6243F88FD004D8794 /* RoomNameEventView.swift in Sources */,
