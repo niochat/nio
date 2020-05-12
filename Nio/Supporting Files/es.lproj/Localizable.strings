@@ -34,7 +34,7 @@
 "composer.accessibility-label.send" = "Enviar";
 "composer.accessibility-label.cancelEdit" = "Cancelar";
 "typing-indicator.single" = "%@ está escribiendo";
-"typing-indicator.two" = "%@ y %@ están escribiendo";
+"typing-indicator.two" = "%@ y %@ estan escribiendo";
 "typing-indicator.many" = "Múltiples personas están escribiendo";
 "event.unknown-sender-fallback" = "Desconocido";
 "event.unknown-room-name-fallback" = "Desconocido";
@@ -69,4 +69,3 @@
 "settings.title" = "Ajustes";
 "settings.accent-color" = "Color destacado";
 "settings.log-out" = "Desconectar";
-"typing-indicator.two" = "%@ y %@ estan escribiendo";
