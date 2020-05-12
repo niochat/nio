@@ -69,3 +69,4 @@
 "settings.title" = "Ajustes";
 "settings.accent-color" = "Color destacado";
 "settings.log-out" = "Desconectar";
+"typing-indicator.two" = "%@ y %@ estan escribiendo";
