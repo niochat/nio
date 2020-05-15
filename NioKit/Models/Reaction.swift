@@ -6,16 +6,6 @@ public struct Reaction: Identifiable {
     public let timestamp: Date
     public let reaction: String
 
-//    var id: Int {
-//        var hasher = Hasher()
-//
-//        self.timestamp.hash(into: &hasher)
-//        self.sender.hash(into: &hasher)
-//        self.reaction.hash(into: &hasher)
-//
-//        return hasher.finalize()
-//    }
-
     public init(
         id: String,
         sender: String,
