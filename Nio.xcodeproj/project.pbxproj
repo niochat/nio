@@ -84,7 +84,6 @@
 		CAD68172246B1C02001878EB /* MXClient+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389882386FD3900B2E1DF /* MXClient+Publisher.swift */; };
 		CAD68173246B1C05001878EB /* MXEventType+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D7623A6CB6C0079C24F /* MXEventType+Equatable.swift */; };
 		CAD68174246B1C09001878EB /* MXCredentials+Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA0722240B3C9A00FD28C6 /* MXCredentials+Keychain.swift */; };
-		CAD68176246B1C5E001878EB /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD68175246B1C5E001878EB /* String+Extensions.swift */; };
 		CAD68178246B1E9F001878EB /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = CAD68177246B1E9F001878EB /* KeychainAccess */; };
 		CAD6817A246C31EB001878EB /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD68179246C31EB001878EB /* String+Extensions.swift */; };
 		CADF662424614A3300F5063F /* ReactionGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADF662124614A3300F5063F /* ReactionGroupView.swift */; };
@@ -234,7 +233,6 @@
 		CAC46D7623A6CB6C0079C24F /* MXEventType+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXEventType+Equatable.swift"; sourceTree = "<group>"; };
 		CAC46D7823A6D4B90079C24F /* TypedEventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypedEventsTests.swift; sourceTree = "<group>"; };
 		CAD68162246B19E3001878EB /* NioKitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NioKitTests.swift; sourceTree = "<group>"; };
-		CAD68175246B1C5E001878EB /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		CAD68179246C31EB001878EB /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		CADF661E246149B900F5063F /* Reaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reaction.swift; sourceTree = "<group>"; };
 		CADF662124614A3300F5063F /* ReactionGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactionGroupView.swift; sourceTree = "<group>"; };
@@ -544,7 +542,6 @@
 				392389882386FD3900B2E1DF /* MXClient+Publisher.swift */,
 				3923898C238859D100B2E1DF /* MX+Identifiable.swift */,
 				393411C823904428003B49B8 /* MXEvent+Extensions.swift */,
-				CAD68175246B1C5E001878EB /* String+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1075,7 +1072,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAD68172246B1C02001878EB /* MXClient+Publisher.swift in Sources */,
-				CAD68176246B1C5E001878EB /* String+Extensions.swift in Sources */,
 				CAD6816D246B1BAD001878EB /* MXEvent+Extensions.swift in Sources */,
 				CAD68173246B1C05001878EB /* MXEventType+Equatable.swift in Sources */,
 				CAD68168246B1A59001878EB /* NIORoomSummary.swift in Sources */,
