@@ -6,7 +6,7 @@ struct ReactionGroupView: View {
 
     let backgroundColor: Color
 
-    public init(text: String, count: Int, backgroundColor: Color) {
+    init(text: String, count: Int, backgroundColor: Color) {
         assert(count > 0, "Expected non-zero positive integer")
 
         self.text = text

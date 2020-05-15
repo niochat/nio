@@ -1,6 +1,8 @@
 import SwiftUI
 import SwiftMatrixSDK
 
+import NioKit
+
 struct RecentRoomsContainerView: View {
     @EnvironmentObject var store: AccountStore
     @EnvironmentObject var settings: AppSettings

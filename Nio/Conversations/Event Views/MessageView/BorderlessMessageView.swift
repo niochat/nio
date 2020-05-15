@@ -1,5 +1,7 @@
 import SwiftUI
 
+import NioKit
+
 struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.colorSchemeContrast) var colorSchemeContrast

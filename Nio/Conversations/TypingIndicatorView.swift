@@ -1,5 +1,7 @@
 import SwiftUI
 
+import NioKit
+
 struct TypingIndicatorContainerView: View {
     @EnvironmentObject private var room: NIORoom
     @Environment(\.userId) var userId

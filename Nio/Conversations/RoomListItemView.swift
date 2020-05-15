@@ -2,6 +2,8 @@ import SwiftUI
 import SwiftMatrixSDK
 import SDWebImageSwiftUI
 
+import NioKit
+
 struct RoomListItemContainerView: View {
     @EnvironmentObject var store: AccountStore
 

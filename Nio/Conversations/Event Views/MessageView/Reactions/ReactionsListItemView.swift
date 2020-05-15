@@ -1,5 +1,7 @@
 import SwiftUI
 
+import NioKit
+
 struct ReactionsListItemView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @Environment(\.colorSchemeContrast) var colorSchemeContrast: ColorSchemeContrast

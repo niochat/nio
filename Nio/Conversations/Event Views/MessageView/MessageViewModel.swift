@@ -1,4 +1,5 @@
 import SwiftMatrixSDK
+import NioKit
 
 protocol MessageViewModelProtocol {
     var id: String { get }

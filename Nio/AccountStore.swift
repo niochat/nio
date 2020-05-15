@@ -3,6 +3,8 @@ import Combine
 import SwiftMatrixSDK
 import KeychainAccess
 
+import NioKit
+
 enum LoginState {
     case loggedOut
     case authenticating

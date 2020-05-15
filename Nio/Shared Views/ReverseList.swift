@@ -32,9 +32,3 @@ struct ReverseList_Previews: PreviewProvider {
         }
     }
 }
-
-extension String: Identifiable {
-    public var id: String {
-        self
-    }
-}

@@ -3,7 +3,7 @@ import Combine
 import SwiftMatrixSDK
 
 extension MXRestClient {
-    func nio_publicRooms(onServer: String? = nil, limit: UInt? = nil) -> AnyPublisher<MXPublicRoomsResponse, Error> {
+    public func nio_publicRooms(onServer: String? = nil, limit: UInt? = nil) -> AnyPublisher<MXPublicRoomsResponse, Error> {
         Future<MXPublicRoomsResponse, Error> { promise in
             self.publicRooms(onServer: onServer, limit: limit) { response in
                 switch response {

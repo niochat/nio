@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1130"
+   LastUpgradeVersion = "1140"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "39C931D823843289004449E1"
-               BuildableName = "Nio.app"
-               BlueprintName = "Nio"
+               BlueprintIdentifier = "CADF662C24614D2300F5063F"
+               BuildableName = "NioKit.framework"
+               BlueprintName = "NioKit"
                ReferencedContainer = "container:Nio.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,26 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "393411CD239087D2003B49B8"
-               BuildableName = "NioTests.xctest"
-               BlueprintName = "NioTests"
-               ReferencedContainer = "container:Nio.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CADF663424614D2300F5063F"
-               BuildableName = "NioKitTests.xctest"
-               BlueprintName = "NioKitTests"
-               ReferencedContainer = "container:Nio.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -60,22 +40,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "39C931D823843289004449E1"
-            BuildableName = "Nio.app"
-            BlueprintName = "Nio"
-            ReferencedContainer = "container:Nio.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
-      <CommandLineArguments>
-         <CommandLineArgument
-            argument = "-clear-stored-credentials"
-            isEnabled = "NO">
-         </CommandLineArgument>
-      </CommandLineArguments>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -83,16 +47,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "39C931D823843289004449E1"
-            BuildableName = "Nio.app"
-            BlueprintName = "Nio"
+            BlueprintIdentifier = "CADF662C24614D2300F5063F"
+            BuildableName = "NioKit.framework"
+            BlueprintName = "NioKit"
             ReferencedContainer = "container:Nio.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
