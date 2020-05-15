@@ -5,7 +5,9 @@ struct SettingsContainerView: View {
     @EnvironmentObject var settings: AppSettings
 
     var body: some View {
-        SettingsView(accentColor: $settings.accentColor, appIcon: $settings.appIcon, logoutAction: { self.store.logout() })
+        SettingsView(accentColor: $settings.accentColor,
+                     appIcon: $settings.appIcon,
+                     logoutAction: { self.store.logout() })
     }
 }
 
