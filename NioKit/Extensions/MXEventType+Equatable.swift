@@ -1,11 +1,3 @@
-//
-//  MXEventType+Equatable.swift
-//  Nio
-//
-//  Created by Vincent Esche on 12/15/19.
-//  Copyright © 2019 Kilian Koeltzsch. All rights reserved.
-//
-
 import Foundation
 import SwiftMatrixSDK
 
