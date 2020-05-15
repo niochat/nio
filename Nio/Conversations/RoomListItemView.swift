@@ -7,7 +7,7 @@ import NioKit
 struct RoomListItemContainerView: View {
     @EnvironmentObject var store: AccountStore
 
-    public var room: NIORoom
+    var room: NIORoom
 
     var body: some View {
         let roomName = room.summary.displayname ?? ""
