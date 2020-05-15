@@ -18,6 +18,11 @@
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum Asset {
+  internal enum AppIcons {
+
+    internal static let `default` = ImageAsset(name: "App Icons/Default")
+    internal static let sketch = ImageAsset(name: "App Icons/Sketch")
+  }
   internal enum Badge {
 
     internal static let edited = ImageAsset(name: "Badge/Edited")

@@ -68,4 +68,5 @@
 "reaction-picker.title" = "Seleccione un emoji como reacción.";
 "settings.title" = "Ajustes";
 "settings.accent-color" = "Color destacado";
+"settings.app-icon" = "Icono de la aplicación";
 "settings.log-out" = "Desconectar";

@@ -15,6 +15,8 @@
 		3902B8A32395935600698B87 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902B8A22395935600698B87 /* SettingsView.swift */; };
 		3902B8A52395A77800698B87 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902B8A42395A77800698B87 /* LoadingView.swift */; };
 		390D63A42465F62D00B8F640 /* BlurHash in Frameworks */ = {isa = PBXBuildFile; productRef = 390D63A32465F62D00B8F640 /* BlurHash */; };
+		390D63BF246F4BEE00B8F640 /* Sketch@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 390D63BD246F4BEE00B8F640 /* Sketch@3x.png */; };
+		390D63C0246F4BEE00B8F640 /* Sketch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 390D63BE246F4BEE00B8F640 /* Sketch@2x.png */; };
 		3921175124412FDE00892B00 /* RoomMemberEventViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3921175024412FDE00892B00 /* RoomMemberEventViewTests.swift */; };
 		392117542441327E00892B00 /* MockEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392117532441327E00892B00 /* MockEvent.swift */; };
 		392117572442556700892B00 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 392117592442556700892B00 /* Localizable.strings */; };
@@ -156,6 +158,8 @@
 		3902B8A22395935600698B87 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3902B8A42395A77800698B87 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		390D639E246327E900B8F640 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		390D63BD246F4BEE00B8F640 /* Sketch@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sketch@3x.png"; sourceTree = "<group>"; };
+		390D63BE246F4BEE00B8F640 /* Sketch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sketch@2x.png"; sourceTree = "<group>"; };
 		3921175024412FDE00892B00 /* RoomMemberEventViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomMemberEventViewTests.swift; sourceTree = "<group>"; };
 		392117532441327E00892B00 /* MockEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEvent.swift; sourceTree = "<group>"; };
 		392117582442556700892B00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -330,6 +334,31 @@
 			path = "Event Views";
 			sourceTree = "<group>";
 		};
+		390D63BA246F4BEE00B8F640 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				390D63BB246F4BEE00B8F640 /* Alternate Icons */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		390D63BB246F4BEE00B8F640 /* Alternate Icons */ = {
+			isa = PBXGroup;
+			children = (
+				390D63BC246F4BEE00B8F640 /* Sketch */,
+			);
+			path = "Alternate Icons";
+			sourceTree = "<group>";
+		};
+		390D63BC246F4BEE00B8F640 /* Sketch */ = {
+			isa = PBXGroup;
+			children = (
+				390D63BD246F4BEE00B8F640 /* Sketch@3x.png */,
+				390D63BE246F4BEE00B8F640 /* Sketch@2x.png */,
+			);
+			path = Sketch;
+			sourceTree = "<group>";
+		};
 		392117522441327100892B00 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -448,6 +477,7 @@
 				3921175D2442563A00892B00 /* Generated */,
 				39C931E22384328B004449E1 /* Assets.xcassets */,
 				39C931EA2384328B004449E1 /* Info.plist */,
+				390D63BA246F4BEE00B8F640 /* Resources */,
 				39C931F3238449C2004449E1 /* Supporting Files */,
 				39C931E42384328B004449E1 /* Preview Content */,
 			);
@@ -793,6 +823,8 @@
 				39C931F723846B2D004449E1 /* .swiftlint.yml in Resources */,
 				39C931E92384328B004449E1 /* LaunchScreen.storyboard in Resources */,
 				39C931E62384328B004449E1 /* Preview Assets.xcassets in Resources */,
+				390D63C0246F4BEE00B8F640 /* Sketch@2x.png in Resources */,
+				390D63BF246F4BEE00B8F640 /* Sketch@3x.png in Resources */,
 				39C931E32384328B004449E1 /* Assets.xcassets in Resources */,
 				3921175C244255D600892B00 /* swiftgen.yml in Resources */,
 			);

@@ -68,4 +68,5 @@
 "reaction-picker.title" = "点击表情以发送反应。";
 "settings.title" = "设置";
 "settings.accent-color" = "主颜色";
+"settings.app-icon" = "应用图标";
 "settings.log-out" = "注销";

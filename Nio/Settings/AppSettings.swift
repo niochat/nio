@@ -16,4 +16,25 @@ class AppSettings: ObservableObject {
             objectWillChange.send()
         }
     }
+
+    static var alternateIcons = [
+        "Default",
+        "Sketch",
+    ]
+
+    var appIcon: String? {
+        get {
+            UIApplication.shared.alternateIconName ?? "Default"
+        }
+        set {
+            var newValue = newValue
+            if newValue == "Default" {
+                newValue = nil
+            }
+            UIApplication.shared.setAlternateIconName(newValue) { error in
+                guard let error = error else { return }
+                print("Error setting new app icon: \(error)")
+            }
+        }
+    }
 }
