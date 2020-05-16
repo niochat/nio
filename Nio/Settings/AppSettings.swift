@@ -18,20 +18,20 @@ class AppSettings: ObservableObject {
     }
 
     static var alternateIcons = [
-        "Default",
-        "Sketch",
+        AppIcon(title: "Default"),
+        AppIcon(title: "Sketch"),
     ]
 
-    var appIcon: String? {
+    var appIcon: String {
         get {
             UIApplication.shared.alternateIconName ?? "Default"
         }
         set {
-            var newValue = newValue
-            if newValue == "Default" {
-                newValue = nil
+            var iconName: String? = newValue
+            if iconName == "Default" {
+                iconName = nil
             }
-            UIApplication.shared.setAlternateIconName(newValue) { error in
+            UIApplication.shared.setAlternateIconName(iconName) { error in
                 guard let error = error else { return }
                 print("Error setting new app icon: \(error)")
             }

@@ -13,7 +13,7 @@ struct SettingsContainerView: View {
 
 struct SettingsView: View {
     @Binding var accentColor: Color
-    @Binding var appIcon: String?
+    @Binding var appIcon: String
     var logoutAction: () -> Void
 
     var body: some View {
@@ -33,17 +33,7 @@ struct SettingsView: View {
                     }
 
                     Picker(selection: $appIcon, label: Text(L10n.Settings.appIcon)) {
-                        ForEach(AppSettings.alternateIcons) { iconName in
-                            HStack {
-                                Image("App Icons/\(iconName)")
-                                    .resizable()
-                                    .frame(width: 60)
-                                    .cornerRadius(12)
-                                    .padding(5)
-                                Text(iconName)
-                            }
-                            .tag(iconName)
-                        }
+                        ForEach(AppSettings.alternateIcons) { $0 }
                     }
                 }
 
@@ -62,6 +52,8 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(accentColor: .constant(.purple), appIcon: .constant(nil), logoutAction: {})
+        SettingsView(accentColor: .constant(.purple),
+                     appIcon: .constant("Default"),
+                     logoutAction: {})
     }
 }
