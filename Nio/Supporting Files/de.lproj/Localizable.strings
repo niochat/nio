@@ -83,4 +83,5 @@
 
 "settings.title" = "Einstellungen";
 "settings.accent-color" = "Akzentfarbe";
+"settings.app-icon" = "App Icon";
 "settings.log-out" = "Abmelden";

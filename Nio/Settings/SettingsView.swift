@@ -5,12 +5,15 @@ struct SettingsContainerView: View {
     @EnvironmentObject var settings: AppSettings
 
     var body: some View {
-        SettingsView(accentColor: $settings.accentColor, logoutAction: { self.store.logout() })
+        SettingsView(accentColor: $settings.accentColor,
+                     appIcon: $settings.appIcon,
+                     logoutAction: { self.store.logout() })
     }
 }
 
 struct SettingsView: View {
     @Binding var accentColor: Color
+    @Binding var appIcon: String
     var logoutAction: () -> Void
 
     var body: some View {
@@ -27,6 +30,10 @@ struct SettingsView: View {
                             }
                             .tag(color)
                         }
+                    }
+
+                    Picker(selection: $appIcon, label: Text(L10n.Settings.appIcon)) {
+                        ForEach(AppSettings.alternateIcons) { $0 }
                     }
                 }
 
@@ -45,6 +52,8 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(accentColor: .constant(.purple), logoutAction: {})
+        SettingsView(accentColor: .constant(.purple),
+                     appIcon: .constant("Default"),
+                     logoutAction: {})
     }
 }

@@ -235,6 +235,8 @@ internal enum L10n {
   internal enum Settings {
     /// Accent Color
     internal static let accentColor = L10n.tr("Localizable", "settings.accent-color")
+    /// App Icon
+    internal static let appIcon = L10n.tr("Localizable", "settings.app-icon")
     /// Log Out
     internal static let logOut = L10n.tr("Localizable", "settings.log-out")
     /// Settings
