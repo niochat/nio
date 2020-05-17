@@ -58,6 +58,10 @@
 		39D166C62385C804006DD257 /* String+Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D166C52385C804006DD257 /* String+Emoji.swift */; };
 		39D166C82385C832006DD257 /* EventContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D166C72385C832006DD257 /* EventContainerView.swift */; };
 		39DD77AF247006E300A29DEE /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DD77AE247006E300A29DEE /* AppIcon.swift */; };
+		39DD77B52470C38300A29DEE /* Rainbow Dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DD77B32470C38300A29DEE /* Rainbow Dark@2x.png */; };
+		39DD77B62470C38300A29DEE /* Rainbow Dark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DD77B42470C38300A29DEE /* Rainbow Dark@3x.png */; };
+		39DD77BA2470C49D00A29DEE /* Rainbow Light@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DD77B82470C49D00A29DEE /* Rainbow Light@3x.png */; };
+		39DD77BB2470C49D00A29DEE /* Rainbow Light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DD77B92470C49D00A29DEE /* Rainbow Light@2x.png */; };
 		4B0A2E47245E2EF800A79443 /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A2E46245E2EF800A79443 /* MultilineTextField.swift */; };
 		4B29F5B52466EC240084043B /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B29F5B42466EC240084043B /* ImagePicker.swift */; };
 		87FE3870173FD55A91B15921 /* Pods_Nio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3410F361E5A713D19ECEF861 /* Pods_Nio.framework */; };
@@ -216,6 +220,10 @@
 		39D166C52385C804006DD257 /* String+Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Emoji.swift"; sourceTree = "<group>"; };
 		39D166C72385C832006DD257 /* EventContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventContainerView.swift; sourceTree = "<group>"; };
 		39DD77AE247006E300A29DEE /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
+		39DD77B32470C38300A29DEE /* Rainbow Dark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rainbow Dark@2x.png"; sourceTree = "<group>"; };
+		39DD77B42470C38300A29DEE /* Rainbow Dark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rainbow Dark@3x.png"; sourceTree = "<group>"; };
+		39DD77B82470C49D00A29DEE /* Rainbow Light@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rainbow Light@3x.png"; sourceTree = "<group>"; };
+		39DD77B92470C49D00A29DEE /* Rainbow Light@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rainbow Light@2x.png"; sourceTree = "<group>"; };
 		42D6B28FC1F7473DA40DF022 /* Pods_NioTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NioTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B058B5524573A570059BC75 /* EditEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEvent.swift; sourceTree = "<group>"; };
 		4B0A2E46245E2EF800A79443 /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
@@ -348,6 +356,8 @@
 		390D63BB246F4BEE00B8F640 /* Alternate Icons */ = {
 			isa = PBXGroup;
 			children = (
+				39DD77B22470C38300A29DEE /* Rainbow Dark */,
+				39DD77B72470C49D00A29DEE /* Rainbow Light */,
 				390D63BC246F4BEE00B8F640 /* Sketch */,
 			);
 			path = "Alternate Icons";
@@ -533,6 +543,24 @@
 				CAD68179246C31EB001878EB /* String+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		39DD77B22470C38300A29DEE /* Rainbow Dark */ = {
+			isa = PBXGroup;
+			children = (
+				39DD77B32470C38300A29DEE /* Rainbow Dark@2x.png */,
+				39DD77B42470C38300A29DEE /* Rainbow Dark@3x.png */,
+			);
+			path = "Rainbow Dark";
+			sourceTree = "<group>";
+		};
+		39DD77B72470C49D00A29DEE /* Rainbow Light */ = {
+			isa = PBXGroup;
+			children = (
+				39DD77B82470C49D00A29DEE /* Rainbow Light@3x.png */,
+				39DD77B92470C49D00A29DEE /* Rainbow Light@2x.png */,
+			);
+			path = "Rainbow Light";
 			sourceTree = "<group>";
 		};
 		5DC5384442FBDB92C6AD5E68 /* Frameworks */ = {
@@ -824,12 +852,16 @@
 			files = (
 				392117572442556700892B00 /* Localizable.strings in Resources */,
 				39C931F723846B2D004449E1 /* .swiftlint.yml in Resources */,
+				39DD77B62470C38300A29DEE /* Rainbow Dark@3x.png in Resources */,
 				39C931E92384328B004449E1 /* LaunchScreen.storyboard in Resources */,
 				39C931E62384328B004449E1 /* Preview Assets.xcassets in Resources */,
+				39DD77BA2470C49D00A29DEE /* Rainbow Light@3x.png in Resources */,
 				390D63C0246F4BEE00B8F640 /* Sketch@2x.png in Resources */,
 				390D63BF246F4BEE00B8F640 /* Sketch@3x.png in Resources */,
+				39DD77B52470C38300A29DEE /* Rainbow Dark@2x.png in Resources */,
 				39C931E32384328B004449E1 /* Assets.xcassets in Resources */,
 				3921175C244255D600892B00 /* swiftgen.yml in Resources */,
+				39DD77BB2470C49D00A29DEE /* Rainbow Light@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1346,7 +1378,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_ASSET_PATHS = "\"Nio/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = HU85FER47E;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Nio/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1370,7 +1402,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_ASSET_PATHS = "\"Nio/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = HU85FER47E;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Nio/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

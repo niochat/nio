@@ -78,6 +78,24 @@
                 <key>UIPrerenderedIcon</key>
                 <false/>
             </dict>
+            <key>Rainbow Dark</key>
+            <dict>
+                <key>CFBundleIconFiles</key>
+                <array>
+                    <string>Rainbow Dark</string>
+                </array>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+            </dict>
+            <key>Rainbow Light</key>
+            <dict>
+                <key>CFBundleIconFiles</key>
+                <array>
+                    <string>Rainbow Light</string>
+                </array>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+            </dict>
         </dict>
     </dict>
 </dict>

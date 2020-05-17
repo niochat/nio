@@ -19,6 +19,8 @@ class AppSettings: ObservableObject {
 
     static var alternateIcons = [
         AppIcon(title: "Default"),
+        AppIcon(title: "Rainbow Dark"),
+        AppIcon(title: "Rainbow Light"),
         AppIcon(title: "Sketch"),
     ]
 

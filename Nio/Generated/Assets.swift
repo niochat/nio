@@ -21,6 +21,8 @@ internal enum Asset {
   internal enum AppIcons {
 
     internal static let `default` = ImageAsset(name: "App Icons/Default")
+    internal static let rainbowDark = ImageAsset(name: "App Icons/Rainbow Dark")
+    internal static let rainbowLight = ImageAsset(name: "App Icons/Rainbow Light")
     internal static let sketch = ImageAsset(name: "App Icons/Sketch")
   }
   internal enum Badge {
