@@ -1,5 +1,5 @@
 <h1>💬 Nio
-  <img src="https://raw.githubusercontent.com/niochat/nio/master/Resources/AppIcon/Rounded_500.png"
+  <img src="https://raw.githubusercontent.com/niochat/nio/master/Resources/AppIcon/Default/Rounded_500.png"
        align="right" width="128" height="128" />
 </h1>
 
