@@ -146,7 +146,7 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
                         EventContextMenu(model: contextMenuModel)
                     }))
                 if isEdited {
-                    self.editBadgeView
+                    editBadgeView
                 }
             }
             GroupedReactionsView(reactions: model.reactions)
