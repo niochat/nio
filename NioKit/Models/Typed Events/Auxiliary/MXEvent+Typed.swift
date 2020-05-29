@@ -2,56 +2,56 @@ import SwiftMatrixSDK
 
 extension MXEvent {
     // swiftlint:disable:next function_body_length cyclomatic_complexity
-    public func typed() throws -> NIOEventProtocol {
+    public func typed() throws -> NIOEventProtocol? {
         switch self.eventType {
         case .roomName: return try NIORoomNameEvent(event: self)
         case .roomTopic: return try NIORoomTopicEvent(event: self)
         case .roomAvatar: return try NIORoomAvatarEvent(event: self)
-        case .roomBotOptions: throw MXEventValidationError.notYetImplemented
-        case .roomMember: throw MXEventValidationError.notYetImplemented
-        case .roomCreate: throw MXEventValidationError.notYetImplemented
-        case .roomJoinRules: throw MXEventValidationError.notYetImplemented
-        case .roomPowerLevels: throw MXEventValidationError.notYetImplemented
-        case .roomAliases: throw MXEventValidationError.notYetImplemented
-        case .roomCanonicalAlias: throw MXEventValidationError.notYetImplemented
-        case .roomEncrypted: throw MXEventValidationError.notYetImplemented
-        case .roomEncryption: throw MXEventValidationError.notYetImplemented
-        case .roomGuestAccess: throw MXEventValidationError.notYetImplemented
-        case .roomHistoryVisibility: throw MXEventValidationError.notYetImplemented
-        case .roomKey: throw MXEventValidationError.notYetImplemented
-        case .roomForwardedKey: throw MXEventValidationError.notYetImplemented
-        case .roomKeyRequest: throw MXEventValidationError.notYetImplemented
+        case .roomBotOptions: return nil
+        case .roomMember: return nil
+        case .roomCreate: return nil
+        case .roomJoinRules: return nil
+        case .roomPowerLevels: return nil
+        case .roomAliases: return nil
+        case .roomCanonicalAlias: return nil
+        case .roomEncrypted: return nil
+        case .roomEncryption: return nil
+        case .roomGuestAccess: return nil
+        case .roomHistoryVisibility: return nil
+        case .roomKey: return nil
+        case .roomForwardedKey: return nil
+        case .roomKeyRequest: return nil
         case .roomMessage: return try NIORoomMessageEvent(event: self)
-        case .roomMessageFeedback: throw MXEventValidationError.notYetImplemented
-        case .roomPlumbing: throw MXEventValidationError.notYetImplemented
-        case .roomRedaction: throw MXEventValidationError.notYetImplemented
-        case .roomThirdPartyInvite: throw MXEventValidationError.notYetImplemented
-        case .roomRelatedGroups: throw MXEventValidationError.notYetImplemented
-        case .roomPinnedEvents: throw MXEventValidationError.notYetImplemented
-        case .roomTag: throw MXEventValidationError.notYetImplemented
-        case .presence: throw MXEventValidationError.notYetImplemented
-        case .typingNotification: throw MXEventValidationError.notYetImplemented
-        case .reaction: throw MXEventValidationError.notYetImplemented
-        case .receipt: throw MXEventValidationError.notYetImplemented
-        case .read: throw MXEventValidationError.notYetImplemented
-        case .readMarker: throw MXEventValidationError.notYetImplemented
-        case .callInvite: throw MXEventValidationError.notYetImplemented
-        case .callCandidates: throw MXEventValidationError.notYetImplemented
-        case .callAnswer: throw MXEventValidationError.notYetImplemented
-        case .callHangup: throw MXEventValidationError.notYetImplemented
-        case .sticker: throw MXEventValidationError.notYetImplemented
-        case .roomTombStone: throw MXEventValidationError.notYetImplemented
-        case .keyVerificationRequest: throw MXEventValidationError.notYetImplemented
-        case .keyVerificationReady: throw MXEventValidationError.notYetImplemented
-        case .keyVerificationStart: throw MXEventValidationError.notYetImplemented
-        case .keyVerificationAccept: throw MXEventValidationError.notYetImplemented
-        case .keyVerificationKey: throw MXEventValidationError.notYetImplemented
-        case .keyVerificationMac: throw MXEventValidationError.notYetImplemented
-        case .keyVerificationCancel: throw MXEventValidationError.notYetImplemented
-        case .keyVerificationDone: throw MXEventValidationError.notYetImplemented
-        case .secretRequest: throw MXEventValidationError.notYetImplemented
-        case .secretSend: throw MXEventValidationError.notYetImplemented
-        case _: throw MXEventValidationError.notYetImplemented
+        case .roomMessageFeedback: return nil
+        case .roomPlumbing: return nil
+        case .roomRedaction: return nil
+        case .roomThirdPartyInvite: return nil
+        case .roomRelatedGroups: return nil
+        case .roomPinnedEvents: return nil
+        case .roomTag: return nil
+        case .presence: return nil
+        case .typingNotification: return nil
+        case .reaction: return nil
+        case .receipt: return nil
+        case .read: return nil
+        case .readMarker: return nil
+        case .callInvite: return nil
+        case .callCandidates: return nil
+        case .callAnswer: return nil
+        case .callHangup: return nil
+        case .sticker: return nil
+        case .roomTombStone: return nil
+        case .keyVerificationRequest: return nil
+        case .keyVerificationReady: return nil
+        case .keyVerificationStart: return nil
+        case .keyVerificationAccept: return nil
+        case .keyVerificationKey: return nil
+        case .keyVerificationMac: return nil
+        case .keyVerificationCancel: return nil
+        case .keyVerificationDone: return nil
+        case .secretRequest: return nil
+        case .secretSend: return nil
+        case _: return nil
         }
     }
 

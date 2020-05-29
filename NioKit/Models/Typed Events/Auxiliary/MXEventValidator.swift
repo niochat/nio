@@ -1,25 +1,25 @@
 import SwiftMatrixSDK
 
 public enum MXEventValidationError: Error {
-    case notYetImplemented
-    case invalid
-    case other(_ message: String)
+    case invalidType
+    case invalidValue
+    case missingValue
+}
+
+extension MXEventValidationError: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .invalidType: return "Invalid Type"
+        case .invalidValue: return "Invalid Value"
+        case .missingValue: return "Missing Value"
+        }
+    }
 }
 
 extension MXEventValidationError: CustomDebugStringConvertible {
     public var debugDescription: String {
-        let message: String
-        switch self {
-        case .notYetImplemented:
-            message = "Not yet implemented"
-        case .invalid:
-            message = "Invalid"
-        case .other(let string):
-            message = string
-        }
-
         return """
-        \(message)
+        Validation failed: \(self.description)
 
         (Hint: Add a 'Swift Error Breakpoint' to find the exact failure source.)
         """
@@ -29,24 +29,27 @@ extension MXEventValidationError: CustomDebugStringConvertible {
 internal struct MXEventValidator {
     typealias Error = MXEventValidationError
 
-    internal static func expect<T, U: Equatable>(value valueOrNil: T, equals expected: U) throws {
-        guard let value = valueOrNil as? U else {
-            throw MXEventValidationError.invalid
+    internal static func expect<T, U: Equatable>(value valueOrNil: T?, equals expected: U) throws {
+        guard let anyValue = valueOrNil else {
+            throw MXEventValidationError.missingValue
+        }
+        guard let value = anyValue as? U else {
+            throw MXEventValidationError.invalidType
         }
         guard value == expected else {
-            throw MXEventValidationError.invalid
+            throw MXEventValidationError.invalidValue
         }
     }
 
     internal static func expect<T, U>(value: T, is type: U.Type) throws {
         guard value is U else {
-            throw MXEventValidationError.invalid
+            throw MXEventValidationError.invalidType
         }
     }
 
     internal static func expectNotNil<T>(value valueOrNil: T?) throws {
         guard valueOrNil != nil else {
-            throw MXEventValidationError.invalid
+            throw MXEventValidationError.missingValue
         }
     }
 }
