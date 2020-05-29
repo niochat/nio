@@ -65,6 +65,7 @@
 		4B0A2E47245E2EF800A79443 /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A2E46245E2EF800A79443 /* MultilineTextField.swift */; };
 		4B29F5B52466EC240084043B /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B29F5B42466EC240084043B /* ImagePicker.swift */; };
 		87FE3870173FD55A91B15921 /* Pods_Nio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3410F361E5A713D19ECEF861 /* Pods_Nio.framework */; };
+		CAAF5BF82478696F006FDC33 /* UITextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAF5BF72478696F006FDC33 /* UITextViewWrapper.swift */; };
 		CAC46D5723A272D10079C24F /* BorderlessMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D5423A272D10079C24F /* BorderlessMessageView.swift */; };
 		CAC46D5823A272D10079C24F /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D5523A272D10079C24F /* MessageViewModel.swift */; };
 		CAC46D5923A272D10079C24F /* BorderedMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D5623A272D10079C24F /* BorderedMessageView.swift */; };
@@ -232,6 +233,7 @@
 		740F96CF311FBD9A066E0C36 /* Pods-NioTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioTests.release.xcconfig"; path = "Target Support Files/Pods-NioTests/Pods-NioTests.release.xcconfig"; sourceTree = "<group>"; };
 		7458D569F4C4516BAF1294E8 /* Pods-NioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioTests.debug.xcconfig"; path = "Target Support Files/Pods-NioTests/Pods-NioTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9B72E2085A593085853A04CB /* Pods-NioKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioKit.debug.xcconfig"; path = "Target Support Files/Pods-NioKit/Pods-NioKit.debug.xcconfig"; sourceTree = "<group>"; };
+		CAAF5BF72478696F006FDC33 /* UITextViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextViewWrapper.swift; sourceTree = "<group>"; };
 		CAC46D5423A272D10079C24F /* BorderlessMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderlessMessageView.swift; sourceTree = "<group>"; };
 		CAC46D5523A272D10079C24F /* MessageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
 		CAC46D5623A272D10079C24F /* BorderedMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderedMessageView.swift; sourceTree = "<group>"; };
@@ -429,6 +431,7 @@
 				CAF2AE882458EEBB00D84133 /* AttributedText.swift */,
 				CAF2AE8A2458EF0900D84133 /* MarkdownText.swift */,
 				4B0A2E46245E2EF800A79443 /* MultilineTextField.swift */,
+				CAAF5BF72478696F006FDC33 /* UITextViewWrapper.swift */,
 				4B29F5B42466EC240084043B /* ImagePicker.swift */,
 			);
 			path = "Shared Views";
@@ -1118,6 +1121,7 @@
 				39C931DF2384328A004449E1 /* SceneDelegate.swift in Sources */,
 				3921176224435E0000892B00 /* MediaEventView.swift in Sources */,
 				3902B8A32395935600698B87 /* SettingsView.swift in Sources */,
+				CAAF5BF82478696F006FDC33 /* UITextViewWrapper.swift in Sources */,
 				3921175F244256AF00892B00 /* Strings.swift in Sources */,
 				392221B0243A6F8E004D8794 /* EventContextMenuModel.swift in Sources */,
 				3922219624366989004D8794 /* EventContextMenu.swift in Sources */,

@@ -6,20 +6,24 @@ struct MarkdownText: View {
     @Binding var markdown: String
     var textColor: UIColor
 
-    @State private var calculatedHeight: CGFloat = 0.0
+    @State private var contentSizeThatFits: CGSize = .zero
 
-    let linkTextAttributes: [NSAttributedString.Key: Any]?
+    private let textAttributes: TextAttributes
+    private let linkTextAttributes: [NSAttributedString.Key: Any]?
 
-    let onLinkInteraction: (((URL, UITextItemInteraction) -> Bool))?
+    private let onLinkInteraction: (((URL, UITextItemInteraction) -> Bool))?
 
     public init(
         markdown: Binding<String>,
         textColor: UIColor,
+        textAttributes: TextAttributes = .init(),
         linkTextAttributes: [NSAttributedString.Key: Any]? = nil,
         onLinkInteraction: (((URL, UITextItemInteraction) -> Bool))? = nil
     ) {
         self._markdown = markdown
+
         self.textColor = textColor.resolvedColor(with: .current)
+        self.textAttributes = textAttributes
         self.linkTextAttributes = linkTextAttributes
         self.onLinkInteraction = onLinkInteraction
     }
@@ -63,15 +67,24 @@ struct MarkdownText: View {
         AttributedText(
             attributedText: self.attributedText,
             isEditing: .constant(false),
-            calculatedHeight: $calculatedHeight,
-            textContainerInset: self.textContainerInset,
-            lineFragmentPadding: self.lineFragmentPadding,
-            linkTextAttributes: self.linkTextAttributes,
-            isEditable: false,
-            isScrollingEnabled: false,
+            textAttributes: .init(
+                textContainerInset: self.textContainerInset,
+                lineFragmentPadding: self.lineFragmentPadding,
+                linkTextAttributes: self.linkTextAttributes,
+                isEditable: false,
+                isScrollingEnabled: false
+            ),
             onLinkInteraction: self.onLinkInteraction
         )
-        .frame(minHeight: calculatedHeight, maxHeight: calculatedHeight)
+        .textAttributes(self.textAttributes)
+        .onPreferenceChange(ContentSizeThatFitsKey.self) {
+            self.contentSizeThatFits = $0
+        }
+        .frame(
+            maxWidth: self.contentSizeThatFits.width,
+            minHeight: self.contentSizeThatFits.height,
+            maxHeight: self.contentSizeThatFits.height
+        )
     }
 }
 

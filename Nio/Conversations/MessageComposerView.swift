@@ -19,8 +19,9 @@ struct MessageComposerView: View {
     @Binding var message: String
     @Binding var showAttachmentPicker: Bool
 
-    @State private var calculatedHeight: CGFloat = 0.0
     @Binding var isEditing: Bool
+
+    @State private var contentSizeThatFits: CGSize = .zero
 
     internal var internalAttributedMessage: Binding<NSAttributedString> {
         Binding<NSAttributedString>(
@@ -69,7 +70,10 @@ struct MessageComposerView: View {
     }
 
     private var messageEditorHeight: CGFloat {
-        min(calculatedHeight, 0.5 * UIScreen.main.bounds.height)
+        min(
+            self.contentSizeThatFits.height,
+            0.25 * UIScreen.main.bounds.height
+        )
     }
 
     private var highlightMessageView: some View {
@@ -115,14 +119,15 @@ struct MessageComposerView: View {
 
     var messageEditorView: some View {
         MultilineTextField(
-            attributedText: internalAttributedMessage,
+            attributedText: self.internalAttributedMessage,
             placeholder: L10n.Composer.newMessage,
-            calculatedHeight: self.$calculatedHeight,
             isEditing: self.$isEditing
         )
-            .frame(minHeight: messageEditorHeight, maxHeight: messageEditorHeight)
-//            .padding(.horizontal)
-            .background(background)
+        .background(self.background)
+        .onPreferenceChange(ContentSizeThatFitsKey.self) {
+            self.contentSizeThatFits = $0
+        }
+        .frame(height: self.messageEditorHeight)
     }
 
     var sendButton: some View {
@@ -140,12 +145,12 @@ struct MessageComposerView: View {
     var body: some View {
         VStack {
             if self.highlightMessage != nil {
-                highlightMessageView
+                self.highlightMessageView
             }
             HStack {
-                attachmentPickerButton
-                messageEditorView
-                sendButton
+                self.attachmentPickerButton
+                self.messageEditorView
+                self.sendButton
             }
         }
     }
