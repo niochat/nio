@@ -88,7 +88,10 @@
 		CACB810F24811AAA00DBCE67 /* NIORoomStateEventProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACB810A24811AAA00DBCE67 /* NIORoomStateEventProtocol.swift */; };
 		CACB811024811AAA00DBCE67 /* NIOEventProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACB810B24811AAA00DBCE67 /* NIOEventProtocol.swift */; };
 		CACB811124811AAA00DBCE67 /* NIOSyncRoomEventProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACB810C24811AAA00DBCE67 /* NIOSyncRoomEventProtocol.swift */; };
-		CAD68163246B19E3001878EB /* NioKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD68162246B19E3001878EB /* NioKitTests.swift */; };
+		CACB812024811C0D00DBCE67 /* NIORoomNameEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACB811D24811C0D00DBCE67 /* NIORoomNameEventTests.swift */; };
+		CACB812B24811CA100DBCE67 /* NIORoomNameEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACB812724811CA100DBCE67 /* NIORoomNameEvent.swift */; };
+		CACB812D24811CD300DBCE67 /* NIORoomTopicEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACB812C24811CD300DBCE67 /* NIORoomTopicEventTests.swift */; };
+		CACB812F24811D8200DBCE67 /* NIORoomTopicEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACB812E24811D8200DBCE67 /* NIORoomTopicEvent.swift */; };
 		CAD68166246B1A59001878EB /* NIORoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389D1238F2E6F00B2E1DF /* NIORoom.swift */; };
 		CAD68167246B1A59001878EB /* EventCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393411C623903C94003B49B8 /* EventCollection.swift */; };
 		CAD68168246B1A59001878EB /* NIORoomSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389D5238F3EB200B2E1DF /* NIORoomSummary.swift */; };
@@ -269,7 +272,10 @@
 		CACB810A24811AAA00DBCE67 /* NIORoomStateEventProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NIORoomStateEventProtocol.swift; sourceTree = "<group>"; };
 		CACB810B24811AAA00DBCE67 /* NIOEventProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NIOEventProtocol.swift; sourceTree = "<group>"; };
 		CACB810C24811AAA00DBCE67 /* NIOSyncRoomEventProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NIOSyncRoomEventProtocol.swift; sourceTree = "<group>"; };
-		CAD68162246B19E3001878EB /* NioKitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NioKitTests.swift; sourceTree = "<group>"; };
+		CACB811D24811C0D00DBCE67 /* NIORoomNameEventTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NIORoomNameEventTests.swift; sourceTree = "<group>"; };
+		CACB812724811CA100DBCE67 /* NIORoomNameEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NIORoomNameEvent.swift; sourceTree = "<group>"; };
+		CACB812C24811CD300DBCE67 /* NIORoomTopicEventTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NIORoomTopicEventTests.swift; sourceTree = "<group>"; };
+		CACB812E24811D8200DBCE67 /* NIORoomTopicEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NIORoomTopicEvent.swift; sourceTree = "<group>"; };
 		CAD68179246C31EB001878EB /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		CADF661E246149B900F5063F /* Reaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reaction.swift; sourceTree = "<group>"; };
 		CADF662124614A3300F5063F /* ReactionGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactionGroupView.swift; sourceTree = "<group>"; };
@@ -718,7 +724,7 @@
 			isa = PBXGroup;
 			children = (
 				CADF663E24614D2300F5063F /* Info.plist */,
-				CAD68162246B19E3001878EB /* NioKitTests.swift */,
+				CACB811C24811C0D00DBCE67 /* Events */,
 			);
 			path = NioKitTests;
 			sourceTree = "<group>";
@@ -1236,7 +1242,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAD68163246B19E3001878EB /* NioKitTests.swift in Sources */,
+				CACB812D24811CD300DBCE67 /* NIORoomTopicEventTests.swift in Sources */,
+				CACB812024811C0D00DBCE67 /* NIORoomNameEventTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
