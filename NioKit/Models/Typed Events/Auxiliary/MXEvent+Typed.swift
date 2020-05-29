@@ -6,7 +6,7 @@ extension MXEvent {
         switch self.eventType {
         case .roomName: return try NIORoomNameEvent(event: self)
         case .roomTopic: return try NIORoomTopicEvent(event: self)
-        case .roomAvatar: throw MXEventValidationError.notYetImplemented
+        case .roomAvatar: return try NIORoomAvatarEvent(event: self)
         case .roomBotOptions: throw MXEventValidationError.notYetImplemented
         case .roomMember: throw MXEventValidationError.notYetImplemented
         case .roomCreate: throw MXEventValidationError.notYetImplemented
