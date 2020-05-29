@@ -1,10 +1,22 @@
-excluded:
-  - Pods
-
-identifier_name:
-  excluded:
-    - id
-    - ts
-
 disabled_rules:
   - trailing_comma
+  - empty_enum_arguments
+  - void_return
+  - redundant_optional_initialization
+  - nesting
+  - redundant_discardable_let
+  - opening_brace
+excluded:
+  - Pods
+line_length:
+  warning: 140
+  error: 140
+identifier_name:
+  excluded:
+    - 'id'
+    - 'i'
+    - 'x'
+    - 'y'
+    - 'z'
+type_name:
+  max_length: 60
