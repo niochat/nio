@@ -5,7 +5,7 @@ extension MXEvent {
     public func typed() throws -> NIOEventProtocol {
         switch self.eventType {
         case .roomName: return try NIORoomNameEvent(event: self)
-        case .roomTopic: throw MXEventValidationError.notYetImplemented
+        case .roomTopic: return try NIORoomTopicEvent(event: self)
         case .roomAvatar: throw MXEventValidationError.notYetImplemented
         case .roomBotOptions: throw MXEventValidationError.notYetImplemented
         case .roomMember: throw MXEventValidationError.notYetImplemented
