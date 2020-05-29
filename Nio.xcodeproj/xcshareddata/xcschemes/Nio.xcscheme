@@ -38,16 +38,6 @@
                ReferencedContainer = "container:Nio.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CADF663424614D2300F5063F"
-               BuildableName = "NioKitTests.xctest"
-               BlueprintName = "NioKitTests"
-               ReferencedContainer = "container:Nio.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
