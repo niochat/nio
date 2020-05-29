@@ -80,6 +80,14 @@
 		CAC46D7123A56BFB0079C24F /* GroupingIteratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D7023A56BFB0079C24F /* GroupingIteratorTests.swift */; };
 		CAC46D7323A6AE890079C24F /* TypedEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D7223A6AE890079C24F /* TypedEvents.swift */; };
 		CAC46D7923A6D4B90079C24F /* TypedEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D7823A6D4B90079C24F /* TypedEventsTests.swift */; };
+		CACB80F02480704000DBCE67 /* MXEventWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACB80EF2480704000DBCE67 /* MXEventWrapper.swift */; };
+		CACB80F22480706B00DBCE67 /* MXEvent+Typed.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACB80F12480706B00DBCE67 /* MXEvent+Typed.swift */; };
+		CACB80FC2480794E00DBCE67 /* MXEventValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACB80FB2480794E00DBCE67 /* MXEventValidator.swift */; };
+		CACB810D24811AAA00DBCE67 /* NIOSyncStateEventProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACB810824811AAA00DBCE67 /* NIOSyncStateEventProtocol.swift */; };
+		CACB810E24811AAA00DBCE67 /* NIORoomEventProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACB810924811AAA00DBCE67 /* NIORoomEventProtocol.swift */; };
+		CACB810F24811AAA00DBCE67 /* NIORoomStateEventProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACB810A24811AAA00DBCE67 /* NIORoomStateEventProtocol.swift */; };
+		CACB811024811AAA00DBCE67 /* NIOEventProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACB810B24811AAA00DBCE67 /* NIOEventProtocol.swift */; };
+		CACB811124811AAA00DBCE67 /* NIOSyncRoomEventProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACB810C24811AAA00DBCE67 /* NIOSyncRoomEventProtocol.swift */; };
 		CAD68163246B19E3001878EB /* NioKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD68162246B19E3001878EB /* NioKitTests.swift */; };
 		CAD68166246B1A59001878EB /* NIORoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389D1238F2E6F00B2E1DF /* NIORoom.swift */; };
 		CAD68167246B1A59001878EB /* EventCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393411C623903C94003B49B8 /* EventCollection.swift */; };
@@ -253,6 +261,14 @@
 		CAC46D7223A6AE890079C24F /* TypedEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypedEvents.swift; sourceTree = "<group>"; };
 		CAC46D7623A6CB6C0079C24F /* MXEventType+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXEventType+Equatable.swift"; sourceTree = "<group>"; };
 		CAC46D7823A6D4B90079C24F /* TypedEventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypedEventsTests.swift; sourceTree = "<group>"; };
+		CACB80EF2480704000DBCE67 /* MXEventWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MXEventWrapper.swift; sourceTree = "<group>"; };
+		CACB80F12480706B00DBCE67 /* MXEvent+Typed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXEvent+Typed.swift"; sourceTree = "<group>"; };
+		CACB80FB2480794E00DBCE67 /* MXEventValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MXEventValidator.swift; sourceTree = "<group>"; };
+		CACB810824811AAA00DBCE67 /* NIOSyncStateEventProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NIOSyncStateEventProtocol.swift; sourceTree = "<group>"; };
+		CACB810924811AAA00DBCE67 /* NIORoomEventProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NIORoomEventProtocol.swift; sourceTree = "<group>"; };
+		CACB810A24811AAA00DBCE67 /* NIORoomStateEventProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NIORoomStateEventProtocol.swift; sourceTree = "<group>"; };
+		CACB810B24811AAA00DBCE67 /* NIOEventProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NIOEventProtocol.swift; sourceTree = "<group>"; };
+		CACB810C24811AAA00DBCE67 /* NIOSyncRoomEventProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NIOSyncRoomEventProtocol.swift; sourceTree = "<group>"; };
 		CAD68162246B19E3001878EB /* NioKitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NioKitTests.swift; sourceTree = "<group>"; };
 		CAD68179246C31EB001878EB /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		CADF661E246149B900F5063F /* Reaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reaction.swift; sourceTree = "<group>"; };
@@ -613,6 +629,37 @@
 			path = Shapes;
 			sourceTree = "<group>";
 		};
+		CACB80E0248025F100DBCE67 /* Typed Events */ = {
+			isa = PBXGroup;
+			children = (
+				CACB810724811AAA00DBCE67 /* Event Protocols */,
+				CACB811224811ABB00DBCE67 /* Auxiliary */,
+			);
+			path = "Typed Events";
+			sourceTree = "<group>";
+		};
+		CACB810724811AAA00DBCE67 /* Event Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				CACB810824811AAA00DBCE67 /* NIOSyncStateEventProtocol.swift */,
+				CACB810924811AAA00DBCE67 /* NIORoomEventProtocol.swift */,
+				CACB810A24811AAA00DBCE67 /* NIORoomStateEventProtocol.swift */,
+				CACB810B24811AAA00DBCE67 /* NIOEventProtocol.swift */,
+				CACB810C24811AAA00DBCE67 /* NIOSyncRoomEventProtocol.swift */,
+			);
+			path = "Event Protocols";
+			sourceTree = "<group>";
+		};
+		CACB811224811ABB00DBCE67 /* Auxiliary */ = {
+			isa = PBXGroup;
+			children = (
+				CACB80EF2480704000DBCE67 /* MXEventWrapper.swift */,
+				CACB80F12480706B00DBCE67 /* MXEvent+Typed.swift */,
+				CACB80FB2480794E00DBCE67 /* MXEventValidator.swift */,
+			);
+			path = Auxiliary;
+			sourceTree = "<group>";
+		};
 		CAD6816E246B1BB0001878EB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -638,6 +685,7 @@
 			children = (
 				CADF661E246149B900F5063F /* Reaction.swift */,
 				39222197243689CB004D8794 /* Custom Events */,
+				CACB80E0248025F100DBCE67 /* Typed Events */,
 				392389D1238F2E6F00B2E1DF /* NIORoom.swift */,
 				392389D5238F3EB200B2E1DF /* NIORoomSummary.swift */,
 				393411C623903C94003B49B8 /* EventCollection.swift */,
@@ -1162,9 +1210,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAD68172246B1C02001878EB /* MXClient+Publisher.swift in Sources */,
+				CACB811124811AAA00DBCE67 /* NIOSyncRoomEventProtocol.swift in Sources */,
 				CAD6816D246B1BAD001878EB /* MXEvent+Extensions.swift in Sources */,
+				CACB810D24811AAA00DBCE67 /* NIOSyncStateEventProtocol.swift in Sources */,
 				CAD68173246B1C05001878EB /* MXEventType+Equatable.swift in Sources */,
+				CACB80F02480704000DBCE67 /* MXEventWrapper.swift in Sources */,
+				CACB80F22480706B00DBCE67 /* MXEvent+Typed.swift in Sources */,
+				CACB811024811AAA00DBCE67 /* NIOEventProtocol.swift in Sources */,
+				CACB810F24811AAA00DBCE67 /* NIORoomStateEventProtocol.swift in Sources */,
 				CAD68168246B1A59001878EB /* NIORoomSummary.swift in Sources */,
+				CACB810E24811AAA00DBCE67 /* NIORoomEventProtocol.swift in Sources */,
 				CAD6816C246B1AE3001878EB /* CustomEvent.swift in Sources */,
 				CAD68174246B1C09001878EB /* MXCredentials+Keychain.swift in Sources */,
 				CAD68171246B1BFB001878EB /* MX+Identifiable.swift in Sources */,
@@ -1173,6 +1228,7 @@
 				CAD68169246B1A5F001878EB /* Reaction.swift in Sources */,
 				CAD68167246B1A59001878EB /* EventCollection.swift in Sources */,
 				CAD68166246B1A59001878EB /* NIORoom.swift in Sources */,
+				CACB80FC2480794E00DBCE67 /* MXEventValidator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
