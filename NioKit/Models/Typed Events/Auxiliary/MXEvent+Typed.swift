@@ -21,7 +21,7 @@ extension MXEvent {
         case .roomKey: throw MXEventValidationError.notYetImplemented
         case .roomForwardedKey: throw MXEventValidationError.notYetImplemented
         case .roomKeyRequest: throw MXEventValidationError.notYetImplemented
-        case .roomMessage: throw MXEventValidationError.notYetImplemented
+        case .roomMessage: return try NIORoomMessageEvent(event: self)
         case .roomMessageFeedback: throw MXEventValidationError.notYetImplemented
         case .roomPlumbing: throw MXEventValidationError.notYetImplemented
         case .roomRedaction: throw MXEventValidationError.notYetImplemented
