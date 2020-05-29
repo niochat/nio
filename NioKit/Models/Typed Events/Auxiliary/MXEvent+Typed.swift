@@ -4,7 +4,7 @@ extension MXEvent {
     // swiftlint:disable:next function_body_length cyclomatic_complexity
     public func typed() throws -> NIOEventProtocol {
         switch self.eventType {
-        case .roomName: throw MXEventValidationError.notYetImplemented
+        case .roomName: return try NIORoomNameEvent(event: self)
         case .roomTopic: throw MXEventValidationError.notYetImplemented
         case .roomAvatar: throw MXEventValidationError.notYetImplemented
         case .roomBotOptions: throw MXEventValidationError.notYetImplemented
