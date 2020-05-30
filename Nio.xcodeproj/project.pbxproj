@@ -163,6 +163,7 @@
 		3902B89F239410EE00698B87 /* ContentSizeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizeCategory.swift; sourceTree = "<group>"; };
 		3902B8A22395935600698B87 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3902B8A42395A77800698B87 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		3902D4E5248277310009355A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		390D639E246327E900B8F640 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		390D63BD246F4BEE00B8F640 /* Sketch@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sketch@3x.png"; sourceTree = "<group>"; };
 		390D63BE246F4BEE00B8F640 /* Sketch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sketch@2x.png"; sourceTree = "<group>"; };
@@ -820,6 +821,7 @@
 				nl,
 				"zh-Hans",
 				es,
+				ru,
 			);
 			mainGroup = 39C931D023843289004449E1;
 			packageReferences = (
@@ -1200,6 +1202,7 @@
 				3997DCCF245732F000763C07 /* nl */,
 				3955DD36245C371C00827F07 /* zh-Hans */,
 				390D639E246327E900B8F640 /* es */,
+				3902D4E5248277310009355A /* ru */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
