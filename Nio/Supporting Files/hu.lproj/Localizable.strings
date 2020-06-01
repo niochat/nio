@@ -4,3 +4,14 @@
 "login.form.homeserver" = "Matrix kiszolgáló";
 "login.form.homeserver-optional-explanation" = "A Matrix kiszolgálót nem kötelező beírni, ha a matrix.org kiszolgálót használod.";
 "login.sign-in" = "Bejelentkezés";
+"login.open-registration-prompt" = "Nincs még fiókod?";
+"login.register-not-yet-implemented" = "Új fiókok regisztrációja jelenleg még nincs implementálva.";
+"login.failure-back-to-login" = "Vissza a bejelentkezéshez";
+"loading.3" = "Belépés";
+"loading.4" = "Munkamenet visszaállítása";
+"loading.cancel" = "Megszakítás";
+"recent-rooms.accessibility-label.settings" = "Beállítások";
+"recent-rooms.accessibility-label.new-conversation" = "Új beszélgetés";
+"recent-rooms.new-message-placeholder" = "Új üzenet";
+"recent-rooms.accessibility-label.new-message-badge" = "%u új üzenet";
+"recent-rooms.leave.alert-title" = "Szoba elhagyása";
