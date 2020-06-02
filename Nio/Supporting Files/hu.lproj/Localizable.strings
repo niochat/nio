@@ -1,0 +1,6 @@
+"login.welcome-message" = "Jelentkezz be a fiókodba kezdésként!";
+"login.form.username" = "Felhasználónév";
+"login.form.password" = "Jelszó";
+"login.form.homeserver" = "Matrix kiszolgáló";
+"login.form.homeserver-optional-explanation" = "A Matrix kiszolgálót nem kötelező beírni, ha a matrix.org kiszolgálót használod.";
+"login.sign-in" = "Bejelentkezés";
