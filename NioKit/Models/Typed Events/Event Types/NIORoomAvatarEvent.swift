@@ -30,7 +30,20 @@ public struct NIORoomAvatarEvent: MXEventInitializable, MXEventProvider {
     }
 }
 
-extension NIORoomAvatarEvent: NIORoomStateEventProtocol {}
+extension NIORoomAvatarEvent: Equatable {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        guard (lhs as NIORoomStateEventProtocol) == (rhs as NIORoomStateEventProtocol) else {
+            return false
+        }
+        guard lhs.avatarURL == rhs.avatarURL else {
+            return false
+        }
+        guard lhs.avatarInfo == rhs.avatarInfo else {
+            return false
+        }
+        return true
+    }
+}
 
 extension NIORoomAvatarEvent: NIORoomAvatarEventProtocol {
     public var avatarURL: URL {
@@ -58,10 +71,9 @@ extension MXEventValidator {
         try self.expect(value: event.stateKey, equals: "")
 
         try self.expect(value: event.content[Key.url], is: String.self)
-        try self.expect(value: event.content[Key.info], is: [String: Any]?.self)
 
-        if let infoDictionary = event.content[Key.info] as? [String: Any] {
-            try MXEventValidator.validate(dictionary: infoDictionary, for: NIOImageInfo.self)
+        try self.ifPresent(event.content[Key.info], as: [String: Any].self) { info in
+            try MXEventValidator.validate(dictionary: info, for: NIOImageInfo.self)
         }
     }
 }

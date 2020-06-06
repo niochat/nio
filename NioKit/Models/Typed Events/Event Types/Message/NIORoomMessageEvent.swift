@@ -7,6 +7,8 @@ public protocol NIORoomMessageEventProtocol: NIORoomStateEventProtocol {
     // FIXME: promote to an enum?
     /// The type of message, e.g. ``m.image``, ``m.text``
     var messageType: String { get }
+
+    var relationships: AnyCollection<NIORoomMessageEventRelationship>? { get }
 }
 
 /// Room Name Event \
@@ -27,10 +29,18 @@ public struct NIORoomMessageEvent: MXEventInitializable, MXEventProvider {
     fileprivate struct Key {
         static let body: String = "body"
         static let messageType: String = "msgtype"
-        static let relatesTo: String = "m.relates_to"
 
+        static let relatesTo: String = "m.relates_to"
         struct RelatesTo {
             static let inReplyTo: String = "m.in_reply_to"
+            struct InReplyTo {
+                static let eventId: String = "event_id"
+            }
+
+            struct Anonymous {
+                static let eventId: String = "event_id"
+                static let relType: String = "rel_type"
+            }
         }
     }
 
@@ -43,9 +53,32 @@ public struct NIORoomMessageEvent: MXEventInitializable, MXEventProvider {
     }
 }
 
+extension NIORoomMessageEvent: Equatable {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        guard (lhs as NIORoomStateEventProtocol) == (rhs as NIORoomStateEventProtocol) else {
+            return false
+        }
+        guard lhs.body == rhs.body else {
+            return false
+        }
+        guard lhs.messageType == rhs.messageType else {
+            return false
+        }
+        guard lhs.relationships?.count == rhs.relationships?.count else {
+            return false
+        }
+        if case let (lhs?, rhs?) = (lhs.relationships, rhs.relationships) {
+            guard zip(lhs, rhs).allSatisfy({ $0 == $1 }) else {
+                return false
+            }
+        }
+        return true
+    }
+}
+
 extension NIORoomMessageEvent: NIORoomEventProtocol {}
 
-extension NIORoomMessageEvent {
+extension NIORoomMessageEvent: NIORoomMessageEventProtocol {
     public var body: String {
         // swiftlint:disable:next force_cast
         return self.content[Key.body] as! String
@@ -56,23 +89,35 @@ extension NIORoomMessageEvent {
         return self.content[Key.messageType] as! String
     }
 
-    public var relationships: AnyCollection<NIORoomMessageEventReplyRelationshipProtocol>? {
-        guard let dictionary = self.event.content[Key.relatesTo] as? [String: Any] else {
+    public var relationships: AnyCollection<NIORoomMessageEventRelationship>? {
+        guard let json = self.event.content[Key.relatesTo] as? [String: Any] else {
             return nil
         }
-        
-        return AnyCollection(dictionary.compactMap { key, value in
-            guard let json = value as? [String: Any] else {
-                return nil
-            }
 
-            switch key {
-            case Key.RelatesTo.inReplyTo:
-                return try? NIORoomMessageEventReplyRelationship(fromJSON: json)
-            case _:
-                return nil
+        var relationships: [NIORoomMessageEventRelationship] = []
+
+        reply: if let inReplyTo = json[Key.RelatesTo.inReplyTo] as? [String: Any] {
+            guard let eventId = inReplyTo[Key.RelatesTo.InReplyTo.eventId] as? String else {
+                break reply
             }
-        })
+            relationships.append(NIORoomMessageEventRelationship.reply(eventId: eventId))
+        }
+
+        anonymous: if let relType = json[Key.RelatesTo.Anonymous.relType] as? String {
+            guard let eventId = json[Key.RelatesTo.Anonymous.eventId] as? String else {
+                break anonymous
+            }
+            switch relType {
+            case "m.replace":
+                relationships.append(NIORoomMessageEventRelationship.replace(eventId: eventId))
+            case "m.reference":
+                relationships.append(NIORoomMessageEventRelationship.reference(eventId: eventId))
+            case _:
+                print("Ignoring relationship")
+            }
+        }
+
+        return AnyCollection(relationships)
     }
 }
 
@@ -87,13 +132,9 @@ extension MXEventValidator {
         try self.expect(value: event.content[Key.body], is: String.self)
         try self.expect(value: event.content[Key.messageType], is: String.self)
 
-        try self.expect(value: event.content[Key.relatesTo], is: [String: Any]?.self)
-
-        if let relatesTo = event.content[Key.relatesTo] as? [String: Any] {
-            try self.expect(value: relatesTo[Key.RelatesTo.inReplyTo], is: [String: Any]?.self)
-
-            if let inReplyTo = relatesTo[Key.RelatesTo.inReplyTo] as? [String: Any] {
-                try self.validate(dictionary: inReplyTo, for: NIORoomMessageEventReplyRelationship.self)
+        try self.ifPresent(event.content[Key.relatesTo], as: [String: Any].self) { relatesTo in
+            try self.ifPresent(relatesTo[Key.RelatesTo.inReplyTo], as: [String: Any].self) { inReplyTo in
+                try self.expect(value: inReplyTo[Key.RelatesTo.InReplyTo.eventId], is: String.self)
             }
         }
     }

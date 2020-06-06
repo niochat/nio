@@ -38,6 +38,15 @@ public struct NIOImageInfo {
     }
 }
 
+extension NIOImageInfo: Equatable {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        guard (lhs as NIOImageInfoProtocol) == (rhs as NIOImageInfoProtocol) else {
+            return false
+        }
+        return true
+    }
+}
+
 extension NIOImageInfo: NIOImageInfoProtocol {
     public var height: Int? {
         // swiftlint:disable:next force_cast
@@ -96,4 +105,29 @@ extension MXEventValidator {
         try self.expect(value: dictionary[Key.thumbnailFile], is: [String: Any]?.self)
         try self.expect(value: dictionary[Key.thumbnailInfo], is: [String: Any]?.self)
     }
+}
+
+internal func == (lhs: NIOImageInfoProtocol, rhs: NIOImageInfoProtocol) -> Bool {
+    guard lhs.height == rhs.height else {
+        return false
+    }
+    guard lhs.width == rhs.width else {
+        return false
+    }
+    guard lhs.mimeType == rhs.mimeType else {
+        return false
+    }
+    guard lhs.size == rhs.size else {
+        return false
+    }
+    guard lhs.thumbnailURL == rhs.thumbnailURL else {
+        return false
+    }
+    guard lhs.thumbnailFile == rhs.thumbnailFile else {
+        return false
+    }
+    guard lhs.thumbnailInfo == rhs.thumbnailInfo else {
+        return false
+    }
+    return true
 }

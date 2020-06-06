@@ -31,7 +31,7 @@ extension MXEvent {
         case .roomTag: return nil
         case .presence: return nil
         case .typingNotification: return nil
-        case .reaction: return nil
+        case .reaction: return try NIORoomReactionEvent(event: self)
         case .receipt: return nil
         case .read: return nil
         case .readMarker: return nil

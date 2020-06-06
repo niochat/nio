@@ -2,36 +2,25 @@ import SwiftMatrixSDK
 
 // MARK: - Reply
 
-public protocol NIORoomMessageEventReplyRelationshipProtocol {
-    /// The ID of the event that this event is in reply to.
+public protocol NIORoomMessageEventRelationshipProtocol {
+    /// The ID of the event that this event is related to.
     var eventId: String { get }
 }
 
-public struct NIORoomMessageEventReplyRelationship {
-    fileprivate struct Key {
-        static let eventId: String = "event_id"
-    }
-
-    private let dictionary: [String: Any]
-
-    public init(fromJSON dictionary: [String: Any]) throws {
-        try MXEventValidator.validate(dictionary: dictionary, for: Self.self)
-
-        self.dictionary = dictionary
-    }
+public enum NIORoomMessageEventRelationship {
+    case reply(eventId: String)
+    case replace(eventId: String)
+    case reference(eventId: String)
 }
 
-extension NIORoomMessageEventReplyRelationship: NIORoomMessageEventReplyRelationshipProtocol {
+extension NIORoomMessageEventRelationship: Equatable {}
+
+extension NIORoomMessageEventRelationship: NIORoomMessageEventRelationshipProtocol {
     public var eventId: String {
-        // swiftlint:disable:next force_cast
-        self.dictionary[Key.eventId] as! String
-    }
-}
-
-extension MXEventValidator {
-    internal static func validate(dictionary: [String: Any], for: NIORoomMessageEventReplyRelationship.Type) throws {
-        typealias Key = NIORoomMessageEventReplyRelationship.Key
-
-        try self.expect(value: dictionary[Key.eventId], is: String.self)
+        switch self {
+        case .reply(let eventId): return eventId
+        case .replace(let eventId): return eventId
+        case .reference(let eventId): return eventId
+        }
     }
 }

@@ -35,3 +35,16 @@ extension MXEventValidator {
         try self.expect(value: event.content, is: [String: Any].self)
     }
 }
+
+internal func == (lhs: NIOEventProtocol, rhs: NIOEventProtocol) -> Bool {
+    guard lhs.type == rhs.type else {
+        return false
+    }
+    // `content` is `[String: Any]?`.
+    // As such the values are not immediately `Equatable`:
+    let (lhsKeys, rhsKeys) = (lhs.content.keys, rhs.content.keys)
+    guard lhsKeys.count == rhsKeys.count else {
+        return false
+    }
+    return lhsKeys.sorted() == rhsKeys.sorted()
+}

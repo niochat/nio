@@ -6,7 +6,7 @@ import SwiftMatrixSDK
 /// The basic set of fields all sync room events must have.
 public protocol NIOSyncRoomEventProtocol: NIOEventProtocol {
     /// The globally unique event identifier.
-    var id: String { get }
+    var eventId: String { get }
 
     /// Contains the fully-qualified ID of the user who sent this event.
     var sender: String { get }
@@ -19,7 +19,7 @@ public protocol NIOSyncRoomEventProtocol: NIOEventProtocol {
 }
 
 extension NIOSyncRoomEventProtocol where Self: MXEventProvider {
-    public var id: String {
+    public var eventId: String {
         self.event.eventId
     }
 
@@ -58,4 +58,23 @@ extension MXEventValidator {
             // FIXME: perform deep validation?
         }
     }
+}
+
+internal func == (lhs: NIOSyncRoomEventProtocol, rhs: NIOSyncRoomEventProtocol) -> Bool {
+    guard (lhs as NIOEventProtocol) == (rhs as NIOEventProtocol) else {
+        return false
+    }
+    guard lhs.eventId == rhs.eventId else {
+        return false
+    }
+    guard lhs.sender == rhs.sender else {
+        return false
+    }
+    guard lhs.originServerTs == rhs.originServerTs else {
+        return false
+    }
+    guard lhs.unsignedData == rhs.unsignedData else {
+        return false
+    }
+    return true
 }

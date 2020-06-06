@@ -35,7 +35,19 @@ public struct NIORoomNameEvent: MXEventInitializable, MXEventProvider {
     }
 }
 
-extension NIORoomNameEvent: NIOSyncStateEventProtocol {}
+extension NIORoomNameEvent: Equatable {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        guard (lhs as NIOSyncStateEventProtocol) == (rhs as NIOSyncStateEventProtocol) else {
+            return false
+        }
+        guard lhs.roomName == rhs.roomName else {
+            return false
+        }
+        return true
+    }
+}
+
+extension NIORoomNameEvent: NIORoomNameEventProtocol {}
 
 extension NIORoomNameEvent {
     public var roomName: String {
@@ -48,7 +60,7 @@ extension MXEventValidator {
     internal static func validate(event: MXEvent, for: NIORoomNameEvent.Type) throws {
         typealias Key = NIORoomNameEvent.Key
 
-        try self.validate(event: event, for: NIOSyncStateEventProtocol.self)
+        try self.validate(event: event, for: NIORoomStateEventProtocol.self)
 
         try self.expect(value: event.type, equals: "m.room.name")
         try self.expect(value: event.stateKey, equals: "")

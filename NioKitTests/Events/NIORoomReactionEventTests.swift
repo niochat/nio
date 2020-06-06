@@ -4,23 +4,31 @@ import SwiftMatrixSDK
 
 @testable import NioKit
 
-class NIORoomTopicEventTests: XCTestCase {
-    func testTyped() throws {
-        typealias TypedEvent = NIORoomTopicEvent
+class NIORoomReactionEventTests: XCTestCase {
+    func testText() throws {
+        typealias TypedEvent = NIORoomReactionEvent
 
         let roomId = "!9876543210:example.org"
         let eventId = "$0123456789:example.org"
         let sender = "@example:example.org"
-        let topic = "Lorem ipsum"
+
+        let key = "👍"
+        let relType = "m.annotation"
+
+        let relatedEventId = "$9876543210:example.org"
 
         let eventOrNil = MXEvent(fromJSON: [
             "room_id": roomId,
             "event_id": eventId,
             "sender": sender,
-            "type": "m.room.topic",
+            "type": "m.reaction",
             "state_key": "",
             "content": [
-                "topic": topic,
+                "m.relates_to": [
+                    "rel_type": relType,
+                    "event_id": relatedEventId,
+                    "key": key,
+                ],
             ]
         ])
 
@@ -31,6 +39,8 @@ class NIORoomTopicEventTests: XCTestCase {
         XCTAssertEqual(typedEvent.eventId, eventId)
         XCTAssertEqual(typedEvent.sender, sender)
 
-        XCTAssertEqual(typedEvent.roomTopic, topic)
+        XCTAssertEqual(typedEvent.key, key)
+        XCTAssertEqual(typedEvent.relatedEventId, relatedEventId)
+        XCTAssertEqual(typedEvent.relType, relType)
     }
 }

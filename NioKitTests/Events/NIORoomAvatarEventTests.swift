@@ -8,10 +8,9 @@ class NIORoomAvatarEventTests: XCTestCase {
     func testTyped() throws {
         typealias TypedEvent = NIORoomAvatarEvent
 
-        let eventId = "$123456789012PhrSn:example.org"
+        let roomId = "!9876543210:example.org"
+        let eventId = "$0123456789:example.org"
         let sender = "@example:example.org"
-
-        let roomId = "abcdef"
 
         let urlString = "https://example.org/avatar.png"
 
@@ -24,11 +23,11 @@ class NIORoomAvatarEventTests: XCTestCase {
 //        let infoThumbnailInfo = ""
 
         let eventOrNil = MXEvent(fromJSON: [
+            "room_id": roomId,
             "event_id": eventId,
             "sender": sender,
             "type": "m.room.avatar",
             "state_key": "",
-            "room_id": roomId,
             "content": [
                 "url": urlString,
                 "info": [
@@ -46,10 +45,9 @@ class NIORoomAvatarEventTests: XCTestCase {
         let anyTypedEvent = try XCTUnwrap(eventOrNil).typed()
         let typedEvent = try XCTUnwrap(anyTypedEvent as? TypedEvent)
 
-        XCTAssertEqual(typedEvent.id, eventId)
-        XCTAssertEqual(typedEvent.sender, sender)
-
         XCTAssertEqual(typedEvent.roomId, roomId)
+        XCTAssertEqual(typedEvent.eventId, eventId)
+        XCTAssertEqual(typedEvent.sender, sender)
 
         XCTAssertEqual(typedEvent.avatarURL, URL(string: urlString)!)
 

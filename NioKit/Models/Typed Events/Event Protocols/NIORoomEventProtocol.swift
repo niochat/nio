@@ -27,3 +27,13 @@ extension MXEventValidator {
         try self.expect(value: event.roomId, is: String.self)
     }
 }
+
+internal func == (lhs: NIORoomEventProtocol, rhs: NIORoomEventProtocol) -> Bool {
+    guard (lhs as NIOSyncRoomEventProtocol) == (rhs as NIOSyncRoomEventProtocol) else {
+        return false
+    }
+    guard lhs.roomId == rhs.roomId else {
+        return false
+    }
+    return true
+}

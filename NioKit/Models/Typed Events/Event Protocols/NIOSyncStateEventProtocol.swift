@@ -47,3 +47,16 @@ extension MXEventValidator {
         }
     }
 }
+
+internal func == (lhs: NIOSyncStateEventProtocol, rhs: NIOSyncStateEventProtocol) -> Bool {
+    guard (lhs as NIOSyncRoomEventProtocol) == (rhs as NIOSyncRoomEventProtocol) else {
+        return false
+    }
+    guard lhs.stateKey == rhs.stateKey else {
+        return false
+    }
+    guard lhs.prevContent == rhs.prevContent else {
+        return false
+    }
+    return true
+}

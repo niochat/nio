@@ -28,7 +28,17 @@ public struct NIORoomTopicEvent: MXEventInitializable, MXEventProvider {
     }
 }
 
-extension NIORoomTopicEvent: NIORoomStateEventProtocol {}
+extension NIORoomTopicEvent: Equatable {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        guard (lhs as NIORoomStateEventProtocol) == (rhs as NIORoomStateEventProtocol) else {
+            return false
+        }
+        guard lhs.roomTopic == rhs.roomTopic else {
+            return false
+        }
+        return true
+    }
+}
 
 extension NIORoomTopicEvent: NIORoomTopicEventProtocol {
     public var roomTopic: String {
@@ -41,7 +51,7 @@ extension MXEventValidator {
     internal static func validate(event: MXEvent, for: NIORoomTopicEvent.Type) throws {
         typealias Key = NIORoomTopicEvent.Key
 
-        try self.validate(event: event, for: NIOSyncStateEventProtocol.self)
+        try self.validate(event: event, for: NIORoomStateEventProtocol.self)
 
         try self.expect(value: event.type, equals: "m.room.topic")
         try self.expect(value: event.stateKey, equals: "")
