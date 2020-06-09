@@ -8,13 +8,11 @@
 "login.open-registration-prompt" = "Du hast noch kein Benutzerkonto?";
 "login.register-not-yet-implemented" = "Registrierung für neue Konten ist noch nicht implementiert.";
 "login.failure-back-to-login" = "Zurück zur Anmeldung";
-
 "loading.1" = "Die Matrix wird entschlüsselt";
 "loading.2" = "Nachrichten werden auseinander gefriemelt";
 "loading.3" = "Anmeldung läuft";
 "loading.4" = "Sitzung wird wiederhergestellt";
 "loading.cancel" = "Abbrechen";
-
 "recent-rooms.accessibility-label.settings" = "Einstellungen";
 "recent-rooms.accessibility-label.new-conversation" = "Neue Konversation";
 "recent-rooms.new-message-placeholder" = "Neue Nachricht";
@@ -25,26 +23,21 @@
 "recent-rooms.accessibility-label.new-message-badge" = "%u neue Nachrichten";
 "recent-rooms.leave.alert-title" = "Raum verlassen";
 "recent-rooms.leave.alert-body" = "Bist du sicher, dass du '%@' verlassen möchtest? Dies kann nicht rückgängig gemacht werden.";
-
 "room.attachment.select-type" = "Anhang senden";
 "room.attachment.type-photo" = "Bild";
 "room.remove.title" = "Entfernen?";
 "room.remove.message" = "Bist du sicher, dass du diese Nachricht entfernen möchtest?";
 "room.remove.action" = "Entfernen";
-
 "composer.new-message" = "Neue Nachricht...";
 "composer.edit-message" = "Nachricht bearbeiten:";
 "composer.accessibility-label.send-file" = "Anhang senden";
 "composer.accessibility-label.send" = "Senden";
 "composer.accessibility-label.cancelEdit" = "Abbrechen";
-
 "typing-indicator.single" = "%@ tippt";
 "typing-indicator.two" = "%@ und %@ tippen";
 "typing-indicator.many" = "Mehrere Leute tippen";
-
 "event.unknown-sender-fallback" = "Unbekannt";
 "event.unknown-room-name-fallback" = "Unbekannt";
-
 "event.room-member.invited" = "%@ hat %@ eingeladen";
 "event.room-member.left" = "%@ hat die Unterhaltung verlassen";
 "event.room-member.kicked" = "%@ hat %@ aus der Unterhaltung geworfen";
@@ -56,32 +49,24 @@
 "event.room-member.remove-avatar" = "%@ hat deren Profilbild entfernt";
 "event.room-member.unknown-state" = "Unbekannter Event: %@";
 "event.reason" = "Grund: %@";
-
 "event.room-name.set-name" = "%@ hat den Raumnamen auf %@ gesetzt";
 "event.room-name.change-name" = "%@ hat den Raumnamen von %@ auf %@ geändert";
-
 "event.room-topic.change" = "%@ hat das Thema auf '%@' geändert";
-
 "room-power-level.default" = "Standard";
 "room-power-level.moderator" = "Moderator";
 "room-power-level.admin" = "Admin";
 "room-power-level.custom" = "Benutzerdefiniert (%d)";
 "event.room-power-level.change-self" = "%@ hat deren Rechte von %@ auf %@ geändert";
 "event.room-power-level.change-other" = "%@ hat die Rechte von %@ von %@ auf %@ geändert";
-
 "event.redaction.redact-self" = "Nachricht entfernt von %@";
 "event.redaction.redact-other" = "%@ hat die Nachricht von %@ entfernt";
-
 "event.edited" = "bearbeitet";
-
 "event.context-menu.add-reaction" = "Emoji hinzufügen";
 "event.context-menu.reply" = "Direkt antworten";
 "event.context-menu.edit" = "Bearbeiten";
 "event.context-menu.remove" = "Entfernen";
-
 "reaction-picker.title" = "Tippe auf ein Emoji um es zu verschicken.";
-
 "settings.title" = "Einstellungen";
 "settings.accent-color" = "Akzentfarbe";
-"settings.app-icon" = "App Icon";
+"settings.app-icon" = "App-Icon";
 "settings.log-out" = "Abmelden";
