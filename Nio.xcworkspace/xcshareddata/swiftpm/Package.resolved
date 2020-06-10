@@ -1,0 +1,79 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "BlurHash",
+        "repositoryURL": "https://github.com/niochat/BlurHash",
+        "state": {
+          "branch": null,
+          "revision": "1c54f004fa1314ebcf678fad33381afb449a79b9",
+          "version": "0.1.0"
+        }
+      },
+      {
+        "package": "CommonMark",
+        "repositoryURL": "https://github.com/SwiftDocOrg/CommonMark.git",
+        "state": {
+          "branch": null,
+          "revision": "35718fc895ff25908628a47b44ae74aba75b6770",
+          "version": "0.3.2"
+        }
+      },
+      {
+        "package": "CommonMarkAttributedString",
+        "repositoryURL": "https://github.com/mattt/CommonMarkAttributedString",
+        "state": {
+          "branch": null,
+          "revision": "578419f521d16fd5fb6e757e7f5a6a4748fc0c38",
+          "version": "0.2.0"
+        }
+      },
+      {
+        "package": "KeyboardObserving",
+        "repositoryURL": "https://github.com/nickffox/KeyboardObserving.git",
+        "state": {
+          "branch": null,
+          "revision": "26c0c913c11f0ee77006740ca1d8b478d222184f",
+          "version": "0.3.0"
+        }
+      },
+      {
+        "package": "KeychainAccess",
+        "repositoryURL": "https://github.com/kishikawakatsumi/KeychainAccess",
+        "state": {
+          "branch": null,
+          "revision": "3d0ea2c0806791abcc5d7f0d9f62f1cfd4a7264d",
+          "version": "4.2.0"
+        }
+      },
+      {
+        "package": "SDWebImage",
+        "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
+        "state": {
+          "branch": null,
+          "revision": "5818cf70fde7e9e07e24196d0d54350bc8526f26",
+          "version": "5.8.0"
+        }
+      },
+      {
+        "package": "SDWebImageSwiftUI",
+        "repositoryURL": "https://github.com/SDWebImage/SDWebImageSwiftUI.git",
+        "state": {
+          "branch": null,
+          "revision": "1ed96d9b08fa18694621e0b1de182fbf032121bc",
+          "version": "1.4.0"
+        }
+      },
+      {
+        "package": "cmark",
+        "repositoryURL": "https://github.com/SwiftDocOrg/swift-cmark.git",
+        "state": {
+          "branch": null,
+          "revision": "2a766030bee955b4806044fd7aca1b6884475138",
+          "version": "0.28.3+20200110.2a76603"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

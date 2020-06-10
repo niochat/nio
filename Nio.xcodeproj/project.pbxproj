@@ -1616,7 +1616,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = stefan.chat.nio.iOS.NioShareExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = chat.nio.iOS.NioShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1637,7 +1637,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = stefan.chat.nio.iOS.NioShareExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = chat.nio.iOS.NioShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
