@@ -3,8 +3,6 @@ import Combine
 import SwiftMatrixSDK
 import KeychainAccess
 
-import NioKit
-
 enum LoginState {
     case loggedOut
     case authenticating
@@ -12,7 +10,7 @@ enum LoginState {
     case loggedIn(userId: String)
 }
 
-class AccountStore: ObservableObject {
+public class AccountStore: ObservableObject {
     let keychain = Keychain(service: "chat.nio.credentials", accessGroup: "VL26UCY4XZ.nio.keychain")
     var client: MXRestClient?
     var session: MXSession?
@@ -20,16 +18,13 @@ class AccountStore: ObservableObject {
 
     var credentials: MXCredentials?
 
-    init() {
+    public init() {
         if CommandLine.arguments.contains("-clear-stored-credentials") {
             print("🗑 cleared stored credentials from keychain")
             MXCredentials
                 .from(keychain)?
                 .clear(from: keychain)
         }
-
-        let defaults = UserDefaults(suiteName: "group.stefan.chat.nio")
-        defaults?.set([], forKey: "users")
 
         if let credentials = MXCredentials.from(keychain) {
             self.loginState = .authenticating
@@ -70,6 +65,7 @@ class AccountStore: ObservableObject {
             case .success(let credentials):
                 self.credentials = credentials
                 credentials.save(to: self.keychain)
+                print("Error on starting session with new credentials:")
 
                 self.sync { result in
                     switch result {
@@ -139,7 +135,7 @@ class AccountStore: ObservableObject {
 
     var listenReference: Any?
 
-    func startListeningForRoomEvents() {
+    public func startListeningForRoomEvents() {
         // roomState is nil for presence events, just for future reference
         listenReference = self.session?.listenToEvents { event, direction, roomState in
             let affectedRooms = self.rooms.filter { $0.summary.roomId == event.roomId }
@@ -150,8 +146,8 @@ class AccountStore: ObservableObject {
         }
     }
 
-    var rooms: [NIORoom] {
-        self.session?.rooms
+    public var rooms: [NIORoom] {
+        return self.session?.rooms
             .map { NIORoom($0) }
             .sorted { $0.summary.lastMessageDate > $1.summary.lastMessageDate }
             ?? []

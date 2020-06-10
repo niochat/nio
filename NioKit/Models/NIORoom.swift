@@ -34,7 +34,7 @@ public class NIORoom: ObservableObject {
             return lastMessageEvent?.content["body"] as? String ?? ""
         }
     }
-    
+
     public init(_ room: MXRoom) {
         self.room = room
         self.summary = NIORoomSummary(room.summary)
@@ -44,6 +44,16 @@ public class NIORoom: ObservableObject {
         print("Got \(currentBatch.count) events.")
 
         self.eventCache.append(contentsOf: currentBatch)
+
+        let defaults = UserDefaults(suiteName: "group.stefan.chat.nio")
+        var roomList = defaults?.dictionary(forKey: "users")
+        if roomList != nil {
+            roomList?[room.summary.roomId] = room.summary.displayname!
+        } else {
+            roomList = [room.summary.roomId!: room.summary.displayname!]
+        }
+
+        defaults?.set(roomList, forKey: "users")
     }
 
     public func add(event: MXEvent, direction: MXTimelineDirection, roomState: MXRoomState?) {
