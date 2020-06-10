@@ -616,6 +616,24 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		39DD77B22470C38300A29DEE /* Rainbow Dark */ = {
+			isa = PBXGroup;
+			children = (
+				39DD77B32470C38300A29DEE /* Rainbow Dark@2x.png */,
+				39DD77B42470C38300A29DEE /* Rainbow Dark@3x.png */,
+			);
+			path = "Rainbow Dark";
+			sourceTree = "<group>";
+		};
+		39DD77B72470C49D00A29DEE /* Rainbow Light */ = {
+			isa = PBXGroup;
+			children = (
+				39DD77B82470C49D00A29DEE /* Rainbow Light@3x.png */,
+				39DD77B92470C49D00A29DEE /* Rainbow Light@2x.png */,
+			);
+			path = "Rainbow Light";
+			sourceTree = "<group>";
+		};
 		4BD3DCA22482FEED009B5048 /* Session */ = {
 			isa = PBXGroup;
 			children = (
