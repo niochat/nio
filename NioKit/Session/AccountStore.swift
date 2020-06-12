@@ -3,7 +3,7 @@ import Combine
 import SwiftMatrixSDK
 import KeychainAccess
 
-enum LoginState {
+public enum LoginState {
     case loggedOut
     case authenticating
     case failure(Error)
@@ -11,12 +11,13 @@ enum LoginState {
 }
 
 public class AccountStore: ObservableObject {
-    let keychain = Keychain(service: "chat.nio.credentials", accessGroup: "VL26UCY4XZ.nio.keychain")
-    var client: MXRestClient?
-    var session: MXSession?
-    var fileStore: MXFileStore?
+    public var client: MXRestClient?
+    public var session: MXSession?
 
+    var fileStore: MXFileStore?
     var credentials: MXCredentials?
+
+    let keychain = Keychain(service: "chat.nio.credentials", accessGroup: "VL26UCY4XZ.nio.keychain")
 
     public init() {
         if CommandLine.arguments.contains("-clear-stored-credentials") {
@@ -47,9 +48,9 @@ public class AccountStore: ObservableObject {
 
     // MARK: - Login & Sync
 
-    @Published var loginState: LoginState = .loggedOut
+    @Published public var loginState: LoginState = .loggedOut
 
-    func login(username: String, password: String, homeserver: URL) {
+    public func login(username: String, password: String, homeserver: URL) {
         self.loginState = .authenticating
 
         let options = MXSDKOptions()
@@ -80,7 +81,7 @@ public class AccountStore: ObservableObject {
         }
     }
 
-    func logout(completion: @escaping (Result<LoginState, Error>) -> Void) {
+    public func logout(completion: @escaping (Result<LoginState, Error>) -> Void) {
         self.credentials?.clear(from: keychain)
 
         self.session?.logout { response in
@@ -94,7 +95,7 @@ public class AccountStore: ObservableObject {
         }
     }
 
-    func logout() {
+    public func logout() {
         self.logout { result in
             switch result {
             case .failure:

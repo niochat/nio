@@ -45,7 +45,7 @@ public class NIORoom: ObservableObject {
 
         self.eventCache.append(contentsOf: currentBatch)
 
-        let defaults = UserDefaults(suiteName: "group.stefan.chat.nio")
+        let defaults = UserDefaults(suiteName: "group.chat.nio")
         var roomList = defaults?.dictionary(forKey: "users")
         if roomList != nil {
             roomList?[room.summary.roomId] = room.summary.displayname!

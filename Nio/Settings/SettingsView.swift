@@ -1,5 +1,7 @@
 import SwiftUI
 
+import NioKit
+
 struct SettingsContainerView: View {
     @EnvironmentObject var store: AccountStore
     @EnvironmentObject var settings: AppSettings

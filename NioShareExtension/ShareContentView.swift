@@ -4,8 +4,11 @@ import UIKit
 
 struct ShareContentView: View {
     @State var parentView: ShareNavigationController
+    @State var showConfirm = false
+    @State var selectedRoom: String?
+    @State var selectedID: String?
 
-    let rooms: [String: String]? = UserDefaults(suiteName: "group.stefan.chat.nio")?
+    let rooms: [String: String]? = UserDefaults(suiteName: "group.chat.nio")?
         .dictionary(forKey: "users") as? [String: String]
 
     var cancelButton: some View {
@@ -16,20 +19,14 @@ struct ShareContentView: View {
         })
     }
 
-    var sendButton: some View {
-        Button(action: {
-            self.parentView.didSelectPost(roomID: "")
-        }, label: {
-            Text("Send")
-        })
-    }
-
     var body: some View {
         NavigationView {
             List {
                 ForEach(rooms!.keys.sorted(), id: \.self) { roomID in
                     Button(action: {
-                        self.parentView.didSelectPost(roomID: roomID)
+                        self.selectedRoom = self.rooms![roomID]!
+                        self.selectedID = roomID
+                        self.showConfirm.toggle()
                     }, label: {
                         Text(self.rooms![roomID]!)
                     })
@@ -37,6 +34,16 @@ struct ShareContentView: View {
             }
             .navigationBarTitle("Nio", displayMode: .inline)
             .navigationBarItems(trailing: cancelButton)
+            .alert(isPresented: $showConfirm) {
+                Alert(
+                    title: Text("Send to " + (self.selectedRoom ?? "")),
+                    primaryButton: .default(
+                        Text("Send"),
+                        action: {
+                            self.parentView.didSelectPost(roomID: self.selectedID!)
+                    }),
+                secondaryButton: .cancel())
+            }
         }
     }
 }

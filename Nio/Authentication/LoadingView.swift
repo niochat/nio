@@ -1,5 +1,7 @@
 import SwiftUI
 
+import NioKit
+
 struct LoadingView: View {
     @EnvironmentObject var store: AccountStore
 

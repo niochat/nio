@@ -39,7 +39,6 @@
 		3984654523B7ECBA006C173B /* MXURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984654423B7ECBA006C173B /* MXURL.swift */; };
 		3984654823B8D809006C173B /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3984654723B8D809006C173B /* SDWebImageSwiftUI */; };
 		39B834C0243FC42000AE1EA0 /* TypingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B834BF243FC42000AE1EA0 /* TypingIndicatorView.swift */; };
-		39BA0721240B1A2600FD28C6 /* AccountStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA0720240B1A2600FD28C6 /* AccountStore.swift */; };
 		39BA0725240B4E8D00FD28C6 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA0724240B4E8D00FD28C6 /* AppSettings.swift */; };
 		39BA0727240B534600FD28C6 /* Color+allAccent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA0726240B534600FD28C6 /* Color+allAccent.swift */; };
 		39C931E12384328A004449E1 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931E02384328A004449E1 /* RootView.swift */; };
@@ -243,7 +242,6 @@
 		3984654423B7ECBA006C173B /* MXURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MXURL.swift; sourceTree = "<group>"; };
 		3997DCCF245732F000763C07 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		39B834BF243FC42000AE1EA0 /* TypingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingIndicatorView.swift; sourceTree = "<group>"; };
-		39BA0720240B1A2600FD28C6 /* AccountStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStore.swift; sourceTree = "<group>"; };
 		39BA0722240B3C9A00FD28C6 /* MXCredentials+Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXCredentials+Keychain.swift"; sourceTree = "<group>"; };
 		39BA0724240B4E8D00FD28C6 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		39BA0726240B534600FD28C6 /* Color+allAccent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+allAccent.swift"; sourceTree = "<group>"; };
@@ -549,7 +547,7 @@
 				A51BF8CD254C2FE5000FB0A4 /* NioApp.swift */,
 				4BFEFD90246F5EF500CCF4A0 /* Nio.entitlements */,
 				39C931DC2384328A004449E1 /* AppDelegate.swift */,
-				39BA0720240B1A2600FD28C6 /* AccountStore.swift */,
+				39C931DE2384328A004449E1 /* SceneDelegate.swift */,
 				39C931E02384328A004449E1 /* RootView.swift */,
 				3902B8A62395A78100698B87 /* Authentication */,
 				CAC46D5E23A276B30079C24F /* Shapes */,
@@ -1241,7 +1239,6 @@
 			files = (
 				39C9320B23856033004449E1 /* MessageComposerView.swift in Sources */,
 				CAC46D5923A272D10079C24F /* BorderedMessageView.swift in Sources */,
-				39BA0721240B1A2600FD28C6 /* AccountStore.swift in Sources */,
 				39B834C0243FC42000AE1EA0 /* TypingIndicatorView.swift in Sources */,
 				3984654523B7ECBA006C173B /* MXURL.swift in Sources */,
 				392221AE243A0508004D8794 /* GroupedReactionsView.swift in Sources */,
@@ -1608,7 +1605,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = NioShareExtension/NioShareExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VL26UCY4XZ;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NioShareExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1629,7 +1626,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = NioShareExtension/NioShareExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VL26UCY4XZ;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NioShareExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
