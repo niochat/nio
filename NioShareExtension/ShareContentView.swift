@@ -8,7 +8,7 @@ struct ShareContentView: View {
     @State var selectedRoom: String?
     @State var selectedID: String?
 
-    let rooms: [String: String]? = UserDefaults(suiteName: "group.chat.nio")?
+    let rooms: [String: String]? = UserDefaults(suiteName: "group." + ((Bundle.main.infoDictionary?["AppGroup"] as? String) ?? ""))?
         .dictionary(forKey: "users") as? [String: String]
 
     var cancelButton: some View {

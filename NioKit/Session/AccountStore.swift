@@ -17,7 +17,9 @@ public class AccountStore: ObservableObject {
     var fileStore: MXFileStore?
     var credentials: MXCredentials?
 
-    let keychain = Keychain(service: "chat.nio.credentials", accessGroup: "VL26UCY4XZ.nio.keychain")
+    let keychain = Keychain(
+        service: "chat.nio.credentials",
+        accessGroup: ((Bundle.main.infoDictionary?["DevelopmentTeam"] as? String) ?? "") + ".nio.keychain")
 
     public init() {
         if CommandLine.arguments.contains("-clear-stored-credentials") {
