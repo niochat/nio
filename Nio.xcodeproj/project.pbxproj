@@ -1276,7 +1276,7 @@
 		};
 		39C931EB2384328B004449E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4B08F0A82495202A008E4286 /* LocalConfig.xcconfig */;
+			baseConfigurationReference = 4BD3D29224951E3B0031846F /* GlobalConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
