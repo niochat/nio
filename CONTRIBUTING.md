@@ -24,7 +24,7 @@ we also rely on people like you telling us if things are anywhere between unclea
 
 Thank you! ❤️
 
-## Localisation
+## Localization
 
 As Nio aims to be accessible by anyone from around the globe, it's important to have Nio speak as many languages as possible.
 Nio uses a tool called Weblate running on [translate.riot.im](https://translate.riot.im/engage/nio) to manage 
