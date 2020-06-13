@@ -1,0 +1,12 @@
+//
+//  GlobalConfig.xcconfig
+//  Nio
+//
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+PRODUCT_BUNDLE_IDENTIFIER = chat.nio.iOS
+DEVELOPMENT_TEAM = HU85FER47E
+CODE_SIGN_STYLE = Manual
+
+#include? "LocalConfig.xcconfig"

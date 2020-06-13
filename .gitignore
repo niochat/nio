@@ -3,3 +3,4 @@ Nio.xcworkspace/xcuserdata
 Pods/Pods.xcodeproj/xcuserdata
 Pods/CocoaPodsKeys
 fastlane/Appfile
+Configs/LocalConfig.xcconfig

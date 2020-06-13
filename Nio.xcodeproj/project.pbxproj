@@ -64,6 +64,7 @@
 		39DD77BB2470C49D00A29DEE /* Rainbow Light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DD77B92470C49D00A29DEE /* Rainbow Light@2x.png */; };
 		4B0A2E47245E2EF800A79443 /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A2E46245E2EF800A79443 /* MultilineTextField.swift */; };
 		4B29F5B52466EC240084043B /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B29F5B42466EC240084043B /* ImagePicker.swift */; };
+		4BD3D29324951E3B0031846F /* GlobalConfig.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4BD3D29224951E3B0031846F /* GlobalConfig.xcconfig */; };
 		87FE3870173FD55A91B15921 /* Pods_Nio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3410F361E5A713D19ECEF861 /* Pods_Nio.framework */; };
 		CAAF5BF82478696F006FDC33 /* UITextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAF5BF72478696F006FDC33 /* UITextViewWrapper.swift */; };
 		CAC46D5723A272D10079C24F /* BorderlessMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D5423A272D10079C24F /* BorderlessMessageView.swift */; };
@@ -228,8 +229,10 @@
 		39DD77B92470C49D00A29DEE /* Rainbow Light@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rainbow Light@2x.png"; sourceTree = "<group>"; };
 		42D6B28FC1F7473DA40DF022 /* Pods_NioTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NioTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B058B5524573A570059BC75 /* EditEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEvent.swift; sourceTree = "<group>"; };
+		4B08F0A82495202A008E4286 /* LocalConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = LocalConfig.xcconfig; sourceTree = "<group>"; };
 		4B0A2E46245E2EF800A79443 /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 		4B29F5B42466EC240084043B /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		4BD3D29224951E3B0031846F /* GlobalConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = GlobalConfig.xcconfig; sourceTree = "<group>"; };
 		5C7C3F7D4F830D17EFBB034C /* Pods_NioKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NioKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		740F96CF311FBD9A066E0C36 /* Pods-NioTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioTests.release.xcconfig"; path = "Target Support Files/Pods-NioTests/Pods-NioTests.release.xcconfig"; sourceTree = "<group>"; };
 		7458D569F4C4516BAF1294E8 /* Pods-NioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioTests.debug.xcconfig"; path = "Target Support Files/Pods-NioTests/Pods-NioTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -455,6 +458,7 @@
 		39C931D023843289004449E1 = {
 			isa = PBXGroup;
 			children = (
+				4BD3D29424951F150031846F /* Configs */,
 				39C931DB2384328A004449E1 /* Nio */,
 				393411CF239087D2003B49B8 /* NioTests */,
 				CADF662E24614D2300F5063F /* NioKit */,
@@ -565,6 +569,15 @@
 				39DD77B92470C49D00A29DEE /* Rainbow Light@2x.png */,
 			);
 			path = "Rainbow Light";
+			sourceTree = "<group>";
+		};
+		4BD3D29424951F150031846F /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				4BD3D29224951E3B0031846F /* GlobalConfig.xcconfig */,
+				4B08F0A82495202A008E4286 /* LocalConfig.xcconfig */,
+			);
+			path = Configs;
 			sourceTree = "<group>";
 		};
 		5DC5384442FBDB92C6AD5E68 /* Frameworks */ = {
@@ -856,6 +869,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				392117572442556700892B00 /* Localizable.strings in Resources */,
+				4BD3D29324951E3B0031846F /* GlobalConfig.xcconfig in Resources */,
 				39C931F723846B2D004449E1 /* .swiftlint.yml in Resources */,
 				39DD77B62470C38300A29DEE /* Rainbow Dark@3x.png in Resources */,
 				39C931E92384328B004449E1 /* LaunchScreen.storyboard in Resources */,
@@ -1262,6 +1276,7 @@
 		};
 		39C931EB2384328B004449E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4B08F0A82495202A008E4286 /* LocalConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -1382,10 +1397,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_ASSET_PATHS = "\"Nio/Preview Content\"";
-				DEVELOPMENT_TEAM = HU85FER47E;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Nio/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1393,7 +1406,6 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = chat.nio.iOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1406,10 +1418,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_ASSET_PATHS = "\"Nio/Preview Content\"";
-				DEVELOPMENT_TEAM = HU85FER47E;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Nio/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1417,7 +1427,6 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = chat.nio.iOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

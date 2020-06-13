@@ -52,5 +52,9 @@ the project.
 $ pod install
 ```
 
+In order to use automatic signing in Xcode, it is possible to create
+`Configs/LocalConfig.xcconfig` and override the default values. For help have
+a look [here](https://www.matrixprojects.net/p/xcconfig-for-shared-projects/).
+
 If you are unsure where to start or have other questions, please reach out, preferably via Matrix in
 [#niochat:matrix.org](https://matrix.to/#/#niochat:matrix.org) or whatever works for you 😊
