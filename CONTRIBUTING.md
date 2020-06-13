@@ -44,6 +44,7 @@ This is the current status of the translations:
 Nio has (and probably always will have 😅) a [long list of open issues](https://github.com/niochat/nio/issues). You are more
 than *extremely* welcome to tackle any of these and send pull requests.
 
+### Dependencies
 Nio manages most of its dependencies via Swift package manager, which Xcode handles automatically. The `matrix-ios-sdk` 
 however is integrated via Cocoapods (for the time being) which makes installing that necessary to setup a local checkout of 
 the project.
@@ -51,6 +52,11 @@ the project.
 ```shell
 $ pod install
 ```
+
+### Automatic Signing
+In order to use automatic signing in Xcode, it is possible to create
+`Configs/LocalConfig.xcconfig` and override the default values. For more info
+have a look [here](https://www.matrixprojects.net/p/xcconfig-for-shared-projects/).
 
 If you are unsure where to start or have other questions, please reach out, preferably via Matrix in
 [#niochat:matrix.org](https://matrix.to/#/#niochat:matrix.org) or whatever works for you 😊
