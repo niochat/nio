@@ -60,11 +60,11 @@
 		39E5032324EAFA8700FED642 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 39E5032224EAFA8700FED642 /* Introspect */; };
 		4B0A2E47245E2EF800A79443 /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A2E46245E2EF800A79443 /* MultilineTextField.swift */; };
 		4B29F5B52466EC240084043B /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B29F5B42466EC240084043B /* ImagePicker.swift */; };
+		4B693515249BBBFE0029D549 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEFD7E246F414D00CCF4A0 /* ShareViewController.swift */; };
 		4BD3D29324951E3B0031846F /* GlobalConfig.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4BD3D29224951E3B0031846F /* GlobalConfig.xcconfig */; };
 		4BD3DCA42482FF08009B5048 /* AccountStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD3DCA32482FF08009B5048 /* AccountStore.swift */; };
 		4BE63CC0247EC53500C1D4DC /* NioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CADF662D24614D2300F5063F /* NioKit.framework */; };
 		4BE63CC1247EC53500C1D4DC /* NioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CADF662D24614D2300F5063F /* NioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4BFEFD7F246F414D00CCF4A0 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEFD7E246F414D00CCF4A0 /* ShareViewController.swift */; };
 		4BFEFD86246F414D00CCF4A0 /* NioShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4BFEFD7C246F414D00CCF4A0 /* NioShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4BFEFD8C246F458000CCF4A0 /* GetURL.js in Resources */ = {isa = PBXBuildFile; fileRef = 4BFEFD8B246F458000CCF4A0 /* GetURL.js */; };
 		4BFEFD92246F686000CCF4A0 /* ShareContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEFD91246F686000CCF4A0 /* ShareContentView.swift */; };
@@ -652,8 +652,8 @@
 		4BFEFD7D246F414D00CCF4A0 /* NioShareExtension */ = {
 			isa = PBXGroup;
 			children = (
-				4BFEFD8F246F5EE000CCF4A0 /* NioShareExtension.entitlements */,
 				4BFEFD7E246F414D00CCF4A0 /* ShareViewController.swift */,
+				4BFEFD8F246F5EE000CCF4A0 /* NioShareExtension.entitlements */,
 				4BFEFD83246F414D00CCF4A0 /* Info.plist */,
 				4BFEFD8B246F458000CCF4A0 /* GetURL.js */,
 				4BFEFD91246F686000CCF4A0 /* ShareContentView.swift */,
@@ -1297,8 +1297,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B693515249BBBFE0029D549 /* ShareViewController.swift in Sources */,
 				4BFEFD92246F686000CCF4A0 /* ShareContentView.swift in Sources */,
-				4BFEFD7F246F414D00CCF4A0 /* ShareViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

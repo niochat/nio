@@ -20,22 +20,39 @@ class ShareNavigationController: UIViewController {
     }
 
     func didSelectPost(roomID: String) {
-        let propertyList = String(kUTTypePropertyList)
-        let rooms = store.rooms
-        if let item = extensionContext?.inputItems.first as? NSExtensionItem,
-            let itemProvider = item.attachments?.first,
-            itemProvider.hasItemConformingToTypeIdentifier(propertyList) {
-            itemProvider.loadItem(forTypeIdentifier: propertyList, options: nil) { (item, _) in
-                guard let dictionary = item as? NSDictionary,
-                    let results = dictionary[NSExtensionJavaScriptPreprocessingResultsKey] as? NSDictionary,
-                    let url = results["url"] as? String else {
-                    return
+        switch store.loginState {
+        case .loggedIn(_):
+            let propertyList = String(kUTTypePropertyList)
+            let rooms = store.rooms
+            if let item = extensionContext?.inputItems.first as? NSExtensionItem,
+                let itemProvider = item.attachments?.first,
+                itemProvider.hasItemConformingToTypeIdentifier(propertyList) {
+                itemProvider.loadItem(forTypeIdentifier: propertyList, options: nil) { (item, _) in
+                    guard let dictionary = item as? NSDictionary,
+                        let results = dictionary[NSExtensionJavaScriptPreprocessingResultsKey] as? NSDictionary,
+                        let url = results["url"] as? String else {
+                        return
+                    }
+                    for room in rooms where room.summary.roomId == roomID {
+                        room.send(text: url)
+                    }
+                    self.extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
                 }
-                for room in rooms where room.summary.roomId == roomID {
-                    room.send(text: url)
-                }
-                self.extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
             }
+        case .loggedOut:
+            didSelectCancel(error: ShareViewControllerError.notRegistered)
+        case .authenticating:
+            let alert = UIAlertController(title: nil, message: "Sending...", preferredStyle: .alert)
+
+            let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+            loadingIndicator.hidesWhenStopped = true
+            loadingIndicator.style = UIActivityIndicatorView.Style.medium
+            loadingIndicator.startAnimating()
+
+            alert.view.addSubview(loadingIndicator)
+            present(alert, animated: true, completion: nil)
+        case .failure(_):
+            didSelectCancel(error: ShareViewControllerError.notRegistered)
         }
     }
 
@@ -46,9 +63,13 @@ class ShareNavigationController: UIViewController {
         case obsoleteShare
     }
 
-    func didSelectCancel() {
+    func didSelectCancel(error: Error?) {
         self.dismiss(animated: true) {
-            self.extensionContext!.cancelRequest(withError: ShareViewControllerError.obsoleteShare)
+            if error != nil {
+
+            } else {
+                self.extensionContext!.cancelRequest(withError: ShareViewControllerError.obsoleteShare)
+            }
         }
     }
 
