@@ -58,10 +58,10 @@
 		39D166C62385C804006DD257 /* String+Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D166C52385C804006DD257 /* String+Emoji.swift */; };
 		39D166C82385C832006DD257 /* EventContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D166C72385C832006DD257 /* EventContainerView.swift */; };
 		39DD77AF247006E300A29DEE /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DD77AE247006E300A29DEE /* AppIcon.swift */; };
-		39DD77B52470C38300A29DEE /* Rainbow Dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DD77B32470C38300A29DEE /* Rainbow Dark@2x.png */; };
-		39DD77B62470C38300A29DEE /* Rainbow Dark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DD77B42470C38300A29DEE /* Rainbow Dark@3x.png */; };
-		39DD77BA2470C49D00A29DEE /* Rainbow Light@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DD77B82470C49D00A29DEE /* Rainbow Light@3x.png */; };
-		39DD77BB2470C49D00A29DEE /* Rainbow Light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DD77B92470C49D00A29DEE /* Rainbow Light@2x.png */; };
+		39DD77B52470C38300A29DEE /* Six Colors Dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DD77B32470C38300A29DEE /* Six Colors Dark@2x.png */; };
+		39DD77B62470C38300A29DEE /* Six Colors Dark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DD77B42470C38300A29DEE /* Six Colors Dark@3x.png */; };
+		39DD77BA2470C49D00A29DEE /* Six Colors Light@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DD77B82470C49D00A29DEE /* Six Colors Light@3x.png */; };
+		39DD77BB2470C49D00A29DEE /* Six Colors Light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DD77B92470C49D00A29DEE /* Six Colors Light@2x.png */; };
 		4B0A2E47245E2EF800A79443 /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A2E46245E2EF800A79443 /* MultilineTextField.swift */; };
 		4B29F5B52466EC240084043B /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B29F5B42466EC240084043B /* ImagePicker.swift */; };
 		4BD3D29324951E3B0031846F /* GlobalConfig.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4BD3D29224951E3B0031846F /* GlobalConfig.xcconfig */; };
@@ -223,10 +223,10 @@
 		39D166C52385C804006DD257 /* String+Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Emoji.swift"; sourceTree = "<group>"; };
 		39D166C72385C832006DD257 /* EventContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventContainerView.swift; sourceTree = "<group>"; };
 		39DD77AE247006E300A29DEE /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
-		39DD77B32470C38300A29DEE /* Rainbow Dark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rainbow Dark@2x.png"; sourceTree = "<group>"; };
-		39DD77B42470C38300A29DEE /* Rainbow Dark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rainbow Dark@3x.png"; sourceTree = "<group>"; };
-		39DD77B82470C49D00A29DEE /* Rainbow Light@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rainbow Light@3x.png"; sourceTree = "<group>"; };
-		39DD77B92470C49D00A29DEE /* Rainbow Light@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rainbow Light@2x.png"; sourceTree = "<group>"; };
+		39DD77B32470C38300A29DEE /* Six Colors Dark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Six Colors Dark@2x.png"; sourceTree = "<group>"; };
+		39DD77B42470C38300A29DEE /* Six Colors Dark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Six Colors Dark@3x.png"; sourceTree = "<group>"; };
+		39DD77B82470C49D00A29DEE /* Six Colors Light@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Six Colors Light@3x.png"; sourceTree = "<group>"; };
+		39DD77B92470C49D00A29DEE /* Six Colors Light@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Six Colors Light@2x.png"; sourceTree = "<group>"; };
 		42D6B28FC1F7473DA40DF022 /* Pods_NioTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NioTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B058B5524573A570059BC75 /* EditEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEvent.swift; sourceTree = "<group>"; };
 		4B08F0A82495202A008E4286 /* LocalConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = LocalConfig.xcconfig; sourceTree = "<group>"; };
@@ -362,8 +362,8 @@
 		390D63BB246F4BEE00B8F640 /* Alternate Icons */ = {
 			isa = PBXGroup;
 			children = (
-				39DD77B22470C38300A29DEE /* Rainbow Dark */,
-				39DD77B72470C49D00A29DEE /* Rainbow Light */,
+				39DD77B22470C38300A29DEE /* Six Colors Dark */,
+				39DD77B72470C49D00A29DEE /* Six Colors Light */,
 				390D63BC246F4BEE00B8F640 /* Sketch */,
 			);
 			path = "Alternate Icons";
@@ -553,22 +553,22 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		39DD77B22470C38300A29DEE /* Rainbow Dark */ = {
+		39DD77B22470C38300A29DEE /* Six Colors Dark */ = {
 			isa = PBXGroup;
 			children = (
-				39DD77B32470C38300A29DEE /* Rainbow Dark@2x.png */,
-				39DD77B42470C38300A29DEE /* Rainbow Dark@3x.png */,
+				39DD77B32470C38300A29DEE /* Six Colors Dark@2x.png */,
+				39DD77B42470C38300A29DEE /* Six Colors Dark@3x.png */,
 			);
-			path = "Rainbow Dark";
+			path = "Six Colors Dark";
 			sourceTree = "<group>";
 		};
-		39DD77B72470C49D00A29DEE /* Rainbow Light */ = {
+		39DD77B72470C49D00A29DEE /* Six Colors Light */ = {
 			isa = PBXGroup;
 			children = (
-				39DD77B82470C49D00A29DEE /* Rainbow Light@3x.png */,
-				39DD77B92470C49D00A29DEE /* Rainbow Light@2x.png */,
+				39DD77B82470C49D00A29DEE /* Six Colors Light@3x.png */,
+				39DD77B92470C49D00A29DEE /* Six Colors Light@2x.png */,
 			);
-			path = "Rainbow Light";
+			path = "Six Colors Light";
 			sourceTree = "<group>";
 		};
 		4BD3D29424951F150031846F /* Configs */ = {
@@ -871,16 +871,16 @@
 				392117572442556700892B00 /* Localizable.strings in Resources */,
 				4BD3D29324951E3B0031846F /* GlobalConfig.xcconfig in Resources */,
 				39C931F723846B2D004449E1 /* .swiftlint.yml in Resources */,
-				39DD77B62470C38300A29DEE /* Rainbow Dark@3x.png in Resources */,
+				39DD77B62470C38300A29DEE /* Six Colors Dark@3x.png in Resources */,
 				39C931E92384328B004449E1 /* LaunchScreen.storyboard in Resources */,
 				39C931E62384328B004449E1 /* Preview Assets.xcassets in Resources */,
-				39DD77BA2470C49D00A29DEE /* Rainbow Light@3x.png in Resources */,
+				39DD77BA2470C49D00A29DEE /* Six Colors Light@3x.png in Resources */,
 				390D63C0246F4BEE00B8F640 /* Sketch@2x.png in Resources */,
 				390D63BF246F4BEE00B8F640 /* Sketch@3x.png in Resources */,
-				39DD77B52470C38300A29DEE /* Rainbow Dark@2x.png in Resources */,
+				39DD77B52470C38300A29DEE /* Six Colors Dark@2x.png in Resources */,
 				39C931E32384328B004449E1 /* Assets.xcassets in Resources */,
 				3921175C244255D600892B00 /* swiftgen.yml in Resources */,
-				39DD77BB2470C49D00A29DEE /* Rainbow Light@2x.png in Resources */,
+				39DD77BB2470C49D00A29DEE /* Six Colors Light@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
