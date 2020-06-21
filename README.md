@@ -4,7 +4,6 @@
 </h1>
 
 [![Matrix](https://img.shields.io/matrix/niochat:matrix.org?logo=matrix&style=flat)](https://matrix.to/#/#niochat:matrix.org)
-[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/kiliankoe/nio?label=latest%20tag)](https://github.com/kiliankoe/nio/releases)
 
 Nio is an upcoming matrix client for iOS.
 
@@ -16,7 +15,7 @@ Want to give it a spin? Join the public [TestFlight Beta](https://testflight.app
 
 ### Getting Started
 
-The following steps should be all that's necessary to build Nio with Xcode. 
+The following steps should be all that's necessary to build Nio with Xcode.
 
 ```bash
 $ git clone https://github.com/kiliankoe/nio.git
