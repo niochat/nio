@@ -72,7 +72,8 @@
 "event.context-menu.reply" = "回复";
 "event.context-menu.edit" = "编辑";
 "event.context-menu.remove" = "删除";
-"reaction-picker.title" = "点击表情以发送反应。";
+"reaction-picker.navigation-title" = "";
+"reaction-picker.search" = "";
 "settings.title" = "设置";
 "settings.accent-color" = "主颜色";
 "settings.app-icon" = "应用图标";

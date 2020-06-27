@@ -72,7 +72,8 @@
 "event.context-menu.reply" = "Responder";
 "event.context-menu.edit" = "Editar";
 "event.context-menu.remove" = "Eliminar";
-"reaction-picker.title" = "Seleccione un emoji como reacción.";
+"reaction-picker.navigation-title" = "";
+"reaction-picker.search" = "";
 "settings.title" = "Ajustes";
 "settings.accent-color" = "Color destacado";
 "settings.app-icon" = "Icono de la aplicación";

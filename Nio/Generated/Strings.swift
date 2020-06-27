@@ -166,8 +166,10 @@ internal enum L10n {
   }
 
   internal enum ReactionPicker {
-    /// Tap on an emoji to send that reaction.
-    internal static let title = L10n.tr("Localizable", "reaction-picker.title")
+    /// Reactions
+    internal static let navigationTitle = L10n.tr("Localizable", "reaction-picker.navigation-title")
+    /// Search for an emoji
+    internal static let search = L10n.tr("Localizable", "reaction-picker.search")
   }
 
   internal enum RecentRooms {

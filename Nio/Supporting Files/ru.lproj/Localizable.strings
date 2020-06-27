@@ -72,7 +72,8 @@
 "event.context-menu.reply" = "Ответить";
 "event.context-menu.edit" = "Редактировать";
 "event.context-menu.remove" = "Удалить";
-"reaction-picker.title" = "Нажмите на эмодзи, чтобы отправить реакцию";
+"reaction-picker.navigation-title" = "";
+"reaction-picker.search" = "";
 "settings.title" = "Настройки";
 "settings.accent-color" = "Цвет оттенка";
 "settings.app-icon" = "Иконка приложения";
