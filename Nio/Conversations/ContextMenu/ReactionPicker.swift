@@ -1,20 +1,23 @@
 import SwiftUI
 
 public struct ReactionPicker: View {
-    @State private var searchQuery = ""
-    @State private var selectedCategory: Emoji.Category = Emoji.categories[0]
+    @Environment(\.colorScheme) var colorScheme
 
-    func headerView(for category: Emoji.Category) -> some View {
+    @State private var searchQuery = ""
+    @State private var selectedCategory: EmojiCollection.Category = .smileysAndEmotion
+    private var emoji = EmojiCollection()
+
+    func headerView(for category: EmojiCollection.Category) -> some View {
         HStack {
             Text(category.name)
                 .font(.headline)
-                .padding(.leading)
                 .padding(.vertical, 5)
             Spacer()
         }
     }
 
     var onSelect: (String) -> Void
+
     public init(onSelect: @escaping (String) -> Void) {
         self.onSelect = onSelect
     }
@@ -24,60 +27,89 @@ public struct ReactionPicker: View {
     ]
 
     public var body: some View {
-        NavigationView {
-            VStack {
-                TextField(L10n.ReactionPicker.search, text: $searchQuery)
-                    .padding()
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+        VStack {
+            // Grab Handle Thingy
+            Color.gray
+                .frame(width: 40, height: 6)
+                .cornerRadius(3.0)
+                .opacity(0.8)
+                .padding(.top)
+
+            ZStack(alignment: .trailing) {
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(.gray)
+                    TextField(L10n.ReactionPicker.search, text: $searchQuery)
+                }
+                .padding(8)
+                .background(Color(colorScheme == .light ? #colorLiteral(red: 0.9332516193, green: 0.9333857894, blue: 0.941064477, alpha: 1) : #colorLiteral(red: 0.1882131398, green: 0.1960922778, blue: 0.2195765972, alpha: 1)).cornerRadius(8))
+                .padding(.horizontal)
 
                 if searchQuery != "" {
-                    ScrollView {
-                        LazyVGrid(columns: columns) {
-                            ForEach(Emoji.emoji(forQuery: searchQuery), id: \.self) { emoji in
-                                EmojiButtonView(emoji: emoji) { emoji in
-                                    onSelect(emoji)
-                                }
+                    Button {
+                        searchQuery = ""
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                    }
+                    .foregroundColor(.gray)
+                    // Adding standard padding with the extra padding we have on the text field above.
+                    .padding(.trailing, 8)
+                    .padding(.trailing)
+                }
+            }
+
+            if searchQuery != "" {
+                ScrollView {
+                    LazyVGrid(columns: columns) {
+                        ForEach(emoji.emoji(matching: searchQuery)) { emoji in
+                            EmojiButtonView(emoji: emoji) { emoji in
+                                onSelect(emoji)
                             }
                         }
                     }
-                    .padding(.horizontal)
-                } else {
-                    Picker("", selection: $selectedCategory) {
-                        ForEach(Emoji.categories) { category in
-                            Text(category.icon).tag(category)
-                        }
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
-                    .padding(.horizontal)
-
+                }
+                .padding(.horizontal)
+            } else {
+                ZStack(alignment: .bottom) {
                     ScrollView {
                         LazyVGrid(columns: columns) {
-                            Section(header: headerView(for: selectedCategory)) {
-                                ForEach(Emoji.emoji(forCategory: selectedCategory.id), id: \.self) { emoji in
+//                                Section(header: headerView(for: selectedCategory)) {
+                                ForEach(emoji.emoji(for: selectedCategory), id: \.self) { emoji in
                                     EmojiButtonView(emoji: emoji) { emoji in
                                         onSelect(emoji)
                                     }
                                 }
-                            }
+//                                }
                         }
                         .padding(.horizontal)
                     }
+
+                    Picker("", selection: $selectedCategory) {
+                        ForEach(EmojiCollection.Category.allCases) { category in
+                            category.iconImage
+                                .tag(category)
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .padding(.horizontal)
+                    .shadow(radius: 10)
+                    // FIXME: This is stupid.
+                    .background(colorScheme == .light ? Color.white : Color(#colorLiteral(red: 0.1097902879, green: 0.1098128334, blue: 0.1176275685, alpha: 1)))
                 }
             }
-            .navigationBarTitle(Text(L10n.ReactionPicker.navigationTitle))
         }
     }
 }
 
 struct EmojiButtonView: View {
-    let emoji: String
+    let emoji: EmojiCollection.Emoji
     let action: (String) -> Void
 
     var body: some View {
         Button {
-            action(emoji)
+            action(emoji.emoji)
         } label: {
-            Text(emoji)
+            Text(emoji.emoji)
                 .font(.system(size: 40))
         }
     }

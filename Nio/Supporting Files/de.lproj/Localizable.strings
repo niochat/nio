@@ -73,7 +73,7 @@
 "event.context-menu.edit" = "Bearbeiten";
 "event.context-menu.remove" = "Entfernen";
 "reaction-picker.navigation-title" = "Reaktionen";
-"reaction-picker.search" = "Suche nach einem Emoji";
+"reaction-picker.search" = "Emoji durchsuchen...";
 "settings.title" = "Einstellungen";
 "settings.accent-color" = "Akzentfarbe";
 "settings.app-icon" = "App-Icon";

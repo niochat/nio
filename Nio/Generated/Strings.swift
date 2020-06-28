@@ -168,7 +168,7 @@ internal enum L10n {
   internal enum ReactionPicker {
     /// Reactions
     internal static let navigationTitle = L10n.tr("Localizable", "reaction-picker.navigation-title")
-    /// Search for an emoji
+    /// Search Emoji...
     internal static let search = L10n.tr("Localizable", "reaction-picker.search")
   }
 
