@@ -47,23 +47,23 @@ class EmojiCollection {
         var iconImage: Image {
             switch self {
             case .smileysAndEmotion:
-                return Image(systemName: "face.smiling.fill")
+                return Image(systemName: "face.smiling")
             case .peopleAndBody:
-                return Image(systemName: "hand.raised.fill")
+                return Image(systemName: "hand.raised")
             case .animalsAndNature:
-                return Image(systemName: "leaf.fill")
+                return Image(systemName: "leaf")
             case .foodAndDrink:
                 return Image(systemName: "thermometer")
             case .travelAndPlaces:
-                return Image(systemName: "car.fill")
+                return Image(systemName: "car")
             case .activities:
                 return Image(systemName: "figure.walk")
             case .objects:
-                return Image(systemName: "lightbulb.fill")
+                return Image(systemName: "lightbulb")
             case .symbols:
-                return Image(systemName: "number.circle.fill")
+                return Image(systemName: "number.circle")
             case .flags:
-                return Image(systemName: "flag.fill")
+                return Image(systemName: "flag")
             }
         }
     }
