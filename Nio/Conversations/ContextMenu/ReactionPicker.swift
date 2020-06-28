@@ -70,31 +70,26 @@ public struct ReactionPicker: View {
                 }
                 .padding(.horizontal)
             } else {
-                ZStack(alignment: .bottom) {
-                    ScrollView {
-                        LazyVGrid(columns: columns) {
+                Picker("", selection: $selectedCategory) {
+                    ForEach(EmojiCollection.Category.allCases) { category in
+                        category.iconImage
+                            .tag(category)
+                    }
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding(.horizontal)
+                
+                ScrollView {
+                    LazyVGrid(columns: columns) {
 //                                Section(header: headerView(for: selectedCategory)) {
-                                ForEach(emoji.emoji(for: selectedCategory), id: \.self) { emoji in
-                                    EmojiButtonView(emoji: emoji) { emoji in
-                                        onSelect(emoji)
-                                    }
+                            ForEach(emoji.emoji(for: selectedCategory), id: \.self) { emoji in
+                                EmojiButtonView(emoji: emoji) { emoji in
+                                    onSelect(emoji)
                                 }
+                            }
 //                                }
-                        }
-                        .padding(.horizontal)
                     }
-
-                    Picker("", selection: $selectedCategory) {
-                        ForEach(EmojiCollection.Category.allCases) { category in
-                            category.iconImage
-                                .tag(category)
-                        }
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
                     .padding(.horizontal)
-                    .shadow(radius: 10)
-                    // FIXME: This is stupid.
-                    .background(colorScheme == .light ? Color.white : Color(#colorLiteral(red: 0.1097902879, green: 0.1098128334, blue: 0.1176275685, alpha: 1)))
                 }
             }
         }
