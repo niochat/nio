@@ -30,17 +30,15 @@ struct RecentRoomsView: View {
 
     @Binding fileprivate var selectedNavigationItem: SelectedNavigationItem?
 
-    @State private var showConfirm = false
-    @State private var leaveId: Int?
-    private var roomToLeave: NIORoom? {
-        guard
-            let leaveId = self.leaveId,
-            rooms.count > leaveId
-        else { return nil }
-        return self.rooms[leaveId]
+    var rooms: [NIORoom]
+
+    var joined_rooms: [NIORoom] {
+        return self.rooms.filter({$0.room.summary.membership == .join})
     }
 
-    var rooms: [NIORoom]
+    var invited_rooms: [NIORoom] {
+        return self.rooms.filter({$0.room.summary.membership == .invite})
+    }
 
     var settingsButton: some View {
         Button(action: {
@@ -67,29 +65,60 @@ struct RecentRoomsView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(rooms) { room in
-                    NavigationLink(destination: RoomContainerView(room: room)) {
-                        RoomListItemContainerView(room: room)
-                    }
+                if self.invited_rooms.count > 0 {
+                    RoomsListSection(sectionHeader: "Pending Invitations", rooms: invited_rooms, alertTitle: "Reject Invitation?")
                 }
-                .onDelete(perform: setLeaveIndex)
-            }
-            .alert(isPresented: $showConfirm) {
-                Alert(
-                    title: Text(L10n.RecentRooms.Leave.alertTitle),
-                    message: Text(L10n.RecentRooms.Leave.alertBody(
-                        roomToLeave?.summary.displayname
-                            ?? roomToLeave?.summary.roomId
-                            ?? "")),
-                    primaryButton: .destructive(
-                        Text(L10n.Room.Remove.action),
-                        action: {
-                            self.leaveRoom()
-                    }),
-                secondaryButton: .cancel())
+    
+                RoomsListSection(sectionHeader: "Recent Conversations", rooms: joined_rooms, alertTitle: "Leave Room?")
+
             }
             .navigationBarTitle("Nio", displayMode: .inline)
             .navigationBarItems(leading: settingsButton, trailing: newConversationButton)
+        }
+    }
+
+}
+
+struct RoomsListSection: View {
+
+    var sectionHeader: String
+    var rooms: [NIORoom]
+    var alertTitle: String
+    @State private var showConfirm: Bool = false
+    @State private var leaveId: Int?
+
+    private var roomToLeave: NIORoom? {
+        guard
+            let leaveId = self.leaveId,
+            rooms.count > leaveId
+        else { return nil }
+        return self.rooms[leaveId]
+    }
+
+    var body: some View {
+        Section(header: Text(sectionHeader)) {
+            ForEach(rooms) { room in
+                NavigationLink(destination: RoomContainerView(room: room)) {
+                    RoomListItemContainerView(room: room)
+                }
+            }
+
+            .onDelete(perform: setLeaveIndex)
+        }
+        .alert(isPresented: $showConfirm) {
+            Alert(
+                //title: Text(L10n.RecentRooms.Leave.alertTitle),
+                title: Text(alertTitle),
+                message: Text(L10n.RecentRooms.Leave.alertBody(
+                    roomToLeave?.summary.displayname
+                        ?? roomToLeave?.summary.roomId
+                        ?? "")),
+                primaryButton: .destructive(
+                    Text(L10n.Room.Remove.action),
+                    action: {
+                        self.leaveRoom()
+                }),
+            secondaryButton: .cancel())
         }
     }
 
@@ -102,7 +131,8 @@ struct RecentRoomsView: View {
 
     func leaveRoom() {
         guard let leaveId = self.leaveId, rooms.count > leaveId else { return }
-        self.store.session?.leaveRoom(self.rooms[leaveId].room.roomId) { _ in }
+        guard let mxRoom = self.roomToLeave?.room else { return }
+        mxRoom.mxSession?.leaveRoom(mxRoom.roomId) { _ in }
     }
 }
 

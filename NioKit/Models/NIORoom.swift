@@ -16,6 +16,14 @@ public class NIORoom: ObservableObject {
     }
 
     public var lastMessage: String {
+        if summary.membership == .invite {
+            let inviteEvent = eventCache.last {
+                $0.type == kMXEventTypeStringRoomMember && $0.stateKey == room.mxSession.myUserId
+            }
+            guard let sender = inviteEvent?.sender else { return "" }
+            return "Invitation from: \(sender)"
+        }
+
         let lastMessageEvent = eventCache.last {
             $0.type == kMXEventTypeStringRoomMessage
         }
