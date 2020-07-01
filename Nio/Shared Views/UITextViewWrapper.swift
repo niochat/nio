@@ -10,7 +10,7 @@ struct UITextViewWrapper: UIViewRepresentable {
     @Binding var isEditing: Bool
     @Binding var sizeThatFits: CGSize
 
-    @State private var maxSize: CGSize
+    private let maxSize: CGSize
 
     private let textAttributes: TextAttributes
 
@@ -32,7 +32,7 @@ struct UITextViewWrapper: UIViewRepresentable {
         self._isEditing = isEditing
         self._sizeThatFits = sizeThatFits
 
-        self._maxSize = State(initialValue: maxSize)
+        self.maxSize = maxSize
 
         self.textAttributes = textAttributes
 
