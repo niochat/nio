@@ -3,6 +3,8 @@ import SwiftUI
 struct RootView: View {
     @EnvironmentObject var store: AccountStore
 
+    let a = 1
+
     var body: some View {
         switch store.loginState {
         case .loggedIn(let userId):
