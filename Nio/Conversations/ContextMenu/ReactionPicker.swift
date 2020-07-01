@@ -28,7 +28,7 @@ public struct ReactionPicker: View {
 
     public var body: some View {
         VStack {
-            // Grab Handle Thingy
+            // Grab-Handle Thingy
             Color.gray
                 .frame(width: 40, height: 6)
                 .cornerRadius(3.0)
