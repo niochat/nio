@@ -18,6 +18,8 @@ Want to give it a spin? Join the public [TestFlight Beta](https://testflight.app
 
 The following steps should be all that's necessary to build Nio with Xcode.
 
+***Note***: Please be aware that Nio builds against the iOS 14 SDK and thus currently requires the Xcode 12 Beta. Download a copy from [Apple's Developer Portal](https://developer.apple.com/download).
+
 ```bash
 $ git clone https://github.com/kiliankoe/nio.git
 $ cd nio
