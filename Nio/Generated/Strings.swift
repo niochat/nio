@@ -3,8 +3,7 @@
 
 import Foundation
 
-// swiftlint:disable superfluous_disable_command
-// swiftlint:disable file_length
+// swiftlint:disable superfluous_disable_command file_length implicit_return
 
 // MARK: - Strings
 
@@ -31,8 +30,8 @@ internal enum L10n {
     /// edited
     internal static let edited = L10n.tr("Localizable", "event.edited")
     /// Reason: %@
-    internal static func reason(_ p1: String) -> String {
-      return L10n.tr("Localizable", "event.reason", p1)
+    internal static func reason(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "event.reason", String(describing: p1))
     }
     /// Unknown
     internal static let unknownRoomNameFallback = L10n.tr("Localizable", "event.unknown-room-name-fallback")
@@ -50,80 +49,80 @@ internal enum L10n {
     }
     internal enum Redaction {
       /// %@ removed %@'s message
-      internal static func redactOther(_ p1: String, _ p2: String) -> String {
-        return L10n.tr("Localizable", "event.redaction.redact-other", p1, p2)
+      internal static func redactOther(_ p1: Any, _ p2: Any) -> String {
+        return L10n.tr("Localizable", "event.redaction.redact-other", String(describing: p1), String(describing: p2))
       }
       /// Message removed by %@
-      internal static func redactSelf(_ p1: String) -> String {
-        return L10n.tr("Localizable", "event.redaction.redact-self", p1)
+      internal static func redactSelf(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "event.redaction.redact-self", String(describing: p1))
       }
     }
     internal enum RoomMember {
       /// %@ banned %@
-      internal static func ban(_ p1: String, _ p2: String) -> String {
-        return L10n.tr("Localizable", "event.room-member.ban", p1, p2)
+      internal static func ban(_ p1: Any, _ p2: Any) -> String {
+        return L10n.tr("Localizable", "event.room-member.ban", String(describing: p1), String(describing: p2))
       }
       /// %@ updated their profile picture
-      internal static func changeAvatar(_ p1: String) -> String {
-        return L10n.tr("Localizable", "event.room-member.change-avatar", p1)
+      internal static func changeAvatar(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "event.room-member.change-avatar", String(describing: p1))
       }
       /// %@ changed their display name to %@
-      internal static func changeName(_ p1: String, _ p2: String) -> String {
-        return L10n.tr("Localizable", "event.room-member.change-name", p1, p2)
+      internal static func changeName(_ p1: Any, _ p2: Any) -> String {
+        return L10n.tr("Localizable", "event.room-member.change-name", String(describing: p1), String(describing: p2))
       }
       /// %@ invited %@
-      internal static func invited(_ p1: String, _ p2: String) -> String {
-        return L10n.tr("Localizable", "event.room-member.invited", p1, p2)
+      internal static func invited(_ p1: Any, _ p2: Any) -> String {
+        return L10n.tr("Localizable", "event.room-member.invited", String(describing: p1), String(describing: p2))
       }
       /// %@ joined
-      internal static func joined(_ p1: String) -> String {
-        return L10n.tr("Localizable", "event.room-member.joined", p1)
+      internal static func joined(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "event.room-member.joined", String(describing: p1))
       }
       /// %@ kicked %@
-      internal static func kicked(_ p1: String, _ p2: String) -> String {
-        return L10n.tr("Localizable", "event.room-member.kicked", p1, p2)
+      internal static func kicked(_ p1: Any, _ p2: Any) -> String {
+        return L10n.tr("Localizable", "event.room-member.kicked", String(describing: p1), String(describing: p2))
       }
       /// %@ left
-      internal static func `left`(_ p1: String) -> String {
-        return L10n.tr("Localizable", "event.room-member.left", p1)
+      internal static func `left`(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "event.room-member.left", String(describing: p1))
       }
       /// %@ removed their profile picture
-      internal static func removeAvatar(_ p1: String) -> String {
-        return L10n.tr("Localizable", "event.room-member.remove-avatar", p1)
+      internal static func removeAvatar(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "event.room-member.remove-avatar", String(describing: p1))
       }
       /// %@ set their profile picture
-      internal static func setAvatar(_ p1: String) -> String {
-        return L10n.tr("Localizable", "event.room-member.set-avatar", p1)
+      internal static func setAvatar(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "event.room-member.set-avatar", String(describing: p1))
       }
       /// Unknown state event: %@
-      internal static func unknownState(_ p1: String) -> String {
-        return L10n.tr("Localizable", "event.room-member.unknown-state", p1)
+      internal static func unknownState(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "event.room-member.unknown-state", String(describing: p1))
       }
     }
     internal enum RoomName {
       /// %@ changed the room name from %@ to %@
-      internal static func changeName(_ p1: String, _ p2: String, _ p3: String) -> String {
-        return L10n.tr("Localizable", "event.room-name.change-name", p1, p2, p3)
+      internal static func changeName(_ p1: Any, _ p2: Any, _ p3: Any) -> String {
+        return L10n.tr("Localizable", "event.room-name.change-name", String(describing: p1), String(describing: p2), String(describing: p3))
       }
       /// %@ set the room name to %@
-      internal static func setName(_ p1: String, _ p2: String) -> String {
-        return L10n.tr("Localizable", "event.room-name.set-name", p1, p2)
+      internal static func setName(_ p1: Any, _ p2: Any) -> String {
+        return L10n.tr("Localizable", "event.room-name.set-name", String(describing: p1), String(describing: p2))
       }
     }
     internal enum RoomPowerLevel {
       /// %@ changed the power level of %@ from %@ to %@
-      internal static func changeOther(_ p1: String, _ p2: String, _ p3: String, _ p4: String) -> String {
-        return L10n.tr("Localizable", "event.room-power-level.change-other", p1, p2, p3, p4)
+      internal static func changeOther(_ p1: Any, _ p2: Any, _ p3: Any, _ p4: Any) -> String {
+        return L10n.tr("Localizable", "event.room-power-level.change-other", String(describing: p1), String(describing: p2), String(describing: p3), String(describing: p4))
       }
       /// %@ changed their power level from %@ to %@
-      internal static func changeSelf(_ p1: String, _ p2: String, _ p3: String) -> String {
-        return L10n.tr("Localizable", "event.room-power-level.change-self", p1, p2, p3)
+      internal static func changeSelf(_ p1: Any, _ p2: Any, _ p3: Any) -> String {
+        return L10n.tr("Localizable", "event.room-power-level.change-self", String(describing: p1), String(describing: p2), String(describing: p3))
       }
     }
     internal enum RoomTopic {
       /// %@ changed the topic to '%@'
-      internal static func change(_ p1: String, _ p2: String) -> String {
-        return L10n.tr("Localizable", "event.room-topic.change", p1, p2)
+      internal static func change(_ p1: Any, _ p2: Any) -> String {
+        return L10n.tr("Localizable", "event.room-topic.change", String(describing: p1), String(describing: p2))
       }
     }
   }
@@ -176,8 +175,8 @@ internal enum L10n {
     internal static let newMessagePlaceholder = L10n.tr("Localizable", "recent-rooms.new-message-placeholder")
     internal enum AccessibilityLabel {
       /// DM with %@, %@ %@
-      internal static func dm(_ p1: String, _ p2: String, _ p3: String) -> String {
-        return L10n.tr("Localizable", "recent-rooms.accessibility-label.dm", p1, p2, p3)
+      internal static func dm(_ p1: Any, _ p2: Any, _ p3: Any) -> String {
+        return L10n.tr("Localizable", "recent-rooms.accessibility-label.dm", String(describing: p1), String(describing: p2), String(describing: p3))
       }
       /// New Conversation
       internal static let newConversation = L10n.tr("Localizable", "recent-rooms.accessibility-label.new-conversation")
@@ -186,16 +185,16 @@ internal enum L10n {
         return L10n.tr("Localizable", "recent-rooms.accessibility-label.new-message-badge", p1)
       }
       /// Room %@, %@ %@
-      internal static func room(_ p1: String, _ p2: String, _ p3: String) -> String {
-        return L10n.tr("Localizable", "recent-rooms.accessibility-label.room", p1, p2, p3)
+      internal static func room(_ p1: Any, _ p2: Any, _ p3: Any) -> String {
+        return L10n.tr("Localizable", "recent-rooms.accessibility-label.room", String(describing: p1), String(describing: p2), String(describing: p3))
       }
       /// Settings
       internal static let settings = L10n.tr("Localizable", "recent-rooms.accessibility-label.settings")
     }
     internal enum Leave {
       /// Are you sure you want to leave '%@'? This action cannot be undone.
-      internal static func alertBody(_ p1: String) -> String {
-        return L10n.tr("Localizable", "recent-rooms.leave.alert-body", p1)
+      internal static func alertBody(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "recent-rooms.leave.alert-body", String(describing: p1))
       }
       /// Leave Room
       internal static let alertTitle = L10n.tr("Localizable", "recent-rooms.leave.alert-title")
@@ -247,12 +246,12 @@ internal enum L10n {
     /// Several people are typing
     internal static let many = L10n.tr("Localizable", "typing-indicator.many")
     /// %@ is typing
-    internal static func single(_ p1: String) -> String {
-      return L10n.tr("Localizable", "typing-indicator.single", p1)
+    internal static func single(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "typing-indicator.single", String(describing: p1))
     }
     /// %@ and %@ are typing
-    internal static func two(_ p1: String, _ p2: String) -> String {
-      return L10n.tr("Localizable", "typing-indicator.two", p1, p2)
+    internal static func two(_ p1: Any, _ p2: Any) -> String {
+      return L10n.tr("Localizable", "typing-indicator.two", String(describing: p1), String(describing: p2))
     }
   }
 }
@@ -263,10 +262,15 @@ internal enum L10n {
 
 extension L10n {
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
-    // swiftlint:disable:next nslocalizedstring_key
-    let format = NSLocalizedString(key, tableName: table, bundle: Bundle(for: BundleToken.self), comment: "")
+    let format = BundleToken.bundle.localizedString(forKey: key, value: nil, table: table)
     return String(format: format, locale: Locale.current, arguments: args)
   }
 }
 
-private final class BundleToken {}
+// swiftlint:disable convenience_type
+private final class BundleToken {
+  static let bundle: Bundle = {
+    Bundle(for: BundleToken.self)
+  }()
+}
+// swiftlint:enable convenience_type
