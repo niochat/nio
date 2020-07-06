@@ -32,12 +32,12 @@ struct RecentRoomsView: View {
 
     var rooms: [NIORoom]
 
-    var joined_rooms: [NIORoom] {
-        return self.rooms.filter({$0.room.summary.membership == .join})
+    var joinedRooms: [NIORoom] {
+        rooms.filter {$0.room.summary.membership == .join}
     }
 
-    var invited_rooms: [NIORoom] {
-        return self.rooms.filter({$0.room.summary.membership == .invite})
+    var invitedRooms: [NIORoom] {
+        rooms.filter {$0.room.summary.membership == .invite}
     }
 
     var settingsButton: some View {
@@ -65,11 +65,11 @@ struct RecentRoomsView: View {
     var body: some View {
         NavigationView {
             List {
-                if self.invited_rooms.count > 0 {
-                    RoomsListSection(sectionHeader: "Pending Invitations", rooms: invited_rooms, alertTitle: "Reject Invitation?")
+                if !invitedRooms.isEmpty {
+                    RoomsListSection(sectionHeader: "Pending Invitations", rooms: invitedRooms, onLeaveAlertTitle: "Reject Invitation?")
                 }
     
-                RoomsListSection(sectionHeader: "Recent Conversations", rooms: joined_rooms, alertTitle: "Leave Room?")
+                RoomsListSection(sectionHeader: "Recent Conversations", rooms: joinedRooms, onLeaveAlertTitle: L10n.RecentRooms.Leave.alertTitle)
 
             }
             .navigationBarTitle("Nio", displayMode: .inline)
@@ -83,7 +83,7 @@ struct RoomsListSection: View {
 
     var sectionHeader: String
     var rooms: [NIORoom]
-    var alertTitle: String
+    var onLeaveAlertTitle: String
     @State private var showConfirm: Bool = false
     @State private var leaveId: Int?
 
@@ -108,7 +108,7 @@ struct RoomsListSection: View {
         .alert(isPresented: $showConfirm) {
             Alert(
                 //title: Text(L10n.RecentRooms.Leave.alertTitle),
-                title: Text(alertTitle),
+                title: Text(onLeaveAlertTitle),
                 message: Text(L10n.RecentRooms.Leave.alertBody(
                     roomToLeave?.summary.displayname
                         ?? roomToLeave?.summary.roomId

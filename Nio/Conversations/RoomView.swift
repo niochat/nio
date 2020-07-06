@@ -57,13 +57,11 @@ struct RoomContainerView: View {
                 secondaryButton: .cancel())
         }
         .onAppear {
-            switch(self.room.summary.membership) {
+            switch self.room.summary.membership {
             case .invite:
                 self.showJoinAlert = true
-                break
             case .join:
                 self.room.markAllAsRead()
-                break
             default:
                 break
             }
