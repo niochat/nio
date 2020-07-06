@@ -68,7 +68,7 @@ struct RecentRoomsView: View {
                 if !invitedRooms.isEmpty {
                     RoomsListSection(sectionHeader: "Pending Invitations", rooms: invitedRooms, onLeaveAlertTitle: "Reject Invitation?")
                 }
-    
+
                 RoomsListSection(sectionHeader: "Recent Conversations", rooms: joinedRooms, onLeaveAlertTitle: L10n.RecentRooms.Leave.alertTitle)
 
             }
