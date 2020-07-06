@@ -66,10 +66,18 @@ struct RecentRoomsView: View {
         NavigationView {
             List {
                 if !invitedRooms.isEmpty {
-                    RoomsListSection(sectionHeader: "Pending Invitations", rooms: invitedRooms, onLeaveAlertTitle: "Reject Invitation?")
+                    RoomsListSection(
+                        sectionHeader: "Pending Invitations",
+                        rooms: invitedRooms,
+                        onLeaveAlertTitle: "Reject Invitation?"
+                        )
                 }
 
-                RoomsListSection(sectionHeader: "Recent Conversations", rooms: joinedRooms, onLeaveAlertTitle: L10n.RecentRooms.Leave.alertTitle)
+                RoomsListSection(
+                    sectionHeader: "Recent Conversations",
+                    rooms: joinedRooms,
+                    onLeaveAlertTitle: L10n.RecentRooms.Leave.alertTitle
+                    )
 
             }
             .navigationBarTitle("Nio", displayMode: .inline)
