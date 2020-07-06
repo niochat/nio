@@ -107,7 +107,6 @@ struct RoomsListSection: View {
         }
         .alert(isPresented: $showConfirm) {
             Alert(
-                //title: Text(L10n.RecentRooms.Leave.alertTitle),
                 title: Text(onLeaveAlertTitle),
                 message: Text(L10n.RecentRooms.Leave.alertBody(
                     roomToLeave?.summary.displayname
