@@ -199,6 +199,14 @@ internal enum L10n {
       /// Leave Room
       internal static let alertTitle = L10n.tr("Localizable", "recent-rooms.leave.alert-title")
     }
+    internal enum PendingInvitations {
+      /// Pending Invitations
+      internal static let header = L10n.tr("Localizable", "recent-rooms.pending-invitations.header")
+      internal enum Leave {
+        /// Reject Invitation?
+        internal static let alertTitle = L10n.tr("Localizable", "recent-rooms.pending-invitations.leave.alert-title")
+      }
+    }
   }
 
   internal enum Room {
@@ -207,6 +215,20 @@ internal enum L10n {
       internal static let selectType = L10n.tr("Localizable", "room.attachment.select-type")
       /// Photo
       internal static let typePhoto = L10n.tr("Localizable", "room.attachment.type-photo")
+    }
+    internal enum Invitation {
+      /// New Conversation
+      internal static let fallbackTitle = L10n.tr("Localizable", "room.invitation.fallback-title")
+      internal enum JoinAlert {
+        /// Join
+        internal static let joinButton = L10n.tr("Localizable", "room.invitation.join-alert.join-button")
+        /// Accept invitation to join '%@'?
+        internal static func message(_ p1: Any) -> String {
+          return L10n.tr("Localizable", "room.invitation.join-alert.message", String(describing: p1))
+        }
+        /// Join Conversation?
+        internal static let title = L10n.tr("Localizable", "room.invitation.join-alert.title")
+      }
     }
     internal enum Remove {
       /// Remove

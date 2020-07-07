@@ -43,12 +43,12 @@ struct RoomContainerView: View {
             }
         }
         .alert(isPresented: $showJoinAlert) {
-            let roomName = self.room.summary.displayname ?? self.room.summary.roomId ?? "New Conversation"
+            let roomName = self.room.summary.displayname ?? self.room.summary.roomId ?? L10n.Room.Invitation.fallbackTitle
             return Alert(
-                title: Text("Join Conversation?"),
-                message: Text("Accept invitation to join '\(roomName)'?"),
+                title: Text(L10n.Room.Invitation.JoinAlert.title),
+                message: Text(L10n.Room.Invitation.JoinAlert.message(roomName)),
                 primaryButton: .default(
-                    Text("Join"),
+                    Text(L10n.Room.Invitation.JoinAlert.joinButton),
                     action: {
                         self.room.room.mxSession.joinRoom(self.room.room.roomId) { _ in
                             self.room.markAllAsRead()

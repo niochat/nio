@@ -19,6 +19,8 @@
 // Room $NAME, $LAST_ACTIVITY_TIMESTAMP $LAST_MESSAGE
 "recent-rooms.accessibility-label.room" = "Группа %@, %@ %@";
 "recent-rooms.accessibility-label.new-message-badge" = "%u новых сообщений";
+"recent-rooms.pending-invitations.header" = "Ожидающие приглашения";
+"recent-rooms.pending-invitations.leave.alert-title" = "Отклонить приглашение?";
 "recent-rooms.leave.alert-title" = "Покинуть Группу";
 "recent-rooms.leave.alert-body" = "Вы уверены, что хотите покинуть '%@'? Это действие нельзя отменить.";
 "room.attachment.select-type" = "Отправить вложение";
@@ -26,6 +28,10 @@
 "room.remove.title" = "Удалить?";
 "room.remove.message" = "Вы уверены, что ходите удалить это сообщение?";
 "room.remove.action" = "Удалить";
+"room.invitation.fallback-title" = "Новое Обращение";
+"room.invitation.join-alert.title" = "Присоединиться к разговору?";
+"room.invitation.join-alert.message" = "Принять приглашение присоединиться к \"%@\"?";
+"room.invitation.join-alert.join-button" = "Присоединяйся";
 "composer.new-message" = "Новое сообщение...";
 "composer.edit-message" = "Редактировать сообщение:";
 "composer.accessibility-label.send-file" = "Отправить файл";
