@@ -23,6 +23,8 @@
 // Room $NAME, $LAST_ACTIVITY_TIMESTAMP $LAST_MESSAGE
 "recent-rooms.accessibility-label.room" = "Room %@, %@ %@";
 "recent-rooms.accessibility-label.new-message-badge" = "%u new messages";
+"recent-rooms.pending-invitations.header" = "Pending Invitations";
+"recent-rooms.pending-invitations.leave.alert-title" = "Reject Invitation?";
 "recent-rooms.leave.alert-title" = "Leave Room";
 "recent-rooms.leave.alert-body" = "Are you sure you want to leave '%@'? This action cannot be undone.";
 
@@ -31,6 +33,10 @@
 "room.remove.title" = "Remove?";
 "room.remove.message" = "Are you sure you want to remove this message?";
 "room.remove.action" = "Remove";
+"room.invitation.fallback-title" = "New Conversation";
+"room.invitation.join-alert.title" = "Join Conversation?";
+"room.invitation.join-alert.message" = "Accept invitation to join '%@'?";
+"room.invitation.join-alert.join-button" = "Join";
 
 "composer.new-message" = "New Message...";
 "composer.edit-message" = "Edit Message:";

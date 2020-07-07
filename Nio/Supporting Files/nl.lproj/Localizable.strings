@@ -23,6 +23,8 @@
 // Room $NAME, $LAST_ACTIVITY_TIMESTAMP $LAST_MESSAGE
 "recent-rooms.accessibility-label.room" = "Kamer %@, %@ %@";
 "recent-rooms.accessibility-label.new-message-badge" = "%u nieuwe berichten";
+"recent-rooms.pending-invitations.header" = "In afwachting van uitnodigingen";
+"recent-rooms.pending-invitations.leave.alert-title" = "Uitnodiging afwijzen?";
 "recent-rooms.leave.alert-title" = "Gesprek Verwijderen";
 "recent-rooms.leave.alert-body" = "Weet u zeker dat je '%@' wilt verlaten? Deze actie can niet ongedaan gemaakt worden.";
 
@@ -31,6 +33,10 @@
 "room.remove.title" = "Verwijderen?";
 "room.remove.message" = "Weet u zeker dat u dit bericht wilt verwijderen?";
 "room.remove.action" = "Verwijderen";
+"room.invitation.fallback-title" = "Nieuw gesprek";
+"room.invitation.join-alert.title" = "Doe je mee met het gesprek?";
+"room.invitation.join-alert.message" = "Accepteer je de uitnodiging om deel te nemen aan '%@'?";
+"room.invitation.join-alert.join-button" = "Toetreden";
 
 "composer.new-message" = "Nieuw Bericht...";
 "composer.edit-message" = "Bewerk Bericht:";

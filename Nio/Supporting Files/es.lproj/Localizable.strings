@@ -21,6 +21,8 @@
 /*Room $NAME, $LAST_ACTIVITY_TIMESTAMP $LAST_MESSAGE*/
 "recent-rooms.accessibility-label.room" = "Sala %@, %@ %@";
 "recent-rooms.accessibility-label.new-message-badge" = "%u nuevos mensajes";
+"recent-rooms.pending-invitations.header" = "Invitaciones pendientes";
+"recent-rooms.pending-invitations.leave.alert-title" = "¿Rechazar la invitación?";
 "recent-rooms.leave.alert-title" = "Deje la habitación";
 "recent-rooms.leave.alert-body" = "¿Estás seguro de que quieres dejar '%@'? Esta acción no puede deshacerse.";
 "room.attachment.select-type" = "Envíe el archivo adjunto";
@@ -28,6 +30,10 @@
 "room.remove.title" = "¿Eliminar?";
 "room.remove.message" = "¿Está seguro de que desea eliminar este mensaje?";
 "room.remove.action" = "Eliminar";
+"room.invitation.fallback-title" = "Nueva conversación";
+"room.invitation.join-alert.title" = "¿Unirse a la conversación?";
+"room.invitation.join-alert.message" = "¿Aceptas la invitación para unirte a '%@'?";
+"room.invitation.join-alert.join-button" = "Únete a";
 "composer.new-message" = "Nuevo mensaje...";
 "composer.edit-message" = "Editar Mensaje:";
 "composer.accessibility-label.send-file" = "Enviar archivo";

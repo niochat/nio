@@ -11,6 +11,7 @@ struct RoomContainerView: View {
     @State var showAttachmentPicker = false
     @State var showImagePicker = false
     @State var eventToReactTo: String?
+    @State var showJoinAlert = false
 
     var body: some View {
         RoomView(
@@ -41,7 +42,30 @@ struct RoomContainerView: View {
                 self.eventToReactTo = nil
             }
         }
-        .onAppear { self.room.markAllAsRead() }
+        .alert(isPresented: $showJoinAlert) {
+            let roomName = self.room.summary.displayname ?? self.room.summary.roomId ?? L10n.Room.Invitation.fallbackTitle
+            return Alert(
+                title: Text(L10n.Room.Invitation.JoinAlert.title),
+                message: Text(L10n.Room.Invitation.JoinAlert.message(roomName)),
+                primaryButton: .default(
+                    Text(L10n.Room.Invitation.JoinAlert.joinButton),
+                    action: {
+                        self.room.room.mxSession.joinRoom(self.room.room.roomId) { _ in
+                            self.room.markAllAsRead()
+                        }
+                    }),
+                secondaryButton: .cancel())
+        }
+        .onAppear {
+            switch self.room.summary.membership {
+            case .invite:
+                self.showJoinAlert = true
+            case .join:
+                self.room.markAllAsRead()
+            default:
+                break
+            }
+        }
         .environmentObject(room)
         .background(EmptyView()
             .sheet(isPresented: $showImagePicker) {
