@@ -70,14 +70,14 @@ struct RecentRoomsView: View {
                         sectionHeader: "Pending Invitations",
                         rooms: invitedRooms,
                         onLeaveAlertTitle: "Reject Invitation?"
-                        )
+                    )
                 }
 
                 RoomsListSection(
-                    sectionHeader: "Recent Conversations",
+                    sectionHeader: nil,
                     rooms: joinedRooms,
                     onLeaveAlertTitle: L10n.RecentRooms.Leave.alertTitle
-                    )
+                )
 
             }
             .navigationBarTitle("Nio", displayMode: .inline)
@@ -88,10 +88,10 @@ struct RecentRoomsView: View {
 }
 
 struct RoomsListSection: View {
+    let sectionHeader: String?
+    let rooms: [NIORoom]
+    let onLeaveAlertTitle: String
 
-    var sectionHeader: String
-    var rooms: [NIORoom]
-    var onLeaveAlertTitle: String
     @State private var showConfirm: Bool = false
     @State private var leaveId: Int?
 
@@ -103,16 +103,30 @@ struct RoomsListSection: View {
         return self.rooms[leaveId]
     }
 
-    var body: some View {
-        Section(header: Text(sectionHeader)) {
-            ForEach(rooms) { room in
-                NavigationLink(destination: RoomContainerView(room: room)) {
-                    RoomListItemContainerView(room: room)
-                }
+    var sectionContent: some View {
+        ForEach(rooms) { room in
+            NavigationLink(destination: RoomContainerView(room: room)) {
+                RoomListItemContainerView(room: room)
             }
-
-            .onDelete(perform: setLeaveIndex)
         }
+        .onDelete(perform: setLeaveIndex)
+    }
+
+    @ViewBuilder
+    var section: some View {
+        if let sectionHeader = sectionHeader {
+            Section(header: Text(sectionHeader)) {
+                sectionContent
+            }
+        } else {
+            Section {
+                sectionContent
+            }
+        }
+    }
+
+    var body: some View {
+        section
         .alert(isPresented: $showConfirm) {
             Alert(
                 title: Text(onLeaveAlertTitle),
