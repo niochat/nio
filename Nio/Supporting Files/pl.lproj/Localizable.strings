@@ -67,3 +67,4 @@
 "settings.accent-color" = "Kolor zaznaczenia";
 "settings.app-icon" = "Ikonka aplikacji";
 "settings.log-out" = "Wyloguj";
+"recent-rooms.pending-invitations.leave.alert-title" = "Odrzuć zaproszenie";
