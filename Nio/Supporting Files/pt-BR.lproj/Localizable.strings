@@ -57,7 +57,7 @@
 "event.reason" = "Motivo: %@";
 "event.room-name.set-name" = "%@ definiu o nome da sala como %@";
 "event.room-name.change-name" = "%@ alterou o nome da sala de %@ para %@";
-"event.room-topic.change" = "%@ alterou o assunto para '%@'";
+"event.room-topic.change" = "%@ alterou a descrição para '%@'";
 "room-power-level.default" = "Padrão";
 "room-power-level.moderator" = "Moderador";
 "room-power-level.admin" = "Administrador";
