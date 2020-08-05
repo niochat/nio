@@ -49,7 +49,7 @@
 "event.room-member.kicked" = "%@ removeu %@";
 "event.room-member.ban" = "%@ bloqueou %@";
 "event.room-member.joined" = "%@ entrou";
-"event.room-member.change-name" = "%@ alterou seu nome de exibição para %@";
+"event.room-member.change-name" = "%@ alterou o nome e sobrenome para %@";
 "event.room-member.set-avatar" = "%@ alterou sua foto de perfil";
 "event.room-member.change-avatar" = "%@ atualizou sua foto de perfil";
 "event.room-member.remove-avatar" = "%@ removeu sua foto de perfil";
