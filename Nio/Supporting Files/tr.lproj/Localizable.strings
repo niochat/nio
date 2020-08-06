@@ -7,11 +7,11 @@
 "login.sign-in" = "Giriş yap";
 "login.open-registration-prompt" = "Henüz bir hesabın yok mu?";
 "login.register-not-yet-implemented" = "Kayıt olma özelliği henüz eklenmedi.";
-"login.failure-back-to-login" = "";
+"login.failure-back-to-login" = "Giriş'e dön";
 "loading.1" = "";
 "loading.2" = "";
 "loading.3" = "Giriş yapılıyor";
-"loading.4" = "";
+"loading.4" = "Oturum geri yükleniyor";
 "loading.cancel" = "İptal";
 "recent-rooms.accessibility-label.settings" = "Ayarlar";
 "recent-rooms.accessibility-label.new-conversation" = "Yeni sohbet";
