@@ -47,7 +47,7 @@
 "event.room-member.invited" = "%@ convidou %@";
 "event.room-member.left" = "%@ saiu";
 "event.room-member.kicked" = "%@ removeu %@";
-"event.room-member.ban" = "%@ bloqueou %@";
+"event.room-member.ban" = "%@ baniu %@";
 "event.room-member.joined" = "%@ entrou";
 "event.room-member.change-name" = "%@ alterou o nome e sobrenome para %@";
 "event.room-member.set-avatar" = "%@ alterou sua foto de perfil";
