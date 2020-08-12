@@ -67,7 +67,7 @@
 "event.redaction.redact-self" = "Mensagem removida por %@";
 "event.redaction.redact-other" = "%@ removeu a mensagem de %@";
 "event.edited" = "editado";
-"event.context-menu.add-reaction" = "Adicionar uma reação";
+"event.context-menu.add-reaction" = "Adicionar reação";
 "event.context-menu.reply" = "Responder";
 "event.context-menu.edit" = "Editar";
 "event.context-menu.remove" = "Apagar";
