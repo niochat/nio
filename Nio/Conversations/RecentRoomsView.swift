@@ -74,12 +74,13 @@ struct RecentRoomsView: View {
                 }
 
                 RoomsListSection(
-                    sectionHeader: nil,
+                    sectionHeader: invitedRooms.isEmpty ? nil : L10n.RecentRooms.Rooms.header ,
                     rooms: joinedRooms,
                     onLeaveAlertTitle: L10n.RecentRooms.Leave.alertTitle
                 )
 
             }
+            .listStyle(GroupedListStyle())
             .navigationBarTitle("Nio", displayMode: .inline)
             .navigationBarItems(leading: settingsButton, trailing: newConversationButton)
         }

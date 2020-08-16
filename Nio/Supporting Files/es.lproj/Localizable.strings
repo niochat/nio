@@ -23,6 +23,7 @@
 "recent-rooms.accessibility-label.new-message-badge" = "%u nuevos mensajes";
 "recent-rooms.pending-invitations.header" = "Invitaciones pendientes";
 "recent-rooms.pending-invitations.leave.alert-title" = "¿Rechazar la invitación?";
+"recent-rooms.rooms.header" = "Salas";
 "recent-rooms.leave.alert-title" = "Deje la habitación";
 "recent-rooms.leave.alert-body" = "¿Estás seguro de que quieres dejar '%@'? Esta acción no puede deshacerse.";
 "room.attachment.select-type" = "Envíe el archivo adjunto";

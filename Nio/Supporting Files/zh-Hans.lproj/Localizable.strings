@@ -23,6 +23,7 @@
 "recent-rooms.accessibility-label.new-message-badge" = "%u条新信息";
 "recent-rooms.pending-invitations.header" = "待定邀请函";
 "recent-rooms.pending-invitations.leave.alert-title" = "拒绝邀请？";
+"recent-rooms.rooms.header" = "聊天室";
 "recent-rooms.leave.alert-title" = "留有余地";
 "recent-rooms.leave.alert-body" = "你确定要留下\"%@\"吗？这个动作是无法撤销的。";
 "room.attachment.select-type" = "发送附件";

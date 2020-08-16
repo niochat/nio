@@ -25,6 +25,7 @@
 "recent-rooms.accessibility-label.new-message-badge" = "%u new messages";
 "recent-rooms.pending-invitations.header" = "Pending Invitations";
 "recent-rooms.pending-invitations.leave.alert-title" = "Reject Invitation?";
+"recent-rooms.rooms.header" = "Rooms";
 "recent-rooms.leave.alert-title" = "Leave Room";
 "recent-rooms.leave.alert-body" = "Are you sure you want to leave '%@'? This action cannot be undone.";
 
