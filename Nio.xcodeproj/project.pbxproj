@@ -61,6 +61,7 @@
 		39DD77B62470C38300A29DEE /* Six Colors Dark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DD77B42470C38300A29DEE /* Six Colors Dark@3x.png */; };
 		39DD77BA2470C49D00A29DEE /* Six Colors Light@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DD77B82470C49D00A29DEE /* Six Colors Light@3x.png */; };
 		39DD77BB2470C49D00A29DEE /* Six Colors Light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DD77B92470C49D00A29DEE /* Six Colors Light@2x.png */; };
+		39E5032324EAFA8700FED642 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 39E5032224EAFA8700FED642 /* Introspect */; };
 		4B0A2E47245E2EF800A79443 /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A2E46245E2EF800A79443 /* MultilineTextField.swift */; };
 		4B29F5B52466EC240084043B /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B29F5B42466EC240084043B /* ImagePicker.swift */; };
 		4BD3D29324951E3B0031846F /* GlobalConfig.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4BD3D29224951E3B0031846F /* GlobalConfig.xcconfig */; };
@@ -286,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3984654823B8D809006C173B /* SDWebImageSwiftUI in Frameworks */,
+				39E5032324EAFA8700FED642 /* Introspect in Frameworks */,
 				CAF2AE9D245DF4B400D84133 /* CommonMarkAttributedString in Frameworks */,
 				390D63A42465F62D00B8F640 /* BlurHash in Frameworks */,
 				87FE3870173FD55A91B15921 /* Pods_Nio.framework in Frameworks */,
@@ -744,6 +746,7 @@
 				3984654723B8D809006C173B /* SDWebImageSwiftUI */,
 				CAF2AE9C245DF4B400D84133 /* CommonMarkAttributedString */,
 				390D63A32465F62D00B8F640 /* BlurHash */,
+				39E5032224EAFA8700FED642 /* Introspect */,
 			);
 			productName = Nio;
 			productReference = 39C931D92384328A004449E1 /* Nio.app */;
@@ -839,6 +842,7 @@
 				3984654623B8D809006C173B /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				CAF2AE9B245DF4B400D84133 /* XCRemoteSwiftPackageReference "CommonMarkAttributedString" */,
 				390D63A22465F62C00B8F640 /* XCRemoteSwiftPackageReference "BlurHash" */,
+				39E5032124EAFA8700FED642 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 39C931DA2384328A004449E1 /* Products */;
 			projectDirPath = "";
@@ -1614,6 +1618,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		39E5032124EAFA8700FED642 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
 		CAF2AE9B245DF4B400D84133 /* XCRemoteSwiftPackageReference "CommonMarkAttributedString" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mattt/CommonMarkAttributedString";
@@ -1634,6 +1646,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3984654623B8D809006C173B /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		39E5032224EAFA8700FED642 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 39E5032124EAFA8700FED642 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
 		};
 		CAD68177246B1E9F001878EB /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;

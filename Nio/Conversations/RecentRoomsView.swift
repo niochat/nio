@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftMatrixSDK
+import Introspect
 
 import NioKit
 
@@ -81,6 +82,11 @@ struct RecentRoomsView: View {
 
             }
             .listStyle(GroupedListStyle())
+            .introspectTableView { tableView in
+                var frame = CGRect.zero
+                frame.size.height = .leastNormalMagnitude
+                tableView.tableHeaderView = UIView(frame: frame)
+            }
             .navigationBarTitle("Nio", displayMode: .inline)
             .navigationBarItems(leading: settingsButton, trailing: newConversationButton)
         }
