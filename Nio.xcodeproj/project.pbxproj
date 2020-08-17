@@ -227,6 +227,7 @@
 		39DD77B42470C38300A29DEE /* Six Colors Dark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Six Colors Dark@3x.png"; sourceTree = "<group>"; };
 		39DD77B82470C49D00A29DEE /* Six Colors Light@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Six Colors Light@3x.png"; sourceTree = "<group>"; };
 		39DD77B92470C49D00A29DEE /* Six Colors Light@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Six Colors Light@2x.png"; sourceTree = "<group>"; };
+		39E5032424EAFED500FED642 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		42D6B28FC1F7473DA40DF022 /* Pods_NioTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NioTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B058B5524573A570059BC75 /* EditEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEvent.swift; sourceTree = "<group>"; };
 		4B08F0A82495202A008E4286 /* LocalConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = LocalConfig.xcconfig; sourceTree = "<group>"; };
@@ -835,6 +836,7 @@
 				"zh-Hans",
 				es,
 				ru,
+				"pt-BR",
 			);
 			mainGroup = 39C931D023843289004449E1;
 			packageReferences = (
@@ -1217,6 +1219,7 @@
 				3955DD36245C371C00827F07 /* zh-Hans */,
 				390D639E246327E900B8F640 /* es */,
 				3902D4E5248277310009355A /* ru */,
+				39E5032424EAFED500FED642 /* pt-BR */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
