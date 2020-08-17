@@ -83,6 +83,7 @@ struct RecentRoomsView: View {
             }
             .listStyle(GroupedListStyle())
             .introspectTableView { tableView in
+                guard invitedRooms.isEmpty else { return }
                 var frame = CGRect.zero
                 frame.size.height = .leastNormalMagnitude
                 tableView.tableHeaderView = UIView(frame: frame)
