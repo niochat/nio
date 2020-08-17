@@ -85,7 +85,6 @@ struct LoginView: View {
 
             Spacer()
         }
-        .keyboardObserving()
         .sheet(isPresented: $showingRegisterView) {
             Text(L10n.Login.registerNotYetImplemented)
         }

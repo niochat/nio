@@ -37,7 +37,6 @@
 		392389982388998F00B2E1DF /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389972388998F00B2E1DF /* ActivityIndicator.swift */; };
 		392389CC238EBB1500B2E1DF /* ReverseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389CB238EBB1400B2E1DF /* ReverseList.swift */; };
 		393411D1239087D2003B49B8 /* EventCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393411D0239087D2003B49B8 /* EventCollectionTests.swift */; };
-		3970DC942385A8BE00EFE31B /* KeyboardObserving in Frameworks */ = {isa = PBXBuildFile; productRef = 3970DC932385A8BE00EFE31B /* KeyboardObserving */; };
 		3984654523B7ECBA006C173B /* MXURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984654423B7ECBA006C173B /* MXURL.swift */; };
 		3984654823B8D809006C173B /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3984654723B8D809006C173B /* SDWebImageSwiftUI */; };
 		39B834C0243FC42000AE1EA0 /* TypingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B834BF243FC42000AE1EA0 /* TypingIndicatorView.swift */; };
@@ -289,7 +288,6 @@
 				3984654823B8D809006C173B /* SDWebImageSwiftUI in Frameworks */,
 				CAF2AE9D245DF4B400D84133 /* CommonMarkAttributedString in Frameworks */,
 				390D63A42465F62D00B8F640 /* BlurHash in Frameworks */,
-				3970DC942385A8BE00EFE31B /* KeyboardObserving in Frameworks */,
 				87FE3870173FD55A91B15921 /* Pods_Nio.framework in Frameworks */,
 				CADF664224614D2300F5063F /* NioKit.framework in Frameworks */,
 			);
@@ -743,7 +741,6 @@
 			);
 			name = Nio;
 			packageProductDependencies = (
-				3970DC932385A8BE00EFE31B /* KeyboardObserving */,
 				3984654723B8D809006C173B /* SDWebImageSwiftUI */,
 				CAF2AE9C245DF4B400D84133 /* CommonMarkAttributedString */,
 				390D63A32465F62D00B8F640 /* BlurHash */,
@@ -838,7 +835,6 @@
 			);
 			mainGroup = 39C931D023843289004449E1;
 			packageReferences = (
-				3970DC922385A8BE00EFE31B /* XCRemoteSwiftPackageReference "KeyboardObserving" */,
 				3923899D238ABA5700B2E1DF /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				3984654623B8D809006C173B /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				CAF2AE9B245DF4B400D84133 /* XCRemoteSwiftPackageReference "CommonMarkAttributedString" */,
@@ -1610,14 +1606,6 @@
 				minimumVersion = 4.1.0;
 			};
 		};
-		3970DC922385A8BE00EFE31B /* XCRemoteSwiftPackageReference "KeyboardObserving" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/nickffox/KeyboardObserving.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.2.1;
-			};
-		};
 		3984654623B8D809006C173B /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
@@ -1641,11 +1629,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 390D63A22465F62C00B8F640 /* XCRemoteSwiftPackageReference "BlurHash" */;
 			productName = BlurHash;
-		};
-		3970DC932385A8BE00EFE31B /* KeyboardObserving */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3970DC922385A8BE00EFE31B /* XCRemoteSwiftPackageReference "KeyboardObserving" */;
-			productName = KeyboardObserving;
 		};
 		3984654723B8D809006C173B /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;

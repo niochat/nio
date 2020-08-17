@@ -1,6 +1,5 @@
 import SwiftUI
 import Combine
-import KeyboardObserving
 import SwiftMatrixSDK
 
 import NioKit
@@ -32,7 +31,6 @@ struct RoomContainerView: View {
             }
         )
         .navigationBarTitle(Text(room.summary.displayname ?? ""), displayMode: .inline)
-        .keyboardObserving()
         .actionSheet(isPresented: $showAttachmentPicker) {
             self.attachmentPickerSheet
         }
