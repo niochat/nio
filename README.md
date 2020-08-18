@@ -6,7 +6,7 @@
 [![Matrix](https://img.shields.io/matrix/niochat:matrix.org?logo=matrix&style=flat)](https://matrix.to/#/#niochat:matrix.org)
 [![Liberapay](https://img.shields.io/liberapay/receives/nio.svg?logo=liberapay&style=flat)](https://liberapay.com/nio/)
 
-Nio is an upcoming matrix client for iOS.
+Nio is an upcoming [Matrix](https://matrix.org) client for iOS.
 
 For the time being this project is still very much a work in progress. For updates, please check by in our matrix room → [#niochat:matrix.org](https://matrix.to/#/#niochat:matrix.org).
 
