@@ -614,22 +614,22 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		39DD77B22470C38300A29DEE /* Rainbow Dark */ = {
+		39DD77B22470C38300A29DEE /* Six Colors Dark */ = {
 			isa = PBXGroup;
 			children = (
-				39DD77B32470C38300A29DEE /* Rainbow Dark@2x.png */,
-				39DD77B42470C38300A29DEE /* Rainbow Dark@3x.png */,
+				39DD77B32470C38300A29DEE /* Six Colors Dark@2x.png */,
+				39DD77B42470C38300A29DEE /* Six Colors Dark@3x.png */,
 			);
-			path = "Rainbow Dark";
+			path = "Six Colors Dark";
 			sourceTree = "<group>";
 		};
-		39DD77B72470C49D00A29DEE /* Rainbow Light */ = {
+		39DD77B72470C49D00A29DEE /* Six Colors Light */ = {
 			isa = PBXGroup;
 			children = (
-				39DD77B82470C49D00A29DEE /* Rainbow Light@3x.png */,
-				39DD77B92470C49D00A29DEE /* Rainbow Light@2x.png */,
+				39DD77B82470C49D00A29DEE /* Six Colors Light@3x.png */,
+				39DD77B92470C49D00A29DEE /* Six Colors Light@2x.png */,
 			);
-			path = "Rainbow Light";
+			path = "Six Colors Light";
 			sourceTree = "<group>";
 		};
 		4BD3D29424951F150031846F /* Configs */ = {
@@ -659,24 +659,6 @@
 				4BFEFD91246F686000CCF4A0 /* ShareContentView.swift */,
 			);
 			path = NioShareExtension;
-			sourceTree = "<group>";
-    };
-		39DD77B22470C38300A29DEE /* Six Colors Dark */ = {
-			isa = PBXGroup;
-			children = (
-				39DD77B32470C38300A29DEE /* Six Colors Dark@2x.png */,
-				39DD77B42470C38300A29DEE /* Six Colors Dark@3x.png */,
-			);
-			path = "Six Colors Dark";
-			sourceTree = "<group>";
-		};
-		39DD77B72470C49D00A29DEE /* Six Colors Light */ = {
-			isa = PBXGroup;
-			children = (
-				39DD77B82470C49D00A29DEE /* Six Colors Light@3x.png */,
-				39DD77B92470C49D00A29DEE /* Six Colors Light@2x.png */,
-			);
-			path = "Six Colors Light";
 			sourceTree = "<group>";
 		};
 		5DC5384442FBDB92C6AD5E68 /* Frameworks */ = {
@@ -1396,15 +1378,12 @@
 			baseConfigurationReference = 7458D569F4C4516BAF1294E8 /* Pods-NioTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HU85FER47E;
 				INFOPLIST_FILE = NioTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.kilian.NioTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1556,12 +1535,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Nio/Nio.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 25;
-				CODE_SIGN_ENTITLEMENTS = Nio/Nio.entitlements;
 				DEVELOPMENT_ASSET_PATHS = "\"Nio/Preview Content\"";
-				DEVELOPMENT_TEAM = HU85FER47E;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Nio/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1582,8 +1560,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 25;
 				CODE_SIGN_ENTITLEMENTS = Nio/Nio.entitlements;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_ASSET_PATHS = "\"Nio/Preview Content\"";
 				DEVELOPMENT_TEAM = HU85FER47E;
 				ENABLE_PREVIEWS = YES;
