@@ -12,7 +12,7 @@ struct ShareContentView: View {
 
     var cancelButton: some View {
         Button(action: {
-            self.parentView.didSelectCancel(error: nil)
+            self.parentView.didSelectCancel()
         }, label: {
             Text("Cancel")
         })

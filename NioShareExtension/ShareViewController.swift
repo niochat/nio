@@ -40,7 +40,7 @@ class ShareNavigationController: UIViewController {
                 }
             }
         case .loggedOut:
-            didSelectCancel(error: ShareViewControllerError.notRegistered)
+            didSelectCancel()
         case .authenticating:
             let alert = UIAlertController(title: nil, message: "Sending...", preferredStyle: .alert)
 
@@ -52,7 +52,7 @@ class ShareNavigationController: UIViewController {
             alert.view.addSubview(loadingIndicator)
             present(alert, animated: true, completion: nil)
         case .failure(_):
-            didSelectCancel(error: ShareViewControllerError.notRegistered)
+            didSelectCancel()
         }
     }
 
@@ -63,13 +63,9 @@ class ShareNavigationController: UIViewController {
         case obsoleteShare
     }
 
-    func didSelectCancel(error: Error?) {
+    func didSelectCancel() {
         self.dismiss(animated: true) {
-            if error != nil {
-
-            } else {
-                self.extensionContext!.cancelRequest(withError: ShareViewControllerError.obsoleteShare)
-            }
+            self.extensionContext!.cancelRequest(withError: ShareViewControllerError.obsoleteShare)
         }
     }
 
