@@ -9,7 +9,7 @@ struct ShareContentView: View {
     @State var selectedID: String?
 
     let rooms: [String: String]? = UserDefaults(suiteName: "group." + ((Bundle.main.infoDictionary?["AppGroup"] as? String) ?? ""))?
-        .dictionary(forKey: "users") as? [String: String]
+        .dictionary(forKey: "roomList") as? [String: String]
 
     var cancelButton: some View {
         Button(action: {

@@ -44,16 +44,21 @@ public class NIORoom: ObservableObject {
         print("Got \(currentBatch.count) events.")
 
         self.eventCache.append(contentsOf: currentBatch)
+
+        self.registerInUserDefaults(room: room)
+    }
+
+    private func registerInUserDefaults(room: MXRoom) {
         let suite = "group." + ((Bundle.main.infoDictionary?["AppGroup"] as? String) ?? "")
         let defaults = UserDefaults(suiteName: suite)
-        var roomList = defaults?.dictionary(forKey: "users")
+        var roomList = defaults?.dictionary(forKey: "roomList")
         if roomList != nil {
             roomList?[room.summary.roomId] = room.summary.displayname!
         } else {
             roomList = [room.summary.roomId!: room.summary.displayname!]
         }
 
-        defaults?.set(roomList, forKey: "users")
+        defaults?.set(roomList, forKey: "roomList")
     }
 
     public func add(event: MXEvent, direction: MXTimelineDirection, roomState: MXRoomState?) {
