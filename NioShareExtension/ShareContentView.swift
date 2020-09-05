@@ -23,7 +23,6 @@ struct ShareContentView: View {
             List {
                 ForEach(rooms!.keys.sorted(), id: \.self) { roomID in
                     Button(action: {
-                        self.selectedRoom = self.rooms![roomID]!
                         self.selectedID = roomID
                         self.showConfirm.toggle()
                     }, label: {
@@ -31,18 +30,26 @@ struct ShareContentView: View {
                     })
                 }
             }
+            .listStyle(GroupedListStyle())
             .navigationBarTitle("Nio", displayMode: .inline)
             .navigationBarItems(trailing: cancelButton)
             .alert(isPresented: $showConfirm) {
                 Alert(
-                    title: Text("Send to " + (self.selectedRoom ?? "")),
+                    title: Text("Send to " + (self.rooms![self.selectedID ?? ""]! )),
                     primaryButton: .default(
                         Text("Send"),
                         action: {
                             self.parentView.didSelectPost(roomID: self.selectedID!)
                     }),
-                secondaryButton: .cancel())
+                    secondaryButton: .cancel())
+
             }
         }
+    }
+}
+
+struct ShareContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }
