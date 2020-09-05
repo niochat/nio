@@ -5,8 +5,8 @@
 "login.form.homeserver" = "Hemserver";
 "login.form.homeserver-optional-explanation" = "Hemserver är valfritt om du använder matrix.org.";
 "login.sign-in" = "Logga in";
-"login.open-registration-prompt" = "Har du ännu inte ett konto?";
-"login.register-not-yet-implemented" = "Registering av nya konton är ännu inte implementerat.";
+"login.open-registration-prompt" = "Har du inte ett konto än?";
+"login.register-not-yet-implemented" = "Registrering av nya konton är inte implementerat än.";
 "login.failure-back-to-login" = "Tillbaka till inloggning";
 "loading.3" = "Loggar in";
 "loading.4" = "Återskapar session";
@@ -32,7 +32,7 @@
 "room.invitation.join-alert.title" = "Gå med i konversation?";
 "room.invitation.join-alert.message" = "Acceptera inbjudan till %@'?";
 "room.invitation.join-alert.join-button" = "Gå med";
-"composer.new-message" = "Nytt meddelande...";
+"composer.new-message" = "Nytt meddelande…";
 "composer.edit-message" = "Redigera meddelande:";
 "composer.accessibility-label.send-file" = "Skicka fil";
 "composer.accessibility-label.send" = "Skicka";
@@ -59,9 +59,9 @@
 "room-power-level.moderator" = "Moderator";
 "room-power-level.admin" = "Admin";
 "room-power-level.custom" = "Anpassad (%d)";
-"event.room-power-level.change-self" = "%@ ändrade sin power-nivå från %@ till %@";
-"event.room-power-level.change-other" = "%@ ändrade power-nivån för %@ från %@ till %@";
-"event.redaction.redact-self" = "Meddelande togs bort av %@";
+"event.room-power-level.change-self" = "%@ ändrade sin behörighetsnivå från %@ till %@";
+"event.room-power-level.change-other" = "%@ ändrade behörighetsnivån för %@ från %@ till %@";
+"event.redaction.redact-self" = "Meddelandet togs bort av %@";
 "event.redaction.redact-other" = "%@ tog bort meddelandet från %@";
 "event.edited" = "redigerat";
 "event.context-menu.add-reaction" = "Lägg till reaktion";
@@ -71,6 +71,9 @@
 "reaction-picker.title" = "Tryck på en emoji för att skicka den reaktionen.";
 "settings.title" = "Inställningar";
 "settings.accent-color" = "Accentfärg";
-"settings.app-icon" = "Appsymbol";
+"settings.app-icon" = "Appikon";
 "settings.log-out" = "Logga ut";
 "recent-rooms.rooms.header" = "Rum";
+"loading.1" = "Nätformar splines";
+"loading.2" = "Diskomfrobulerar meddelanden";
+"event.room-member.unknown-state" = "Okänd statushändelse: %@";
