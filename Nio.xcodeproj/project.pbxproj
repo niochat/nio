@@ -65,6 +65,7 @@
 		4BD3DCA42482FF08009B5048 /* AccountStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD3DCA32482FF08009B5048 /* AccountStore.swift */; };
 		4BE63CC0247EC53500C1D4DC /* NioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CADF662D24614D2300F5063F /* NioKit.framework */; };
 		4BE63CC1247EC53500C1D4DC /* NioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CADF662D24614D2300F5063F /* NioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4BEB8C04250403D200E90699 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEB8C03250403D200E90699 /* UserDefaults.swift */; };
 		4BFEFD86246F414D00CCF4A0 /* NioShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4BFEFD7C246F414D00CCF4A0 /* NioShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4BFEFD8C246F458000CCF4A0 /* GetURL.js in Resources */ = {isa = PBXBuildFile; fileRef = 4BFEFD8B246F458000CCF4A0 /* GetURL.js */; };
 		4BFEFD92246F686000CCF4A0 /* ShareContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEFD91246F686000CCF4A0 /* ShareContentView.swift */; };
@@ -276,6 +277,7 @@
 		4BD3DC9B2482FCFE009B5048 /* SwiftMatrixSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftMatrixSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BD3DC9F2482FE6D009B5048 /* SwiftMatrixSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftMatrixSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BD3DCA32482FF08009B5048 /* AccountStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStore.swift; sourceTree = "<group>"; };
+		4BEB8C03250403D200E90699 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		4BFEFD7C246F414D00CCF4A0 /* NioShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NioShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BFEFD7E246F414D00CCF4A0 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		4BFEFD83246F414D00CCF4A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -706,6 +708,7 @@
 				392389882386FD3900B2E1DF /* MXClient+Publisher.swift */,
 				3923898C238859D100B2E1DF /* MX+Identifiable.swift */,
 				393411C823904428003B49B8 /* MXEvent+Extensions.swift */,
+				4BEB8C03250403D200E90699 /* UserDefaults.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1300,6 +1303,7 @@
 				CAD6816A246B1AE3001878EB /* ReactionEvent.swift in Sources */,
 				CAD68169246B1A5F001878EB /* Reaction.swift in Sources */,
 				CAD68167246B1A59001878EB /* EventCollection.swift in Sources */,
+				4BEB8C04250403D200E90699 /* UserDefaults.swift in Sources */,
 				CAD68166246B1A59001878EB /* NIORoom.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
