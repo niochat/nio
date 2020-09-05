@@ -49,16 +49,15 @@ public class NIORoom: ObservableObject {
     }
 
     private func registerInUserDefaults(room: MXRoom) {
-        let suite = "group." + ((Bundle.main.infoDictionary?["AppGroup"] as? String) ?? "")
-        let defaults = UserDefaults(suiteName: suite)
-        var roomList = defaults?.dictionary(forKey: "roomList")
+        let defaults = UserDefaults.group
+        var roomList = defaults.dictionary(forKey: "roomList")
         if roomList != nil {
             roomList?[room.summary.roomId] = room.summary.displayname!
         } else {
             roomList = [room.summary.roomId!: room.summary.displayname!]
         }
 
-        defaults?.set(roomList, forKey: "roomList")
+        defaults.set(roomList, forKey: "roomList")
     }
 
     public func add(event: MXEvent, direction: MXTimelineDirection, roomState: MXRoomState?) {
