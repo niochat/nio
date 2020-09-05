@@ -41,5 +41,7 @@
 		<key>NSExtensionPrincipalClass</key>
 		<string>ShareNavigationController</string>
 	</dict>
+	<key>DevelopmentTeam</key>
+	<string>$(DEVELOPMENT_TEAM)</string>
 </dict>
 </plist>
