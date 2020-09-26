@@ -1,4 +1,4 @@
-"login.welcome-header" = "Добро положаловать в ";
+"login.welcome-header" = "Добро пожаловать в ";
 "login.welcome-message" = "Войдите в свой аккаунт, чтобы начать.";
 "login.form.username" = "Имя пользоватаеля";
 "login.form.password" = "Пароль";
