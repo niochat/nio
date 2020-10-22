@@ -6,7 +6,7 @@
 "login.form.homeserver-optional-explanation" = "Nie wpisuj nic, jeżeli używasz serwera matrix.org.";
 "login.sign-in" = "Zaloguj się";
 "login.open-registration-prompt" = "Nie masz konta?";
-"login.register-not-yet-implemented" = "Rejestracja nowych kont nie jest jeszcze możliwa przez aplikację.";
+"login.register-not-yet-implemented" = "Rejestracja nowych kont nie jest obecnie możliwa.";
 "login.failure-back-to-login" = "Wróć do logowania";
 "loading.1" = "Jeszcze chwila…";
 "loading.2" = "Ładuję…";
