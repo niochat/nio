@@ -7,14 +7,13 @@ struct SettingsContainerView: View {
     @EnvironmentObject var settings: AppSettings
 
     var body: some View {
-        SettingsView(accentColor: $settings.accentColor,
-                     appIcon: $settings.appIcon,
+        SettingsView(appIcon: $settings.appIcon,
                      logoutAction: { self.store.logout() })
     }
 }
 
 struct SettingsView: View {
-    @Binding var accentColor: Color
+    @AppStorage("accentColor") var accentColor: Color = .purple
     @Binding var appIcon: String
     var logoutAction: () -> Void
 
@@ -63,8 +62,7 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(accentColor: .constant(.purple),
-                     appIcon: .constant("Default"),
+        SettingsView(appIcon: .constant("Default"),
                      logoutAction: {})
     }
 }

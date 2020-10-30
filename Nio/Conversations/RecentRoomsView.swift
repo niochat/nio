@@ -7,6 +7,7 @@ import NioKit
 struct RecentRoomsContainerView: View {
     @EnvironmentObject var store: AccountStore
     @EnvironmentObject var settings: AppSettings
+    @AppStorage("accentColor") var accentColor: Color = .purple
 
     @State private var selectedNavigationItem: SelectedNavigationItem?
 
@@ -18,7 +19,7 @@ struct RecentRoomsContainerView: View {
                     // This really shouldn't be necessary. SwiftUI bug?
                     .environmentObject(self.store)
                     .environmentObject(self.settings)
-                    .accentColor(self.settings.accentColor)
+                    .accentColor(accentColor)
             }
             .onAppear {
                 self.store.startListeningForRoomEvents()
