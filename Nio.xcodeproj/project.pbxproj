@@ -43,8 +43,6 @@
 		39BA0721240B1A2600FD28C6 /* AccountStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA0720240B1A2600FD28C6 /* AccountStore.swift */; };
 		39BA0725240B4E8D00FD28C6 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA0724240B4E8D00FD28C6 /* AppSettings.swift */; };
 		39BA0727240B534600FD28C6 /* Color+allAccent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA0726240B534600FD28C6 /* Color+allAccent.swift */; };
-		39C931DD2384328A004449E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931DC2384328A004449E1 /* AppDelegate.swift */; };
-		39C931DF2384328A004449E1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931DE2384328A004449E1 /* SceneDelegate.swift */; };
 		39C931E12384328A004449E1 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931E02384328A004449E1 /* RootView.swift */; };
 		39C931E32384328B004449E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39C931E22384328B004449E1 /* Assets.xcassets */; };
 		39C931E62384328B004449E1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39C931E52384328B004449E1 /* Preview Assets.xcassets */; };
@@ -66,6 +64,7 @@
 		4B29F5B52466EC240084043B /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B29F5B42466EC240084043B /* ImagePicker.swift */; };
 		4BD3D29324951E3B0031846F /* GlobalConfig.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4BD3D29224951E3B0031846F /* GlobalConfig.xcconfig */; };
 		87FE3870173FD55A91B15921 /* Pods_Nio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3410F361E5A713D19ECEF861 /* Pods_Nio.framework */; };
+		A51BF8CE254C2FE5000FB0A4 /* NioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51BF8CD254C2FE5000FB0A4 /* NioApp.swift */; };
 		CAAF5BF82478696F006FDC33 /* UITextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAF5BF72478696F006FDC33 /* UITextViewWrapper.swift */; };
 		CAC46D5723A272D10079C24F /* BorderlessMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D5423A272D10079C24F /* BorderlessMessageView.swift */; };
 		CAC46D5823A272D10079C24F /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D5523A272D10079C24F /* MessageViewModel.swift */; };
@@ -208,8 +207,6 @@
 		39BA0724240B4E8D00FD28C6 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		39BA0726240B534600FD28C6 /* Color+allAccent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+allAccent.swift"; sourceTree = "<group>"; };
 		39C931D92384328A004449E1 /* Nio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nio.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		39C931DC2384328A004449E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		39C931DE2384328A004449E1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		39C931E02384328A004449E1 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		39C931E22384328B004449E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		39C931E52384328B004449E1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -238,6 +235,7 @@
 		740F96CF311FBD9A066E0C36 /* Pods-NioTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioTests.release.xcconfig"; path = "Target Support Files/Pods-NioTests/Pods-NioTests.release.xcconfig"; sourceTree = "<group>"; };
 		7458D569F4C4516BAF1294E8 /* Pods-NioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioTests.debug.xcconfig"; path = "Target Support Files/Pods-NioTests/Pods-NioTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9B72E2085A593085853A04CB /* Pods-NioKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioKit.debug.xcconfig"; path = "Target Support Files/Pods-NioKit/Pods-NioKit.debug.xcconfig"; sourceTree = "<group>"; };
+		A51BF8CD254C2FE5000FB0A4 /* NioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NioApp.swift; sourceTree = "<group>"; };
 		CAAF5BF72478696F006FDC33 /* UITextViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextViewWrapper.swift; sourceTree = "<group>"; };
 		CAC46D5423A272D10079C24F /* BorderlessMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderlessMessageView.swift; sourceTree = "<group>"; };
 		CAC46D5523A272D10079C24F /* MessageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
@@ -485,9 +483,8 @@
 		39C931DB2384328A004449E1 /* Nio */ = {
 			isa = PBXGroup;
 			children = (
-				39C931DC2384328A004449E1 /* AppDelegate.swift */,
+				A51BF8CD254C2FE5000FB0A4 /* NioApp.swift */,
 				39BA0720240B1A2600FD28C6 /* AccountStore.swift */,
-				39C931DE2384328A004449E1 /* SceneDelegate.swift */,
 				39C931E02384328A004449E1 /* RootView.swift */,
 				3902B8A62395A78100698B87 /* Authentication */,
 				CAC46D5E23A276B30079C24F /* Shapes */,
@@ -1106,7 +1103,6 @@
 				392221AE243A0508004D8794 /* GroupedReactionsView.swift in Sources */,
 				3923898F2388707E00B2E1DF /* RoomListItemView.swift in Sources */,
 				4B29F5B52466EC240084043B /* ImagePicker.swift in Sources */,
-				39C931DD2384328A004449E1 /* AppDelegate.swift in Sources */,
 				CAF2AE8B2458EF0900D84133 /* MarkdownText.swift in Sources */,
 				39DD77AF247006E300A29DEE /* AppIcon.swift in Sources */,
 				CAFCB323245F6E6700869320 /* NSAttributedString+Extensions.swift in Sources */,
@@ -1119,6 +1115,7 @@
 				CADF662424614A3300F5063F /* ReactionGroupView.swift in Sources */,
 				392221B6243F88FD004D8794 /* RoomNameEventView.swift in Sources */,
 				4B0A2E47245E2EF800A79443 /* MultilineTextField.swift in Sources */,
+				A51BF8CE254C2FE5000FB0A4 /* NioApp.swift in Sources */,
 				3902B8A0239410EE00698B87 /* ContentSizeCategory.swift in Sources */,
 				39D166C62385C804006DD257 /* String+Emoji.swift in Sources */,
 				392221A02437285B004D8794 /* ReactionPicker.swift in Sources */,
@@ -1136,7 +1133,6 @@
 				39D166C82385C832006DD257 /* EventContainerView.swift in Sources */,
 				CAC46D6B23A55E940079C24F /* PeekableIterator.swift in Sources */,
 				CAC46D5823A272D10079C24F /* MessageViewModel.swift in Sources */,
-				39C931DF2384328A004449E1 /* SceneDelegate.swift in Sources */,
 				3921176224435E0000892B00 /* MediaEventView.swift in Sources */,
 				3902B8A32395935600698B87 /* SettingsView.swift in Sources */,
 				CAAF5BF82478696F006FDC33 /* UITextViewWrapper.swift in Sources */,
