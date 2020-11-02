@@ -1,0 +1,11 @@
+
+
+
+"login.open-registration-prompt" = "Все още нямате профил?";
+"login.sign-in" = "Вписване";
+"login.form.homeserver-optional-explanation" = "Домашния сървър не е задължителен, ако ползвате matrix.org.";
+"login.form.homeserver" = "Домашен сървър";
+"login.form.password" = "Парола";
+"login.form.username" = "Потребителско име";
+"login.welcome-message" = "Влезте в профила си, за да започнете.";
+"login.welcome-header" = "Добре дошли в ";
