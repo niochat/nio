@@ -58,20 +58,19 @@ struct RoomListItemView: View {
     }
 
     var prefixAvatar: some View {
-        Text(title.prefix(2).uppercased())
-            .multilineTextAlignment(.center)
-            .font(.system(.headline, design: .rounded))
-            .lineLimit(1)
-            .allowsTightening(true)
-            .padding(10 * sizeCategory.scalingFactor)
-            .aspectRatio(1.0, contentMode: .fill)
-            .foregroundColor(.init(UIColor.textOnAccentColor(for: colorScheme)))
-            .background(
-                Circle()
-                    .foregroundColor(.accentColor)
-                    .overlay(Circle().fill(self.gradient))
-            )
-            .accessibility(addTraits: .isImage)
+        GeometryReader { geometry in
+            Text(title.prefix(2).uppercased())
+                .multilineTextAlignment(.center)
+                .font(.system(.headline, design: .rounded))
+                .lineLimit(1)
+                .allowsTightening(true)
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .foregroundColor(.init(UIColor.textOnAccentColor(for: colorScheme)))
+                .background(
+                    Color.accentColor.overlay(gradient)
+                )
+        }
+        .accessibility(addTraits: .isImage)
     }
 
     var topView: some View {
@@ -144,9 +143,6 @@ struct RoomListItemView: View {
                 WebImage(url: avatarURL)
                     .resizable()
                     .placeholder { prefixAvatar }
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 40, height: 40)
-                    .mask(Circle())
             )
         } else {
             return AnyView(
@@ -160,11 +156,13 @@ struct RoomListItemView: View {
     var body: some View {
         HStack(alignment: .center) {
             image
+                .aspectRatio(1, contentMode: .fill)
+                .mask(Circle())
 
             VStack(alignment: .leading, spacing: 0) {
                 topView
                 bottomView
-            }
+            }.layoutPriority(1)
         }
         .padding([.vertical], 5 * sizeCategory.scalingFactor)
     }
