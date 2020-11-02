@@ -25,7 +25,7 @@ struct LoadingView: View {
         VStack {
             Spacer()
 
-            ActivityIndicator()
+            ProgressView().padding(1)
 
             Text(self.randomLoadingMessage)
                 .bold()
