@@ -67,6 +67,13 @@
 "settings.accent-color" = "Kolor zaznaczenia";
 "settings.app-icon" = "Ikonka aplikacji";
 "settings.log-out" = "Wyloguj";
-"recent-rooms.pending-invitations.leave.alert-title" = "Odrzuć zaproszenie";
+"recent-rooms.pending-invitations.leave.alert-title" = "Odrzucić zaproszenie?";
 "event.room-power-level.change-other" = "%@ zmienił(a) poziom uprawnień użytkownika %@ z %@ na %@";
 "event.room-power-level.change-self" = "%@ zmienił(a) swój poziom uprawnień z %@ na %@";
+"event.room-member.unknown-state" = "Zdarzenie nieznanego stanu: %@";
+"room.invitation.join-alert.message" = "Przyjąć zaproszenie do '%@'?";
+"room.invitation.join-alert.title" = "Dołączyć?";
+"recent-rooms.rooms.header" = "Kanały";
+"room.invitation.fallback-title" = "Nowa rozmowa";
+"room.invitation.join-alert.join-button" = "Dołącz";
+"recent-rooms.pending-invitations.header" = "Zaproszenia";
