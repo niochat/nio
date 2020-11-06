@@ -20,7 +20,7 @@
 "recent-rooms.accessibility-label.dm" = "DM z %@, %@ %@";
 // Room $NAME, $LAST_ACTIVITY_TIMESTAMP $LAST_MESSAGE
 "recent-rooms.accessibility-label.room" = "Kanał %@, %@ %@";
-"recent-rooms.accessibility-label.new-message-badge" = "Nowa wiadomość od %u";
+"recent-rooms.accessibility-label.new-message-badge" = "%u nowych wiadomości";
 "recent-rooms.leave.alert-title" = "Opuść kanał";
 "recent-rooms.leave.alert-body" = "Czy na pewno chcesz opuścić '%@'? Tej akcji nie można cofnąć.";
 "room.attachment.select-type" = "Wyślij załącznik";
@@ -43,7 +43,7 @@
 "event.room-member.kicked" = "%@ wyrzucił %@";
 "event.room-member.ban" = "%@ zablokował %@";
 "event.room-member.joined" = "%@ dołączył do kanału";
-"event.room-member.change-name" = "%@ to teraz %@";
+"event.room-member.change-name" = "%@ zmienił(a) nazwę użytkownika na %@";
 "event.room-member.set-avatar" = "%@ ustawił awatar";
 "event.room-member.change-avatar" = "%@ zaktualizował swój awatar";
 "event.room-member.remove-avatar" = "%@ usunął swój awatar";
@@ -54,7 +54,7 @@
 "room-power-level.default" = "Standardowy";
 "room-power-level.moderator" = "Moderator";
 "room-power-level.admin" = "Admin";
-"room-power-level.custom" = "Specjalny (%d)";
+"room-power-level.custom" = "Inny (%d)";
 "event.redaction.redact-self" = "Wiadomość usunięta przez %@";
 "event.redaction.redact-other" = "%@ usunął wiadomość napisaną przez %@";
 "event.edited" = "edytowany";
@@ -68,3 +68,5 @@
 "settings.app-icon" = "Ikonka aplikacji";
 "settings.log-out" = "Wyloguj";
 "recent-rooms.pending-invitations.leave.alert-title" = "Odrzuć zaproszenie";
+"event.room-power-level.change-other" = "%@ zmienił(a) poziom uprawnień użytkownika %@ z %@ na %@";
+"event.room-power-level.change-self" = "%@ zmienił(a) swój poziom uprawnień z %@ na %@";
