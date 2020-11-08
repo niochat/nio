@@ -43,15 +43,17 @@ struct AppIcon: Identifiable, View {
     }
 }
 
-@propertyWrapper struct AppIconTitle {
-    var wrappedValue: Binding<String> {
-        Binding {
+class AppIconTitle: ObservableObject {
+    var current: String {
+        get {
             UIApplication.shared.alternateIconName ?? "Default"
-        } set: { newValue in
+        }
+        set {
             var iconName: String? = newValue
             if iconName == "Default" {
                 iconName = nil
             }
+            objectWillChange.send()
             UIApplication.shared.setAlternateIconName(iconName) { error in
                 guard let error = error else { return }
                 print("Error setting new app icon: \(error)")

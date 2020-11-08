@@ -12,7 +12,7 @@ struct SettingsContainerView: View {
 
 struct SettingsView: View {
     @AppStorage("accentColor") var accentColor: Color = .purple
-    @AppIconTitle var appIconTitle
+    @StateObject private var appIconTitle = AppIconTitle()
     var logoutAction: () -> Void
 
     @Environment(\.presentationMode) var presentationMode
@@ -33,7 +33,7 @@ struct SettingsView: View {
                         }
                     }
 
-                    Picker(selection: appIconTitle, label: Text(L10n.Settings.appIcon)) {
+                    Picker(selection: $appIconTitle.current, label: Text(L10n.Settings.appIcon)) {
                         ForEach(AppIcon.alternateIcons) { $0 }
                     }
                 }
