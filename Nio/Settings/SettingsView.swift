@@ -34,7 +34,7 @@ struct SettingsView: View {
                     }
 
                     Picker(selection: $appIconTitle.current, label: Text(L10n.Settings.appIcon)) {
-                        ForEach(AppIcon.alternateIcons) { $0 }
+                        ForEach(AppIconTitle.alternatives) { AppIcon(title: $0) }
                     }
                 }
 

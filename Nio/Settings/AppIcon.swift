@@ -1,13 +1,6 @@
 import SwiftUI
 
 struct AppIcon: Identifiable, View {
-    static var alternateIcons = [
-        AppIcon(title: "Default"),
-        AppIcon(title: "Six Colors Dark"),
-        AppIcon(title: "Six Colors Light"),
-        AppIcon(title: "Sketch"),
-    ]
-
     let title: String
     let attribution: String?
 
@@ -44,6 +37,13 @@ struct AppIcon: Identifiable, View {
 }
 
 class AppIconTitle: ObservableObject {
+    static var alternatives = [
+        "Default",
+        "Six Colors Dark",
+        "Six Colors Light",
+        "Sketch",
+    ]
+
     var current: String {
         get {
             UIApplication.shared.alternateIconName ?? "Default"
