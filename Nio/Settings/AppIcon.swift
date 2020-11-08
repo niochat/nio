@@ -1,6 +1,13 @@
 import SwiftUI
 
 struct AppIcon: Identifiable, View {
+    static var alternateIcons = [
+        AppIcon(title: "Default"),
+        AppIcon(title: "Six Colors Dark"),
+        AppIcon(title: "Six Colors Light"),
+        AppIcon(title: "Sketch"),
+    ]
+
     let title: String
     let attribution: String?
 
@@ -31,6 +38,23 @@ struct AppIcon: Identifiable, View {
                         .font(.footnote)
                         .foregroundColor(.gray)
                 }
+            }
+        }
+    }
+}
+
+@propertyWrapper struct AppIconTitle {
+    var wrappedValue: Binding<String> {
+        Binding {
+            UIApplication.shared.alternateIconName ?? "Default"
+        } set: { newValue in
+            var iconName: String? = newValue
+            if iconName == "Default" {
+                iconName = nil
+            }
+            UIApplication.shared.setAlternateIconName(iconName) { error in
+                guard let error = error else { return }
+                print("Error setting new app icon: \(error)")
             }
         }
     }

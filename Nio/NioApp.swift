@@ -4,7 +4,6 @@ import NioKit
 @main
 struct NioApp: App {
     @StateObject var accountStore = AccountStore()
-    @StateObject var appSettings = AppSettings()
 
     @AppStorage("accentColor") var accentColor: Color = .purple
 
@@ -12,7 +11,6 @@ struct NioApp: App {
         WindowGroup {
             RootView()
                 .environmentObject(accountStore)
-                .environmentObject(appSettings)
                 .accentColor(accentColor)
         }
     }
