@@ -266,6 +266,8 @@ internal enum L10n {
     internal static let logOut = L10n.tr("Localizable", "settings.log-out")
     /// Settings
     internal static let title = L10n.tr("Localizable", "settings.title")
+    /// Done
+    internal static let done = L10n.tr("Localizable", "settings.dismiss")
   }
 
   internal enum TypingIndicator {
