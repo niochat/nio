@@ -16,6 +16,8 @@ struct SettingsView: View {
     @Binding var appIcon: String
     var logoutAction: () -> Void
 
+    @Environment(\.presentationMode) var presentationMode
+
     var body: some View {
         NavigationView {
             Form {
@@ -46,6 +48,13 @@ struct SettingsView: View {
                 }
             }
             .navigationBarTitle(Text(L10n.Settings.title), displayMode: .inline)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button(L10n.Settings.done) {
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                }
+            }
         }
     }
 }
