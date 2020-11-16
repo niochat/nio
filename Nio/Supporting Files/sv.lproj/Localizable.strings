@@ -77,3 +77,4 @@
 "loading.1" = "Nätformar splines";
 "loading.2" = "Diskomfrobulerar meddelanden";
 "event.room-member.unknown-state" = "Okänd statushändelse: %@";
+"settings.dismiss" = "Klar";
