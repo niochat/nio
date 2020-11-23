@@ -5,44 +5,52 @@ import UIKit
 struct ShareContentView: View {
     @State var parentView: ShareNavigationController
     @State var showConfirm = false
-    @State var selectedRoom: String?
-    @State var selectedID: String?
+    @State var selectedRoom: RoomItem?
 
-    let rooms: [String: String]? = UserDefaults.group.dictionary(forKey: "roomList") as? [String: String]
+    var rooms: [RoomItem]?
 
-    var cancelButton: some View {
-        Button(action: {
-            self.parentView.didSelectCancel()
-        }, label: {
-            Text("Cancel")
-        })
+    public init(parentView: ShareNavigationController) {
+        _parentView = State(initialValue: parentView)
+        let data = UserDefaults.group.data(forKey: "roomList")!
+        do {
+            let decoder = JSONDecoder()
+            let temp = try decoder.decode([RoomItem].self, from: data)
+            self.rooms = temp
+            self.rooms?.sort(by: { $0.messageDate > $1.messageDate })
+        } catch {
+            print("An error occured: \(error)")
+        }
     }
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(rooms!.keys.sorted(), id: \.self) { roomID in
+            VStack {
+                List(rooms!, id: \.self) { room in
                     Button(action: {
-                        self.selectedID = roomID
+                        self.selectedRoom = room
                         self.showConfirm.toggle()
                     }, label: {
-                        Text(self.rooms![roomID]!)
+                        Text(room.displayName)
                     })
                 }
-            }
-            .listStyle(GroupedListStyle())
-            .navigationBarTitle("Nio", displayMode: .inline)
-            .navigationBarItems(trailing: cancelButton)
-            .alert(isPresented: $showConfirm) {
-                Alert(
-                    title: Text("Send to " + (self.rooms![self.selectedID ?? ""]! )),
-                    primaryButton: .default(
-                        Text("Send"),
-                        action: {
-                            self.parentView.didSelectPost(roomID: self.selectedID!)
-                    }),
-                    secondaryButton: .cancel())
-
+                .padding(.bottom, 20.0)
+                .listStyle(GroupedListStyle())
+                .navigationBarTitle("Nio")
+                .alert(isPresented: $showConfirm) {
+                    Alert(
+                        title: Text("Send to " + self.selectedRoom!.displayName),
+                        primaryButton: .default(
+                            Text("Send"),
+                            action: {
+                                self.parentView.didSelectPost(roomID: self.selectedRoom!.roomId)
+                        }),
+                        secondaryButton: .cancel())
+                }
+                // This is ugly, but otherwise the last results are too far down. Update if you know
+                // a better way.
+                Text("")
+                Text("")
+                Text("")
             }
         }
     }

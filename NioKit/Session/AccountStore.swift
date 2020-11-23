@@ -150,6 +150,7 @@ public class AccountStore: ObservableObject {
     }
 
     public var rooms: [NIORoom] {
+        UserDefaults.group.removeObject(forKey: "roomList")
         return self.session?.rooms
             .map { NIORoom($0) }
             .sorted { $0.summary.lastMessageDate > $1.summary.lastMessageDate }
