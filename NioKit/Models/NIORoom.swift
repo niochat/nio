@@ -3,6 +3,23 @@ import Combine
 
 import SwiftMatrixSDK
 
+public struct RoomItem: Codable, Hashable {
+    public static func == (lhs: RoomItem, rhs: RoomItem) -> Bool {
+        return lhs.displayName == rhs.displayName &&
+          lhs.roomId == rhs.roomId
+    }
+
+    public let roomId: String
+    public let displayName: String
+    public let messageDate: UInt64
+
+    public init(room: MXRoom) {
+        self.roomId = room.summary.roomId
+        self.displayName = room.summary.displayname
+        self.messageDate = room.summary.lastMessageOriginServerTs
+    }
+}
+
 public class NIORoom: ObservableObject {
     public var room: MXRoom
 
@@ -34,7 +51,7 @@ public class NIORoom: ObservableObject {
             return lastMessageEvent?.content["body"] as? String ?? ""
         }
     }
-    
+
     public init(_ room: MXRoom) {
         self.room = room
         self.summary = NIORoomSummary(room.summary)
@@ -44,6 +61,33 @@ public class NIORoom: ObservableObject {
         print("Got \(currentBatch.count) events.")
 
         self.eventCache.append(contentsOf: currentBatch)
+
+        self.registerInUserDefaults(room: room)
+    }
+
+    private func registerInUserDefaults(room: MXRoom) {
+        let defaults = UserDefaults.group
+        let roomItem: RoomItem = RoomItem(room: room)
+        var rooms: [RoomItem]
+        let data = defaults.data(forKey: "roomList")
+        do {
+            if data != nil {
+                let decoder = JSONDecoder()
+                rooms = try decoder.decode([RoomItem].self, from: data!)
+            } else {
+                rooms = []
+            }
+            rooms.append(roomItem)
+            do {
+                let encoder = JSONEncoder()
+                let data = try encoder.encode(rooms)
+                defaults.set(data, forKey: "roomList")
+            } catch {
+                print("An error occured: \(error)")
+            }
+        } catch {
+            print("An error occured: \(error)")
+        }
     }
 
     public func add(event: MXEvent, direction: MXTimelineDirection, roomState: MXRoomState?) {

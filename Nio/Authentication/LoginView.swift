@@ -1,6 +1,8 @@
 import SwiftUI
 import SwiftMatrixSDK
 
+import NioKit
+
 struct LoginContainerView: View {
     @EnvironmentObject var store: AccountStore
 
@@ -37,7 +39,7 @@ struct LoginContainerView: View {
 
         store.login(username: username, password: password, homeserver: homeserverURL)
     }
-    
+
     private func guessHomeserverURL() {
         if !username.isEmpty && homeserver.isEmpty {
             let userparts = username.components(separatedBy: ":")
@@ -128,7 +130,7 @@ struct LoginForm: View {
     @Binding var username: String
     @Binding var password: String
     @Binding var homeserver: String
-    
+
     let guessHomeserverURL: () -> Void
 
     var body: some View {

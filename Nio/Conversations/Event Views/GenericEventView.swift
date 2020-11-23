@@ -1,6 +1,8 @@
 import SwiftUI
 import SDWebImageSwiftUI
 
+import NioKit
+
 struct GenericEventView: View {
     @EnvironmentObject var store: AccountStore
 

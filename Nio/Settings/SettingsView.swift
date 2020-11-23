@@ -1,5 +1,7 @@
 import SwiftUI
 
+import NioKit
+
 struct SettingsContainerView: View {
     @EnvironmentObject var store: AccountStore
     @EnvironmentObject var settings: AppSettings
@@ -50,7 +52,7 @@ struct SettingsView: View {
             .navigationBarTitle(Text(L10n.Settings.title), displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button(L10n.Settings.done) {
+                    Button(L10n.Settings.dismiss) {
                         presentationMode.wrappedValue.dismiss()
                     }
                 }

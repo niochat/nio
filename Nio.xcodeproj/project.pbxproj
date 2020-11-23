@@ -39,7 +39,6 @@
 		3984654523B7ECBA006C173B /* MXURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984654423B7ECBA006C173B /* MXURL.swift */; };
 		3984654823B8D809006C173B /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3984654723B8D809006C173B /* SDWebImageSwiftUI */; };
 		39B834C0243FC42000AE1EA0 /* TypingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B834BF243FC42000AE1EA0 /* TypingIndicatorView.swift */; };
-		39BA0721240B1A2600FD28C6 /* AccountStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA0720240B1A2600FD28C6 /* AccountStore.swift */; };
 		39BA0725240B4E8D00FD28C6 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA0724240B4E8D00FD28C6 /* AppSettings.swift */; };
 		39BA0727240B534600FD28C6 /* Color+allAccent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA0726240B534600FD28C6 /* Color+allAccent.swift */; };
 		39C931E12384328A004449E1 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931E02384328A004449E1 /* RootView.swift */; };
@@ -61,7 +60,15 @@
 		39E5032324EAFA8700FED642 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 39E5032224EAFA8700FED642 /* Introspect */; };
 		4B0A2E47245E2EF800A79443 /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A2E46245E2EF800A79443 /* MultilineTextField.swift */; };
 		4B29F5B52466EC240084043B /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B29F5B42466EC240084043B /* ImagePicker.swift */; };
+		4B693515249BBBFE0029D549 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEFD7E246F414D00CCF4A0 /* ShareViewController.swift */; };
 		4BD3D29324951E3B0031846F /* GlobalConfig.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4BD3D29224951E3B0031846F /* GlobalConfig.xcconfig */; };
+		4BD3DCA42482FF08009B5048 /* AccountStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD3DCA32482FF08009B5048 /* AccountStore.swift */; };
+		4BE63CC0247EC53500C1D4DC /* NioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CADF662D24614D2300F5063F /* NioKit.framework */; };
+		4BE63CC1247EC53500C1D4DC /* NioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CADF662D24614D2300F5063F /* NioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4BEB8C04250403D200E90699 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEB8C03250403D200E90699 /* UserDefaults.swift */; };
+		4BFEFD86246F414D00CCF4A0 /* NioShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4BFEFD7C246F414D00CCF4A0 /* NioShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4BFEFD8C246F458000CCF4A0 /* GetURL.js in Resources */ = {isa = PBXBuildFile; fileRef = 4BFEFD8B246F458000CCF4A0 /* GetURL.js */; };
+		4BFEFD92246F686000CCF4A0 /* ShareContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEFD91246F686000CCF4A0 /* ShareContentView.swift */; };
 		87FE3870173FD55A91B15921 /* Pods_Nio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3410F361E5A713D19ECEF861 /* Pods_Nio.framework */; };
 		A51BF8CE254C2FE5000FB0A4 /* NioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51BF8CD254C2FE5000FB0A4 /* NioApp.swift */; };
 		CAAF5BF82478696F006FDC33 /* UITextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAF5BF72478696F006FDC33 /* UITextViewWrapper.swift */; };
@@ -116,6 +123,20 @@
 			remoteGlobalIDString = 39C931D823843289004449E1;
 			remoteInfo = Nio;
 		};
+		4BE63CC2247EC53500C1D4DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 39C931D123843289004449E1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CADF662C24614D2300F5063F;
+			remoteInfo = NioKit;
+		};
+		4BFEFD84246F414D00CCF4A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 39C931D123843289004449E1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4BFEFD7B246F414D00CCF4A0;
+			remoteInfo = NioShareExtension;
+		};
 		CADF663724614D2300F5063F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 39C931D123843289004449E1 /* Project object */;
@@ -140,6 +161,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		4BE63CC4247EC53500C1D4DC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4BE63CC1247EC53500C1D4DC /* NioKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4BFEFD87246F414D00CCF4A0 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4BFEFD86246F414D00CCF4A0 /* NioShareExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CADF664724614D2300F5063F /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -200,7 +243,6 @@
 		3984654423B7ECBA006C173B /* MXURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MXURL.swift; sourceTree = "<group>"; };
 		3997DCCF245732F000763C07 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		39B834BF243FC42000AE1EA0 /* TypingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingIndicatorView.swift; sourceTree = "<group>"; };
-		39BA0720240B1A2600FD28C6 /* AccountStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStore.swift; sourceTree = "<group>"; };
 		39BA0722240B3C9A00FD28C6 /* MXCredentials+Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXCredentials+Keychain.swift"; sourceTree = "<group>"; };
 		39BA0724240B4E8D00FD28C6 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		39BA0726240B534600FD28C6 /* Color+allAccent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+allAccent.swift"; sourceTree = "<group>"; };
@@ -229,6 +271,20 @@
 		4B0A2E46245E2EF800A79443 /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 		4B29F5B42466EC240084043B /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		4BD3D29224951E3B0031846F /* GlobalConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = GlobalConfig.xcconfig; sourceTree = "<group>"; };
+		4BD3DC902482FABD009B5048 /* SwiftMatrixSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftMatrixSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4BD3DC932482FAFB009B5048 /* SwiftMatrixSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftMatrixSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4BD3DC962482FB0D009B5048 /* SwiftMatrixSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftMatrixSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4BD3DC9B2482FCFE009B5048 /* SwiftMatrixSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftMatrixSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4BD3DC9F2482FE6D009B5048 /* SwiftMatrixSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftMatrixSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4BD3DCA32482FF08009B5048 /* AccountStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStore.swift; sourceTree = "<group>"; };
+		4BEB8C03250403D200E90699 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		4BFEFD7C246F414D00CCF4A0 /* NioShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NioShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4BFEFD7E246F414D00CCF4A0 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		4BFEFD83246F414D00CCF4A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4BFEFD8B246F458000CCF4A0 /* GetURL.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = GetURL.js; sourceTree = "<group>"; };
+		4BFEFD8F246F5EE000CCF4A0 /* NioShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NioShareExtension.entitlements; sourceTree = "<group>"; };
+		4BFEFD90246F5EF500CCF4A0 /* Nio.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nio.entitlements; sourceTree = "<group>"; };
+		4BFEFD91246F686000CCF4A0 /* ShareContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareContentView.swift; sourceTree = "<group>"; };
 		5C7C3F7D4F830D17EFBB034C /* Pods_NioKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NioKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		740F96CF311FBD9A066E0C36 /* Pods-NioTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioTests.release.xcconfig"; path = "Target Support Files/Pods-NioTests/Pods-NioTests.release.xcconfig"; sourceTree = "<group>"; };
 		7458D569F4C4516BAF1294E8 /* Pods-NioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioTests.debug.xcconfig"; path = "Target Support Files/Pods-NioTests/Pods-NioTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -289,6 +345,14 @@
 				390D63A42465F62D00B8F640 /* BlurHash in Frameworks */,
 				87FE3870173FD55A91B15921 /* Pods_Nio.framework in Frameworks */,
 				CADF664224614D2300F5063F /* NioKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4BFEFD79246F414D00CCF4A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4BE63CC0247EC53500C1D4DC /* NioKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,6 +523,7 @@
 				393411CF239087D2003B49B8 /* NioTests */,
 				CADF662E24614D2300F5063F /* NioKit */,
 				CADF663B24614D2300F5063F /* NioKitTests */,
+				4BFEFD7D246F414D00CCF4A0 /* NioShareExtension */,
 				39C931DA2384328A004449E1 /* Products */,
 				E59A03343DCFE20D3EC045F7 /* Pods */,
 				5DC5384442FBDB92C6AD5E68 /* Frameworks */,
@@ -473,6 +538,7 @@
 				393411CE239087D2003B49B8 /* NioTests.xctest */,
 				CADF662D24614D2300F5063F /* NioKit.framework */,
 				CADF663524614D2300F5063F /* NioKitTests.xctest */,
+				4BFEFD7C246F414D00CCF4A0 /* NioShareExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -481,7 +547,9 @@
 			isa = PBXGroup;
 			children = (
 				A51BF8CD254C2FE5000FB0A4 /* NioApp.swift */,
-				39BA0720240B1A2600FD28C6 /* AccountStore.swift */,
+				4BFEFD90246F5EF500CCF4A0 /* Nio.entitlements */,
+				39C931DC2384328A004449E1 /* AppDelegate.swift */,
+				39C931DE2384328A004449E1 /* SceneDelegate.swift */,
 				39C931E02384328A004449E1 /* RootView.swift */,
 				3902B8A62395A78100698B87 /* Authentication */,
 				CAC46D5E23A276B30079C24F /* Shapes */,
@@ -575,9 +643,34 @@
 			path = Configs;
 			sourceTree = "<group>";
 		};
+		4BD3DCA22482FEED009B5048 /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				4BD3DCA32482FF08009B5048 /* AccountStore.swift */,
+			);
+			path = Session;
+			sourceTree = "<group>";
+		};
+		4BFEFD7D246F414D00CCF4A0 /* NioShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				4BFEFD7E246F414D00CCF4A0 /* ShareViewController.swift */,
+				4BFEFD8F246F5EE000CCF4A0 /* NioShareExtension.entitlements */,
+				4BFEFD83246F414D00CCF4A0 /* Info.plist */,
+				4BFEFD8B246F458000CCF4A0 /* GetURL.js */,
+				4BFEFD91246F686000CCF4A0 /* ShareContentView.swift */,
+			);
+			path = NioShareExtension;
+			sourceTree = "<group>";
+		};
 		5DC5384442FBDB92C6AD5E68 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4BD3DC9F2482FE6D009B5048 /* SwiftMatrixSDK.framework */,
+				4BD3DC9B2482FCFE009B5048 /* SwiftMatrixSDK.framework */,
+				4BD3DC962482FB0D009B5048 /* SwiftMatrixSDK.framework */,
+				4BD3DC932482FAFB009B5048 /* SwiftMatrixSDK.framework */,
+				4BD3DC902482FABD009B5048 /* SwiftMatrixSDK.framework */,
 				3410F361E5A713D19ECEF861 /* Pods_Nio.framework */,
 				5C7C3F7D4F830D17EFBB034C /* Pods_NioKit.framework */,
 				D1955325397526BB40F3D0EE /* Pods_NioKitTests.framework */,
@@ -615,6 +708,7 @@
 				392389882386FD3900B2E1DF /* MXClient+Publisher.swift */,
 				3923898C238859D100B2E1DF /* MX+Identifiable.swift */,
 				393411C823904428003B49B8 /* MXEvent+Extensions.swift */,
+				4BEB8C03250403D200E90699 /* UserDefaults.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -652,6 +746,7 @@
 		CADF662E24614D2300F5063F /* NioKit */ = {
 			isa = PBXGroup;
 			children = (
+				4BD3DCA22482FEED009B5048 /* Session */,
 				CAD68170246B1BE2001878EB /* Models */,
 				CAD6816E246B1BB0001878EB /* Extensions */,
 				CADF663024614D2300F5063F /* Info.plist */,
@@ -730,11 +825,13 @@
 				39C931D723843289004449E1 /* Resources */,
 				CADF664724614D2300F5063F /* Embed Frameworks */,
 				8D593CBB7FA0E64873D981FE /* [CP] Embed Pods Frameworks */,
+				4BFEFD87246F414D00CCF4A0 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				CADF664124614D2300F5063F /* PBXTargetDependency */,
+				4BFEFD85246F414D00CCF4A0 /* PBXTargetDependency */,
 			);
 			name = Nio;
 			packageProductDependencies = (
@@ -746,6 +843,27 @@
 			productName = Nio;
 			productReference = 39C931D92384328A004449E1 /* Nio.app */;
 			productType = "com.apple.product-type.application";
+		};
+		4BFEFD7B246F414D00CCF4A0 /* NioShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4BFEFD8A246F414D00CCF4A0 /* Build configuration list for PBXNativeTarget "NioShareExtension" */;
+			buildPhases = (
+				4BFEFD78246F414D00CCF4A0 /* Sources */,
+				4BFEFD79246F414D00CCF4A0 /* Frameworks */,
+				4BFEFD7A246F414D00CCF4A0 /* Resources */,
+				4BE63CC4247EC53500C1D4DC /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4BE63CC3247EC53500C1D4DC /* PBXTargetDependency */,
+			);
+			name = NioShareExtension;
+			packageProductDependencies = (
+			);
+			productName = NioShareExtension;
+			productReference = 4BFEFD7C246F414D00CCF4A0 /* NioShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		CADF662C24614D2300F5063F /* NioKit */ = {
 			isa = PBXNativeTarget;
@@ -807,6 +925,9 @@
 					39C931D823843289004449E1 = {
 						CreatedOnToolsVersion = 11.3;
 					};
+					4BFEFD7B246F414D00CCF4A0 = {
+						CreatedOnToolsVersion = 11.4.1;
+					};
 					CADF662C24614D2300F5063F = {
 						CreatedOnToolsVersion = 11.4.1;
 						LastSwiftMigration = 1140;
@@ -848,6 +969,7 @@
 				393411CD239087D2003B49B8 /* NioTests */,
 				CADF662C24614D2300F5063F /* NioKit */,
 				CADF663424614D2300F5063F /* NioKitTests */,
+				4BFEFD7B246F414D00CCF4A0 /* NioShareExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -877,6 +999,14 @@
 				39C931E32384328B004449E1 /* Assets.xcassets in Resources */,
 				3921175C244255D600892B00 /* swiftgen.yml in Resources */,
 				39DD77BB2470C49D00A29DEE /* Six Colors Light@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4BFEFD7A246F414D00CCF4A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4BFEFD8C246F458000CCF4A0 /* GetURL.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1094,7 +1224,6 @@
 			files = (
 				39C9320B23856033004449E1 /* MessageComposerView.swift in Sources */,
 				CAC46D5923A272D10079C24F /* BorderedMessageView.swift in Sources */,
-				39BA0721240B1A2600FD28C6 /* AccountStore.swift in Sources */,
 				39B834C0243FC42000AE1EA0 /* TypingIndicatorView.swift in Sources */,
 				3984654523B7ECBA006C173B /* MXURL.swift in Sources */,
 				392221AE243A0508004D8794 /* GroupedReactionsView.swift in Sources */,
@@ -1149,6 +1278,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4BFEFD78246F414D00CCF4A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B693515249BBBFE0029D549 /* ShareViewController.swift in Sources */,
+				4BFEFD92246F686000CCF4A0 /* ShareContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CADF662924614D2300F5063F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1159,11 +1297,13 @@
 				CAD68168246B1A59001878EB /* NIORoomSummary.swift in Sources */,
 				CAD6816C246B1AE3001878EB /* CustomEvent.swift in Sources */,
 				CAD68174246B1C09001878EB /* MXCredentials+Keychain.swift in Sources */,
+				4BD3DCA42482FF08009B5048 /* AccountStore.swift in Sources */,
 				CAD68171246B1BFB001878EB /* MX+Identifiable.swift in Sources */,
 				CAD6816B246B1AE3001878EB /* EditEvent.swift in Sources */,
 				CAD6816A246B1AE3001878EB /* ReactionEvent.swift in Sources */,
 				CAD68169246B1A5F001878EB /* Reaction.swift in Sources */,
 				CAD68167246B1A59001878EB /* EventCollection.swift in Sources */,
+				4BEB8C04250403D200E90699 /* UserDefaults.swift in Sources */,
 				CAD68166246B1A59001878EB /* NIORoom.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1183,6 +1323,16 @@
 			isa = PBXTargetDependency;
 			target = 39C931D823843289004449E1 /* Nio */;
 			targetProxy = 393411D3239087D2003B49B8 /* PBXContainerItemProxy */;
+		};
+		4BE63CC3247EC53500C1D4DC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CADF662C24614D2300F5063F /* NioKit */;
+			targetProxy = 4BE63CC2247EC53500C1D4DC /* PBXContainerItemProxy */;
+		};
+		4BFEFD85246F414D00CCF4A0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4BFEFD7B246F414D00CCF4A0 /* NioShareExtension */;
+			targetProxy = 4BFEFD84246F414D00CCF4A0 /* PBXContainerItemProxy */;
 		};
 		CADF663824614D2300F5063F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1232,15 +1382,12 @@
 			baseConfigurationReference = 7458D569F4C4516BAF1294E8 /* Pods-NioTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HU85FER47E;
 				INFOPLIST_FILE = NioTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.kilian.NioTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1392,11 +1539,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Nio/Nio.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_ASSET_PATHS = "\"Nio/Preview Content\"";
-				DEVELOPMENT_TEAM = HU85FER47E;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Nio/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1417,6 +1564,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Nio/Nio.entitlements;
 				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_ASSET_PATHS = "\"Nio/Preview Content\"";
 				DEVELOPMENT_TEAM = HU85FER47E;
@@ -1429,6 +1577,43 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = chat.nio.iOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		4BFEFD88246F414D00CCF4A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = NioShareExtension/NioShareExtension.entitlements;
+				INFOPLIST_FILE = NioShareExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(SHARE_EXTENSION_PRODUCT_BUNDLE_IDENTIFIER)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4BFEFD89246F414D00CCF4A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = NioShareExtension/NioShareExtension.entitlements;
+				INFOPLIST_FILE = NioShareExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1570,6 +1755,15 @@
 			buildConfigurations = (
 				39C931EE2384328B004449E1 /* Debug */,
 				39C931EF2384328B004449E1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4BFEFD8A246F414D00CCF4A0 /* Build configuration list for PBXNativeTarget "NioShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4BFEFD88246F414D00CCF4A0 /* Debug */,
+				4BFEFD89246F414D00CCF4A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

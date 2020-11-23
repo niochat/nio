@@ -9,4 +9,7 @@ PRODUCT_BUNDLE_IDENTIFIER = chat.nio.iOS
 DEVELOPMENT_TEAM = HU85FER47E
 CODE_SIGN_STYLE = Manual
 
+SHARE_EXTENSION_PRODUCT_BUNDLE_IDENTIFIER = chat.nio.iOS.NioShareExtension
+APPGROUP = chat.nio
+
 #include? "LocalConfig.xcconfig"

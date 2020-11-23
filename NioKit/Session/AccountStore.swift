@@ -3,24 +3,25 @@ import Combine
 import SwiftMatrixSDK
 import KeychainAccess
 
-import NioKit
-
-enum LoginState {
+public enum LoginState {
     case loggedOut
     case authenticating
     case failure(Error)
     case loggedIn(userId: String)
 }
 
-class AccountStore: ObservableObject {
-    let keychain = Keychain(service: "chat.nio.credentials")
-    var client: MXRestClient?
-    var session: MXSession?
-    var fileStore: MXFileStore?
+public class AccountStore: ObservableObject {
+    public var client: MXRestClient?
+    public var session: MXSession?
 
+    var fileStore: MXFileStore?
     var credentials: MXCredentials?
 
-    init() {
+    let keychain = Keychain(
+        service: "chat.nio.credentials",
+        accessGroup: ((Bundle.main.infoDictionary?["DevelopmentTeam"] as? String) ?? "") + ".nio.keychain")
+
+    public init() {
         if CommandLine.arguments.contains("-clear-stored-credentials") {
             print("🗑 cleared stored credentials from keychain")
             MXCredentials
@@ -49,9 +50,9 @@ class AccountStore: ObservableObject {
 
     // MARK: - Login & Sync
 
-    @Published var loginState: LoginState = .loggedOut
+    @Published public var loginState: LoginState = .loggedOut
 
-    func login(username: String, password: String, homeserver: URL) {
+    public func login(username: String, password: String, homeserver: URL) {
         self.loginState = .authenticating
 
         let options = MXSDKOptions()
@@ -67,6 +68,7 @@ class AccountStore: ObservableObject {
             case .success(let credentials):
                 self.credentials = credentials
                 credentials.save(to: self.keychain)
+                print("Error on starting session with new credentials:")
 
                 self.sync { result in
                     switch result {
@@ -81,7 +83,7 @@ class AccountStore: ObservableObject {
         }
     }
 
-    func logout(completion: @escaping (Result<LoginState, Error>) -> Void) {
+    public func logout(completion: @escaping (Result<LoginState, Error>) -> Void) {
         self.credentials?.clear(from: keychain)
 
         self.session?.logout { response in
@@ -95,7 +97,7 @@ class AccountStore: ObservableObject {
         }
     }
 
-    func logout() {
+    public func logout() {
         self.logout { result in
             switch result {
             case .failure:
@@ -136,7 +138,7 @@ class AccountStore: ObservableObject {
 
     var listenReference: Any?
 
-    func startListeningForRoomEvents() {
+    public func startListeningForRoomEvents() {
         // roomState is nil for presence events, just for future reference
         listenReference = self.session?.listenToEvents { event, direction, roomState in
             let affectedRooms = self.rooms.filter { $0.summary.roomId == event.roomId }
@@ -147,8 +149,9 @@ class AccountStore: ObservableObject {
         }
     }
 
-    var rooms: [NIORoom] {
-        self.session?.rooms
+    public var rooms: [NIORoom] {
+        UserDefaults.group.removeObject(forKey: "roomList")
+        return self.session?.rooms
             .map { NIORoom($0) }
             .sorted { $0.summary.lastMessageDate > $1.summary.lastMessageDate }
             ?? []
