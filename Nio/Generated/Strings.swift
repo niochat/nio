@@ -262,12 +262,12 @@ internal enum L10n {
     internal static let accentColor = L10n.tr("Localizable", "settings.accent-color")
     /// App Icon
     internal static let appIcon = L10n.tr("Localizable", "settings.app-icon")
+    /// Done
+    internal static let dismiss = L10n.tr("Localizable", "settings.dismiss")
     /// Log Out
     internal static let logOut = L10n.tr("Localizable", "settings.log-out")
     /// Settings
     internal static let title = L10n.tr("Localizable", "settings.title")
-    /// Done
-    internal static let done = L10n.tr("Localizable", "settings.dismiss")
   }
 
   internal enum TypingIndicator {
@@ -297,6 +297,12 @@ extension L10n {
 
 // swiftlint:disable convenience_type
 private final class BundleToken {
-  static let bundle = Bundle(for: BundleToken.self)
+  static let bundle: Bundle = {
+    #if SWIFT_PACKAGE
+    return Bundle.module
+    #else
+    return Bundle(for: BundleToken.self)
+    #endif
+  }()
 }
 // swiftlint:enable convenience_type
