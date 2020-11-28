@@ -143,6 +143,7 @@ struct RoomListItemView: View {
                 WebImage(url: avatarURL)
                     .resizable()
                     .placeholder { prefixAvatar }
+                    .aspectRatio(contentMode: .fill)
             )
         } else {
             return AnyView(
@@ -155,9 +156,10 @@ struct RoomListItemView: View {
 
     var body: some View {
         HStack(alignment: .center) {
-            image
+            Circle()
+                .foregroundColor(.clear)
                 .aspectRatio(1, contentMode: .fill)
-                .mask(Circle())
+                .overlay(image.mask(Circle()))
 
             VStack(alignment: .leading, spacing: 0) {
                 topView
