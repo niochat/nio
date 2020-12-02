@@ -136,6 +136,13 @@ struct RoomListItemView: View {
                 }
             )
     }
+    
+    var avatarView: some View {
+        Circle()
+            .foregroundColor(.clear)
+            .aspectRatio(1, contentMode: .fill)
+            .overlay(image.mask(Circle()))
+    }
 
     var image: some View {
         if let avatarURL = roomAvatarURL {
@@ -156,11 +163,7 @@ struct RoomListItemView: View {
 
     var body: some View {
         HStack(alignment: .center) {
-            Circle()
-                .foregroundColor(.clear)
-                .aspectRatio(1, contentMode: .fill)
-                .overlay(image.mask(Circle()))
-
+            avatarView
             VStack(alignment: .leading, spacing: 0) {
                 topView
                 bottomView
