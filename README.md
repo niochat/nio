@@ -38,9 +38,8 @@ If you can help translate Nio into other languages your help would be much appre
 
 You might also have fun checking out the following applications.
 
-- [Ditto](https://dittochat.org), cross-platform ReactNative based and just as purple 💜
-- [Messagerie](https://github.com/manuroe/messagerie), also built with SwiftUI
-- [Pattle](https://git.pattle.im/pattle/app), very polished cross-platform app built with Flutter
+- [FluffyChat](https://fluffychat.im/en/), arguably the cutest mobile Matrix client.
+- [Ditto](https://dittochat.org), cross-platform (based on ReactNative) and just as purple 💜
 
 ### Why "Nio"?
 
