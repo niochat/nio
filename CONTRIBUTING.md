@@ -44,8 +44,6 @@ This is the current status of the translations:
 Nio has (and probably always will have 😅) a [long list of open issues](https://github.com/niochat/nio/issues). You are more
 than *extremely* welcome to tackle any of these and send pull requests.
 
-***Note***: Please be aware that Nio builds against the iOS 14 SDK and thus currently requires the Xcode 12 Beta. Download a copy from [Apple's Developer Portal](https://developer.apple.com/download).
-
 ### Dependencies
 Nio manages most of its dependencies via Swift package manager, which Xcode handles automatically. The `matrix-ios-sdk` 
 however is integrated via Cocoapods (for the time being) which makes installing that necessary to setup a local checkout of 
