@@ -79,3 +79,4 @@
 "recent-rooms.rooms.header" = "Salons";
 "recent-rooms.pending-invitations.leave.alert-title" = "Refuser l'invitation ?";
 "recent-rooms.pending-invitations.header" = "Invitations en attente";
+"settings.dismiss" = "Fini";
