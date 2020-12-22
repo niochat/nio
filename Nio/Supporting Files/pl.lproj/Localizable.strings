@@ -77,3 +77,4 @@
 "room.invitation.fallback-title" = "Nowa rozmowa";
 "room.invitation.join-alert.join-button" = "Dołącz";
 "recent-rooms.pending-invitations.header" = "Zaproszenia";
+"settings.dismiss" = "Gotowe";
