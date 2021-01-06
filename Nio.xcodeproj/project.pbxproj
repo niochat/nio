@@ -68,6 +68,8 @@
 		4BFEFD8C246F458000CCF4A0 /* GetURL.js in Resources */ = {isa = PBXBuildFile; fileRef = 4BFEFD8B246F458000CCF4A0 /* GetURL.js */; };
 		4BFEFD92246F686000CCF4A0 /* ShareContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEFD91246F686000CCF4A0 /* ShareContentView.swift */; };
 		A51BF8CE254C2FE5000FB0A4 /* NioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51BF8CD254C2FE5000FB0A4 /* NioApp.swift */; };
+		A58352A625A667AB00533363 /* MatrixSDK in Frameworks */ = {isa = PBXBuildFile; productRef = A58352A525A667AB00533363 /* MatrixSDK */; };
+		A58352AC25A667B300533363 /* MatrixSDK in Frameworks */ = {isa = PBXBuildFile; productRef = A58352AB25A667B300533363 /* MatrixSDK */; };
 		CAAF5BF82478696F006FDC33 /* UITextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAF5BF72478696F006FDC33 /* UITextViewWrapper.swift */; };
 		CAC46D5723A272D10079C24F /* BorderlessMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D5423A272D10079C24F /* BorderlessMessageView.swift */; };
 		CAC46D5823A272D10079C24F /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D5523A272D10079C24F /* MessageViewModel.swift */; };
@@ -321,6 +323,7 @@
 				39E5032324EAFA8700FED642 /* Introspect in Frameworks */,
 				CAF2AE9D245DF4B400D84133 /* CommonMarkAttributedString in Frameworks */,
 				390D63A42465F62D00B8F640 /* BlurHash in Frameworks */,
+				A58352A625A667AB00533363 /* MatrixSDK in Frameworks */,
 				CADF664224614D2300F5063F /* NioKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -337,6 +340,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A58352AC25A667B300533363 /* MatrixSDK in Frameworks */,
 				CAD68178246B1E9F001878EB /* KeychainAccess in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -500,6 +504,7 @@
 				CADF663B24614D2300F5063F /* NioKitTests */,
 				4BFEFD7D246F414D00CCF4A0 /* NioShareExtension */,
 				39C931DA2384328A004449E1 /* Products */,
+				A58352AA25A667B300533363 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 			usesTabs = 0;
@@ -632,6 +637,13 @@
 				4BFEFD91246F686000CCF4A0 /* ShareContentView.swift */,
 			);
 			path = NioShareExtension;
+			sourceTree = "<group>";
+		};
+		A58352AA25A667B300533363 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		CAC46D5323A272D10079C24F /* MessageView */ = {
@@ -775,6 +787,7 @@
 				CAF2AE9C245DF4B400D84133 /* CommonMarkAttributedString */,
 				390D63A32465F62D00B8F640 /* BlurHash */,
 				39E5032224EAFA8700FED642 /* Introspect */,
+				A58352A525A667AB00533363 /* MatrixSDK */,
 			);
 			productName = Nio;
 			productReference = 39C931D92384328A004449E1 /* Nio.app */;
@@ -815,6 +828,7 @@
 			name = NioKit;
 			packageProductDependencies = (
 				CAD68177246B1E9F001878EB /* KeychainAccess */,
+				A58352AB25A667B300533363 /* MatrixSDK */,
 			);
 			productName = NioKit;
 			productReference = CADF662D24614D2300F5063F /* NioKit.framework */;
@@ -891,6 +905,7 @@
 				CAF2AE9B245DF4B400D84133 /* XCRemoteSwiftPackageReference "CommonMarkAttributedString" */,
 				390D63A22465F62C00B8F640 /* XCRemoteSwiftPackageReference "BlurHash" */,
 				39E5032124EAFA8700FED642 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				A58352A425A667AB00533363 /* XCRemoteSwiftPackageReference "MatrixSDK" */,
 			);
 			productRefGroup = 39C931DA2384328A004449E1 /* Products */;
 			projectDirPath = "";
@@ -1604,6 +1619,14 @@
 				minimumVersion = 0.1.0;
 			};
 		};
+		A58352A425A667AB00533363 /* XCRemoteSwiftPackageReference "MatrixSDK" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/niochat/MatrixSDK";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.17.6;
+			};
+		};
 		CAF2AE9B245DF4B400D84133 /* XCRemoteSwiftPackageReference "CommonMarkAttributedString" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mattt/CommonMarkAttributedString";
@@ -1629,6 +1652,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 39E5032124EAFA8700FED642 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
+		};
+		A58352A525A667AB00533363 /* MatrixSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A58352A425A667AB00533363 /* XCRemoteSwiftPackageReference "MatrixSDK" */;
+			productName = MatrixSDK;
+		};
+		A58352AB25A667B300533363 /* MatrixSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A58352A425A667AB00533363 /* XCRemoteSwiftPackageReference "MatrixSDK" */;
+			productName = MatrixSDK;
 		};
 		CAD68177246B1E9F001878EB /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;

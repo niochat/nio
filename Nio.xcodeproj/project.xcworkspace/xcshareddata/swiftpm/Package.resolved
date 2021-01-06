@@ -38,6 +38,15 @@
         }
       },
       {
+        "package": "MatrixSDK",
+        "repositoryURL": "https://github.com/niochat/MatrixSDK",
+        "state": {
+          "branch": null,
+          "revision": "59ecc79c6c5a00917dcb6f652c6c46bc6f96bd5f",
+          "version": "0.17.6"
+        }
+      },
+      {
         "package": "SDWebImage",
         "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
         "state": {

@@ -1,5 +1,5 @@
 import Foundation
-import SwiftMatrixSDK
+import MatrixSDK
 
 @dynamicMemberLookup
 public class NIORoomSummary: ObservableObject {

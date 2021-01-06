@@ -1,5 +1,5 @@
 import Foundation
-import SwiftMatrixSDK
+import MatrixSDK
 
 protocol TypeableEvent {
     var type: String { get }

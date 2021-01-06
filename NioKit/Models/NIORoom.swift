@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 
-import SwiftMatrixSDK
+import MatrixSDK
 
 public struct RoomItem: Codable, Hashable {
     public static func == (lhs: RoomItem, rhs: RoomItem) -> Bool {

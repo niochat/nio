@@ -1,6 +1,6 @@
 import Foundation
 import Combine
-import SwiftMatrixSDK
+import MatrixSDK
 import KeychainAccess
 
 public enum LoginState {

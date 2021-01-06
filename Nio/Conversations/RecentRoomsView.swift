@@ -1,5 +1,5 @@
 import SwiftUI
-import SwiftMatrixSDK
+import MatrixSDK
 import Introspect
 
 import NioKit

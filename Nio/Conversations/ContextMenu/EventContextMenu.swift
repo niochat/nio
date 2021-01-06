@@ -1,5 +1,5 @@
 import SwiftUI
-import SwiftMatrixSDK
+import MatrixSDK
 
 private struct EventContextMenuViewModel {
     var canReact: Bool

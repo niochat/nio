@@ -1,5 +1,5 @@
 import Foundation
-import SwiftMatrixSDK
+import MatrixSDK
 
 struct ReactionEvent {
     let eventId: String

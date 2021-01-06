@@ -1,5 +1,5 @@
 import Foundation
-import SwiftMatrixSDK
+import MatrixSDK
 
 // TODO: Remove, once
 // https://github.com/matrix-org/matrix-ios-sdk/pull/755

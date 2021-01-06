@@ -1,5 +1,5 @@
 import Foundation
-import SwiftMatrixSDK
+import MatrixSDK
 
 public struct EventCollection {
     internal var wrapped: [MXEvent]
