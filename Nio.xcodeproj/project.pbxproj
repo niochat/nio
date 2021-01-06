@@ -548,8 +548,6 @@
 			children = (
 				A51BF8CD254C2FE5000FB0A4 /* NioApp.swift */,
 				4BFEFD90246F5EF500CCF4A0 /* Nio.entitlements */,
-				39C931DC2384328A004449E1 /* AppDelegate.swift */,
-				39C931DE2384328A004449E1 /* SceneDelegate.swift */,
 				39C931E02384328A004449E1 /* RootView.swift */,
 				3902B8A62395A78100698B87 /* Authentication */,
 				CAC46D5E23A276B30079C24F /* Shapes */,
