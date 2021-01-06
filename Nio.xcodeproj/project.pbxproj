@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A12648BA863599F47FCA0E4 /* Pods_NioKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1955325397526BB40F3D0EE /* Pods_NioKitTests.framework */; };
-		2922D22E822C70D39E1DD872 /* Pods_NioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C7C3F7D4F830D17EFBB034C /* Pods_NioKit.framework */; };
 		3902B89C2393FE6100698B87 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902B89B2393FE6100698B87 /* MessageView.swift */; };
 		3902B89E2393FE8200698B87 /* GenericEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902B89D2393FE8200698B87 /* GenericEventView.swift */; };
 		3902B8A0239410EE00698B87 /* ContentSizeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902B89F239410EE00698B87 /* ContentSizeCategory.swift */; };
@@ -69,7 +67,6 @@
 		4BFEFD86246F414D00CCF4A0 /* NioShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4BFEFD7C246F414D00CCF4A0 /* NioShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4BFEFD8C246F458000CCF4A0 /* GetURL.js in Resources */ = {isa = PBXBuildFile; fileRef = 4BFEFD8B246F458000CCF4A0 /* GetURL.js */; };
 		4BFEFD92246F686000CCF4A0 /* ShareContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEFD91246F686000CCF4A0 /* ShareContentView.swift */; };
-		87FE3870173FD55A91B15921 /* Pods_Nio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3410F361E5A713D19ECEF861 /* Pods_Nio.framework */; };
 		A51BF8CE254C2FE5000FB0A4 /* NioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51BF8CD254C2FE5000FB0A4 /* NioApp.swift */; };
 		CAAF5BF82478696F006FDC33 /* UITextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAF5BF72478696F006FDC33 /* UITextViewWrapper.swift */; };
 		CAC46D5723A272D10079C24F /* BorderlessMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D5423A272D10079C24F /* BorderlessMessageView.swift */; };
@@ -112,7 +109,6 @@
 		CAF2AE94245B507400D84133 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AE93245B507400D84133 /* Assets.swift */; };
 		CAF2AE9D245DF4B400D84133 /* CommonMarkAttributedString in Frameworks */ = {isa = PBXBuildFile; productRef = CAF2AE9C245DF4B400D84133 /* CommonMarkAttributedString */; };
 		CAFCB323245F6E6700869320 /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFCB322245F6E6700869320 /* NSAttributedString+Extensions.swift */; };
-		DD248EF865919E28C46C4E70 /* Pods_NioTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42D6B28FC1F7473DA40DF022 /* Pods_NioTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -197,9 +193,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		23EAE3BC298E0AAC5460FC63 /* Pods-Nio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nio.debug.xcconfig"; path = "Target Support Files/Pods-Nio/Pods-Nio.debug.xcconfig"; sourceTree = "<group>"; };
-		3410F361E5A713D19ECEF861 /* Pods_Nio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		366FD96F5985BF90D5C07A10 /* Pods-NioKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioKitTests.debug.xcconfig"; path = "Target Support Files/Pods-NioKitTests/Pods-NioKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3902B89B2393FE6100698B87 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		3902B89D2393FE8200698B87 /* GenericEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericEventView.swift; sourceTree = "<group>"; };
 		3902B89F239410EE00698B87 /* ContentSizeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizeCategory.swift; sourceTree = "<group>"; };
@@ -265,17 +258,11 @@
 		39DD77B82470C49D00A29DEE /* Six Colors Light@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Six Colors Light@3x.png"; sourceTree = "<group>"; };
 		39DD77B92470C49D00A29DEE /* Six Colors Light@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Six Colors Light@2x.png"; sourceTree = "<group>"; };
 		39E5032424EAFED500FED642 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		42D6B28FC1F7473DA40DF022 /* Pods_NioTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NioTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B058B5524573A570059BC75 /* EditEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEvent.swift; sourceTree = "<group>"; };
 		4B08F0A82495202A008E4286 /* LocalConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = LocalConfig.xcconfig; sourceTree = "<group>"; };
 		4B0A2E46245E2EF800A79443 /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 		4B29F5B42466EC240084043B /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		4BD3D29224951E3B0031846F /* GlobalConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = GlobalConfig.xcconfig; sourceTree = "<group>"; };
-		4BD3DC902482FABD009B5048 /* SwiftMatrixSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftMatrixSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4BD3DC932482FAFB009B5048 /* SwiftMatrixSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftMatrixSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4BD3DC962482FB0D009B5048 /* SwiftMatrixSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftMatrixSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4BD3DC9B2482FCFE009B5048 /* SwiftMatrixSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftMatrixSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4BD3DC9F2482FE6D009B5048 /* SwiftMatrixSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftMatrixSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BD3DCA32482FF08009B5048 /* AccountStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStore.swift; sourceTree = "<group>"; };
 		4BEB8C03250403D200E90699 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		4BFEFD7C246F414D00CCF4A0 /* NioShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NioShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -285,10 +272,6 @@
 		4BFEFD8F246F5EE000CCF4A0 /* NioShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NioShareExtension.entitlements; sourceTree = "<group>"; };
 		4BFEFD90246F5EF500CCF4A0 /* Nio.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nio.entitlements; sourceTree = "<group>"; };
 		4BFEFD91246F686000CCF4A0 /* ShareContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareContentView.swift; sourceTree = "<group>"; };
-		5C7C3F7D4F830D17EFBB034C /* Pods_NioKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NioKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		740F96CF311FBD9A066E0C36 /* Pods-NioTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioTests.release.xcconfig"; path = "Target Support Files/Pods-NioTests/Pods-NioTests.release.xcconfig"; sourceTree = "<group>"; };
-		7458D569F4C4516BAF1294E8 /* Pods-NioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioTests.debug.xcconfig"; path = "Target Support Files/Pods-NioTests/Pods-NioTests.debug.xcconfig"; sourceTree = "<group>"; };
-		9B72E2085A593085853A04CB /* Pods-NioKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioKit.debug.xcconfig"; path = "Target Support Files/Pods-NioKit/Pods-NioKit.debug.xcconfig"; sourceTree = "<group>"; };
 		A51BF8CD254C2FE5000FB0A4 /* NioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NioApp.swift; sourceTree = "<group>"; };
 		CAAF5BF72478696F006FDC33 /* UITextViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextViewWrapper.swift; sourceTree = "<group>"; };
 		CAC46D5423A272D10079C24F /* BorderlessMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderlessMessageView.swift; sourceTree = "<group>"; };
@@ -320,10 +303,6 @@
 		CAF2AE91245AEEBA00D84133 /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
 		CAF2AE93245B507400D84133 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		CAFCB322245F6E6700869320 /* NSAttributedString+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extensions.swift"; sourceTree = "<group>"; };
-		D1955325397526BB40F3D0EE /* Pods_NioKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NioKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D7C252B3954404B2E5099379 /* Pods-Nio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nio.release.xcconfig"; path = "Target Support Files/Pods-Nio/Pods-Nio.release.xcconfig"; sourceTree = "<group>"; };
-		F536628F366B4A425718E388 /* Pods-NioKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioKitTests.release.xcconfig"; path = "Target Support Files/Pods-NioKitTests/Pods-NioKitTests.release.xcconfig"; sourceTree = "<group>"; };
-		FD4CC87179A65C24D234DF6E /* Pods-NioKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NioKit.release.xcconfig"; path = "Target Support Files/Pods-NioKit/Pods-NioKit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -331,7 +310,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD248EF865919E28C46C4E70 /* Pods_NioTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,7 +321,6 @@
 				39E5032324EAFA8700FED642 /* Introspect in Frameworks */,
 				CAF2AE9D245DF4B400D84133 /* CommonMarkAttributedString in Frameworks */,
 				390D63A42465F62D00B8F640 /* BlurHash in Frameworks */,
-				87FE3870173FD55A91B15921 /* Pods_Nio.framework in Frameworks */,
 				CADF664224614D2300F5063F /* NioKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -361,7 +338,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAD68178246B1E9F001878EB /* KeychainAccess in Frameworks */,
-				2922D22E822C70D39E1DD872 /* Pods_NioKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,7 +346,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CADF663624614D2300F5063F /* NioKit.framework in Frameworks */,
-				1A12648BA863599F47FCA0E4 /* Pods_NioKitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,8 +500,6 @@
 				CADF663B24614D2300F5063F /* NioKitTests */,
 				4BFEFD7D246F414D00CCF4A0 /* NioShareExtension */,
 				39C931DA2384328A004449E1 /* Products */,
-				E59A03343DCFE20D3EC045F7 /* Pods */,
-				5DC5384442FBDB92C6AD5E68 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 			usesTabs = 0;
@@ -661,22 +634,6 @@
 			path = NioShareExtension;
 			sourceTree = "<group>";
 		};
-		5DC5384442FBDB92C6AD5E68 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				4BD3DC9F2482FE6D009B5048 /* SwiftMatrixSDK.framework */,
-				4BD3DC9B2482FCFE009B5048 /* SwiftMatrixSDK.framework */,
-				4BD3DC962482FB0D009B5048 /* SwiftMatrixSDK.framework */,
-				4BD3DC932482FAFB009B5048 /* SwiftMatrixSDK.framework */,
-				4BD3DC902482FABD009B5048 /* SwiftMatrixSDK.framework */,
-				3410F361E5A713D19ECEF861 /* Pods_Nio.framework */,
-				5C7C3F7D4F830D17EFBB034C /* Pods_NioKit.framework */,
-				D1955325397526BB40F3D0EE /* Pods_NioKitTests.framework */,
-				42D6B28FC1F7473DA40DF022 /* Pods_NioTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		CAC46D5323A272D10079C24F /* MessageView */ = {
 			isa = PBXGroup;
 			children = (
@@ -762,21 +719,6 @@
 			path = NioKitTests;
 			sourceTree = "<group>";
 		};
-		E59A03343DCFE20D3EC045F7 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				9B72E2085A593085853A04CB /* Pods-NioKit.debug.xcconfig */,
-				FD4CC87179A65C24D234DF6E /* Pods-NioKit.release.xcconfig */,
-				366FD96F5985BF90D5C07A10 /* Pods-NioKitTests.debug.xcconfig */,
-				F536628F366B4A425718E388 /* Pods-NioKitTests.release.xcconfig */,
-				23EAE3BC298E0AAC5460FC63 /* Pods-Nio.debug.xcconfig */,
-				D7C252B3954404B2E5099379 /* Pods-Nio.release.xcconfig */,
-				7458D569F4C4516BAF1294E8 /* Pods-NioTests.debug.xcconfig */,
-				740F96CF311FBD9A066E0C36 /* Pods-NioTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -795,11 +737,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 393411D5239087D2003B49B8 /* Build configuration list for PBXNativeTarget "NioTests" */;
 			buildPhases = (
-				0C70AF0EF9DC380895164504 /* [CP] Check Pods Manifest.lock */,
 				393411CA239087D2003B49B8 /* Sources */,
 				393411CB239087D2003B49B8 /* Frameworks */,
 				393411CC239087D2003B49B8 /* Resources */,
-				218284428FE48EE75DE8E7DB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -815,14 +755,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 39C931ED2384328B004449E1 /* Build configuration list for PBXNativeTarget "Nio" */;
 			buildPhases = (
-				6AF3A0758CCAA54127577187 /* [CP] Check Pods Manifest.lock */,
 				39211760244256C300892B00 /* Swiftgen */,
 				39C931F0238447D2004449E1 /* Swiftlint */,
 				39C931D523843289004449E1 /* Sources */,
 				39C931D623843289004449E1 /* Frameworks */,
 				39C931D723843289004449E1 /* Resources */,
 				CADF664724614D2300F5063F /* Embed Frameworks */,
-				8D593CBB7FA0E64873D981FE /* [CP] Embed Pods Frameworks */,
 				4BFEFD87246F414D00CCF4A0 /* Embed App Extensions */,
 			);
 			buildRules = (
@@ -857,8 +795,6 @@
 				4BE63CC3247EC53500C1D4DC /* PBXTargetDependency */,
 			);
 			name = NioShareExtension;
-			packageProductDependencies = (
-			);
 			productName = NioShareExtension;
 			productReference = 4BFEFD7C246F414D00CCF4A0 /* NioShareExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -867,7 +803,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CADF664424614D2300F5063F /* Build configuration list for PBXNativeTarget "NioKit" */;
 			buildPhases = (
-				DDFF46D5C016C7A6AC022F2C /* [CP] Check Pods Manifest.lock */,
 				CADF662824614D2300F5063F /* Headers */,
 				CADF662924614D2300F5063F /* Sources */,
 				CADF662A24614D2300F5063F /* Frameworks */,
@@ -889,11 +824,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CADF664824614D2300F5063F /* Build configuration list for PBXNativeTarget "NioKitTests" */;
 			buildPhases = (
-				7D8BF1DB7D569F0D46AB070F /* [CP] Check Pods Manifest.lock */,
 				CADF663124614D2300F5063F /* Sources */,
 				CADF663224614D2300F5063F /* Frameworks */,
 				CADF663324614D2300F5063F /* Resources */,
-				20C9096BD81609225C4170E9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1025,62 +958,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0C70AF0EF9DC380895164504 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-NioTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		20C9096BD81609225C4170E9 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NioKitTests/Pods-NioKitTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NioKitTests/Pods-NioKitTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NioKitTests/Pods-NioKitTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		218284428FE48EE75DE8E7DB /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NioTests/Pods-NioTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NioTests/Pods-NioTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NioTests/Pods-NioTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		39211760244256C300892B00 /* Swiftgen */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1116,89 +993,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		6AF3A0758CCAA54127577187 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Nio-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7D8BF1DB7D569F0D46AB070F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-NioKitTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8D593CBB7FA0E64873D981FE /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Nio/Pods-Nio-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Nio/Pods-Nio-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Nio/Pods-Nio-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DDFF46D5C016C7A6AC022F2C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-NioKit-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1377,7 +1171,6 @@
 /* Begin XCBuildConfiguration section */
 		393411D6239087D2003B49B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7458D569F4C4516BAF1294E8 /* Pods-NioTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = NioTests/Info.plist;
@@ -1395,7 +1188,6 @@
 		};
 		393411D7239087D2003B49B8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 740F96CF311FBD9A066E0C36 /* Pods-NioTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1533,7 +1325,6 @@
 		};
 		39C931EE2384328B004449E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 23EAE3BC298E0AAC5460FC63 /* Pods-Nio.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1558,7 +1349,6 @@
 		};
 		39C931EF2384328B004449E1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D7C252B3954404B2E5099379 /* Pods-Nio.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1620,7 +1410,6 @@
 		};
 		CADF664524614D2300F5063F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9B72E2085A593085853A04CB /* Pods-NioKit.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1638,7 +1427,6 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PODS_ROOT = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = chat.nio.NioKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1652,7 +1440,6 @@
 		};
 		CADF664624614D2300F5063F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FD4CC87179A65C24D234DF6E /* Pods-NioKit.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1670,7 +1457,6 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PODS_ROOT = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = chat.nio.NioKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1683,7 +1469,6 @@
 		};
 		CADF664924614D2300F5063F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 366FD96F5985BF90D5C07A10 /* Pods-NioKitTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -1707,7 +1492,6 @@
 		};
 		CADF664A24614D2300F5063F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F536628F366B4A425718E388 /* Pods-NioKitTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
