@@ -771,6 +771,7 @@
 				39C931D723843289004449E1 /* Resources */,
 				CADF664724614D2300F5063F /* Embed Frameworks */,
 				4BFEFD87246F414D00CCF4A0 /* Embed App Extensions */,
+				A542F02825A66C73000AF476 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1005,6 +1006,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		A542F02825A66C73000AF476 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Only include 1 copy of MatrixSDK.framework\nrm -rf $CODESIGNING_FOLDER_PATH/Frameworks/NioKit.framework/Frameworks\nrm -rf $CODESIGNING_FOLDER_PATH/PlugIns/MatrixSDK.framework\nrm -rf $CODESIGNING_FOLDER_PATH/PlugIns/NioShareExtension.appex/Frameworks/NioKit.framework/Frameworks\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
