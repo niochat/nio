@@ -16,7 +16,7 @@
 lane :beta do
     ensure_git_status_clean
     increment_build_number
-    build_app(workspace: "Nio.xcworkspace", scheme: "Nio")
+    build_app(project: "Nio.xcodeproj", scheme: "Nio")
     upload_to_testflight(
         skip_waiting_for_build_processing: true
     )
