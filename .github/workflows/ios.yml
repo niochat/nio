@@ -18,13 +18,12 @@ jobs:
     - name: Prerequisites
       run: |
         brew install swiftlint
-        gem install cocoapods xcpretty
-        pod install
+        gem install xcpretty
     - name: Build
       run: |
         set -o pipefail
-        xcodebuild -workspace Nio.xcworkspace -scheme Nio -destination 'platform=iOS Simulator,name=iPhone 11' build | xcpretty --color
+        xcodebuild -scheme Nio -destination 'platform=iOS Simulator,name=iPhone 11' build | xcpretty --color
     - name: Test
       run: |
         set -o pipefail
-        xcodebuild -workspace Nio.xcworkspace -scheme Nio -destination 'platform=iOS Simulator,name=iPhone 11' test | xcpretty --color --test
+        xcodebuild -scheme Nio -destination 'platform=iOS Simulator,name=iPhone 11' test | xcpretty --color --test
