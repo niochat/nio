@@ -78,3 +78,4 @@
 "room.attachment.type-photo" = "Fotoğraf";
 "recent-rooms.pending-invitations.leave.alert-title" = "Davet Reddi?";
 "recent-rooms.pending-invitations.header" = "Bekleyen Davetler";
+"settings.dismiss" = "Yapıldı";
