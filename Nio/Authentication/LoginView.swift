@@ -88,7 +88,7 @@ struct LoginView: View {
             Spacer()
         }
         .sheet(isPresented: $showingRegisterView) {
-            Text(L10n.Login.registerNotYetImplemented)
+            Link(L10n.Login.registerNotYetImplemented, destination: URL(string: "https://app.element.io/#/register")!)
         }
     }
 
