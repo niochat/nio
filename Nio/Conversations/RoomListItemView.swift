@@ -108,12 +108,14 @@ struct RoomListItemView: View {
     }
 
     var subtitleView: some View {
-        Text(subtitle)
+        Text(subtitle.isEmpty ? " " : subtitle)     // Replace empty string with space to maintain height
             .multilineTextAlignment(.leading)
             .font(.subheadline)
             .lineLimit(1)
             .allowsTightening(true)
             .foregroundColor(.secondary)
+            // Maintain consistent vertical padding when there isn't a badge
+            .padding(.vertical, badgeTextVerticalPadding)
     }
 
     var badgeView: some View {
@@ -123,7 +125,7 @@ struct RoomListItemView: View {
             .allowsTightening(true)
             .foregroundColor(.init(UIColor.textOnAccentColor(for: colorScheme)))
             // Make sure we get enough "breathing air" around the number:
-            .padding(.vertical, 3 * sizeCategory.scalingFactor)
+            .padding(.vertical, badgeTextVerticalPadding)
             .padding(.horizontal, 6 * sizeCategory.scalingFactor)
             .accessibility(label: Text(L10n.RecentRooms.AccessibilityLabel.newMessageBadge(Int(self.badge))))
             .background(
@@ -136,7 +138,9 @@ struct RoomListItemView: View {
                 }
             )
     }
-    
+
+    var badgeTextVerticalPadding: CGFloat { 3 * sizeCategory.scalingFactor }
+
     var avatarView: some View {
         Circle()
             .foregroundColor(.clear)
@@ -182,7 +186,7 @@ struct RoomListItemView_Previews: PreviewProvider {
         return UInt(pow(10.0, Double.random(in: 0.0..<4.0)))
     }
 
-    static var list: some View {
+    static var contentSizeList: some View {
         List {
             ForEach(ContentSizeCategory.allCases, id: \.self) { contentSizeCategory in
                 RoomListItemView(
@@ -197,12 +201,39 @@ struct RoomListItemView_Previews: PreviewProvider {
         }
     }
 
+    static var contentList: some View {
+        List {
+            RoomListItemView(
+                title: "Morpheus",
+                subtitle: "",
+                rightDetail: "10m ago",
+                badge: 0,
+                roomAvatarURL: MXURL.nioIconURL
+            )
+            RoomListItemView(
+                title: "Morpheus",
+                subtitle: "Red and yellow and pink and green. Purple and orange and blue 🌈.",
+                rightDetail: "10m ago",
+                badge: 0,
+                roomAvatarURL: MXURL.nioIconURL
+            )
+            RoomListItemView(
+                title: "Morpheus",
+                subtitle: "Red or blue 💊?",
+                rightDetail: "10m ago",
+                badge: 50,
+                roomAvatarURL: MXURL.nioIconURL
+            )
+        }
+    }
+
     static var previews: some View {
         Group {
-            list
+            contentSizeList
                 .environment(\.colorScheme, .light)
-            list
+            contentSizeList
                 .environment(\.colorScheme, .dark)
+            contentList
         }
         .accentColor(.purple)
     }
