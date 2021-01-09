@@ -168,7 +168,7 @@ struct RoomListItemView: View {
     var body: some View {
         HStack(alignment: .center) {
             avatarView
-            VStack(alignment: .leading, spacing: 0) {
+            VStack(alignment: .leading, spacing: -4) {
                 topView
                 bottomView
             }.layoutPriority(1)
