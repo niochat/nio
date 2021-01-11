@@ -51,13 +51,13 @@ class EmojiCollection {
             case .peopleAndBody:
                 return Image(systemName: "hand.raised")
             case .animalsAndNature:
-                return Image(systemName: "leaf")
+                return Image(systemName: "hare")
             case .foodAndDrink:
-                return Image(systemName: "thermometer")
+                return Image(systemName: "leaf")
             case .travelAndPlaces:
                 return Image(systemName: "car")
             case .activities:
-                return Image(systemName: "figure.walk")
+                return Image(systemName: "die.face.5")
             case .objects:
                 return Image(systemName: "lightbulb")
             case .symbols:
