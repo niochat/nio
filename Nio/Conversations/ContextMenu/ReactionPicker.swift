@@ -35,28 +35,7 @@ public struct ReactionPicker: View {
                 .opacity(0.8)
                 .padding(.top)
 
-            ZStack(alignment: .trailing) {
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                        .foregroundColor(.gray)
-                    TextField(L10n.ReactionPicker.search, text: $searchQuery)
-                }
-                .padding(8)
-                .background(Color(colorScheme == .light ? #colorLiteral(red: 0.9332516193, green: 0.9333857894, blue: 0.941064477, alpha: 1) : #colorLiteral(red: 0.1882131398, green: 0.1960922778, blue: 0.2195765972, alpha: 1)).cornerRadius(8))
-                .padding(.horizontal)
-
-                if searchQuery != "" {
-                    Button {
-                        searchQuery = ""
-                    } label: {
-                        Image(systemName: "xmark.circle.fill")
-                    }
-                    .foregroundColor(.gray)
-                    // Adding standard padding with the extra padding we have on the text field above.
-                    .padding(.trailing, 8)
-                    .padding(.trailing)
-                }
-            }
+            SearchField(placeholder: L10n.ReactionPicker.search, query: $searchQuery)
 
             if searchQuery != "" {
                 ScrollView {
