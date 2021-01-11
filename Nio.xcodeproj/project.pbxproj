@@ -206,6 +206,15 @@
 		3902B8A22395935600698B87 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3902B8A42395A77800698B87 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		3902D4E5248277310009355A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3902F94D25ACE72B009F5991 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3902F94E25ACE767009F5991 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3902F94F25ACE783009F5991 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3902F95025ACE7CD009F5991 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3902F95125ACE7F4009F5991 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3902F95225ACE80F009F5991 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3902F95325ACE83A009F5991 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3902F95425ACE86D009F5991 /* bg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bg; path = bg.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3902F95525ACE888009F5991 /* si */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = si; path = si.lproj/Localizable.strings; sourceTree = "<group>"; };
 		390D639E246327E900B8F640 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		390D63BD246F4BEE00B8F640 /* Sketch@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sketch@3x.png"; sourceTree = "<group>"; };
 		390D63BE246F4BEE00B8F640 /* Sketch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sketch@2x.png"; sourceTree = "<group>"; };
@@ -548,8 +557,6 @@
 			children = (
 				A51BF8CD254C2FE5000FB0A4 /* NioApp.swift */,
 				4BFEFD90246F5EF500CCF4A0 /* Nio.entitlements */,
-				39C931DC2384328A004449E1 /* AppDelegate.swift */,
-				39C931DE2384328A004449E1 /* SceneDelegate.swift */,
 				39C931E02384328A004449E1 /* RootView.swift */,
 				3902B8A62395A78100698B87 /* Authentication */,
 				CAC46D5E23A276B30079C24F /* Shapes */,
@@ -952,6 +959,15 @@
 				es,
 				ru,
 				"pt-BR",
+				pl,
+				sv,
+				tr,
+				it,
+				fr,
+				nb,
+				hu,
+				bg,
+				si,
 			);
 			mainGroup = 39C931D023843289004449E1;
 			packageReferences = (
@@ -1362,6 +1378,15 @@
 				390D639E246327E900B8F640 /* es */,
 				3902D4E5248277310009355A /* ru */,
 				39E5032424EAFED500FED642 /* pt-BR */,
+				3902F94D25ACE72B009F5991 /* pl */,
+				3902F94E25ACE767009F5991 /* sv */,
+				3902F94F25ACE783009F5991 /* tr */,
+				3902F95025ACE7CD009F5991 /* it */,
+				3902F95125ACE7F4009F5991 /* fr */,
+				3902F95225ACE80F009F5991 /* nb */,
+				3902F95325ACE83A009F5991 /* hu */,
+				3902F95425ACE86D009F5991 /* bg */,
+				3902F95525ACE888009F5991 /* si */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
