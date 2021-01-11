@@ -14,6 +14,9 @@
 		3902B8A0239410EE00698B87 /* ContentSizeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902B89F239410EE00698B87 /* ContentSizeCategory.swift */; };
 		3902B8A32395935600698B87 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902B8A22395935600698B87 /* SettingsView.swift */; };
 		3902B8A52395A77800698B87 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902B8A42395A77800698B87 /* LoadingView.swift */; };
+		3902F93C25ACE00D009F5991 /* EmojiCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902F93B25ACE00D009F5991 /* EmojiCollection.swift */; };
+		3902F94125ACE048009F5991 /* emoji.json in Resources */ = {isa = PBXBuildFile; fileRef = 3902F94025ACE048009F5991 /* emoji.json */; };
+		3902F94625ACE06B009F5991 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902F94525ACE06B009F5991 /* UserDefault.swift */; };
 		390D63A42465F62D00B8F640 /* BlurHash in Frameworks */ = {isa = PBXBuildFile; productRef = 390D63A32465F62D00B8F640 /* BlurHash */; };
 		390D63BF246F4BEE00B8F640 /* Sketch@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 390D63BD246F4BEE00B8F640 /* Sketch@3x.png */; };
 		390D63C0246F4BEE00B8F640 /* Sketch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 390D63BE246F4BEE00B8F640 /* Sketch@2x.png */; };
@@ -206,6 +209,9 @@
 		3902B8A22395935600698B87 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3902B8A42395A77800698B87 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		3902D4E5248277310009355A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3902F93B25ACE00D009F5991 /* EmojiCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiCollection.swift; sourceTree = "<group>"; };
+		3902F94025ACE048009F5991 /* emoji.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emoji.json; sourceTree = "<group>"; };
+		3902F94525ACE06B009F5991 /* UserDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		390D639E246327E900B8F640 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		390D63BD246F4BEE00B8F640 /* Sketch@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sketch@3x.png"; sourceTree = "<group>"; };
 		390D63BE246F4BEE00B8F640 /* Sketch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sketch@2x.png"; sourceTree = "<group>"; };
@@ -472,6 +478,7 @@
 				3922219524366989004D8794 /* EventContextMenu.swift */,
 				3922219F2437285B004D8794 /* ReactionPicker.swift */,
 				392221AF243A6F8E004D8794 /* EventContextMenuModel.swift */,
+				3902F93B25ACE00D009F5991 /* EmojiCollection.swift */,
 			);
 			path = ContextMenu;
 			sourceTree = "<group>";
@@ -484,6 +491,7 @@
 				CAC46D6E23A56BBE0079C24F /* GroupingIterator.swift */,
 				CAC46D7223A6AE890079C24F /* TypedEvents.swift */,
 				3984654423B7ECBA006C173B /* MXURL.swift */,
+				3902F94525ACE06B009F5991 /* UserDefault.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -548,8 +556,6 @@
 			children = (
 				A51BF8CD254C2FE5000FB0A4 /* NioApp.swift */,
 				4BFEFD90246F5EF500CCF4A0 /* Nio.entitlements */,
-				39C931DC2384328A004449E1 /* AppDelegate.swift */,
-				39C931DE2384328A004449E1 /* SceneDelegate.swift */,
 				39C931E02384328A004449E1 /* RootView.swift */,
 				3902B8A62395A78100698B87 /* Authentication */,
 				CAC46D5E23A276B30079C24F /* Shapes */,
@@ -579,6 +585,7 @@
 		39C931F3238449C2004449E1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3902F94025ACE048009F5991 /* emoji.json */,
 				39C931F623846B2D004449E1 /* .swiftlint.yml */,
 				3921175B244255D600892B00 /* swiftgen.yml */,
 				39C931E72384328B004449E1 /* LaunchScreen.storyboard */,
@@ -994,6 +1001,7 @@
 				39C931E62384328B004449E1 /* Preview Assets.xcassets in Resources */,
 				39DD77BA2470C49D00A29DEE /* Six Colors Light@3x.png in Resources */,
 				390D63C0246F4BEE00B8F640 /* Sketch@2x.png in Resources */,
+				3902F94125ACE048009F5991 /* emoji.json in Resources */,
 				390D63BF246F4BEE00B8F640 /* Sketch@3x.png in Resources */,
 				39DD77B52470C38300A29DEE /* Six Colors Dark@2x.png in Resources */,
 				39C931E32384328B004449E1 /* Assets.xcassets in Resources */,
@@ -1268,6 +1276,8 @@
 				39C931F523846966004449E1 /* LoginView.swift in Sources */,
 				CADF662624614A3300F5063F /* ReactionsListItemView.swift in Sources */,
 				39BA0727240B534600FD28C6 /* Color+allAccent.swift in Sources */,
+				3902F93C25ACE00D009F5991 /* EmojiCollection.swift in Sources */,
+				3902F94625ACE06B009F5991 /* UserDefault.swift in Sources */,
 				CAD6817A246C31EB001878EB /* String+Extensions.swift in Sources */,
 				CAC46D5D23A276700079C24F /* Color+Named.swift in Sources */,
 				CAF2AE94245B507400D84133 /* Assets.swift in Sources */,

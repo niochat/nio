@@ -86,7 +86,8 @@
 "event.context-menu.edit" = "Edit";
 "event.context-menu.remove" = "Remove";
 
-"reaction-picker.title" = "Tap on an emoji to send that reaction.";
+"reaction-picker.navigation-title" = "Reactions";
+"reaction-picker.search" = "Search Emoji...";
 
 "settings.title" = "Settings";
 "settings.accent-color" = "Accent Color";
