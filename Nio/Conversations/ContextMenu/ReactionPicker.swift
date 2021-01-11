@@ -78,7 +78,7 @@ public struct ReactionPicker: View {
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
-                
+
                 ScrollView {
                     LazyVGrid(columns: columns) {
 //                                Section(header: headerView(for: selectedCategory)) {
@@ -101,12 +101,11 @@ struct EmojiButtonView: View {
     let action: (String) -> Void
 
     var body: some View {
-        Button {
-            action(emoji.emoji)
-        } label: {
-            Text(emoji.emoji)
-                .font(.system(size: 40))
-        }
+        Text(emoji.emoji)
+            .font(.system(size: 40))
+            .onTapGesture {
+                action(emoji.emoji)
+            }
     }
 }
 
