@@ -35,7 +35,7 @@
 "room.invitation.join-alert.title" = "Unterhaltung beitreten?";
 "room.invitation.join-alert.message" = "Raum '%@' beitreten?";
 "room.invitation.join-alert.join-button" = "Beitreten";
-"composer.new-message" = "Neue Nachricht...";
+"composer.new-message" = "Neue Nachricht…";
 "composer.edit-message" = "Nachricht bearbeiten:";
 "composer.accessibility-label.send-file" = "Anhang senden";
 "composer.accessibility-label.send" = "Senden";
