@@ -43,7 +43,7 @@
 "composer.accessibility-label.send" = "Invia";
 "composer.accessibility-label.send-file" = "Invia documento";
 "composer.edit-message" = "Modifica Messaggio:";
-"composer.new-message" = "Nuovo Messaggio...";
+"composer.new-message" = "Nuovo Messaggio…";
 "room.invitation.join-alert.join-button" = "Unisciti";
 "room.invitation.join-alert.message" = "Accettare l'invito per unirsi a '%@'?";
 "room.invitation.join-alert.title" = "Unirsi alla conversazione?";
