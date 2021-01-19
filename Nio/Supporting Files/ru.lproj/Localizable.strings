@@ -33,7 +33,7 @@
 "room.invitation.join-alert.title" = "Присоединиться к разговору?";
 "room.invitation.join-alert.message" = "Принять приглашение присоединиться к \"%@\"?";
 "room.invitation.join-alert.join-button" = "Присоединяйся";
-"composer.new-message" = "Новое сообщение...";
+"composer.new-message" = "Новое сообщение…";
 "composer.edit-message" = "Редактировать сообщение:";
 "composer.accessibility-label.send-file" = "Отправить файл";
 "composer.accessibility-label.send" = "Отправить";
@@ -77,4 +77,4 @@
 "settings.accent-color" = "Цвет оттенка";
 "settings.app-icon" = "Иконка приложения";
 "settings.log-out" = "Выход";
-"settings.dismiss" = "Done";
+"settings.dismiss" = "Готово";
