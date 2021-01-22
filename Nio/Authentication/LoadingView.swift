@@ -39,7 +39,7 @@ struct LoadingView: View {
                 self.store.logout()
             }, label: {
                 Text(L10n.Loading.cancel).font(.callout)
-            })
+            }).padding()
         }
     }
 }
