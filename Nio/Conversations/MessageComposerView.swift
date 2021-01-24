@@ -16,29 +16,13 @@ struct MessageComposerView: View {
     @Environment(\.colorSchemeContrast) var colorSchemeContrast
     @Environment(\.sizeCategory) var sizeCategory
 
-    @Binding var message: String
     @Binding var showAttachmentPicker: Bool
 
     @Binding var isEditing: Bool
 
     @State private var contentSizeThatFits: CGSize = .zero
 
-    internal var internalAttributedMessage: Binding<NSAttributedString> {
-        Binding<NSAttributedString>(
-            get: {
-                NSAttributedString(
-                    string: self.message,
-                    attributes: [
-                        NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body),
-                        NSAttributedString.Key.foregroundColor: UIColor.label,
-                    ]
-                )
-            },
-            set: {
-                self.message = $0.string
-            }
-        )
-    }
+    @Binding var attributedMessage: NSAttributedString
 
     var highlightMessage: String?
 
@@ -119,7 +103,7 @@ struct MessageComposerView: View {
 
     var messageEditorView: some View {
         MultilineTextField(
-            attributedText: self.internalAttributedMessage,
+            attributedText: $attributedMessage,
             placeholder: L10n.Composer.newMessage,
             isEditing: self.$isEditing
         )
@@ -139,7 +123,7 @@ struct MessageComposerView: View {
                 .frame(width: 30.0, height: 30.0)
                 .accessibility(label: Text(L10n.Composer.AccessibilityLabel.send))
         })
-        .disabled(message.isEmpty)
+        .disabled(attributedMessage.isEmpty)
     }
 
     var body: some View {
@@ -160,50 +144,50 @@ struct MessageComposerView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             MessageComposerView(
-                message: .constant(""),
                 showAttachmentPicker: .constant(false),
                 isEditing: .constant(false),
+                attributedMessage: .constant(NSAttributedString(string: "New message...")),
                 onCancel: {},
                 onCommit: {}
             )
-                .padding()
-                .environment(\.colorScheme, .light)
+            .padding()
+            .environment(\.colorScheme, .light)
             ZStack {
                 MessageComposerView(
-                    message: .constant("Message to edit"),
-                    showAttachmentPicker: .constant(true),
+                    showAttachmentPicker: .constant(false),
                     isEditing: .constant(false),
+                    attributedMessage: .constant(NSAttributedString(string: "New message...")),
                     highlightMessage: "Message to edit",
                     onCancel: {},
                     onCommit: {}
                 )
-                    .padding()
-                    .environment(\.colorScheme, .light)
+                .padding()
+                .environment(\.colorScheme, .light)
             }
             ZStack {
                 Color.black.frame(height: 80)
                 MessageComposerView(
-                    message: .constant(""),
                     showAttachmentPicker: .constant(false),
                     isEditing: .constant(false),
+                    attributedMessage: .constant(NSAttributedString(string: "New message...")),
                     onCancel: {},
                     onCommit: {}
                 )
-                    .padding()
-                    .environment(\.colorScheme, .dark)
+                .padding()
+                .environment(\.colorScheme, .dark)
             }
             ZStack {
                 Color.black.frame(height: 152)
                 MessageComposerView(
-                    message: .constant("Message to edit"),
-                    showAttachmentPicker: .constant(true),
+                    showAttachmentPicker: .constant(false),
                     isEditing: .constant(false),
+                    attributedMessage: .constant(NSAttributedString(string: "New message...")),
                     highlightMessage: "Message to edit",
                     onCancel: {},
                     onCommit: {}
                 )
-                    .padding()
-                    .environment(\.colorScheme, .dark)
+                .padding()
+                .environment(\.colorScheme, .dark)
             }
         }
         .accentColor(.purple)
