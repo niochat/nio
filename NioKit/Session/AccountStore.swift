@@ -159,9 +159,22 @@ public class AccountStore: ObservableObject {
 
     public var rooms: [NIORoom] {
         guard let session = self.session else { return [] }
-        UserDefaults.group.removeObject(forKey: "roomList")
-        return session.rooms
+
+        let rooms = session.rooms
             .map { roomCache[$0.id] ?? makeRoom(from: $0) }
             .sorted { $0.summary.lastMessageDate > $1.summary.lastMessageDate }
+
+        updateUserDefaults(with: rooms)
+        return rooms
+    }
+
+    private func updateUserDefaults(with rooms: [NIORoom]) {
+        let roomItems = rooms.map { RoomItem(room: $0.room) }
+        do {
+            let data = try JSONEncoder().encode(roomItems)
+            UserDefaults.group.set(data, forKey: "roomList")
+        } catch {
+            print("An error occured: \(error)")
+        }
     }
 }
