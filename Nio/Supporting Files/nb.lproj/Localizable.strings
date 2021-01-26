@@ -43,7 +43,7 @@
 "composer.accessibility-label.send" = "Send";
 "composer.accessibility-label.send-file" = "Send fil";
 "composer.edit-message" = "Rediger melding:";
-"composer.new-message" = "Ny melding...";
+"composer.new-message" = "Ny melding…";
 "room.invitation.join-alert.join-button" = "Bli med";
 "room.invitation.join-alert.message" = "Godta invitasjonen til å bli med i '%@'?";
 "room.invitation.join-alert.title" = "Bli med i samtalen?";
