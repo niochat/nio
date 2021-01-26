@@ -61,33 +61,6 @@ public class NIORoom: ObservableObject {
         print("Got \(currentBatch.count) events.")
 
         self.eventCache.append(contentsOf: currentBatch)
-
-        self.registerInUserDefaults(room: room)
-    }
-
-    private func registerInUserDefaults(room: MXRoom) {
-        let defaults = UserDefaults.group
-        let roomItem: RoomItem = RoomItem(room: room)
-        var rooms: [RoomItem]
-        let data = defaults.data(forKey: "roomList")
-        do {
-            if data != nil {
-                let decoder = JSONDecoder()
-                rooms = try decoder.decode([RoomItem].self, from: data!)
-            } else {
-                rooms = []
-            }
-            rooms.append(roomItem)
-            do {
-                let encoder = JSONEncoder()
-                let data = try encoder.encode(rooms)
-                defaults.set(data, forKey: "roomList")
-            } catch {
-                print("An error occured: \(error)")
-            }
-        } catch {
-            print("An error occured: \(error)")
-        }
     }
 
     public func add(event: MXEvent, direction: MXTimelineDirection, roomState: MXRoomState?) {
