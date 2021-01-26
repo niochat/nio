@@ -149,9 +149,9 @@ public class AccountStore: ObservableObject {
         }
     }
 
-    internal var roomCache = [ObjectIdentifier: NIORoom]()
+    private var roomCache = [ObjectIdentifier: NIORoom]()
 
-    internal func makeRoom(from mxRoom: MXRoom) -> NIORoom {
+    private func makeRoom(from mxRoom: MXRoom) -> NIORoom {
         let room = NIORoom(mxRoom)
         roomCache[mxRoom.id] = room
         return room
