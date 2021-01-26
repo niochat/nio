@@ -24,7 +24,7 @@
 "recent-rooms.pending-invitations.header" = "In afwachting van uitnodigingen";
 "recent-rooms.pending-invitations.leave.alert-title" = "Uitnodiging afwijzen?";
 "recent-rooms.rooms.header" = "Kamers";
-"recent-rooms.leave.alert-title" = "Gesprek Verwijderen";
+"recent-rooms.leave.alert-title" = "Kamer Verlaten";
 "recent-rooms.leave.alert-body" = "Weet u zeker dat je '%@' wilt verlaten? Deze actie can niet ongedaan gemaakt worden.";
 "room.attachment.select-type" = "Stuur bijlage";
 "room.attachment.type-photo" = "Foto";
@@ -35,7 +35,7 @@
 "room.invitation.join-alert.title" = "Doe je mee met het gesprek?";
 "room.invitation.join-alert.message" = "Accepteer je de uitnodiging om deel te nemen aan '%@'?";
 "room.invitation.join-alert.join-button" = "Toetreden";
-"composer.new-message" = "Nieuw Bericht...";
+"composer.new-message" = "Nieuw Bericht…";
 "composer.edit-message" = "Bewerk Bericht:";
 "composer.accessibility-label.send-file" = "Bestand versturen";
 "composer.accessibility-label.send" = "Verstuur";
@@ -56,8 +56,8 @@
 "event.room-member.remove-avatar" = "%@ heeft zijn/haar profielfoto verwijderd";
 "event.room-member.unknown-state" = "Onbekend evenement: %@";
 "event.reason" = "Reden: %@";
-"event.room-name.set-name" = "%@ heeft de kamer naam naar %@ veranderd";
-"event.room-name.change-name" = "%@ heeft de kamer naam van %@ naar %@ veranderd";
+"event.room-name.set-name" = "%@ heeft de kamernaam naar %@ veranderd";
+"event.room-name.change-name" = "%@ heeft de kamernaam van %@ naar %@ veranderd";
 "event.room-topic.change" = "%@ heeft het onderwerp veranderd naar '%@'";
 "room-power-level.default" = "Standaard";
 "room-power-level.moderator" = "Moderator";
