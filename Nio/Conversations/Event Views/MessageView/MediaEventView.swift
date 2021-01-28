@@ -102,6 +102,7 @@ struct MediaEventView: View {
     }
 }
 
+// swiftlint:disable comment_spacing
 //struct MediaEventView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        MediaEventView(model: .init(mediaURLs: [], timestamp: <#String#>))

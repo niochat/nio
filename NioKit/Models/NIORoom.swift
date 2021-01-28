@@ -84,7 +84,7 @@ public class NIORoom: ObservableObject {
 
     public func send(text: String) {
         guard !text.isEmpty else { return }
-        //swiftlint:disable:next redundant_optional_initialization
+        // swiftlint:disable:next redundant_optional_initialization
         var localEcho: MXEvent? = nil
         // TODO: Use localEcho to show sent message until it actually comes back
         room.sendTextMessage(text, localEcho: &localEcho) { _ in
@@ -96,7 +96,7 @@ public class NIORoom: ObservableObject {
     public func react(toEventId eventId: String, emoji: String) {
         // swiftlint:disable:next force_try
         let content = try! ReactionEvent(eventId: eventId, key: emoji).encodeContent()
-        //swiftlint:disable:next redundant_optional_initialization
+        // swiftlint:disable:next redundant_optional_initialization
         var localEcho: MXEvent? = nil
         room.sendEvent(.reaction, content: content, localEcho: &localEcho) { _ in
             self.objectWillChange.send()
@@ -105,7 +105,7 @@ public class NIORoom: ObservableObject {
 
     public func edit(text: String, eventId: String) {
         guard !text.isEmpty else { return }
-        //swiftlint:disable:next redundant_optional_initialization
+        // swiftlint:disable:next redundant_optional_initialization
         var localEcho: MXEvent? = nil
         // swiftlint:disable:next force_try
         let content = try! EditEvent(eventId: eventId, text: text).encodeContent()
@@ -124,7 +124,7 @@ public class NIORoom: ObservableObject {
 
     public func sendImage(image: UIImage) {
         guard let imageData = image.jpeg(.lowest) else { return }
-        //swiftlint:disable:next redundant_optional_initialization
+        // swiftlint:disable:next redundant_optional_initialization
         var localEcho: MXEvent? = nil
         // TODO: Use localEcho to show sent message until it actually comes back
         room.sendImage(

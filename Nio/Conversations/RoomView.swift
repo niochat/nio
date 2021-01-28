@@ -171,6 +171,7 @@ struct RoomView: View {
     }
 }
 
+// swiftlint:disable comment_spacing
 //struct ConversationView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        NavigationView {
