@@ -98,6 +98,8 @@ public class NIORoom: ObservableObject {
             self.eventCache.insert(event, at: 0)
         case .forwards:
             self.eventCache.append(event)
+        @unknown default:
+            assertionFailure("Unknown direction value")
         }
 
         self.objectWillChange.send()
