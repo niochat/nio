@@ -170,14 +170,3 @@ struct RoomView: View {
         attributedMessage = NSAttributedString(string: "")
     }
 }
-
-// swiftlint:disable comment_spacing
-//struct ConversationView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NavigationView {
-//            ConversationView()
-//                .accentColor(.purple)
-//                .navigationBarTitle("Morpheus", displayMode: .inline)
-//        }
-//    }
-//}
