@@ -27,7 +27,7 @@ public struct ReactionGroup: Identifiable {
     public var id: String {
         self.reaction
     }
-    
+
     public init(reaction: String, count: Int, reactions: [Reaction]) {
         self.reaction = reaction
         self.count = count
