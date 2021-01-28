@@ -39,7 +39,6 @@
 		3984654523B7ECBA006C173B /* MXURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984654423B7ECBA006C173B /* MXURL.swift */; };
 		3984654823B8D809006C173B /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3984654723B8D809006C173B /* SDWebImageSwiftUI */; };
 		39B834C0243FC42000AE1EA0 /* TypingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B834BF243FC42000AE1EA0 /* TypingIndicatorView.swift */; };
-		39BA0725240B4E8D00FD28C6 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA0724240B4E8D00FD28C6 /* AppSettings.swift */; };
 		39BA0727240B534600FD28C6 /* Color+allAccent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA0726240B534600FD28C6 /* Color+allAccent.swift */; };
 		39C931E12384328A004449E1 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931E02384328A004449E1 /* RootView.swift */; };
 		39C931E32384328B004449E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39C931E22384328B004449E1 /* Assets.xcassets */; };
@@ -254,7 +253,6 @@
 		3997DCCF245732F000763C07 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		39B834BF243FC42000AE1EA0 /* TypingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingIndicatorView.swift; sourceTree = "<group>"; };
 		39BA0722240B3C9A00FD28C6 /* MXCredentials+Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXCredentials+Keychain.swift"; sourceTree = "<group>"; };
-		39BA0724240B4E8D00FD28C6 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		39BA0726240B534600FD28C6 /* Color+allAccent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+allAccent.swift"; sourceTree = "<group>"; };
 		39C931D92384328A004449E1 /* Nio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39C931E02384328A004449E1 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -391,7 +389,6 @@
 			isa = PBXGroup;
 			children = (
 				3902B8A22395935600698B87 /* SettingsView.swift */,
-				39BA0724240B4E8D00FD28C6 /* AppSettings.swift */,
 				39DD77AE247006E300A29DEE /* AppIcon.swift */,
 			);
 			path = Settings;
@@ -1273,7 +1270,6 @@
 				392221B4243D1627004D8794 /* RoomPowerLevelsEventView.swift in Sources */,
 				CAF2AE92245AEEBA00D84133 /* BadgeView.swift in Sources */,
 				CAC46D6323A278F40079C24F /* PreviewProvider+Enumeration.swift in Sources */,
-				39BA0725240B4E8D00FD28C6 /* AppSettings.swift in Sources */,
 				39D166C82385C832006DD257 /* EventContainerView.swift in Sources */,
 				CAC46D6B23A55E940079C24F /* PeekableIterator.swift in Sources */,
 				CAC46D5823A272D10079C24F /* MessageViewModel.swift in Sources */,
