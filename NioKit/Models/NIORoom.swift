@@ -117,7 +117,7 @@ public class NIORoom: ObservableObject {
     }
 
     public func redact(eventId: String, reason: String?) {
-        room.redactEvent(eventId, reason: reason) { response in
+        room.redactEvent(eventId, reason: reason) { _ in
             self.objectWillChange.send()
         }
     }
