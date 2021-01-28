@@ -170,13 +170,3 @@ struct RoomView: View {
         attributedMessage = NSAttributedString(string: "")
     }
 }
-
-//struct ConversationView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NavigationView {
-//            ConversationView()
-//                .accentColor(.purple)
-//                .navigationBarTitle("Morpheus", displayMode: .inline)
-//        }
-//    }
-//}

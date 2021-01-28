@@ -10,7 +10,7 @@ class MockEvent: MXEvent {
         self.originServerTs = 1000 * timestamp
     }
 
-    //swiftlint:disable:next identifier_name
+    // swiftlint:disable:next identifier_name
     var _type: String
     override var type: String! {
         _type
