@@ -55,8 +55,7 @@ public class AccountStore: ObservableObject {
     public func login(username: String, password: String, homeserver: URL) {
         self.loginState = .authenticating
 
-        let options = MXSDKOptions()
-        options.enableCryptoWhenStartingMXSession = true
+        Configuration.setupMatrixSDKSettings()
 
         self.client = MXRestClient(homeServer: homeserver, unrecognizedCertificateHandler: nil)
 
@@ -77,6 +76,7 @@ public class AccountStore: ObservableObject {
                         self.loginState = .failure(error)
                     case .success(let state):
                         self.loginState = state
+                        self.session?.crypto.warnOnUnknowDevices = false
                     }
                 }
             }
