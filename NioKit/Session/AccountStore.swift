@@ -41,6 +41,7 @@ public class AccountStore: ObservableObject {
                     self.loginState = .failure(error)
                 case .success(let state):
                     self.loginState = state
+                    self.session?.crypto.warnOnUnknowDevices = false
                 }
             }
         }
