@@ -4,7 +4,7 @@ import MatrixSDK
 @testable import Nio
 @testable import NioKit
 
-//swiftlint:disable identifier_name
+// swiftlint:disable identifier_name
 
 class EventCollectionTests: XCTestCase {
     func testReadConnectedEdges() {

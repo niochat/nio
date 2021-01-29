@@ -35,7 +35,7 @@
 "room.invitation.join-alert.title" = "加入对话？";
 "room.invitation.join-alert.message" = "接受邀请加入'%@'？";
 "room.invitation.join-alert.join-button" = "加入";
-"composer.new-message" = "新信息...";
+"composer.new-message" = "新信息…";
 "composer.edit-message" = "编辑信息：";
 "composer.accessibility-label.send-file" = "发送文件";
 "composer.accessibility-label.send" = "发送";

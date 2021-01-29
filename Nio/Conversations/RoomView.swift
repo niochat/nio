@@ -103,9 +103,9 @@ struct RoomView: View {
     @State private var editEventId: String?
     @State private var eventToRedact: String?
 
-    @State private var message = ""
     @State private var highlightMessage: String?
     @State private var isEditingMessage: Bool = false
+    @State private var attributedMessage = NSAttributedString(string: "")
 
     var body: some View {
         VStack {
@@ -128,9 +128,9 @@ struct RoomView: View {
                 TypingIndicatorContainerView()
             }
             MessageComposerView(
-                message: $message,
                 showAttachmentPicker: $showAttachmentPicker,
                 isEditing: $isEditingMessage,
+                attributedMessage: $attributedMessage,
                 highlightMessage: highlightMessage,
                 onCancel: cancelEdit,
                 onCommit: send
@@ -148,35 +148,25 @@ struct RoomView: View {
 
     private func send() {
         if editEventId == nil {
-            onCommit(message)
-            message = ""
+            onCommit(attributedMessage.string)
+            attributedMessage = NSAttributedString(string: "")
         } else {
-            onEdit(message, editEventId!)
-            message = ""
+            onEdit(attributedMessage.string, editEventId!)
+            attributedMessage = NSAttributedString(string: "")
             editEventId = nil
             highlightMessage = nil
         }
     }
 
     private func edit(event: MXEvent) {
-        message = event.content["body"] as? String ?? ""
-        highlightMessage = message
+        attributedMessage = NSAttributedString(string: event.content["body"] as? String ?? "")
+        highlightMessage = attributedMessage.string
         editEventId = event.eventId
     }
 
     private func cancelEdit() {
         editEventId = nil
         highlightMessage = nil
-        message = ""
+        attributedMessage = NSAttributedString(string: "")
     }
 }
-
-//struct ConversationView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NavigationView {
-//            ConversationView()
-//                .accentColor(.purple)
-//                .navigationBarTitle("Morpheus", displayMode: .inline)
-//        }
-//    }
-//}

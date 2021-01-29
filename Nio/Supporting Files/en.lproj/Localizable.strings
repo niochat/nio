@@ -8,13 +8,11 @@
 "login.open-registration-prompt" = "Don't have an account yet?";
 "login.register-not-yet-implemented" = "Registering for new accounts is not yet implemented.";
 "login.failure-back-to-login" = "Back to Login";
-
 "loading.1" = "Reticulating splines";
 "loading.2" = "Discomfrobulating messages";
 "loading.3" = "Logging in";
 "loading.4" = "Restoring session";
 "loading.cancel" = "Cancel";
-
 "recent-rooms.accessibility-label.settings" = "Settings";
 "recent-rooms.accessibility-label.new-conversation" = "New Conversation";
 "recent-rooms.new-message-placeholder" = "New Message";
@@ -28,7 +26,6 @@
 "recent-rooms.rooms.header" = "Rooms";
 "recent-rooms.leave.alert-title" = "Leave Room";
 "recent-rooms.leave.alert-body" = "Are you sure you want to leave '%@'? This action cannot be undone.";
-
 "room.attachment.select-type" = "Send attachment";
 "room.attachment.type-photo" = "Photo";
 "room.remove.title" = "Remove?";
@@ -38,20 +35,16 @@
 "room.invitation.join-alert.title" = "Join Conversation?";
 "room.invitation.join-alert.message" = "Accept invitation to join '%@'?";
 "room.invitation.join-alert.join-button" = "Join";
-
-"composer.new-message" = "New Message...";
+"composer.new-message" = "New Message…";
 "composer.edit-message" = "Edit Message:";
 "composer.accessibility-label.send-file" = "Send file";
 "composer.accessibility-label.send" = "Send";
 "composer.accessibility-label.cancelEdit" = "Cancel";
-
 "typing-indicator.single" = "%@ is typing";
 "typing-indicator.two" = "%@ and %@ are typing";
 "typing-indicator.many" = "Several people are typing";
-
 "event.unknown-sender-fallback" = "Unknown";
 "event.unknown-room-name-fallback" = "Unknown";
-
 "event.room-member.invited" = "%@ invited %@";
 "event.room-member.left" = "%@ left";
 "event.room-member.kicked" = "%@ kicked %@";
@@ -63,31 +56,23 @@
 "event.room-member.remove-avatar" = "%@ removed their profile picture";
 "event.room-member.unknown-state" = "Unknown state event: %@";
 "event.reason" = "Reason: %@";
-
 "event.room-name.set-name" = "%@ set the room name to %@";
 "event.room-name.change-name" = "%@ changed the room name from %@ to %@";
-
 "event.room-topic.change" = "%@ changed the topic to '%@'";
-
 "room-power-level.default" = "Default";
 "room-power-level.moderator" = "Moderator";
 "room-power-level.admin" = "Admin";
 "room-power-level.custom" = "Custom (%d)";
 "event.room-power-level.change-self" = "%@ changed their power level from %@ to %@";
 "event.room-power-level.change-other" = "%@ changed the power level of %@ from %@ to %@";
-
 "event.redaction.redact-self" = "Message removed by %@";
 "event.redaction.redact-other" = "%@ removed %@'s message";
-
 "event.edited" = "edited";
-
 "event.context-menu.add-reaction" = "Add Reaction";
 "event.context-menu.reply" = "Reply";
 "event.context-menu.edit" = "Edit";
 "event.context-menu.remove" = "Remove";
-
 "reaction-picker.title" = "Tap on an emoji to send that reaction.";
-
 "settings.title" = "Settings";
 "settings.accent-color" = "Accent Color";
 "settings.app-icon" = "App Icon";

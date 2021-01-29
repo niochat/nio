@@ -25,12 +25,14 @@ struct RootView: View {
         case .failure(let error):
             return AnyView(
                 VStack {
+                    Spacer()
                     Text(error.localizedDescription)
+                    Spacer()
                     Button(action: {
                         self.store.loginState = .loggedOut
                     }, label: {
                         Text(L10n.Login.failureBackToLogin)
-                    })
+                    }).padding()
                 }
             )
         }

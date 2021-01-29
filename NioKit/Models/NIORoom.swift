@@ -61,33 +61,6 @@ public class NIORoom: ObservableObject {
         print("Got \(currentBatch.count) events.")
 
         self.eventCache.append(contentsOf: currentBatch)
-
-        self.registerInUserDefaults(room: room)
-    }
-
-    private func registerInUserDefaults(room: MXRoom) {
-        let defaults = UserDefaults.group
-        let roomItem: RoomItem = RoomItem(room: room)
-        var rooms: [RoomItem]
-        let data = defaults.data(forKey: "roomList")
-        do {
-            if data != nil {
-                let decoder = JSONDecoder()
-                rooms = try decoder.decode([RoomItem].self, from: data!)
-            } else {
-                rooms = []
-            }
-            rooms.append(roomItem)
-            do {
-                let encoder = JSONEncoder()
-                let data = try encoder.encode(rooms)
-                defaults.set(data, forKey: "roomList")
-            } catch {
-                print("An error occured: \(error)")
-            }
-        } catch {
-            print("An error occured: \(error)")
-        }
     }
 
     public func add(event: MXEvent, direction: MXTimelineDirection, roomState: MXRoomState?) {
@@ -113,7 +86,7 @@ public class NIORoom: ObservableObject {
 
     public func send(text: String) {
         guard !text.isEmpty else { return }
-        //swiftlint:disable:next redundant_optional_initialization
+        // swiftlint:disable:next redundant_optional_initialization
         var localEcho: MXEvent? = nil
         // TODO: Use localEcho to show sent message until it actually comes back
         room.sendTextMessage(text, localEcho: &localEcho) { _ in
@@ -125,7 +98,7 @@ public class NIORoom: ObservableObject {
     public func react(toEventId eventId: String, emoji: String) {
         // swiftlint:disable:next force_try
         let content = try! ReactionEvent(eventId: eventId, key: emoji).encodeContent()
-        //swiftlint:disable:next redundant_optional_initialization
+        // swiftlint:disable:next redundant_optional_initialization
         var localEcho: MXEvent? = nil
         room.sendEvent(.reaction, content: content, localEcho: &localEcho) { _ in
             self.objectWillChange.send()
@@ -134,7 +107,7 @@ public class NIORoom: ObservableObject {
 
     public func edit(text: String, eventId: String) {
         guard !text.isEmpty else { return }
-        //swiftlint:disable:next redundant_optional_initialization
+        // swiftlint:disable:next redundant_optional_initialization
         var localEcho: MXEvent? = nil
         // swiftlint:disable:next force_try
         let content = try! EditEvent(eventId: eventId, text: text).encodeContent()
@@ -146,14 +119,14 @@ public class NIORoom: ObservableObject {
     }
 
     public func redact(eventId: String, reason: String?) {
-        room.redactEvent(eventId, reason: reason) { response in
+        room.redactEvent(eventId, reason: reason) { _ in
             self.objectWillChange.send()
         }
     }
 
     public func sendImage(image: UIImage) {
         guard let imageData = image.jpeg(.lowest) else { return }
-        //swiftlint:disable:next redundant_optional_initialization
+        // swiftlint:disable:next redundant_optional_initialization
         var localEcho: MXEvent? = nil
         // TODO: Use localEcho to show sent message until it actually comes back
         room.sendImage(

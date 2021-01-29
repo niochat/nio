@@ -2,7 +2,7 @@ import UIKit
 import SwiftUI
 
 import NioKit
-//swiftlint:disable line_length
+// swiftlint:disable line_length
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 

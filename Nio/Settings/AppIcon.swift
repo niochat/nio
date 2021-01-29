@@ -35,3 +35,29 @@ struct AppIcon: Identifiable, View {
         }
     }
 }
+
+class AppIconTitle: ObservableObject {
+    static var alternatives = [
+        "Default",
+        "Six Colors Dark",
+        "Six Colors Light",
+        "Sketch",
+    ]
+
+    var current: String {
+        get {
+            UIApplication.shared.alternateIconName ?? "Default"
+        }
+        set {
+            var iconName: String? = newValue
+            if iconName == "Default" {
+                iconName = nil
+            }
+            objectWillChange.send()
+            UIApplication.shared.setAlternateIconName(iconName) { error in
+                guard let error = error else { return }
+                print("Error setting new app icon: \(error)")
+            }
+        }
+    }
+}

@@ -1,6 +1,6 @@
 import SwiftUI
 
-extension Color {
+extension Color: RawRepresentable {
     static var allAccentOptions: [Color] {
         [
             .purple,
@@ -13,8 +13,8 @@ extension Color {
         ]
     }
 
-    init?(description: String) {
-        switch description {
+    public init?(rawValue: String) {
+        switch rawValue {
         case "purple": self = .purple
         case "blue": self = .blue
         case "red": self = .red
@@ -25,4 +25,6 @@ extension Color {
         default: self = .purple
         }
     }
+
+    public var rawValue: String { description }
 }

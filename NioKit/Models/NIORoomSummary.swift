@@ -6,8 +6,8 @@ public class NIORoomSummary: ObservableObject {
     internal var summary: MXRoomSummary
 
     public var lastMessageDate: Date {
-        let ts = Double(summary.lastMessageOriginServerTs)
-        return Date(timeIntervalSince1970: ts / 1000)
+        let timestamp = Double(summary.lastMessageOriginServerTs)
+        return Date(timeIntervalSince1970: timestamp / 1000)
     }
 
     public init(_ summary: MXRoomSummary) {

@@ -101,9 +101,3 @@ struct MediaEventView: View {
                maxHeight: UIScreen.main.bounds.height * 0.75)
     }
 }
-
-//struct MediaEventView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MediaEventView(model: .init(mediaURLs: [], timestamp: <#String#>))
-//    }
-//}

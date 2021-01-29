@@ -79,7 +79,6 @@ struct TextAttributes {
         let clearsOnInsertion: Bool? = self.clearsOnInsertion ?? fallback.clearsOnInsertion
         let contentType: UITextContentType? = self.contentType ?? fallback.contentType
         let autocorrectionType: UITextAutocorrectionType? = self.autocorrectionType ?? fallback.autocorrectionType
-        // swiftlint:disable:next line_length
         let autocapitalizationType: UITextAutocapitalizationType? = self.autocapitalizationType ?? fallback.autocapitalizationType
         let lineLimit: Int? = self.lineLimit ?? fallback.lineLimit
         let lineBreakMode: NSLineBreakMode? = self.lineBreakMode ?? fallback.lineBreakMode

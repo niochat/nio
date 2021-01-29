@@ -4,18 +4,15 @@ import NioKit
 
 struct SettingsContainerView: View {
     @EnvironmentObject var store: AccountStore
-    @EnvironmentObject var settings: AppSettings
 
     var body: some View {
-        SettingsView(accentColor: $settings.accentColor,
-                     appIcon: $settings.appIcon,
-                     logoutAction: { self.store.logout() })
+        SettingsView(logoutAction: { self.store.logout() })
     }
 }
 
 struct SettingsView: View {
-    @Binding var accentColor: Color
-    @Binding var appIcon: String
+    @AppStorage("accentColor") var accentColor: Color = .purple
+    @StateObject private var appIconTitle = AppIconTitle()
     var logoutAction: () -> Void
 
     @Environment(\.presentationMode) var presentationMode
@@ -36,8 +33,8 @@ struct SettingsView: View {
                         }
                     }
 
-                    Picker(selection: $appIcon, label: Text(L10n.Settings.appIcon)) {
-                        ForEach(AppSettings.alternateIcons) { $0 }
+                    Picker(selection: $appIconTitle.current, label: Text(L10n.Settings.appIcon)) {
+                        ForEach(AppIconTitle.alternatives) { AppIcon(title: $0) }
                     }
                 }
 
@@ -63,8 +60,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(accentColor: .constant(.purple),
-                     appIcon: .constant("Default"),
-                     logoutAction: {})
+        SettingsView(logoutAction: {})
     }
 }
