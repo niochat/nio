@@ -29,6 +29,8 @@ public class AccountStore: ObservableObject {
                 .clear(from: keychain)
         }
 
+        Configuration.setupMatrixSDKSettings()
+
         if let credentials = MXCredentials.from(keychain) {
             self.loginState = .authenticating
             self.credentials = credentials
@@ -39,6 +41,7 @@ public class AccountStore: ObservableObject {
                     self.loginState = .failure(error)
                 case .success(let state):
                     self.loginState = state
+                    self.session?.crypto.warnOnUnknowDevices = false
                 }
             }
         }
@@ -55,11 +58,7 @@ public class AccountStore: ObservableObject {
     public func login(username: String, password: String, homeserver: URL) {
         self.loginState = .authenticating
 
-        let options = MXSDKOptions()
-        options.enableCryptoWhenStartingMXSession = true
-
         self.client = MXRestClient(homeServer: homeserver, unrecognizedCertificateHandler: nil)
-
         self.client?.login(username: username, password: password) { response in
             switch response {
             case .failure(let error):
@@ -77,6 +76,7 @@ public class AccountStore: ObservableObject {
                         self.loginState = .failure(error)
                     case .success(let state):
                         self.loginState = state
+                        self.session?.crypto.warnOnUnknowDevices = false
                     }
                 }
             }
@@ -109,7 +109,7 @@ public class AccountStore: ObservableObject {
         }
     }
 
-    func sync(completion: @escaping (Result<LoginState, Error>) -> Void) {
+    private func sync(completion: @escaping (Result<LoginState, Error>) -> Void) {
         guard let credentials = self.credentials else { return }
 
         self.client = MXRestClient(credentials: credentials, unrecognizedCertificateHandler: nil)
