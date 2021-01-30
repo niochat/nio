@@ -1039,7 +1039,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Only include 1 copy of MatrixSDK.framework\nrm -rf $CODESIGNING_FOLDER_PATH/Frameworks/NioKit.framework/Frameworks\nrm -rf $CODESIGNING_FOLDER_PATH/PlugIns/MatrixSDK.framework\nrm -rf $CODESIGNING_FOLDER_PATH/PlugIns/NioShareExtension.appex/Frameworks/NioKit.framework/Frameworks\nplutil -insert CFBundleShortVersionString -string $MARKETING_VERSION $CODESIGNING_FOLDER_PATH/Frameworks/MatrixSDK.framework/Info.plist\nplutil -insert CFBundleVersion -string $CURRENT_PROJECT_VERSION $CODESIGNING_FOLDER_PATH/Frameworks/MatrixSDK.framework/Info.plist\n";
+			shellScript = "# Only include 1 copy of MatrixSDK.framework\nrm -rf $CODESIGNING_FOLDER_PATH/Frameworks/NioKit.framework/Frameworks\nrm -rf $CODESIGNING_FOLDER_PATH/PlugIns/MatrixSDK.framework\nrm -rf $CODESIGNING_FOLDER_PATH/PlugIns/NioShareExtension.appex/Frameworks/NioKit.framework/Frameworks\nplutil -replace CFBundleShortVersionString -string $MARKETING_VERSION $CODESIGNING_FOLDER_PATH/Frameworks/MatrixSDK.framework/Info.plist\nplutil -replace CFBundleVersion -string $CURRENT_PROJECT_VERSION $CODESIGNING_FOLDER_PATH/Frameworks/MatrixSDK.framework/Info.plist\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
