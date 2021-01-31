@@ -9,3 +9,8 @@
 "login.form.username" = "Потребителско име";
 "login.welcome-message" = "Влезте в профила си, за да започнете.";
 "login.welcome-header" = "Добре дошли в ";
+"recent-rooms.leave.alert-title" = "Напускане на стая";
+"recent-rooms.rooms.header" = "Стаи";
+"recent-rooms.accessibility-label.new-conversation" = "Нов разговор";
+"recent-rooms.new-message-placeholder" = "Ново съобщение";
+"recent-rooms.accessibility-label.settings" = "Настройки";
