@@ -16,14 +16,7 @@ Want to give it a spin? Join the public [TestFlight Beta](https://testflight.app
 
 ### Getting Started
 
-The following steps should be all that's necessary to build Nio with Xcode.
-
-```bash
-$ git clone https://github.com/niochat/nio.git
-$ cd nio
-$ pod install
-$ xed .
-```
+Since Nio uses Swift Package Manager all you need to do is clone the project, open it in Xcode and hit <kbd>⌘</kbd><kbd>R</kbd> to run the app on your simulator or device.
 
 ### Translations
 
