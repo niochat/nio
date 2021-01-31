@@ -1,5 +1,5 @@
 import Foundation
-import class SwiftMatrixSDK.MXEvent
+import class MatrixSDK.MXEvent
 
 class MockEvent: MXEvent {
     init(sender: String, type: String, timestamp: UInt64, isRedacted: Bool) {

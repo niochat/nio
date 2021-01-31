@@ -1,5 +1,5 @@
 import SwiftUI
-import class SwiftMatrixSDK.MXEvent
+import class MatrixSDK.MXEvent
 import SDWebImageSwiftUI
 import BlurHash
 

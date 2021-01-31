@@ -1,4 +1,4 @@
-import SwiftMatrixSDK
+import MatrixSDK
 import KeychainAccess
 
 extension MXCredentials {

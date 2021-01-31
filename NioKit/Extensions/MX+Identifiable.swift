@@ -1,5 +1,5 @@
 import SwiftUI
-import SwiftMatrixSDK
+import MatrixSDK
 
 extension MXPublicRoom: Identifiable {}
 extension MXRoom: Identifiable {}

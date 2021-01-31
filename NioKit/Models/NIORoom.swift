@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 
-import SwiftMatrixSDK
+import MatrixSDK
 
 public struct RoomItem: Codable, Hashable {
     public static func == (lhs: RoomItem, rhs: RoomItem) -> Bool {
@@ -71,6 +71,8 @@ public class NIORoom: ObservableObject {
             self.eventCache.insert(event, at: 0)
         case .forwards:
             self.eventCache.append(event)
+        @unknown default:
+            assertionFailure("Unknown direction value")
         }
 
         self.objectWillChange.send()

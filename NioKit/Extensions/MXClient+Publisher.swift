@@ -1,6 +1,6 @@
 import Foundation
 import Combine
-import SwiftMatrixSDK
+import MatrixSDK
 
 extension MXRestClient {
     public func nio_publicRooms(onServer: String? = nil, limit: UInt? = nil) -> AnyPublisher<MXPublicRoomsResponse, Error> {

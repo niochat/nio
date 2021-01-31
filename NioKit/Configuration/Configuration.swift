@@ -1,5 +1,5 @@
 import Foundation
-import SwiftMatrixSDK
+import MatrixSDK
 
 class Configuration {
     static func setupMatrixSDKSettings() {
@@ -12,6 +12,6 @@ class Configuration {
         sdkOptions.computeE2ERoomSummaryTrust = true
 
         // Use UIKit BackgroundTask for handling background tasks in the SDK
-        sdkOptions.backgroundModeHandler = MXUIKitBackgroundModeHandler()
+//        sdkOptions.backgroundModeHandler = MXUIKitBackgroundModeHandler()
     }
 }

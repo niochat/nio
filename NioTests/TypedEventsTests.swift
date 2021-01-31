@@ -1,5 +1,5 @@
 import XCTest
-import SwiftMatrixSDK
+import MatrixSDK
 
 @testable import Nio
 

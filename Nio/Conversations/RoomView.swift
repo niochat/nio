@@ -1,6 +1,6 @@
 import SwiftUI
 import Combine
-import SwiftMatrixSDK
+import MatrixSDK
 
 import NioKit
 

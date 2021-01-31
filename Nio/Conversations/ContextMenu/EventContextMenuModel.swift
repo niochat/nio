@@ -1,5 +1,5 @@
 import SwiftUI
-import SwiftMatrixSDK
+import MatrixSDK
 
 struct EventContextMenuModel {
     typealias Action = () -> Void
