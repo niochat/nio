@@ -45,13 +45,8 @@ Nio has (and probably always will have 😅) a [long list of open issues](https:
 than *extremely* welcome to tackle any of these and send pull requests.
 
 ### Dependencies
-Nio manages most of its dependencies via Swift package manager, which Xcode handles automatically. The `matrix-ios-sdk` 
-however is integrated via Cocoapods (for the time being) which makes installing that necessary to setup a local checkout of 
-the project.
-
-```shell
-$ pod install
-```
+Nio manages its dependencies via Swift package manager, which Xcode handles automatically. The `matrix-ios-sdk` 
+however doesn't directly support SwiftPM, so we build our own compatible framework and pull it from [niochat/MatrixSDK](https://github.com/niochat/MatrixSDK).
 
 ### Automatic Signing
 In order to use automatic signing in Xcode, it is possible to create
