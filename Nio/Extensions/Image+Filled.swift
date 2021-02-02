@@ -2,16 +2,11 @@ import SwiftUI
 
 extension Image {
     init(fillColour: Color, size: CGSize) {
-        var image: UIImage?
-
-        UIGraphicsBeginImageContextWithOptions(size, true, 0.0)
-        if let context: CGContext = UIGraphicsGetCurrentContext() {
+        let image = UIGraphicsImageRenderer(size: size) .image { context in
             UIColor(fillColour).setFill()
             context.fill(CGRect(origin: .zero, size: size))
-            image = UIGraphicsGetImageFromCurrentImageContext()
         }
-        UIGraphicsEndImageContext()
 
-        self.init(uiImage: image ?? UIImage())
+        self.init(uiImage: image)
     }
 }
