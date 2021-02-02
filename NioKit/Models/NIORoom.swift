@@ -118,7 +118,7 @@ public class NIORoom: ObservableObject {
         guard let imageData = image.jpeg(.lowest) else { return }
 
         var localEcho: MXEvent? = nil
-        // TODO: Use localEcho to show sent message until it actually comes back
+        objectWillChange.send()     // room.outgoingMessages() will change
         room.sendImage(
             data: imageData,
             size: image.size,

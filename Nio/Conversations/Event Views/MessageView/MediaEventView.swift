@@ -42,22 +42,35 @@ struct MediaEventView: View {
                     let height = info["h"] as? Double {
                     self.size = CGSize(width: width, height: height)
                 }
-                if let blurhash = info["xyz.amorgan.blurhash"] as? String {
-                    self.blurhash = blurhash
-                }
+                self.blurhash = info["xyz.amorgan.blurhash"] as? String
             }
         }
     }
 
     let model: ViewModel
 
-    var placeholder: UIImage {
+    var placeholder: Image? {
         guard
             let size = model.size,
             let blurhash = model.blurhash,
             let img = UIImage(blurHash: blurhash, size: size)
-        else { return UIImage() }
-        return img
+        else { return nil }
+        return Image(uiImage: img)
+    }
+
+    var placeholderBackground: Image {
+        let size = CGSize(width: 480, height: 320)
+        var image: UIImage?
+
+        UIGraphicsBeginImageContextWithOptions(size, true, 0.0)
+        if let context: CGContext = UIGraphicsGetCurrentContext() {
+            Asset.Color.borderedMessageBackground.color.setFill()
+            context.fill(CGRect(origin: .zero, size: size))
+            image = UIGraphicsGetImageFromCurrentImageContext()
+        }
+        UIGraphicsEndImageContext()
+
+        return Image(uiImage: image ?? UIImage())
     }
 
     var urls: [URL] {
@@ -87,15 +100,15 @@ struct MediaEventView: View {
     }
 
     var body: some View {
-        VStack(alignment: self.isMe ? .trailing : .leading, spacing: 5) {
-            self.senderView
-            WebImage(url: self.urls.first!, isAnimating: .constant(true))
+        VStack(alignment: isMe ? .trailing : .leading, spacing: 5) {
+            senderView
+            WebImage(url: urls.first, isAnimating: .constant(true))
                 .resizable()
-                .placeholder(Image(uiImage: self.placeholder))
+                .placeholder(placeholder ?? placeholderBackground)
                 .indicator(.activity)
                 .scaledToFit()
                 .mask(RoundedRectangle(cornerRadius: 15))
-            self.timestampView
+            timestampView
         }
         .frame(maxWidth: UIScreen.main.bounds.width * 0.75,
                maxHeight: UIScreen.main.bounds.height * 0.75)
