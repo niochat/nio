@@ -59,18 +59,7 @@ struct MediaEventView: View {
     }
 
     var placeholderBackground: Image {
-        let size = CGSize(width: 480, height: 320)
-        var image: UIImage?
-
-        UIGraphicsBeginImageContextWithOptions(size, true, 0.0)
-        if let context: CGContext = UIGraphicsGetCurrentContext() {
-            Asset.Color.borderedMessageBackground.color.setFill()
-            context.fill(CGRect(origin: .zero, size: size))
-            image = UIGraphicsGetImageFromCurrentImageContext()
-        }
-        UIGraphicsEndImageContext()
-
-        return Image(uiImage: image ?? UIImage())
+        Image(fillColour: Color.borderedMessageBackground, size: CGSize(width: 480, height: 320))
     }
 
     var urls: [URL] {
