@@ -59,7 +59,8 @@ struct MediaEventView: View {
     }
 
     var placeholderBackground: Image {
-        Image(fillColour: Color.borderedMessageBackground, size: CGSize(width: 480, height: 320))
+        Image(fillColour: Color.borderedMessageBackground,
+              size: model.size ?? CGSize(width: 480, height: 320))
     }
 
     var urls: [URL] {
