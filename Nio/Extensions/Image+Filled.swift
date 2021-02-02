@@ -1,9 +1,10 @@
 import SwiftUI
 
 extension Image {
-    init(fillColour: Color, size: CGSize) {
+    /// Creates an image with a solid fill color of the specified size.
+    init(fillColor: Color, size: CGSize) {
         let image = UIGraphicsImageRenderer(size: size) .image { context in
-            UIColor(fillColour).setFill()
+            UIColor(fillColor).setFill()
             context.fill(CGRect(origin: .zero, size: size))
         }
 

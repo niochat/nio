@@ -59,7 +59,7 @@ struct MediaEventView: View {
     }
 
     var placeholderBackground: Image {
-        Image(fillColour: Color.borderedMessageBackground,
+        Image(fillColor: Color.borderedMessageBackground,
               size: model.size ?? CGSize(width: 480, height: 320))
     }
 
