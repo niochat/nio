@@ -49,18 +49,17 @@ struct MediaEventView: View {
 
     let model: ViewModel
 
-    var placeholder: Image? {
-        guard
-            let size = model.size,
-            let blurhash = model.blurhash,
-            let img = UIImage(blurHash: blurhash, size: size)
-        else { return nil }
-        return Image(uiImage: img)
-    }
-
-    var placeholderBackground: Image {
-        Image(fillColor: Color.borderedMessageBackground,
-              size: model.size ?? CGSize(width: 480, height: 320))
+    @ViewBuilder
+    var placeholder: some View {
+        if let size = model.size,
+           let blurhash = model.blurhash,
+           let img = UIImage(blurHash: blurhash, size: size) {
+            Image(uiImage: img)
+        } else {
+            Rectangle()
+                .foregroundColor(Color.borderedMessageBackground)
+                .aspectRatio(model.size ?? CGSize(width: 3, height: 2), contentMode: .fit)
+        }
     }
 
     var urls: [URL] {
@@ -94,7 +93,7 @@ struct MediaEventView: View {
             senderView
             WebImage(url: urls.first, isAnimating: .constant(true))
                 .resizable()
-                .placeholder(placeholder ?? placeholderBackground)
+                .placeholder { placeholder }
                 .indicator(.activity)
                 .scaledToFit()
                 .mask(RoundedRectangle(cornerRadius: 15))
