@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/niochat/MatrixSDK",
         "state": {
           "branch": null,
-          "revision": "5864433221df67e2b5a1568c99b9c2fb6bb26c7a",
-          "version": "0.17.10"
+          "revision": "1fc67906ae3c839a6a7b678e3a6aabfd743ad6ba",
+          "version": "0.17.11"
         }
       },
       {
