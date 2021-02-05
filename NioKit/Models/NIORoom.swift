@@ -86,18 +86,22 @@ public class NIORoom: ObservableObject {
     public func send(text: String) {
         guard !text.isEmpty else { return }
 
-        objectWillChange.send()     // room.outgoingMessages() will change
+        objectWillChange.send()             // room.outgoingMessages() will change
         var localEcho: MXEvent? = nil
-        room.sendTextMessage(text, localEcho: &localEcho) { _ in }
+        room.sendTextMessage(text, localEcho: &localEcho) { _ in
+            self.objectWillChange.send()    // localEcho.sentState has(!) changed
+        }
     }
 
     public func react(toEventId eventId: String, emoji: String) {
         // swiftlint:disable:next force_try
         let content = try! ReactionEvent(eventId: eventId, key: emoji).encodeContent()
 
-        objectWillChange.send()     // room.outgoingMessages() will change
+        objectWillChange.send()             // room.outgoingMessages() will change
         var localEcho: MXEvent? = nil
-        room.sendEvent(.reaction, content: content, localEcho: &localEcho) { _ in }
+        room.sendEvent(.reaction, content: content, localEcho: &localEcho) { _ in
+            self.objectWillChange.send()    // localEcho.sentState has(!) changed
+        }
     }
 
     public func edit(text: String, eventId: String) {
@@ -118,14 +122,16 @@ public class NIORoom: ObservableObject {
         guard let imageData = image.jpeg(.lowest) else { return }
 
         var localEcho: MXEvent? = nil
-        objectWillChange.send()     // room.outgoingMessages() will change
+        objectWillChange.send()             // room.outgoingMessages() will change
         room.sendImage(
             data: imageData,
             size: image.size,
             mimeType: "image/jpeg",
             thumbnail: image,
             localEcho: &localEcho
-        ) { _ in }
+        ) { _ in
+            self.objectWillChange.send()    // localEcho.sentState has(!) changed
+        }
     }
 
     public func markAllAsRead() {

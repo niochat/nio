@@ -5,6 +5,7 @@ protocol MessageViewModelProtocol {
     var id: String { get }
     var text: String { get }
     var sender: String { get }
+    var sentState: MXEventSentState { get }
     var showSender: Bool { get }
     var timestamp: String { get }
 
@@ -48,6 +49,10 @@ struct MessageViewModel: MessageViewModelProtocol {
 
     var sender: String {
         event.sender
+    }
+
+    var sentState: MXEventSentState {
+        event.sentState
     }
 
     var showSender: Bool
