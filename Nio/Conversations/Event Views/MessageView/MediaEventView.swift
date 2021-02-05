@@ -48,6 +48,7 @@ struct MediaEventView: View {
     }
 
     let model: ViewModel
+    let contextMenuModel: EventContextMenuModel
 
     @ViewBuilder
     var placeholder: some View {
@@ -100,6 +101,9 @@ struct MediaEventView: View {
         }
         .frame(maxWidth: UIScreen.main.bounds.width * 0.75,
                maxHeight: UIScreen.main.bounds.height * 0.75)
+        .contextMenu(ContextMenu(menuItems: {
+            EventContextMenu(model: contextMenuModel)
+        }))
     }
 }
 
@@ -112,6 +116,6 @@ struct MediaEventView_Previews: PreviewProvider {
             timestamp: "9:41 am",
             size: CGSize(width: 3000, height: 2000),
             blurhash: nil)
-        MediaEventView(model: sendingModel)
+        MediaEventView(model: sendingModel, contextMenuModel: .previewModel)
     }
 }

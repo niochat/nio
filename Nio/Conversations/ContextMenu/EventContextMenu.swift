@@ -32,6 +32,10 @@ private struct EventContextMenuViewModel {
             canRedact = true
         }
 
+        if event.isMediaAttachment() {
+            canEdit = false
+        }
+
         self.canReact = canReact
         self.canReply = canReply
         self.canEdit = canEdit

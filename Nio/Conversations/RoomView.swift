@@ -121,7 +121,13 @@ struct RoomView: View {
                                     onReact: { self.onReact(event.eventId) },
                                     onReply: { },
                                     onEdit: { self.edit(event: event) },
-                                    onRedact: { self.eventToRedact = event.eventId }))
+                                    onRedact: {
+                                        if event.sentState == MXEventSentStateFailed {
+                                            room.removeOutgoingMessage(event)
+                                        } else {
+                                            self.eventToRedact = event.eventId
+                                        }
+                                    }))
                     .padding(.horizontal)
             }
             if !(room.room.typingUsers?.filter { $0 != userId }.isEmpty ?? false) {

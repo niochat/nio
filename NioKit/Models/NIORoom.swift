@@ -137,6 +137,11 @@ public class NIORoom: ObservableObject {
     public func markAllAsRead() {
         room.markAllAsRead()
     }
+
+    public func removeOutgoingMessage(_ event: MXEvent) {
+        objectWillChange.send()             // room.outgoingMessages() will change
+        room.removeOutgoingMessage(event.eventId)
+    }
 }
 
 extension NIORoom: Identifiable {
