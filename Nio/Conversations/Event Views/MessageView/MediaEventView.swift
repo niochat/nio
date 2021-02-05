@@ -58,7 +58,6 @@ struct MediaEventView: View {
         } else {
             Rectangle()
                 .foregroundColor(Color.borderedMessageBackground)
-                .aspectRatio(model.size ?? CGSize(width: 3, height: 2), contentMode: .fit)
         }
     }
 
@@ -95,11 +94,24 @@ struct MediaEventView: View {
                 .resizable()
                 .placeholder { placeholder }
                 .indicator(.activity)
-                .scaledToFit()
+                .aspectRatio(model.size ?? CGSize(width: 3, height: 2), contentMode: .fit)
                 .mask(RoundedRectangle(cornerRadius: 15))
             timestampView
         }
         .frame(maxWidth: UIScreen.main.bounds.width * 0.75,
                maxHeight: UIScreen.main.bounds.height * 0.75)
+    }
+}
+
+struct MediaEventView_Previews: PreviewProvider {
+    static var previews: some View {
+        let sendingModel = MediaEventView.ViewModel(
+            mediaURLs: [],
+            sender: "",
+            showSender: false,
+            timestamp: "9:41 am",
+            size: CGSize(width: 3000, height: 2000),
+            blurhash: nil)
+        MediaEventView(model: sendingModel)
     }
 }
