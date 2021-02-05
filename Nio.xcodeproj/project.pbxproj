@@ -775,10 +775,10 @@
 				39C931D523843289004449E1 /* Sources */,
 				39C931D623843289004449E1 /* Frameworks */,
 				39C931D723843289004449E1 /* Resources */,
-				A542188F25C6E02100991381 /* Catalyst SDK Clean-up */,
+				A542188F25C6E02100991381 /* Remove SDK from NioKit */,
 				CADF664724614D2300F5063F /* Embed Frameworks */,
 				4BFEFD87246F414D00CCF4A0 /* Embed App Extensions */,
-				A542F02825A66C73000AF476 /* iOS SDK Clean-up */,
+				A542F02825A66C73000AF476 /* Remove extra SDKs from Nio */,
 			);
 			buildRules = (
 			);
@@ -1023,7 +1023,7 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
-		A542188F25C6E02100991381 /* Catalyst SDK Clean-up */ = {
+		A542188F25C6E02100991381 /* Remove SDK from NioKit */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1032,16 +1032,16 @@
 			);
 			inputPaths = (
 			);
-			name = "Catalyst SDK Clean-up";
+			name = "Remove SDK from NioKit";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${IS_MACCATALYST}\" = \"YES\" ]; then\n    rm -rf $BUILT_PRODUCTS_DIR/NioKit.framework/Versions/Current/Frameworks\nfi\n";
+			shellScript = "# This step needs to run before Embed Frameworks for Catalyst builds to succeed\nif [ \"${IS_MACCATALYST}\" = \"YES\" ]; then\n    rm -rf $BUILT_PRODUCTS_DIR/NioKit.framework/Versions/Current/Frameworks\nelse\n    rm -rf $BUILT_PRODUCTS_DIR/NioKit.framework/Frameworks\nfi\n";
 		};
-		A542F02825A66C73000AF476 /* iOS SDK Clean-up */ = {
+		A542F02825A66C73000AF476 /* Remove extra SDKs from Nio */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1050,14 +1050,14 @@
 			);
 			inputPaths = (
 			);
-			name = "iOS SDK Clean-up";
+			name = "Remove extra SDKs from Nio";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${IS_MACCATALYST}\" = \"NO\" ]; then\n    # Only include 1 copy of MatrixSDK.framework\n    rm -rf $CODESIGNING_FOLDER_PATH/Frameworks/NioKit.framework/Frameworks\n    rm -rf $CODESIGNING_FOLDER_PATH/PlugIns/MatrixSDK.framework\n    rm -rf $CODESIGNING_FOLDER_PATH/PlugIns/NioShareExtension.appex/Frameworks/NioKit.framework/Frameworks\n    plutil -replace CFBundleShortVersionString -string $MARKETING_VERSION $CODESIGNING_FOLDER_PATH/Frameworks/MatrixSDK.framework/Info.plist\n    plutil -replace CFBundleVersion -string $CURRENT_PROJECT_VERSION $CODESIGNING_FOLDER_PATH/Frameworks/MatrixSDK.framework/Info.plist\nfi\n";
+			shellScript = "# Removes extra copies of MatrixSDK that have been embedded in the app\nif [ \"${IS_MACCATALYST}\" = \"YES\" ]; then\n    rm -rf $CODESIGNING_FOLDER_PATH/Contents/PlugIns/MatrixSDK.framework\nelse\n    rm -rf $CODESIGNING_FOLDER_PATH/PlugIns/MatrixSDK.framework\n    rm -rf $CODESIGNING_FOLDER_PATH/PlugIns/NioShareExtension.appex/Frameworks/NioKit.framework/Frameworks\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
