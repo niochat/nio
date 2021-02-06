@@ -39,6 +39,10 @@ This is the current status of the translations:
 
 [![Translation status](https://translate.riot.im/widgets/nio/-/nio/multi-auto.svg)](https://translate.riot.im/engage/nio/?utm_source=widget)
 
+## Custom App Icons
+
+Nio includes a few basic app icons, but a bigger selection of community icons would be fantastic. All that's necessary to include a new icon is a 1024x1024px PNG file. Please don't include any rounded edges, iOS does that automatically. Check the [Resources](https://github.com/niochat/nio/tree/stable/Resources) directory for the existing icons and the base chat bubbles in different formats if you want to build on that. You can send the finished file to our Matrix room or mail address (all listed on [nio.chat](https://nio.chat)) or just [open a new issue](https://github.com/niochat/nio/issues/new) on GitHub 😊
+
 ## Implementation
 
 Nio has (and probably always will have 😅) a [long list of open issues](https://github.com/niochat/nio/issues). You are more
