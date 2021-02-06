@@ -42,22 +42,24 @@ struct MediaEventView: View {
                     let height = info["h"] as? Double {
                     self.size = CGSize(width: width, height: height)
                 }
-                if let blurhash = info["xyz.amorgan.blurhash"] as? String {
-                    self.blurhash = blurhash
-                }
+                self.blurhash = info["xyz.amorgan.blurhash"] as? String
             }
         }
     }
 
     let model: ViewModel
+    let contextMenuModel: EventContextMenuModel
 
-    var placeholder: UIImage {
-        guard
-            let size = model.size,
-            let blurhash = model.blurhash,
-            let img = UIImage(blurHash: blurhash, size: size)
-        else { return UIImage() }
-        return img
+    @ViewBuilder
+    var placeholder: some View {
+        if let size = model.size,
+           let blurhash = model.blurhash,
+           let img = UIImage(blurHash: blurhash, size: size) {
+            Image(uiImage: img)
+        } else {
+            Rectangle()
+                .foregroundColor(Color.borderedMessageBackground)
+        }
     }
 
     var urls: [URL] {
@@ -87,17 +89,33 @@ struct MediaEventView: View {
     }
 
     var body: some View {
-        VStack(alignment: self.isMe ? .trailing : .leading, spacing: 5) {
-            self.senderView
-            WebImage(url: self.urls.first!, isAnimating: .constant(true))
+        VStack(alignment: isMe ? .trailing : .leading, spacing: 5) {
+            senderView
+            WebImage(url: urls.first, isAnimating: .constant(true))
                 .resizable()
-                .placeholder(Image(uiImage: self.placeholder))
+                .placeholder { placeholder }
                 .indicator(.activity)
-                .scaledToFit()
+                .aspectRatio(model.size ?? CGSize(width: 3, height: 2), contentMode: .fit)
                 .mask(RoundedRectangle(cornerRadius: 15))
-            self.timestampView
+            timestampView
         }
         .frame(maxWidth: UIScreen.main.bounds.width * 0.75,
                maxHeight: UIScreen.main.bounds.height * 0.75)
+        .contextMenu(ContextMenu(menuItems: {
+            EventContextMenu(model: contextMenuModel)
+        }))
+    }
+}
+
+struct MediaEventView_Previews: PreviewProvider {
+    static var previews: some View {
+        let sendingModel = MediaEventView.ViewModel(
+            mediaURLs: [],
+            sender: "",
+            showSender: false,
+            timestamp: "9:41 am",
+            size: CGSize(width: 3000, height: 2000),
+            blurhash: nil)
+        MediaEventView(model: sendingModel, contextMenuModel: .previewModel)
     }
 }

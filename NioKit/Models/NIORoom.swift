@@ -26,6 +26,7 @@ public class NIORoom: ObservableObject {
     @Published
     public var summary: NIORoomSummary
 
+    @Published
     internal var eventCache: [MXEvent] = []
 
     public var isDirect: Bool {
@@ -74,61 +75,54 @@ public class NIORoom: ObservableObject {
         @unknown default:
             assertionFailure("Unknown direction value")
         }
-
-        self.objectWillChange.send()
     }
 
     public func events() -> EventCollection {
-        return EventCollection(eventCache)
+        return EventCollection(eventCache + room.outgoingMessages())
     }
 
     // MARK: Sending Events
 
     public func send(text: String) {
         guard !text.isEmpty else { return }
-        // swiftlint:disable:next redundant_optional_initialization
+
+        objectWillChange.send()             // room.outgoingMessages() will change
         var localEcho: MXEvent? = nil
-        // TODO: Use localEcho to show sent message until it actually comes back
         room.sendTextMessage(text, localEcho: &localEcho) { _ in
-            self.objectWillChange.send()
+            self.objectWillChange.send()    // localEcho.sentState has(!) changed
         }
-        self.objectWillChange.send()
     }
 
     public func react(toEventId eventId: String, emoji: String) {
         // swiftlint:disable:next force_try
         let content = try! ReactionEvent(eventId: eventId, key: emoji).encodeContent()
-        // swiftlint:disable:next redundant_optional_initialization
+
+        objectWillChange.send()             // room.outgoingMessages() will change
         var localEcho: MXEvent? = nil
         room.sendEvent(.reaction, content: content, localEcho: &localEcho) { _ in
-            self.objectWillChange.send()
+            self.objectWillChange.send()    // localEcho.sentState has(!) changed
         }
     }
 
     public func edit(text: String, eventId: String) {
         guard !text.isEmpty else { return }
-        // swiftlint:disable:next redundant_optional_initialization
+
         var localEcho: MXEvent? = nil
         // swiftlint:disable:next force_try
         let content = try! EditEvent(eventId: eventId, text: text).encodeContent()
         // TODO: Use localEcho to show sent message until it actually comes back
-        room.sendMessage(withContent: content, localEcho: &localEcho) { _ in
-            self.objectWillChange.send()
-        }
-        self.objectWillChange.send()
+        room.sendMessage(withContent: content, localEcho: &localEcho) { _ in }
     }
 
     public func redact(eventId: String, reason: String?) {
-        room.redactEvent(eventId, reason: reason) { _ in
-            self.objectWillChange.send()
-        }
+        room.redactEvent(eventId, reason: reason) { _ in }
     }
 
     public func sendImage(image: UIImage) {
         guard let imageData = image.jpeg(.lowest) else { return }
-        // swiftlint:disable:next redundant_optional_initialization
+
         var localEcho: MXEvent? = nil
-        // TODO: Use localEcho to show sent message until it actually comes back
+        objectWillChange.send()             // room.outgoingMessages() will change
         room.sendImage(
             data: imageData,
             size: image.size,
@@ -136,12 +130,17 @@ public class NIORoom: ObservableObject {
             thumbnail: image,
             localEcho: &localEcho
         ) { _ in
-            self.objectWillChange.send()
+            self.objectWillChange.send()    // localEcho.sentState has(!) changed
         }
     }
 
     public func markAllAsRead() {
         room.markAllAsRead()
+    }
+
+    public func removeOutgoingMessage(_ event: MXEvent) {
+        objectWillChange.send()             // room.outgoingMessages() will change
+        room.removeOutgoingMessage(event.eventId)
     }
 }
 

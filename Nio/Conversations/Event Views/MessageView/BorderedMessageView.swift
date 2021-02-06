@@ -1,4 +1,5 @@
 import SwiftUI
+import MatrixSDK
 
 import NioKit
 
@@ -149,6 +150,7 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
                     editBadgeView
                 }
             }
+            .opacity(model.sentState == MXEventSentStateSent ? 1 : 0.5)
             GroupedReactionsView(reactions: model.reactions)
             if !connectedEdges.contains(.bottomEdge) {
                 // It's the last message in a group, so show a timestamp:
@@ -163,6 +165,7 @@ struct BorderedMessageView_Previews: PreviewProvider {
         var id: String
         var text: String
         var sender: String
+        var sentState: MXEventSentState
         var showSender: Bool
         var timestamp: String
         var reactions: [Reaction]
@@ -178,7 +181,7 @@ struct BorderedMessageView_Previews: PreviewProvider {
             model: MessageViewModel(
                 id: "0",
                 text: text,
-                sender: sender,
+                sender: sender, sentState: MXEventSentStateSent,
                 showSender: showSender,
                 timestamp: "12:29",
                 reactions: reactions
@@ -203,6 +206,7 @@ struct BorderedMessageView_Previews: PreviewProvider {
                     id: "0",
                     text: "This is a message",
                     sender: sender,
+                    sentState: MXEventSentStateSent,
                     showSender: showSender,
                     timestamp: "12:29",
                     reactions: reactions
@@ -215,6 +219,7 @@ struct BorderedMessageView_Previews: PreviewProvider {
                     id: "0",
                     text: "that's quickly followed",
                     sender: sender,
+                    sentState: MXEventSentStateSent,
                     showSender: showSender,
                     timestamp: "12:29",
                     reactions: reactions
@@ -227,6 +232,7 @@ struct BorderedMessageView_Previews: PreviewProvider {
                     id: "0",
                     text: "by some more messages.",
                     sender: sender,
+                    sentState: MXEventSentStateSent,
                     showSender: showSender,
                     timestamp: "12:29",
                     reactions: reactions

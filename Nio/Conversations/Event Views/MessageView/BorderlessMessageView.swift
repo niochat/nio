@@ -1,4 +1,5 @@
 import SwiftUI
+import MatrixSDK
 
 import NioKit
 
@@ -122,6 +123,7 @@ struct BorderlessMessageView_Previews: PreviewProvider {
         var id: String
         var text: String
         var sender: String
+        var sentState: MXEventSentState
         var showSender: Bool
         var timestamp: String
         var reactions: [Reaction]
@@ -143,6 +145,7 @@ struct BorderlessMessageView_Previews: PreviewProvider {
                 id: "0",
                 text: "🐧",
                 sender: sender,
+                sentState: MXEventSentStateSent,
                 showSender: showSender,
                 timestamp: "12:29",
                 reactions: reactions
@@ -167,6 +170,7 @@ struct BorderlessMessageView_Previews: PreviewProvider {
                     id: "0",
                     text: "🐶",
                     sender: sender,
+                    sentState: MXEventSentStateSent,
                     showSender: showSender,
                     timestamp: "12:29",
                     reactions: reactions
@@ -179,6 +183,7 @@ struct BorderlessMessageView_Previews: PreviewProvider {
                     id: "0",
                     text: "🦊",
                     sender: sender,
+                    sentState: MXEventSentStateSent,
                     showSender: showSender,
                     timestamp: "12:29",
                     reactions: reactions
@@ -191,6 +196,7 @@ struct BorderlessMessageView_Previews: PreviewProvider {
                     id: "0",
                     text: "🐻",
                     sender: sender,
+                    sentState: MXEventSentStateSent,
                     showSender: showSender,
                     timestamp: "12:29",
                     reactions: reactions
