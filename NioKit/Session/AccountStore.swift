@@ -180,7 +180,7 @@ public class AccountStore: ObservableObject {
 
     var listenReferenceRoom: Any?
 
-    func paginate(room: NIORoom, event: MXEvent) {
+    public func paginate(room: NIORoom, event: MXEvent) {
         let timeline = room.room.timeline(onEvent: event.eventId)
         listenReferenceRoom = timeline?.listenToEvents { event, direction, roomState in
             if direction == .backwards {

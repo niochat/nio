@@ -22,7 +22,7 @@ public struct EventCollection {
         wrapped.filter { Self.renderableEventTypes.contains($0.type) }
     }
 
-    var renderableEventsWithoutEdited: [MXEvent] {
+    public var renderableEventsWithoutEdited: [MXEvent] {
         wrapped.filter { Self.renderableEventTypes.contains($0.type) && !$0.isEdit()}
     }
 
