@@ -1,13 +1,5 @@
 import SwiftUI
 
-struct ContentSizeThatFitsKey: PreferenceKey {
-    static var defaultValue: CGSize = .zero
-
-    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
-        value = nextValue()
-    }
-}
-
 struct TextAttributesKey: EnvironmentKey {
     static var defaultValue: TextAttributes = .init()
 }

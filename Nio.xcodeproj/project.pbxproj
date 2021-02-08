@@ -67,6 +67,7 @@
 		4BFEFD92246F686000CCF4A0 /* ShareContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEFD91246F686000CCF4A0 /* ShareContentView.swift */; };
 		A51BF8CE254C2FE5000FB0A4 /* NioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51BF8CD254C2FE5000FB0A4 /* NioApp.swift */; };
 		A51EF11C25D14B7700EC688E /* MessageTextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51EF11B25D14B7700EC688E /* MessageTextViewWrapper.swift */; };
+		A51EF13625D1B60500EC688E /* PreferenceKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51EF13525D1B60500EC688E /* PreferenceKeys.swift */; };
 		A58352A625A667AB00533363 /* MatrixSDK in Frameworks */ = {isa = PBXBuildFile; productRef = A58352A525A667AB00533363 /* MatrixSDK */; };
 		A58352AC25A667B300533363 /* MatrixSDK in Frameworks */ = {isa = PBXBuildFile; productRef = A58352AB25A667B300533363 /* MatrixSDK */; };
 		CAAF5BF82478696F006FDC33 /* UITextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAF5BF72478696F006FDC33 /* UITextViewWrapper.swift */; };
@@ -272,6 +273,7 @@
 		4BFEFD91246F686000CCF4A0 /* ShareContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareContentView.swift; sourceTree = "<group>"; };
 		A51BF8CD254C2FE5000FB0A4 /* NioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NioApp.swift; sourceTree = "<group>"; };
 		A51EF11B25D14B7700EC688E /* MessageTextViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTextViewWrapper.swift; sourceTree = "<group>"; };
+		A51EF13525D1B60500EC688E /* PreferenceKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceKeys.swift; sourceTree = "<group>"; };
 		CAAF5BF72478696F006FDC33 /* UITextViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextViewWrapper.swift; sourceTree = "<group>"; };
 		CAC46D5423A272D10079C24F /* BorderlessMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderlessMessageView.swift; sourceTree = "<group>"; };
 		CAC46D5523A272D10079C24F /* MessageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
@@ -471,6 +473,7 @@
 				CAAF5BF72478696F006FDC33 /* UITextViewWrapper.swift */,
 				A51EF11B25D14B7700EC688E /* MessageTextViewWrapper.swift */,
 				4B29F5B42466EC240084043B /* ImagePicker.swift */,
+				A51EF13525D1B60500EC688E /* PreferenceKeys.swift */,
 			);
 			path = "Shared Views";
 			sourceTree = "<group>";
@@ -1105,6 +1108,7 @@
 				392221A02437285B004D8794 /* ReactionPicker.swift in Sources */,
 				3902B89C2393FE6100698B87 /* MessageView.swift in Sources */,
 				CAC46D5723A272D10079C24F /* BorderlessMessageView.swift in Sources */,
+				A51EF13625D1B60500EC688E /* PreferenceKeys.swift in Sources */,
 				39C93209238553E4004449E1 /* RoomView.swift in Sources */,
 				392221AA2438083C004D8794 /* RedactionEventView.swift in Sources */,
 				392389942388899200B2E1DF /* Formatter.swift in Sources */,

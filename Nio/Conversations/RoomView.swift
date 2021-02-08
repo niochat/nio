@@ -107,34 +107,64 @@ struct RoomView: View {
     @State private var isEditingMessage: Bool = false
     @State private var attributedMessage = NSAttributedString(string: "")
 
+    typealias TopOfScrollKey = BoolKey
+    typealias BottomOfScrollKey = BoolKey
+    @State private var shouldAutoScroll = false
+    @State private var shouldPaginate = false
+
     var body: some View {
         VStack {
-            ScrollView {
-                ScrollViewReader { reader in
-                    ForEach(events.renderableEvents) { event in
-                        EventContainerView(event: event,
-                                           reactions: self.events.reactions(for: event),
-                                           connectedEdges: self.events.connectedEdges(of: event),
-                                           showSender: !self.isDirect,
-                                           edits: self.events.relatedEvents(of: event).filter { $0.isEdit() },
-                                           contextMenuModel: EventContextMenuModel(
-                                            event: event,
-                                            userId: self.userId,
-                                            onReact: { self.onReact(event.eventId) },
-                                            onReply: { },
-                                            onEdit: { self.edit(event: event) },
-                                            onRedact: {
-                                                if event.sentState == MXEventSentStateFailed {
-                                                    room.removeOutgoingMessage(event)
-                                                } else {
-                                                    self.eventToRedact = event.eventId
-                                                }
-                                            }))
-                            .padding(.horizontal)
-                            .id(event.eventId)
-                    }
-                    .onAppear {
-                        reader.scrollTo(events.renderableEvents.last?.eventId, anchor: .bottom)
+            GeometryReader { outerGeometry in
+                ScrollView {
+                    ScrollViewReader { reader in
+                        ZStack {
+                            GeometryReader { innerGeometry in
+                                let topIsVisible = innerGeometry.frame(in: .global).minY >= outerGeometry.frame(in: .global).minY
+                                let bottomIsVisible = innerGeometry.frame(in: .global).maxY <= outerGeometry.frame(in: .global).maxY
+                                RoundedRectangle(cornerRadius: 100)
+                                    .foregroundColor(bottomIsVisible ? .green : topIsVisible ? .red : .yellow)
+                                    .preference(key: TopOfScrollKey.self, value: topIsVisible)
+                                    .preference(key: BottomOfScrollKey.self, value: bottomIsVisible)
+                            }
+                            VStack {
+                                ForEach(events.renderableEvents) { event in
+                                    EventContainerView(event: event,
+                                                       reactions: self.events.reactions(for: event),
+                                                       connectedEdges: self.events.connectedEdges(of: event),
+                                                       showSender: !self.isDirect,
+                                                       edits: self.events.relatedEvents(of: event).filter { $0.isEdit() },
+                                                       contextMenuModel: EventContextMenuModel(
+                                                        event: event,
+                                                        userId: self.userId,
+                                                        onReact: { self.onReact(event.eventId) },
+                                                        onReply: { },
+                                                        onEdit: { self.edit(event: event) },
+                                                        onRedact: {
+                                                            if event.sentState == MXEventSentStateFailed {
+                                                                room.removeOutgoingMessage(event)
+                                                            } else {
+                                                                self.eventToRedact = event.eventId
+                                                            }
+                                                        }))
+                                        .padding(.horizontal)
+                                        .id(event.eventId)
+                                }
+                            }
+                        }
+                        .onPreferenceChange(TopOfScrollKey.self) {
+                            shouldPaginate = $0
+                        }
+                        .onPreferenceChange(BottomOfScrollKey.self) {
+                            shouldAutoScroll = $0
+                        }
+                        .onAppear {
+                            reader.scrollTo(events.renderableEvents.last?.eventId, anchor: .bottom)
+                        }
+                        .onReceive(room.objectWillChange) {
+                            if shouldAutoScroll {
+                                reader.scrollTo(events.renderableEvents.last?.eventId, anchor: .bottom)
+                            }
+                        }
                     }
                 }
             }
