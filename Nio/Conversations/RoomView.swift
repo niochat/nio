@@ -109,26 +109,34 @@ struct RoomView: View {
 
     var body: some View {
         VStack {
-            ReverseList(events.renderableEvents) { event in
-                EventContainerView(event: event,
-                                   reactions: self.events.reactions(for: event),
-                                   connectedEdges: self.events.connectedEdges(of: event),
-                                   showSender: !self.isDirect,
-                                   edits: self.events.relatedEvents(of: event).filter { $0.isEdit() },
-                                   contextMenuModel: EventContextMenuModel(
-                                    event: event,
-                                    userId: self.userId,
-                                    onReact: { self.onReact(event.eventId) },
-                                    onReply: { },
-                                    onEdit: { self.edit(event: event) },
-                                    onRedact: {
-                                        if event.sentState == MXEventSentStateFailed {
-                                            room.removeOutgoingMessage(event)
-                                        } else {
-                                            self.eventToRedact = event.eventId
-                                        }
-                                    }))
-                    .padding(.horizontal)
+            ScrollView {
+                ScrollViewReader { reader in
+                    ForEach(events.renderableEvents) { event in
+                        EventContainerView(event: event,
+                                           reactions: self.events.reactions(for: event),
+                                           connectedEdges: self.events.connectedEdges(of: event),
+                                           showSender: !self.isDirect,
+                                           edits: self.events.relatedEvents(of: event).filter { $0.isEdit() },
+                                           contextMenuModel: EventContextMenuModel(
+                                            event: event,
+                                            userId: self.userId,
+                                            onReact: { self.onReact(event.eventId) },
+                                            onReply: { },
+                                            onEdit: { self.edit(event: event) },
+                                            onRedact: {
+                                                if event.sentState == MXEventSentStateFailed {
+                                                    room.removeOutgoingMessage(event)
+                                                } else {
+                                                    self.eventToRedact = event.eventId
+                                                }
+                                            }))
+                            .padding(.horizontal)
+                            .id(event.eventId)
+                    }
+                    .onAppear {
+                        reader.scrollTo(events.renderableEvents.last?.eventId, anchor: .bottom)
+                    }
+                }
             }
             if !(room.room.typingUsers?.filter { $0 != userId }.isEmpty ?? false) {
                 TypingIndicatorContainerView()
