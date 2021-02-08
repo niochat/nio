@@ -126,6 +126,12 @@ struct RoomView: View {
                                     .preference(key: TopOfScrollKey.self, value: topIsVisible)
                                     .preference(key: BottomOfScrollKey.self, value: bottomIsVisible)
                             }
+                            .onPreferenceChange(TopOfScrollKey.self) {
+                                shouldPaginate = $0
+                            }
+                            .onPreferenceChange(BottomOfScrollKey.self) {
+                                shouldAutoScroll = $0
+                            }
                             VStack {
                                 ForEach(events.renderableEvents) { event in
                                     EventContainerView(event: event,
@@ -150,12 +156,6 @@ struct RoomView: View {
                                         .id(event.eventId)
                                 }
                             }
-                        }
-                        .onPreferenceChange(TopOfScrollKey.self) {
-                            shouldPaginate = $0
-                        }
-                        .onPreferenceChange(BottomOfScrollKey.self) {
-                            shouldAutoScroll = $0
                         }
                         .onAppear {
                             reader.scrollTo(events.renderableEvents.last?.eventId, anchor: .bottom)
