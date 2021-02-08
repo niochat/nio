@@ -72,7 +72,8 @@ struct MarkdownText: View {
         }
         .frame(
             maxWidth: self.contentSizeThatFits.width,
-            idealHeight: self.contentSizeThatFits.height,
+            minHeight: self.contentSizeThatFits.height,
+            maxHeight: self.contentSizeThatFits.height,
             alignment: .leading
         )
     }
