@@ -67,6 +67,7 @@
 		4BFEFD8C246F458000CCF4A0 /* GetURL.js in Resources */ = {isa = PBXBuildFile; fileRef = 4BFEFD8B246F458000CCF4A0 /* GetURL.js */; };
 		4BFEFD92246F686000CCF4A0 /* ShareContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEFD91246F686000CCF4A0 /* ShareContentView.swift */; };
 		A51BF8CE254C2FE5000FB0A4 /* NioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51BF8CD254C2FE5000FB0A4 /* NioApp.swift */; };
+		A51EF11C25D14B7700EC688E /* MessageTextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51EF11B25D14B7700EC688E /* MessageTextViewWrapper.swift */; };
 		A58352A625A667AB00533363 /* MatrixSDK in Frameworks */ = {isa = PBXBuildFile; productRef = A58352A525A667AB00533363 /* MatrixSDK */; };
 		A58352AC25A667B300533363 /* MatrixSDK in Frameworks */ = {isa = PBXBuildFile; productRef = A58352AB25A667B300533363 /* MatrixSDK */; };
 		CAAF5BF82478696F006FDC33 /* UITextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAF5BF72478696F006FDC33 /* UITextViewWrapper.swift */; };
@@ -272,6 +273,7 @@
 		4BFEFD90246F5EF500CCF4A0 /* Nio.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nio.entitlements; sourceTree = "<group>"; };
 		4BFEFD91246F686000CCF4A0 /* ShareContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareContentView.swift; sourceTree = "<group>"; };
 		A51BF8CD254C2FE5000FB0A4 /* NioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NioApp.swift; sourceTree = "<group>"; };
+		A51EF11B25D14B7700EC688E /* MessageTextViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTextViewWrapper.swift; sourceTree = "<group>"; };
 		CAAF5BF72478696F006FDC33 /* UITextViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextViewWrapper.swift; sourceTree = "<group>"; };
 		CAC46D5423A272D10079C24F /* BorderlessMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderlessMessageView.swift; sourceTree = "<group>"; };
 		CAC46D5523A272D10079C24F /* MessageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
@@ -470,6 +472,7 @@
 				CAF2AE8A2458EF0900D84133 /* MarkdownText.swift */,
 				4B0A2E46245E2EF800A79443 /* MultilineTextField.swift */,
 				CAAF5BF72478696F006FDC33 /* UITextViewWrapper.swift */,
+				A51EF11B25D14B7700EC688E /* MessageTextViewWrapper.swift */,
 				4B29F5B42466EC240084043B /* ImagePicker.swift */,
 			);
 			path = "Shared Views";
@@ -1080,6 +1083,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				39C9320B23856033004449E1 /* MessageComposerView.swift in Sources */,
+				A51EF11C25D14B7700EC688E /* MessageTextViewWrapper.swift in Sources */,
 				CAC46D5923A272D10079C24F /* BorderedMessageView.swift in Sources */,
 				39B834C0243FC42000AE1EA0 /* TypingIndicatorView.swift in Sources */,
 				3984654523B7ECBA006C173B /* MXURL.swift in Sources */,
