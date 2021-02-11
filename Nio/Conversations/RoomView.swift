@@ -108,11 +108,11 @@ struct RoomView: View {
     @State private var isEditingMessage: Bool = false
     @State private var attributedMessage = NSAttributedString(string: "")
 
-    @State private var firstMessage = false
+    @State private var shouldPaginate = false
 
     var body: some View {
         VStack {
-            ReverseList(events.renderableEvents) { event in
+            ReverseList(events.renderableEvents, hasReachedTop: $shouldPaginate) { event in
                 EventContainerView(event: event,
                                    reactions: self.events.reactions(for: event),
                                    connectedEdges: self.events.connectedEdges(of: event),
@@ -132,11 +132,6 @@ struct RoomView: View {
                                         }
                                     }))
                     .padding(.horizontal)
-                    .onAppear(perform: {
-                        if self.events.renderableEventsWithoutEdited.first!.eventId == event.eventId! {
-                            self.store.paginate(room: self.room, event: event)
-                        }
-                    })
             }
             if !(room.room.typingUsers?.filter { $0 != userId }.isEmpty ?? false) {
                 TypingIndicatorContainerView()
@@ -151,6 +146,11 @@ struct RoomView: View {
             )
                 .padding(.horizontal)
                 .padding(.bottom, 10)
+        }
+        .onChange(of: shouldPaginate) { newValue in
+            if newValue, let topEvent = events.renderableEvents.first {
+                store.paginate(room: self.room, event: topEvent)
+            }
         }
         .alert(item: $eventToRedact) { eventId in
             Alert(title: Text(L10n.Room.Remove.title),
