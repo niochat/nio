@@ -17,6 +17,7 @@ class MessageTextView: UITextView {
         backgroundColor = .clear
         textContainerInset = .zero
         textContainer.lineFragmentPadding = 0
+        dataDetectorTypes = .all
         isEditable = false
         isScrollEnabled = false
         linkTextAttributes = [
