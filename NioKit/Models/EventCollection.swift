@@ -22,10 +22,6 @@ public struct EventCollection {
         wrapped.filter { Self.renderableEventTypes.contains($0.type) }
     }
 
-    public var renderableEventsWithoutEdited: [MXEvent] {
-        wrapped.filter { Self.renderableEventTypes.contains($0.type) && !$0.isEdit()}
-    }
-
     public func relatedEvents(of event: MXEvent) -> [MXEvent] {
         wrapped.filter { $0.relatesTo?.eventId == event.eventId }
     }
