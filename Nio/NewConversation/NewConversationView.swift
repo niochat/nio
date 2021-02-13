@@ -42,8 +42,8 @@ struct NewConversationView: View {
             }
             .navigationBarTitle(Text(L10n.NewConversation.title), displayMode: .inline)
             .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
                         presentationMode.wrappedValue.dismiss()
                     }
                 }
