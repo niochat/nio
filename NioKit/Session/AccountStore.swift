@@ -177,4 +177,19 @@ public class AccountStore: ObservableObject {
             print("An error occured: \(error)")
         }
     }
+
+    var listenReferenceRoom: Any?
+
+    public func paginate(room: NIORoom, event: MXEvent) {
+        let timeline = room.room.timeline(onEvent: event.eventId)
+        listenReferenceRoom = timeline?.listenToEvents { event, direction, roomState in
+            if direction == .backwards {
+                room.add(event: event, direction: direction, roomState: roomState)
+            }
+            self.objectWillChange.send()
+        }
+        timeline?.resetPaginationAroundInitialEvent(withLimit: 40) { _ in
+            self.objectWillChange.send()
+        }
+    }
 }
