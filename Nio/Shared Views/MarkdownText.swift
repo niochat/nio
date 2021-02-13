@@ -3,28 +3,29 @@ import SwiftUI
 import CommonMarkAttributedString
 
 struct MarkdownText: View {
-    @Binding var markdown: String
-    var textColor: UIColor
+    let markdown: String
+    let textColor: UIColor
 
     @State private var contentSizeThatFits: CGSize = .zero
 
     private let textAttributes: TextAttributes
-    private let linkTextAttributes: [NSAttributedString.Key: Any]?
+    private let linkColor: UIColor
 
+    #warning("Is onLinkInteraction needed?")
     private let onLinkInteraction: (((URL, UITextItemInteraction) -> Bool))?
 
     public init(
-        markdown: Binding<String>,
+        markdown: String,
         textColor: UIColor,
         textAttributes: TextAttributes = .init(),
-        linkTextAttributes: [NSAttributedString.Key: Any]? = nil,
+        linkColor: UIColor,
         onLinkInteraction: (((URL, UITextItemInteraction) -> Bool))? = nil
     ) {
-        self._markdown = markdown
+        self.markdown = markdown
 
         self.textColor = textColor.resolvedColor(with: .current)
         self.textAttributes = textAttributes
-        self.linkTextAttributes = linkTextAttributes
+        self.linkColor = linkColor
         self.onLinkInteraction = onLinkInteraction
     }
 
@@ -35,23 +36,15 @@ struct MarkdownText: View {
         ]
     }
 
-    internal var attributedText: Binding<NSAttributedString> {
-        Binding<NSAttributedString>(
-            get: {
-                let markdownString = self.markdown.trimmingCharacters(in: .whitespacesAndNewlines)
-                let attributes = self.attributes
-                let attributedString = try? NSAttributedString(
-                    commonmark: markdownString,
-                    attributes: attributes
-                )
-                return attributedString ?? NSAttributedString(
-                    string: markdownString,
-                    attributes: attributes
-                )
-            },
-            set: {
-                self.markdown = $0.string
-            }
+    internal var attributedText: NSAttributedString {
+        let markdownString = markdown.trimmingCharacters(in: .whitespacesAndNewlines)
+        let attributedString = try? NSAttributedString(
+            commonmark: markdownString,
+            attributes: attributes
+        )
+        return attributedString ?? NSAttributedString(
+            string: markdownString,
+            attributes: attributes
         )
     }
 
@@ -64,26 +57,22 @@ struct MarkdownText: View {
     }
 
     var body: some View {
-        AttributedText(
-            attributedText: self.attributedText,
-            isEditing: .constant(false),
-            textAttributes: .init(
-                textContainerInset: self.textContainerInset,
-                lineFragmentPadding: self.lineFragmentPadding,
-                linkTextAttributes: self.linkTextAttributes,
-                isEditable: false,
-                isScrollingEnabled: false
-            ),
-            onLinkInteraction: self.onLinkInteraction
-        )
-        .textAttributes(self.textAttributes)
+        GeometryReader { geometry in
+            let size = MessageTextView(attributedString: attributedText,
+                                            linkColor: linkColor,
+                                            maxSize: geometry.size).intrinsicContentSize
+
+            MessageTextViewWrapper(attributedString: attributedText, linkColor: linkColor, maxSize: geometry.size)
+                .preference(key: ContentSizeThatFitsKey.self, value: size)
+        }
         .onPreferenceChange(ContentSizeThatFitsKey.self) {
-            self.contentSizeThatFits = $0
+            contentSizeThatFits = $0
         }
         .frame(
             maxWidth: self.contentSizeThatFits.width,
             minHeight: self.contentSizeThatFits.height,
-            maxHeight: self.contentSizeThatFits.height
+            maxHeight: self.contentSizeThatFits.height,
+            alignment: .leading
         )
     }
 }
@@ -102,17 +91,13 @@ struct MarkdownText_Previews: PreviewProvider {
         [udhr]: https://www.un.org/en/universal-declaration-human-rights/ "View full version"
         """#
         return MarkdownText(
-            markdown: .constant(markdownString),
+            markdown: markdownString,
             textColor: .messageTextColor(for: .light, isOutgoing: false),
-            linkTextAttributes: [
-                .foregroundColor: UIColor.blue,
-                .underlineStyle: NSUnderlineStyle.single.rawValue,
-            ]
+            linkColor: .blue
         ) { url, _ in
             print("Tapped URL:", url)
             return true
         }
             .padding(10.0)
-            .previewLayout(.sizeThatFits)
     }
 }
