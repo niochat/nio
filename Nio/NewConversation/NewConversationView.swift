@@ -1,9 +1,10 @@
 import SwiftUI
-import SwiftMatrixSDK
+import MatrixSDK
+
+import NioKit
 
 struct NewConversationContainerView: View {
     @EnvironmentObject var store: AccountStore
-    @EnvironmentObject var settings: AppSettings
 
     var body: some View {
         NewConversationView(store: store)
