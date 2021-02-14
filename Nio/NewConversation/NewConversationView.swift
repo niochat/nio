@@ -22,7 +22,7 @@ struct NewConversationView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section {
+                Section(footer: Text("For example \(store?.session?.myUserId ?? "@user:server.org")")) {
                     TextField("Matrix ID", text: $user)
                 }
                 Section {
