@@ -27,10 +27,10 @@ struct NewConversationView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(footer: Text("For example \(store?.session?.myUserId ?? "@username:server.org")")) {
+                Section(footer: Text("\(L10n.NewConversation.forExample) \(store?.session?.myUserId ?? "@username:server.org")")) {
                     ForEach(0..<users.count, id: \.self) { index in
                         HStack {
-                            TextField("Matrix ID", text: $users[index])
+                            TextField(L10n.NewConversation.usernamePlaceholder, text: $users[index])
                             Spacer()
                             Button(action: addUser) {
                                 Image(systemName: "plus.circle")
@@ -45,14 +45,14 @@ struct NewConversationView: View {
 
                 if users.count > 1 {
                     Section {
-                        Toggle("Public Room", isOn: $isPublic)
+                        Toggle(L10n.NewConversation.publicRoom, isOn: $isPublic)
                     }
                 }
 
                 Section {
                     HStack {
                         Button(action: createRoom) {
-                            Text("Start Chat")
+                            Text(L10n.NewConversation.createRoom)
                         }
                         .disabled(users.contains(""))
 
@@ -62,15 +62,15 @@ struct NewConversationView: View {
                     }
                 }
                 .alert(isPresented: $isPresentingAlert) {
-                    Alert(title: Text("Failed To Start Chat"))
+                    Alert(title: Text(L10n.NewConversation.alertFailed))
                 }
             }
             .disabled(isWaiting)
-            .navigationTitle(users.count > 1 ? "New Room" : L10n.NewConversation.title)
+            .navigationTitle(users.count > 1 ? L10n.NewConversation.titleRoom : L10n.NewConversation.titleChat)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
+                    Button(L10n.NewConversation.cancel) {
                         presentationMode.wrappedValue.dismiss()
                     }
                 }
