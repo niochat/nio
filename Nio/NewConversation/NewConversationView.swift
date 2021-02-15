@@ -31,6 +31,7 @@ struct NewConversationView: View {
                     ForEach(0..<users.count, id: \.self) { index in
                         HStack {
                             TextField(L10n.NewConversation.usernamePlaceholder, text: $users[index])
+                                .disableAutocorrection(true)
                             Spacer()
                             Button(action: addUser) {
                                 Image(systemName: "plus.circle")
