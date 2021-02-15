@@ -16,50 +16,103 @@ struct NewConversationView: View {
     @Environment(\.presentationMode) var presentationMode
 
     var store: AccountStore?
-    var parameters: MXRoomCreationParameters = MXRoomCreationParameters.init()
-    var visibility: MXRoomDirectoryVisibility = MXRoomDirectoryVisibility.private
-    @State private var user: String = ""
 
+    @State var isPublic = false
+    @State private var user: String = ""
+    @State private var users: [String] = []
+
+    @State var isWaiting = false
     @Binding var createdRoomId: ObjectIdentifier?
     @State private var isPresentingAlert = false
 
     var body: some View {
         NavigationView {
             Form {
-                Section(footer: Text("For example \(store?.session?.myUserId ?? "@user:server.org")")) {
-                    TextField("Matrix ID", text: $user)
+                Section(footer: Text("For example \(store?.session?.myUserId ?? "@username:server.org")")) {
+                    HStack {
+                        TextField("Matrix ID", text: $user, onCommit: addUser)
+                        Spacer()
+                        Button(action: addUser) {
+                            Image(systemName: "plus.circle")
+                        }
+                    }
                 }
+
                 Section {
-                    Button(action: {
-                        if self.user != "" {
-                            self.parameters.inviteArray = [self.user]
-                        }
-                        self.parameters.isDirect = true
-                        self.store!.session?.createRoom(parameters: self.parameters) { response in
-                            switch response {
-                            case .success(let room):
-                                createdRoomId = room.id
-                                presentationMode.wrappedValue.dismiss()
-                            case.failure(let error):
-                                isPresentingAlert = true
-                                print("Error on creating room: \(error)")
-                            }
-                        }
-                    }, label: {
+                    ForEach(users) { user in
+                        Text(user)
+                    }
+                    .onDelete { users.remove(atOffsets: $0) }
+                }
+
+                if users.count > 1 {
+                    Section {
+                        Toggle("Public Room", isOn: $isPublic)
+                    }
+                }
+
+                Section {
+                    Button(action: createRoom) {
                         Text("Start Chat")
-                    })
+                    }
+                    .disabled(users.count == 0)
                 }
                 .alert(isPresented: $isPresentingAlert) {
                     Alert(title: Text("Failed To Start Chat"))
                 }
             }
-            .navigationBarTitle(Text(L10n.NewConversation.title), displayMode: .inline)
+            .disabled(isWaiting)
+            .navigationTitle(users.count > 1 ? "New Room" : L10n.NewConversation.title)
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
                         presentationMode.wrappedValue.dismiss()
                     }
                 }
+            }
+        }
+    }
+
+    func addUser() {
+        guard !user.isEmpty && !users.contains(user) else { return }
+
+        withAnimation {
+            users.append(user)
+            user = ""
+        }
+    }
+
+    func createRoom() {
+        isWaiting = true
+
+        let parameters = MXRoomCreationParameters()
+        if users.count == 1 {
+            parameters.inviteArray = users
+            parameters.isDirect = true
+            parameters.visibility = MXRoomDirectoryVisibility.private.identifier
+            parameters.preset = MXRoomPreset.trustedPrivateChat.identifier
+        } else {
+            parameters.inviteArray = users
+            parameters.isDirect = false
+            if isPublic {
+                parameters.visibility = MXRoomDirectoryVisibility.public.identifier
+                parameters.preset = MXRoomPreset.publicChat.identifier
+            } else {
+                parameters.visibility = MXRoomDirectoryVisibility.private.identifier
+                parameters.preset = MXRoomPreset.privateChat.identifier
+            }
+        }
+
+        store!.session?.createRoom(parameters: parameters) { response in
+            switch response {
+            case .success(let room):
+                createdRoomId = room.id
+                presentationMode.wrappedValue.dismiss()
+            case.failure(let error):
+                isPresentingAlert = true
+                isWaiting = false
+                print("Error on creating room: \(error)")
             }
         }
     }
