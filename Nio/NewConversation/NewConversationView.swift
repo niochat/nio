@@ -17,10 +17,11 @@ struct NewConversationView: View {
 
     var store: AccountStore?
 
-    @State var isPublic = false
     @State private var users = [""]
+    @State private var roomName = ""
+    @State private var isPublic = false
 
-    @State var isWaiting = false
+    @State private var isWaiting = false
     @Binding var createdRoomId: ObjectIdentifier?
     @State private var isPresentingAlert = false
 
@@ -46,6 +47,7 @@ struct NewConversationView: View {
 
                 if users.count > 1 {
                     Section {
+                        TextField(L10n.NewConversation.roomName, text: $roomName)
                         Toggle(L10n.NewConversation.publicRoom, isOn: $isPublic)
                     }
                 }
@@ -55,7 +57,7 @@ struct NewConversationView: View {
                         Button(action: createRoom) {
                             Text(L10n.NewConversation.createRoom)
                         }
-                        .disabled(users.contains(""))
+                        .disabled(users.contains("") || (roomName.isEmpty && users.count > 1))
 
                         Spacer()
                         ProgressView()
@@ -97,6 +99,7 @@ struct NewConversationView: View {
         } else {
             parameters.inviteArray = users
             parameters.isDirect = false
+            parameters.name = roomName
             if isPublic {
                 parameters.visibility = MXRoomDirectoryVisibility.public.identifier
                 parameters.preset = MXRoomPreset.publicChat.identifier

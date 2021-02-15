@@ -82,7 +82,8 @@
 "new-conversation.title-room" = "New Room";
 "new-conversation.username-placeholder" = "Matrix ID";
 "new-conversation.for-example" = "For example";
-"new-conversation.publicRoom" = "Public Room";
-"new-conversation.createRoom" = "Start Chat";
+"new-conversation.room-name" = "Room Name";
+"new-conversation.public-room" = "Public Room";
+"new-conversation.create-room" = "Start Chat";
 "new-conversation.alert-failed" = "Failed To Start Chat";
 "new-conversation.cancel" = "Cancel";
