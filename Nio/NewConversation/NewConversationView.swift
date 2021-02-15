@@ -18,8 +18,7 @@ struct NewConversationView: View {
     var store: AccountStore?
 
     @State var isPublic = false
-    @State private var user: String = ""
-    @State private var users: [String] = []
+    @State private var users = [""]
 
     @State var isWaiting = false
     @Binding var createdRoomId: ObjectIdentifier?
@@ -29,20 +28,19 @@ struct NewConversationView: View {
         NavigationView {
             Form {
                 Section(footer: Text("For example \(store?.session?.myUserId ?? "@username:server.org")")) {
-                    HStack {
-                        TextField("Matrix ID", text: $user, onCommit: addUser)
-                        Spacer()
-                        Button(action: addUser) {
-                            Image(systemName: "plus.circle")
+                    ForEach(0..<users.count, id: \.self) { index in
+                        HStack {
+                            TextField("Matrix ID", text: $users[index])
+                            Spacer()
+                            Button(action: addUser) {
+                                Image(systemName: "plus.circle")
+                            }
+                            .disabled(users.contains(""))
+                            .opacity(index == users.count - 1 ? 1.0 : 0.0)
                         }
                     }
-                }
-
-                Section {
-                    ForEach(users) { user in
-                        Text(user)
-                    }
                     .onDelete { users.remove(atOffsets: $0) }
+                    .deleteDisabled(users.count == 1)
                 }
 
                 if users.count > 1 {
@@ -55,7 +53,7 @@ struct NewConversationView: View {
                     Button(action: createRoom) {
                         Text("Start Chat")
                     }
-                    .disabled(users.count == 0)
+                    .disabled(users.contains(""))
                 }
                 .alert(isPresented: $isPresentingAlert) {
                     Alert(title: Text("Failed To Start Chat"))
@@ -75,11 +73,8 @@ struct NewConversationView: View {
     }
 
     func addUser() {
-        guard !user.isEmpty && !users.contains(user) else { return }
-
         withAnimation {
-            users.append(user)
-            user = ""
+            users.append("")
         }
     }
 
