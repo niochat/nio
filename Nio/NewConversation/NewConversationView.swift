@@ -50,10 +50,16 @@ struct NewConversationView: View {
                 }
 
                 Section {
-                    Button(action: createRoom) {
-                        Text("Start Chat")
+                    HStack {
+                        Button(action: createRoom) {
+                            Text("Start Chat")
+                        }
+                        .disabled(users.contains(""))
+
+                        Spacer()
+                        ProgressView()
+                            .opacity(isWaiting ? 1.0 : 0.0)
                     }
-                    .disabled(users.contains(""))
                 }
                 .alert(isPresented: $isPresentingAlert) {
                     Alert(title: Text("Failed To Start Chat"))
@@ -116,5 +122,6 @@ struct NewConversationView: View {
 struct NewConversationView_Previews: PreviewProvider {
     static var previews: some View {
         NewConversationView(store: nil, createdRoomId: .constant(nil))
+            .preferredColorScheme(.light)
     }
 }
