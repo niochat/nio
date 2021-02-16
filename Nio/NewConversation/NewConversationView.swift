@@ -35,6 +35,7 @@ struct NewConversationView: View {
                                       text: Binding(get: { users[index] }, set: { users[index] = $0 }))
                                             // proxy binding prevents an index out of range crash on delete
                                 .disableAutocorrection(true)
+                                .autocapitalization(.none)
                             Spacer()
                             Button(action: addUser) {
                                 Image(systemName: "plus.circle")
