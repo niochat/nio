@@ -88,7 +88,7 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
     var bodyView: some View {
         VStack(alignment: isMe ? .trailing : .leading, spacing: 0) {
             HStack {
-                FlipGroup(flippedIf: isMe) {
+                Flipped(if: isMe) {
                     self.conditionalBadgedContentView
                     if !self.connectedEdges.contains(.bottomEdge) {
                         self.timestampView
