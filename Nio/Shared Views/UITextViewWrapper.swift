@@ -253,8 +253,8 @@ struct UITextViewWrapper: UIViewRepresentable {
             guard
                 text == "\n",
                 let onCommit = onCommit,
-                let view = textView as? TextView,
-                view.shouldCommit
+                let textView = textView as? TextView,
+                textView.shouldCommit
             else {
                 return true
             }
