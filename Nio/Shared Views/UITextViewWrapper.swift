@@ -1,7 +1,35 @@
 import SwiftUI
 
 struct UITextViewWrapper: UIViewRepresentable {
-    typealias UIViewType = UITextView
+    class TextView: UITextView {
+        private let newLineModifiers: [UIKeyboardHIDUsage] = [
+            .keyboardLeftShift,
+            .keyboardRightShift,
+            .keyboardLeftAlt,
+            .keyboardRightAlt
+        ]
+
+        private var currentModifiers: Set<UIKeyboardHIDUsage> = []
+        var shouldCommit: Bool { currentModifiers.isEmpty }
+
+        private func newLineKeyCodes(in presses: Set<UIPress>) -> [UIKeyboardHIDUsage] {
+            presses.compactMap { $0.key?.keyCode }.filter { newLineModifiers.contains($0) }
+        }
+
+        override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+            super.pressesBegan(presses, with: event)
+
+            let keyCodes = newLineKeyCodes(in: presses)
+            keyCodes.forEach { currentModifiers.insert($0) }
+        }
+
+        override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+            super.pressesEnded(presses, with: event)
+
+            let keyCodes = newLineKeyCodes(in: presses)
+            keyCodes.forEach { currentModifiers.remove($0) }
+        }
+    }
 
     @Environment(\.textAttributes)
     var envTextAttributes: TextAttributes
@@ -42,8 +70,8 @@ struct UITextViewWrapper: UIViewRepresentable {
     }
 
     // swiftlint:disable:next cyclomatic_complexity
-    func makeUIView(context: Context) -> UITextView {
-        let view = UITextView()
+    func makeUIView(context: Context) -> TextView {
+        let view = TextView()
 
         view.delegate = context.coordinator
 
@@ -107,7 +135,7 @@ struct UITextViewWrapper: UIViewRepresentable {
         return view
     }
 
-    func updateUIView(_ uiView: UITextView, context: Context) {
+    func updateUIView(_ uiView: TextView, context: Context) {
         uiView.attributedText = attributedText
         if isEditing {
             uiView.becomeFirstResponder()
@@ -206,8 +234,6 @@ struct UITextViewWrapper: UIViewRepresentable {
                 }
                 self.isEditing = false
             }
-
-            onCommit?()
         }
 
         func textView(
@@ -224,12 +250,18 @@ struct UITextViewWrapper: UIViewRepresentable {
             shouldChangeTextIn range: NSRange,
             replacementText text: String
         ) -> Bool {
-            guard let onCommit = self.onCommit, text == "\n" else {
+            guard
+                text == "\n",
+                let onCommit = onCommit,
+                let textView = textView as? TextView,
+                textView.shouldCommit
+            else {
                 return true
             }
 
-            textView.resignFirstResponder()
-            onCommit()
+            DispatchQueue.main.async {
+                onCommit()
+            }
 
             return false
         }
