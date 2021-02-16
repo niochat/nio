@@ -14,3 +14,12 @@
 "recent-rooms.accessibility-label.new-conversation" = "Нов разговор";
 "recent-rooms.new-message-placeholder" = "Ново съобщение";
 "recent-rooms.accessibility-label.settings" = "Настройки";
+"recent-rooms.pending-invitations.leave.alert-title" = "Отхвърляне на поканата?";
+"recent-rooms.accessibility-label.new-message-badge" = "%u нови съобщения";
+// Room $NAME, $LAST_ACTIVITY_TIMESTAMP $LAST_MESSAGE
+"recent-rooms.accessibility-label.room" = "Стая %@, %@ %@";
+"loading.cancel" = "Отмени";
+"loading.4" = "Възстановяване на сесията";
+"loading.3" = "Вписване";
+"login.failure-back-to-login" = "Обратно към Впиши се";
+"login.register-not-yet-implemented" = "Регистрацията на нов акаунт все още не е налична.";
