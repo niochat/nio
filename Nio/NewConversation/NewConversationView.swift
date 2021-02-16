@@ -112,7 +112,7 @@ struct NewConversationView: View {
             }
         }
 
-        store!.session?.createRoom(parameters: parameters) { response in
+        store?.session?.createRoom(parameters: parameters) { response in
             switch response {
             case .success(let room):
                 createdRoomId = room.id
