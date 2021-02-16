@@ -105,7 +105,8 @@ struct MessageComposerView: View {
         MultilineTextField(
             attributedText: $attributedMessage,
             placeholder: L10n.Composer.newMessage,
-            isEditing: self.$isEditing
+            isEditing: self.$isEditing,
+            textAttributes: TextAttributes(autocapitalizationType: .sentences)
         )
         .background(self.background)
         .onPreferenceChange(ContentSizeThatFitsKey.self) {
