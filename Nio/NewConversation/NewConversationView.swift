@@ -31,7 +31,9 @@ struct NewConversationView: View {
                 Section(footer: Text("\(L10n.NewConversation.forExample) \(store?.session?.myUserId ?? "@username:server.org")")) {
                     ForEach(0..<users.count, id: \.self) { index in
                         HStack {
-                            TextField(L10n.NewConversation.usernamePlaceholder, text: $users[index])
+                            TextField(L10n.NewConversation.usernamePlaceholder,
+                                      text: Binding(get: { users[index] }, set: { users[index] = $0 }))
+                                            // proxy binding prevents an index out of range crash on delete
                                 .disableAutocorrection(true)
                             Spacer()
                             Button(action: addUser) {
