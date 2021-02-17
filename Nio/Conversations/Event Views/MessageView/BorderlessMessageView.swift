@@ -87,22 +87,14 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
 
     var bodyView: some View {
         VStack(alignment: isMe ? .trailing : .leading, spacing: 0) {
-            if isMe {
-                HStack {
-                    if !self.connectedEdges.contains(.bottomEdge) {
-                        self.timestampView
-                   }
-                    self.conditionalBadgedContentView
-                }
-            } else {
-                HStack {
+            HStack {
+                Flipped(if: isMe) {
                     self.conditionalBadgedContentView
                     if !self.connectedEdges.contains(.bottomEdge) {
                         self.timestampView
                     }
                 }
             }
-
             GroupedReactionsView(reactions: model.reactions)
         }
     }
