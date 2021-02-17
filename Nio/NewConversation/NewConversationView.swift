@@ -25,10 +25,18 @@ struct NewConversationView: View {
     @Binding var createdRoomId: ObjectIdentifier?
     @State private var errorMessage: String?
 
+    var usersHeader: some View {
+        EditButton().frame(maxWidth: .infinity, alignment: .trailing)
+    }
+
+    var usersFooter: some View {
+        Text("\(L10n.NewConversation.forExample) \(store?.session?.myUserId ?? "@username:server.org")")
+    }
+
     var body: some View {
         NavigationView {
             Form {
-                Section(footer: Text("\(L10n.NewConversation.forExample) \(store?.session?.myUserId ?? "@username:server.org")")) {
+                Section(header: usersHeader, footer: usersFooter) {
                     ForEach(0..<users.count, id: \.self) { index in
                         HStack {
                             TextField(L10n.NewConversation.usernamePlaceholder,
@@ -40,6 +48,7 @@ struct NewConversationView: View {
                             Button(action: addUser) {
                                 Image(systemName: "plus.circle")
                             }
+                            .buttonStyle(BorderlessButtonStyle())
                             .disabled(users.contains(""))
                             .opacity(index == users.count - 1 ? 1.0 : 0.0)
                         }
