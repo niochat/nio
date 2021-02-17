@@ -11,12 +11,21 @@ struct UITextViewWrapper: UIViewRepresentable {
 
         private var currentModifiers: Set<UIKeyboardHIDUsage> = []
         var shouldCommit: Bool { currentModifiers.isEmpty }
+        var onCommit: (() -> Void)?
 
         private func newLineKeyCodes(in presses: Set<UIPress>) -> [UIKeyboardHIDUsage] {
             presses.compactMap { $0.key?.keyCode }.filter { newLineModifiers.contains($0) }
         }
 
         override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+            #if !targetEnvironment(macCatalyst)     // the return key isn't surfaced here in catalyst?! (macOS 11.2.1)
+                                                    // avoid the potential of handling it twice if that ever changes
+            if shouldCommit && presses.contains(where: { $0.key?.keyCode == .keyboardReturnOrEnter }) {
+                onCommit?()
+            }
+            #endif
+            
+            let presses = shouldCommit ? presses.filter { $0.key?.keyCode != .keyboardReturnOrEnter } : presses
             super.pressesBegan(presses, with: event)
 
             let keyCodes = newLineKeyCodes(in: presses)
@@ -24,6 +33,7 @@ struct UITextViewWrapper: UIViewRepresentable {
         }
 
         override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+            let presses = shouldCommit ? presses.filter { $0.key?.keyCode != .keyboardReturnOrEnter } : presses
             super.pressesEnded(presses, with: event)
 
             let keyCodes = newLineKeyCodes(in: presses)
@@ -74,6 +84,7 @@ struct UITextViewWrapper: UIViewRepresentable {
         let view = TextView()
 
         view.delegate = context.coordinator
+        view.onCommit = onCommit
 
         view.font = UIFont.preferredFont(forTextStyle: .body)
         view.textColor = UIColor.label
@@ -245,6 +256,7 @@ struct UITextViewWrapper: UIViewRepresentable {
             return onLinkInteraction?(url, interaction) ?? true
         }
 
+        #if targetEnvironment(macCatalyst)
         func textView(
             _ textView: UITextView,
             shouldChangeTextIn range: NSRange,
@@ -252,7 +264,6 @@ struct UITextViewWrapper: UIViewRepresentable {
         ) -> Bool {
             guard
                 text == "\n",
-                let onCommit = onCommit,
                 let textView = textView as? TextView,
                 textView.shouldCommit
             else {
@@ -260,11 +271,12 @@ struct UITextViewWrapper: UIViewRepresentable {
             }
 
             DispatchQueue.main.async {
-                onCommit()
+                self.onCommit?()
             }
 
             return false
         }
+        #endif
     }
 }
 
