@@ -9,12 +9,14 @@ struct RecentRoomsContainerView: View {
     @AppStorage("accentColor") var accentColor: Color = .purple
 
     @State private var selectedNavigationItem: SelectedNavigationItem?
+    @State private var selectedRoomId: ObjectIdentifier?
 
     var body: some View {
         RecentRoomsView(selectedNavigationItem: $selectedNavigationItem,
+                        selectedRoomId: $selectedRoomId,
                         rooms: store.rooms)
             .sheet(item: $selectedNavigationItem) {
-                NavigationSheet(selectedItem: $0)
+                NavigationSheet(selectedItem: $0, selectedRoomId: $selectedRoomId)
                     // This really shouldn't be necessary. SwiftUI bug?
                     .environmentObject(self.store)
                     .accentColor(accentColor)
@@ -29,6 +31,7 @@ struct RecentRoomsView: View {
     @EnvironmentObject var store: AccountStore
 
     @Binding fileprivate var selectedNavigationItem: SelectedNavigationItem?
+    @Binding fileprivate var selectedRoomId: ObjectIdentifier?
 
     var rooms: [NIORoom]
 
@@ -53,7 +56,7 @@ struct RecentRoomsView: View {
 
     var newConversationButton: some View {
         Button(action: {
-            self.selectedNavigationItem = .newMessage
+            self.selectedNavigationItem = .newConversation
         }, label: {
             Image(Asset.Icon.addRoom.name)
                 .resizable()
@@ -69,14 +72,16 @@ struct RecentRoomsView: View {
                     RoomsListSection(
                         sectionHeader: L10n.RecentRooms.PendingInvitations.header,
                         rooms: invitedRooms,
-                        onLeaveAlertTitle: L10n.RecentRooms.PendingInvitations.Leave.alertTitle
+                        onLeaveAlertTitle: L10n.RecentRooms.PendingInvitations.Leave.alertTitle,
+                        selectedRoomId: $selectedRoomId
                     )
                 }
 
                 RoomsListSection(
                     sectionHeader: invitedRooms.isEmpty ? nil : L10n.RecentRooms.Rooms.header ,
                     rooms: joinedRooms,
-                    onLeaveAlertTitle: L10n.RecentRooms.Leave.alertTitle
+                    onLeaveAlertTitle: L10n.RecentRooms.Leave.alertTitle,
+                    selectedRoomId: $selectedRoomId
                 )
 
             }
@@ -99,6 +104,8 @@ struct RoomsListSection: View {
     let rooms: [NIORoom]
     let onLeaveAlertTitle: String
 
+    @Binding var selectedRoomId: ObjectIdentifier?
+
     @State private var showConfirm: Bool = false
     @State private var leaveId: Int?
 
@@ -112,7 +119,7 @@ struct RoomsListSection: View {
 
     var sectionContent: some View {
         ForEach(rooms) { room in
-            NavigationLink(destination: RoomContainerView(room: room)) {
+            NavigationLink(destination: RoomContainerView(room: room), tag: room.id, selection: $selectedRoomId) {
                 RoomListItemContainerView(room: room)
             }
         }
@@ -166,7 +173,7 @@ struct RoomsListSection: View {
 
 private enum SelectedNavigationItem: Int, Identifiable {
     case settings
-    case newMessage
+    case newConversation
 
     var id: Int {
         return self.rawValue
@@ -175,6 +182,7 @@ private enum SelectedNavigationItem: Int, Identifiable {
 
 private struct NavigationSheet: View {
     var selectedItem: SelectedNavigationItem
+    @Binding var selectedRoomId: ObjectIdentifier?
 
     var body: some View {
         switch selectedItem {
@@ -182,9 +190,9 @@ private struct NavigationSheet: View {
             return AnyView(
                 SettingsContainerView()
             )
-        case .newMessage:
+        case .newConversation:
             return AnyView(
-                Text(L10n.RecentRooms.newMessagePlaceholder)
+                NewConversationContainerView(createdRoomId: $selectedRoomId)
             )
         }
     }
@@ -192,6 +200,6 @@ private struct NavigationSheet: View {
 
 struct RecentRoomsView_Previews: PreviewProvider {
     static var previews: some View {
-        RecentRoomsView(selectedNavigationItem: .constant(nil), rooms: [])
+        RecentRoomsView(selectedNavigationItem: .constant(nil), selectedRoomId: .constant(nil), rooms: [])
     }
 }

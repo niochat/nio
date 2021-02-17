@@ -165,6 +165,27 @@ internal enum L10n {
     }
   }
 
+  internal enum NewConversation {
+    /// Failed To Start Chat
+    internal static let alertFailed = L10n.tr("Localizable", "new-conversation.alert-failed")
+    /// Cancel
+    internal static let cancel = L10n.tr("Localizable", "new-conversation.cancel")
+    /// Start Chat
+    internal static let createRoom = L10n.tr("Localizable", "new-conversation.create-room")
+    /// For example
+    internal static let forExample = L10n.tr("Localizable", "new-conversation.for-example")
+    /// Public Room
+    internal static let publicRoom = L10n.tr("Localizable", "new-conversation.public-room")
+    /// Room Name
+    internal static let roomName = L10n.tr("Localizable", "new-conversation.room-name")
+    /// New Chat
+    internal static let titleChat = L10n.tr("Localizable", "new-conversation.title-chat")
+    /// New Room
+    internal static let titleRoom = L10n.tr("Localizable", "new-conversation.title-room")
+    /// Matrix ID
+    internal static let usernamePlaceholder = L10n.tr("Localizable", "new-conversation.username-placeholder")
+  }
+
   internal enum ReactionPicker {
     /// Tap on an emoji to send that reaction.
     internal static let title = L10n.tr("Localizable", "reaction-picker.title")
