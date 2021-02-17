@@ -23,7 +23,7 @@ struct NewConversationView: View {
 
     @State private var isWaiting = false
     @Binding var createdRoomId: ObjectIdentifier?
-    @State private var isPresentingAlert = false
+    @State private var errorMessage: String?
 
     var body: some View {
         NavigationView {
@@ -67,8 +67,9 @@ struct NewConversationView: View {
                             .opacity(isWaiting ? 1.0 : 0.0)
                     }
                 }
-                .alert(isPresented: $isPresentingAlert) {
-                    Alert(title: Text(L10n.NewConversation.alertFailed))
+                .alert(item: $errorMessage) { errorMessage in
+                    Alert(title: Text(L10n.NewConversation.alertFailed),
+                          message: Text(errorMessage))
                 }
             }
             .disabled(isWaiting)
@@ -118,7 +119,7 @@ struct NewConversationView: View {
                 createdRoomId = room.id
                 presentationMode.wrappedValue.dismiss()
             case.failure(let error):
-                isPresentingAlert = true
+                errorMessage = error.localizedDescription
                 isWaiting = false
                 print("Error on creating room: \(error)")
             }
