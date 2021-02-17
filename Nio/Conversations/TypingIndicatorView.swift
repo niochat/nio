@@ -42,7 +42,7 @@ struct TypingIndicatorView: View {
     var body: some View {
         HStack {
             Group {
-                Image(systemName: "ellipsis")
+                SFSymbol.typing
                 Text(text)
             }
             .font(.caption)

@@ -76,7 +76,7 @@ struct MessageComposerView: View {
                         Button(action: {
                             self.onCancel()
                         }, label: {
-                            Image(systemName: "multiply")
+                            SFSymbol.close
                                 .font(.system(size: 20))
                                 .accessibility(label: Text(L10n.Composer.AccessibilityLabel.cancelEdit))
                         })

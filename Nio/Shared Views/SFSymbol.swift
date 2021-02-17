@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum SFSymbol: String, View {
-    case ellipsis
+    case typing = "scribble.variable"
     case close = "xmark"
 
     var body: some View {
