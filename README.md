@@ -24,6 +24,14 @@ If you can help translate Nio into other languages your help would be much appre
 
 [![Translation status](https://translate.riot.im/widgets/nio/-/nio/multi-auto.svg)](https://translate.riot.im/engage/nio/?utm_source=widget)
 
+### Funding
+
+As with any project, development costs a lot of time and money. Nio has no intention whatsoever of ever becoming a paid application or to support itself through *icky* means like ads or selling user data. But if you feel so inclined to support the project financially, we'd be forever grateful.
+
+You can either use [Liberapay](https://liberapay.com/nio/) for "traditional" payment methods or donate some [Nano](https://nano.org) to `nano_1dr4k1p63sas5qf9wyepqnuxwpjgik8z1f3nmk1gs8dpopaz97er6rq4tojm`.
+(Other cryptocurrencies are of course just as welcome, just ask in the chat.)
+
+Thank you! ❤️
 
 ### Similar Apps
 
@@ -37,4 +45,3 @@ You might also have fun checking out the following applications.
 *Nio* is short for *Niobe* (albeit pronounced differently), captain of the ship *Logos* in the [Matrix trilogy](https://en.wikipedia.org/wiki/The_Matrix_(franchise)). Additionally it's a homonym of *Neo*, because there's definitely not enough Matrix projects jumping on that pun train already.
 
 The abbreviation NIO is also commonly used to refer to the term *non-blocking IO*. I find this entertaining for a messaging client, which is essentially a human IO interface.
-
