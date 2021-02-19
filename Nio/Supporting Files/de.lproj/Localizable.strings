@@ -78,3 +78,12 @@
 "settings.app-icon" = "App-Icon";
 "settings.log-out" = "Abmelden";
 "settings.dismiss" = "Fertig";
+"new-conversation.cancel" = "Abbrechen";
+"new-conversation.alert-failed" = "Starten des Chats fehlgeschlagen";
+"new-conversation.create-room" = "Chat starten";
+"new-conversation.public-room" = "Öffentlicher Raum";
+"new-conversation.room-name" = "Raum-Name";
+"new-conversation.for-example" = "Zum Beispiel";
+"new-conversation.username-placeholder" = "Matrix-ID";
+"new-conversation.title-room" = "Neuer Raum";
+"new-conversation.title-chat" = "Neuer Chat";
