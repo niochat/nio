@@ -35,7 +35,7 @@
 "room.invitation.join-alert.title" = "¿Unirse a la conversación?";
 "room.invitation.join-alert.message" = "¿Aceptas la invitación para unirte a '%@'?";
 "room.invitation.join-alert.join-button" = "Únete a";
-"composer.new-message" = "Nuevo mensaje...";
+"composer.new-message" = "Nuevo mensaje…";
 "composer.edit-message" = "Editar Mensaje:";
 "composer.accessibility-label.send-file" = "Enviar archivo";
 "composer.accessibility-label.send" = "Enviar";
