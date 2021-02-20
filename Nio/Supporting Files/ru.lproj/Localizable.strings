@@ -78,3 +78,12 @@
 "settings.app-icon" = "Иконка приложения";
 "settings.log-out" = "Выход";
 "settings.dismiss" = "Готово";
+"new-conversation.cancel" = "Отмена";
+"new-conversation.alert-failed" = "Не удалось начать чат";
+"new-conversation.create-room" = "Начать чат";
+"new-conversation.public-room" = "Публичная комната";
+"new-conversation.room-name" = "Название комнаты";
+"new-conversation.for-example" = "Например";
+"new-conversation.username-placeholder" = "Matrix ID";
+"new-conversation.title-room" = "Новая комната";
+"new-conversation.title-chat" = "Новый чат";
