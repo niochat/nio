@@ -28,7 +28,7 @@ If you can help translate Nio into other languages your help would be much appre
 
 As with any project, development costs a lot of time and money. Nio has no intention whatsoever of ever becoming a paid application or to support itself through *icky* means like ads or selling user data. But if you feel so inclined to support the project financially, we'd be forever grateful.
 
-You can either use [Liberapay](https://liberapay.com/nio/) for "traditional" payment methods or donate some [Nano](https://nano.org) to `nano_1dr4k1p63sas5qf9wyepqnuxwpjgik8z1f3nmk1gs8dpopaz97er6rq4tojm`.
+You can either use [Liberapay](https://liberapay.com/nio/) for "traditional" payment methods or donate some [Nano](https://nano.org) to [`nano_1dr4k1p63sas5qf9wyepqnuxwpjgik8z1f3nmk1gs8dpopaz97er6rq4tojm`](https://paynano.me/nano_1dr4k1p63sas5qf9wyepqnuxwpjgik8z1f3nmk1gs8dpopaz97er6rq4tojm).
 (Other cryptocurrencies are of course just as welcome, just ask in the chat.)
 
 Thank you! ❤️
