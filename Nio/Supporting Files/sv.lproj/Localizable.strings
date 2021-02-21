@@ -78,3 +78,12 @@
 "loading.2" = "Diskomfrobulerar meddelanden";
 "event.room-member.unknown-state" = "Okänd statushändelse: %@";
 "settings.dismiss" = "Klar";
+"new-conversation.cancel" = "Avbryt";
+"new-conversation.alert-failed" = "Misslyckades att starta chatt";
+"new-conversation.create-room" = "Start chatt";
+"new-conversation.public-room" = "Offentligt rum";
+"new-conversation.room-name" = "Rumsnamn";
+"new-conversation.for-example" = "Till exempel";
+"new-conversation.username-placeholder" = "Matrix-ID";
+"new-conversation.title-room" = "Nytt rum";
+"new-conversation.title-chat" = "Ny chatt";
