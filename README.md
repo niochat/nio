@@ -34,7 +34,7 @@ You can either use [Liberapay](https://liberapay.com/nio/) for "traditional" pay
 |------|
 | Nano |
 
-(Other cryptocurrencies are of course just as welcome, just ask in the chat.)
+Other cryptocurrencies are of course just as welcome, just ask in the chat.
 
 Thank you! ❤️
 
