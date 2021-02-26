@@ -25,10 +25,6 @@ struct NewConversationView: View {
     @Binding var createdRoomId: ObjectIdentifier?
     @State private var errorMessage: String?
 
-    var usersHeader: some View {
-        EditButton().frame(maxWidth: .infinity, alignment: .trailing)
-    }
-
     var usersFooter: some View {
         Text("\(L10n.NewConversation.forExample) \(store?.session?.myUserId ?? "@username:server.org")")
     }
@@ -36,7 +32,7 @@ struct NewConversationView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: usersHeader, footer: usersFooter) {
+                Section(footer: usersFooter) {
                     ForEach(0..<users.count, id: \.self) { index in
                         HStack {
                             TextField(L10n.NewConversation.usernamePlaceholder,
@@ -88,6 +84,11 @@ struct NewConversationView: View {
                 ToolbarItem(placement: .cancellationAction) {
                     Button(L10n.NewConversation.cancel) {
                         presentationMode.wrappedValue.dismiss()
+                    }
+                }
+                ToolbarItem(placement: .automatic) {
+                    if users.count > 1 {
+                        EditButton()
                     }
                 }
             }
