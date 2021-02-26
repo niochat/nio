@@ -79,3 +79,12 @@
 "settings.log-out" = "Sair";
 "settings.dismiss" = "Fechar";
 "recent-rooms.rooms.header" = "Salas";
+"new-conversation.cancel" = "Cancelar";
+"new-conversation.alert-failed" = "Falha ao iniciar a conversa";
+"new-conversation.create-room" = "Iniciar conversa";
+"new-conversation.public-room" = "Sala pública";
+"new-conversation.room-name" = "Nome da sala";
+"new-conversation.for-example" = "Por exemplo";
+"new-conversation.username-placeholder" = "ID na Matrix";
+"new-conversation.title-room" = "Nova sala";
+"new-conversation.title-chat" = "Nova conversa";
