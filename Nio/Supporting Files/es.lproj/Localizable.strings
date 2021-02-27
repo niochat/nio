@@ -64,7 +64,7 @@
 "room-power-level.admin" = "Administrador";
 "room-power-level.custom" = "Personalizado (%d)";
 "event.room-power-level.change-self" = "%@ cambió su nivel de %@ a %@";
-"event.room-power-level.change-other" = "%@ cambió el nivel de %@ de %@ a %@";
+"event.room-power-level.change-other" = "%@ cambió el nivel de permisos de %@ de %@ a %@";
 "event.redaction.redact-self" = "Mensaje eliminado por %@";
 "event.redaction.redact-other" = "%@ eliminó el mensaje de %@";
 "event.edited" = "editado";
@@ -77,4 +77,13 @@
 "settings.accent-color" = "Color destacado";
 "settings.app-icon" = "Icono de la aplicación";
 "settings.log-out" = "Desconectar";
-"settings.dismiss" = "Done";
+"settings.dismiss" = "Hecho";
+"new-conversation.cancel" = "Cancelar";
+"new-conversation.alert-failed" = "Falló el comienzo de la conversación";
+"new-conversation.create-room" = "Empezar conversación";
+"new-conversation.public-room" = "Sala pública";
+"new-conversation.room-name" = "Nombre de la sala";
+"new-conversation.for-example" = "Por ejemplo";
+"new-conversation.username-placeholder" = "ID de Matrix";
+"new-conversation.title-room" = "Nueva sala";
+"new-conversation.title-chat" = "Nueva conversación";
