@@ -18,6 +18,7 @@ struct NewConversationView: View {
     var store: AccountStore?
 
     @State private var users = [""]
+    @State private var editMode = EditMode.inactive
     @State private var roomName = ""
     @State private var isPublic = false
 
@@ -77,6 +78,10 @@ struct NewConversationView: View {
                           message: Text(errorMessage))
                 }
             }
+            .environment(\.editMode, $editMode)
+            .onChange(of: users.count) { count in
+                editMode = count > 1 ? editMode : .inactive
+            }
             .disabled(isWaiting)
             .navigationTitle(users.count > 1 ? L10n.NewConversation.titleRoom : L10n.NewConversation.titleChat)
             .navigationBarTitleDisplayMode(.inline)
@@ -88,7 +93,14 @@ struct NewConversationView: View {
                 }
                 ToolbarItem(placement: .automatic) {
                     if users.count > 1 {
-                        EditButton()
+                        // It seems that `.environment(\.editMode, $editMode)`
+                        // and `EditButton` cannot coexist.
+                        Button(editMode.isEditing
+                                ? L10n.NewConversation.done
+                                : L10n.NewConversation.edit
+                        ) {
+                            editMode = editMode.isEditing ? .inactive : .active
+                        }
                     }
                 }
             }

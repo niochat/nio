@@ -87,3 +87,5 @@
 "new-conversation.create-room" = "Start Chat";
 "new-conversation.alert-failed" = "Failed To Start Chat";
 "new-conversation.cancel" = "Cancel";
+"new-conversation.edit" = "Edit";
+"new-conversation.done" = "Done";
