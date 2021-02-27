@@ -8,10 +8,10 @@
 "login.open-registration-prompt" = "Nog geen account?";
 "login.register-not-yet-implemented" = "Registratie voor nieuwe accounts is nog niet geïmplementeerd.";
 "login.failure-back-to-login" = "Terug naar Login";
-"loading.1" = "De Matrix wordt gedecodeerd";
-"loading.2" = "Berichten worden verzameld";
+"loading.1" = "Berichten inparkeren";
+"loading.2" = "Berichten worden ontfrommeld";
 "loading.3" = "Inloggen";
-"loading.4" = "Herstel sessie";
+"loading.4" = "Sessie herstellen";
 "loading.cancel" = "Annuleer";
 "recent-rooms.accessibility-label.settings" = "Instellingen";
 "recent-rooms.accessibility-label.new-conversation" = "Nieuw Gesprek";
@@ -78,3 +78,12 @@
 "settings.app-icon" = "App Icoon";
 "settings.log-out" = "Uitloggen";
 "settings.dismiss" = "Gereed";
+"new-conversation.cancel" = "Annuleer";
+"new-conversation.alert-failed" = "Chat Starten Mislukt";
+"new-conversation.create-room" = "Start Chat";
+"new-conversation.public-room" = "Publieke Kamer";
+"new-conversation.title-room" = "Nieuwe Kamer";
+"new-conversation.room-name" = "Kamernaam";
+"new-conversation.for-example" = "Bijvoorbeeld";
+"new-conversation.username-placeholder" = "Matrix-ID";
+"new-conversation.title-chat" = "Nieuwe Chat";
