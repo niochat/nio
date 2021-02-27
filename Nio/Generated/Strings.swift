@@ -172,6 +172,10 @@ internal enum L10n {
     internal static let cancel = L10n.tr("Localizable", "new-conversation.cancel")
     /// Start Chat
     internal static let createRoom = L10n.tr("Localizable", "new-conversation.create-room")
+    /// Done
+    internal static let done = L10n.tr("Localizable", "new-conversation.done")
+    /// Edit
+    internal static let edit = L10n.tr("Localizable", "new-conversation.edit")
     /// For example
     internal static let forExample = L10n.tr("Localizable", "new-conversation.for-example")
     /// Public Room

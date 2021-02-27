@@ -18,16 +18,13 @@ struct NewConversationView: View {
     var store: AccountStore?
 
     @State private var users = [""]
+    @State private var editMode = EditMode.inactive
     @State private var roomName = ""
     @State private var isPublic = false
 
     @State private var isWaiting = false
     @Binding var createdRoomId: ObjectIdentifier?
     @State private var errorMessage: String?
-
-    var usersHeader: some View {
-        EditButton().frame(maxWidth: .infinity, alignment: .trailing)
-    }
 
     var usersFooter: some View {
         Text("\(L10n.NewConversation.forExample) \(store?.session?.myUserId ?? "@username:server.org")")
@@ -36,7 +33,7 @@ struct NewConversationView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: usersHeader, footer: usersFooter) {
+                Section(footer: usersFooter) {
                     ForEach(0..<users.count, id: \.self) { index in
                         HStack {
                             TextField(L10n.NewConversation.usernamePlaceholder,
@@ -81,6 +78,10 @@ struct NewConversationView: View {
                           message: Text(errorMessage))
                 }
             }
+            .environment(\.editMode, $editMode)
+            .onChange(of: users.count) { count in
+                editMode = count > 1 ? editMode : .inactive
+            }
             .disabled(isWaiting)
             .navigationTitle(users.count > 1 ? L10n.NewConversation.titleRoom : L10n.NewConversation.titleChat)
             .navigationBarTitleDisplayMode(.inline)
@@ -88,6 +89,18 @@ struct NewConversationView: View {
                 ToolbarItem(placement: .cancellationAction) {
                     Button(L10n.NewConversation.cancel) {
                         presentationMode.wrappedValue.dismiss()
+                    }
+                }
+                ToolbarItem(placement: .automatic) {
+                    if users.count > 1 {
+                        // It seems that `.environment(\.editMode, $editMode)`
+                        // and `EditButton` cannot coexist.
+                        Button(editMode.isEditing
+                                ? L10n.NewConversation.done
+                                : L10n.NewConversation.edit
+                        ) {
+                            editMode = editMode.isEditing ? .inactive : .active
+                        }
                     }
                 }
             }
