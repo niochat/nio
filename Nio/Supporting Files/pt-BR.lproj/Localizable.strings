@@ -88,3 +88,5 @@
 "new-conversation.username-placeholder" = "ID na Matrix";
 "new-conversation.title-room" = "Nova sala";
 "new-conversation.title-chat" = "Nova conversa";
+"new-conversation.done" = "Feito";
+"new-conversation.edit" = "Editar";
