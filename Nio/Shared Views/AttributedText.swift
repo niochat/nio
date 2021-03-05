@@ -1,4 +1,5 @@
 import SwiftUI
+import NioKit
 
 struct ContentSizeThatFitsKey: PreferenceKey {
     static var defaultValue: CGSize = .zero
@@ -34,15 +35,21 @@ extension View {
 }
 
 struct TextAttributes {
-    var textContainerInset: UIEdgeInsets? = nil
+    var textContainerInset: UXEdgeInsets? = nil
     var lineFragmentPadding: CGFloat? = nil
+  #if os(macOS)
+  #else
     var returnKeyType: UIReturnKeyType? = nil
+  #endif
     var textAlignment: NSTextAlignment? = nil
     var linkTextAttributes: [NSAttributedString.Key: Any]? = nil
     var clearsOnInsertion: Bool? = nil
+  #if os(macOS)
+  #else
     var contentType: UITextContentType? = nil
     var autocorrectionType: UITextAutocorrectionType? = nil
     var autocapitalizationType: UITextAutocapitalizationType? = nil
+  #endif
     var lineLimit: Int? = nil
     var lineBreakMode: NSLineBreakMode? = nil
     var isSecure: Bool? = nil
@@ -51,7 +58,22 @@ struct TextAttributes {
     var isScrollingEnabled: Bool? = nil
 
     fileprivate static var `default`: Self {
-        .init(
+      #if os(macOS)
+        return Self(
+            textContainerInset: .init(top: 8.0, left: 0.0, bottom: 8.0, right: 0.0),
+            lineFragmentPadding: 8.0,
+            textAlignment: nil,
+            linkTextAttributes: nil,
+            clearsOnInsertion: false,
+            lineLimit: nil,
+            lineBreakMode: .byWordWrapping,
+            isSecure: false,
+            isEditable: true,
+            isSelectable: true,
+            isScrollingEnabled: true
+        )
+      #else
+        return .init(
             textContainerInset: .init(top: 8.0, left: 0.0, bottom: 8.0, right: 0.0),
             lineFragmentPadding: 8.0,
             returnKeyType: .default,
@@ -68,18 +90,25 @@ struct TextAttributes {
             isSelectable: true,
             isScrollingEnabled: true
         )
+      #endif
     }
 
     func overriding(_ fallback: Self) -> Self {
-        let textContainerInset: UIEdgeInsets? = self.textContainerInset ?? fallback.textContainerInset
+        let textContainerInset: UXEdgeInsets? = self.textContainerInset ?? fallback.textContainerInset
         let lineFragmentPadding: CGFloat? = self.lineFragmentPadding ?? fallback.lineFragmentPadding
+      #if os(macOS)
+      #else
         let returnKeyType: UIReturnKeyType? = self.returnKeyType ?? fallback.returnKeyType
+      #endif
         let textAlignment: NSTextAlignment? = self.textAlignment ?? fallback.textAlignment
         let linkTextAttributes: [NSAttributedString.Key: Any]? = self.linkTextAttributes ?? fallback.linkTextAttributes
         let clearsOnInsertion: Bool? = self.clearsOnInsertion ?? fallback.clearsOnInsertion
+      #if os(macOS)
+      #else
         let contentType: UITextContentType? = self.contentType ?? fallback.contentType
         let autocorrectionType: UITextAutocorrectionType? = self.autocorrectionType ?? fallback.autocorrectionType
         let autocapitalizationType: UITextAutocapitalizationType? = self.autocapitalizationType ?? fallback.autocapitalizationType
+      #endif
         let lineLimit: Int? = self.lineLimit ?? fallback.lineLimit
         let lineBreakMode: NSLineBreakMode? = self.lineBreakMode ?? fallback.lineBreakMode
         let isSecure: Bool? = self.isSecure ?? fallback.isSecure
@@ -87,6 +116,21 @@ struct TextAttributes {
         let isSelectable: Bool? = self.isSelectable ?? fallback.isSelectable
         let isScrollingEnabled: Bool? = self.isScrollingEnabled ?? fallback.isScrollingEnabled
 
+      #if os(macOS)
+        return .init(
+            textContainerInset: textContainerInset,
+            lineFragmentPadding: lineFragmentPadding,
+            textAlignment: textAlignment,
+            linkTextAttributes: linkTextAttributes,
+            clearsOnInsertion: clearsOnInsertion,
+            lineLimit: lineLimit,
+            lineBreakMode: lineBreakMode,
+            isSecure: isSecure,
+            isEditable: isEditable,
+            isSelectable: isSelectable,
+            isScrollingEnabled: isScrollingEnabled
+        )
+      #else
         return .init(
             textContainerInset: textContainerInset,
             lineFragmentPadding: lineFragmentPadding,
@@ -104,6 +148,7 @@ struct TextAttributes {
             isSelectable: isSelectable,
             isScrollingEnabled: isScrollingEnabled
         )
+      #endif
     }
 }
 
@@ -118,11 +163,19 @@ struct AttributedText: View {
 
     private let textAttributes: TextAttributes
 
+  #if os(macOS)
+    // TODO: Port me to AppKit
+  #else
     private let onLinkInteraction: (((URL, UITextItemInteraction) -> Bool))?
+  #endif
     private let onEditingChanged: ((Bool) -> Void)?
     private let onCommit: (() -> Void)?
 
     var body: some View {
+      #if os(macOS)
+        // TODO: Port me to AppKit
+        Text("No UITextViewWrapper on macOS yet")
+      #else
         let textAttributes = self.textAttributes
             .overriding(self.envTextAttributes)
             .overriding(TextAttributes.default)
@@ -143,8 +196,26 @@ struct AttributedText: View {
                 value: self.sizeThatFits
             )
         }
+      #endif
     }
 
+  #if os(macOS)
+    init(
+        attributedText: Binding<NSAttributedString>,
+        isEditing: Binding<Bool>,
+        textAttributes: TextAttributes = .init(),
+        onEditingChanged: ((Bool) -> Void)? = nil,
+        onCommit: (() -> Void)? = nil
+    ) {
+        self._attributedText = attributedText
+        self._isEditing = isEditing
+
+        self.textAttributes = textAttributes
+
+        self.onEditingChanged = onEditingChanged
+        self.onCommit = onCommit
+    }
+  #else
     init(
         attributedText: Binding<NSAttributedString>,
         isEditing: Binding<Bool>,
@@ -162,6 +233,7 @@ struct AttributedText: View {
         self.onEditingChanged = onEditingChanged
         self.onCommit = onCommit
     }
+  #endif
 }
 
 struct AttributedText_Previews: PreviewProvider {
@@ -169,8 +241,8 @@ struct AttributedText_Previews: PreviewProvider {
         let attributedString = NSAttributedString(
             string: "Hello world!",
             attributes: [
-                NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body),
-                NSAttributedString.Key.foregroundColor: UIColor.red,
+                NSAttributedString.Key.font: UXFont.preferredFont(forTextStyle: .body),
+                NSAttributedString.Key.foregroundColor: UXColor.red,
             ]
         )
         return AttributedText(

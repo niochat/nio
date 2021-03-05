@@ -46,7 +46,7 @@ struct SettingsView: View {
                     })
                 }
             }
-            .navigationBarTitle(Text(L10n.Settings.title), displayMode: .inline)
+            .navigationBarTitle(L10n.Settings.title, displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button(L10n.Settings.dismiss) {

@@ -141,7 +141,11 @@ struct LoginForm: View {
 
             FormTextField(title: L10n.Login.Form.password, text: $password, isSecure: true)
 
+          #if os(macOS)
+            FormTextField(title: L10n.Login.Form.homeserver, text: $homeserver)
+          #else
             FormTextField(title: L10n.Login.Form.homeserver, text: $homeserver, keyboardType: .URL)
+          #endif
             Text(L10n.Login.Form.homeserverOptionalExplanation)
                 .font(.caption)
                 .foregroundColor(.gray)
@@ -156,7 +160,10 @@ private struct FormTextField: View {
     @Binding var text: String
     var onEditingChanged: ((Bool) -> Void)?
 
+  #if os(macOS)
+  #else
     var keyboardType: UIKeyboardType = .default
+  #endif
 
     var isSecure = false
 
@@ -170,11 +177,18 @@ private struct FormTextField: View {
                     .padding()
                     .textContentType(.password)
             } else {
+              #if os(macOS)
+                TextField(title, text: $text, onEditingChanged: onEditingChanged ?? { _ in })
+                    .padding()
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+              #else
                 TextField(title, text: $text, onEditingChanged: onEditingChanged ?? { _ in })
                     .padding()
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
                     .keyboardType(keyboardType)
+              #endif
             }
         }
         .padding(.horizontal)

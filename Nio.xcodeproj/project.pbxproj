@@ -97,6 +97,60 @@
 		E843F2F225F274B600B0F33B /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = E843F2F125F274B600B0F33B /* Introspect */; };
 		E843F2F425F274C900B0F33B /* CommonMarkAttributedString in Frameworks */ = {isa = PBXBuildFile; productRef = E843F2F325F274C900B0F33B /* CommonMarkAttributedString */; };
 		E843F2F825F2776F00B0F33B /* BlurHash in Frameworks */ = {isa = PBXBuildFile; productRef = E843F2F725F2776F00B0F33B /* BlurHash */; };
+		E843F2F925F2780600B0F33B /* NioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51BF8CD254C2FE5000FB0A4 /* NioApp.swift */; };
+		E843F2FA25F2780900B0F33B /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931E02384328A004449E1 /* RootView.swift */; };
+		E843F2FB25F2780C00B0F33B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931F423846966004449E1 /* LoginView.swift */; };
+		E843F2FC25F2780C00B0F33B /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902B8A42395A77800698B87 /* LoadingView.swift */; };
+		E843F2FD25F2781100B0F33B /* IndividuallyRoundedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D5F23A276B30079C24F /* IndividuallyRoundedRectangle.swift */; };
+		E843F2FE25F2781400B0F33B /* AttributedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AE882458EEBB00D84133 /* AttributedText.swift */; };
+		E843F2FF25F2781400B0F33B /* MessageTextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51F762B25D6E9950061B4A4 /* MessageTextViewWrapper.swift */; };
+		E843F30025F2781400B0F33B /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A2E46245E2EF800A79443 /* MultilineTextField.swift */; };
+		E843F30225F2781400B0F33B /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B29F5B42466EC240084043B /* ImagePicker.swift */; };
+		E843F30325F2781400B0F33B /* MarkdownText.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AE8A2458EF0900D84133 /* MarkdownText.swift */; };
+		E843F30425F2781400B0F33B /* ReverseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389CB238EBB1400B2E1DF /* ReverseList.swift */; };
+		E843F30525F2781400B0F33B /* SFSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395E06FC25DDC1790059F6AD /* SFSymbol.swift */; };
+		E843F30625F2781800B0F33B /* TypedEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D7223A6AE890079C24F /* TypedEvents.swift */; };
+		E843F30725F2781800B0F33B /* GroupingIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D6E23A56BBE0079C24F /* GroupingIterator.swift */; };
+		E843F30825F2781800B0F33B /* PeekableIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D6A23A55E930079C24F /* PeekableIterator.swift */; };
+		E843F30925F2781800B0F33B /* MXURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984654423B7ECBA006C173B /* MXURL.swift */; };
+		E843F30A25F2781800B0F33B /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389932388899200B2E1DF /* Formatter.swift */; };
+		E843F30B25F2781B00B0F33B /* RoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C93208238553E4004449E1 /* RoomView.swift */; };
+		E843F30C25F2781B00B0F33B /* RecentRoomsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C932062384BB13004449E1 /* RecentRoomsView.swift */; };
+		E843F30D25F2781B00B0F33B /* RoomListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3923898E2388707E00B2E1DF /* RoomListItemView.swift */; };
+		E843F30E25F2781F00B0F33B /* EventContextMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392221AF243A6F8E004D8794 /* EventContextMenuModel.swift */; };
+		E843F30F25F2782000B0F33B /* ReactionPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3922219F2437285B004D8794 /* ReactionPicker.swift */; };
+		E843F31025F2782000B0F33B /* EventContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3922219524366989004D8794 /* EventContextMenu.swift */; };
+		E843F31125F2782000B0F33B /* TypingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B834BF243FC42000AE1EA0 /* TypingIndicatorView.swift */; };
+		E843F31225F2782000B0F33B /* MessageComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C9320A23856033004449E1 /* MessageComposerView.swift */; };
+		E843F31325F2782200B0F33B /* EventContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D166C72385C832006DD257 /* EventContainerView.swift */; };
+		E843F31425F2782700B0F33B /* GroupedReactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392221AD243A0508004D8794 /* GroupedReactionsView.swift */; };
+		E843F31525F2782700B0F33B /* ReactionsListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADF662324614A3300F5063F /* ReactionsListItemView.swift */; };
+		E843F31625F2782700B0F33B /* ReactionGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADF662124614A3300F5063F /* ReactionGroupView.swift */; };
+		E843F31725F2782B00B0F33B /* BorderlessMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D5423A272D10079C24F /* BorderlessMessageView.swift */; };
+		E843F31825F2782B00B0F33B /* BorderedMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D5623A272D10079C24F /* BorderedMessageView.swift */; };
+		E843F31925F2782B00B0F33B /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902B89B2393FE6100698B87 /* MessageView.swift */; };
+		E843F31A25F2782B00B0F33B /* MediaEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3921176124435E0000892B00 /* MediaEventView.swift */; };
+		E843F31B25F2782B00B0F33B /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D5523A272D10079C24F /* MessageViewModel.swift */; };
+		E843F31C25F2782E00B0F33B /* RedactionEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392221A92438083C004D8794 /* RedactionEventView.swift */; };
+		E843F31D25F2782E00B0F33B /* GenericEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902B89D2393FE8200698B87 /* GenericEventView.swift */; };
+		E843F31E25F2782E00B0F33B /* RoomMemberEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392221AB2438149D004D8794 /* RoomMemberEventView.swift */; };
+		E843F31F25F2782E00B0F33B /* RoomPowerLevelsEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392221B3243D1627004D8794 /* RoomPowerLevelsEventView.swift */; };
+		E843F32025F2782E00B0F33B /* RoomNameEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392221B5243F88FD004D8794 /* RoomNameEventView.swift */; };
+		E843F32125F2782E00B0F33B /* RoomTopicEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392221B1243D0CCC004D8794 /* RoomTopicEventView.swift */; };
+		E843F32225F2782E00B0F33B /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AE91245AEEBA00D84133 /* BadgeView.swift */; };
+		E843F32325F2783200B0F33B /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DD77AE247006E300A29DEE /* AppIcon.swift */; };
+		E843F32425F2783200B0F33B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902B8A22395935600698B87 /* SettingsView.swift */; };
+		E843F32525F2783500B0F33B /* NewConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD867262460ADEF0014E3D6 /* NewConversationView.swift */; };
+		E843F32625F2783900B0F33B /* String+Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D166C52385C804006DD257 /* String+Emoji.swift */; };
+		E843F32725F2783900B0F33B /* Color+allAccent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA0726240B534600FD28C6 /* Color+allAccent.swift */; };
+		E843F32825F2783900B0F33B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD68179246C31EB001878EB /* String+Extensions.swift */; };
+		E843F32925F2783900B0F33B /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFCB322245F6E6700869320 /* NSAttributedString+Extensions.swift */; };
+		E843F32A25F2783900B0F33B /* Color+Named.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D5C23A276700079C24F /* Color+Named.swift */; };
+		E843F32B25F2783900B0F33B /* ContentSizeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902B89F239410EE00698B87 /* ContentSizeCategory.swift */; };
+		E843F32C25F2783900B0F33B /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D5A23A2734C0079C24F /* EnvironmentValues.swift */; };
+		E843F32D25F2783900B0F33B /* PreviewProvider+Enumeration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D6223A278F40079C24F /* PreviewProvider+Enumeration.swift */; };
+		E843F32E25F2783D00B0F33B /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3921175E244256AF00892B00 /* Strings.swift */; };
+		E843F32F25F2783D00B0F33B /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AE93245B507400D84133 /* Assets.swift */; };
 		E897AA1925F2707C00D11427 /* EditEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B058B5524573A570059BC75 /* EditEvent.swift */; };
 		E897AA1A25F2707C00D11427 /* NIORoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389D1238F2E6F00B2E1DF /* NIORoom.swift */; };
 		E897AA1B25F2707C00D11427 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3964D5CC25C4BB0200617C35 /* Configuration.swift */; };
@@ -1318,6 +1372,60 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E843F31E25F2782E00B0F33B /* RoomMemberEventView.swift in Sources */,
+				E843F30C25F2781B00B0F33B /* RecentRoomsView.swift in Sources */,
+				E843F30E25F2781F00B0F33B /* EventContextMenuModel.swift in Sources */,
+				E843F30425F2781400B0F33B /* ReverseList.swift in Sources */,
+				E843F32825F2783900B0F33B /* String+Extensions.swift in Sources */,
+				E843F31525F2782700B0F33B /* ReactionsListItemView.swift in Sources */,
+				E843F31A25F2782B00B0F33B /* MediaEventView.swift in Sources */,
+				E843F2FE25F2781400B0F33B /* AttributedText.swift in Sources */,
+				E843F32325F2783200B0F33B /* AppIcon.swift in Sources */,
+				E843F30525F2781400B0F33B /* SFSymbol.swift in Sources */,
+				E843F32E25F2783D00B0F33B /* Strings.swift in Sources */,
+				E843F32625F2783900B0F33B /* String+Emoji.swift in Sources */,
+				E843F31925F2782B00B0F33B /* MessageView.swift in Sources */,
+				E843F30925F2781800B0F33B /* MXURL.swift in Sources */,
+				E843F31C25F2782E00B0F33B /* RedactionEventView.swift in Sources */,
+				E843F2FB25F2780C00B0F33B /* LoginView.swift in Sources */,
+				E843F30F25F2782000B0F33B /* ReactionPicker.swift in Sources */,
+				E843F30825F2781800B0F33B /* PeekableIterator.swift in Sources */,
+				E843F2FC25F2780C00B0F33B /* LoadingView.swift in Sources */,
+				E843F2FD25F2781100B0F33B /* IndividuallyRoundedRectangle.swift in Sources */,
+				E843F31125F2782000B0F33B /* TypingIndicatorView.swift in Sources */,
+				E843F32525F2783500B0F33B /* NewConversationView.swift in Sources */,
+				E843F31F25F2782E00B0F33B /* RoomPowerLevelsEventView.swift in Sources */,
+				E843F32F25F2783D00B0F33B /* Assets.swift in Sources */,
+				E843F31225F2782000B0F33B /* MessageComposerView.swift in Sources */,
+				E843F2FF25F2781400B0F33B /* MessageTextViewWrapper.swift in Sources */,
+				E843F32425F2783200B0F33B /* SettingsView.swift in Sources */,
+				E843F30D25F2781B00B0F33B /* RoomListItemView.swift in Sources */,
+				E843F30625F2781800B0F33B /* TypedEvents.swift in Sources */,
+				E843F30325F2781400B0F33B /* MarkdownText.swift in Sources */,
+				E843F2FA25F2780900B0F33B /* RootView.swift in Sources */,
+				E843F32D25F2783900B0F33B /* PreviewProvider+Enumeration.swift in Sources */,
+				E843F31425F2782700B0F33B /* GroupedReactionsView.swift in Sources */,
+				E843F32725F2783900B0F33B /* Color+allAccent.swift in Sources */,
+				E843F30A25F2781800B0F33B /* Formatter.swift in Sources */,
+				E843F30B25F2781B00B0F33B /* RoomView.swift in Sources */,
+				E843F2F925F2780600B0F33B /* NioApp.swift in Sources */,
+				E843F31625F2782700B0F33B /* ReactionGroupView.swift in Sources */,
+				E843F32C25F2783900B0F33B /* EnvironmentValues.swift in Sources */,
+				E843F32025F2782E00B0F33B /* RoomNameEventView.swift in Sources */,
+				E843F30225F2781400B0F33B /* ImagePicker.swift in Sources */,
+				E843F31725F2782B00B0F33B /* BorderlessMessageView.swift in Sources */,
+				E843F32925F2783900B0F33B /* NSAttributedString+Extensions.swift in Sources */,
+				E843F32A25F2783900B0F33B /* Color+Named.swift in Sources */,
+				E843F30725F2781800B0F33B /* GroupingIterator.swift in Sources */,
+				E843F31825F2782B00B0F33B /* BorderedMessageView.swift in Sources */,
+				E843F32B25F2783900B0F33B /* ContentSizeCategory.swift in Sources */,
+				E843F31025F2782000B0F33B /* EventContextMenu.swift in Sources */,
+				E843F31D25F2782E00B0F33B /* GenericEventView.swift in Sources */,
+				E843F32225F2782E00B0F33B /* BadgeView.swift in Sources */,
+				E843F30025F2781400B0F33B /* MultilineTextField.swift in Sources */,
+				E843F31B25F2782B00B0F33B /* MessageViewModel.swift in Sources */,
+				E843F31325F2782200B0F33B /* EventContainerView.swift in Sources */,
+				E843F32125F2782E00B0F33B /* RoomTopicEventView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

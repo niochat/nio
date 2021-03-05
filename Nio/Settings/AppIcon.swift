@@ -36,6 +36,18 @@ struct AppIcon: Identifiable, View {
     }
 }
 
+#if os(macOS)
+class AppIconTitle: ObservableObject {
+    static var alternatives = [ "Default" ]
+
+    var current: String {
+        get { return Self.alternatives.first ?? "" }
+        set {
+          assert(newValue == Self.alternatives.first)
+        }
+    }
+}
+#else // iOS
 class AppIconTitle: ObservableObject {
     static var alternatives = [
         "Default",
@@ -61,3 +73,4 @@ class AppIconTitle: ObservableObject {
         }
     }
 }
+#endif // iOS

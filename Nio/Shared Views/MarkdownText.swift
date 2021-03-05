@@ -1,24 +1,43 @@
 import SwiftUI
+import NioKit
 
 import CommonMarkAttributedString
 
 struct MarkdownText: View {
     let markdown: String
-    let textColor: UIColor
+    let textColor: UXColor
 
     @State private var contentSizeThatFits: CGSize = .zero
 
     private let textAttributes: TextAttributes
-    private let linkColor: UIColor
+    private let linkColor: UXColor
 
+  #if os(macOS)
+  #else
     #warning("Is onLinkInteraction needed?")
     private let onLinkInteraction: (((URL, UITextItemInteraction) -> Bool))?
+  #endif
 
+  #if os(macOS)
     public init(
         markdown: String,
-        textColor: UIColor,
+        textColor: UXColor,
         textAttributes: TextAttributes = .init(),
-        linkColor: UIColor,
+        linkColor: UXColor,
+        dummyLinkInteraction: ((URL, String) -> Bool)? = nil
+    ) {
+        self.markdown = markdown
+
+        self.textColor = textColor.resolvedColor(with: .current)
+        self.textAttributes = textAttributes
+        self.linkColor = linkColor
+    }
+  #else
+    public init(
+        markdown: String,
+        textColor: UXColor,
+        textAttributes: TextAttributes = .init(),
+        linkColor: UXColor,
         onLinkInteraction: (((URL, UITextItemInteraction) -> Bool))? = nil
     ) {
         self.markdown = markdown
@@ -28,10 +47,11 @@ struct MarkdownText: View {
         self.linkColor = linkColor
         self.onLinkInteraction = onLinkInteraction
     }
+  #endif
 
     internal var attributes: [NSAttributedString.Key: Any] {
         [
-            NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body),
+            NSAttributedString.Key.font: UXFont.preferredFont(forTextStyle: .body),
             NSAttributedString.Key.foregroundColor: self.textColor,
         ]
     }
@@ -48,7 +68,7 @@ struct MarkdownText: View {
         )
     }
 
-    private var textContainerInset: UIEdgeInsets {
+    private var textContainerInset: UXEdgeInsets {
         .init(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
     }
 

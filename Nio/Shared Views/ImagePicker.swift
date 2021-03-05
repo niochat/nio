@@ -1,5 +1,15 @@
 import SwiftUI
 
+#if os(macOS)
+
+struct ImagePicker: View {
+  
+    var body: some View {
+        Text("Sorrz, no image picker on macOS yet :-/")
+    }
+}
+
+#else // iOS
 struct ImagePicker: UIViewControllerRepresentable {
 
     @Environment(\.presentationMode)
@@ -60,3 +70,4 @@ struct ImagePicker: UIViewControllerRepresentable {
     }
 
 }
+#endif // iOS

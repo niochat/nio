@@ -11,25 +11,53 @@ struct RoomContainerView: View {
     @State var showImagePicker = false
     @State var eventToReactTo: String?
     @State var showJoinAlert = false
+  
+    private var roomView: RoomView {
+      RoomView(
+          events: room.events(),
+          isDirect: room.isDirect,
+          showAttachmentPicker: $showAttachmentPicker,
+          onCommit: { message in
+              self.room.send(text: message)
+          },
+          onReact: { eventId in
+              self.eventToReactTo = eventId
+          },
+          onRedact: { eventId, reason in
+              self.room.redact(eventId: eventId, reason: reason)
+          },
+          onEdit: { message, eventId in
+              self.room.edit(text: message, eventId: eventId)
+          }
+      )
+    }
 
     var body: some View {
-        RoomView(
-            events: room.events(),
-            isDirect: room.isDirect,
-            showAttachmentPicker: $showAttachmentPicker,
-            onCommit: { message in
-                self.room.send(text: message)
-            },
-            onReact: { eventId in
-                self.eventToReactTo = eventId
-            },
-            onRedact: { eventId, reason in
-                self.room.redact(eventId: eventId, reason: reason)
-            },
-            onEdit: { message, eventId in
-                self.room.edit(text: message, eventId: eventId)
+      #if os(macOS)
+        roomView
+        .navigationTitle(Text(room.summary.displayname ?? ""))
+        // TODO: action sheet
+        .sheet(item: $eventToReactTo) { eventId in
+            ReactionPicker { reaction in
+                self.room.react(toEventId: eventId, emoji: reaction)
+                self.eventToReactTo = nil
             }
-        )
+        }
+        // TODO: join alert
+        .onAppear {
+            switch self.room.summary.membership {
+            case .invite:
+                self.showJoinAlert = true
+            case .join:
+                self.room.markAllAsRead()
+            default:
+                break
+            }
+        }
+        .environmentObject(room)
+        // TODO: background sheet thing
+      #else
+        roomView
         .navigationBarTitle(Text(room.summary.displayname ?? ""), displayMode: .inline)
         .actionSheet(isPresented: $showAttachmentPicker) {
             self.attachmentPickerSheet
@@ -72,8 +100,12 @@ struct RoomContainerView: View {
                 }
             }
         )
+      #endif
     }
 
+  #if os(macOS)
+    // TODO: port me to macOS
+  #else
     var attachmentPickerSheet: ActionSheet {
         ActionSheet(
             title: Text(L10n.Room.Attachment.selectType), buttons: [
@@ -84,6 +116,7 @@ struct RoomContainerView: View {
             ]
         )
     }
+  #endif
 }
 
 struct RoomView: View {
