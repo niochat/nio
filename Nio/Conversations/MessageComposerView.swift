@@ -55,9 +55,9 @@ struct MessageComposerView: View {
 
     private var messageEditorHeight: CGFloat {
       #if os(macOS)
-        min(self.contentSizeThatFits.height, 240)
+        return min(self.contentSizeThatFits.height, 240)
       #else
-        min(
+        return min(
             self.contentSizeThatFits.height,
             0.25 * UIScreen.main.bounds.height
         )
