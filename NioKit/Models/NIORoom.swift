@@ -160,6 +160,11 @@ extension UXImage {
     }
 
     public func jpeg(_ jpegQuality: JPEGQuality) -> Data? {
-        return jpegData(compressionQuality: jpegQuality.rawValue)
+        #if os(macOS)
+            return tiffRepresentation(using  : .jpeg,
+                                      factor : Float(jpegQuality.rawValue))
+        #else
+            return jpegData(compressionQuality: jpegQuality.rawValue)
+        #endif
     }
 }
