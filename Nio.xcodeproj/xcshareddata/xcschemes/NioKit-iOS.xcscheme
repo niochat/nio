@@ -14,9 +14,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CADF662C24614D2300F5063F"
-               BuildableName = "NioKit_iOS.framework"
+               BlueprintIdentifier = "E8302D4B25F26CA500E962E9"
+               BuildableName = "libNioKit-iOS.a"
                BlueprintName = "NioKit-iOS"
+               ReferencedContainer = "container:Nio.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CADF663424614D2300F5063F"
+               BuildableName = "NioKitTests.xctest"
+               BlueprintName = "NioKitTests"
                ReferencedContainer = "container:Nio.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,6 +42,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CADF663424614D2300F5063F"
+               BuildableName = "NioKitTests.xctest"
+               BlueprintName = "NioKitTests"
+               ReferencedContainer = "container:Nio.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -50,8 +74,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CADF662C24614D2300F5063F"
-            BuildableName = "NioKit_iOS.framework"
+            BlueprintIdentifier = "E8302D4B25F26CA500E962E9"
+            BuildableName = "libNioKit-iOS.a"
             BlueprintName = "NioKit-iOS"
             ReferencedContainer = "container:Nio.xcodeproj">
          </BuildableReference>

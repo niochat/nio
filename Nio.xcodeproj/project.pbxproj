@@ -35,7 +35,6 @@
 		392389CC238EBB1500B2E1DF /* ReverseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389CB238EBB1400B2E1DF /* ReverseList.swift */; };
 		393411D1239087D2003B49B8 /* EventCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393411D0239087D2003B49B8 /* EventCollectionTests.swift */; };
 		395E06FD25DDC1790059F6AD /* SFSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395E06FC25DDC1790059F6AD /* SFSymbol.swift */; };
-		3964D5D625C4BB8600617C35 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3964D5CC25C4BB0200617C35 /* Configuration.swift */; };
 		3984654523B7ECBA006C173B /* MXURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984654423B7ECBA006C173B /* MXURL.swift */; };
 		3984654823B8D809006C173B /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3984654723B8D809006C173B /* SDWebImageSwiftUI */; };
 		39B834C0243FC42000AE1EA0 /* TypingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B834BF243FC42000AE1EA0 /* TypingIndicatorView.swift */; };
@@ -60,17 +59,13 @@
 		4B0A2E47245E2EF800A79443 /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A2E46245E2EF800A79443 /* MultilineTextField.swift */; };
 		4B29F5B52466EC240084043B /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B29F5B42466EC240084043B /* ImagePicker.swift */; };
 		4B693515249BBBFE0029D549 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEFD7E246F414D00CCF4A0 /* ShareViewController.swift */; };
-		4BD3DCA42482FF08009B5048 /* AccountStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD3DCA32482FF08009B5048 /* AccountStore.swift */; };
 		4BD867272460ADEF0014E3D6 /* NewConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD867262460ADEF0014E3D6 /* NewConversationView.swift */; };
-		4BE63CC0247EC53500C1D4DC /* NioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CADF662D24614D2300F5063F /* NioKit.framework */; };
-		4BEB8C04250403D200E90699 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEB8C03250403D200E90699 /* UserDefaults.swift */; };
 		4BFEFD86246F414D00CCF4A0 /* NioShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4BFEFD7C246F414D00CCF4A0 /* NioShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4BFEFD8C246F458000CCF4A0 /* GetURL.js in Resources */ = {isa = PBXBuildFile; fileRef = 4BFEFD8B246F458000CCF4A0 /* GetURL.js */; };
 		4BFEFD92246F686000CCF4A0 /* ShareContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEFD91246F686000CCF4A0 /* ShareContentView.swift */; };
 		A51BF8CE254C2FE5000FB0A4 /* NioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51BF8CD254C2FE5000FB0A4 /* NioApp.swift */; };
 		A51F762C25D6E9950061B4A4 /* MessageTextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51F762B25D6E9950061B4A4 /* MessageTextViewWrapper.swift */; };
 		A58352A625A667AB00533363 /* MatrixSDK in Frameworks */ = {isa = PBXBuildFile; productRef = A58352A525A667AB00533363 /* MatrixSDK */; };
-		A58352AC25A667B300533363 /* MatrixSDK in Frameworks */ = {isa = PBXBuildFile; productRef = A58352AB25A667B300533363 /* MatrixSDK */; };
 		CAAF5BF82478696F006FDC33 /* UITextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAF5BF72478696F006FDC33 /* UITextViewWrapper.swift */; };
 		CAC46D5723A272D10079C24F /* BorderlessMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D5423A272D10079C24F /* BorderlessMessageView.swift */; };
 		CAC46D5823A272D10079C24F /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D5523A272D10079C24F /* MessageViewModel.swift */; };
@@ -86,48 +81,33 @@
 		CAC46D7323A6AE890079C24F /* TypedEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D7223A6AE890079C24F /* TypedEvents.swift */; };
 		CAC46D7923A6D4B90079C24F /* TypedEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D7823A6D4B90079C24F /* TypedEventsTests.swift */; };
 		CAD68163246B19E3001878EB /* NioKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD68162246B19E3001878EB /* NioKitTests.swift */; };
-		CAD68166246B1A59001878EB /* NIORoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389D1238F2E6F00B2E1DF /* NIORoom.swift */; };
-		CAD68167246B1A59001878EB /* EventCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393411C623903C94003B49B8 /* EventCollection.swift */; };
-		CAD68168246B1A59001878EB /* NIORoomSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389D5238F3EB200B2E1DF /* NIORoomSummary.swift */; };
-		CAD68169246B1A5F001878EB /* Reaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADF661E246149B900F5063F /* Reaction.swift */; };
-		CAD6816A246B1AE3001878EB /* ReactionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39222198243689D6004D8794 /* ReactionEvent.swift */; };
-		CAD6816B246B1AE3001878EB /* EditEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B058B5524573A570059BC75 /* EditEvent.swift */; };
-		CAD6816C246B1AE3001878EB /* CustomEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3922219C24368B25004D8794 /* CustomEvent.swift */; };
-		CAD6816D246B1BAD001878EB /* MXEvent+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393411C823904428003B49B8 /* MXEvent+Extensions.swift */; };
-		CAD68171246B1BFB001878EB /* MX+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3923898C238859D100B2E1DF /* MX+Identifiable.swift */; };
-		CAD68172246B1C02001878EB /* MXClient+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389882386FD3900B2E1DF /* MXClient+Publisher.swift */; };
-		CAD68174246B1C09001878EB /* MXCredentials+Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA0722240B3C9A00FD28C6 /* MXCredentials+Keychain.swift */; };
-		CAD68178246B1E9F001878EB /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = CAD68177246B1E9F001878EB /* KeychainAccess */; };
 		CAD6817A246C31EB001878EB /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD68179246C31EB001878EB /* String+Extensions.swift */; };
 		CADF662424614A3300F5063F /* ReactionGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADF662124614A3300F5063F /* ReactionGroupView.swift */; };
 		CADF662624614A3300F5063F /* ReactionsListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADF662324614A3300F5063F /* ReactionsListItemView.swift */; };
-		CADF663624614D2300F5063F /* NioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CADF662D24614D2300F5063F /* NioKit.framework */; };
-		CADF663F24614D2300F5063F /* NioKit.h in Headers */ = {isa = PBXBuildFile; fileRef = CADF662F24614D2300F5063F /* NioKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CADF664224614D2300F5063F /* NioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CADF662D24614D2300F5063F /* NioKit.framework */; };
-		CADF664324614D2300F5063F /* NioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CADF662D24614D2300F5063F /* NioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CAF2AE892458EEBC00D84133 /* AttributedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AE882458EEBB00D84133 /* AttributedText.swift */; };
 		CAF2AE8B2458EF0900D84133 /* MarkdownText.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AE8A2458EF0900D84133 /* MarkdownText.swift */; };
 		CAF2AE92245AEEBA00D84133 /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AE91245AEEBA00D84133 /* BadgeView.swift */; };
 		CAF2AE94245B507400D84133 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AE93245B507400D84133 /* Assets.swift */; };
 		CAF2AE9D245DF4B400D84133 /* CommonMarkAttributedString in Frameworks */ = {isa = PBXBuildFile; productRef = CAF2AE9C245DF4B400D84133 /* CommonMarkAttributedString */; };
 		CAFCB323245F6E6700869320 /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFCB322245F6E6700869320 /* NSAttributedString+Extensions.swift */; };
-		E8302D2F25F13D7D00E962E9 /* NioKit.h in Headers */ = {isa = PBXBuildFile; fileRef = CADF662F24614D2300F5063F /* NioKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8302D3125F13D7D00E962E9 /* MXClient+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389882386FD3900B2E1DF /* MXClient+Publisher.swift */; };
-		E8302D3225F13D7D00E962E9 /* MXEvent+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393411C823904428003B49B8 /* MXEvent+Extensions.swift */; };
-		E8302D3325F13D7D00E962E9 /* NIORoomSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389D5238F3EB200B2E1DF /* NIORoomSummary.swift */; };
-		E8302D3425F13D7D00E962E9 /* CustomEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3922219C24368B25004D8794 /* CustomEvent.swift */; };
-		E8302D3525F13D7D00E962E9 /* MXCredentials+Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA0722240B3C9A00FD28C6 /* MXCredentials+Keychain.swift */; };
-		E8302D3625F13D7D00E962E9 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3964D5CC25C4BB0200617C35 /* Configuration.swift */; };
-		E8302D3725F13D7D00E962E9 /* AccountStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD3DCA32482FF08009B5048 /* AccountStore.swift */; };
-		E8302D3825F13D7D00E962E9 /* MX+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3923898C238859D100B2E1DF /* MX+Identifiable.swift */; };
-		E8302D3925F13D7D00E962E9 /* EditEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B058B5524573A570059BC75 /* EditEvent.swift */; };
-		E8302D3A25F13D7D00E962E9 /* ReactionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39222198243689D6004D8794 /* ReactionEvent.swift */; };
-		E8302D3B25F13D7D00E962E9 /* Reaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADF661E246149B900F5063F /* Reaction.swift */; };
-		E8302D3C25F13D7D00E962E9 /* EventCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393411C623903C94003B49B8 /* EventCollection.swift */; };
-		E8302D3D25F13D7D00E962E9 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEB8C03250403D200E90699 /* UserDefaults.swift */; };
-		E8302D3E25F13D7D00E962E9 /* NIORoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389D1238F2E6F00B2E1DF /* NIORoom.swift */; };
-		E8302D4025F13D7D00E962E9 /* MatrixSDK in Frameworks */ = {isa = PBXBuildFile; productRef = E8302D2C25F13D7D00E962E9 /* MatrixSDK */; };
-		E8302D4125F13D7D00E962E9 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = E8302D2A25F13D7D00E962E9 /* KeychainAccess */; };
+		E8B4725425F26D5A00ACEFCB /* MXCredentials+Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA0722240B3C9A00FD28C6 /* MXCredentials+Keychain.swift */; };
+		E8B4725525F26D5A00ACEFCB /* MXClient+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389882386FD3900B2E1DF /* MXClient+Publisher.swift */; };
+		E8B4725625F26D5A00ACEFCB /* ReactionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39222198243689D6004D8794 /* ReactionEvent.swift */; };
+		E8B4725725F26D5A00ACEFCB /* EditEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B058B5524573A570059BC75 /* EditEvent.swift */; };
+		E8B4725825F26D5A00ACEFCB /* CustomEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3922219C24368B25004D8794 /* CustomEvent.swift */; };
+		E8B4725925F26D5A00ACEFCB /* NIORoomSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389D5238F3EB200B2E1DF /* NIORoomSummary.swift */; };
+		E8B4725A25F26D5A00ACEFCB /* MX+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3923898C238859D100B2E1DF /* MX+Identifiable.swift */; };
+		E8B4725B25F26D5A00ACEFCB /* Reaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADF661E246149B900F5063F /* Reaction.swift */; };
+		E8B4725C25F26D5A00ACEFCB /* NIORoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389D1238F2E6F00B2E1DF /* NIORoom.swift */; };
+		E8B4725D25F26D5A00ACEFCB /* EventCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393411C623903C94003B49B8 /* EventCollection.swift */; };
+		E8B4725E25F26D5A00ACEFCB /* MXEvent+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393411C823904428003B49B8 /* MXEvent+Extensions.swift */; };
+		E8B4725F25F26D5A00ACEFCB /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3964D5CC25C4BB0200617C35 /* Configuration.swift */; };
+		E8B4726025F26D5A00ACEFCB /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEB8C03250403D200E90699 /* UserDefaults.swift */; };
+		E8B4726125F26D5A00ACEFCB /* AccountStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD3DCA32482FF08009B5048 /* AccountStore.swift */; };
+		E8B4726525F26D9200ACEFCB /* MatrixSDK in Frameworks */ = {isa = PBXBuildFile; productRef = E8B4726425F26D9200ACEFCB /* MatrixSDK */; };
+		E8B4726725F26D9900ACEFCB /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = E8B4726625F26D9900ACEFCB /* KeychainAccess */; };
+		E8B4726A25F26DD700ACEFCB /* libNioKit-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8302D4C25F26CA500E962E9 /* libNioKit-iOS.a */; };
+		E8B4726B25F26DE600ACEFCB /* libNioKit-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8302D4C25F26CA500E962E9 /* libNioKit-iOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,26 +118,12 @@
 			remoteGlobalIDString = 39C931D823843289004449E1;
 			remoteInfo = Nio;
 		};
-		4BE63CC2247EC53500C1D4DC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 39C931D123843289004449E1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CADF662C24614D2300F5063F;
-			remoteInfo = NioKit;
-		};
 		4BFEFD84246F414D00CCF4A0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 39C931D123843289004449E1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 4BFEFD7B246F414D00CCF4A0;
 			remoteInfo = NioShareExtension;
-		};
-		CADF663724614D2300F5063F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 39C931D123843289004449E1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CADF662C24614D2300F5063F;
-			remoteInfo = NioKit;
 		};
 		CADF663924614D2300F5063F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -166,12 +132,19 @@
 			remoteGlobalIDString = 39C931D823843289004449E1;
 			remoteInfo = Nio;
 		};
-		CADF664024614D2300F5063F /* PBXContainerItemProxy */ = {
+		E8B4726825F26DCB00ACEFCB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 39C931D123843289004449E1 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = CADF662C24614D2300F5063F;
-			remoteInfo = NioKit;
+			remoteGlobalIDString = E8302D4B25F26CA500E962E9;
+			remoteInfo = "NioKit-iOS";
+		};
+		E8B4726C25F26DE900ACEFCB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 39C931D123843289004449E1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E8302D4B25F26CA500E962E9;
+			remoteInfo = "NioKit-iOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -193,9 +166,17 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				CADF664324614D2300F5063F /* NioKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E8302D4A25F26CA500E962E9 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -313,7 +294,6 @@
 		CADF661E246149B900F5063F /* Reaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reaction.swift; sourceTree = "<group>"; };
 		CADF662124614A3300F5063F /* ReactionGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactionGroupView.swift; sourceTree = "<group>"; };
 		CADF662324614A3300F5063F /* ReactionsListItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactionsListItemView.swift; sourceTree = "<group>"; };
-		CADF662D24614D2300F5063F /* NioKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NioKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CADF662F24614D2300F5063F /* NioKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NioKit.h; sourceTree = "<group>"; };
 		CADF663024614D2300F5063F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CADF663524614D2300F5063F /* NioKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NioKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -323,7 +303,7 @@
 		CAF2AE91245AEEBA00D84133 /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
 		CAF2AE93245B507400D84133 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		CAFCB322245F6E6700869320 /* NSAttributedString+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extensions.swift"; sourceTree = "<group>"; };
-		E8302D4625F13D7D00E962E9 /* NioKit-macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "NioKit-macOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8302D4C25F26CA500E962E9 /* libNioKit-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libNioKit-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -338,12 +318,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8B4726A25F26DD700ACEFCB /* libNioKit-iOS.a in Frameworks */,
 				3984654823B8D809006C173B /* SDWebImageSwiftUI in Frameworks */,
 				39E5032324EAFA8700FED642 /* Introspect in Frameworks */,
 				CAF2AE9D245DF4B400D84133 /* CommonMarkAttributedString in Frameworks */,
 				390D63A42465F62D00B8F640 /* BlurHash in Frameworks */,
 				A58352A625A667AB00533363 /* MatrixSDK in Frameworks */,
-				CADF664224614D2300F5063F /* NioKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,16 +331,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4BE63CC0247EC53500C1D4DC /* NioKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CADF662A24614D2300F5063F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A58352AC25A667B300533363 /* MatrixSDK in Frameworks */,
-				CAD68178246B1E9F001878EB /* KeychainAccess in Frameworks */,
+				E8B4726B25F26DE600ACEFCB /* libNioKit-iOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,16 +339,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CADF663624614D2300F5063F /* NioKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E8302D3F25F13D7D00E962E9 /* Frameworks */ = {
+		E8302D4925F26CA500E962E9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E8302D4025F13D7D00E962E9 /* MatrixSDK in Frameworks */,
-				E8302D4125F13D7D00E962E9 /* KeychainAccess in Frameworks */,
+				E8B4726725F26D9900ACEFCB /* KeychainAccess in Frameworks */,
+				E8B4726525F26D9200ACEFCB /* MatrixSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,10 +521,9 @@
 			children = (
 				39C931D92384328A004449E1 /* Nio.app */,
 				393411CE239087D2003B49B8 /* NioTests.xctest */,
-				CADF662D24614D2300F5063F /* NioKit.framework */,
 				CADF663524614D2300F5063F /* NioKitTests.xctest */,
 				4BFEFD7C246F414D00CCF4A0 /* NioShareExtension.appex */,
-				E8302D4625F13D7D00E962E9 /* NioKit-macOS.framework */,
+				E8302D4C25F26CA500E962E9 /* libNioKit-iOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -780,25 +749,6 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		CADF662824614D2300F5063F /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CADF663F24614D2300F5063F /* NioKit.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E8302D2E25F13D7D00E962E9 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E8302D2F25F13D7D00E962E9 /* NioKit.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
 		393411CD239087D2003B49B8 /* NioTests */ = {
 			isa = PBXNativeTarget;
@@ -835,7 +785,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				CADF664124614D2300F5063F /* PBXTargetDependency */,
+				E8B4726925F26DCB00ACEFCB /* PBXTargetDependency */,
 				4BFEFD85246F414D00CCF4A0 /* PBXTargetDependency */,
 			);
 			name = Nio;
@@ -861,34 +811,12 @@
 			buildRules = (
 			);
 			dependencies = (
-				4BE63CC3247EC53500C1D4DC /* PBXTargetDependency */,
+				E8B4726D25F26DE900ACEFCB /* PBXTargetDependency */,
 			);
 			name = NioShareExtension;
 			productName = NioShareExtension;
 			productReference = 4BFEFD7C246F414D00CCF4A0 /* NioShareExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
-		};
-		CADF662C24614D2300F5063F /* NioKit-iOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CADF664424614D2300F5063F /* Build configuration list for PBXNativeTarget "NioKit-iOS" */;
-			buildPhases = (
-				CADF662824614D2300F5063F /* Headers */,
-				CADF662924614D2300F5063F /* Sources */,
-				CADF662A24614D2300F5063F /* Frameworks */,
-				CADF662B24614D2300F5063F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "NioKit-iOS";
-			packageProductDependencies = (
-				CAD68177246B1E9F001878EB /* KeychainAccess */,
-				A58352AB25A667B300533363 /* MatrixSDK */,
-			);
-			productName = NioKit;
-			productReference = CADF662D24614D2300F5063F /* NioKit.framework */;
-			productType = "com.apple.product-type.framework";
 		};
 		CADF663424614D2300F5063F /* NioKitTests */ = {
 			isa = PBXNativeTarget;
@@ -901,7 +829,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				CADF663824614D2300F5063F /* PBXTargetDependency */,
 				CADF663A24614D2300F5063F /* PBXTargetDependency */,
 			);
 			name = NioKitTests;
@@ -909,27 +836,26 @@
 			productReference = CADF663524614D2300F5063F /* NioKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		E8302D2925F13D7D00E962E9 /* NioKit-macOS */ = {
+		E8302D4B25F26CA500E962E9 /* NioKit-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E8302D4325F13D7D00E962E9 /* Build configuration list for PBXNativeTarget "NioKit-macOS" */;
+			buildConfigurationList = E8302D5025F26CA500E962E9 /* Build configuration list for PBXNativeTarget "NioKit-iOS" */;
 			buildPhases = (
-				E8302D2E25F13D7D00E962E9 /* Headers */,
-				E8302D3025F13D7D00E962E9 /* Sources */,
-				E8302D3F25F13D7D00E962E9 /* Frameworks */,
-				E8302D4225F13D7D00E962E9 /* Resources */,
+				E8302D4825F26CA500E962E9 /* Sources */,
+				E8302D4925F26CA500E962E9 /* Frameworks */,
+				E8302D4A25F26CA500E962E9 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "NioKit-macOS";
+			name = "NioKit-iOS";
 			packageProductDependencies = (
-				E8302D2A25F13D7D00E962E9 /* KeychainAccess */,
-				E8302D2C25F13D7D00E962E9 /* MatrixSDK */,
+				E8B4726425F26D9200ACEFCB /* MatrixSDK */,
+				E8B4726625F26D9900ACEFCB /* KeychainAccess */,
 			);
-			productName = NioKit;
-			productReference = E8302D4625F13D7D00E962E9 /* NioKit-macOS.framework */;
-			productType = "com.apple.product-type.framework";
+			productName = "NioKit-iOS";
+			productReference = E8302D4C25F26CA500E962E9 /* libNioKit-iOS.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
@@ -937,7 +863,7 @@
 		39C931D123843289004449E1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1140;
+				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = "Kilian Koeltzsch";
 				TargetAttributes = {
@@ -951,14 +877,13 @@
 					4BFEFD7B246F414D00CCF4A0 = {
 						CreatedOnToolsVersion = 11.4.1;
 					};
-					CADF662C24614D2300F5063F = {
-						CreatedOnToolsVersion = 11.4.1;
-						LastSwiftMigration = 1140;
-					};
 					CADF663424614D2300F5063F = {
 						CreatedOnToolsVersion = 11.4.1;
 						LastSwiftMigration = 1140;
 						TestTargetID = 39C931D823843289004449E1;
+					};
+					E8302D4B25F26CA500E962E9 = {
+						CreatedOnToolsVersion = 12.5;
 					};
 				};
 			};
@@ -1001,8 +926,7 @@
 			targets = (
 				39C931D823843289004449E1 /* Nio */,
 				393411CD239087D2003B49B8 /* NioTests */,
-				CADF662C24614D2300F5063F /* NioKit-iOS */,
-				E8302D2925F13D7D00E962E9 /* NioKit-macOS */,
+				E8302D4B25F26CA500E962E9 /* NioKit-iOS */,
 				CADF663424614D2300F5063F /* NioKitTests */,
 				4BFEFD7B246F414D00CCF4A0 /* NioShareExtension */,
 			);
@@ -1044,21 +968,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CADF662B24614D2300F5063F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		CADF663324614D2300F5063F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E8302D4225F13D7D00E962E9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1227,27 +1137,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CADF662924614D2300F5063F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CAD68172246B1C02001878EB /* MXClient+Publisher.swift in Sources */,
-				CAD6816D246B1BAD001878EB /* MXEvent+Extensions.swift in Sources */,
-				CAD68168246B1A59001878EB /* NIORoomSummary.swift in Sources */,
-				CAD6816C246B1AE3001878EB /* CustomEvent.swift in Sources */,
-				CAD68174246B1C09001878EB /* MXCredentials+Keychain.swift in Sources */,
-				3964D5D625C4BB8600617C35 /* Configuration.swift in Sources */,
-				4BD3DCA42482FF08009B5048 /* AccountStore.swift in Sources */,
-				CAD68171246B1BFB001878EB /* MX+Identifiable.swift in Sources */,
-				CAD6816B246B1AE3001878EB /* EditEvent.swift in Sources */,
-				CAD6816A246B1AE3001878EB /* ReactionEvent.swift in Sources */,
-				CAD68169246B1A5F001878EB /* Reaction.swift in Sources */,
-				CAD68167246B1A59001878EB /* EventCollection.swift in Sources */,
-				4BEB8C04250403D200E90699 /* UserDefaults.swift in Sources */,
-				CAD68166246B1A59001878EB /* NIORoom.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		CADF663124614D2300F5063F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1256,24 +1145,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E8302D3025F13D7D00E962E9 /* Sources */ = {
+		E8302D4825F26CA500E962E9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E8302D3125F13D7D00E962E9 /* MXClient+Publisher.swift in Sources */,
-				E8302D3225F13D7D00E962E9 /* MXEvent+Extensions.swift in Sources */,
-				E8302D3325F13D7D00E962E9 /* NIORoomSummary.swift in Sources */,
-				E8302D3425F13D7D00E962E9 /* CustomEvent.swift in Sources */,
-				E8302D3525F13D7D00E962E9 /* MXCredentials+Keychain.swift in Sources */,
-				E8302D3625F13D7D00E962E9 /* Configuration.swift in Sources */,
-				E8302D3725F13D7D00E962E9 /* AccountStore.swift in Sources */,
-				E8302D3825F13D7D00E962E9 /* MX+Identifiable.swift in Sources */,
-				E8302D3925F13D7D00E962E9 /* EditEvent.swift in Sources */,
-				E8302D3A25F13D7D00E962E9 /* ReactionEvent.swift in Sources */,
-				E8302D3B25F13D7D00E962E9 /* Reaction.swift in Sources */,
-				E8302D3C25F13D7D00E962E9 /* EventCollection.swift in Sources */,
-				E8302D3D25F13D7D00E962E9 /* UserDefaults.swift in Sources */,
-				E8302D3E25F13D7D00E962E9 /* NIORoom.swift in Sources */,
+				E8B4725A25F26D5A00ACEFCB /* MX+Identifiable.swift in Sources */,
+				E8B4725B25F26D5A00ACEFCB /* Reaction.swift in Sources */,
+				E8B4725525F26D5A00ACEFCB /* MXClient+Publisher.swift in Sources */,
+				E8B4725625F26D5A00ACEFCB /* ReactionEvent.swift in Sources */,
+				E8B4725925F26D5A00ACEFCB /* NIORoomSummary.swift in Sources */,
+				E8B4725725F26D5A00ACEFCB /* EditEvent.swift in Sources */,
+				E8B4726125F26D5A00ACEFCB /* AccountStore.swift in Sources */,
+				E8B4725825F26D5A00ACEFCB /* CustomEvent.swift in Sources */,
+				E8B4725F25F26D5A00ACEFCB /* Configuration.swift in Sources */,
+				E8B4725D25F26D5A00ACEFCB /* EventCollection.swift in Sources */,
+				E8B4725E25F26D5A00ACEFCB /* MXEvent+Extensions.swift in Sources */,
+				E8B4725425F26D5A00ACEFCB /* MXCredentials+Keychain.swift in Sources */,
+				E8B4726025F26D5A00ACEFCB /* UserDefaults.swift in Sources */,
+				E8B4725C25F26D5A00ACEFCB /* NIORoom.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1285,30 +1174,25 @@
 			target = 39C931D823843289004449E1 /* Nio */;
 			targetProxy = 393411D3239087D2003B49B8 /* PBXContainerItemProxy */;
 		};
-		4BE63CC3247EC53500C1D4DC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CADF662C24614D2300F5063F /* NioKit-iOS */;
-			targetProxy = 4BE63CC2247EC53500C1D4DC /* PBXContainerItemProxy */;
-		};
 		4BFEFD85246F414D00CCF4A0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4BFEFD7B246F414D00CCF4A0 /* NioShareExtension */;
 			targetProxy = 4BFEFD84246F414D00CCF4A0 /* PBXContainerItemProxy */;
-		};
-		CADF663824614D2300F5063F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CADF662C24614D2300F5063F /* NioKit-iOS */;
-			targetProxy = CADF663724614D2300F5063F /* PBXContainerItemProxy */;
 		};
 		CADF663A24614D2300F5063F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 39C931D823843289004449E1 /* Nio */;
 			targetProxy = CADF663924614D2300F5063F /* PBXContainerItemProxy */;
 		};
-		CADF664124614D2300F5063F /* PBXTargetDependency */ = {
+		E8B4726925F26DCB00ACEFCB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = CADF662C24614D2300F5063F /* NioKit-iOS */;
-			targetProxy = CADF664024614D2300F5063F /* PBXContainerItemProxy */;
+			target = E8302D4B25F26CA500E962E9 /* NioKit-iOS */;
+			targetProxy = E8B4726825F26DCB00ACEFCB /* PBXContainerItemProxy */;
+		};
+		E8B4726D25F26DE900ACEFCB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E8302D4B25F26CA500E962E9 /* NioKit-iOS */;
+			targetProxy = E8B4726C25F26DE900ACEFCB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1595,67 +1479,6 @@
 			};
 			name = Release;
 		};
-		CADF664524614D2300F5063F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = NioKit/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = chat.nio.NioKit;
-				PRODUCT_MODULE_NAME = NioKit;
-				PRODUCT_NAME = NioKit;
-				SKIP_INSTALL = YES;
-				SWIFT_INSTALL_OBJC_HEADER = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		CADF664624614D2300F5063F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = NioKit/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = chat.nio.NioKit;
-				PRODUCT_MODULE_NAME = NioKit;
-				PRODUCT_NAME = NioKit;
-				SKIP_INSTALL = YES;
-				SWIFT_INSTALL_OBJC_HEADER = NO;
-				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		CADF664924614D2300F5063F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1701,66 +1524,33 @@
 			};
 			name = Release;
 		};
-		E8302D4425F13D7D00E962E9 /* Debug */ = {
+		E8302D5125F26CA500E962E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = NioKit/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_BUNDLE_IDENTIFIER = chat.nio.NioKit;
+				DEVELOPMENT_TEAM = 4GXF3JAMM4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_MODULE_NAME = NioKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_INSTALL_OBJC_HEADER = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
 				SWIFT_VERSION = 5.0;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		E8302D4525F13D7D00E962E9 /* Release */ = {
+		E8302D5225F26CA500E962E9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = NioKit/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_BUNDLE_IDENTIFIER = chat.nio.NioKit;
+				DEVELOPMENT_TEAM = 4GXF3JAMM4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_MODULE_NAME = NioKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_INSTALL_OBJC_HEADER = NO;
-				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
 				SWIFT_VERSION = 5.0;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1803,15 +1593,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CADF664424614D2300F5063F /* Build configuration list for PBXNativeTarget "NioKit-iOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CADF664524614D2300F5063F /* Debug */,
-				CADF664624614D2300F5063F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		CADF664824614D2300F5063F /* Build configuration list for PBXNativeTarget "NioKitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1821,11 +1602,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E8302D4325F13D7D00E962E9 /* Build configuration list for PBXNativeTarget "NioKit-macOS" */ = {
+		E8302D5025F26CA500E962E9 /* Build configuration list for PBXNativeTarget "NioKit-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E8302D4425F13D7D00E962E9 /* Debug */,
-				E8302D4525F13D7D00E962E9 /* Release */,
+				E8302D5125F26CA500E962E9 /* Debug */,
+				E8302D5225F26CA500E962E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1881,22 +1662,6 @@
 				minimumVersion = 0.2.0;
 			};
 		};
-		E8302D2B25F13D7D00E962E9 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.1.0;
-			};
-		};
-		E8302D2D25F13D7D00E962E9 /* XCRemoteSwiftPackageReference "MatrixSDK" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/niochat/MatrixSDK";
-			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 0.18.4;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1920,30 +1685,20 @@
 			package = A58352A425A667AB00533363 /* XCRemoteSwiftPackageReference "MatrixSDK" */;
 			productName = MatrixSDK;
 		};
-		A58352AB25A667B300533363 /* MatrixSDK */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A58352A425A667AB00533363 /* XCRemoteSwiftPackageReference "MatrixSDK" */;
-			productName = MatrixSDK;
-		};
-		CAD68177246B1E9F001878EB /* KeychainAccess */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3923899D238ABA5700B2E1DF /* XCRemoteSwiftPackageReference "KeychainAccess" */;
-			productName = KeychainAccess;
-		};
 		CAF2AE9C245DF4B400D84133 /* CommonMarkAttributedString */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CAF2AE9B245DF4B400D84133 /* XCRemoteSwiftPackageReference "CommonMarkAttributedString" */;
 			productName = CommonMarkAttributedString;
 		};
-		E8302D2A25F13D7D00E962E9 /* KeychainAccess */ = {
+		E8B4726425F26D9200ACEFCB /* MatrixSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E8302D2B25F13D7D00E962E9 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
-			productName = KeychainAccess;
-		};
-		E8302D2C25F13D7D00E962E9 /* MatrixSDK */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E8302D2D25F13D7D00E962E9 /* XCRemoteSwiftPackageReference "MatrixSDK" */;
+			package = A58352A425A667AB00533363 /* XCRemoteSwiftPackageReference "MatrixSDK" */;
 			productName = MatrixSDK;
+		};
+		E8B4726625F26D9900ACEFCB /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3923899D238ABA5700B2E1DF /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
