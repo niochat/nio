@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+        <key>ApplicationDescription</key>
+        <string>Mio is a client for the Matrix messaging service.</string>
+	<key>Connections</key>
+	<array>
+		<dict>
+                        <key>IsIncoming</key>
+                        <false/>
+                        <key>Host</key>
+                        <string>*</string>
+                        <key>Port</key>
+                        <string>443</string>
+                        <key>NetworkProtocol</key>
+                        <string>TCP</string>
+                        <key>Relevance</key>
+                        <string>Essential</string>
+			<key>Purpose</key>
+			<string>Mio needs the connection to contact Matrix services.</string>
+                        <key>DenyConsequences</key>
+                        <string>If you deny this connection, Mio won&apos;t be able to send or receive messages.</string>
+		</dict>
+                <dict>
+                  <key>IsIncoming</key>
+                  <false/>
+                  <key>Host</key>
+                  <string>*</string>
+                  <key>Port</key>
+                  <string>80</string>
+                  <key>NetworkProtocol</key>
+                  <string>TCP</string>
+                  <key>Relevance</key>
+                  <string>default</string>
+                  <key>Purpose</key>
+                  <string>Mio needs the connections to retrieve arbitrary web resources referred to by users or bots in Matrix messages.</string>
+                  <key>DenyConsequences</key>
+                  <string>If you deny this connection, Mio won&apos;t be able to receive assets from the web for inline display.</string>
+                </dict>
+	</array>
+</dict>
+</plist>
