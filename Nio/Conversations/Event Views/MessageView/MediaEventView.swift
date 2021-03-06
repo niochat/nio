@@ -77,14 +77,10 @@ struct MediaEventView: View {
         .font(.caption)
     }
 
-    var senderView: some View {
+    @ViewBuilder private var senderView: some View {
         if model.showSender && !isMe {
-            return AnyView(
                 Text(model.sender)
                     .font(.caption)
-            )
-        } else {
-            return AnyView(EmptyView())
         }
     }
 

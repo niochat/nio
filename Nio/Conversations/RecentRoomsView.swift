@@ -185,13 +185,9 @@ private struct NavigationSheet: View {
     var body: some View {
         switch selectedItem {
         case .settings:
-            return AnyView(
-                SettingsContainerView()
-            )
+            SettingsContainerView()
         case .newConversation:
-            return AnyView(
-                NewConversationContainerView(createdRoomId: $selectedRoomId)
-            )
+            NewConversationContainerView(createdRoomId: $selectedRoomId)
         }
     }
 }

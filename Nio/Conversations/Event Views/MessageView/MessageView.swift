@@ -26,15 +26,15 @@ struct MessageView<Model>: View where Model: MessageViewModelProtocol {
                 isEdited: self.isEdited
             )
             if isMe {
-                return AnyView(HStack {
+                HStack {
                     Spacer()
                     messageView
-                })
+                }
             } else {
-                return AnyView(HStack {
+                HStack {
                     messageView
                     Spacer()
-                })
+                }
             }
         } else {
             let messageView = BorderedMessageView(
@@ -44,15 +44,15 @@ struct MessageView<Model>: View where Model: MessageViewModelProtocol {
                 isEdited: self.isEdited
             )
             if isMe {
-                return AnyView(HStack {
+                HStack {
                     Spacer()
                     messageView
-                })
+                }
             } else {
-                return AnyView(HStack {
+                HStack {
                     messageView
                     Spacer()
-                })
+                }
             }
         }
     }

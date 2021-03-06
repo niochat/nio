@@ -148,18 +148,14 @@ struct RoomListItemView: View {
             .overlay(image.mask(Circle()))
     }
 
-    var image: some View {
+    @ViewBuilder private var image: some View {
         if let avatarURL = roomAvatarURL {
-            return AnyView(
-                WebImage(url: avatarURL)
-                    .resizable()
-                    .placeholder { prefixAvatar }
-                    .aspectRatio(contentMode: .fill)
-            )
+            WebImage(url: avatarURL)
+                .resizable()
+                .placeholder { prefixAvatar }
+                .aspectRatio(contentMode: .fill)
         } else {
-            return AnyView(
-                prefixAvatar
-            )
+            prefixAvatar
         }
     }
 

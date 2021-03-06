@@ -44,14 +44,10 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
         }
     }
 
-    var senderView: some View {
+    @ViewBuilder private var senderView: some View {
         if model.showSender && !isMe && (connectedEdges == .bottomEdge || connectedEdges.isEmpty) {
-            return AnyView(
-                Text(model.sender)
-                    .font(.caption)
-            )
-        } else {
-            return AnyView(EmptyView())
+            Text(model.sender)
+                .font(.caption)
         }
     }
 

@@ -87,16 +87,12 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
         }
     }
 
-    var senderView: some View {
+    @ViewBuilder private var senderView: some View {
         if model.showSender
             && !isMe
             && (connectedEdges.isEmpty || connectedEdges == .bottomEdge) {
-                return AnyView(
                     Text(model.sender)
                         .font(.caption)
-                )
-        } else {
-            return AnyView(EmptyView())
         }
     }
 

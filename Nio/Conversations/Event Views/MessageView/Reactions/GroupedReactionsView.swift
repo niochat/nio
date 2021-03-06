@@ -54,14 +54,11 @@ struct GroupedReactionsView: View {
         return .borderedMessageBackground
     }
 
+    @ViewBuilder
     fileprivate func backgroundOverlay(for group: ReactionGroup) -> some View {
         if group.containsReaction(from: userId) {
-            return AnyView(
-                RoundedRectangle(cornerRadius: 30)
-                    .stroke(self.backgroundColor(for: group), lineWidth: 2)
-            )
-        } else {
-            return AnyView(EmptyView())
+            RoundedRectangle(cornerRadius: 30)
+                .stroke(self.backgroundColor(for: group), lineWidth: 2)
         }
     }
 
