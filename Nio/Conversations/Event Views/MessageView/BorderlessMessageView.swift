@@ -4,37 +4,37 @@ import MatrixSDK
 import NioKit
 
 struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol {
-    @Environment(\.colorScheme) var colorScheme
-    @Environment(\.colorSchemeContrast) var colorSchemeContrast
-    @Environment(\.sizeCategory) var sizeCategory
-    @Environment(\.userId) var userId
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+    @Environment(\.sizeCategory) private var sizeCategory
+    @Environment(\.userId) private var userId
 
-    var model: Model
-    var contextMenuModel: EventContextMenuModel
-    var connectedEdges: ConnectedEdges
+    let model: Model
+    let contextMenuModel: EventContextMenuModel
+    let connectedEdges: ConnectedEdges
     var isEdited = false
 
-    var isMe: Bool {
+    private var isMe: Bool {
         model.sender == userId
     }
 
-    var timestampView: some View {
+    private var timestampView: some View {
         Text(model.timestamp)
             .font(.caption)
             .foregroundColor(.secondary)
             .padding(10)
     }
 
-    var emojiView: some View {
+    private var emojiView: some View {
         Text(model.text)
         .font(.system(size: 60 * sizeCategory.scalingFactor))
     }
 
-    var contentView: some View {
+    private var contentView: some View {
         emojiView
     }
 
-    var conditionalBadgedContentView: some View {
+    private var conditionalBadgedContentView: some View {
         ZStack(alignment: isMe ? .bottomLeading : .bottomTrailing) {
             contentView
             if isEdited {
@@ -55,7 +55,7 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
         }
     }
 
-    var gradient: LinearGradient {
+    private var gradient: LinearGradient {
         let color: Color = .borderedMessageBackground
         let colors: [Color]
         if colorScheme == .dark {
@@ -70,14 +70,14 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
         )
     }
 
-    var backgroundColor: Color {
+    private var backgroundColor: Color {
         guard model.sender == userId else {
             return .borderedMessageBackground
         }
         return .accentColor
     }
 
-    var editBadgeView: some View {
+    private var editBadgeView: some View {
         let foregroundColor = Color.backgroundColor(for: colorScheme)
         return BadgeView(image: Image(Asset.Badge.edited.name),
                          foregroundColor: foregroundColor,
@@ -85,7 +85,7 @@ struct BorderlessMessageView<Model>: View where Model: MessageViewModelProtocol 
             .frame(width: 20.0, height: 20.0)
     }
 
-    var bodyView: some View {
+    private var bodyView: some View {
         VStack(alignment: isMe ? .trailing : .leading, spacing: 0) {
             if isMe {
                 HStack {

@@ -4,16 +4,16 @@ import SDWebImageSwiftUI
 import BlurHash
 
 struct MediaEventView: View {
-    @Environment(\.userId) var userId
-    @Environment(\.homeserver) var homeserver
+    @Environment(\.userId) private var userId
+    @Environment(\.homeserver) private var homeserver
 
     struct ViewModel {
-        let mediaURLs: [MXURL]
-        let sender: String
-        let showSender: Bool
-        let timestamp: String
-        var size: CGSize?
-        var blurhash: String?
+        fileprivate let mediaURLs: [MXURL]
+        fileprivate let sender: String
+        fileprivate let showSender: Bool
+        fileprivate let timestamp: String
+        fileprivate var size: CGSize?
+        fileprivate var blurhash: String?
 
         init(mediaURLs: [String],
              sender: String,
@@ -68,11 +68,11 @@ struct MediaEventView: View {
         }
     }
 
-    var isMe: Bool {
+    private var isMe: Bool {
         model.sender == userId
     }
 
-    var timestampView: some View {
+    private var timestampView: some View {
         Text(model.timestamp)
         .font(.caption)
     }

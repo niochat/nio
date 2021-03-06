@@ -7,9 +7,9 @@ struct GroupedReactionsView: View {
     @Environment(\.userId) var userId
 
     struct ViewModel {
-        var reactions: [Reaction]
+        let reactions: [Reaction]
 
-        init(reactions: [Reaction]) {
+        fileprivate init(reactions: [Reaction]) {
             self.reactions = reactions
         }
 

@@ -4,17 +4,17 @@ import MatrixSDK
 import NioKit
 
 struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
-    @Environment(\.colorScheme) var colorScheme
-    @Environment(\.colorSchemeContrast) var colorSchemeContrast
-    @Environment(\.sizeCategory) var sizeCategory
-    @Environment(\.userId) var userId
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+    @Environment(\.sizeCategory) private var sizeCategory
+    @Environment(\.userId) private var userId
 
-    var model: Model
-    var contextMenuModel: EventContextMenuModel
-    var connectedEdges: ConnectedEdges
-    var isEdited = false
+    let model: Model
+    let contextMenuModel: EventContextMenuModel
+    let connectedEdges: ConnectedEdges
+    var isEdited: Bool = false
 
-    var isMe: Bool {
+    private var isMe: Bool {
         model.sender == userId
     }
 
@@ -31,7 +31,7 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
         }
     }
 
-    var backgroundColor: Color {
+    private var backgroundColor: Color {
         if isMe {
             return .accentColor
         } else {
@@ -39,7 +39,7 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
         }
     }
 
-    var gradient: LinearGradient {
+    private var gradient: LinearGradient {
         let color: Color = backgroundColor
         let colors: [Color]
         if colorScheme == .dark {
@@ -54,7 +54,7 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
         )
     }
 
-    var background: some View {
+    private var background: some View {
         let largeRadius: CGFloat = 15.0 * sizeCategory.scalingFactor
         let smallRadius: CGFloat = 5.0 * sizeCategory.scalingFactor
 
@@ -70,13 +70,13 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
         .scaleEffect(x: isMe ? -1.0 : 1.0, y: 1.0, anchor: .center)
     }
 
-    var timestampView: some View {
+    private var timestampView: some View {
         Text(model.timestamp)
             .font(.caption)
             .foregroundColor(.secondary)
     }
 
-    var markdownView: some View {
+    private var markdownView: some View {
         MarkdownText(
             markdown: model.text,
             textColor: .messageTextColor(for: colorScheme, isOutgoing: isMe),
@@ -100,7 +100,7 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
         }
     }
 
-    var editBadgeView: some View {
+    private var editBadgeView: some View {
         let foregroundColor = Color.backgroundColor(for: colorScheme)
         return BadgeView(
             image: Image(Asset.Badge.edited.name),

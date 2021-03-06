@@ -4,13 +4,13 @@ import MatrixSDK
 import NioKit
 
 struct MessageView<Model>: View where Model: MessageViewModelProtocol {
-    @Environment(\.colorScheme) var colorScheme
-    @Environment(\.sizeCategory) var sizeCategory: ContentSizeCategory
-    @Environment(\.userId) var userId
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.sizeCategory) private var sizeCategory: ContentSizeCategory
+    @Environment(\.userId) private var userId
 
     @Binding var model: Model
-    var contextMenuModel: EventContextMenuModel
-    var connectedEdges: ConnectedEdges
+    let contextMenuModel: EventContextMenuModel
+    let connectedEdges: ConnectedEdges
     var isEdited = false
 
     private var isMe: Bool {

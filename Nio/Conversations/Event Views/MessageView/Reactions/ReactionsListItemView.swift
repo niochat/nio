@@ -3,9 +3,9 @@ import SwiftUI
 import NioKit
 
 struct ReactionsListItemView: View {
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
-    @Environment(\.colorSchemeContrast) var colorSchemeContrast: ColorSchemeContrast
-    @Environment(\.userId) var userId
+    @Environment(\.colorScheme) private var colorScheme: ColorScheme
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast: ColorSchemeContrast
+    @Environment(\.userId) private var userId
 
     let reaction: Reaction
 

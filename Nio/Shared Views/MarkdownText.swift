@@ -3,8 +3,8 @@ import SwiftUI
 import CommonMarkAttributedString
 
 struct MarkdownText: View {
-    let markdown: String
-    let textColor: UIColor
+    private let markdown: String
+    private let textColor: UIColor
 
     @State private var contentSizeThatFits: CGSize = .zero
 

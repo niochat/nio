@@ -3,7 +3,7 @@ import SwiftUI
 struct ReactionPicker: View {
     let emoji = ["👍", "👎", "😄", "🎉", "❤️", "🚀", "👀"]
 
-    var picked: (String) -> Void
+    let picked: (String) -> Void
 
     var body: some View {
         VStack {

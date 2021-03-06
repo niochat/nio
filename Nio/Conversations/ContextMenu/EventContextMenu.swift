@@ -2,14 +2,14 @@ import SwiftUI
 import MatrixSDK
 
 private struct EventContextMenuViewModel {
-    var canReact: Bool
-    var canReply: Bool
-    var canEdit: Bool
-    var canRedact: Bool
+    fileprivate let canReact: Bool
+    fileprivate let canReply: Bool
+    fileprivate let canEdit: Bool
+    fileprivate let canRedact: Bool
 
     init(event: MXEvent, userId: String) {
         var canReact = false
-        var canReply = false
+        let canReply = false
         var canEdit = false
         var canRedact = false
 
@@ -48,10 +48,10 @@ struct EventContextMenu: View {
 
     typealias Action = () -> Void
 
-    var onReact: Action
-    var onReply: Action
-    var onEdit: Action
-    var onRedact: Action
+    private let onReact: Action
+    private let onReply: Action
+    private let onEdit: Action
+    private let onRedact: Action
 
     init(model: EventContextMenuModel) {
         self.init(event: model.event,

@@ -4,7 +4,7 @@ import MatrixSDK
 import NioKit
 
 struct NewConversationContainerView: View {
-    @EnvironmentObject var store: AccountStore
+    @EnvironmentObject private var store: AccountStore
     @Binding var createdRoomId: ObjectIdentifier?
 
     var body: some View {
@@ -13,9 +13,9 @@ struct NewConversationContainerView: View {
 }
 
 struct NewConversationView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) private var presentationMode
 
-    var store: AccountStore?
+    let store: AccountStore?
 
     @State private var users = [""]
     @State private var editMode = EditMode.inactive
@@ -26,7 +26,7 @@ struct NewConversationView: View {
     @Binding var createdRoomId: ObjectIdentifier?
     @State private var errorMessage: String?
 
-    var usersFooter: some View {
+    private var usersFooter: some View {
         Text("\(L10n.NewConversation.forExample) \(store?.session?.myUserId ?? "@username:server.org")")
     }
 
@@ -107,13 +107,13 @@ struct NewConversationView: View {
         }
     }
 
-    func addUser() {
+    private func addUser() {
         withAnimation {
             users.append("")
         }
     }
 
-    func createRoom() {
+    private func createRoom() {
         isWaiting = true
 
         let parameters = MXRoomCreationParameters()
