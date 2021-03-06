@@ -9,15 +9,20 @@
 import Foundation
 
 public extension UserDefaults {
-    private static let appGroup = Bundle.main.infoDictionary?["AppGroup"] as! String
+    private static let appGroup: String = {
+        guard let group = Bundle.main.infoDictionary?["AppGroup"] as? String else {
+            fatalError("Missing 'AppGroup' key in Info.plist!")
+        }
+        return group
+    }()
   #if os(macOS)
     private static let teamIdentifierPrefix = Bundle.main
       .object(forInfoDictionaryKey: "TeamIdentifierPrefix") as? String ?? ""
 
-    static let suiteName = teamIdentifierPrefix + appGroup
+    private static let suiteName = teamIdentifierPrefix + appGroup
   #else // iOS
-    static let suiteName = "group." + appGroup
+    private static let suiteName = "group." + appGroup
   #endif
-  
+
     static let group = UserDefaults(suiteName: suiteName)!
 }
