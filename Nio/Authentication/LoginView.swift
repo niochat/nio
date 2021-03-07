@@ -97,7 +97,7 @@ struct LoginView: View {
             Button(action: {
                 self.onLogin()
             }, label: {
-                Text(L10n.Login.signIn)
+                Text(verbatim: L10n.Login.signIn)
                     .font(.system(size: 18))
                     .bold()
             })
@@ -107,7 +107,7 @@ struct LoginView: View {
             Button(action: {
                 self.showingRegisterView.toggle()
             }, label: {
-                Text(L10n.Login.openRegistrationPrompt).font(.footnote)
+                Text(verbatim: L10n.Login.openRegistrationPrompt).font(.footnote)
             })
         }
     }
@@ -118,10 +118,10 @@ struct LoginTitleView: View {
         let nio = Text("Nio").foregroundColor(.accentColor)
 
         return VStack {
-            (Text("👋") + Text(L10n.Login.welcomeHeader) + nio + Text("!"))
+            (Text("👋") + Text(verbatim: L10n.Login.welcomeHeader) + nio + Text("!"))
                 .font(.title)
                 .bold()
-            Text(L10n.Login.welcomeMessage)
+            Text(verbatim: L10n.Login.welcomeMessage)
         }
     }
 }
@@ -142,7 +142,7 @@ struct LoginForm: View {
             FormTextField(title: L10n.Login.Form.password, text: $password, isSecure: true)
 
             FormTextField(title: L10n.Login.Form.homeserver, text: $homeserver, keyboardType: .URL)
-            Text(L10n.Login.Form.homeserverOptionalExplanation)
+            Text(verbatim: L10n.Login.Form.homeserverOptionalExplanation)
                 .font(.caption)
                 .foregroundColor(.gray)
         }

@@ -80,7 +80,7 @@ struct EventContextMenu: View {
         Group {
             if model.canReact {
                 Button(action: onReact, label: {
-                    Text(L10n.Event.ContextMenu.addReaction)
+                    Text(verbatim: L10n.Event.ContextMenu.addReaction)
                     Image(Asset.Icon.smiley.name)
                         .resizable()
                         .frame(width: 30.0, height: 30.0)
@@ -88,7 +88,7 @@ struct EventContextMenu: View {
             }
             if model.canReply {
                 Button(action: onReply, label: {
-                    Text(L10n.Event.ContextMenu.reply)
+                    Text(verbatim: L10n.Event.ContextMenu.reply)
                     Image(Asset.Icon.Arrow.upLeft.name)
                         .resizable()
                         .frame(width: 30.0, height: 30.0)
@@ -96,7 +96,7 @@ struct EventContextMenu: View {
             }
             if model.canEdit {
                 Button(action: onEdit, label: {
-                    Text(L10n.Event.ContextMenu.edit)
+                    Text(verbatim: L10n.Event.ContextMenu.edit)
                     Image(Asset.Icon.pencil.name)
                         .resizable()
                         .frame(width: 30.0, height: 30.0)
@@ -104,7 +104,7 @@ struct EventContextMenu: View {
             }
             if model.canRedact {
                 Button(action: onRedact, label: {
-                    Text(L10n.Event.ContextMenu.remove)
+                    Text(verbatim: L10n.Event.ContextMenu.remove)
                     Image(Asset.Icon.trash.name)
                         .resizable()
                         .frame(width: 30.0, height: 30.0)

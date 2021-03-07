@@ -7,7 +7,7 @@ struct ReactionPicker: View {
 
     var body: some View {
         VStack {
-            Text(L10n.ReactionPicker.title)
+            Text(verbatim: L10n.ReactionPicker.title)
                 .foregroundColor(.gray)
                 .font(.headline)
                 .padding(.bottom, 30)

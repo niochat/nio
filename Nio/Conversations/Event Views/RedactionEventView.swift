@@ -24,7 +24,7 @@ struct RedactionEventView: View {
                     .font(.caption)
                     .foregroundColor(.gray)
                 if model.reason != nil {
-                    Text(L10n.Event.reason(model.reason!))
+                    Text(verbatim: L10n.Event.reason(model.reason!))
                         .foregroundColor(.gray)
                         .font(.callout)
                 }
