@@ -3,23 +3,23 @@ import SwiftUI
 import NioKit
 
 struct LoadingView: View {
-    @EnvironmentObject var store: AccountStore
+    @EnvironmentObject private var store: AccountStore
 
-    var loadingEmoji = [
+    private let loadingEmoji = [
         "🧑‍🎤",
         "🧑‍🏭",
         "🧑‍🔧",
         "🧑‍💻",
     ]
 
-    var loadingMessages = [
+    private let loadingMessages = [
         L10n.Loading._1,
         L10n.Loading._2,
         L10n.Loading._3,
         L10n.Loading._4,
     ]
 
-    var randomLoadingMessage: String {
+    private var randomLoadingMessage: String {
         "\(loadingEmoji.randomElement()!) \(loadingMessages.randomElement()!)"
     }
 
@@ -35,11 +35,10 @@ struct LoadingView: View {
 
             Spacer()
 
-            Button(action: {
-                self.store.logout()
-            }, label: {
+            Button(action: self.store.logout) {
                 Text(L10n.Loading.cancel).font(.callout)
-            }).padding()
+            }
+            .padding()
         }
     }
 }
