@@ -5,27 +5,27 @@ import SDWebImageSwiftUI
 import NioKit
 
 struct RoomListItemContainerView: View {
-    @EnvironmentObject var store: AccountStore
+    @EnvironmentObject private var store: AccountStore
 
-    var room: NIORoom
-
+    let room: NIORoom
+  
+    private var roomAvatarURL: URL? {
+        guard let client = store.client,
+              let homeserver = URL(string: client.homeserver),
+              let avatar = room.summary.avatar else { return nil }
+        return MXURL(mxContentURI: avatar)?.contentURL(on: homeserver)
+    }
+  
     var body: some View {
         let roomName = room.summary.displayname ?? ""
         let lastMessage = room.lastMessage
         let lastActivity = Formatter.string(forRelativeDate: room.summary.lastMessageDate)
 
-        var accessibilityLabel = ""
+        let accessibilityLabel : String
         if room.isDirect {
             accessibilityLabel = L10n.RecentRooms.AccessibilityLabel.dm(roomName, lastActivity, lastMessage)
         } else {
             accessibilityLabel = L10n.RecentRooms.AccessibilityLabel.room(roomName, lastActivity, lastMessage)
-        }
-
-        var roomAvatarURL: URL?
-        if let client = store.client,
-            let homeserver = URL(string: client.homeserver),
-            let avatar = room.summary.avatar {
-                roomAvatarURL = MXURL(mxContentURI: avatar)?.contentURL(on: homeserver)
         }
 
         return RoomListItemView(title: room.summary.displayname ?? "",
@@ -33,21 +33,21 @@ struct RoomListItemContainerView: View {
                                 rightDetail: lastActivity,
                                 badge: room.summary.localUnreadEventCount,
                                 roomAvatarURL: roomAvatarURL)
-        .accessibility(label: Text(accessibilityLabel))
+               .accessibility(label: Text(verbatim: accessibilityLabel))
     }
 }
 
 struct RoomListItemView: View {
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
-    @Environment(\.colorSchemeContrast) var colorSchemeContrast: ColorSchemeContrast
+    @Environment(\.colorScheme) private var colorScheme: ColorScheme
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast: ColorSchemeContrast
 
-    var title: String
-    var subtitle: String
-    var rightDetail: String
-    var badge: UInt
-    var roomAvatarURL: URL?
+    fileprivate let title: String
+    fileprivate let subtitle: String
+    fileprivate let rightDetail: String
+    fileprivate let badge: UInt
+    fileprivate let roomAvatarURL: URL?
 
-    var gradient: LinearGradient {
+    private var gradient: LinearGradient {
         let color: Color = .white
         let colors = [color.opacity(0.3), color.opacity(0.0)]
         return LinearGradient(
@@ -57,9 +57,9 @@ struct RoomListItemView: View {
         )
     }
 
-    var prefixAvatar: some View {
+    private var prefixAvatar: some View {
         GeometryReader { geometry in
-            Text(title.prefix(2).uppercased())
+            Text(verbatim: title.prefix(2).uppercased())
                 .multilineTextAlignment(.center)
                 .font(.system(.headline, design: .rounded))
                 .lineLimit(1)
@@ -73,7 +73,7 @@ struct RoomListItemView: View {
         .accessibility(addTraits: .isImage)
     }
 
-    var topView: some View {
+    private var topView: some View {
         HStack(alignment: .top) {
             titleView
             Spacer()
@@ -82,22 +82,22 @@ struct RoomListItemView: View {
         .padding(.bottom, 5)
     }
 
-    var titleView: some View {
-        Text(title)
+    private var titleView: some View {
+        Text(verbatim: title)
             .font(.headline)
             .lineLimit(1)
             .allowsTightening(true)
     }
 
-    var timeAgoView: some View {
-        Text(rightDetail)
+    private var timeAgoView: some View {
+        Text(verbatim: rightDetail)
             .font(.caption)
             .lineLimit(1)
             .allowsTightening(true)
             .foregroundColor(.secondary)
     }
 
-    var bottomView: some View {
+    private var bottomView: some View {
         HStack {
             subtitleView
             if badge != 0 {
@@ -107,8 +107,8 @@ struct RoomListItemView: View {
         }
     }
 
-    var subtitleView: some View {
-        Text(subtitle.isEmpty ? " " : subtitle)     // Replace empty string with space to maintain height
+    private var subtitleView: some View {
+        Text(verbatim: subtitle.isEmpty ? " " : subtitle)     // Replace empty string with space to maintain height
             .multilineTextAlignment(.leading)
             .font(.subheadline)
             .lineLimit(1)
@@ -118,8 +118,8 @@ struct RoomListItemView: View {
             .padding(.vertical, badgeTextVerticalPadding)
     }
 
-    var badgeView: some View {
-        Text(String(self.badge))
+    private var badgeView: some View {
+        Text(verbatim: String(self.badge))
             .font(.caption)
             .lineLimit(1)
             .allowsTightening(true)
@@ -139,9 +139,9 @@ struct RoomListItemView: View {
             )
     }
 
-    var badgeTextVerticalPadding: CGFloat { 3 * sizeCategory.scalingFactor }
+    private var badgeTextVerticalPadding: CGFloat { 3 * sizeCategory.scalingFactor }
 
-    var avatarView: some View {
+    private var avatarView: some View {
         Circle()
             .foregroundColor(.clear)
             .aspectRatio(1, contentMode: .fill)
@@ -159,7 +159,7 @@ struct RoomListItemView: View {
         }
     }
 
-    @Environment(\.sizeCategory) var sizeCategory
+    @Environment(\.sizeCategory) private var sizeCategory
 
     var body: some View {
         HStack(alignment: .center) {
@@ -169,7 +169,7 @@ struct RoomListItemView: View {
                 bottomView
             }.layoutPriority(1)
         }
-        .padding([.vertical], 5 * sizeCategory.scalingFactor)
+        .padding(.vertical, 5 * sizeCategory.scalingFactor)
     }
 }
 
