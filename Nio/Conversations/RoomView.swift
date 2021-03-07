@@ -91,15 +91,15 @@ struct RoomView: View {
     @EnvironmentObject private var room: NIORoom
     @EnvironmentObject private var store: AccountStore
 
-    var events: EventCollection
-    var isDirect: Bool
+    let events: EventCollection
+    let isDirect: Bool
 
     @Binding var showAttachmentPicker: Bool
-    var onCommit: (String) -> Void
+    let onCommit: (String) -> Void
 
-    var onReact: (String) -> Void
-    var onRedact: (String, String?) -> Void
-    var onEdit: (String, String) -> Void
+    let onReact: (String) -> Void
+    let onRedact: (String, String?) -> Void
+    let onEdit: (String, String) -> Void
 
     @State private var editEventId: String?
     @State private var eventToRedact: String?
