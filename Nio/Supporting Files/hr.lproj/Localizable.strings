@@ -81,3 +81,14 @@
 "event.room-topic.change" = "% @ je promijenio temu u \"% @\"";
 "event.room-name.change-name" = "% @ je promijenio naziv stanov iz% @ u% @";
 "event.room-name.set-name" = "% @ postavi naziv stanov na% @";
+"new-conversation.done" = "Gotovo";
+"new-conversation.edit" = "Uredi";
+"new-conversation.cancel" = "Otkazati";
+"new-conversation.alert-failed" = "Pokretanje razgovor nije uspjelo";
+"new-conversation.create-room" = "Pokrenite razgovor";
+"new-conversation.public-room" = "Javna mijesto";
+"new-conversation.room-name" = "Naziv mijesto";
+"new-conversation.for-example" = "Na primjer";
+"new-conversation.username-placeholder" = "Matrix ID";
+"new-conversation.title-room" = "Novi Mijesto";
+"new-conversation.title-chat" = "Novi Odgovor";
