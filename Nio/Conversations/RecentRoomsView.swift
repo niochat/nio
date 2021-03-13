@@ -35,15 +35,15 @@ struct RecentRoomsView: View {
 
     var rooms: [NIORoom]
 
-    var joinedRooms: [NIORoom] {
+    private var joinedRooms: [NIORoom] {
         rooms.filter {$0.room.summary.membership == .join}
     }
 
-    var invitedRooms: [NIORoom] {
+    private var invitedRooms: [NIORoom] {
         rooms.filter {$0.room.summary.membership == .invite}
     }
 
-    var settingsButton: some View {
+    private var settingsButton: some View {
         Button(action: {
             self.selectedNavigationItem = .settings
         }, label: {
@@ -54,7 +54,7 @@ struct RecentRoomsView: View {
         })
     }
 
-    var newConversationButton: some View {
+    private var newConversationButton: some View {
         Button(action: {
             self.selectedNavigationItem = .newConversation
         }, label: {
@@ -117,7 +117,7 @@ struct RoomsListSection: View {
         return self.rooms[leaveId]
     }
 
-    var sectionContent: some View {
+    private var sectionContent: some View {
         ForEach(rooms) { room in
             NavigationLink(destination: RoomContainerView(room: room), tag: room.id, selection: $selectedRoomId) {
                 RoomListItemContainerView(room: room)
@@ -127,7 +127,7 @@ struct RoomsListSection: View {
     }
 
     @ViewBuilder
-    var section: some View {
+    private var section: some View {
         if let sectionHeader = sectionHeader {
             Section(header: Text(sectionHeader)) {
                 sectionContent
@@ -150,21 +150,19 @@ struct RoomsListSection: View {
                         ?? "")),
                 primaryButton: .destructive(
                     Text(verbatim: L10n.Room.Remove.action),
-                    action: {
-                        self.leaveRoom()
-                }),
-            secondaryButton: .cancel())
+                    action: self.leaveRoom),
+                secondaryButton: .cancel())
         }
     }
 
-    func setLeaveIndex(at offsets: IndexSet) {
+    private func setLeaveIndex(at offsets: IndexSet) {
         self.showConfirm = true
         for offset in offsets {
             self.leaveId = offset
         }
     }
 
-    func leaveRoom() {
+    private func leaveRoom() {
         guard let leaveId = self.leaveId, rooms.count > leaveId else { return }
         guard let mxRoom = self.roomToLeave?.room else { return }
         mxRoom.mxSession?.leaveRoom(mxRoom.roomId) { _ in }
@@ -187,13 +185,9 @@ private struct NavigationSheet: View {
     var body: some View {
         switch selectedItem {
         case .settings:
-            return AnyView(
-                SettingsContainerView()
-            )
+            SettingsContainerView()
         case .newConversation:
-            return AnyView(
-                NewConversationContainerView(createdRoomId: $selectedRoomId)
-            )
+            NewConversationContainerView(createdRoomId: $selectedRoomId)
         }
     }
 }

@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct ReactionGroupView: View {
-    let text: String
-    let count: Int
+    private let text: String
+    private let count: Int
 
-    let backgroundColor: Color
+    private let backgroundColor: Color
 
     init(text: String, count: Int, backgroundColor: Color) {
         assert(count > 0, "Expected non-zero positive integer")

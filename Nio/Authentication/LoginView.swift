@@ -92,7 +92,7 @@ struct LoginView: View {
         }
     }
 
-    var buttons: some View {
+    private var buttons: some View {
         VStack {
             Button(action: {
                 self.onLogin()
@@ -150,9 +150,9 @@ struct LoginForm: View {
 }
 
 private struct FormTextField: View {
-    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.colorScheme) private var colorScheme
 
-    var title: String
+    let title: String
     @Binding var text: String
     var onEditingChanged: ((Bool) -> Void)?
 

@@ -4,7 +4,7 @@ import NioKit
 
 struct TypingIndicatorContainerView: View {
     @EnvironmentObject private var room: NIORoom
-    @Environment(\.userId) var userId
+    @Environment(\.userId) private var userId
 
     private var typingUsers: [String] {
         room.room.typingUsers?.filter { $0 != userId} ?? []
@@ -17,9 +17,9 @@ struct TypingIndicatorContainerView: View {
 
 struct TypingIndicatorView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    var typingUsers: [String]
+    let typingUsers: [String]
 
-    var text: String {
+    private var text: String {
         switch typingUsers.count {
         case 1:
             return L10n.TypingIndicator.single(typingUsers.first!)
@@ -30,7 +30,7 @@ struct TypingIndicatorView: View {
         }
     }
 
-    var backgroundColor: Color {
+    private var backgroundColor: Color {
         switch self.colorScheme {
         case .dark:
             return Color(#colorLiteral(red: 0.1221848231, green: 0.1316168257, blue: 0.1457917546, alpha: 1))

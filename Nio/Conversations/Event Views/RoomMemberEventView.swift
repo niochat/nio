@@ -3,7 +3,7 @@ import class MatrixSDK.MXEvent
 
 struct RoomMemberEventView: View {
     struct ViewModel {
-        let sender: String
+        private let sender: String
 
         struct User {
             let displayName: String
@@ -12,8 +12,8 @@ struct RoomMemberEventView: View {
             let reason: String?
         }
 
-        let current: User
-        let previous: User?
+        fileprivate let current: User
+        private let previous: User?
 
         var hasUserInfoDifference: Bool {
             guard let previous = previous else { return false }

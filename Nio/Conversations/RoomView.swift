@@ -7,10 +7,10 @@ import NioKit
 struct RoomContainerView: View {
     @ObservedObject var room: NIORoom
 
-    @State var showAttachmentPicker = false
-    @State var showImagePicker = false
-    @State var eventToReactTo: String?
-    @State var showJoinAlert = false
+    @State private var showAttachmentPicker = false
+    @State private var showImagePicker = false
+    @State private var eventToReactTo: String?
+    @State private var showJoinAlert = false
 
     var body: some View {
         RoomView(
@@ -87,19 +87,19 @@ struct RoomContainerView: View {
 }
 
 struct RoomView: View {
-    @Environment(\.userId) var userId
-    @EnvironmentObject var room: NIORoom
-    @EnvironmentObject var store: AccountStore
+    @Environment(\.userId) private var userId
+    @EnvironmentObject private var room: NIORoom
+    @EnvironmentObject private var store: AccountStore
 
-    var events: EventCollection
-    var isDirect: Bool
+    let events: EventCollection
+    let isDirect: Bool
 
     @Binding var showAttachmentPicker: Bool
-    var onCommit: (String) -> Void
+    let onCommit: (String) -> Void
 
-    var onReact: (String) -> Void
-    var onRedact: (String, String?) -> Void
-    var onEdit: (String, String) -> Void
+    let onReact: (String) -> Void
+    let onRedact: (String, String?) -> Void
+    let onEdit: (String, String) -> Void
 
     @State private var editEventId: String?
     @State private var eventToRedact: String?

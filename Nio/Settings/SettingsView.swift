@@ -11,11 +11,11 @@ struct SettingsContainerView: View {
 }
 
 struct SettingsView: View {
-    @AppStorage("accentColor") var accentColor: Color = .purple
+    @AppStorage("accentColor") private var accentColor: Color = .purple
     @StateObject private var appIconTitle = AppIconTitle()
-    var logoutAction: () -> Void
+    let logoutAction: () -> Void
 
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) private var presentationMode
 
     var body: some View {
         NavigationView {

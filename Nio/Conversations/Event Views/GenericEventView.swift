@@ -4,11 +4,11 @@ import SDWebImageSwiftUI
 import NioKit
 
 struct GenericEventView: View {
-    @EnvironmentObject var store: AccountStore
+    @EnvironmentObject private var store: AccountStore
 
-    var text: String
+    let text: String
     var image: MXURL?
-    var imageURL: URL? {
+    private var imageURL: URL? {
         return store.client?.homeserver
             .flatMap(URL.init(string:))
             .flatMap { image?.contentURL(on: $0) }

@@ -3,9 +3,9 @@ import NioKit
 
 @main
 struct NioApp: App {
-    @StateObject var accountStore = AccountStore()
+    @StateObject private var accountStore = AccountStore()
 
-    @AppStorage("accentColor") var accentColor: Color = .purple
+    @AppStorage("accentColor") private var accentColor: Color = .purple
 
     var body: some Scene {
         WindowGroup {
