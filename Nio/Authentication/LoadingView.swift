@@ -38,7 +38,7 @@ struct LoadingView: View {
             Button(action: {
                 self.store.logout()
             }, label: {
-                Text(L10n.Loading.cancel).font(.callout)
+                Text(verbatim: L10n.Loading.cancel).font(.callout)
             }).padding()
         }
     }

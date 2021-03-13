@@ -21,7 +21,7 @@ struct SettingsView: View {
         NavigationView {
             Form {
                 Section {
-                    Picker(selection: $accentColor, label: Text(L10n.Settings.accentColor)) {
+                    Picker(selection: $accentColor, label: Text(verbatim: L10n.Settings.accentColor)) {
                         ForEach(Color.allAccentOptions, id: \.self) { color in
                             HStack {
                                 Circle()
@@ -33,7 +33,7 @@ struct SettingsView: View {
                         }
                     }
 
-                    Picker(selection: $appIconTitle.current, label: Text(L10n.Settings.appIcon)) {
+                    Picker(selection: $appIconTitle.current, label: Text(verbatim: L10n.Settings.appIcon)) {
                         ForEach(AppIconTitle.alternatives) { AppIcon(title: $0) }
                     }
                 }
@@ -42,7 +42,7 @@ struct SettingsView: View {
                     Button(action: {
                         self.logoutAction()
                     }, label: {
-                        Text(L10n.Settings.logOut)
+                        Text(verbatim: L10n.Settings.logOut)
                     })
                 }
             }

@@ -50,7 +50,7 @@ struct RecentRoomsView: View {
             Image(Asset.Icon.user.name)
                 .resizable()
                 .frame(width: 30.0, height: 30.0)
-                .accessibility(label: Text(L10n.RecentRooms.AccessibilityLabel.settings))
+                .accessibility(label: Text(verbatim: L10n.RecentRooms.AccessibilityLabel.settings))
         })
     }
 
@@ -61,7 +61,7 @@ struct RecentRoomsView: View {
             Image(Asset.Icon.addRoom.name)
                 .resizable()
                 .frame(width: 30.0, height: 30.0)
-                .accessibility(label: Text(L10n.RecentRooms.AccessibilityLabel.newConversation))
+                .accessibility(label: Text(verbatim: L10n.RecentRooms.AccessibilityLabel.newConversation))
         })
     }
 
@@ -144,12 +144,12 @@ struct RoomsListSection: View {
         .alert(isPresented: $showConfirm) {
             Alert(
                 title: Text(onLeaveAlertTitle),
-                message: Text(L10n.RecentRooms.Leave.alertBody(
+                message: Text(verbatim: L10n.RecentRooms.Leave.alertBody(
                     roomToLeave?.summary.displayname
                         ?? roomToLeave?.summary.roomId
                         ?? "")),
                 primaryButton: .destructive(
-                    Text(L10n.Room.Remove.action),
+                    Text(verbatim: L10n.Room.Remove.action),
                     action: {
                         self.leaveRoom()
                 }),

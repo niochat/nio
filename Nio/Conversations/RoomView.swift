@@ -43,10 +43,10 @@ struct RoomContainerView: View {
         .alert(isPresented: $showJoinAlert) {
             let roomName = self.room.summary.displayname ?? self.room.summary.roomId ?? L10n.Room.Invitation.fallbackTitle
             return Alert(
-                title: Text(L10n.Room.Invitation.JoinAlert.title),
-                message: Text(L10n.Room.Invitation.JoinAlert.message(roomName)),
+                title: Text(verbatim: L10n.Room.Invitation.JoinAlert.title),
+                message: Text(verbatim: L10n.Room.Invitation.JoinAlert.message(roomName)),
                 primaryButton: .default(
-                    Text(L10n.Room.Invitation.JoinAlert.joinButton),
+                    Text(verbatim: L10n.Room.Invitation.JoinAlert.joinButton),
                     action: {
                         self.room.room.mxSession.joinRoom(self.room.room.roomId) { _ in
                             self.room.markAllAsRead()
@@ -76,8 +76,8 @@ struct RoomContainerView: View {
 
     var attachmentPickerSheet: ActionSheet {
         ActionSheet(
-            title: Text(L10n.Room.Attachment.selectType), buttons: [
-                .default(Text(L10n.Room.Attachment.typePhoto), action: {
+            title: Text(verbatim: L10n.Room.Attachment.selectType), buttons: [
+                .default(Text(verbatim: L10n.Room.Attachment.typePhoto), action: {
                     self.showImagePicker = true
                 }),
                 .cancel()
@@ -153,9 +153,9 @@ struct RoomView: View {
             }
         }
         .alert(item: $eventToRedact) { eventId in
-            Alert(title: Text(L10n.Room.Remove.title),
-                  message: Text(L10n.Room.Remove.message),
-                  primaryButton: .destructive(Text(L10n.Room.Remove.action), action: { self.onRedact(eventId, nil) }),
+            Alert(title: Text(verbatim: L10n.Room.Remove.title),
+                  message: Text(verbatim: L10n.Room.Remove.message),
+                  primaryButton: .destructive(Text(verbatim: L10n.Room.Remove.action), action: { self.onRedact(eventId, nil) }),
                   secondaryButton: .cancel())
         }
     }

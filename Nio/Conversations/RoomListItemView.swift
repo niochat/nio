@@ -127,7 +127,7 @@ struct RoomListItemView: View {
             // Make sure we get enough "breathing air" around the number:
             .padding(.vertical, badgeTextVerticalPadding)
             .padding(.horizontal, 6 * sizeCategory.scalingFactor)
-            .accessibility(label: Text(L10n.RecentRooms.AccessibilityLabel.newMessageBadge(Int(self.badge))))
+            .accessibility(label: Text(verbatim: L10n.RecentRooms.AccessibilityLabel.newMessageBadge(Int(self.badge))))
             .background(
                 GeometryReader { geometry in
                     Capsule()

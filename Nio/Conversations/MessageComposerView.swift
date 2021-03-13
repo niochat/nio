@@ -68,7 +68,7 @@ struct MessageComposerView: View {
                     .background(Color.accentColor)
                 VStack {
                     HStack {
-                        Text(L10n.Composer.editMessage)
+                        Text(verbatim: L10n.Composer.editMessage)
                             .frame(alignment: .leading)
                             .padding(.leading, 10)
                             .foregroundColor(.accentColor)
@@ -78,7 +78,7 @@ struct MessageComposerView: View {
                         }, label: {
                             SFSymbol.close
                                 .font(.system(size: 20))
-                                .accessibility(label: Text(L10n.Composer.AccessibilityLabel.cancelEdit))
+                                .accessibility(label: Text(verbatim: L10n.Composer.AccessibilityLabel.cancelEdit))
                         })
                     }
                     Text(highlightMessage!)
@@ -97,7 +97,7 @@ struct MessageComposerView: View {
             Image(Asset.Icon.paperclip.name)
                 .resizable()
                 .frame(width: 30.0, height: 30.0)
-                .accessibility(label: Text(L10n.Composer.AccessibilityLabel.sendFile))
+                .accessibility(label: Text(verbatim: L10n.Composer.AccessibilityLabel.sendFile))
         })
     }
 
@@ -123,7 +123,7 @@ struct MessageComposerView: View {
             Image(Asset.Icon.paperplane.name)
                 .resizable()
                 .frame(width: 30.0, height: 30.0)
-                .accessibility(label: Text(L10n.Composer.AccessibilityLabel.send))
+                .accessibility(label: Text(verbatim: L10n.Composer.AccessibilityLabel.send))
         })
         .disabled(attributedMessage.isEmpty)
     }
