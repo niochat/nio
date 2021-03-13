@@ -4,7 +4,7 @@ import NioKit
 
 struct RootView: View {
     @EnvironmentObject private var store: AccountStore
-  
+
     private var homeserverURL: URL {
         // Can this ever be nil? And if so, what happens with the default fallback?
         assert(store.client != nil)
@@ -19,7 +19,7 @@ struct RootView: View {
             RecentRoomsContainerView()
                 .environment(\.userId, userId)
                 .environment(\.homeserver, homeserverURL)
-          
+
         case .loggedOut:
             LoginContainerView()
 
