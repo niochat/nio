@@ -1,19 +1,15 @@
-//
-//  GlobalConfig.xcconfig
-//  Nio
-//
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
-//
+
 // Nio: When working on your fork of Nio, create the `LocalConfig.xcconfig`
 //      file, and set the `NIO_NAMESPACE` to some reverse DNS you own.
 //      The same goes for the `DEVELOPMENT_TEAM`.
 // Example `LocalConfig.xcconfig`:
-//      NIO_NAMESPACE    = com.alwaysrightinstitute.nio
+//      NIO_NAMESPACE    = com.example.nio
 //      DEVELOPMENT_TEAM = Z123456789
 
-NIO_NAMESPACE                             = chat.nio
-DEVELOPMENT_TEAM                          = HU85FER47E
+NIO_NAMESPACE                             = com.example.nio
+DEVELOPMENT_TEAM                          = Z123456789
 
 APPGROUP                                  = $(NIO_NAMESPACE)
 PRODUCT_BUNDLE_IDENTIFIER                 = $(NIO_NAMESPACE).iOS
