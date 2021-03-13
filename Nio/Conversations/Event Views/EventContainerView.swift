@@ -4,20 +4,12 @@ import MatrixSDK
 import NioKit
 
 struct EventContainerView: View {
-    var event: MXEvent
-    var reactions: [Reaction]
-    var connectedEdges: ConnectedEdges
-    var showSender: Bool
-    var edits: [MXEvent]
-    var contextMenuModel: EventContextMenuModel
-
-    private var topPadding: CGFloat {
-        connectedEdges.contains(.topEdge) ? 2.0 : 8.0
-    }
-
-    private var bottomPadding: CGFloat {
-        connectedEdges.contains(.bottomEdge) ? 2.0 : 8.0
-    }
+    let event: MXEvent
+    let reactions: [Reaction]
+    let connectedEdges: ConnectedEdges
+    let showSender: Bool
+    let edits: [MXEvent]
+    let contextMenuModel: EventContextMenuModel
 
     var body: some View {
         // NOTE: For as long as https://github.com/matrix-org/matrix-ios-sdk/pull/843
@@ -28,39 +20,88 @@ struct EventContainerView: View {
         // FIXME: Remove comment when linked bug fix has been merged.
         switch MXEventType(identifier: event.type) {
         case .roomMessage:
-            guard !event.isRedactedEvent() else {
-                let redactor = event.redactedBecause["sender"] as? String ?? L10n.Event.unknownSenderFallback
-                let reason = (event.redactedBecause["content"] as? [AnyHashable: Any])?["body"] as? String
-                return AnyView(
-                    RedactionEventView(model: .init(sender: event.sender, redactor: redactor, reason: reason))
-                )
-            }
+            RoomMessageView(event: event, reactions: reactions,
+                            connectedEdges: connectedEdges,
+                            showSender: showSender, edits: edits,
+                            contextMenuModel: contextMenuModel)
+        case .roomMember:
+            RoomMemberEventView(model: .init(event: event))
 
-            guard !event.isEdit() else {
-                return AnyView(EmptyView())
-            }
+        case .roomTopic:
+            RoomTopicEventView(model: .init(event: event))
 
-            if event.isMediaAttachment() {
-                return AnyView(
-                    MediaEventView(model: .init(event: event, showSender: showSender),
-                                   contextMenuModel: contextMenuModel)
-                        .padding(.top, topPadding)
-                        .padding(.bottom, bottomPadding)
-                )
-            }
+        case .roomPowerLevels:
+            RoomPowerLevelsEventView(model: .init(event: event))
 
+        case .roomName:
+            RoomNameEventView(model: .init(event: event))
+
+        default:
+            GenericEventView(text: "\(event.type!)\n\(event.content!)")
+                .padding(.top, 10)
+        }
+    }
+
+    private struct RoomMessageView: View {
+
+        fileprivate let event: MXEvent
+        fileprivate let reactions: [Reaction]
+        fileprivate let connectedEdges: ConnectedEdges
+        fileprivate let showSender: Bool
+        fileprivate let edits: [MXEvent]
+        fileprivate let contextMenuModel: EventContextMenuModel
+
+        private var topPadding: CGFloat {
+            connectedEdges.contains(.topEdge) ? 2.0 : 8.0
+        }
+
+        private var bottomPadding: CGFloat {
+            connectedEdges.contains(.bottomEdge) ? 2.0 : 8.0
+        }
+
+        private enum Model {
+            case model(MessageViewModel)
+            case invalidEventType(MXEventType)
+            case otherError(Swift.Error)
+        }
+
+        private var model: Model {
             var newEvent = event
             if event.contentHasBeenEdited() {
                 newEvent = edits.last ?? event
             }
 
             do {
-                let messageModel = try MessageViewModel(
+                return .model(try MessageViewModel(
                     event: newEvent,
                     reactions: reactions,
                     showSender: showSender
-                )
-                return AnyView(
+                ))
+            } catch let error as MessageViewModel.Error {
+                switch error {
+                case .invalidEventType(let eventType):
+                    return .invalidEventType(eventType)
+                }
+            } catch let error {
+                return .otherError(error)
+            }
+        }
+
+        var body: some View {
+            if event.isRedactedEvent() {
+                let redactor = event.redactedBecause["sender"] as? String ?? L10n.Event.unknownSenderFallback
+                let reason = (event.redactedBecause["content"] as? [AnyHashable: Any])?["body"] as? String
+                RedactionEventView(model: .init(sender: event.sender, redactor: redactor, reason: reason))
+            } else if event.isEdit() {
+                EmptyView()
+            } else if event.isMediaAttachment() {
+                MediaEventView(model: .init(event: event, showSender: showSender),
+                               contextMenuModel: contextMenuModel)
+                    .padding(.top, topPadding)
+                    .padding(.bottom, bottomPadding)
+            } else {
+                switch model {
+                case .model(let messageModel):
                     MessageView(
                         model: .constant(messageModel),
                         contextMenuModel: contextMenuModel,
@@ -69,36 +110,13 @@ struct EventContainerView: View {
                     )
                     .padding(.top, topPadding)
                     .padding(.bottom, bottomPadding)
-                )
-            } catch let error as MessageViewModel.Error {
-                switch error {
+
                 case .invalidEventType(let eventType):
-                    return AnyView(Text("⚠️ Invalid event type \(String(describing: eventType))"))
+                    Text("⚠️ Invalid event type \(String(describing: eventType))")
+                case .otherError(let error):
+                    Text("⚠️ Unknown error \(String(describing: error))")
                 }
-            } catch let error {
-                return AnyView(Text("⚠️ Unknown error \(String(describing: error))"))
             }
-        case .roomMember:
-            return AnyView(
-                RoomMemberEventView(model: .init(event: event))
-            )
-        case .roomTopic:
-            return AnyView(
-                RoomTopicEventView(model: .init(event: event))
-            )
-        case .roomPowerLevels:
-            return AnyView(
-                RoomPowerLevelsEventView(model: .init(event: event))
-            )
-        case .roomName:
-            return AnyView(
-                RoomNameEventView(model: .init(event: event))
-            )
-        default:
-            return AnyView(
-                GenericEventView(text: "\(event.type!)\n\(event.content!)")
-                    .padding(.top, 10)
-            )
         }
     }
 }

@@ -9,9 +9,9 @@ struct IsVisibleKey: PreferenceKey {
 }
 
 struct ReverseList<Element, Content>: View where Element: Identifiable, Content: View {
-    var items: [Element]
-    var reverseItemOrder: Bool
-    var viewForItem: (Element) -> Content
+    private let items: [Element]
+    private let reverseItemOrder: Bool
+    private let viewForItem: (Element) -> Content
 
     @Binding var hasReachedTop: Bool
 

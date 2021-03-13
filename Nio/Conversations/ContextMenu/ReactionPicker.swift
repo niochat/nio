@@ -3,11 +3,11 @@ import SwiftUI
 struct ReactionPicker: View {
     let emoji = ["👍", "👎", "😄", "🎉", "❤️", "🚀", "👀"]
 
-    var picked: (String) -> Void
+    let picked: (String) -> Void
 
     var body: some View {
         VStack {
-            Text(L10n.ReactionPicker.title)
+            Text(verbatim: L10n.ReactionPicker.title)
                 .foregroundColor(.gray)
                 .font(.headline)
                 .padding(.bottom, 30)

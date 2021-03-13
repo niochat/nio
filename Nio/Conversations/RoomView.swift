@@ -71,10 +71,10 @@ struct RoomContainerView: View {
         .alert(isPresented: $showJoinAlert) {
             let roomName = self.room.summary.displayname ?? self.room.summary.roomId ?? L10n.Room.Invitation.fallbackTitle
             return Alert(
-                title: Text(L10n.Room.Invitation.JoinAlert.title),
-                message: Text(L10n.Room.Invitation.JoinAlert.message(roomName)),
+                title: Text(verbatim: L10n.Room.Invitation.JoinAlert.title),
+                message: Text(verbatim: L10n.Room.Invitation.JoinAlert.message(roomName)),
                 primaryButton: .default(
-                    Text(L10n.Room.Invitation.JoinAlert.joinButton),
+                    Text(verbatim: L10n.Room.Invitation.JoinAlert.joinButton),
                     action: {
                         self.room.room.mxSession.joinRoom(self.room.room.roomId) { _ in
                             self.room.markAllAsRead()
@@ -108,8 +108,8 @@ struct RoomContainerView: View {
   #else
     var attachmentPickerSheet: ActionSheet {
         ActionSheet(
-            title: Text(L10n.Room.Attachment.selectType), buttons: [
-                .default(Text(L10n.Room.Attachment.typePhoto), action: {
+            title: Text(verbatim: L10n.Room.Attachment.selectType), buttons: [
+                .default(Text(verbatim: L10n.Room.Attachment.typePhoto), action: {
                     self.showImagePicker = true
                 }),
                 .cancel()
@@ -120,19 +120,19 @@ struct RoomContainerView: View {
 }
 
 struct RoomView: View {
-    @Environment(\.userId) var userId
-    @EnvironmentObject var room: NIORoom
-    @EnvironmentObject var store: AccountStore
+    @Environment(\.userId) private var userId
+    @EnvironmentObject private var room: NIORoom
+    @EnvironmentObject private var store: AccountStore
 
-    var events: EventCollection
-    var isDirect: Bool
+    let events: EventCollection
+    let isDirect: Bool
 
     @Binding var showAttachmentPicker: Bool
-    var onCommit: (String) -> Void
+    let onCommit: (String) -> Void
 
-    var onReact: (String) -> Void
-    var onRedact: (String, String?) -> Void
-    var onEdit: (String, String) -> Void
+    let onReact: (String) -> Void
+    let onRedact: (String, String?) -> Void
+    let onEdit: (String, String) -> Void
 
     @State private var editEventId: String?
     @State private var eventToRedact: String?
@@ -186,9 +186,9 @@ struct RoomView: View {
             }
         }
         .alert(item: $eventToRedact) { eventId in
-            Alert(title: Text(L10n.Room.Remove.title),
-                  message: Text(L10n.Room.Remove.message),
-                  primaryButton: .destructive(Text(L10n.Room.Remove.action), action: { self.onRedact(eventId, nil) }),
+            Alert(title: Text(verbatim: L10n.Room.Remove.title),
+                  message: Text(verbatim: L10n.Room.Remove.message),
+                  primaryButton: .destructive(Text(verbatim: L10n.Room.Remove.action), action: { self.onRedact(eventId, nil) }),
                   secondaryButton: .cancel())
         }
     }

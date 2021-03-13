@@ -3,38 +3,39 @@ import SwiftUI
 import NioKit
 
 struct RootView: View {
-    @EnvironmentObject var store: AccountStore
+    @EnvironmentObject private var store: AccountStore
+
+    private var homeserverURL: URL {
+        // Can this ever be nil? And if so, what happens with the default fallback?
+        assert(store.client != nil)
+        let configuredURL = store.client?.homeserver.flatMap(URL.init)
+        assert(configuredURL != nil)
+        return configuredURL ?? HomeserverKey.defaultValue
+    }
 
     var body: some View {
         switch store.loginState {
         case .loggedIn(let userId):
-            return AnyView(
-                RecentRoomsContainerView()
-                    .environment(\.userId, userId)
-                    // Can this ever be nil? And if so, what happens with the default fallback?
-                    .environment(\.homeserver, (store.client?.homeserver.flatMap(URL.init)) ?? HomeserverKey.defaultValue)
-            )
+            RecentRoomsContainerView()
+                .environment(\.userId, userId)
+                .environment(\.homeserver, homeserverURL)
+
         case .loggedOut:
-            return AnyView(
-                LoginContainerView()
-            )
+            LoginContainerView()
+
         case .authenticating:
-            return AnyView(
-                LoadingView()
-            )
+            LoadingView()
+
         case .failure(let error):
-            return AnyView(
-                VStack {
-                    Spacer()
-                    Text(error.localizedDescription)
-                    Spacer()
-                    Button(action: {
-                        self.store.loginState = .loggedOut
-                    }, label: {
-                        Text(L10n.Login.failureBackToLogin)
-                    }).padding()
+            VStack {
+                Spacer()
+                Text(verbatim: error.localizedDescription)
+                Spacer()
+                Button(action: { self.store.loginState = .loggedOut }) {
+                    Text(verbatim: L10n.Login.failureBackToLogin)
                 }
-            )
+                .padding()
+            }
         }
     }
 }

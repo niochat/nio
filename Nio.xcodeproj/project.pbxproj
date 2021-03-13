@@ -1708,7 +1708,7 @@
 				CODE_SIGN_ENTITLEMENTS = Nio/Nio.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 33;
 				DEVELOPMENT_ASSET_PATHS = "\"Nio/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Nio/Info.plist;
@@ -1731,7 +1731,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nio/Nio.entitlements;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 33;
 				DEVELOPMENT_ASSET_PATHS = "\"Nio/Preview Content\"";
 				DEVELOPMENT_TEAM = HU85FER47E;
 				ENABLE_PREVIEWS = YES;
@@ -1754,6 +1754,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = NioShareExtension/NioShareExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 33;
 				INFOPLIST_FILE = NioShareExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1774,6 +1775,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = NioShareExtension/NioShareExtension.entitlements;
+				CURRENT_PROJECT_VERSION = 33;
+				DEVELOPMENT_TEAM = HU85FER47E;
 				INFOPLIST_FILE = NioShareExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1781,6 +1784,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = chat.nio.iOS.ShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = YES;

@@ -7,9 +7,9 @@ struct RedactionEventView: View {
         let reason: String?
     }
 
-    var model: ViewModel
+    let model: ViewModel
 
-    var redactionText: String {
+    private var redactionText: String {
         if model.sender == model.redactor {
             return "🗑 \(L10n.Event.Redaction.redactSelf(model.redactor))"
         }
@@ -24,7 +24,7 @@ struct RedactionEventView: View {
                     .font(.caption)
                     .foregroundColor(.gray)
                 if model.reason != nil {
-                    Text(L10n.Event.reason(model.reason!))
+                    Text(verbatim: L10n.Event.reason(model.reason!))
                         .foregroundColor(.gray)
                         .font(.callout)
                 }

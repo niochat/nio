@@ -3,9 +3,9 @@ import class MatrixSDK.MXEvent
 
 struct RoomNameEventView: View {
     struct ViewModel {
-        let sender: String
-        let newName: String
-        let oldName: String?
+        fileprivate let sender: String
+        fileprivate let newName: String
+        fileprivate let oldName: String?
 
         init(event: MXEvent) {
             self.sender = event.sender ?? ""
@@ -20,7 +20,7 @@ struct RoomNameEventView: View {
         }
     }
 
-    var model: ViewModel
+    let model: ViewModel
 
     var body: some View {
         if let oldName = model.oldName {

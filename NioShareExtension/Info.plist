@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AppGroup</key>
+	<string>$(APPGROUP)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -19,9 +21,9 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
-	<key>AppGroup</key>
-	<string>$(APPGROUP)</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>DevelopmentTeam</key>
+	<string>$(DEVELOPMENT_TEAM)</string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionAttributes</key>
@@ -41,7 +43,5 @@
 		<key>NSExtensionPrincipalClass</key>
 		<string>ShareNavigationController</string>
 	</dict>
-	<key>DevelopmentTeam</key>
-	<string>$(DEVELOPMENT_TEAM)</string>
 </dict>
 </plist>

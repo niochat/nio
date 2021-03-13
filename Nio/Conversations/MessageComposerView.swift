@@ -12,9 +12,9 @@ struct ExDivider: View {
 }
 
 struct MessageComposerView: View {
-    @Environment (\.colorScheme) var colorScheme
-    @Environment(\.colorSchemeContrast) var colorSchemeContrast
-    @Environment(\.sizeCategory) var sizeCategory
+    @Environment (\.colorScheme) private var colorScheme
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+    @Environment(\.sizeCategory) private var sizeCategory
 
     @Binding var showAttachmentPicker: Bool
 
@@ -26,14 +26,14 @@ struct MessageComposerView: View {
 
     var highlightMessage: String?
 
-    var onCancel: () -> Void
-    var onCommit: () -> Void
+    let onCancel: () -> Void
+    let onCommit: () -> Void
 
-    var backgroundColor: Color {
+    private var backgroundColor: Color {
         colorScheme == .light ? Color(#colorLiteral(red: 0.9332506061, green: 0.937307477, blue: 0.9410644174, alpha: 1)) : Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1))
     }
 
-    var gradient: LinearGradient {
+    private var gradient: LinearGradient {
         let color: Color = backgroundColor
         let colors: [Color]
         if colorScheme == .dark {
@@ -48,7 +48,7 @@ struct MessageComposerView: View {
         )
     }
 
-    var background: some View {
+    private var background: some View {
         RoundedRectangle(cornerRadius: 10.0 * sizeCategory.scalingFactor)
             .fill(gradient).opacity(0.9)
     }
@@ -72,7 +72,7 @@ struct MessageComposerView: View {
                     .background(Color.accentColor)
                 VStack {
                     HStack {
-                        Text(L10n.Composer.editMessage)
+                        Text(verbatim: L10n.Composer.editMessage)
                             .frame(alignment: .leading)
                             .padding(.leading, 10)
                             .foregroundColor(.accentColor)
@@ -82,7 +82,7 @@ struct MessageComposerView: View {
                         }, label: {
                             SFSymbol.close
                                 .font(.system(size: 20))
-                                .accessibility(label: Text(L10n.Composer.AccessibilityLabel.cancelEdit))
+                                .accessibility(label: Text(verbatim: L10n.Composer.AccessibilityLabel.cancelEdit))
                         })
                     }
                     Text(highlightMessage!)
@@ -94,14 +94,14 @@ struct MessageComposerView: View {
         }
     }
 
-    var attachmentPickerButton: some View {
+    private var attachmentPickerButton: some View {
         Button(action: {
             self.showAttachmentPicker.toggle()
         }, label: {
             Image(Asset.Icon.paperclip.name)
                 .resizable()
                 .frame(width: 30.0, height: 30.0)
-                .accessibility(label: Text(L10n.Composer.AccessibilityLabel.sendFile))
+                .accessibility(label: Text(verbatim: L10n.Composer.AccessibilityLabel.sendFile))
         })
     }
 
@@ -125,14 +125,14 @@ struct MessageComposerView: View {
         .frame(height: self.messageEditorHeight)
     }
 
-    var sendButton: some View {
+    private var sendButton: some View {
         Button(action: {
             self.onCommit()
         }, label: {
             Image(Asset.Icon.paperplane.name)
                 .resizable()
                 .frame(width: 30.0, height: 30.0)
-                .accessibility(label: Text(L10n.Composer.AccessibilityLabel.send))
+                .accessibility(label: Text(verbatim: L10n.Composer.AccessibilityLabel.send))
         })
         .disabled(attributedMessage.isEmpty)
     }

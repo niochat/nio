@@ -42,11 +42,11 @@ struct UITextViewWrapper: UIViewRepresentable {
     }
 
     @Environment(\.textAttributes)
-    var envTextAttributes: TextAttributes
+    private var envTextAttributes: TextAttributes
 
-    @Binding var attributedText: NSAttributedString
-    @Binding var isEditing: Bool
-    @Binding var sizeThatFits: CGSize
+    @Binding private var attributedText: NSAttributedString
+    @Binding private var isEditing: Bool
+    @Binding private var sizeThatFits: CGSize
 
     private let maxSize: CGSize
 

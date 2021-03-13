@@ -3,7 +3,7 @@ import class MatrixSDK.MXEvent
 
 struct RoomPowerLevelsEventView: View {
     struct ViewModel {
-        let sender: String
+        fileprivate let sender: String
 
         struct LevelChange: Identifiable {
             let name: String
@@ -21,15 +21,15 @@ struct RoomPowerLevelsEventView: View {
                 }
             }
 
-            var oldLevelName: String {
+            fileprivate var oldLevelName: String {
                 old.map { levelName($0) } ?? L10n.RoomPowerLevel.default
             }
 
-            var newLevelName: String {
+            fileprivate var newLevelName: String {
                 levelName(new)
             }
         }
-        let changes: [LevelChange]
+        private let changes: [LevelChange]
 
         init(sender: String,
              changes: [LevelChange]) {
@@ -72,7 +72,7 @@ struct RoomPowerLevelsEventView: View {
         }
     }
 
-    var model: ViewModel
+    let model: ViewModel
 
     var body: some View {
         GenericEventView(text: model.combined)
