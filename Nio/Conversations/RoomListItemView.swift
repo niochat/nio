@@ -8,20 +8,20 @@ struct RoomListItemContainerView: View {
     @EnvironmentObject private var store: AccountStore
 
     let room: NIORoom
-  
+
     private var roomAvatarURL: URL? {
         guard let client = store.client,
               let homeserver = URL(string: client.homeserver),
               let avatar = room.summary.avatar else { return nil }
         return MXURL(mxContentURI: avatar)?.contentURL(on: homeserver)
     }
-  
+
     var body: some View {
         let roomName = room.summary.displayname ?? ""
         let lastMessage = room.lastMessage
         let lastActivity = Formatter.string(forRelativeDate: room.summary.lastMessageDate)
 
-        let accessibilityLabel : String
+        let accessibilityLabel: String
         if room.isDirect {
             accessibilityLabel = L10n.RecentRooms.AccessibilityLabel.dm(roomName, lastActivity, lastMessage)
         } else {
