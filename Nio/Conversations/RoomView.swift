@@ -32,9 +32,12 @@ struct RoomContainerView: View {
       )
     }
 
+  #if os(macOS)
     var body: some View {
-      #if os(macOS)
-        roomView
+        VStack(spacing: 0) {
+            Divider() // TBD: This might be better done w/ toolbar styling
+            roomView
+        }
         .navigationTitle(Text(room.summary.displayname ?? ""))
         // TODO: action sheet
         .sheet(item: $eventToReactTo) { eventId in
@@ -56,7 +59,11 @@ struct RoomContainerView: View {
         }
         .environmentObject(room)
         // TODO: background sheet thing
-      #else
+        .background(Color(.textBackgroundColor))
+        .frame(minWidth: Style.minTimelineWidth)
+    }
+  #else // iOS
+    var body: some View {
         roomView
         .navigationBarTitle(Text(room.summary.displayname ?? ""), displayMode: .inline)
         .actionSheet(isPresented: $showAttachmentPicker) {
@@ -100,8 +107,8 @@ struct RoomContainerView: View {
                 }
             }
         )
-      #endif
     }
+  #endif // iOS
 
   #if os(macOS)
     // TODO: port me to macOS
@@ -142,6 +149,10 @@ struct RoomView: View {
     @State private var attributedMessage = NSAttributedString(string: "")
 
     @State private var shouldPaginate = false
+  
+    private var areOtherUsersTyping: Bool {
+        return !(room.room.typingUsers?.filter { $0 != userId }.isEmpty ?? false)
+    }
 
     var body: some View {
         VStack {
@@ -166,9 +177,15 @@ struct RoomView: View {
                                     }))
                     .padding(.horizontal)
             }
-            if !(room.room.typingUsers?.filter { $0 != userId }.isEmpty ?? false) {
+          
+            if #available(macOS 11, *) {
+                Divider()
+            }
+          
+            if areOtherUsersTyping {
                 TypingIndicatorContainerView()
             }
+            
             MessageComposerView(
                 showAttachmentPicker: $showAttachmentPicker,
                 isEditing: $isEditingMessage,

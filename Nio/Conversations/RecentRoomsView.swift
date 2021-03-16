@@ -11,6 +11,12 @@ struct RecentRoomsContainerView: View {
     @State private var selectedNavigationItem: SelectedNavigationItem?
     @State private var selectedRoomId: ObjectIdentifier?
 
+    private func autoselectFirstRoom() {
+      if selectedRoomId == nil {
+          selectedRoomId = store.rooms.first?.id
+      }
+    }
+
     var body: some View {
         RecentRoomsView(selectedNavigationItem: $selectedNavigationItem,
                         selectedRoomId: $selectedRoomId,
@@ -18,11 +24,15 @@ struct RecentRoomsContainerView: View {
             .sheet(item: $selectedNavigationItem) {
                 NavigationSheet(selectedItem: $0, selectedRoomId: $selectedRoomId)
                     // This really shouldn't be necessary. SwiftUI bug?
+                    // 2021-03-07(hh): SwiftUI doesn't document when
+                    //                 environments are preserved. Also
+                    //                 different between platforms.
                     .environmentObject(self.store)
                     .accentColor(accentColor)
             }
             .onAppear {
                 self.store.startListeningForRoomEvents()
+                if #available(macOS 11, *) { autoselectFirstRoom() }
             }
     }
 }
@@ -43,6 +53,47 @@ struct RecentRoomsView: View {
         rooms.filter {$0.room.summary.membership == .invite}
     }
 
+  #if os(macOS)
+    var body: some View {
+        NavigationView {
+            List {
+                if !invitedRooms.isEmpty {
+                    RoomsListSection(
+                        sectionHeader: L10n.RecentRooms.PendingInvitations.header,
+                        rooms: invitedRooms,
+                        onLeaveAlertTitle: L10n.RecentRooms.PendingInvitations.Leave.alertTitle,
+                        selectedRoomId: $selectedRoomId
+                    )
+                }
+
+                RoomsListSection(
+                    sectionHeader: invitedRooms.isEmpty ? nil : L10n.RecentRooms.Rooms.header ,
+                    rooms: joinedRooms,
+                    onLeaveAlertTitle: L10n.RecentRooms.Leave.alertTitle,
+                    selectedRoomId: $selectedRoomId
+                )
+
+            }
+            .listStyle(SidebarListStyle())
+            .navigationTitle("Mio")
+            .frame(minWidth: Style.minSidebarWidth)
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button(action: { self.selectedNavigationItem = .settings }) {
+                        Label(L10n.RecentRooms.AccessibilityLabel.settings,
+                              systemImage: SFSymbol.settings.rawValue)
+                    }
+                }
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(action: { self.selectedNavigationItem = .newConversation }) {
+                        Label(L10n.RecentRooms.AccessibilityLabel.newConversation,
+                              systemImage: SFSymbol.newConversation.rawValue)
+                    }
+                }
+            }
+        }
+    }
+  #else // iOS
     private var settingsButton: some View {
         Button(action: {
             self.selectedNavigationItem = .settings
@@ -66,33 +117,6 @@ struct RecentRoomsView: View {
     }
 
     var body: some View {
-      #if os(macOS)
-        NavigationView {
-            List {
-                if !invitedRooms.isEmpty {
-                    RoomsListSection(
-                        sectionHeader: L10n.RecentRooms.PendingInvitations.header,
-                        rooms: invitedRooms,
-                        onLeaveAlertTitle: L10n.RecentRooms.PendingInvitations.Leave.alertTitle,
-                        selectedRoomId: $selectedRoomId
-                    )
-                }
-
-                RoomsListSection(
-                    sectionHeader: invitedRooms.isEmpty ? nil : L10n.RecentRooms.Rooms.header ,
-                    rooms: joinedRooms,
-                    onLeaveAlertTitle: L10n.RecentRooms.Leave.alertTitle,
-                    selectedRoomId: $selectedRoomId
-                )
-
-            }
-            .navigationTitle("Nio")
-            .toolbar { // TBD
-                ToolbarItem { settingsButton  }
-                ToolbarItem { newConversationButton }
-            }
-        }
-      #else
         NavigationView {
             List {
                 if !invitedRooms.isEmpty {
@@ -122,9 +146,8 @@ struct RecentRoomsView: View {
             .navigationBarTitle("Nio", displayMode: .inline)
             .navigationBarItems(leading: settingsButton, trailing: newConversationButton)
         }
-      #endif
     }
-
+  #endif // iOS
 }
 
 struct RoomsListSection: View {
