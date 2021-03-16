@@ -33,7 +33,7 @@ struct RecentRoomsView: View {
     @Binding fileprivate var selectedNavigationItem: SelectedNavigationItem?
     @Binding fileprivate var selectedRoomId: ObjectIdentifier?
 
-    var rooms: [NIORoom]
+    let rooms: [NIORoom]
 
     private var joinedRooms: [NIORoom] {
         rooms.filter {$0.room.summary.membership == .join}

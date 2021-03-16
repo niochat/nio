@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct ExDivider: View {
-    let color: Color = .accentColor
-    let width: CGFloat = 3
+    private let color: Color = .accentColor
+    private let width: CGFloat = 3
     var body: some View {
         Rectangle()
             .fill(color)
