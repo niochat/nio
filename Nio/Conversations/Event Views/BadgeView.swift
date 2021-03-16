@@ -1,4 +1,5 @@
 import SwiftUI
+import NioKit
 
 struct BadgeView: View {
     let image: Image
@@ -28,8 +29,8 @@ struct BadgeView: View {
 struct BadgeView_Previews: PreviewProvider {
     static var previews: some View {
         let image = Image(Asset.Badge.edited.name)
-        let foregroundColor = Color(UIColor.lightGray)
-        let backgroundColor = Color(UIColor.darkGray)
+        let foregroundColor = Color(UXColor.lightGray)
+        let backgroundColor = Color(UXColor.darkGray)
 
         return BadgeView(
             image: image,

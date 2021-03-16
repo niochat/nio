@@ -66,6 +66,33 @@ struct RecentRoomsView: View {
     }
 
     var body: some View {
+      #if os(macOS)
+        NavigationView {
+            List {
+                if !invitedRooms.isEmpty {
+                    RoomsListSection(
+                        sectionHeader: L10n.RecentRooms.PendingInvitations.header,
+                        rooms: invitedRooms,
+                        onLeaveAlertTitle: L10n.RecentRooms.PendingInvitations.Leave.alertTitle,
+                        selectedRoomId: $selectedRoomId
+                    )
+                }
+
+                RoomsListSection(
+                    sectionHeader: invitedRooms.isEmpty ? nil : L10n.RecentRooms.Rooms.header ,
+                    rooms: joinedRooms,
+                    onLeaveAlertTitle: L10n.RecentRooms.Leave.alertTitle,
+                    selectedRoomId: $selectedRoomId
+                )
+
+            }
+            .navigationTitle("Nio")
+            .toolbar { // TBD
+                ToolbarItem { settingsButton  }
+                ToolbarItem { newConversationButton }
+            }
+        }
+      #else
         NavigationView {
             List {
                 if !invitedRooms.isEmpty {
@@ -95,6 +122,7 @@ struct RecentRoomsView: View {
             .navigationBarTitle("Nio", displayMode: .inline)
             .navigationBarItems(leading: settingsButton, trailing: newConversationButton)
         }
+      #endif
     }
 
 }

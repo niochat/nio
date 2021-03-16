@@ -1,5 +1,4 @@
 import SwiftUI
-import UIKit
 
 struct IsVisibleKey: PreferenceKey {
     static var defaultValue: Bool = false

@@ -1,7 +1,11 @@
 import SwiftUI
 import class MatrixSDK.MXEvent
 import SDWebImageSwiftUI
-import BlurHash
+
+#if os(macOS)
+#else
+  import BlurHash
+#endif
 
 struct MediaEventView: View {
     @Environment(\.userId) private var userId
@@ -52,6 +56,11 @@ struct MediaEventView: View {
 
     @ViewBuilder
     var placeholder: some View {
+        // TBD: isn't there a "placeholder" generator in SwiftUI now?
+      #if os(macOS)
+        Rectangle()
+            .foregroundColor(Color.borderedMessageBackground)
+      #else
         if let size = model.size,
            let blurhash = model.blurhash,
            let img = UIImage(blurHash: blurhash, size: size) {
@@ -60,6 +69,7 @@ struct MediaEventView: View {
             Rectangle()
                 .foregroundColor(Color.borderedMessageBackground)
         }
+      #endif
     }
 
     var urls: [URL] {
@@ -85,6 +95,21 @@ struct MediaEventView: View {
     }
 
     var body: some View {
+      #if os(macOS)
+        VStack(alignment: isMe ? .trailing : .leading, spacing: 5) {
+            senderView
+            WebImage(url: urls.first, isAnimating: .constant(true))
+                .resizable()
+                .placeholder { placeholder }
+                .indicator(.activity)
+                .aspectRatio(model.size ?? CGSize(width: 3, height: 2), contentMode: .fit)
+                .mask(RoundedRectangle(cornerRadius: 15))
+            timestampView
+        }
+        .contextMenu(ContextMenu(menuItems: {
+            EventContextMenu(model: contextMenuModel)
+        }))
+      #else
         VStack(alignment: isMe ? .trailing : .leading, spacing: 5) {
             senderView
             WebImage(url: urls.first, isAnimating: .constant(true))
@@ -100,6 +125,7 @@ struct MediaEventView: View {
         .contextMenu(ContextMenu(menuItems: {
             EventContextMenu(model: contextMenuModel)
         }))
+      #endif
     }
 }
 

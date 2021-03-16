@@ -65,7 +65,7 @@ struct RoomListItemView: View {
                 .lineLimit(1)
                 .allowsTightening(true)
                 .frame(width: geometry.size.width, height: geometry.size.height)
-                .foregroundColor(.init(UIColor.textOnAccentColor(for: colorScheme)))
+                .foregroundColor(.init(UXColor.textOnAccentColor(for: colorScheme)))
                 .background(
                     Color.accentColor.overlay(gradient)
                 )
@@ -123,7 +123,7 @@ struct RoomListItemView: View {
             .font(.caption)
             .lineLimit(1)
             .allowsTightening(true)
-            .foregroundColor(.init(UIColor.textOnAccentColor(for: colorScheme)))
+            .foregroundColor(.init(UXColor.textOnAccentColor(for: colorScheme)))
             // Make sure we get enough "breathing air" around the number:
             .padding(.vertical, badgeTextVerticalPadding)
             .padding(.horizontal, 6 * sizeCategory.scalingFactor)

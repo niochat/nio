@@ -79,6 +79,8 @@ public class AccountStore: ObservableObject {
                         self.session?.crypto.warnOnUnknowDevices = false
                     }
                 }
+            @unknown default:
+                fatalError("Unexpected Matrix response: \(response)")
             }
         }
     }
@@ -93,6 +95,8 @@ public class AccountStore: ObservableObject {
             case .success:
                 self.fileStore?.deleteAllData()
                 completion(.success(.loggedOut))
+            @unknown default:
+                fatalError("Unexpected Matrix response: \(response)")
             }
         }
     }
@@ -128,8 +132,12 @@ public class AccountStore: ObservableObject {
                     case .success:
                         let userId = credentials.userId!
                         completion(.success(.loggedIn(userId: userId)))
+                    @unknown default:
+                        fatalError("Unexpected Matrix response: \(response)")
                     }
                 }
+            @unknown default:
+                fatalError("Unexpected Matrix response: \(response)")
             }
         }
     }

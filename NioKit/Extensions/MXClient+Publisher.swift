@@ -11,6 +11,8 @@ extension MXRestClient {
                     promise(.failure(error))
                 case .success(let publicRoomsResponse):
                     promise(.success(publicRoomsResponse))
+                @unknown default:
+                    fatalError("Unexpected Matrix response: \(response)")
                 }
             }
         }.eraseToAnyPublisher()

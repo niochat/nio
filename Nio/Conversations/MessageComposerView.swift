@@ -54,10 +54,14 @@ struct MessageComposerView: View {
     }
 
     private var messageEditorHeight: CGFloat {
-        min(
+      #if os(macOS)
+        return min(self.contentSizeThatFits.height, 240)
+      #else
+        return min(
             self.contentSizeThatFits.height,
             0.25 * UIScreen.main.bounds.height
         )
+      #endif
     }
 
     private var highlightMessageView: some View {
@@ -102,11 +106,16 @@ struct MessageComposerView: View {
     }
 
     var messageEditorView: some View {
-        MultilineTextField(
+        #if os(macOS)
+            let textAttributes = TextAttributes()
+        #else
+            let textAttributes = TextAttributes(autocapitalizationType: .sentences)
+        #endif
+        return MultilineTextField(
             attributedText: $attributedMessage,
             placeholder: L10n.Composer.newMessage,
             isEditing: self.$isEditing,
-            textAttributes: TextAttributes(autocapitalizationType: .sentences),
+            textAttributes: textAttributes,
             onCommit: onCommit
         )
         .background(self.background)

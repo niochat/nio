@@ -18,16 +18,16 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
         model.sender == userId
     }
 
-    private var linkColor: UIColor {
+    private var linkColor: UXColor {
         if isMe {
-            return UIColor(
+            return UXColor(
                 hue: 280.0 / 360.0,
                 saturation: 1.0,
                 brightness: 0.33,
                 alpha: 1.0
             )
         } else {
-            return UIColor.blue
+            return UXColor.blue
         }
     }
 

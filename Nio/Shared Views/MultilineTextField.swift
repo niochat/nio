@@ -1,5 +1,5 @@
 import SwiftUI
-import UIKit
+import NioKit
 
 struct MultilineTextField: View {
     @Binding private var attributedText: NSAttributedString
@@ -17,7 +17,7 @@ struct MultilineTextField: View {
         .init(top: 8.0, leading: 8.0, bottom: 8.0, trailing: 8.0)
     }
 
-    private var textContainerInset: UIEdgeInsets {
+    private var textContainerInset: UXEdgeInsets {
         .init(top: 8.0, left: 0.0, bottom: 8.0, right: 0.0)
     }
 

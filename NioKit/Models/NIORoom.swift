@@ -118,7 +118,7 @@ public class NIORoom: ObservableObject {
         room.redactEvent(eventId, reason: reason) { _ in }
     }
 
-    public func sendImage(image: UIImage) {
+    public func sendImage(image: UXImage) {
         guard let imageData = image.jpeg(.lowest) else { return }
 
         var localEcho: MXEvent? = nil
@@ -150,7 +150,7 @@ extension NIORoom: Identifiable {
     }
 }
 
-extension UIImage {
+extension UXImage {
     public enum JPEGQuality: CGFloat {
         case lowest  = 0
         case low     = 0.25
@@ -160,6 +160,11 @@ extension UIImage {
     }
 
     public func jpeg(_ jpegQuality: JPEGQuality) -> Data? {
-        return jpegData(compressionQuality: jpegQuality.rawValue)
+        #if os(macOS)
+            return tiffRepresentation(using  : .jpeg,
+                                      factor : Float(jpegQuality.rawValue))
+        #else
+            return jpegData(compressionQuality: jpegQuality.rawValue)
+        #endif
     }
 }
