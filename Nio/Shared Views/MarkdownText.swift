@@ -3,6 +3,14 @@ import NioKit
 
 import CommonMarkAttributedString
 
+#if os(macOS)
+@available(macOS, unavailable)
+struct MarkdownText: View {
+  var body: some View { Text("`MarkdownText` unavailable on macOS") }
+}
+#else // iOS etc
+@available(macOS, unavailable)
+@available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 struct MarkdownText: View {
     private let markdown: String
     private let textColor: UXColor
@@ -12,27 +20,9 @@ struct MarkdownText: View {
     private let textAttributes: TextAttributes
     private let linkColor: UXColor
 
-  #if os(macOS)
-  #else
     #warning("Is onLinkInteraction needed?")
     private let onLinkInteraction: (((URL, UITextItemInteraction) -> Bool))?
-  #endif
 
-  #if os(macOS)
-    public init(
-        markdown: String,
-        textColor: UXColor,
-        textAttributes: TextAttributes = .init(),
-        linkColor: UXColor,
-        dummyLinkInteraction: ((URL, String) -> Bool)? = nil
-    ) {
-        self.markdown = markdown
-
-        self.textColor = textColor.resolvedColor(with: .current)
-        self.textAttributes = textAttributes
-        self.linkColor = linkColor
-    }
-  #else
     public init(
         markdown: String,
         textColor: UXColor,
@@ -47,7 +37,6 @@ struct MarkdownText: View {
         self.linkColor = linkColor
         self.onLinkInteraction = onLinkInteraction
     }
-  #endif
 
     internal var attributes: [NSAttributedString.Key: Any] {
         [
@@ -98,6 +87,8 @@ struct MarkdownText: View {
     }
 }
 
+@available(macOS, unavailable)
+@available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 struct MarkdownText_Previews: PreviewProvider {
     static var previews: some View {
         let markdownString = #"""
@@ -122,3 +113,4 @@ struct MarkdownText_Previews: PreviewProvider {
             .padding(10.0)
     }
 }
+#endif // !macOS

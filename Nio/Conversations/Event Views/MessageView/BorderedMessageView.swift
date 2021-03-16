@@ -76,7 +76,11 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
             .foregroundColor(.secondary)
     }
 
+    @ViewBuilder
     private var markdownView: some View {
+      #if os(macOS)
+        Text(verbatim: model.text) // Until we have something better.
+      #else
         MarkdownText(
             markdown: model.text,
             textColor: .messageTextColor(for: colorScheme, isOutgoing: isMe),
@@ -85,6 +89,7 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
             print("Tapped URL:", url)
             return true
         }
+      #endif
     }
 
     @ViewBuilder private var senderView: some View {
