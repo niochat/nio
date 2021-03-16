@@ -66,7 +66,7 @@ struct NewConversationView: View {
             Section {
                 HStack {
                     Button(action: createRoom) {
-                        Text(L10n.NewConversation.createRoom)
+                        Text(verbatim: L10n.NewConversation.createRoom)
                     }
                     .disabled(users.contains("") || (roomName.isEmpty && users.count > 1))
 
@@ -76,7 +76,7 @@ struct NewConversationView: View {
                 }
             }
             .alert(item: $errorMessage) { errorMessage in
-                Alert(title: Text(L10n.NewConversation.alertFailed),
+                Alert(title: Text(verbatim: L10n.NewConversation.alertFailed),
                       message: Text(errorMessage))
             }
         }
