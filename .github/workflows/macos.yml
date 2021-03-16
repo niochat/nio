@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: stable
+
+jobs:
+  build_and_test:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Version
+      run: |
+        sudo xcode-select --switch /Applications/Xcode_12.app
+        xcode-select --print-path
+        xcodebuild -version
+    - name: Prerequisites
+      run: |
+        gem install xcpretty
+    - name: Build
+      run: |
+        set -o pipefail
+        xcodebuild -scheme Mio build | xcpretty --color
