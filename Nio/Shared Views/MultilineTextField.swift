@@ -46,7 +46,21 @@ struct MultilineTextField: View {
         self.onCommit = onCommit
     }
 
+  #if os(macOS)
+    var plainStringBinding : Binding<String> {
+        return .init(get: { attributedText.string },
+                     set: { attributedText = NSAttributedString(string: $0) })
+    }
+  #endif
+
     var body: some View {
+      #if os(macOS)
+        TextField("Compose message",
+                  text: plainStringBinding,
+                  onEditingChanged: onEditingChanged ?? { _ in },
+                  onCommit: onCommit ?? {})
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+      #else // iOS
         AttributedText(
             attributedText: $attributedText,
             isEditing: $isEditing,
@@ -61,14 +75,13 @@ struct MultilineTextField: View {
                 idealHeight: self.contentSizeThatFits.height
             )
             .background(placeholderView, alignment: .topLeading)
+      #endif // iOS
     }
 
-    var placeholderView: some View {
-        return Group {
-            if attributedText.isEmpty {
-                Text(placeholder).foregroundColor(.gray)
-                    .padding(placeholderInset)
-            }
+    @ViewBuilder private var placeholderView: some View {
+        if attributedText.isEmpty {
+            Text(placeholder).foregroundColor(.gray)
+                .padding(placeholderInset)
         }
     }
 }
