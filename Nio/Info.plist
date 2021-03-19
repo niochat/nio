@@ -83,6 +83,8 @@
 	</array>
 	<key>DevelopmentTeam</key>
 	<string>$(DEVELOPMENT_TEAM)</string>
+	<key>NSContactsUsageDescription</key>
+	<string>The contact information is used to find a matrix id on the identity server</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
