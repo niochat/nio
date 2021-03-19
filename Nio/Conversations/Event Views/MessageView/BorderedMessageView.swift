@@ -80,6 +80,7 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
     private var markdownView: some View {
       #if os(macOS)
         Text(verbatim: model.text) // Until we have something better.
+        .foregroundColor(Color(.messageTextColor(for: colorScheme, isOutgoing: isMe)))
       #else
         MarkdownText(
             markdown: model.text,
