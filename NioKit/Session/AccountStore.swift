@@ -2,6 +2,7 @@ import Foundation
 import Combine
 import MatrixSDK
 import KeychainAccess
+import SwiftUI
 
 public enum LoginState {
     case loggedOut
@@ -10,10 +11,16 @@ public enum LoginState {
     case loggedIn(userId: String)
 }
 
+@available(iOS 14.0, *)
 public class AccountStore: ObservableObject {
+    @AppStorage("identityServer") private var identityServer: String = "https://vector.im"
+    @AppStorage("identityServerBool") private var identityServerBool: Bool = false
+    
     public var client: MXRestClient?
     public var session: MXSession?
 
+    public var identityService: MXIdentityService?
+    
     var fileStore: MXFileStore?
     var credentials: MXCredentials?
 
@@ -120,6 +127,10 @@ public class AccountStore: ObservableObject {
         self.session = MXSession(matrixRestClient: self.client!)
         self.fileStore = MXFileStore()
 
+        if self.identityServerBool {
+            self.setIdentityService()
+        }
+        
         self.session!.setStore(fileStore!) { response in
             switch response {
             case .failure(let error):
@@ -199,5 +210,9 @@ public class AccountStore: ObservableObject {
         timeline?.resetPaginationAroundInitialEvent(withLimit: 40) { _ in
             self.objectWillChange.send()
         }
+    }
+    
+    public func setIdentityService() {
+        self.identityService = MXIdentityService.init(identityServer: URL(string: identityServer)!, accessToken: nil, homeserverRestClient: self.client!)
     }
 }

@@ -4,6 +4,8 @@ import MobileCoreServices
 import SwiftUI
 import NioKit
 
+@available(macCatalystApplicationExtension 14.0, *)
+@available(iOSApplicationExtension 14.0, *)
 @objc(ShareNavigationController)
 class ShareNavigationController: UIViewController {
 
