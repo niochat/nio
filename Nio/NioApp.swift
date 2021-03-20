@@ -21,6 +21,13 @@ struct NioApp: App {
                 .accentColor(accentColor)
           #endif
         }
+      
+      #if os(macOS)
+        Settings {
+            SettingsContainerView()
+                .environmentObject(accountStore)
+        }
+      #endif
     }
 }
 

@@ -78,12 +78,6 @@ struct RecentRoomsView: View {
             .navigationTitle("Mio")
             .frame(minWidth: Style.minSidebarWidth)
             .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button(action: { self.selectedNavigationItem = .settings }) {
-                        Label(L10n.RecentRooms.AccessibilityLabel.settings,
-                              systemImage: SFSymbol.settings.rawValue)
-                    }
-                }
                 ToolbarItem(placement: .cancellationAction) {
                     Button(action: { self.selectedNavigationItem = .newConversation }) {
                         Label(L10n.RecentRooms.AccessibilityLabel.newConversation,
