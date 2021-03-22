@@ -3,6 +3,13 @@ import MatrixSDK
 
 import NioKit
 
+enum UserStatus {
+    case unkown
+    case notValid
+    case valid
+    case retrieving
+}
+
 struct NewConversationContainerView: View {
     @EnvironmentObject private var store: AccountStore
     @Binding var createdRoomId: ObjectIdentifier?
@@ -14,10 +21,12 @@ struct NewConversationContainerView: View {
 
 struct NewConversationView: View {
     @Environment(\.presentationMode) private var presentationMode
+    @AppStorage("identityServerBool") private var identityServerBool: Bool = false
 
     let store: AccountStore?
 
     @State private var users = [""]
+    @State private var usersVerified: [UserStatus] = [UserStatus.unkown]
   #if os(macOS)
   #else
     @State private var editMode = EditMode.inactive
@@ -32,17 +41,48 @@ struct NewConversationView: View {
     private var usersFooter: some View {
         Text("\(L10n.NewConversation.forExample) \(store?.session?.myUserId ?? "@username:server.org")")
     }
-  
+
     private var form: some View {
         Form {
             Section(footer: usersFooter) {
                 ForEach(0..<users.count, id: \.self) { index in
                     HStack {
-                        TextField(L10n.NewConversation.usernamePlaceholder,
-                                  text: Binding(get: { users[index] }, set: { users[index] = $0 }))
-                                        // proxy binding prevents an index out of range crash on delete
+                        if usersVerified[index] == UserStatus.unkown {
+                            Image(systemName: "questionmark.circle")
+                        } else if usersVerified[index] == UserStatus.valid {
+                            Image(systemName: "checkmark.circle")
+                        } else if usersVerified[index] == UserStatus.notValid {
+                            Image(systemName: "multiply.circle")
+                        } else if usersVerified[index] == UserStatus.retrieving {
+                            Image(systemName: "arrow.2.circlepath.circle")
+                        }
+                        if identityServerBool {
+                            // proxy binding prevents an index out of range crash on delete
+                            TextField(
+                                L10n.NewConversation.usernamePlaceholderExtended,
+                                text: Binding(get: { users[index] }, set: { users[index] = $0 }),
+                                onEditingChanged: { (editingChanged) in
+                                    if !editingChanged {
+                                        findUser(userIndex: index)
+                                    }
+                                }
+                            )
                             .disableAutocorrection(true)
                             .autocapitalization(.none)
+                        } else {
+                            // proxy binding prevents an index out of range crash on delete
+                            TextField(
+                                L10n.NewConversation.usernamePlaceholder,
+                                text: Binding(get: { users[index] }, set: { users[index] = $0 }),
+                                onEditingChanged: { (editingChanged) in
+                                    if !editingChanged {
+                                        findUser(userIndex: index)
+                                    }
+                                }
+                            )
+                            .disableAutocorrection(true)
+                            .autocapitalization(.none)
+                        }
                         Spacer()
                         Button(action: addUser) {
                             Image(systemName: "plus.circle")
@@ -81,7 +121,7 @@ struct NewConversationView: View {
             }
         }
     }
-  
+
     var body: some View {
       #if os(macOS)
         NavigationView {
@@ -132,13 +172,51 @@ struct NewConversationView: View {
 
     private func addUser() {
         withAnimation {
+            usersVerified.append(UserStatus.unkown)
             users.append("")
         }
+    }
+
+    private func findUser(userIndex: Int) {
+        usersVerified[userIndex] = UserStatus.retrieving
+        let user = users[userIndex]
+        let pattern = "@[A-Z0-9a-z._%+-]+:[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let result = user.range(of: pattern, options: .regularExpression)
+        let group = DispatchGroup()
+        group.enter()
+
+        if result == nil && identityServerBool {
+            DispatchQueue.global(qos: .background).async {
+
+                let mx3pids: [MX3PID] = [
+                    MX3PID.init(medium: MX3PID.Medium.email, address: user),
+                    MX3PID.init(medium: MX3PID.Medium.msisdn, address: user),
+                ]
+                store?.identityService?.lookup3PIDs(mx3pids) { response in
+                    print(response)
+                    if response.value?.count ?? 0 > 0 {
+                        response.value?.forEach({ (responseItem: (key: MX3PID, value: String)) in
+                            users[users.firstIndex(of: user)!] = responseItem.value
+                            usersVerified[userIndex] = UserStatus.valid
+                        })
+                    } else {
+                        usersVerified[userIndex] = UserStatus.notValid
+                    }
+                    group.leave()
+                }
+            }
+        } else if result != nil {
+            usersVerified[userIndex] = UserStatus.valid
+        } else {
+            usersVerified[userIndex] = UserStatus.notValid
+        }
+        group.wait()
     }
 
     private func createRoom() {
         isWaiting = true
 
+        /*
         let parameters = MXRoomCreationParameters()
         if users.count == 1 {
             parameters.inviteArray = users
@@ -170,7 +248,7 @@ struct NewConversationView: View {
             @unknown default:
                 fatalError("Unexpected Matrix response: \(response)")
             }
-        }
+        }*/
     }
 }
 

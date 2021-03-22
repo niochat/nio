@@ -15,12 +15,12 @@ public enum LoginState {
 public class AccountStore: ObservableObject {
     @AppStorage("identityServer") private var identityServer: String = "https://vector.im"
     @AppStorage("identityServerBool") private var identityServerBool: Bool = false
-    
+
     public var client: MXRestClient?
     public var session: MXSession?
 
     public var identityService: MXIdentityService?
-    
+
     var fileStore: MXFileStore?
     var credentials: MXCredentials?
 
@@ -211,8 +211,12 @@ public class AccountStore: ObservableObject {
             self.objectWillChange.send()
         }
     }
-    
+
     public func setIdentityService() {
-        self.identityService = MXIdentityService.init(identityServer: URL(string: identityServer)!, accessToken: nil, homeserverRestClient: self.client!)
+        self.identityService = MXIdentityService.init(
+            identityServer: URL(string: identityServer)!,
+            accessToken: nil,
+            homeserverRestClient: self.client!
+        )
     }
 }

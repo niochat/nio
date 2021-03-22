@@ -188,6 +188,8 @@ internal enum L10n {
     internal static let titleRoom = L10n.tr("Localizable", "new-conversation.title-room")
     /// Matrix ID
     internal static let usernamePlaceholder = L10n.tr("Localizable", "new-conversation.username-placeholder")
+    /// Matrix ID, Phone, or Email
+    internal static let usernamePlaceholderExtended = L10n.tr("Localizable", "new-conversation.username-placeholder-extended")
   }
 
   internal enum ReactionPicker {
