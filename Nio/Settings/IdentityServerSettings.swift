@@ -92,9 +92,9 @@ struct InformationContainerView: View {
                                   imageName: "globe"
             )
             
-            InformationDetailView(title: L10n.SettingsIdentityServer.optionalContactSync,
-                                  subTitle: L10n.SettingsIdentityServer.optionalContactSyncText,
-                                  imageName: "person")
+            //InformationDetailView(title: L10n.SettingsIdentityServer.optionalContactSync,
+            //                      subTitle: L10n.SettingsIdentityServer.optionalContactSyncText,
+            //                      imageName: "person")
         }
         .padding(.horizontal)
     }
@@ -192,7 +192,7 @@ struct IdentityServerSettingsView: View {
             )
             if identityServerBool {
                 TextField(L10n.SettingsIdentityServer.url, text: $identityServer)
-                Toggle(L10n.SettingsIdentityServer.contactSync, isOn: $syncContacts).onChange(of: syncContacts, perform: syncContacts(isSync:))
+                //Toggle(L10n.SettingsIdentityServer.contactSync, isOn: $syncContacts).onChange(of: syncContacts, perform: syncContacts(isSync:))
             }
         }
     }
