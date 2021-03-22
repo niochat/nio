@@ -81,6 +81,7 @@
 "new-conversation.title-chat" = "New Chat";
 "new-conversation.title-room" = "New Room";
 "new-conversation.username-placeholder" = "Matrix ID";
+"new-conversation.username-placeholder-extended" = "Matrix ID, Phone, or Email";
 "new-conversation.for-example" = "For example";
 "new-conversation.room-name" = "Room Name";
 "new-conversation.public-room" = "Public Room";

@@ -79,7 +79,13 @@ private struct SettingsView: View {
                 }
 
                 Section {
-                    Toggle("Enable Identity Server", isOn: $identityServerBool).onChange(of: identityServerBool, perform: syncIdentityServer(isSync:))
+                    Toggle(
+                        "Enable Identity Server",
+                        isOn: $identityServerBool
+                    ).onChange(
+                        of: identityServerBool,
+                        perform: syncIdentityServer(isSync:)
+                    )
                     if identityServerBool {
                         TextField("Identity URL", text: $identityServer)
                         Toggle("Sync Contacts", isOn: $syncContacts).onChange(of: syncContacts, perform: syncContacts(isSync:))
@@ -102,7 +108,7 @@ private struct SettingsView: View {
             }
         }
     }
-    
+
     private func syncIdentityServer(isSync: Bool) {
         if isSync {
             store.setIdentityService()
@@ -111,7 +117,7 @@ private struct SettingsView: View {
             syncContacts = false
         }
     }
-    
+
     private func syncContacts(isSync: Bool) {
         if isSync {
             let contacts = Contacts.getAllContacts()
