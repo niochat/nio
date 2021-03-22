@@ -297,6 +297,39 @@ internal enum L10n {
     internal static let title = L10n.tr("Localizable", "settings.title")
   }
 
+  internal enum SettingsIdentityServer {
+    /// Closed Federation
+    internal static let closedFederation = L10n.tr("Localizable", "settings-identity-server.closed-federation")
+    /// At the moment, the identity servers are in a closed federation configuration. This means that there are only two identity servers (matrix.org, vector.im) and all data uploaded to one is copied to the other.
+    internal static let closedFederationText = L10n.tr("Localizable", "settings-identity-server.closed-federation-text")
+    /// Sync Contacts
+    internal static let contactSync = L10n.tr("Localizable", "settings-identity-server.contact-sync")
+    /// Continue
+    internal static let `continue` = L10n.tr("Localizable", "settings-identity-server.continue")
+    /// Data
+    internal static let data = L10n.tr("Localizable", "settings-identity-server.data")
+    /// Data & Privacy
+    internal static let dataPrivacy = L10n.tr("Localizable", "settings-identity-server.data-privacy")
+    /// By using the identity server, your email address and phone number will be sent to the identity server and will be linked to your Matrix ID (@example.nio.chat).
+    internal static let dataText = L10n.tr("Localizable", "settings-identity-server.data-text")
+    /// Learn More
+    internal static let learnMore = L10n.tr("Localizable", "settings-identity-server.learn-more")
+    /// Match
+    internal static let match = L10n.tr("Localizable", "settings-identity-server.match")
+    /// Any user can retrieve your Matrix ID by entering your email address or phone number, but cannot find your email address or phone number by entering your Matrix ID.
+    internal static let matchText = L10n.tr("Localizable", "settings-identity-server.match-text")
+    /// (Optional) Contact Sync
+    internal static let optionalContactSync = L10n.tr("Localizable", "settings-identity-server.optional-contact-sync")
+    /// When activating contact syncronization, Nio will periodically send the email addresses and phone numbers of all your contacts to the identity server to see if that contact has a linked Matrix ID. This contact information is never stored or shared by Nio.
+    internal static let optionalContactSyncText = L10n.tr("Localizable", "settings-identity-server.optional-contact-sync-text")
+    /// Identity Server
+    internal static let title = L10n.tr("Localizable", "settings-identity-server.title")
+    /// Enable Identity Server
+    internal static let toggle = L10n.tr("Localizable", "settings-identity-server.toggle")
+    /// Identity URL
+    internal static let url = L10n.tr("Localizable", "settings-identity-server.url")
+  }
+
   internal enum TypingIndicator {
     /// Several people are typing
     internal static let many = L10n.tr("Localizable", "typing-indicator.many")
