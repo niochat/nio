@@ -10,6 +10,22 @@ import Foundation
 import Contacts
 
 public class Contacts {
+    public static func hasPermission() -> Bool {
+        switch CNContactStore.authorizationStatus(for: CNEntityType.contacts) {
+        case .authorized:
+            return true
+        case .notDetermined:
+            return true
+        default:
+            print((Bundle.main.infoDictionary?["CFBundleName"] as? String) ?? "")
+            CNContactStore().requestAccess(for: CNEntityType.contacts) { result, error in
+                print(result)
+                print(error)
+            }
+            return false
+        }
+    }
+    
     public static func getContact() -> String {
         let store = CNContactStore()
         do {

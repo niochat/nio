@@ -55,8 +55,10 @@ private struct NewConversationView: View {
                             Image(systemName: "questionmark.circle")
                         } else if usersVerified[index] == UserStatus.valid {
                             Image(systemName: "checkmark.circle")
+                                .foregroundColor(Color.green)
                         } else if usersVerified[index] == UserStatus.notValid {
                             Image(systemName: "multiply.circle")
+                                .foregroundColor(Color.red)
                         } else if usersVerified[index] == UserStatus.retrieving {
                             Image(systemName: "arrow.2.circlepath.circle")
                                 .rotationEffect(Angle.degrees(isRetrieving ? 360 : 0))
