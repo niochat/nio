@@ -60,6 +60,8 @@
 		4B0B26C926050818009E2D3A /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0B26C726050818009E2D3A /* Contacts.swift */; };
 		4B29F5B52466EC240084043B /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B29F5B42466EC240084043B /* ImagePicker.swift */; };
 		4B693515249BBBFE0029D549 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEFD7E246F414D00CCF4A0 /* ShareViewController.swift */; };
+		4B9AB8C32608D08A005E1092 /* IdentityServerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9AB8C22608D08A005E1092 /* IdentityServerSettings.swift */; };
+		4B9AB8D22608EED9005E1092 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B9AB8D42608EED9005E1092 /* InfoPlist.strings */; };
 		4BD867272460ADEF0014E3D6 /* NewConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD867262460ADEF0014E3D6 /* NewConversationView.swift */; };
 		4BFEFD86246F414D00CCF4A0 /* NioShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4BFEFD7C246F414D00CCF4A0 /* NioShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4BFEFD8C246F458000CCF4A0 /* GetURL.js in Resources */ = {isa = PBXBuildFile; fileRef = 4BFEFD8B246F458000CCF4A0 /* GetURL.js */; };
@@ -352,6 +354,9 @@
 		4B0A2E46245E2EF800A79443 /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 		4B0B26C726050818009E2D3A /* Contacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contacts.swift; sourceTree = "<group>"; };
 		4B29F5B42466EC240084043B /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		4B9AB8C22608D08A005E1092 /* IdentityServerSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityServerSettings.swift; sourceTree = "<group>"; };
+		4B9AB8D32608EED9005E1092 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4B9AB8DB2608EEE1005E1092 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4BD3D29224951E3B0031846F /* GlobalConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = GlobalConfig.xcconfig; sourceTree = "<group>"; };
 		4BD3DCA32482FF08009B5048 /* AccountStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStore.swift; sourceTree = "<group>"; };
 		4BD867262460ADEF0014E3D6 /* NewConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationView.swift; sourceTree = "<group>"; };
@@ -476,6 +481,7 @@
 			children = (
 				3902B8A22395935600698B87 /* SettingsView.swift */,
 				39DD77AE247006E300A29DEE /* AppIcon.swift */,
+				4B9AB8C22608D08A005E1092 /* IdentityServerSettings.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -508,6 +514,7 @@
 		390D63BA246F4BEE00B8F640 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4B9AB8D42608EED9005E1092 /* InfoPlist.strings */,
 				390D63BB246F4BEE00B8F640 /* Alternate Icons */,
 			);
 			path = Resources;
@@ -1147,6 +1154,7 @@
 				392117572442556700892B00 /* Localizable.strings in Resources */,
 				39C931F723846B2D004449E1 /* .swiftlint.yml in Resources */,
 				39DD77B62470C38300A29DEE /* Six Colors Dark@3x.png in Resources */,
+				4B9AB8D22608EED9005E1092 /* InfoPlist.strings in Resources */,
 				39C931E92384328B004449E1 /* LaunchScreen.storyboard in Resources */,
 				39C931E62384328B004449E1 /* Preview Assets.xcassets in Resources */,
 				39DD77BA2470C49D00A29DEE /* Six Colors Light@3x.png in Resources */,
@@ -1288,6 +1296,7 @@
 				3923898F2388707E00B2E1DF /* RoomListItemView.swift in Sources */,
 				4B29F5B52466EC240084043B /* ImagePicker.swift in Sources */,
 				CAF2AE8B2458EF0900D84133 /* MarkdownText.swift in Sources */,
+				4B9AB8C32608D08A005E1092 /* IdentityServerSettings.swift in Sources */,
 				395E06FD25DDC1790059F6AD /* SFSymbol.swift in Sources */,
 				39DD77AF247006E300A29DEE /* AppIcon.swift in Sources */,
 				CAFCB323245F6E6700869320 /* NSAttributedString+Extensions.swift in Sources */,
@@ -1543,6 +1552,15 @@
 				39C931E82384328B004449E1 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		4B9AB8D42608EED9005E1092 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4B9AB8D32608EED9005E1092 /* en */,
+				4B9AB8DB2608EEE1005E1092 /* nl */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
