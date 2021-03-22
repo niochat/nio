@@ -1,6 +1,6 @@
 strings:
   inputs: "Nio/Supporting Files/en.lproj"
-  filter: .+\.strings$
+  filter: (\b(Localizable)\b)\.strings$
   outputs:
     - templateName: structured-swift4
       output: Nio/Generated/Strings.swift

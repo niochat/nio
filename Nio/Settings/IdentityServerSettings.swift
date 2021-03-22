@@ -92,9 +92,9 @@ struct InformationContainerView: View {
                                   imageName: "globe"
             )
             
-            //InformationDetailView(title: L10n.SettingsIdentityServer.optionalContactSync,
-            //                      subTitle: L10n.SettingsIdentityServer.optionalContactSyncText,
-            //                      imageName: "person")
+            InformationDetailView(title: L10n.SettingsIdentityServer.optionalContactSync,
+                                  subTitle: L10n.SettingsIdentityServer.optionalContactSyncText,
+                                  imageName: "person")
         }
         .padding(.horizontal)
     }
@@ -163,7 +163,7 @@ struct IdentityServerInfoView: View {
 struct IdentityServerSettingsView: View {
     @AppStorage("identityServerBool") private var identityServerBool: Bool = false
     @AppStorage("identityServer") private var identityServer: String = "https://vector.im"
-    @AppStorage("syncContacts") private var syncContacts: Bool = false
+    @AppStorage("locSyncContacts") private var locSyncContacts: Bool = false
     
     @EnvironmentObject var store: AccountStore
     
@@ -192,7 +192,11 @@ struct IdentityServerSettingsView: View {
             )
             if identityServerBool {
                 TextField(L10n.SettingsIdentityServer.url, text: $identityServer)
-                //Toggle(L10n.SettingsIdentityServer.contactSync, isOn: $syncContacts).onChange(of: syncContacts, perform: syncContacts(isSync:))
+                Toggle(
+                    L10n.SettingsIdentityServer.contactSync,
+                    isOn: Binding(get: { Contacts.hasPermission() && locSyncContacts }, set: { status in locSyncContacts = status })
+                )
+                .onChange(of: locSyncContacts, perform: syncContacts(isSync:))
             }
         }
     }
@@ -201,12 +205,12 @@ struct IdentityServerSettingsView: View {
         if isSync {
             store.setIdentityService()
         } else {
-            // Revoke Contact Sync
-            syncContacts = false
+            locSyncContacts = false
         }
     }
     
     private func syncContacts(isSync: Bool) {
+        print(isSync)
         if isSync {
             let contacts = Contacts.getAllContacts()
             contacts.forEach { (contact) in
