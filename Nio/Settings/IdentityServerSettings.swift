@@ -5,7 +5,7 @@ import NioKit
 
 struct IdentityServerSettingsContainerView: View {
     @EnvironmentObject var store: AccountStore
-    
+
     var body: some View {
         IdentityServerSettingsView()
     }
@@ -42,7 +42,7 @@ extension Text {
 
 struct InformationDetailView: View {
     @AppStorage("accentColor") private var accentColor: Color = .purple
-    
+
     var title: String = ""
     var subTitle: String = ""
     var imageName: String = ""
@@ -63,7 +63,6 @@ struct InformationDetailView: View {
                     .accessibility(addTraits: .isHeader)
 
                 Text(subTitle)
-                    //.font(.body)
                     .foregroundColor(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
             }
@@ -80,7 +79,7 @@ struct InformationContainerView: View {
                 subTitle: L10n.SettingsIdentityServer.dataText,
                 imageName: "arrow.up.doc"
             )
-            
+
             InformationDetailView(
                 title: L10n.SettingsIdentityServer.match,
                 subTitle: L10n.SettingsIdentityServer.matchText,
@@ -91,7 +90,7 @@ struct InformationContainerView: View {
                                   subTitle: L10n.SettingsIdentityServer.closedFederationText,
                                   imageName: "globe"
             )
-            
+
             InformationDetailView(title: L10n.SettingsIdentityServer.optionalContactSync,
                                   subTitle: L10n.SettingsIdentityServer.optionalContactSyncText,
                                   imageName: "person")
@@ -124,9 +123,9 @@ struct TitleView: View {
 
 struct IdentityServerInfoView: View {
     @AppStorage("accentColor") private var accentColor: Color = .purple
-    
+
     @Environment(\.presentationMode) var presentationMode
-    
+
     var body: some View {
             ScrollView {
                 VStack(alignment: .center) {
@@ -146,9 +145,9 @@ struct IdentityServerInfoView: View {
                             .customButton()
                     }
                     .padding(.horizontal)
-                    
+
                     Spacer()
-                    
+
                     Link(
                         L10n.SettingsIdentityServer.learnMore,
                         destination: URL(string: "https://matrix.org/legal/identity-server-privacy-notice-1")!
@@ -164,10 +163,11 @@ struct IdentityServerSettingsView: View {
     @AppStorage("identityServerBool") private var identityServerBool: Bool = false
     @AppStorage("identityServer") private var identityServer: String = "https://vector.im"
     @AppStorage("locSyncContacts") private var locSyncContacts: Bool = false
-    
+
     @EnvironmentObject var store: AccountStore
-    
+
     @State private var showModal = false
+    @State private var showContactStateWarning = false
 
     var identityServerInfo: some View {
         Button(action: {
@@ -194,13 +194,32 @@ struct IdentityServerSettingsView: View {
                 TextField(L10n.SettingsIdentityServer.url, text: $identityServer)
                 Toggle(
                     L10n.SettingsIdentityServer.contactSync,
-                    isOn: Binding(get: { Contacts.hasPermission() && locSyncContacts }, set: { status in locSyncContacts = status })
+                    isOn: Binding(
+                        get: { Contacts.hasPermission() && locSyncContacts },
+                        set: { status in
+                            locSyncContacts = status
+                            if locSyncContacts && !Contacts.hasPermission() {
+                                self.showContactStateWarning.toggle()
+                            }
+                        }
+                    )
                 )
                 .onChange(of: locSyncContacts, perform: syncContacts(isSync:))
+                .alert(isPresented: $showContactStateWarning) {
+                      Alert(
+                        title: Text(L10n.SettingsIdentityServer.permissionAlertTitle),
+                        message: Text(L10n.SettingsIdentityServer.permissionAlertBody),
+                        primaryButton: .cancel(Text(L10n.SettingsIdentityServer.permissionCancelButton)),
+                        secondaryButton: .default(Text(L10n.SettingsIdentityServer.permissionSettingsButton), action: {
+                          if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
+                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                          }
+                        }))
+                    }
             }
         }
     }
-    
+
     private func syncIdentityServer(isSync: Bool) {
         if isSync {
             store.setIdentityService()
@@ -208,22 +227,10 @@ struct IdentityServerSettingsView: View {
             locSyncContacts = false
         }
     }
-    
+
     private func syncContacts(isSync: Bool) {
-        print(isSync)
         if isSync {
-            let contacts = Contacts.getAllContacts()
-            contacts.forEach { (contact) in
-                var mx3pids: [MX3PID] = []
-                contact.emailAddresses.forEach { (email) in
-                    mx3pids.append(MX3PID.init(medium: MX3PID.Medium.email, address: email.value as String))
-                }
-                store.identityService?.lookup3PIDs(mx3pids) { response in
-                    response.value?.forEach({ (responseItem: (key: MX3PID, value: String)) in
-                        print(contact.givenName + " " + responseItem.value)
-                    })
-                }
-            }
+            store.updateMatrixContacts()
         }
     }
 }

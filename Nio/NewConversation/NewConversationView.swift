@@ -13,9 +13,24 @@ enum UserStatus {
 struct NewConversationContainerView: View {
     @EnvironmentObject private var store: AccountStore
     @Binding var createdRoomId: ObjectIdentifier?
+    @AppStorage("matrixUsers") private var matrixUsersJSON: String = ""
 
     var body: some View {
-        NewConversationView(store: store, createdRoomId: $createdRoomId)
+        NewConversationView(
+            store: store,
+            createdRoomId: $createdRoomId,
+            matrixUsers: { () -> [MatrixUser] in
+                do {
+                    var matrixArray: [MatrixUser] = try JSONDecoder().decode(
+                        [MatrixUser].self, from: matrixUsersJSON.data(using: .utf8) ?? Data()
+                    )
+                    matrixArray.sort(by: { (lhs, rhs) in return lhs.getFirstName() > rhs.getFirstName() })
+                    return matrixArray
+                } catch {
+                    return []
+                }
+            }()
+        )
     }
 }
 
@@ -28,9 +43,9 @@ struct NewConversationView: View {
     @State private var users = [""]
     @State private var usersVerified: [UserStatus] = [UserStatus.unkown]
     @State private var numCalls: Int = 0
-    
+
     @State private var isRetrieving = false
-    
+
   #if os(macOS)
   #else
     @State private var editMode = EditMode.inactive
@@ -41,6 +56,8 @@ struct NewConversationView: View {
     @State private var isWaiting = false
     @Binding var createdRoomId: ObjectIdentifier?
     @State private var errorMessage: String?
+
+    let matrixUsers: [MatrixUser]
 
     private var usersFooter: some View {
         Text("\(L10n.NewConversation.forExample) \(store?.session?.myUserId ?? "@username:server.org")")
@@ -69,7 +86,11 @@ struct NewConversationView: View {
                         }
                         // proxy binding prevents an index out of range crash on delete
                         TextField(
-                            (identityServerBool ? L10n.NewConversation.usernamePlaceholderExtended : L10n.NewConversation.usernamePlaceholder),
+                            (
+                                identityServerBool ?
+                                    L10n.NewConversation.usernamePlaceholderExtended :
+                                    L10n.NewConversation.usernamePlaceholder
+                            ),
                             text: Binding(get: { users[index] }, set: { users[index] = $0; findUser(userIndex: index) })
                         )
                         .disableAutocorrection(true)
@@ -110,11 +131,51 @@ struct NewConversationView: View {
                     Spacer()
                     ProgressView()
                         .opacity(isWaiting ? 1.0 : 0.0)
+
                 }
             }
             .alert(item: $errorMessage) { errorMessage in
                 Alert(title: Text(L10n.NewConversation.alertFailed),
                       message: Text(errorMessage))
+            }
+
+            Section(header: Text(L10n.NewConversation.contactsMatrix)) {
+                ForEach(0..<matrixUsers.count, id: \.self) { index in
+                    HStack {
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(matrixUsers[index].getFirstName() + " " + matrixUsers[index].getLastName())
+
+                                Text(matrixUsers[index].getMatrixID())
+                                    .foregroundColor(.secondary)
+                            }
+
+                            Spacer()
+
+                            Button(
+                                action: {
+                                    var emptyIndex = -1
+                                    if users.contains("") {
+                                        emptyIndex = users.firstIndex(where: {$0 == ""}) ?? users.count - 1
+                                        users[emptyIndex] = matrixUsers[index].getMatrixID()
+                                    } else {
+                                        addUser()
+                                        emptyIndex = users.count - 1
+                                        users[emptyIndex] = matrixUsers[index].getMatrixID()
+                                    }
+                                    findUser(userIndex: emptyIndex)
+                                },
+                                label: {
+                                    Image(systemName: "plus.circle")
+                                }
+                            )
+                            .disabled(
+                                users.contains(matrixUsers[index].getMatrixID())
+                            )
+
+                        }
+                    }
+                }
             }
         }
     }
@@ -261,7 +322,7 @@ struct NewConversationView: View {
 
 struct NewConversationView_Previews: PreviewProvider {
     static var previews: some View {
-        NewConversationView(store: nil, createdRoomId: .constant(nil))
+        NewConversationView(store: nil, createdRoomId: .constant(nil), matrixUsers: [])
             .preferredColorScheme(.light)
     }
 }

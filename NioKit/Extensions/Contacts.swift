@@ -9,7 +9,32 @@
 import Foundation
 import Contacts
 
+public struct MatrixUser: Codable {
+    let firstName: String?
+    let lastName: String?
+    let matrixID: String?
+
+    public init(firstName: String, lastName: String, matrixID: String) {
+        self.firstName = firstName
+        self.lastName = lastName
+        self.matrixID = matrixID
+    }
+    
+    public func getFirstName() -> String {
+        return self.firstName ?? ""
+    }
+
+    public func getLastName() -> String {
+        return self.lastName ?? ""
+    }
+
+    public func getMatrixID() -> String {
+        return self.matrixID ?? ""
+    }
+}
+
 public class Contacts {
+
     public static func hasPermission() -> Bool {
         switch CNContactStore.authorizationStatus(for: CNEntityType.contacts) {
         case .authorized:
@@ -17,34 +42,17 @@ public class Contacts {
         case .notDetermined:
             return true
         default:
-            print((Bundle.main.infoDictionary?["CFBundleName"] as? String) ?? "")
-            CNContactStore().requestAccess(for: CNEntityType.contacts) { result, error in
-                print(result)
-                print(error)
-            }
             return false
         }
     }
-    
-    public static func getContact() -> String {
-        let store = CNContactStore()
-        do {
-            let predicate = CNContact.predicateForContacts(matchingName: "Hofman")
-            let keysToFetch = [CNContactGivenNameKey, CNContactFamilyNameKey] as [CNKeyDescriptor]
-            let contacts = try store.unifiedContacts(matching: predicate, keysToFetch: keysToFetch)
-            return "found"
-        } catch {
-            return "not found"
-        }
-    }
-    
+
     public static func getAllContacts() -> [CNContact] {
         var contacts = [CNContact]()
         let store = CNContactStore()
         do {
             let keys = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactEmailAddressesKey] as [CNKeyDescriptor]
             let request = CNContactFetchRequest(keysToFetch: keys)
-            try store.enumerateContacts(with: request) { (contact, stop) in
+            try store.enumerateContacts(with: request) { (contact, _) in
                 // Array containing all unified contacts from everywhere
                 if contact.emailAddresses.count > 0 {
                     contacts.append(contact)

@@ -18,7 +18,7 @@ struct SettingsView: View {
     @EnvironmentObject var store: AccountStore
 
     @Environment(\.presentationMode) private var presentationMode
-    
+
     var body: some View {
         NavigationView {
             Form {
@@ -40,7 +40,6 @@ struct SettingsView: View {
                     }
                 }
 
-                // Text("Using an Identity Server will allow you to find other users by their email address and/ or phone number. This will mean that your email address and/ or phone number will be uploaded to the Identity Server")
                 IdentityServerSettingsContainerView()
 
                 Section {
