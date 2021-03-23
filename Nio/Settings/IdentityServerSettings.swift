@@ -13,7 +13,7 @@ struct IdentityServerSettingsContainerView: View {
 
 struct ButtonModifier: ViewModifier {
     @AppStorage("accentColor") private var accentColor: Color = .purple
-    
+
     func body(content: Content) -> some View {
         content
             .foregroundColor(.white)
