@@ -170,6 +170,8 @@ internal enum L10n {
     internal static let alertFailed = L10n.tr("Localizable", "new-conversation.alert-failed")
     /// Cancel
     internal static let cancel = L10n.tr("Localizable", "new-conversation.cancel")
+    /// Contacts on Matrix
+    internal static let contactsMatrix = L10n.tr("Localizable", "new-conversation.contacts-matrix")
     /// Start Chat
     internal static let createRoom = L10n.tr("Localizable", "new-conversation.create-room")
     /// Done
@@ -322,6 +324,14 @@ internal enum L10n {
     internal static let optionalContactSync = L10n.tr("Localizable", "settings-identity-server.optional-contact-sync")
     /// When activating contact syncronization, Nio will periodically send the email addresses and phone numbers of all your contacts to the identity server to see if that contact has a linked Matrix ID. This contact information is never stored or shared by Nio.
     internal static let optionalContactSyncText = L10n.tr("Localizable", "settings-identity-server.optional-contact-sync-text")
+    /// Please go to Settings and turn on the permissions.
+    internal static let permissionAlertBody = L10n.tr("Localizable", "settings-identity-server.permission-alert-body")
+    /// No permissions
+    internal static let permissionAlertTitle = L10n.tr("Localizable", "settings-identity-server.permission-alert-title")
+    /// Cancel
+    internal static let permissionCancelButton = L10n.tr("Localizable", "settings-identity-server.permission-cancel-button")
+    /// Settings
+    internal static let permissionSettingsButton = L10n.tr("Localizable", "settings-identity-server.permission-settings-button")
     /// Identity Server
     internal static let title = L10n.tr("Localizable", "settings-identity-server.title")
     /// Enable Identity Server

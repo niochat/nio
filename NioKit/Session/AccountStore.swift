@@ -15,6 +15,8 @@ public enum LoginState {
 public class AccountStore: ObservableObject {
     @AppStorage("identityServer") private var identityServer: String = "https://vector.im"
     @AppStorage("identityServerBool") private var identityServerBool: Bool = false
+    @AppStorage("matrixUsers") private var matrixUsersJSON: String = ""
+    @AppStorage("locSyncContacts") private var locSyncContacts: Bool = false
 
     public var client: MXRestClient?
     public var session: MXSession?
@@ -130,7 +132,11 @@ public class AccountStore: ObservableObject {
         if self.identityServerBool {
             self.setIdentityService()
         }
-        
+
+        if self.locSyncContacts && Contacts.hasPermission(){
+            self.updateMatrixContacts()
+        }
+
         self.session!.setStore(fileStore!) { response in
             switch response {
             case .failure(let error):
@@ -218,5 +224,31 @@ public class AccountStore: ObservableObject {
             accessToken: nil,
             homeserverRestClient: self.client!
         )
+    }
+
+    public func updateMatrixContacts() {
+        var matrixUsers: [MatrixUser] = []
+        let contacts = Contacts.getAllContacts()
+        contacts.forEach { (contact) in
+            var mx3pids: [MX3PID] = []
+            contact.emailAddresses.forEach { (email) in
+                mx3pids.append(MX3PID.init(medium: MX3PID.Medium.email, address: email.value as String))
+            }
+            self.identityService?.lookup3PIDs(mx3pids) { [self] response in
+                response.value?.forEach({ (responseItem: (key: MX3PID, value: String)) in
+                    do {
+                        matrixUsers.append(
+                            MatrixUser(
+                                firstName: contact.givenName,
+                                lastName: contact.familyName,
+                                matrixID: responseItem.value
+                            )
+                        )
+                        let jsonData = try JSONEncoder().encode(matrixUsers)
+                        self.matrixUsersJSON = String(data: jsonData, encoding: .utf8)!
+                    } catch { print(error) }
+                })
+            }
+        }
     }
 }
