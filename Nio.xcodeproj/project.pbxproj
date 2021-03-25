@@ -38,6 +38,9 @@
 		3984654823B8D809006C173B /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3984654723B8D809006C173B /* SDWebImageSwiftUI */; };
 		39B834C0243FC42000AE1EA0 /* TypingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B834BF243FC42000AE1EA0 /* TypingIndicatorView.swift */; };
 		39BA0727240B534600FD28C6 /* Color+allAccent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BA0726240B534600FD28C6 /* Color+allAccent.swift */; };
+		39C4E07226068A86002E9175 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C4E07126068A86002E9175 /* AppDelegate.swift */; };
+		39C4E079260B8076002E9175 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C4E076260B8070002E9175 /* AccountManager.swift */; };
+		39C4E07A260B8076002E9175 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C4E076260B8070002E9175 /* AccountManager.swift */; };
 		39C931E12384328A004449E1 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C931E02384328A004449E1 /* RootView.swift */; };
 		39C931E32384328B004449E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39C931E22384328B004449E1 /* Assets.xcassets */; };
 		39C931E62384328B004449E1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39C931E52384328B004449E1 /* Preview Assets.xcassets */; };
@@ -326,6 +329,8 @@
 		39B834BF243FC42000AE1EA0 /* TypingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingIndicatorView.swift; sourceTree = "<group>"; };
 		39BA0722240B3C9A00FD28C6 /* MXCredentials+Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXCredentials+Keychain.swift"; sourceTree = "<group>"; };
 		39BA0726240B534600FD28C6 /* Color+allAccent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+allAccent.swift"; sourceTree = "<group>"; };
+		39C4E07126068A86002E9175 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		39C4E076260B8070002E9175 /* AccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
 		39C931D92384328A004449E1 /* Nio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39C931E02384328A004449E1 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		39C931E22384328B004449E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -649,6 +654,7 @@
 			isa = PBXGroup;
 			children = (
 				A51BF8CD254C2FE5000FB0A4 /* NioApp.swift */,
+				39C4E07126068A86002E9175 /* AppDelegate.swift */,
 				4BFEFD90246F5EF500CCF4A0 /* Nio.entitlements */,
 				39C931E02384328A004449E1 /* RootView.swift */,
 				3902B8A62395A78100698B87 /* Authentication */,
@@ -748,6 +754,7 @@
 			isa = PBXGroup;
 			children = (
 				4BD3DCA32482FF08009B5048 /* AccountStore.swift */,
+				39C4E076260B8070002E9175 /* AccountManager.swift */,
 			);
 			path = Session;
 			sourceTree = "<group>";
@@ -1307,6 +1314,7 @@
 				392221AA2438083C004D8794 /* RedactionEventView.swift in Sources */,
 				392389CC238EBB1500B2E1DF /* ReverseList.swift in Sources */,
 				392389942388899200B2E1DF /* Formatter.swift in Sources */,
+				39C4E07226068A86002E9175 /* AppDelegate.swift in Sources */,
 				392221AC2438149D004D8794 /* RoomMemberEventView.swift in Sources */,
 				392221B4243D1627004D8794 /* RoomPowerLevelsEventView.swift in Sources */,
 				CAF2AE92245AEEBA00D84133 /* BadgeView.swift in Sources */,
@@ -1361,6 +1369,7 @@
 				E8B4725625F26D5A00ACEFCB /* ReactionEvent.swift in Sources */,
 				E8B4725925F26D5A00ACEFCB /* NIORoomSummary.swift in Sources */,
 				E8B4725725F26D5A00ACEFCB /* EditEvent.swift in Sources */,
+				39C4E079260B8076002E9175 /* AccountManager.swift in Sources */,
 				E8B4726125F26D5A00ACEFCB /* AccountStore.swift in Sources */,
 				E8B4725825F26D5A00ACEFCB /* CustomEvent.swift in Sources */,
 				E8B4725F25F26D5A00ACEFCB /* Configuration.swift in Sources */,
@@ -1444,6 +1453,7 @@
 				E897AA1E25F2707C00D11427 /* MXClient+Publisher.swift in Sources */,
 				E897AA1B25F2707C00D11427 /* Configuration.swift in Sources */,
 				E897AA1C25F2707C00D11427 /* CustomEvent.swift in Sources */,
+				39C4E07A260B8076002E9175 /* AccountManager.swift in Sources */,
 				E897AA2325F2707C00D11427 /* Reaction.swift in Sources */,
 				E897AA1925F2707C00D11427 /* EditEvent.swift in Sources */,
 				E897AA1F25F2707C00D11427 /* MX+Identifiable.swift in Sources */,
@@ -1712,6 +1722,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Nio/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Nio/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1736,6 +1747,7 @@
 				DEVELOPMENT_TEAM = HU85FER47E;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Nio/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1756,7 +1768,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 33;
 				INFOPLIST_FILE = NioShareExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1778,7 +1790,7 @@
 				CURRENT_PROJECT_VERSION = 33;
 				DEVELOPMENT_TEAM = HU85FER47E;
 				INFOPLIST_FILE = NioShareExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1843,7 +1855,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4GXF3JAMM4;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_MODULE_NAME = NioKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1858,7 +1870,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4GXF3JAMM4;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_MODULE_NAME = NioKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";

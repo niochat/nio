@@ -77,6 +77,7 @@ public class AccountStore: ObservableObject {
                     case .success(let state):
                         self.loginState = state
                         self.session?.crypto.warnOnUnknowDevices = false
+                        AccountManager.shared.register(self)
                     }
                 }
             @unknown default:
@@ -94,6 +95,7 @@ public class AccountStore: ObservableObject {
                 completion(.failure(error))
             case .success:
                 self.fileStore?.deleteAllData()
+                AccountManager.shared.deregister(self)
                 completion(.success(.loggedOut))
             @unknown default:
                 fatalError("Unexpected Matrix response: \(response)")
