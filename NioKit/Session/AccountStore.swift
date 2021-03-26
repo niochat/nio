@@ -227,7 +227,15 @@ public class AccountStore: ObservableObject {
     }
 
     public func updateMatrixContacts() {
-        var matrixUsers: [MatrixUser] = []
+        var matrixUsers: [MatrixUser] = { () -> [MatrixUser] in
+            do {
+                return try JSONDecoder().decode(
+                    [MatrixUser].self, from: matrixUsersJSON.data(using: .utf8) ?? Data()
+                )
+            } catch {
+                return []
+            }
+        }()
         let contacts = Contacts.getAllContacts()
         contacts.forEach { (contact) in
             var mx3pids: [MX3PID] = []
@@ -237,15 +245,19 @@ public class AccountStore: ObservableObject {
             self.identityService?.lookup3PIDs(mx3pids) { [self] response in
                 response.value?.forEach({ (responseItem: (key: MX3PID, value: String)) in
                     do {
-                        matrixUsers.append(
-                            MatrixUser(
-                                firstName: contact.givenName,
-                                lastName: contact.familyName,
-                                matrixID: responseItem.value
+                        if (!matrixUsers.contains(where: { user in
+                            return user.matrixID == responseItem.value
+                        })) {
+                            matrixUsers.append(
+                                MatrixUser(
+                                    firstName: contact.givenName,
+                                    lastName: contact.familyName,
+                                    matrixID: responseItem.value
+                                )
                             )
-                        )
-                        let jsonData = try JSONEncoder().encode(matrixUsers)
-                        self.matrixUsersJSON = String(data: jsonData, encoding: .utf8)!
+                            let jsonData = try JSONEncoder().encode(matrixUsers)
+                            self.matrixUsersJSON = String(data: jsonData, encoding: .utf8)!
+                        }
                     } catch { print(error) }
                 })
             }
