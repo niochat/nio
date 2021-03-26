@@ -19,7 +19,6 @@ public struct MatrixUser: Codable {
         self.lastName = lastName
         self.matrixID = matrixID
     }
-    
     public func getFirstName() -> String {
         return self.firstName
     }
