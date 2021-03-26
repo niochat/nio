@@ -1,59 +1,61 @@
 {
   "images" : [
     {
+      "filename" : "Mio_16.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "16x16"
     },
     {
+      "filename" : "Mio_16@2x.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "16x16"
     },
     {
-      "filename" : "MioAppIcon32.png",
+      "filename" : "Mio_32.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "32x32"
     },
     {
-      "filename" : "MioAppIcon32@2x.png",
+      "filename" : "Mio_32@2x.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "32x32"
     },
     {
-      "filename" : "MioAppIcon128.png",
+      "filename" : "Mio_128.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "128x128"
     },
     {
-      "filename" : "MioAppIcon128@2x.png",
+      "filename" : "Mio_128@2x.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "128x128"
     },
     {
-      "filename" : "MioAppIcon256.png",
+      "filename" : "Mio_256.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "256x256"
     },
     {
-      "filename" : "MioAppIcon256@2x.png",
+      "filename" : "Mio_256@2x.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "256x256"
     },
     {
-      "filename" : "MioAppIcon512.png",
+      "filename" : "Mio_512.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "512x512"
     },
     {
-      "filename" : "MioAppIcon512@2x.png",
+      "filename" : "Mio_512@2x.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "512x512"
