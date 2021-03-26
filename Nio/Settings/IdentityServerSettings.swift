@@ -163,6 +163,7 @@ struct IdentityServerSettingsView: View {
     @AppStorage("identityServerBool") private var identityServerBool: Bool = false
     @AppStorage("identityServer") private var identityServer: String = "https://vector.im"
     @AppStorage("locSyncContacts") private var locSyncContacts: Bool = false
+    @AppStorage("matrixUsers") private var matrixUsersJSON: String = ""
 
     @EnvironmentObject var store: AccountStore
 
@@ -216,6 +217,12 @@ struct IdentityServerSettingsView: View {
                           }
                         }))
                     }
+                Button(action: {
+                    self.matrixUsersJSON = ""
+                    self.syncContacts(isSync: locSyncContacts)
+                }, label: {
+                    Text(verbatim: "Force Sync")
+                })
             }
         }
     }

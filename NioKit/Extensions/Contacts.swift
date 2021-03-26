@@ -10,9 +10,9 @@ import Foundation
 import Contacts
 
 public struct MatrixUser: Codable {
-    let firstName: String?
-    let lastName: String?
-    let matrixID: String?
+    let firstName: String
+    let lastName: String
+    let matrixID: String
 
     public init(firstName: String, lastName: String, matrixID: String) {
         self.firstName = firstName
@@ -21,15 +21,15 @@ public struct MatrixUser: Codable {
     }
     
     public func getFirstName() -> String {
-        return self.firstName ?? ""
+        return self.firstName
     }
 
     public func getLastName() -> String {
-        return self.lastName ?? ""
+        return self.lastName
     }
 
     public func getMatrixID() -> String {
-        return self.matrixID ?? ""
+        return self.matrixID
     }
 }
 
