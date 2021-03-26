@@ -83,6 +83,9 @@ private struct NewConversationView: View {
                                 .onAppear {
                                     self.isRetrieving.toggle()
                                 }
+                                .onDisappear {
+                                    self.isRetrieving.toggle()
+                                }
                         }
                         // proxy binding prevents an index out of range crash on delete
                         TextField(
