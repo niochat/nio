@@ -93,22 +93,13 @@ struct TextAttributes {
       #endif
     }
 
+  #if os(macOS)
     func overriding(_ fallback: Self) -> Self {
         let textContainerInset: UXEdgeInsets? = self.textContainerInset ?? fallback.textContainerInset
         let lineFragmentPadding: CGFloat? = self.lineFragmentPadding ?? fallback.lineFragmentPadding
-      #if os(macOS)
-      #else
-        let returnKeyType: UIReturnKeyType? = self.returnKeyType ?? fallback.returnKeyType
-      #endif
         let textAlignment: NSTextAlignment? = self.textAlignment ?? fallback.textAlignment
         let linkTextAttributes: [NSAttributedString.Key: Any]? = self.linkTextAttributes ?? fallback.linkTextAttributes
         let clearsOnInsertion: Bool? = self.clearsOnInsertion ?? fallback.clearsOnInsertion
-      #if os(macOS)
-      #else
-        let contentType: UITextContentType? = self.contentType ?? fallback.contentType
-        let autocorrectionType: UITextAutocorrectionType? = self.autocorrectionType ?? fallback.autocorrectionType
-        let autocapitalizationType: UITextAutocapitalizationType? = self.autocapitalizationType ?? fallback.autocapitalizationType
-      #endif
         let lineLimit: Int? = self.lineLimit ?? fallback.lineLimit
         let lineBreakMode: NSLineBreakMode? = self.lineBreakMode ?? fallback.lineBreakMode
         let isSecure: Bool? = self.isSecure ?? fallback.isSecure
@@ -116,7 +107,6 @@ struct TextAttributes {
         let isSelectable: Bool? = self.isSelectable ?? fallback.isSelectable
         let isScrollingEnabled: Bool? = self.isScrollingEnabled ?? fallback.isScrollingEnabled
 
-      #if os(macOS)
         return .init(
             textContainerInset: textContainerInset,
             lineFragmentPadding: lineFragmentPadding,
@@ -130,7 +120,25 @@ struct TextAttributes {
             isSelectable: isSelectable,
             isScrollingEnabled: isScrollingEnabled
         )
-      #else
+    }
+  #else // iOS
+    func overriding(_ fallback: Self) -> Self {
+        let textContainerInset: UXEdgeInsets? = self.textContainerInset ?? fallback.textContainerInset
+        let lineFragmentPadding: CGFloat? = self.lineFragmentPadding ?? fallback.lineFragmentPadding
+        let returnKeyType: UIReturnKeyType? = self.returnKeyType ?? fallback.returnKeyType
+        let textAlignment: NSTextAlignment? = self.textAlignment ?? fallback.textAlignment
+        let linkTextAttributes: [NSAttributedString.Key: Any]? = self.linkTextAttributes ?? fallback.linkTextAttributes
+        let clearsOnInsertion: Bool? = self.clearsOnInsertion ?? fallback.clearsOnInsertion
+        let contentType: UITextContentType? = self.contentType ?? fallback.contentType
+        let autocorrectionType: UITextAutocorrectionType? = self.autocorrectionType ?? fallback.autocorrectionType
+        let autocapitalizationType: UITextAutocapitalizationType? = self.autocapitalizationType ?? fallback.autocapitalizationType
+        let lineLimit: Int? = self.lineLimit ?? fallback.lineLimit
+        let lineBreakMode: NSLineBreakMode? = self.lineBreakMode ?? fallback.lineBreakMode
+        let isSecure: Bool? = self.isSecure ?? fallback.isSecure
+        let isEditable: Bool? = self.isEditable ?? fallback.isEditable
+        let isSelectable: Bool? = self.isSelectable ?? fallback.isSelectable
+        let isScrollingEnabled: Bool? = self.isScrollingEnabled ?? fallback.isScrollingEnabled
+
         return .init(
             textContainerInset: textContainerInset,
             lineFragmentPadding: lineFragmentPadding,
@@ -148,10 +156,19 @@ struct TextAttributes {
             isSelectable: isSelectable,
             isScrollingEnabled: isScrollingEnabled
         )
-      #endif
     }
+  #endif // iOS
 }
 
+#if os(macOS)
+// TODO: port to macOS. Note: This is really an `AttributedTextField`
+@available(macOS, unavailable)
+struct AttributedText: View {
+  var body: some View { Text("`AttributedText` unavailable on macOS") }
+}
+#else
+@available(macOS, unavailable)
+@available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 struct AttributedText: View {
     @Environment(\.textAttributes)
     var envTextAttributes: TextAttributes
@@ -163,19 +180,11 @@ struct AttributedText: View {
 
     private let textAttributes: TextAttributes
 
-  #if os(macOS)
-    // TODO: Port me to AppKit
-  #else
     private let onLinkInteraction: (((URL, UITextItemInteraction) -> Bool))?
-  #endif
     private let onEditingChanged: ((Bool) -> Void)?
     private let onCommit: (() -> Void)?
 
     var body: some View {
-      #if os(macOS)
-        // TODO: Port me to AppKit
-        Text("No UITextViewWrapper on macOS yet")
-      #else
         let textAttributes = self.textAttributes
             .overriding(self.envTextAttributes)
             .overriding(TextAttributes.default)
@@ -196,26 +205,8 @@ struct AttributedText: View {
                 value: self.sizeThatFits
             )
         }
-      #endif
     }
 
-  #if os(macOS)
-    init(
-        attributedText: Binding<NSAttributedString>,
-        isEditing: Binding<Bool>,
-        textAttributes: TextAttributes = .init(),
-        onEditingChanged: ((Bool) -> Void)? = nil,
-        onCommit: (() -> Void)? = nil
-    ) {
-        self._attributedText = attributedText
-        self._isEditing = isEditing
-
-        self.textAttributes = textAttributes
-
-        self.onEditingChanged = onEditingChanged
-        self.onCommit = onCommit
-    }
-  #else
     init(
         attributedText: Binding<NSAttributedString>,
         isEditing: Binding<Bool>,
@@ -233,7 +224,6 @@ struct AttributedText: View {
         self.onEditingChanged = onEditingChanged
         self.onCommit = onCommit
     }
-  #endif
 }
 
 struct AttributedText_Previews: PreviewProvider {
@@ -253,3 +243,4 @@ struct AttributedText_Previews: PreviewProvider {
             .previewLayout(.sizeThatFits)
     }
 }
+#endif // iOS

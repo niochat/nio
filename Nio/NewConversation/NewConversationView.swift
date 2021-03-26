@@ -12,14 +12,13 @@ struct NewConversationContainerView: View {
     }
 }
 
-struct NewConversationView: View {
+private struct NewConversationView: View {
     @Environment(\.presentationMode) private var presentationMode
 
     let store: AccountStore?
 
     @State private var users = [""]
-  #if os(macOS)
-  #else
+  #if !os(macOS)
     @State private var editMode = EditMode.inactive
   #endif
     @State private var roomName = ""
@@ -32,7 +31,7 @@ struct NewConversationView: View {
     private var usersFooter: some View {
         Text("\(L10n.NewConversation.forExample) \(store?.session?.myUserId ?? "@username:server.org")")
     }
-  
+
     private var form: some View {
         Form {
             Section(footer: usersFooter) {
@@ -65,38 +64,43 @@ struct NewConversationView: View {
 
             Section {
                 HStack {
+                  #if !os(macOS)
                     Button(action: createRoom) {
-                        Text(L10n.NewConversation.createRoom)
+                        Text(verbatim: L10n.NewConversation.createRoom)
                     }
                     .disabled(users.contains("") || (roomName.isEmpty && users.count > 1))
-
+                  #endif
                     Spacer()
                     ProgressView()
                         .opacity(isWaiting ? 1.0 : 0.0)
                 }
             }
             .alert(item: $errorMessage) { errorMessage in
-                Alert(title: Text(L10n.NewConversation.alertFailed),
+                Alert(title: Text(verbatim: L10n.NewConversation.alertFailed),
                       message: Text(errorMessage))
             }
         }
     }
-  
+
     var body: some View {
       #if os(macOS)
-        NavigationView {
-          form
-            // TBD: no edit-mode
-            .disabled(isWaiting)
-            .navigationTitle(users.count > 1 ? L10n.NewConversation.titleRoom : L10n.NewConversation.titleChat)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button(L10n.NewConversation.cancel) {
-                        presentationMode.wrappedValue.dismiss()
-                    }
-                }
-            }
-        }
+        form
+          // TBD: no edit-mode
+          .disabled(isWaiting)
+          .toolbar {
+              ToolbarItem(placement: .cancellationAction) {
+                  Button(L10n.NewConversation.cancel) {
+                      presentationMode.wrappedValue.dismiss()
+                  }
+              }
+              ToolbarItem(placement: .confirmationAction) {
+                  Button(action: createRoom) {
+                      Text(verbatim: L10n.NewConversation.createRoom)
+                  }
+                  .disabled(users.contains("") || (roomName.isEmpty && users.count > 1))
+              }
+          }
+          .padding()
       #else
         NavigationView {
           form
