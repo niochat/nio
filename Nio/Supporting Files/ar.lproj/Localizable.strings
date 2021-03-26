@@ -52,7 +52,7 @@
 "event.room-member.unknown-state" = "حَدَثُ حالَة غَيرُ مَعرُوف: %@";
 "composer.edit-message" = "تَحريرُ الرِسَالَة:";
 "room.invitation.join-alert.message" = "قُبُل دَعوَة لِلاِنضِمام إلى '%@'؟";
-"loading.1" = "الخُطُوطُ الشَّبَكِيَّة";
+"loading.1" = "خطوط شبكية";
 "loading.2" = "رَسائِلٌ مُربِكَة";
 "event.context-menu.add-reaction" = "إضافَةُ رَدِّ فِعل";
 "event.edited" = "تَمَّ تَحرِيرُه";
