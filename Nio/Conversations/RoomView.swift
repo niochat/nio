@@ -11,7 +11,7 @@ struct RoomContainerView: View {
     @State var showImagePicker = false
     @State var eventToReactTo: String?
     @State var showJoinAlert = false
-  
+
     private var roomView: RoomView {
       RoomView(
           events: room.events(),
