@@ -1,1 +1,11 @@
 
+
+"login.failure-back-to-login" = "Kembali ke halaman login";
+"login.register-not-yet-implemented" = "Pendaftaran akun baru belum selesai.";
+"login.open-registration-prompt" = "Belum punya akun?";
+"login.sign-in" = "Masuk";
+"login.form.homeserver-optional-explanation" = "Homeserver tidak wajib di pilih jika kamu menggunakan matrix.org";
+"login.form.password" = "Kata Sandi";
+"login.form.username" = "Nama Pengguna";
+"login.welcome-message" = "Masuk ke akun kamu untuk memulai";
+"login.welcome-header" = "Selamat datang di ";
