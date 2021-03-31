@@ -41,12 +41,12 @@ private struct NewConversationView: View {
     let store: AccountStore?
 
     @State private var users = [""]
-    @State private var usersVerified: [UserStatus] = [UserStatus.unkown]
+    @State private var usersVerified: [UserStatus] = [UserStatus.unknown]
 
     @State private var numCalls: Int = 0
 
     @State private var isRetrieving = false
-    
+
   #if !os(macOS)
     @State private var editMode = EditMode.inactive
   #endif
@@ -238,7 +238,7 @@ private struct NewConversationView: View {
 
     private func addUser() {
         withAnimation {
-            usersVerified.append(UserStatus.unkown)
+            usersVerified.append(UserStatus.unknown)
             users.append("")
         }
     }

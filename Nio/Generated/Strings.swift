@@ -312,8 +312,10 @@ internal enum L10n {
     internal static let data = L10n.tr("Localizable", "settings-identity-server.data")
     /// Data & Privacy
     internal static let dataPrivacy = L10n.tr("Localizable", "settings-identity-server.data-privacy")
-    /// By using the identity server, your email address and phone number will be sent to the identity server and will be linked to your Matrix ID (@example.nio.chat).
-    internal static let dataText = L10n.tr("Localizable", "settings-identity-server.data-text")
+    /// By using the identity server, your email address and phone number will be sent to the identity server and will be linked to your Matrix ID (%@).
+    internal static func dataText(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "settings-identity-server.data-text", String(describing: p1))
+    }
     /// Learn More
     internal static let learnMore = L10n.tr("Localizable", "settings-identity-server.learn-more")
     /// Match
@@ -322,7 +324,7 @@ internal enum L10n {
     internal static let matchText = L10n.tr("Localizable", "settings-identity-server.match-text")
     /// (Optional) Contact Sync
     internal static let optionalContactSync = L10n.tr("Localizable", "settings-identity-server.optional-contact-sync")
-    /// When activating contact syncronization, Nio will periodically send the email addresses and phone numbers of all your contacts to the identity server to see if that contact has a linked Matrix ID. This contact information is never stored or shared by Nio.
+    /// When activating contact syncronization, Nio will periodically send the email addresses and phone numbers of all your contacts to the identity server to see if that contact has a linked Matrix ID. This contact information is never stored or shared with other parties by Nio.
     internal static let optionalContactSyncText = L10n.tr("Localizable", "settings-identity-server.optional-contact-sync-text")
     /// Please go to Settings and turn on the permissions.
     internal static let permissionAlertBody = L10n.tr("Localizable", "settings-identity-server.permission-alert-body")

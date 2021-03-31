@@ -61,10 +61,12 @@ struct InformationDetailView: View {
                     .font(.headline)
                     .foregroundColor(.primary)
                     .accessibility(addTraits: .isHeader)
+                    .textCase(.none)
 
                 Text(subTitle)
                     .foregroundColor(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
+                    .textCase(.none)
             }
         }
         .padding(.top)
@@ -72,11 +74,13 @@ struct InformationDetailView: View {
 }
 
 struct InformationContainerView: View {
+    @EnvironmentObject private var store: AccountStore
+
     var body: some View {
         VStack(alignment: .leading) {
             InformationDetailView(
                 title: L10n.SettingsIdentityServer.data,
-                subTitle: L10n.SettingsIdentityServer.dataText,
+                subTitle: L10n.SettingsIdentityServer.dataText(store.session?.myUserId ?? "@username:server.org"),
                 imageName: "arrow.up.doc"
             )
 
