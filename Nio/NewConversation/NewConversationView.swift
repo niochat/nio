@@ -4,7 +4,7 @@ import MatrixSDK
 import NioKit
 
 enum UserStatus {
-    case unkown         // Validity of user is still unkown.
+    case unknown         // Validity of user is still unknown.
     case notValid       // User is not valid.
     case valid          // User is valid.
     case retrieving     // Validity of user is being retrieved from identity server.
@@ -68,7 +68,7 @@ private struct NewConversationView: View {
             Section(footer: usersFooter) {
                 ForEach(0..<users.count, id: \.self) { index in
                     HStack {
-                        if usersVerified[index] == UserStatus.unkown {
+                        if usersVerified[index] == UserStatus.unknown {
                             Image(systemName: "questionmark.circle")
                         } else if usersVerified[index] == UserStatus.valid {
                             Image(systemName: "checkmark.circle")
@@ -125,11 +125,11 @@ private struct NewConversationView: View {
                         Text(verbatim: L10n.NewConversation.createRoom)
                     }
                     .disabled(
-                      users.contains("")
-                          || (roomName.isEmpty && users.count > 1)
-                          || usersVerified.contains(UserStatus.notValid)
-                          || usersVerified.contains(UserStatus.retrieving)
-                          || usersVerified.contains(UserStatus.unkown)
+                        users.contains("")
+                            || (roomName.isEmpty && users.count > 1)
+                            || usersVerified.contains(UserStatus.notValid)
+                            || usersVerified.contains(UserStatus.retrieving)
+                            || usersVerified.contains(UserStatus.unknown)
                     )
                   #endif
                     Spacer()
