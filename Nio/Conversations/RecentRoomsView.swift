@@ -29,6 +29,7 @@ struct RecentRoomsContainerView: View {
 
 struct RecentRoomsView: View {
     @EnvironmentObject var store: AccountStore
+    @AppStorage("iconPack") private var iconPack: String = "Default (nio)"
 
     @Binding fileprivate var selectedNavigationItem: SelectedNavigationItem?
     @Binding fileprivate var selectedRoomId: ObjectIdentifier?
@@ -47,10 +48,7 @@ struct RecentRoomsView: View {
         Button(action: {
             self.selectedNavigationItem = .settings
         }, label: {
-            Image(Asset.Icon.user.name)
-                .resizable()
-                .frame(width: 30.0, height: 30.0)
-                .accessibility(label: Text(verbatim: L10n.RecentRooms.AccessibilityLabel.settings))
+            IconPack(title: iconPack).pack.getIconPerson
         })
     }
 
@@ -58,10 +56,7 @@ struct RecentRoomsView: View {
         Button(action: {
             self.selectedNavigationItem = .newConversation
         }, label: {
-            Image(Asset.Icon.addRoom.name)
-                .resizable()
-                .frame(width: 30.0, height: 30.0)
-                .accessibility(label: Text(verbatim: L10n.RecentRooms.AccessibilityLabel.newConversation))
+            IconPack(title: iconPack).pack.getIconNewChat
         })
     }
 

@@ -44,6 +44,8 @@ private struct EventContextMenuViewModel {
 }
 
 struct EventContextMenu: View {
+    @AppStorage("iconPack") private var iconPack: String = "Default (nio)"
+
     private var model: EventContextMenuViewModel
 
     typealias Action = () -> Void
@@ -81,33 +83,25 @@ struct EventContextMenu: View {
             if model.canReact {
                 Button(action: onReact, label: {
                     Text(verbatim: L10n.Event.ContextMenu.addReaction)
-                    Image(Asset.Icon.smiley.name)
-                        .resizable()
-                        .frame(width: 30.0, height: 30.0)
+                    IconPack(title: iconPack).pack.getIconReaction
                 })
             }
             if model.canReply {
                 Button(action: onReply, label: {
                     Text(verbatim: L10n.Event.ContextMenu.reply)
-                    Image(Asset.Icon.Arrow.upLeft.name)
-                        .resizable()
-                        .frame(width: 30.0, height: 30.0)
+                    IconPack(title: iconPack).pack.getIconReply
                 })
             }
             if model.canEdit {
                 Button(action: onEdit, label: {
                     Text(verbatim: L10n.Event.ContextMenu.edit)
-                    Image(Asset.Icon.pencil.name)
-                        .resizable()
-                        .frame(width: 30.0, height: 30.0)
+                    IconPack(title: iconPack).pack.getIconEdit
                 })
             }
             if model.canRedact {
                 Button(action: onRedact, label: {
                     Text(verbatim: L10n.Event.ContextMenu.remove)
-                    Image(Asset.Icon.trash.name)
-                        .resizable()
-                        .frame(width: 30.0, height: 30.0)
+                    IconPack(title: iconPack).pack.getIconRedact
                 })
             }
         }

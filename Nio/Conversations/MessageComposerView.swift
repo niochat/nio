@@ -16,6 +16,8 @@ struct MessageComposerView: View {
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     @Environment(\.sizeCategory) private var sizeCategory
 
+    @AppStorage("iconPack") private var iconPack: String = "Default (nio)"
+
     @Binding var showAttachmentPicker: Bool
 
     @Binding var isEditing: Bool
@@ -98,10 +100,7 @@ struct MessageComposerView: View {
         Button(action: {
             self.showAttachmentPicker.toggle()
         }, label: {
-            Image(Asset.Icon.paperclip.name)
-                .resizable()
-                .frame(width: 30.0, height: 30.0)
-                .accessibility(label: Text(verbatim: L10n.Composer.AccessibilityLabel.sendFile))
+            IconPack(title: iconPack).pack.getIconAttachment
         })
     }
 
@@ -129,10 +128,7 @@ struct MessageComposerView: View {
         Button(action: {
             self.onCommit()
         }, label: {
-            Image(Asset.Icon.paperplane.name)
-                .resizable()
-                .frame(width: 30.0, height: 30.0)
-                .accessibility(label: Text(verbatim: L10n.Composer.AccessibilityLabel.send))
+            IconPack(title: iconPack).pack.getIconSendMessage
         })
         .disabled(attributedMessage.isEmpty)
     }

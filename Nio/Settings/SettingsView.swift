@@ -13,6 +13,7 @@ struct SettingsContainerView: View {
 
 struct SettingsView: View {
     @AppStorage("accentColor") private var accentColor: Color = .purple
+    @AppStorage("iconPack") private var iconPack: String = "Default (nio)"
     @StateObject private var appIconTitle = AppIconTitle()
     let logoutAction: () -> Void
     @EnvironmentObject var store: AccountStore
@@ -37,6 +38,12 @@ struct SettingsView: View {
 
                     Picker(selection: $appIconTitle.current, label: Text(verbatim: L10n.Settings.appIcon)) {
                         ForEach(AppIconTitle.alternatives) { AppIcon(title: $0) }
+                    }
+
+                    Picker(selection: $iconPack, label: Text(verbatim: "Icon Pack")) {
+                        ForEach(IconPackTitle.alternatives) { title in
+                            IconPackStruct(title: title)
+                        }
                     }
                 }
 

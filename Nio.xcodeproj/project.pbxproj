@@ -59,6 +59,9 @@
 		4B0B26C826050818009E2D3A /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0B26C726050818009E2D3A /* Contacts.swift */; };
 		4B0B26C926050818009E2D3A /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0B26C726050818009E2D3A /* Contacts.swift */; };
 		4B29F5B52466EC240084043B /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B29F5B42466EC240084043B /* ImagePicker.swift */; };
+		4B49C4B52609FED500F5FD4E /* IconPack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B49C4B42609FED500F5FD4E /* IconPack.swift */; };
+		4B49C4BE260A069900F5FD4E /* Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B49C4BD260A069900F5FD4E /* Default.swift */; };
+		4B49C4C6260A0B4800F5FD4E /* SF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B49C4C5260A0B4800F5FD4E /* SF.swift */; };
 		4B693515249BBBFE0029D549 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEFD7E246F414D00CCF4A0 /* ShareViewController.swift */; };
 		4B8225A426091A5F0013E733 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B8225A626091A5F0013E733 /* InfoPlist.strings */; };
 		4B9AB8C32608D08A005E1092 /* IdentityServerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9AB8C22608D08A005E1092 /* IdentityServerSettings.swift */; };
@@ -354,6 +357,9 @@
 		4B0A2E46245E2EF800A79443 /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 		4B0B26C726050818009E2D3A /* Contacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contacts.swift; sourceTree = "<group>"; };
 		4B29F5B42466EC240084043B /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		4B49C4B42609FED500F5FD4E /* IconPack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPack.swift; sourceTree = "<group>"; };
+		4B49C4BD260A069900F5FD4E /* Default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Default.swift; sourceTree = "<group>"; };
+		4B49C4C5260A0B4800F5FD4E /* SF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SF.swift; sourceTree = "<group>"; };
 		4B8225A526091A5F0013E733 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4B8225AD26091A650013E733 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4B9AB8C22608D08A005E1092 /* IdentityServerSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityServerSettings.swift; sourceTree = "<group>"; };
@@ -482,6 +488,7 @@
 				3902B8A22395935600698B87 /* SettingsView.swift */,
 				39DD77AE247006E300A29DEE /* AppIcon.swift */,
 				4B9AB8C22608D08A005E1092 /* IdentityServerSettings.swift */,
+				4B49C4B42609FED500F5FD4E /* IconPack.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -514,6 +521,7 @@
 		390D63BA246F4BEE00B8F640 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4B49C4BC260A068000F5FD4E /* Icon Packs */,
 				390D63BB246F4BEE00B8F640 /* Alternate Icons */,
 			);
 			path = Resources;
@@ -743,6 +751,15 @@
 				39DD77B92470C49D00A29DEE /* Six Colors Light@2x.png */,
 			);
 			path = "Six Colors Light";
+			sourceTree = "<group>";
+		};
+		4B49C4BC260A068000F5FD4E /* Icon Packs */ = {
+			isa = PBXGroup;
+			children = (
+				4B49C4BD260A069900F5FD4E /* Default.swift */,
+				4B49C4C5260A0B4800F5FD4E /* SF.swift */,
+			);
+			path = "Icon Packs";
 			sourceTree = "<group>";
 		};
 		4BD3D29424951F150031846F /* Configs */ = {
@@ -1322,7 +1339,9 @@
 				392389942388899200B2E1DF /* Formatter.swift in Sources */,
 				392221AC2438149D004D8794 /* RoomMemberEventView.swift in Sources */,
 				392221B4243D1627004D8794 /* RoomPowerLevelsEventView.swift in Sources */,
+				4B49C4BE260A069900F5FD4E /* Default.swift in Sources */,
 				CAF2AE92245AEEBA00D84133 /* BadgeView.swift in Sources */,
+				4B49C4C6260A0B4800F5FD4E /* SF.swift in Sources */,
 				CAC46D6323A278F40079C24F /* PreviewProvider+Enumeration.swift in Sources */,
 				39D166C82385C832006DD257 /* EventContainerView.swift in Sources */,
 				CAC46D6B23A55E940079C24F /* PeekableIterator.swift in Sources */,
@@ -1338,6 +1357,7 @@
 				39BA0727240B534600FD28C6 /* Color+allAccent.swift in Sources */,
 				CAD6817A246C31EB001878EB /* String+Extensions.swift in Sources */,
 				CAC46D5D23A276700079C24F /* Color+Named.swift in Sources */,
+				4B49C4B52609FED500F5FD4E /* IconPack.swift in Sources */,
 				CAF2AE94245B507400D84133 /* Assets.swift in Sources */,
 				3902B89E2393FE8200698B87 /* GenericEventView.swift in Sources */,
 				CAC46D6023A276B40079C24F /* IndividuallyRoundedRectangle.swift in Sources */,
