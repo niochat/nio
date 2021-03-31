@@ -43,3 +43,13 @@
 "login.form.homeserver-optional-explanation" = "ඔබ matrix.org පාවිච්චි කරන්නේ නම් හෝම් සර්වරයක් අවශ්‍ය නැත.";
 "login.form.homeserver" = "හෝම් සර්වරය";
 "login.welcome-message" = "පටන් ගැනීම සඳහා ඔබේ ගිණුමට පිවිසෙන්න.";
+"settings.title" = "සැකසුම්";
+"room.invitation.fallback-title" = "අලුත් සංවාදයක්";
+"recent-rooms.accessibility-label.new-conversation" = "අලුත් සංවාදයක්";
+"recent-rooms.new-message-placeholder" = "අලුත් පණිවුඩ‍යක්";
+"recent-rooms.accessibility-label.settings" = "සැකසුම්";
+"room.attachment.type-photo" = "ඡා‍යාරූපය";
+"recent-rooms.accessibility-label.new-message-badge" = "අලුත් පණිවුඩ %u";
+"loading.3" = "පිවිසෙමින්";
+"login.failure-back-to-login" = "නැවත පිවිසීමට";
+"login.welcome-header" = "ආ‍යුබෝවන් ";
