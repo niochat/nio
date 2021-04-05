@@ -80,3 +80,15 @@
 "login.form.username" = "Brukernavn";
 "login.welcome-message" = "Logg på kontoen din for å komme i gang.";
 "login.welcome-header" = "Velkommen til ";
+"loading.2" = "Laster meldinger";
+"new-conversation.cancel" = "Avbryt";
+"new-conversation.done" = "Klar";
+"new-conversation.edit" = "Rediger";
+"new-conversation.alert-failed" = "Mislyktes i å starte chat";
+"new-conversation.create-room" = "Start chat";
+"new-conversation.public-room" = "Offentlig rom";
+"new-conversation.room-name" = "Romnavn";
+"new-conversation.for-example" = "For eksempel";
+"new-conversation.username-placeholder" = "Matrix-ID";
+"new-conversation.title-room" = "Nytt rom";
+"new-conversation.title-chat" = "Ny chat";
