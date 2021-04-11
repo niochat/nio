@@ -3,6 +3,7 @@ import Social
 import MobileCoreServices
 import SwiftUI
 import NioKit
+import MatrixSDK
 
 @objc(ShareNavigationController)
 class ShareNavigationController: UIViewController {

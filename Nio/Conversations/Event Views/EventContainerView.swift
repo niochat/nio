@@ -52,11 +52,11 @@ struct EventContainerView: View {
         fileprivate let contextMenuModel: EventContextMenuModel
 
         private var topPadding: CGFloat {
-            connectedEdges.contains(.topEdge) ? 2.0 : 8.0
+            connectedEdges.contains(.topEdge) ? 0.0 : 8.0
         }
 
         private var bottomPadding: CGFloat {
-            connectedEdges.contains(.bottomEdge) ? 2.0 : 8.0
+            connectedEdges.contains(.bottomEdge) ? 0.0 : 8.0
         }
 
         private enum Model {
