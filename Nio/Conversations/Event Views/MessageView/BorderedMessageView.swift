@@ -68,7 +68,6 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
         .fill(gradient).opacity(0.9)
         // and flip it in case it's meant to be right-aligned:
         .scaleEffect(x: isMe ? -1.0 : 1.0, y: 1.0, anchor: .center)
-        .padding(.bottom, connectedEdges.contains(.bottomEdge) ? -12 : 0)
     }
 
     private var timestampView: some View {
@@ -157,6 +156,8 @@ struct BorderedMessageView<Model>: View where Model: MessageViewModelProtocol {
                 timestampView
             }
         }
+        .padding(.top, model.reactions.count > 0 || !connectedEdges.contains(.bottomEdge) ? -8.0 : 0)
+        .padding(.bottom, model.reactions.count > 0 ? 3.0 : 0)
     }
 }
 
