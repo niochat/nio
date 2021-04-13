@@ -1,1 +1,15 @@
 
+
+"login.form.username" = "Naudotojo vardas";
+"login.form.password" = "Slaptažodis";
+"login.open-registration-prompt" = "Dar neturite paskyros?";
+"login.failure-back-to-login" = "Atgal į prisijungimą";
+"recent-rooms.accessibility-label.new-conversation" = "Naujas pokalbis";
+"recent-rooms.new-message-placeholder" = "Nauja žinutė";
+"recent-rooms.accessibility-label.new-message-badge" = "Naujų žinučių: %u";
+"login.welcome-header" = "Sveiki atvykę į ";
+"login.welcome-message" = "Norėdami pradėti, prisijunkite prie savo paskyros.";
+"login.sign-in" = "Prisijungti";
+"login.register-not-yet-implemented" = "Naujų paskyrų registracija kol kas neįgyvendinta.";
+"loading.cancel" = "Atsisakyti";
+"recent-rooms.accessibility-label.settings" = "Nustatymai";
