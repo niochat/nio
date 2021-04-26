@@ -80,7 +80,7 @@
 "settings.dismiss" = "Klar";
 "new-conversation.cancel" = "Avbryt";
 "new-conversation.alert-failed" = "Misslyckades att starta chatt";
-"new-conversation.create-room" = "Start chatt";
+"new-conversation.create-room" = "Starta chatt";
 "new-conversation.public-room" = "Offentligt rum";
 "new-conversation.room-name" = "Rumsnamn";
 "new-conversation.for-example" = "Till exempel";
