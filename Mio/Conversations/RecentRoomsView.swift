@@ -1,6 +1,6 @@
 //
 //  RecentRoomsView.swift
-//  Nio
+//  Mio
 //
 //  Created by Finn Behrens on 13.06.21.
 //  Copyright © 2021 Kilian Koeltzsch. All rights reserved.
@@ -27,28 +27,6 @@ struct RecentRoomsView: View {
         rooms.filter {$0.room.summary.membership == .invite}
     }
 
-    private var settingsButton: some View {
-        Button(action: {
-            self.selectedNavigationItem = .settings
-        }, label: {
-            Image(Asset.Icon.user.name)
-                .resizable()
-                .frame(width: 30.0, height: 30.0)
-                .accessibility(label: Text(verbatim: L10n.RecentRooms.AccessibilityLabel.settings))
-        })
-    }
-
-    private var newConversationButton: some View {
-        Button(action: {
-            self.selectedNavigationItem = .newConversation
-        }, label: {
-            Image(Asset.Icon.addRoom.name)
-                .resizable()
-                .frame(width: 30.0, height: 30.0)
-                .accessibility(label: Text(verbatim: L10n.RecentRooms.AccessibilityLabel.newConversation))
-        })
-    }
-
     var body: some View {
         NavigationView {
             List {
@@ -69,20 +47,20 @@ struct RecentRoomsView: View {
                 )
 
             }
-            .listStyle(GroupedListStyle())
-            .introspectTableView { tableView in
-                guard invitedRooms.isEmpty else { return }
-                var frame = CGRect.zero
-                frame.size.height = .leastNormalMagnitude
-                tableView.tableHeaderView = UIView(frame: frame)
+            .listStyle(SidebarListStyle())
+            .navigationTitle("Mio")
+            .frame(minWidth: Style.minSidebarWidth)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(action: { self.selectedNavigationItem = .newConversation }) {
+                        Label(L10n.RecentRooms.AccessibilityLabel.newConversation,
+                              systemImage: SFSymbol.newConversation.rawValue)
+                    }
+                }
             }
-            .navigationBarTitle("Nio", displayMode: .inline)
-            .navigationBarItems(leading: settingsButton, trailing: newConversationButton)
         }
     }
 }
-
-
 
 struct RecentRoomsView_Previews: PreviewProvider {
     static var previews: some View {
