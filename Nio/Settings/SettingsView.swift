@@ -5,10 +5,18 @@ struct SettingsContainerView: View {
     @EnvironmentObject var store: AccountStore
 
     var body: some View {
-      #if os(macOS)
-        MacSettingsView(logoutAction: self.store.logout)
+    #if os(macOS)
+        MacSettingsView(logoutAction: {
+            async {
+                await self.store.logout()
+            }
+        })
       #else
-        SettingsView(logoutAction: self.store.logout)
+        SettingsView(logoutAction: {
+            async {
+                await self.store.logout()
+            }
+        })
       #endif
     }
 }

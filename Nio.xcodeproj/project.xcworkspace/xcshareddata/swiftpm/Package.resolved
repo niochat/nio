@@ -65,7 +65,7 @@
         }
       },
       {
-        "package": "cmark",
+        "package": "swift-cmark",
         "repositoryURL": "https://github.com/SwiftDocOrg/swift-cmark.git",
         "state": {
           "branch": null,
@@ -74,7 +74,7 @@
         }
       },
       {
-        "package": "Introspect",
+        "package": "SwiftUI-Introspect",
         "repositoryURL": "https://github.com/siteline/SwiftUI-Introspect",
         "state": {
           "branch": null,

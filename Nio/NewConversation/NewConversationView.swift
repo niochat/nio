@@ -28,10 +28,12 @@ private struct NewConversationView: View {
     @Binding var createdRoomId: ObjectIdentifier?
     @State private var errorMessage: String?
 
+    @MainActor
     private var usersFooter: some View {
         Text("\(L10n.NewConversation.forExample) \(store?.session?.myUserId ?? "@username:server.org")")
     }
 
+    @MainActor
     private var form: some View {
         Form {
             Section(footer: usersFooter) {
@@ -65,7 +67,12 @@ private struct NewConversationView: View {
             Section {
                 HStack {
                   #if !os(macOS)
-                    Button(action: createRoom) {
+                    // Seems to be a bug in Xcode, currently needs to be asnyc, to be able to await actor
+                    Button(action: {
+                        async {
+                            createRoom
+                        }
+                    }) {
                         Text(verbatim: L10n.NewConversation.createRoom)
                     }
                     .disabled(users.contains("") || (roomName.isEmpty && users.count > 1))
@@ -94,7 +101,11 @@ private struct NewConversationView: View {
                   }
               }
               ToolbarItem(placement: .confirmationAction) {
-                  Button(action: createRoom) {
+                  Button(action: {
+                      async {
+                          await createRoom
+                      }
+                  }) {
                       Text(verbatim: L10n.NewConversation.createRoom)
                   }
                   .disabled(users.contains("") || (roomName.isEmpty && users.count > 1))
@@ -140,7 +151,7 @@ private struct NewConversationView: View {
         }
     }
 
-    private func createRoom() {
+    @MainActor private func createRoom() {
         isWaiting = true
 
         let parameters = MXRoomCreationParameters()

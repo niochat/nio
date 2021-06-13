@@ -2,6 +2,7 @@ import Foundation
 import MatrixSDK
 
 @dynamicMemberLookup
+@MainActor
 public class NIORoomSummary: ObservableObject {
     internal var summary: MXRoomSummary
 

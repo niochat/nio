@@ -37,7 +37,9 @@ struct LoginContainerView: View {
             return
         }
 
-        store.login(username: username, password: password, homeserver: homeserverURL)
+        async {
+            await store.login(username: username, password: password, homeserver: homeserverURL)
+        }
     }
 
     private func guessHomeserverURL() {

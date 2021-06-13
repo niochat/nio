@@ -10,6 +10,7 @@ public enum LoginState {
     case loggedIn(userId: String)
 }
 
+@MainActor
 public class AccountStore: ObservableObject {
     public var client: MXRestClient?
     public var session: MXSession?
@@ -30,19 +31,18 @@ public class AccountStore: ObservableObject {
         }
 
         Configuration.setupMatrixSDKSettings()
-
-        if let credentials = MXCredentials.from(keychain) {
-            self.loginState = .authenticating
-            self.credentials = credentials
-            self.sync { result in
-                switch result {
-                case .failure(let error):
-                    print("Error on starting session with saved credentials: \(error)")
-                    self.loginState = .failure(error)
-                case .success(let state):
-                    self.loginState = state
-                    self.session?.crypto.warnOnUnknowDevices = false
-                }
+        guard let credentials = MXCredentials.from(keychain) else {
+            return
+        }
+        self.credentials = credentials
+        self.loginState = .authenticating
+        async {
+            do {
+                self.loginState = try await self.sync()
+                self.session?.crypto.warnOnUnknowDevices = false
+            } catch {
+                print("Error on starting session with saved credentials: \(error)")
+                self.loginState = .failure(error)
             }
         }
     }
@@ -55,91 +55,64 @@ public class AccountStore: ObservableObject {
 
     @Published public var loginState: LoginState = .loggedOut
 
-    public func login(username: String, password: String, homeserver: URL) {
+    public func login(username: String, password: String, homeserver: URL) async {
         self.loginState = .authenticating
 
         self.client = MXRestClient(homeServer: homeserver, unrecognizedCertificateHandler: nil)
-        self.client?.login(username: username, password: password) { response in
-            switch response {
-            case .failure(let error):
-                print("Error on starting session with new credentials: \(error)")
-                self.loginState = .failure(error)
-            case .success(let credentials):
-                self.credentials = credentials
-                credentials.save(to: self.keychain)
-                print("Error on starting session with new credentials:")
+        self.client?.acceptableContentTypes = ["text/plain", "text/html", "application/json", "application/octet-stream", "any"]
 
-                self.sync { result in
-                    switch result {
-                    case .failure(let error):
-                        // Does this make sense? The login itself didn't fail, but syncing did.
-                        self.loginState = .failure(error)
-                    case .success(let state):
-                        self.loginState = state
-                        self.session?.crypto.warnOnUnknowDevices = false
-                    }
-                }
-            @unknown default:
-                fatalError("Unexpected Matrix response: \(response)")
+        do {
+            let credentials = try await self.client?.login(username: username, password: password)
+            guard let credentials = credentials else {
+                self.loginState = .failure(AccountStoreError.noCredentials)
+                return
             }
+            self.credentials = credentials
+            credentials.save(to: self.keychain)
+            self.loginState = try await self.sync()
+            self.session?.crypto.warnOnUnknowDevices = false
+        } catch {
+            self.loginState = .failure(error)
         }
     }
 
-    public func logout(completion: @escaping (Result<LoginState, Error>) -> Void) {
+    public func logout() async {
         self.credentials?.clear(from: keychain)
 
-        self.session?.logout { response in
-            switch response {
-            case .failure(let error):
-                completion(.failure(error))
-            case .success:
-                self.fileStore?.deleteAllData()
-                completion(.success(.loggedOut))
-            @unknown default:
-                fatalError("Unexpected Matrix response: \(response)")
-            }
+        do {
+            try await self.session?.logout()
+            self.loginState = .loggedOut
+        } catch {
+            // Close the session even if the logout request failed
+            self.loginState = .loggedOut
         }
     }
 
-    public func logout() {
-        self.logout { result in
-            switch result {
-            case .failure:
-                // Close the session even if the logout request failed
-                self.loginState = .loggedOut
-            case .success(let state):
-                self.loginState = state
-            }
-        }
-    }
-
+    @available(*, deprecated, message: "Prefer async alternative instead")
     private func sync(completion: @escaping (Result<LoginState, Error>) -> Void) {
-        guard let credentials = self.credentials else { return }
+        async {
+            do {
+                let result = try await sync()
+                completion(.success(result))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+
+
+    private func sync() async throws -> LoginState {
+        guard let credentials = self.credentials else {
+            throw AccountStoreError.noCredentials
+        }
 
         self.client = MXRestClient(credentials: credentials, unrecognizedCertificateHandler: nil)
         self.session = MXSession(matrixRestClient: self.client!)
         self.fileStore = MXFileStore()
 
-        self.session!.setStore(fileStore!) { response in
-            switch response {
-            case .failure(let error):
-                completion(.failure(error))
-            case .success:
-                self.session?.start { response in
-                    switch response {
-                    case .failure(let error):
-                        completion(.failure(error))
-                    case .success:
-                        let userId = credentials.userId!
-                        completion(.success(.loggedIn(userId: userId)))
-                    @unknown default:
-                        fatalError("Unexpected Matrix response: \(response)")
-                    }
-                }
-            @unknown default:
-                fatalError("Unexpected Matrix response: \(response)")
-            }
-        }
+        try await self.session!.setStore(fileStore!)
+        try await self.session?.start()
+        return .loggedIn(userId: credentials.userId!)
     }
 
     // MARK: - Rooms
@@ -200,4 +173,9 @@ public class AccountStore: ObservableObject {
             self.objectWillChange.send()
         }
     }
+}
+
+enum AccountStoreError: Error {
+    case noCredentials
+    case invalidUrl
 }
