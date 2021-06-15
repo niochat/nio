@@ -79,6 +79,8 @@
 		9525D2EC267659A2004055B6 /* SettingsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525D2EB267659A2004055B6 /* SettingsContainerView.swift */; };
 		9525D2ED267659BD004055B6 /* SettingsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525D2E62676594F004055B6 /* SettingsContainerView.swift */; };
 		9525D2EE26765C8C004055B6 /* RecentRoomsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C932062384BB13004449E1 /* RecentRoomsContainerView.swift */; };
+		95CAC7B82678F64E001D71DC /* MXEventTimeLine+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CAC7B72678F64E001D71DC /* MXEventTimeLine+Async.swift */; };
+		95CAC7B92678F64E001D71DC /* MXEventTimeLine+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CAC7B72678F64E001D71DC /* MXEventTimeLine+Async.swift */; };
 		A51BF8CE254C2FE5000FB0A4 /* NioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51BF8CD254C2FE5000FB0A4 /* NioApp.swift */; };
 		A51F762C25D6E9950061B4A4 /* MessageTextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51F762B25D6E9950061B4A4 /* MessageTextViewWrapper.swift */; };
 		A58352A625A667AB00533363 /* MatrixSDK in Frameworks */ = {isa = PBXBuildFile; productRef = A58352A525A667AB00533363 /* MatrixSDK */; };
@@ -383,6 +385,7 @@
 		9525D2E326765850004055B6 /* RoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomView.swift; sourceTree = "<group>"; };
 		9525D2E62676594F004055B6 /* SettingsContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsContainerView.swift; sourceTree = "<group>"; };
 		9525D2EB267659A2004055B6 /* SettingsContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsContainerView.swift; sourceTree = "<group>"; };
+		95CAC7B72678F64E001D71DC /* MXEventTimeLine+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXEventTimeLine+Async.swift"; sourceTree = "<group>"; };
 		A51BF8CD254C2FE5000FB0A4 /* NioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NioApp.swift; sourceTree = "<group>"; };
 		A51F762B25D6E9950061B4A4 /* MessageTextViewWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTextViewWrapper.swift; sourceTree = "<group>"; };
 		CAAF5BF72478696F006FDC33 /* UITextViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextViewWrapper.swift; sourceTree = "<group>"; };
@@ -864,6 +867,7 @@
 				393411C823904428003B49B8 /* MXEvent+Extensions.swift */,
 				4BEB8C03250403D200E90699 /* UserDefaults.swift */,
 				E897AA3325F2716F00D11427 /* UXKit.swift */,
+				95CAC7B72678F64E001D71DC /* MXEventTimeLine+Async.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1427,6 +1431,7 @@
 				E8B4726125F26D5A00ACEFCB /* AccountStore.swift in Sources */,
 				E8B4725825F26D5A00ACEFCB /* CustomEvent.swift in Sources */,
 				E8B4725F25F26D5A00ACEFCB /* Configuration.swift in Sources */,
+				95CAC7B82678F64E001D71DC /* MXEventTimeLine+Async.swift in Sources */,
 				E8B4725D25F26D5A00ACEFCB /* EventCollection.swift in Sources */,
 				9525D2D426763DD0004055B6 /* MXAutoDiscovery+Async.swift in Sources */,
 				E8B4725E25F26D5A00ACEFCB /* MXEvent+Extensions.swift in Sources */,
@@ -1516,6 +1521,7 @@
 				E897AA2325F2707C00D11427 /* Reaction.swift in Sources */,
 				E897AA1925F2707C00D11427 /* EditEvent.swift in Sources */,
 				E897AA1F25F2707C00D11427 /* MX+Identifiable.swift in Sources */,
+				95CAC7B92678F64E001D71DC /* MXEventTimeLine+Async.swift in Sources */,
 				E897AA1D25F2707C00D11427 /* MXCredentials+Keychain.swift in Sources */,
 				9525D2D326763DD0004055B6 /* MXAutoDiscovery+Async.swift in Sources */,
 				E897AA2425F2707C00D11427 /* MXEvent+Extensions.swift in Sources */,

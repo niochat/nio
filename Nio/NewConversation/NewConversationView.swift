@@ -70,7 +70,7 @@ private struct NewConversationView: View {
                     // Seems to be a bug in Xcode, currently needs to be asnyc, to be able to await actor
                     Button(action: {
                         async {
-                            createRoom
+                            await createRoom()
                         }
                     }) {
                         Text(verbatim: L10n.NewConversation.createRoom)
@@ -151,7 +151,7 @@ private struct NewConversationView: View {
         }
     }
 
-    @MainActor private func createRoom() {
+    private func createRoom() async {
         isWaiting = true
 
         let parameters = MXRoomCreationParameters()
@@ -173,7 +173,7 @@ private struct NewConversationView: View {
             }
         }
 
-        store?.session?.createRoom(parameters: parameters) { response in
+        await store?.session?.createRoom(parameters: parameters) { response in
             switch response {
             case .success(let room):
                 createdRoomId = room.id

@@ -10,17 +10,25 @@ import MatrixSDK
 
 extension MXRoom {
     func members() async throws -> MXRoomMembers? {
-        return try await withCheckedThrowingContinuation {continuation in
-            self.members(completion: {resp in
+        try await withCheckedThrowingContinuation { continuation in
+            self.members(completion: { resp in
                 switch resp {
-                case .success(let v):
+                case let .success(v):
                     continuation.resume(returning: v)
-                case .failure(let e):
+                case let .failure(e):
                     continuation.resume(throwing: e)
                 @unknown default:
                     continuation.resume(throwing: NioUnknownContinuationSwitchError(value: resp))
                 }
             })
+        }
+    }
+
+    var liveTimeline: MXEventTimeline {
+        get async {
+            await withCheckedContinuation { continuation in
+                self.liveTimeline { continuation.resume(returning: $0!) }
+            }
         }
     }
 }

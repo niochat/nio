@@ -15,14 +15,15 @@ public extension UserDefaults {
         }
         return group
     }()
-  #if os(macOS)
-    private static let teamIdentifierPrefix = Bundle.main
-      .object(forInfoDictionaryKey: "TeamIdentifierPrefix") as? String ?? ""
 
-    private static let suiteName = teamIdentifierPrefix + appGroup
-  #else // iOS
-    private static let suiteName = "group." + appGroup
-  #endif
+    #if os(macOS)
+        private static let teamIdentifierPrefix = Bundle.main
+            .object(forInfoDictionaryKey: "TeamIdentifierPrefix") as? String ?? ""
+
+        private static let suiteName = teamIdentifierPrefix + appGroup
+    #else // iOS
+        private static let suiteName = "group." + appGroup
+    #endif
 
     static let group = UserDefaults(suiteName: suiteName)!
 }

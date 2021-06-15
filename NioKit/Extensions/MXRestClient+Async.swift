@@ -10,12 +10,12 @@ import MatrixSDK
 
 extension MXRestClient {
     func login(type loginType: MatrixSDK.MXLoginFlowType = .password, username: String, password: String) async throws -> MXCredentials {
-        return try await withCheckedThrowingContinuation {continuation in
-            self.login(type: loginType, username: username, password: password, completion: {resp in
+        try await withCheckedThrowingContinuation { continuation in
+            self.login(type: loginType, username: username, password: password, completion: { resp in
                 switch resp {
-                case .success(let v):
+                case let .success(v):
                     continuation.resume(returning: v)
-                case .failure(let e):
+                case let .failure(e):
                     continuation.resume(throwing: e)
                 @unknown default:
                     continuation.resume(throwing: NioUnknownContinuationSwitchError(value: resp))
@@ -23,10 +23,10 @@ extension MXRestClient {
             })
         }
     }
-    
+
     func wellKnown() async throws -> MXWellKnown {
-        return try await withCheckedThrowingContinuation {continuation in
-            self.wellKnow({continuation.resume(returning: $0!)}, failure: {continuation.resume(throwing: $0!)})
+        try await withCheckedThrowingContinuation { continuation in
+            self.wellKnow({ continuation.resume(returning: $0!) }, failure: { continuation.resume(throwing: $0!) })
         }
     }
 }

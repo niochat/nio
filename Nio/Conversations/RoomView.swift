@@ -1,6 +1,6 @@
-import SwiftUI
 import Combine
 import MatrixSDK
+import SwiftUI
 
 import NioKit
 
@@ -29,7 +29,7 @@ struct RoomView: View {
     @State private var shouldPaginate = false
 
     private var areOtherUsersTyping: Bool {
-        return !(room.room.typingUsers?.filter { $0 != userId }.isEmpty ?? true)
+        !(room.room.typingUsers?.filter { $0 != userId }.isEmpty ?? true)
     }
 
     var body: some View {
@@ -41,18 +41,19 @@ struct RoomView: View {
                                    showSender: !self.isDirect,
                                    edits: self.events.relatedEvents(of: event).filter { $0.isEdit() },
                                    contextMenuModel: EventContextMenuModel(
-                                    event: event,
-                                    userId: self.userId,
-                                    onReact: { self.onReact(event.eventId) },
-                                    onReply: { },
-                                    onEdit: { self.edit(event: event) },
-                                    onRedact: {
-                                        if event.sentState == MXEventSentStateFailed {
-                                            room.removeOutgoingMessage(event)
-                                        } else {
-                                            self.eventToRedact = event.eventId
-                                        }
-                                    }))
+                                       event: event,
+                                       userId: self.userId,
+                                       onReact: { self.onReact(event.eventId) },
+                                       onReply: {},
+                                       onEdit: { self.edit(event: event) },
+                                       onRedact: {
+                                           if event.sentState == MXEventSentStateFailed {
+                                               room.removeOutgoingMessage(event)
+                                           } else {
+                                               self.eventToRedact = event.eventId
+                                           }
+                                       }
+                                   ))
                     .padding(.horizontal)
             }
 
@@ -72,12 +73,20 @@ struct RoomView: View {
                 onCancel: cancelEdit,
                 onCommit: send
             )
-                .padding(.horizontal)
-                .padding(.bottom, 10)
+            .padding(.horizontal)
+            .padding(.bottom, 10)
         }
         .onChange(of: shouldPaginate) { newValue in
             if newValue, let topEvent = events.renderableEvents.first {
-                store.paginate(room: self.room, event: topEvent)
+                asyncDetached {
+                    print("paginating")
+                    await room.paginate(topEvent)
+                }
+            }
+        }
+        .onAppear {
+            asyncDetached {
+                await room.createPagination()
             }
         }
         .alert(item: $eventToRedact) { eventId in

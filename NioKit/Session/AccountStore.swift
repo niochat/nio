@@ -1,7 +1,7 @@
-import Foundation
 import Combine
-import MatrixSDK
+import Foundation
 import KeychainAccess
+import MatrixSDK
 
 public enum LoginState {
     case loggedOut
@@ -20,7 +20,8 @@ public class AccountStore: ObservableObject {
 
     let keychain = Keychain(
         service: "chat.nio.credentials",
-        accessGroup: ((Bundle.main.infoDictionary?["DevelopmentTeam"] as? String) ?? "") + ".nio.keychain")
+        accessGroup: ((Bundle.main.infoDictionary?["DevelopmentTeam"] as? String) ?? "") + ".nio.keychain"
+    )
 
     public init() {
         if CommandLine.arguments.contains("-clear-stored-credentials") {
@@ -35,7 +36,7 @@ public class AccountStore: ObservableObject {
             return
         }
         self.credentials = credentials
-        self.loginState = .authenticating
+        loginState = .authenticating
         async {
             do {
                 self.loginState = try await self.sync()
@@ -56,35 +57,35 @@ public class AccountStore: ObservableObject {
     @Published public var loginState: LoginState = .loggedOut
 
     public func login(username: String, password: String, homeserver: URL) async {
-        self.loginState = .authenticating
+        loginState = .authenticating
 
-        self.client = MXRestClient(homeServer: homeserver, unrecognizedCertificateHandler: nil)
-        self.client?.acceptableContentTypes = ["text/plain", "text/html", "application/json", "application/octet-stream", "any"]
+        client = MXRestClient(homeServer: homeserver, unrecognizedCertificateHandler: nil)
+        client?.acceptableContentTypes = ["text/plain", "text/html", "application/json", "application/octet-stream", "any"]
 
         do {
-            let credentials = try await self.client?.login(username: username, password: password)
+            let credentials = try await client?.login(username: username, password: password)
             guard let credentials = credentials else {
-                self.loginState = .failure(AccountStoreError.noCredentials)
+                loginState = .failure(AccountStoreError.noCredentials)
                 return
             }
             self.credentials = credentials
-            credentials.save(to: self.keychain)
-            self.loginState = try await self.sync()
-            self.session?.crypto.warnOnUnknowDevices = false
+            credentials.save(to: keychain)
+            loginState = try await sync()
+            session?.crypto.warnOnUnknowDevices = false
         } catch {
-            self.loginState = .failure(error)
+            loginState = .failure(error)
         }
     }
 
     public func logout() async {
-        self.credentials?.clear(from: keychain)
+        credentials?.clear(from: keychain)
 
         do {
-            try await self.session?.logout()
-            self.loginState = .loggedOut
+            try await session?.logout()
+            loginState = .loggedOut
         } catch {
             // Close the session even if the logout request failed
-            self.loginState = .loggedOut
+            loginState = .loggedOut
         }
     }
 
@@ -100,18 +101,17 @@ public class AccountStore: ObservableObject {
         }
     }
 
-
     private func sync() async throws -> LoginState {
         guard let credentials = self.credentials else {
             throw AccountStoreError.noCredentials
         }
 
-        self.client = MXRestClient(credentials: credentials, unrecognizedCertificateHandler: nil)
-        self.session = MXSession(matrixRestClient: self.client!)
-        self.fileStore = MXFileStore()
+        client = MXRestClient(credentials: credentials, unrecognizedCertificateHandler: nil)
+        session = MXSession(matrixRestClient: client!)
+        fileStore = MXFileStore()
 
-        try await self.session!.setStore(fileStore!)
-        try await self.session?.start()
+        try await session!.setStore(fileStore!)
+        try await session?.start()
         return .loggedIn(userId: credentials.userId!)
     }
 
@@ -121,7 +121,7 @@ public class AccountStore: ObservableObject {
 
     public func startListeningForRoomEvents() {
         // roomState is nil for presence events, just for future reference
-        listenReference = self.session?.listenToEvents { event, direction, roomState in
+        listenReference = session?.listenToEvents { event, direction, roomState in
             let affectedRooms = self.rooms.filter { $0.summary.roomId == event.roomId }
             for room in affectedRooms {
                 room.add(event: event, direction: direction, roomState: roomState as? MXRoomState)
@@ -161,6 +161,7 @@ public class AccountStore: ObservableObject {
 
     var listenReferenceRoom: Any?
 
+    @available(*, deprecated, message: "Prefer paginating on the room instead")
     public func paginate(room: NIORoom, event: MXEvent) {
         let timeline = room.room.timeline(onEvent: event.eventId)
         listenReferenceRoom = timeline?.listenToEvents { event, direction, roomState in

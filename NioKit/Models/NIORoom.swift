@@ -3,6 +3,8 @@ import Combine
 
 import MatrixSDK
 
+import os
+
 public struct RoomItem: Codable, Hashable {
     public static func == (lhs: RoomItem, rhs: RoomItem) -> Bool {
         return lhs.displayName == rhs.displayName &&
@@ -22,6 +24,8 @@ public struct RoomItem: Codable, Hashable {
 
 @MainActor
 public class NIORoom: ObservableObject {
+    static let logger = Logger(subsystem: "chat.nio", category: "ROOM")
+    
     public let room: MXRoom
 
     @Published
@@ -171,6 +175,58 @@ public class NIORoom: ObservableObject {
     public func removeOutgoingMessage(_ event: MXEvent) {
         objectWillChange.send()             // room.outgoingMessages() will change
         room.removeOutgoingMessage(event.eventId)
+    }
+    
+    //private var lastPaginatedEvent: MXEvent?
+    private var timeline: MXEventTimeline?
+    
+    public func paginate(_ event: MXEvent, direction: MXTimelineDirection = .backwards, numItems: UInt = 40) async {
+        /*guard event != lastPaginatedEvent else {
+            return
+        }*/
+        
+        if timeline == nil {
+            Self.logger.debug("creating timeline for room '\(self.displayName)' with event '\(event.eventId)'")
+            //lastPaginatedEvent = event
+            timeline = room.timeline(onEvent: event.eventId)
+            let _ = timeline?.listenToEvents {
+                event, direction, roomState in
+                if direction == .backwards {
+                    // eventCache is published, so no objectWillChanges.send here
+                    self.add(event: event, direction: direction, roomState: roomState)
+                }
+            }
+            timeline?.resetPagination()
+        }
+        
+        if timeline?.canPaginate(direction) ?? false {
+            do {
+                try await timeline?.paginate(numItems, direction: direction, onlyFromStore: false)
+            } catch {
+                Self.logger.warning("could not paginate: \(error.localizedDescription)")
+            }
+        } else {
+            Self.logger.debug("cannot paginate: \(self.displayName)")
+        }
+    }
+    
+    public func createPagination() async {
+        guard timeline == nil else {
+            return
+        }
+        Self.logger.debug("Bootstraping pagination")
+        
+        timeline = await room.liveTimeline
+        timeline?.resetPagination()
+        if timeline?.canPaginate(.backwards) ?? false {
+            do {
+                try await timeline?.paginate(40, direction: .backwards)
+            } catch {
+                Self.logger.warning("could not bootstrap pagination: \(error.localizedDescription)")
+            }
+        } else {
+            Self.logger.warning("could not bootstrap pagination")
+        }
     }
 }
 

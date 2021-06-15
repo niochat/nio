@@ -43,7 +43,7 @@ struct ReverseList<Element, Content>: View where Element: Identifiable, Content:
                 }
                 .frame(height: 30)      // FIXME: Frame height shouldn't be hard-coded
                 .onPreferenceChange(IsVisibleKey.self) {
-                    hasReachedTop = $0
+                    if $0 != hasReachedTop { hasReachedTop = $0 }
                 }
             }
             .scaleEffect(x: -1.0, y: 1.0)

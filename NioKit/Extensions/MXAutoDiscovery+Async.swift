@@ -8,10 +8,10 @@
 import Foundation
 import MatrixSDK
 
-extension MXAutoDiscovery {
-    public func findClientConfig() async throws -> MXDiscoveredClientConfig {
-        return try await withCheckedThrowingContinuation {continuation in
-            self.findClientConfig({ continuation.resume(returning: $0)}, failure: {continuation.resume(throwing: $0)})
+public extension MXAutoDiscovery {
+    func findClientConfig() async throws -> MXDiscoveredClientConfig {
+        try await withCheckedThrowingContinuation { continuation in
+            self.findClientConfig({ continuation.resume(returning: $0) }, failure: { continuation.resume(throwing: $0) })
         }
     }
 }
