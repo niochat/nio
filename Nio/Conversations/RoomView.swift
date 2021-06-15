@@ -151,7 +151,7 @@ struct RoomView: View {
     @State private var shouldPaginate = false
   
     private var areOtherUsersTyping: Bool {
-        return !(room.room.typingUsers?.filter { $0 != userId }.isEmpty ?? false)
+        return !(room.room.typingUsers?.filter { $0 != userId }.isEmpty ?? true)
     }
 
     var body: some View {
