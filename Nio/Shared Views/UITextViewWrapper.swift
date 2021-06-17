@@ -18,12 +18,9 @@ struct UITextViewWrapper: UIViewRepresentable {
         }
 
         override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-            #if !targetEnvironment(macCatalyst)     // the return key isn't surfaced here in catalyst?! (macOS 11.2.1)
-                                                    // avoid the potential of handling it twice if that ever changes
             if shouldCommit && presses.contains(where: { $0.key?.keyCode == .keyboardReturnOrEnter }) {
                 onCommit?()
             }
-            #endif
             
             let presses = shouldCommit ? presses.filter { $0.key?.keyCode != .keyboardReturnOrEnter } : presses
             super.pressesBegan(presses, with: event)
@@ -255,28 +252,6 @@ struct UITextViewWrapper: UIViewRepresentable {
         ) -> Bool {
             return onLinkInteraction?(url, interaction) ?? true
         }
-
-        #if targetEnvironment(macCatalyst)
-        func textView(
-            _ textView: UITextView,
-            shouldChangeTextIn range: NSRange,
-            replacementText text: String
-        ) -> Bool {
-            guard
-                text == "\n",
-                let textView = textView as? TextView,
-                textView.shouldCommit
-            else {
-                return true
-            }
-
-            DispatchQueue.main.async {
-                self.onCommit?()
-            }
-
-            return false
-        }
-        #endif
     }
 }
 
