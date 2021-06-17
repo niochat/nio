@@ -5,7 +5,7 @@ import NioKit
 
 struct NewConversationContainerView: View {
     @EnvironmentObject private var store: AccountStore
-    @Binding var createdRoomId: ObjectIdentifier?
+    @Binding var createdRoomId: MXRoom.MXRoomId?
 
     var body: some View {
         NewConversationView(store: store, createdRoomId: $createdRoomId)
@@ -25,7 +25,7 @@ private struct NewConversationView: View {
     @State private var isPublic = false
 
     @State private var isWaiting = false
-    @Binding var createdRoomId: ObjectIdentifier?
+    @Binding var createdRoomId: MXRoom.MXRoomId?
     @State private var errorMessage: String?
 
     @MainActor
@@ -103,7 +103,7 @@ private struct NewConversationView: View {
               ToolbarItem(placement: .confirmationAction) {
                   Button(action: {
                       async {
-                          await createRoom
+                          await createRoom()
                       }
                   }) {
                       Text(verbatim: L10n.NewConversation.createRoom)
@@ -176,7 +176,7 @@ private struct NewConversationView: View {
         await store?.session?.createRoom(parameters: parameters) { response in
             switch response {
             case .success(let room):
-                createdRoomId = room.id
+                createdRoomId = MXRoom.MXRoomId(room.roomId)
                 presentationMode.wrappedValue.dismiss()
             case.failure(let error):
                 errorMessage = error.localizedDescription

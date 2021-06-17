@@ -2,6 +2,10 @@ import Combine
 import MatrixSDK
 import SwiftUI
 
+import Intents
+import CoreSpotlight
+import CoreServices
+
 import NioKit
 
 struct RoomView: View {
@@ -94,6 +98,25 @@ struct RoomView: View {
                   message: Text(verbatim: L10n.Room.Remove.message),
                   primaryButton: .destructive(Text(verbatim: L10n.Room.Remove.action), action: { self.onRedact(eventId, nil) }),
                   secondaryButton: .cancel())
+        }
+        .userActivity("chat.nio.chat") { userActivity in
+            userActivity.isEligibleForHandoff = true
+            userActivity.isEligibleForSearch = true
+            userActivity.isEligibleForPrediction = true
+            userActivity.title = room.displayName
+            userActivity.userInfo = ["id": room.id.rawValue as String]
+            
+            let attributes = CSSearchableItemAttributeSet(itemContentType: kUTTypeItem as String)
+            
+            attributes.contentDescription = "Open chat with \(room.displayName)"
+            attributes.instantMessageAddresses = [ room.room.roomId ]
+            userActivity.contentAttributeSet = attributes
+            userActivity.webpageURL = URL(string: "https://matrix.to/#/\(room.room.roomId ?? "")")
+            
+            // TODO: implement with a viewDelegate to save the current text into the handsof
+            // userActivity.needsSave = true
+            
+            print("advertising: \(room.displayName) \(String(describing: userActivity.webpageURL))")
         }
     }
 

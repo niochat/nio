@@ -3,8 +3,9 @@ import SwiftUI
 import NioKit
 
 struct RootView: View {
+    
     @EnvironmentObject private var store: AccountStore
-
+    
     private var homeserverURL: URL {
         // Can this ever be nil? And if so, what happens with the default fallback?
         assert(store.client != nil)
@@ -34,7 +35,8 @@ struct RootView: View {
                 Button(action: { self.store.loginState = .loggedOut }) {
                     Text(verbatim: L10n.Login.failureBackToLogin)
                 }
-                .padding()
+              .padding()
+
             }
         }
     }

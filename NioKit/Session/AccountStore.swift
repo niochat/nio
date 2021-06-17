@@ -1,7 +1,9 @@
 import Combine
 import Foundation
 import KeychainAccess
+import Intents
 import MatrixSDK
+import os
 
 public enum LoginState {
     case loggedOut
@@ -12,6 +14,8 @@ public enum LoginState {
 
 @MainActor
 public class AccountStore: ObservableObject {
+    static let logger = Logger(subsystem: "chat.nio.chat", category: "AccountStore")
+    
     public var client: MXRestClient?
     public var session: MXSession?
 
@@ -29,6 +33,12 @@ public class AccountStore: ObservableObject {
             MXCredentials
                 .from(keychain)?
                 .clear(from: keychain)
+        }
+        if CommandLine.arguments.contains("-clear-stored-sk-search-iterms") {
+            print("🗑 cleared stored sk search items from Siri")
+            async {
+                await Self.deleteSkItems()
+            }
         }
 
         Configuration.setupMatrixSDKSettings()
@@ -86,6 +96,17 @@ public class AccountStore: ObservableObject {
         } catch {
             // Close the session even if the logout request failed
             loginState = .loggedOut
+        }
+        await NSUserActivity.deleteAllSavedUserActivities()
+    }
+    
+    public static func deleteSkItems() async {
+        await NSUserActivity.deleteAllSavedUserActivities()
+        do {
+            try await INInteraction.deleteAll()
+            Self.logger.debug("deleted ININteractions")
+        } catch {
+            Self.logger.warning("failed to delete INInteractions: \(error.localizedDescription)")
         }
     }
 
@@ -174,6 +195,15 @@ public class AccountStore: ObservableObject {
             self.objectWillChange.send()
         }
     }
+    
+    // MARK: - Push Notifications
+    /*
+    func requestNotificationToken() {
+        
+    }*/
+    /*func setPusher() {
+        self.session?.matrixRestClient.setPusher(pushKey: <#T##String#>, kind: .http, appId: <#T##String#>, appDisplayName: <#T##String#>, deviceDisplayName: <#T##String#>, profileTag: <#T##String#>, lang: <#T##String#>, data: <#T##[String : Any]#>, append: <#T##Bool#>, completion: <#T##(MXResponse<Void>) -> Void#>)
+    }*/
 }
 
 enum AccountStoreError: Error {

@@ -24,11 +24,37 @@ struct SettingsContainerView: View {
 
 private struct SettingsView: View {
     @AppStorage("accentColor") private var accentColor: Color = .purple
+    @AppStorage("showDeveloperSettings") private var showDeveloperSettings = false
+    
     @StateObject private var appIconTitle = AppIconTitle()
     let logoutAction: () -> Void
+    
+    private let bundleVersion = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as! String
 
     @Environment(\.presentationMode) private var presentationMode
 
+    /// Show a info banner for e.g. changing the developer setting
+    func showInfoBanner(_ text: String, identifier: String) {
+        print("trying to show banner")
+        asyncDetached {
+            let notification = UNMutableNotificationContent()
+            notification.body = text
+            notification.sound = UNNotificationSound.default
+            notification.userInfo = ["settings": identifier]
+            notification.title = "Settings changed"
+            notification.badge = await UIApplication.shared.applicationIconBadgeNumber as NSNumber
+            
+            let request = UNNotificationRequest(identifier: identifier, content: notification, trigger: nil)
+            
+            //request.
+            do {
+                try await UNUserNotificationCenter.current().add(request)
+            } catch {
+                print("failed to schedule notification: \(error.localizedDescription)")
+            }
+        }
+    }
+    
     var body: some View {
         NavigationView {
             Form {
@@ -53,6 +79,28 @@ private struct SettingsView: View {
                 Section {
                     Button(action: self.logoutAction) {
                        Text(verbatim: L10n.Settings.logOut)
+                    }
+                }
+                
+                Section("Version") {
+                    Text(bundleVersion)
+                        .onTapGesture {
+                            showDeveloperSettings.toggle()
+                            let text = showDeveloperSettings ? "Developer settings activated" : "Developer settings deactivated"
+                            showInfoBanner(text, identifier: "chat.nio.developer-settings.show")
+                        }
+                }
+                
+                if showDeveloperSettings {
+                    Section("Developer") {
+                        Button(action: {
+                            async {
+                                await AccountStore.deleteSkItems()
+                                showInfoBanner("Sirikit Donations cleared", identifier: "chat.nio.developer-settings.sk-cleared")
+                            }
+                        }) {
+                            Text("delete sk items")
+                        }
                     }
                 }
             }

@@ -5,16 +5,27 @@ import Introspect
 import NioKit
 
 struct RecentRoomsContainerView: View {
+    
+    @ObservedObject var appDelegate = AppDelegate.shared
+    
     @EnvironmentObject var store: AccountStore
     @AppStorage("accentColor") var accentColor: Color = .purple
 
     @State private var selectedNavigationItem: SelectedNavigationItem?
-    @State private var selectedRoomId: ObjectIdentifier?
+    @State private var selectedRoomId: MXRoom.MXRoomId?
 
     private func autoselectFirstRoom() {
-      if selectedRoomId == nil {
+      /*if selectedRoomId == nil {
           selectedRoomId = store.rooms.first?.id
-      }
+      }*/
+    }
+    
+    private func restoreChat() {
+        print("trying to restore selectedRoomId")
+        if let room = AppDelegate.shared.selectedRoom {
+            print("restoring seletedRoomId")
+            selectedRoomId = room
+        }
     }
 
     var body: some View {
@@ -32,7 +43,11 @@ struct RecentRoomsContainerView: View {
             }
             .onAppear {
                 self.store.startListeningForRoomEvents()
+                self.restoreChat()
                 if #available(macOS 11, *) { autoselectFirstRoom() }
+            }
+            .onChange(of: appDelegate.selectedRoom) { newRoom in
+                selectedRoomId = newRoom
             }
     }
 }
@@ -44,7 +59,7 @@ struct RoomsListSection: View {
     let rooms: [NIORoom]
     let onLeaveAlertTitle: String
 
-    @Binding var selectedRoomId: ObjectIdentifier?
+    @Binding var selectedRoomId: MXRoom.MXRoomId?
 
     @State private var showConfirm: Bool = false
     @State private var leaveId: Int?
@@ -120,7 +135,7 @@ enum SelectedNavigationItem: Int, Identifiable {
 
 struct NavigationSheet: View {
     var selectedItem: SelectedNavigationItem
-    @Binding var selectedRoomId: ObjectIdentifier?
+    @Binding var selectedRoomId: MXRoom.MXRoomId?
 
     var body: some View {
         switch selectedItem {

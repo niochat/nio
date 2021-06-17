@@ -4,6 +4,9 @@ import Combine
 import MatrixSDK
 
 import os
+import Intents
+import CoreSpotlight
+import CoreServices
 
 public struct RoomItem: Codable, Hashable {
     public static func == (lhs: RoomItem, rhs: RoomItem) -> Bool {
@@ -112,17 +115,22 @@ public class NIORoom: ObservableObject {
 
     // MARK: Sending Events
 
-    public func send(text: String) {
+    public func send(text: String) async {
         guard !text.isEmpty else { return }
 
         objectWillChange.send()             // room.outgoingMessages() will change
         var localEcho: MXEvent? = nil
-        // TODO: async
-        room.sendTextMessage(text, localEcho: &localEcho) { _ in
-            self.objectWillChange.send()    // localEcho.sentState has(!) changed
+        do {
+            try await room.sendTextMessage(text, localEcho: &localEcho)
+        } catch {
+            Self.logger.warning("could not send text message to \(self.displayName): \(error.localizedDescription)")
         }
+        // localEcho.sentState has(!) changed
+        self.objectWillChange.send()
+        
+        await self.donateOutgoingIntent(text)
     }
-
+    
     public func react(toEventId eventId: String, emoji: String) {
         // swiftlint:disable:next force_try
         let content = try! ReactionEvent(eventId: eventId, key: emoji).encodeContent()
@@ -151,21 +159,26 @@ public class NIORoom: ObservableObject {
         room.redactEvent(eventId, reason: reason) { _ in }
     }
 
-    public func sendImage(image: UXImage) {
+    public func sendImage(image: UXImage) async {
         guard let imageData = image.jpeg(.lowest) else { return }
 
         var localEcho: MXEvent? = nil
         objectWillChange.send()             // room.outgoingMessages() will change
-        // TODO: async
-        room.sendImage(
-            data: imageData,
-            size: image.size,
-            mimeType: "image/jpeg",
-            thumbnail: image,
-            localEcho: &localEcho
-        ) { _ in
-            self.objectWillChange.send()    // localEcho.sentState has(!) changed
+        do {
+            try await room.sendImage(
+                data: imageData,
+                size: image.size,
+                mimeType: "image/jpeg",
+                thumbnail: image,
+                localEcho: &localEcho)
+        } catch {
+            Self.logger.warning("could not send image to \(self.displayName): \(error.localizedDescription)")
         }
+        // localEcho.sentState has(!) changed
+        self.objectWillChange.send()
+
+        
+        await self.donateOutgoingIntent()
     }
 
     public func markAllAsRead() {
@@ -177,6 +190,56 @@ public class NIORoom: ObservableObject {
         room.removeOutgoingMessage(event.eventId)
     }
     
+    // intent
+    private func donateOutgoingIntent(_ text: String? = nil) async {
+        do {
+            let recipients = try await self.room.members()?.inPerson
+            
+            let senderPersonHandle = INPersonHandle(value: room.mxSession.credentials.userId, type: .unknown)
+            let sender = INPerson(
+                personHandle: senderPersonHandle,
+                nameComponents: nil,
+                displayName: nil,
+                image: nil,
+                contactIdentifier: nil,
+                customIdentifier: room.mxSession.credentials.userId,
+                isMe: true,
+                suggestionType: .instantMessageAddress)
+            
+            let messageIntent = INSendMessageIntent(
+                recipients: recipients,
+                outgoingMessageType: .outgoingMessageText,
+                content: text,
+                speakableGroupName: INSpeakableString(spokenPhrase: room.summary.displayname),
+                conversationIdentifier: room.roomId,
+                serviceName: "matrix",
+                sender: sender,
+                attachments: nil)
+            
+            let userActivity = NSUserActivity(activityType: "chat.nio.chat")
+            userActivity.isEligibleForHandoff = true
+            userActivity.isEligibleForSearch = true
+            userActivity.isEligibleForPrediction = true
+            userActivity.title = self.displayName
+            userActivity.userInfo = ["id": self.id.rawValue as String]
+            
+            let attributes = CSSearchableItemAttributeSet(itemContentType: kUTTypeItem as String)
+            
+            attributes.contentDescription = "Open chat with \(self.displayName)"
+            attributes.instantMessageAddresses = [ self.room.roomId ]
+            userActivity.contentAttributeSet = attributes
+            userActivity.webpageURL = URL(string: "https://matrix.to/#/\(self.room.roomId ?? "")")
+            let response = INSendMessageIntentResponse(code: .success, userActivity: userActivity)
+            
+            let intent = INInteraction(intent: messageIntent, response: response)
+            intent.direction = .outgoing
+            //intent.intentHandlingStatus = .success
+            try await intent.donate()
+        } catch {
+            Self.logger.warning("Could not donate intent: \(error.localizedDescription)")
+        }
+    }
+    
     //private var lastPaginatedEvent: MXEvent?
     private var timeline: MXEventTimeline?
     
@@ -186,7 +249,8 @@ public class NIORoom: ObservableObject {
         }*/
         
         if timeline == nil {
-            Self.logger.debug("creating timeline for room '\(self.displayName)' with event '\(event.eventId)'")
+            return await createPagination()
+            /*Self.logger.debug("creating timeline for room '\(self.displayName)' with event '\(event.eventId)'")
             //lastPaginatedEvent = event
             timeline = room.timeline(onEvent: event.eventId)
             let _ = timeline?.listenToEvents {
@@ -196,7 +260,7 @@ public class NIORoom: ObservableObject {
                     self.add(event: event, direction: direction, roomState: roomState)
                 }
             }
-            timeline?.resetPagination()
+            timeline?.resetPagination()*/
         }
         
         if timeline?.canPaginate(direction) ?? false {
@@ -231,7 +295,7 @@ public class NIORoom: ObservableObject {
 }
 
 extension NIORoom: Identifiable {
-    public nonisolated var id: ObjectIdentifier {
+    public nonisolated var id: MXRoom.MXRoomId {
         room.id
     }
 }

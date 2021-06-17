@@ -15,7 +15,7 @@ struct RecentRoomsView: View {
     @EnvironmentObject var store: AccountStore
 
     @Binding var selectedNavigationItem: SelectedNavigationItem?
-    @Binding var selectedRoomId: ObjectIdentifier?
+    @Binding var selectedRoomId: MXRoom.MXRoomId?
 
     let rooms: [NIORoom]
 

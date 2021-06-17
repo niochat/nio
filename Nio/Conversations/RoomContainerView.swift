@@ -18,7 +18,9 @@ struct RoomContainerView: View {
           isDirect: room.isDirect,
           showAttachmentPicker: $showAttachmentPicker,
           onCommit: { message in
-              self.room.send(text: message)
+          asyncDetached {
+              await self.room.send(text: message)
+          }
           },
           onReact: { eventId in
               self.eventToReactTo = eventId
@@ -72,7 +74,9 @@ struct RoomContainerView: View {
         .background(EmptyView()
             .sheet(isPresented: $showImagePicker) {
                 ImagePicker(sourceType: .photoLibrary) { image in
-                    self.room.sendImage(image: image)
+                    asyncDetached {
+                        await self.room.sendImage(image: image)
+                    }
                 }
             }
         )
