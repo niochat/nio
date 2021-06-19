@@ -34,14 +34,18 @@ private struct SettingsView: View {
     @Environment(\.presentationMode) private var presentationMode
 
     /// Show a info banner for e.g. changing the developer setting
-    func showInfoBanner(_ text: String, identifier: String) {
+    func showInfoBanner(_ text: String, body: String? = nil, identifier: String) {
+        // TODO: fallback if notifications is disabled
         print("trying to show banner")
         asyncDetached {
             let notification = UNMutableNotificationContent()
-            notification.body = text
+            notification.title = text
+            if let body = body {
+                notification.body = body
+            }
             notification.sound = UNNotificationSound.default
             notification.userInfo = ["settings": identifier]
-            notification.title = "Settings changed"
+            //notification.title = "Settings changed"
             notification.badge = await UIApplication.shared.applicationIconBadgeNumber as NSNumber
             
             let request = UNNotificationRequest(identifier: identifier, content: notification, trigger: nil)
@@ -101,6 +105,25 @@ private struct SettingsView: View {
                         }) {
                             Text("delete sk items")
                         }
+                        
+                        Button(action: {
+                            async {
+                                do {
+                                    try await AccountStore.shared.setPusher()
+                                    showInfoBanner("Pusher repushed", identifier: "chat.nio.developer-settings.reset-pusher")
+                                } catch {
+                                    print("failed to reset pusher")
+                                    showInfoBanner("Pusher update failed", body: error.localizedDescription, identifier: "chat.nio.developer-settings.reset-pusher")
+                                }
+                            }
+                        }) {
+                            Text("refresh pusher config")
+                        }
+                        
+                        Text("\(AccountStore.shared.session?.crypto.crossSigning.state.rawValue ?? -1)")
+                            .onTapGesture {
+                                AccountStore.shared.session?.crypto.crossSigning.refreshState(success: nil, failure: nil)
+                            }
                     }
                 }
             }

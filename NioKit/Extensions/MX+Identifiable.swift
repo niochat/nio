@@ -29,7 +29,6 @@ public extension MXStringId { // Literals
 }
 
 public extension MXStringId {
-    
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         self.init(try container.decode(String.self))
@@ -62,4 +61,18 @@ extension MXRoom: Identifiable {
         }
     }
 }
-extension MXEvent: Identifiable {}
+extension MXEvent: Identifiable {
+    public struct MXEventId: MXStringId, Hashable {
+        public var id: String
+        
+        public init(_ id: String) {
+            self.id = id
+        }
+    }
+    
+    public var id: MXEventId {
+        get {
+            return MXEventId(self.eventId)
+        }
+    }
+}

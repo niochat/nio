@@ -10,7 +10,7 @@ struct NioApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     #endif
     
-    @StateObject private var accountStore = AccountStore()
+    @StateObject private var accountStore = AccountStore.shared
     
     //@State private var selectedRoomId: ObjectIdentifier?
 

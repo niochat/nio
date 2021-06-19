@@ -10,11 +10,22 @@ public enum LoginState {
     case authenticating
     case failure(Error)
     case loggedIn(userId: String)
+    
+    public var isAuthenticating: Bool {
+        switch self {
+        case .authenticating:
+            return true
+        default:
+            return false
+        }
+    }
 }
 
 @MainActor
 public class AccountStore: ObservableObject {
     static let logger = Logger(subsystem: "chat.nio.chat", category: "AccountStore")
+    
+    public static let shared = AccountStore()
     
     public var client: MXRestClient?
     public var session: MXSession?
@@ -40,6 +51,10 @@ public class AccountStore: ObservableObject {
                 await Self.deleteSkItems()
             }
         }
+        
+        let developmentTeam = Bundle.main.infoDictionary?["DevelopmentTeam"] as? String
+        print("team: ")
+        print(developmentTeam)
 
         Configuration.setupMatrixSDKSettings()
         guard let credentials = MXCredentials.from(keychain) else {
@@ -82,6 +97,8 @@ public class AccountStore: ObservableObject {
             credentials.save(to: keychain)
             loginState = try await sync()
             session?.crypto.warnOnUnknowDevices = false
+
+            try await self.setPusher()
         } catch {
             loginState = .failure(error)
         }
@@ -92,6 +109,7 @@ public class AccountStore: ObservableObject {
 
         do {
             try await session?.logout()
+            try await self.setPusher(enable: false)
             loginState = .loggedOut
         } catch {
             // Close the session even if the logout request failed
@@ -169,6 +187,10 @@ public class AccountStore: ObservableObject {
         updateUserDefaults(with: rooms)
         return rooms
     }
+    
+    public func findRoom(id: MXRoom.MXRoomId) -> NIORoom? {
+        return self.rooms.filter({ $0.id == id }).first
+    }
 
     private func updateUserDefaults(with rooms: [NIORoom]) {
         let roomItems = rooms.map { RoomItem(room: $0.room) }
@@ -197,10 +219,58 @@ public class AccountStore: ObservableObject {
     }
     
     // MARK: - Push Notifications
-    /*
-    func requestNotificationToken() {
+    internal var pushKey: String?
+    
+    public func setPusher(key: Data, enable: Bool = true) async throws {
+        let base = key.base64EncodedString()
+        try await setPusher(stringKey: base, enable: enable)
+    }
+    
+    public func setPusher(stringKey: String, enable: Bool = true) async throws {
+        if pushKey != nil {
+            Self.logger.warning("Pushkey already set to \(self.pushKey!)")
+        }
+        self.pushKey = stringKey
         
-    }*/
+        try await setPusher(enable: enable)
+    }
+    
+    /// function is also used to reset the push config
+    // TODO: lang, dynamic pusher
+    public func setPusher(enable: Bool = true) async throws {
+        guard let session = self.session else {
+            throw AccountStoreError.noSessionOpened
+        }
+        guard let pushKey = self.pushKey else {
+            throw AccountStoreError.noPuskKey
+        }
+
+        let appId = Bundle.main.bundleIdentifier ?? "nio.chat"
+        let lang = NSLocale.preferredLanguages.first ?? "en-US"
+        
+        let data: [String : Any] = [
+            "url": "https://dev.matrix-push.kloenk.dev/_matrix/push/v1/notify",
+            "format": "event_id_only",
+            "default_payload": [
+                "aps": [
+                    "mutable-content": 1,
+                    "content-available": 1,
+                    "alert": [
+                        "loc-key": "MESSAGE",
+                        "loc-args": [],
+                    ]
+                ]
+            ]
+        ];
+        
+        let pushers = try await session.matrixRestClient.pushers()
+        if pushers.count != 0 {
+            Self.logger.debug("got pushers: \(String(describing: pushers))")
+        }
+        try await session.matrixRestClient.setPusher(puskKey: pushKey, kind: enable ? .http : .none, appId: appId, appDisplayName: "Nio", deviceDisplayName: "NioiOS", profileTag: "gloaaabal", lang: lang, data: data, append: false)
+        //session.matrixRestClient.setPusher(pushKey: key, kind: .http, appId: <#T##String#>, appDisplayName: <#T##String#>, deviceDisplayName: <#T##String#>, profileTag: <#T##String#>, lang: <#T##String#>, data: <#T##[String : Any]#>, append: <#T##Bool#>, completion: <#T##(MXResponse<Void>) -> Void#>)
+        //self.session?.matrixRestClient.setPusher(pushKey: <#T##String#>, kind: .http, appId: <#T##String#>, appDisplayName: <#T##String#>, deviceDisplayName: <#T##String#>, profileTag: <#T##String#>, lang: <#T##String#>, data: <#T##[String : Any]#>, append: <#T##Bool#>, completion: <#T##(MXResponse<Void>) -> Void#>)
+    }
     /*func setPusher() {
         self.session?.matrixRestClient.setPusher(pushKey: <#T##String#>, kind: .http, appId: <#T##String#>, appDisplayName: <#T##String#>, deviceDisplayName: <#T##String#>, profileTag: <#T##String#>, lang: <#T##String#>, data: <#T##[String : Any]#>, append: <#T##Bool#>, completion: <#T##(MXResponse<Void>) -> Void#>)
     }*/
@@ -208,5 +278,7 @@ public class AccountStore: ObservableObject {
 
 enum AccountStoreError: Error {
     case noCredentials
+    case noSessionOpened
     case invalidUrl
+    case noPuskKey
 }

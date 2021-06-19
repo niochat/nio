@@ -104,9 +104,85 @@ public class NIORoom: ObservableObject {
             self.eventCache.insert(event, at: 0)
         case .forwards:
             self.eventCache.append(event)
+            self.donateNotification(event: event)
         @unknown default:
             assertionFailure("Unknown direction value")
         }
+    }
+    
+    public func donateNotification(event: MXEvent) {
+        guard event.type == "m.room.message" else {
+            return
+        }
+        if event.timestamp.distance(to: Date()) >= -100 {
+            print("skipping? \(String(describing: event.eventId))")
+            return
+        }
+        async {
+            do {
+                let intent = try await self.createIntent(event: event)
+                let interaction = try await self.createNotification(event: event, messageIntent: intent)
+            
+                try await interaction.donate()
+            } catch {
+                Self.logger.warning("could not donate intent for add: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    public func createIntent(event: MXEvent) async throws -> INSendMessageIntent {
+        let members = try await self.room.members()?.members ?? []
+        //let recipients = await  members.filter({ $0.userId != event.sender }).map({ $0.inPerson })
+        var recipients: [INPerson] = []
+        for recipient in members.filter({ $0.userId != event.sender}) {
+            recipients.append( await recipient.inPerson(isMe: recipient.userId == AccountStore.shared.credentials?.userId ))
+        }
+        
+        print("sender")
+        //let sender = await members.filter({ $0.userId == event.sender }).first?.inPerson
+        let senderMember = await members.filter({ $0.userId == event.sender }).first
+        let sender = await senderMember?.inPerson()
+        
+        let body = event.content["body"] as? String
+        
+        let messageIntent = INSendMessageIntent(
+            recipients: recipients,
+            outgoingMessageType: .outgoingMessageText,
+            content: body,
+            speakableGroupName: self.isDirect ? nil : INSpeakableString(spokenPhrase: room.summary.displayname),
+            conversationIdentifier: room.id.id,
+            serviceName: "matrix",
+            sender: sender,
+            attachments: nil)
+        
+        return messageIntent
+    }
+    
+    public func createNotification(event: MXEvent, messageIntent: INSendMessageIntent) async throws -> INInteraction {
+        guard let selfId = AccountStore.shared.credentials?.userId else {
+            throw AccountStoreError.noCredentials
+        }
+        let isMe = event.sender == selfId
+        
+        let userActivity = NSUserActivity(activityType: "chat.nio.chat")
+        userActivity.isEligibleForHandoff = true
+        userActivity.isEligibleForSearch = true
+        userActivity.isEligibleForPrediction = true
+        userActivity.title = self.displayName
+        userActivity.userInfo = ["id": self.id.rawValue as String]
+        
+        let attributes = CSSearchableItemAttributeSet(itemContentType: kUTTypeItem as String)
+        
+        attributes.contentDescription = "Open chat with \(self.displayName)"
+        attributes.instantMessageAddresses = [ self.room.roomId ]
+        userActivity.contentAttributeSet = attributes
+        userActivity.webpageURL = URL(string: "https://matrix.to/#/\(self.room.roomId ?? "")")
+        
+        let response = INSendMessageIntentResponse(code: .success, userActivity: userActivity)
+        let interaction = INInteraction(intent: messageIntent, response: response)
+        interaction.direction = isMe ? INInteractionDirection.outgoing : INInteractionDirection.incoming
+        interaction.dateInterval = DateInterval(start: event.timestamp, duration: 0)
+        return interaction
     }
 
     public func events() -> EventCollection {
@@ -131,16 +207,28 @@ public class NIORoom: ObservableObject {
         await self.donateOutgoingIntent(text)
     }
     
+    public func react(toEvent event: MXEvent.MXEventId, emoji: String) async {
+        let content = try! ReactionEvent(eventId: event.id, key: emoji).encodeContent()
+        
+        await self.sendEvent(.reaction, content: content)
+    }
+    
+    @available(*, deprecated, message: "Prefer MXEvent.MXEventId methode")
     public func react(toEventId eventId: String, emoji: String) {
-        // swiftlint:disable:next force_try
-        let content = try! ReactionEvent(eventId: eventId, key: emoji).encodeContent()
-
-        objectWillChange.send()             // room.outgoingMessages() will change
-        var localEcho: MXEvent? = nil
-        // TODO: async
-        room.sendEvent(.reaction, content: content, localEcho: &localEcho) { _ in
-            self.objectWillChange.send()    // localEcho.sentState has(!) changed
+        async {
+            await self.react(toEvent: MXEvent.MXEventId(eventId), emoji: emoji)
         }
+    }
+    
+    public func sendEvent(_ eventType: MXEventType, content: [String: Any]) async {
+        var localEcho: MXEvent?
+        
+        do {
+            try await room.sendEvent(eventType, content: content, localEcho: &localEcho)
+        } catch {
+            Self.logger.warning("could not send \(eventType.identifier): \(error.localizedDescription)")
+        }
+        self.objectWillChange.send()
     }
 
     public func edit(text: String, eventId: String) {
@@ -180,6 +268,20 @@ public class NIORoom: ObservableObject {
         
         await self.donateOutgoingIntent()
     }
+    
+    public func createReply(toEventId eventId: MXEvent.MXEventId, text: String, htmlText: String? = nil) async throws -> [String : Any] {
+        let event = try await AccountStore.shared.session?.event(withEventId: eventId, inRoom: self.id)
+        
+        guard let event = event else {
+            throw AccountStoreError.noSessionOpened
+        }
+        
+        return try self.createReply(toEvent: event, text: text, htmlText: htmlText)
+    }
+    
+    public func createReply(toEvent event: MXEvent, text: String, htmlText: String? = nil) throws -> [String: Any] {
+        return try event.createReply(text: text, htmlText: htmlText).encodeContent()
+    }
 
     public func markAllAsRead() {
         room.markAllAsRead()
@@ -191,11 +293,18 @@ public class NIORoom: ObservableObject {
     }
     
     // intent
+    @available(*, deprecated, message: "Prefer `createNotification` to create an intent and donate that response")
     private func donateOutgoingIntent(_ text: String? = nil) async {
         do {
-            let recipients = try await self.room.members()?.inPerson
+            let senderId = room.mxSession.credentials.userId
+            //let recipients = try await self.room.members()?.members.filter({ $0.userId != senderId }).map({$0.inPerson})
+            let members = try await self.room.members()?.members.filter({ $0.userId != senderId }) ?? []
+            var recipients: [INPerson] = []
+            for recipient in members {
+                recipients.append( await recipient.inPerson)
+            }
             
-            let senderPersonHandle = INPersonHandle(value: room.mxSession.credentials.userId, type: .unknown)
+            let senderPersonHandle = INPersonHandle(value: senderId, type: .unknown)
             let sender = INPerson(
                 personHandle: senderPersonHandle,
                 nameComponents: nil,
@@ -291,6 +400,10 @@ public class NIORoom: ObservableObject {
         } else {
             Self.logger.warning("could not bootstrap pagination")
         }
+    }
+    
+    public func findEvent(id: MXEvent.MXEventId) -> MXEvent? {
+        self.eventCache.filter({ $0.id == id }).first
     }
 }
 

@@ -53,6 +53,14 @@ extension MXSession {
             }
         }
     }
+    
+    //store.session?.event(withEventId: <#T##String!#>, inRoom: <#T##String!#>, success: <#T##((MXEvent?) -> Void)!##((MXEvent?) -> Void)!##(MXEvent?) -> Void#>, failure: <#T##((Error?) -> Void)!##((Error?) -> Void)!##(Error?) -> Void#>)
+
+    public func event(withEventId event: MXEvent.MXEventId, inRoom room: MXRoom.MXRoomId) async throws -> MXEvent? {
+        return try await withCheckedThrowingContinuation {continuation in
+            self.event(withEventId: event.id, inRoom: room.id, success: { continuation.resume(returning: $0) }, failure: { continuation.resume(throwing: $0!) })
+        }
+    }
 }
 
 struct NioUnknownContinuationSwitchError: Error {

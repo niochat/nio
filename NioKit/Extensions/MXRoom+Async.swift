@@ -63,4 +63,20 @@ extension MXRoom {
             })
         }
     }
+    
+    @discardableResult
+    func sendEvent(_ eventType: MXEventType, content: [String: Any], localEcho: inout MXEvent?) async throws -> String? {
+        return try await withCheckedThrowingContinuation { continuation in
+            self.sendEvent(eventType, content: content, localEcho: &localEcho, completion: { resp in
+                switch resp {
+                case let .success(v):
+                    continuation.resume(returning: v)
+                case let .failure(e):
+                    continuation.resume(throwing: e)
+                @unknown default:
+                    continuation.resume(throwing: NioUnknownContinuationSwitchError(value: resp))
+                }
+            })
+        }
+    }
 }

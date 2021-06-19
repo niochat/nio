@@ -8,15 +8,16 @@
 //      NIO_NAMESPACE    = com.example.nio
 //      DEVELOPMENT_TEAM = Z123456789
 
-NIO_NAMESPACE                                  = com.example.nio
-DEVELOPMENT_TEAM                               = Z123456789
+NIO_NAMESPACE                                     = com.example.nio
+DEVELOPMENT_TEAM                                  = Z123456789
 
-APPGROUP                                       = $(NIO_NAMESPACE)
-PRODUCT_BUNDLE_IDENTIFIER                      = $(NIO_NAMESPACE).iOS
-MAC_PRODUCT_BUNDLE_IDENTIFIER                  = $(NIO_NAMESPACE).mio
-SHARE_EXTENSION_PRODUCT_BUNDLE_IDENTIFIER      = $(PRODUCT_BUNDLE_IDENTIFIER).NioShareExtension
-INTENTS_EXTENSION_PRODUCT_BUNDLE_IDENTIFIER    = $(PRODUCT_BUNDLE_IDENTIFIER).NioIntents
-INTENTSUI_EXTENSION_PRODUCT_BUNDLE_IDENTIFIER  = $(PRODUCT_BUNDLE_IDENTIFIER).NioIntentsUI
-CODE_SIGN_STYLE                                = Manual
+APPGROUP                                          = $(NIO_NAMESPACE)
+PRODUCT_BUNDLE_IDENTIFIER                         = $(NIO_NAMESPACE).iOS
+MAC_PRODUCT_BUNDLE_IDENTIFIER                     = $(NIO_NAMESPACE).mio
+SHARE_EXTENSION_PRODUCT_BUNDLE_IDENTIFIER         = $(PRODUCT_BUNDLE_IDENTIFIER).NioShareExtension
+INTENTS_EXTENSION_PRODUCT_BUNDLE_IDENTIFIER       = $(PRODUCT_BUNDLE_IDENTIFIER).NioIntents
+INTENTSUI_EXTENSION_PRODUCT_BUNDLE_IDENTIFIER     = $(PRODUCT_BUNDLE_IDENTIFIER).NioIntentsUI
+NOTIFICATIONS_EXTENSION_PRODUCT_BUNDLE_IDENTIFIER = $(PRODUCT_BUNDLE_IDENTIFIER).NioNotificationExtension
+CODE_SIGN_STYLE                                   = Manual
 
 #include? "LocalConfig.xcconfig"
