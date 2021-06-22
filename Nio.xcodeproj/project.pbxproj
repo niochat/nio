@@ -101,6 +101,9 @@
 		95CAC88C26791913001D71DC /* MXRoomMember+INPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CAC88A26791913001D71DC /* MXRoomMember+INPerson.swift */; };
 		95CAC88E26791D11001D71DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CAC88D26791D11001D71DC /* AppDelegate.swift */; };
 		95CAC89026792247001D71DC /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 95CAC88F26792247001D71DC /* Intents.intentdefinition */; };
+		95EF1D78267F7B94000FAEF0 /* libNioKit-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8302D4C25F26CA500E962E9 /* libNioKit-iOS.a */; };
+		95EF1D7C267F7B98000FAEF0 /* MatrixSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 95EF1D7B267F7B98000FAEF0 /* MatrixSDK */; };
+		95EF1D7E267F7C7C000FAEF0 /* CommonMarkAttributedString in Frameworks */ = {isa = PBXBuildFile; productRef = 95EF1D7D267F7C7C000FAEF0 /* CommonMarkAttributedString */; };
 		A51BF8CE254C2FE5000FB0A4 /* NioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51BF8CD254C2FE5000FB0A4 /* NioApp.swift */; };
 		A51F762C25D6E9950061B4A4 /* MessageTextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51F762B25D6E9950061B4A4 /* MessageTextViewWrapper.swift */; };
 		A58352A625A667AB00533363 /* MatrixSDK in Frameworks */ = {isa = PBXBuildFile; productRef = A58352A525A667AB00533363 /* MatrixSDK */; };
@@ -266,6 +269,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 95CAC86626791295001D71DC;
 			remoteInfo = NioIntentsExtension;
+		};
+		95EF1D79267F7B94000FAEF0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 39C931D123843289004449E1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E8302D4B25F26CA500E962E9;
+			remoteInfo = "NioKit-iOS";
 		};
 		CADF663924614D2300F5063F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -540,6 +550,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				95CAC86926791295001D71DC /* Intents.framework in Frameworks */,
+				95EF1D7E267F7C7C000FAEF0 /* CommonMarkAttributedString in Frameworks */,
+				95EF1D7C267F7B98000FAEF0 /* MatrixSDK in Frameworks */,
+				95EF1D78267F7B94000FAEF0 /* libNioKit-iOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1193,8 +1206,13 @@
 			buildRules = (
 			);
 			dependencies = (
+				95EF1D7A267F7B94000FAEF0 /* PBXTargetDependency */,
 			);
 			name = NioIntentsExtension;
+			packageProductDependencies = (
+				95EF1D7B267F7B98000FAEF0 /* MatrixSDK */,
+				95EF1D7D267F7C7C000FAEF0 /* CommonMarkAttributedString */,
+			);
 			productName = NioIntentsExtension;
 			productReference = 95CAC86726791295001D71DC /* NioIntentsExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -1212,6 +1230,8 @@
 			dependencies = (
 			);
 			name = NioIntentsExtensionUI;
+			packageProductDependencies = (
+			);
 			productName = NioIntentsExtensionUI;
 			productReference = 95CAC87226791295001D71DC /* NioIntentsExtensionUI.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -1830,6 +1850,11 @@
 			target = 95CAC86626791295001D71DC /* NioIntentsExtension */;
 			targetProxy = 95CAC88026791295001D71DC /* PBXContainerItemProxy */;
 		};
+		95EF1D7A267F7B94000FAEF0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E8302D4B25F26CA500E962E9 /* NioKit-iOS */;
+			targetProxy = 95EF1D79267F7B94000FAEF0 /* PBXContainerItemProxy */;
+		};
 		CADF663A24614D2300F5063F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 39C931D823843289004449E1 /* Nio */;
@@ -2233,7 +2258,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = NioIntentsExtension;
 				INFOPLIST_KEY_CFBundleExecutable = NioIntentsExtension;
 				INFOPLIST_KEY_CFBundleName = NioIntentsExtension;
-				INFOPLIST_KEY_CFBundleVersion = "$(CURRENT_PROJECT_VERSION)";
+				INFOPLIST_KEY_CFBundleVersion = 33;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Kilian Koeltzsch. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2242,7 +2267,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.kloenk.nio.iOS.NioIntents;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(INTENTS_EXTENSION_PRODUCT_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = YES;
@@ -2264,7 +2289,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = NioIntentsExtension;
 				INFOPLIST_KEY_CFBundleExecutable = NioIntentsExtension;
 				INFOPLIST_KEY_CFBundleName = NioIntentsExtension;
-				INFOPLIST_KEY_CFBundleVersion = "$(CURRENT_PROJECT_VERSION)";
+				INFOPLIST_KEY_CFBundleVersion = 33;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Kilian Koeltzsch. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2273,7 +2298,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.kloenk.nio.iOS.NioIntents;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = YES;
@@ -2295,7 +2320,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = NioIntentsExtensionUI;
 				INFOPLIST_KEY_CFBundleExecutable = NioIntentsExtensionUI;
 				INFOPLIST_KEY_CFBundleName = NioIntentsExtensionUI;
-				INFOPLIST_KEY_CFBundleVersion = "$(CURRENT_PROJECT_VERSION)";
+				INFOPLIST_KEY_CFBundleVersion = 33;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Kilian Koeltzsch. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2326,7 +2351,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = NioIntentsExtensionUI;
 				INFOPLIST_KEY_CFBundleExecutable = NioIntentsExtensionUI;
 				INFOPLIST_KEY_CFBundleName = NioIntentsExtensionUI;
-				INFOPLIST_KEY_CFBundleVersion = "$(CURRENT_PROJECT_VERSION)";
+				INFOPLIST_KEY_CFBundleVersion = 33;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Kilian Koeltzsch. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2663,6 +2688,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 39E5032124EAFA8700FED642 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
+		};
+		95EF1D7B267F7B98000FAEF0 /* MatrixSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A58352A425A667AB00533363 /* XCRemoteSwiftPackageReference "MatrixSDK" */;
+			productName = MatrixSDK;
+		};
+		95EF1D7D267F7C7C000FAEF0 /* CommonMarkAttributedString */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CAF2AE9B245DF4B400D84133 /* XCRemoteSwiftPackageReference "CommonMarkAttributedString" */;
+			productName = CommonMarkAttributedString;
 		};
 		A58352A525A667AB00533363 /* MatrixSDK */ = {
 			isa = XCSwiftPackageProductDependency;

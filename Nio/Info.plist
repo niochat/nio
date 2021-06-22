@@ -72,6 +72,7 @@
 	<string>Send Messages via Siri</string>
 	<key>NSUserActivityTypes</key>
 	<array>
+		<string>INSendMessageIntent</string>
 		<string>chat.nio.chat</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>

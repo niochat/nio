@@ -14,6 +14,7 @@ import UserNotifications
 import UIKit
 import NioKit
 
+@MainActor
 class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
     public static let shared = AppDelegate()
     

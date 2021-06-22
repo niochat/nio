@@ -110,6 +110,7 @@ public class NIORoom: ObservableObject {
         }
     }
     
+    @available(*, deprecated, message: "Prefer `createNotification` to create an intent and donate that response")
     public func donateNotification(event: MXEvent) {
         guard event.type == "m.room.message" else {
             return
@@ -140,7 +141,7 @@ public class NIORoom: ObservableObject {
         
         print("sender")
         //let sender = await members.filter({ $0.userId == event.sender }).first?.inPerson
-        let senderMember = await members.filter({ $0.userId == event.sender }).first
+        let senderMember = members.filter({ $0.userId == event.sender }).first
         let sender = await senderMember?.inPerson()
         
         let body = event.content["body"] as? String
@@ -180,6 +181,7 @@ public class NIORoom: ObservableObject {
         
         let response = INSendMessageIntentResponse(code: .success, userActivity: userActivity)
         let interaction = INInteraction(intent: messageIntent, response: response)
+        // TODO: remove?
         interaction.direction = isMe ? INInteractionDirection.outgoing : INInteractionDirection.incoming
         interaction.dateInterval = DateInterval(start: event.timestamp, duration: 0)
         return interaction
@@ -191,7 +193,7 @@ public class NIORoom: ObservableObject {
 
     // MARK: Sending Events
 
-    public func send(text: String) async {
+    public func send(text: String, publishIntent: Bool = true) async {
         guard !text.isEmpty else { return }
 
         objectWillChange.send()             // room.outgoingMessages() will change
@@ -204,7 +206,22 @@ public class NIORoom: ObservableObject {
         // localEcho.sentState has(!) changed
         self.objectWillChange.send()
         
-        await self.donateOutgoingIntent(text)
+        if publishIntent {
+            guard let localEcho = localEcho else {
+                return
+            }
+            do {
+                let messageIntent = try await createIntent(event: localEcho)
+                let intent = try await createNotification(event: localEcho, messageIntent: messageIntent)
+                intent.direction = .outgoing
+                if !self.isDirect {
+                    intent.groupIdentifier = localEcho.roomId
+                }
+                try await intent.donate()
+            } catch {
+                Self.logger.warning("could not donate text message to \(self.displayName): \(error.localizedDescription)")
+            }
+        }
     }
     
     public func react(toEvent event: MXEvent.MXEventId, emoji: String) async {
@@ -265,8 +282,20 @@ public class NIORoom: ObservableObject {
         // localEcho.sentState has(!) changed
         self.objectWillChange.send()
 
-        
-        await self.donateOutgoingIntent()
+        guard let localEcho = localEcho else {
+            return
+        }
+        do {
+            let messageIntent = try await createIntent(event: localEcho)
+            let intent = try await createNotification(event: localEcho, messageIntent: messageIntent)
+            intent.direction = .outgoing
+            if !self.isDirect {
+                intent.groupIdentifier = localEcho.roomId
+            }
+            try await intent.donate()
+        } catch {
+            Self.logger.warning("could not donate image message to \(self.displayName): \(error.localizedDescription)")
+        }
     }
     
     public func createReply(toEventId eventId: MXEvent.MXEventId, text: String, htmlText: String? = nil) async throws -> [String : Any] {

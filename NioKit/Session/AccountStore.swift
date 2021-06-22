@@ -19,6 +19,13 @@ public enum LoginState {
             return false
         }
     }
+    
+    public func waitForLogin() async {
+        while self.isAuthenticating {
+            print("trying to authenticate")
+            //await Task.sleep(20_000)
+        }
+    }
 }
 
 @MainActor
@@ -53,8 +60,6 @@ public class AccountStore: ObservableObject {
         }
         
         let developmentTeam = Bundle.main.infoDictionary?["DevelopmentTeam"] as? String
-        print("team: ")
-        print(developmentTeam)
 
         Configuration.setupMatrixSDKSettings()
         guard let credentials = MXCredentials.from(keychain) else {

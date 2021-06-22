@@ -47,7 +47,7 @@
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
-      intentQueryString = "Use Nio to tell Milan I&apos;ll be 10 minutes late"
+      intentQueryString = "Use Nio to tell testroom I&apos;ll be 10 minutes late"
       selectedDebuggerIdentifier = ""
       selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
       launchStyle = "0"
@@ -75,7 +75,7 @@
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
-      intentQueryString = "Use Nio to tell Milan I&apos;ll be 10 minutes late"
+      intentQueryString = "Use Nio to tell testroom I&apos;ll be 10 minutes late"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
