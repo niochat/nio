@@ -78,6 +78,14 @@ struct RoomView: View {
                 onCancel: cancelEdit,
                 onCommit: send
             )
+                .gesture(DragGesture(minimumDistance: 0.3, coordinateSpace: .local)
+                            .onEnded({ value in
+                    if value.translation.height > 0 {
+                        isEditingMessage = false
+                    }
+                })
+                )
+            
             .padding(.horizontal)
             .padding(.bottom, 10)
         }

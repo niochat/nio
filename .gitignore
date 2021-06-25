@@ -2,3 +2,4 @@
 Pods/CocoaPodsKeys
 fastlane/Appfile
 Configs/LocalConfig.xcconfig
+.DS_Store
