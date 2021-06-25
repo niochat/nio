@@ -16,38 +16,38 @@ class NotificationService: UNNotificationServiceExtension {
     var bestAttemptContent: UNMutableNotificationContent?
     var contentIntent: UNNotificationContent?
 
-    @MainActor
+    
+    //@MainActor
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
-        self.contentHandler = contentHandler
-        bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
-        
-        print("didReceive")
-        print(bestAttemptContent?.userInfo as Any)
-        if let bestAttemptContent = bestAttemptContent {
-            let store = AccountStore.shared
-            // Modify the notification content here...
-            //bestAttemptContent.title = "\(bestAttemptContent.title) [modified]"
+        async {
+            self.contentHandler = contentHandler
+            bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
             
-            sleep(1)
-            while store.loginState.isAuthenticating {
-                // FIXME: !!!!!!!
-                #warning("this is not good coding!!!!!")
-                usleep(2000)
-                //sleep(1)
-            }
-            
-            //store.session?.crypto.
-            
-            sleep(1)
-            
-            let roomId = MXRoom.MXRoomId(bestAttemptContent.userInfo["room_id"] as? String ?? "")
-            bestAttemptContent.threadIdentifier = roomId.id
-            bestAttemptContent.categoryIdentifier = "chat.nio.messageReplyAction"
-            let eventId = MXEvent.MXEventId(bestAttemptContent.userInfo["event_id"] as? String ?? "")
-            let room = AccountStore.shared.findRoom(id: roomId)
-            bestAttemptContent.subtitle = !(room?.isDirect ?? false) ? room?.displayName ?? "" : ""
-            
-            async {
+            print("didReceive")
+            print(bestAttemptContent?.userInfo as Any)
+            if let bestAttemptContent = bestAttemptContent {
+                let store = AccountStore.shared
+                // Modify the notification content here...
+                //bestAttemptContent.title = "\(bestAttemptContent.title) [modified]"
+                
+                while await store.loginState.isAuthenticating {
+                    // FIXME: !!!!!!!
+                    #warning("this is not good coding!!!!!")
+                    await Task.yield()
+                    //sleep(1)
+                }
+                
+                //store.session?.crypto.
+                
+                sleep(1)
+                
+                let roomId = MXRoom.MXRoomId(bestAttemptContent.userInfo["room_id"] as? String ?? "")
+                bestAttemptContent.threadIdentifier = roomId.id
+                bestAttemptContent.categoryIdentifier = "chat.nio.messageReplyAction"
+                let eventId = MXEvent.MXEventId(bestAttemptContent.userInfo["event_id"] as? String ?? "")
+                let room = await AccountStore.shared.findRoom(id: roomId)
+                bestAttemptContent.subtitle = await !(room?.isDirect ?? false) ? room?.displayName ?? "" : ""
+                
                 do {
                     //let event = try await store.session?.matrixRestClient.event(withEventId: eventId, inRoom: roomId)
                     let event = try await store.session?.event(withEventId: eventId, inRoom: roomId)
