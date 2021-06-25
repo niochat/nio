@@ -48,7 +48,7 @@ public class IntentHandler: INExtension, INSendMessageIntentHandling, INSearchFo
         //await Task.sleep(20_000)
         
         // TODO: wait at a better place
-        while await store.loginState.isAuthenticating {
+        while store.loginState.isAuthenticating {
             // FIXME: !!!!!!!
             #warning("this is not good coding!!!!!")
             await Task.yield()
@@ -58,7 +58,7 @@ public class IntentHandler: INExtension, INSendMessageIntentHandling, INSearchFo
         
         var resolutionResults = [INSendMessageRecipientResolutionResult]()
         
-        print("group name: \(intent.speakableGroupName)")
+        print("group name: \(String(describing: intent.speakableGroupName))")
         
         for recipient in recipients {
             print("handle: \(String(describing: recipient.personHandle))")

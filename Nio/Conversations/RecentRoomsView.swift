@@ -16,15 +16,22 @@ struct RecentRoomsView: View {
 
     @Binding var selectedNavigationItem: SelectedNavigationItem?
     @Binding var selectedRoomId: MXRoom.MXRoomId?
+    @Binding var searchText: String
 
     let rooms: [NIORoom]
 
     private var joinedRooms: [NIORoom] {
-        rooms.filter {$0.room.summary.membership == .join}
+        rooms.filter {
+            $0.room.summary.membership == .join &&
+            (searchText.isEmpty ? true : $0.displayName.lowercased().contains(searchText.lowercased()))
+        }
     }
 
     private var invitedRooms: [NIORoom] {
-        rooms.filter {$0.room.summary.membership == .invite}
+        rooms.filter {
+            $0.room.summary.membership == .invite &&
+            (searchText.isEmpty ? true : $0.displayName.lowercased().contains(searchText.lowercased()))
+        }
     }
 
     private var settingsButton: some View {
@@ -86,6 +93,6 @@ struct RecentRoomsView: View {
 
 struct RecentRoomsView_Previews: PreviewProvider {
     static var previews: some View {
-        RecentRoomsView(selectedNavigationItem: .constant(nil), selectedRoomId: .constant(nil), rooms: [])
+        RecentRoomsView(selectedNavigationItem: .constant(nil), selectedRoomId: .constant(nil), searchText: .constant(""), rooms: [])
     }
 }

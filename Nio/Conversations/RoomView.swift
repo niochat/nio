@@ -31,6 +31,7 @@ struct RoomView: View {
     @State private var attributedMessage = NSAttributedString(string: "")
 
     @State private var shouldPaginate = false
+    @State private var canScrollFurther = true
 
     private var areOtherUsersTyping: Bool {
         !(room.room.typingUsers?.filter { $0 != userId }.isEmpty ?? true)
@@ -38,7 +39,7 @@ struct RoomView: View {
 
     var body: some View {
         VStack {
-            ReverseList(events.renderableEvents, hasReachedTop: $shouldPaginate) { event in
+            ReverseList(events.renderableEvents, hasReachedTop: $shouldPaginate, canScrollFurther: $canScrollFurther) { event in
                 EventContainerView(event: event,
                                    reactions: self.events.reactions(for: event),
                                    connectedEdges: self.events.connectedEdges(of: event),
@@ -83,8 +84,7 @@ struct RoomView: View {
         .onChange(of: shouldPaginate) { newValue in
             if newValue, let topEvent = events.renderableEvents.first {
                 asyncDetached {
-                    print("paginating")
-                    await room.paginate(topEvent)
+                    await paginate(topEvent: topEvent)
                 }
             }
         }
@@ -120,6 +120,16 @@ struct RoomView: View {
         }
     }
 
+    private nonisolated func paginate(topEvent: MXEvent) async {
+        print("paginating")
+        let canScroll = await room.paginate(topEvent)
+        await self.setCanScroll(to: canScroll)
+    }
+    
+    private func setCanScroll(to canScroll: Bool) {
+        self.canScrollFurther = canScroll
+    }
+    
     private func send() {
         if editEventId == nil {
             onCommit(attributedMessage.string)

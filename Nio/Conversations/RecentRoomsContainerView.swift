@@ -13,6 +13,7 @@ struct RecentRoomsContainerView: View {
 
     @State private var selectedNavigationItem: SelectedNavigationItem?
     @State private var selectedRoomId: MXRoom.MXRoomId?
+    @State private var searchText: String = ""
 
     private func autoselectFirstRoom() {
       /*if selectedRoomId == nil {
@@ -31,13 +32,14 @@ struct RecentRoomsContainerView: View {
     var body: some View {
         RecentRoomsView(selectedNavigationItem: $selectedNavigationItem,
                         selectedRoomId: $selectedRoomId,
+                        searchText: $searchText,
                         rooms: store.rooms)
             .sheet(item: $selectedNavigationItem) {
                 NavigationSheet(selectedItem: $0, selectedRoomId: $selectedRoomId)
-                    // This really shouldn't be necessary. SwiftUI bug?
-                    // 2021-03-07(hh): SwiftUI doesn't document when
-                    //                 environments are preserved. Also
-                    //                 different between platforms.
+                // This really shouldn't be necessary. SwiftUI bug?
+                // 2021-03-07(hh): SwiftUI doesn't document when
+                //                 environments are preserved. Also
+                //                 different between platforms.
                     .environmentObject(self.store)
                     .accentColor(accentColor)
             }
@@ -49,6 +51,7 @@ struct RecentRoomsContainerView: View {
             .onChange(of: appDelegate.selectedRoom) { newRoom in
                 selectedRoomId = newRoom
             }
+            .searchable(text: $searchText)
     }
 }
 
@@ -72,16 +75,20 @@ struct RoomsListSection: View {
         return self.rooms[leaveId]
     }
 
+    // we could use the userhandle incease of direct rooms here, currently we use the none readable room id
+    @MainActor
     private var sectionContent: some View {
         ForEach(rooms) { room in
             NavigationLink(destination: RoomContainerView(room: room), tag: room.id, selection: $selectedRoomId) {
                 RoomListItemContainerView(room: room)
             }
+            //.searchCompletion(room.displayName)
         }
         .onDelete(perform: setLeaveIndex)
     }
 
     @ViewBuilder
+    @MainActor
     private var section: some View {
         if let sectionHeader = sectionHeader {
             Section(header: Text(sectionHeader)) {

@@ -84,6 +84,7 @@ public class NIORoom: ObservableObject {
         }
     }
 
+
     // MARK: - init
     public init(_ room: MXRoom) {
         self.room = room
@@ -381,40 +382,29 @@ public class NIORoom: ObservableObject {
     //private var lastPaginatedEvent: MXEvent?
     private var timeline: MXEventTimeline?
     
-    public func paginate(_ event: MXEvent, direction: MXTimelineDirection = .backwards, numItems: UInt = 40) async {
-        /*guard event != lastPaginatedEvent else {
-            return
-        }*/
-        
+    public func paginate(_ event: MXEvent, direction: MXTimelineDirection = .backwards, numItems: UInt = 40) async -> Bool {
         if timeline == nil {
             return await createPagination()
-            /*Self.logger.debug("creating timeline for room '\(self.displayName)' with event '\(event.eventId)'")
-            //lastPaginatedEvent = event
-            timeline = room.timeline(onEvent: event.eventId)
-            let _ = timeline?.listenToEvents {
-                event, direction, roomState in
-                if direction == .backwards {
-                    // eventCache is published, so no objectWillChanges.send here
-                    self.add(event: event, direction: direction, roomState: roomState)
-                }
-            }
-            timeline?.resetPagination()*/
         }
         
         if timeline?.canPaginate(direction) ?? false {
             do {
                 try await timeline?.paginate(numItems, direction: direction, onlyFromStore: false)
+                return true
             } catch {
                 Self.logger.warning("could not paginate: \(error.localizedDescription)")
+                return false
             }
         } else {
             Self.logger.debug("cannot paginate: \(self.displayName)")
+            return false
         }
     }
     
-    public func createPagination() async {
+    public func createPagination() async -> Bool {
         guard timeline == nil else {
-            return
+            Self.logger.critical("createPagination called while a timeline already exists. This could be a critical bug")
+            return false
         }
         Self.logger.debug("Bootstraping pagination")
         
@@ -423,11 +413,14 @@ public class NIORoom: ObservableObject {
         if timeline?.canPaginate(.backwards) ?? false {
             do {
                 try await timeline?.paginate(40, direction: .backwards)
+                return true
             } catch {
                 Self.logger.warning("could not bootstrap pagination: \(error.localizedDescription)")
+                return false
             }
         } else {
             Self.logger.warning("could not bootstrap pagination")
+            return false
         }
     }
     
