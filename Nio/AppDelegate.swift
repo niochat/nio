@@ -33,8 +33,9 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        let notificationCenter = UNUserNotificationCenter.current()
         
+        let notificationCenter = UNUserNotificationCenter.current()
+
         self.createMessageActions(notificationCenter: notificationCenter)
         
         async {
@@ -45,6 +46,8 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
             } catch {
                 print("error requesting UNUserNotificationCenter: \(error.localizedDescription)")
             }
+            
+            await INPreferences.requestSiriAuthorization()
         }
         
         print("Your code here")

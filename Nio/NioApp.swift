@@ -38,15 +38,6 @@ struct NioApp: App {
                         print("found string \(id)")
                     }*/
                 })
-                .onAppear {
-                    async {
-                        let _: INSiriAuthorizationStatus = await withCheckedContinuation {continuation in
-                            INPreferences.requestSiriAuthorization({status in
-                                continuation.resume(returning: status)
-                            })
-                        }
-                    }
-                }
           #endif
         }
       
