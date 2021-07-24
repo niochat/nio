@@ -7,7 +7,7 @@
 "room-power-level.default" = "සාමාන්‍ය";
 "event.room-topic.change" = "%@ මාතෘකාව '%@' ට වෙනස් කළා";
 "new-conversation.done" = "අවසානයි";
-"new-conversation.edit" = "වෙනස් කරන්න";
+"new-conversation.edit" = "සංස්කරණය";
 "new-conversation.cancel" = "අවලංගු කරන්න";
 "new-conversation.alert-failed" = "සංවාදය ඇරඹීම අසාර්ථක වුණා";
 "event.room-member.joined" = "%@ සම්බන්ධ වුණා";
@@ -36,12 +36,12 @@
 "recent-rooms.rooms.header" = "කාමර";
 "recent-rooms.pending-invitations.leave.alert-title" = "ඇරයුම ප්‍රතික්ෂේප කරන්න ද?";
 "recent-rooms.pending-invitations.header" = "නව ඇරයුම්";
-"loading.cancel" = "නවත්වන්න";
+"loading.cancel" = "අවලංගු කරන්න";
 "loading.4" = "සැසි වාරය නැවත පිහිටුවමින්";
 "login.register-not-yet-implemented" = "නව ගිණුම් සඳහා ලියාපදිංචි කිරීම තවම ක්‍රියාත්මක වී නැත.";
 "login.open-registration-prompt" = "තවම ගිණුමක් නැත් ද?";
-"login.form.homeserver-optional-explanation" = "ඔබ matrix.org පාවිච්චි කරන්නේ නම් හෝම් සර්වරයක් අවශ්‍ය නැත.";
-"login.form.homeserver" = "හෝම් සර්වරය";
+"login.form.homeserver-optional-explanation" = "ඔබ matrix.org පාවිච්චි කරන්නේ නම් මූලික සේවාදායකය විකල්පයක් පමණි.";
+"login.form.homeserver" = "මූලික සේවාදායකය";
 "login.welcome-message" = "පටන් ගැනීම සඳහා ඔබේ ගිණුමට පිවිසෙන්න.";
 "settings.title" = "සැකසුම්";
 "room.invitation.fallback-title" = "අලුත් සංවාදයක්";
@@ -51,5 +51,9 @@
 "room.attachment.type-photo" = "ඡා‍යාරූපය";
 "recent-rooms.accessibility-label.new-message-badge" = "අලුත් පණිවුඩ %u";
 "loading.3" = "පිවිසෙමින්";
-"login.failure-back-to-login" = "නැවත පිවිසීමට";
-"login.welcome-header" = "ආ‍යුබෝවන් ";
+"login.failure-back-to-login" = "පිවිසුම ට ආපසු";
+"login.welcome-header" = "සැරද ";
+"event.context-menu.remove" = "ඉවත් කරන්න";
+"event.context-menu.edit" = "සංස්කරණය";
+"event.context-menu.reply" = "පිළිතුර";
+"settings.log-out" = "නික්මෙන්න";
