@@ -107,7 +107,7 @@ struct RoomView: View {
                   primaryButton: .destructive(Text(verbatim: L10n.Room.Remove.action), action: { self.onRedact(eventId, nil) }),
                   secondaryButton: .cancel())
         }
-        .userActivity("chat.nio.chat") { userActivity in
+        .userActivity("org.matrix.room") { userActivity in
             userActivity.isEligibleForHandoff = true
             userActivity.isEligibleForSearch = true
             userActivity.isEligibleForPrediction = true

@@ -29,7 +29,7 @@ public struct RoomItem: Codable, Hashable {
 public class NIORoom: ObservableObject {
     static let logger = Logger(subsystem: "chat.nio", category: "ROOM")
     
-    public let room: MXRoom
+    public nonisolated let room: MXRoom
 
     @Published
     public var summary: NIORoomSummary
@@ -166,7 +166,7 @@ public class NIORoom: ObservableObject {
         }
         let isMe = event.sender == selfId
         
-        let userActivity = NSUserActivity(activityType: "chat.nio.chat")
+        let userActivity = NSUserActivity(activityType: "org.matrix.room")
         userActivity.isEligibleForHandoff = true
         userActivity.isEligibleForSearch = true
         userActivity.isEligibleForPrediction = true

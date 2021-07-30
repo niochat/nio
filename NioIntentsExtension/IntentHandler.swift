@@ -144,12 +144,12 @@ public class IntentHandler: INExtension, INSendMessageIntentHandling, INSearchFo
     public func handle(intent: INSendMessageIntent) async -> INSendMessageIntentResponse {
         print("handle INSendMessageIntent")
         // Implement your application logic to send a message here.
-        let store = AccountStore.shared
+        let store = await AccountStore.shared
         
         guard let recipient = intent.recipients?.first?.customIdentifier else {
             return INSendMessageIntentResponse(code: .failure, userActivity: nil)
         }
-        let userActivity = NSUserActivity(activityType: "chat.nio.chat")
+        let userActivity = NSUserActivity(activityType: "org.matrix.room")
         userActivity.isEligibleForSearch = true
         userActivity.isEligibleForHandoff = true
         userActivity.isEligibleForPrediction = true

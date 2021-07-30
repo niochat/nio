@@ -88,6 +88,8 @@
 		9525D2EE26765C8C004055B6 /* RecentRoomsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C932062384BB13004449E1 /* RecentRoomsContainerView.swift */; };
 		95860113268604EE00C4065F /* INPreferences+async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95860112268604EE00C4065F /* INPreferences+async.swift */; };
 		95860114268604EE00C4065F /* INPreferences+async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95860112268604EE00C4065F /* INPreferences+async.swift */; };
+		9586011826861BA400C4065F /* MXMediaManager+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95860115268619C000C4065F /* MXMediaManager+Async.swift */; };
+		9586011926861BA500C4065F /* MXMediaManager+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95860115268619C000C4065F /* MXMediaManager+Async.swift */; };
 		95A11CD2267CA8810094AC5F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A11CD1267CA8810094AC5F /* NotificationService.swift */; };
 		95A11CD6267CA8810094AC5F /* NioNSE.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 95A11CCF267CA8810094AC5F /* NioNSE.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		95CAC7B82678F64E001D71DC /* MXEventTimeLine+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CAC7B72678F64E001D71DC /* MXEventTimeLine+Async.swift */; };
@@ -451,6 +453,7 @@
 		9525D2E62676594F004055B6 /* SettingsContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsContainerView.swift; sourceTree = "<group>"; };
 		9525D2EB267659A2004055B6 /* SettingsContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsContainerView.swift; sourceTree = "<group>"; };
 		95860112268604EE00C4065F /* INPreferences+async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "INPreferences+async.swift"; sourceTree = "<group>"; };
+		95860115268619C000C4065F /* MXMediaManager+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXMediaManager+Async.swift"; sourceTree = "<group>"; };
 		95A11CCF267CA8810094AC5F /* NioNSE.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NioNSE.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		95A11CD1267CA8810094AC5F /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		95A11CD3267CA8810094AC5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1028,6 +1031,7 @@
 				E897AA3325F2716F00D11427 /* UXKit.swift */,
 				95CAC7B72678F64E001D71DC /* MXEventTimeLine+Async.swift */,
 				95CAC88A26791913001D71DC /* MXRoomMember+INPerson.swift */,
+				95860115268619C000C4065F /* MXMediaManager+Async.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1710,6 +1714,7 @@
 				E8B4725B25F26D5A00ACEFCB /* Reaction.swift in Sources */,
 				9525D2CF26763DCB004055B6 /* MXSession+Async.swift in Sources */,
 				95CAC88B26791913001D71DC /* MXRoomMember+INPerson.swift in Sources */,
+				9586011926861BA500C4065F /* MXMediaManager+Async.swift in Sources */,
 				E8B4725525F26D5A00ACEFCB /* MXClient+Publisher.swift in Sources */,
 				E897AA3425F2716F00D11427 /* UXKit.swift in Sources */,
 				9525D2D626763DD0004055B6 /* MXRoom+Async.swift in Sources */,
@@ -1798,6 +1803,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9586011826861BA400C4065F /* MXMediaManager+Async.swift in Sources */,
 				9525D2D126763DD0004055B6 /* MXRestClient+Async.swift in Sources */,
 				E897AA2025F2707C00D11427 /* NIORoomSummary.swift in Sources */,
 				E897AA2525F2707C00D11427 /* ReactionEvent.swift in Sources */,

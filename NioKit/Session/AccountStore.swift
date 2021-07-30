@@ -32,7 +32,7 @@ public enum LoginState {
 public class AccountStore: ObservableObject {
     static let logger = Logger(subsystem: "chat.nio.chat", category: "AccountStore")
     
-    public static let shared = AccountStore()
+    public static nonisolated let shared = AccountStore()
     
     public var client: MXRestClient?
     public var session: MXSession?
@@ -45,7 +45,7 @@ public class AccountStore: ObservableObject {
         accessGroup: ((Bundle.main.infoDictionary?["DevelopmentTeam"] as? String) ?? "") + ".nio.keychain"
     )
 
-    public init() {
+    public nonisolated init() {
         if CommandLine.arguments.contains("-clear-stored-credentials") {
             print("🗑 cleared stored credentials from keychain")
             MXCredentials
@@ -66,20 +66,24 @@ public class AccountStore: ObservableObject {
             return
         }
         self.credentials = credentials
-        loginState = .authenticating
         async {
-            do {
-                self.loginState = try await self.sync()
-                self.session?.crypto.warnOnUnknowDevices = false
-            } catch {
-                print("Error on starting session with saved credentials: \(error)")
-                self.loginState = .failure(error)
-            }
+            await self.init_sync()
         }
     }
 
     deinit {
         self.session?.removeListener(self.listenReference)
+    }
+    
+    private func init_sync() async {
+        loginState = .authenticating
+        do {
+            self.loginState = try await self.sync()
+            self.session?.crypto.warnOnUnknowDevices = false
+        } catch {
+            print("Error on starting session with saved credentials: \(error)")
+            self.loginState = .failure(error)
+        }
     }
 
     // MARK: - Login & Sync
@@ -273,12 +277,26 @@ public class AccountStore: ObservableObject {
             Self.logger.debug("got pushers: \(String(describing: pushers))")
         }
         try await session.matrixRestClient.setPusher(puskKey: pushKey, kind: enable ? .http : .none, appId: appId, appDisplayName: "Nio", deviceDisplayName: "NioiOS", profileTag: "gloaaabal", lang: lang, data: data, append: false)
-        //session.matrixRestClient.setPusher(pushKey: key, kind: .http, appId: <#T##String#>, appDisplayName: <#T##String#>, deviceDisplayName: <#T##String#>, profileTag: <#T##String#>, lang: <#T##String#>, data: <#T##[String : Any]#>, append: <#T##Bool#>, completion: <#T##(MXResponse<Void>) -> Void#>)
-        //self.session?.matrixRestClient.setPusher(pushKey: <#T##String#>, kind: .http, appId: <#T##String#>, appDisplayName: <#T##String#>, deviceDisplayName: <#T##String#>, profileTag: <#T##String#>, lang: <#T##String#>, data: <#T##[String : Any]#>, append: <#T##Bool#>, completion: <#T##(MXResponse<Void>) -> Void#>)
     }
-    /*func setPusher() {
-        self.session?.matrixRestClient.setPusher(pushKey: <#T##String#>, kind: .http, appId: <#T##String#>, appDisplayName: <#T##String#>, deviceDisplayName: <#T##String#>, profileTag: <#T##String#>, lang: <#T##String#>, data: <#T##[String : Any]#>, append: <#T##Bool#>, completion: <#T##(MXResponse<Void>) -> Void#>)
-    }*/
+    
+    public func downloadEncrpytedMedia(event: MXEvent) async -> String? {
+        guard let session = session else {
+            return nil
+        }
+
+        guard let file = event.getEncryptedContentFiles().first else {
+            return nil
+        }
+        
+        do {
+            let filePath = try await session.mediaManager.downloadEncryptedMedia(fromMatrixContentFile: file, inFolder: nil)
+            Self.logger.debug("got encrypted media file: \(filePath)")
+            return filePath
+        } catch {
+            Self.logger.info("Could not download encrpyted media: \(error.localizedDescription)")
+            return nil
+        }
+    }
 }
 
 enum AccountStoreError: Error {

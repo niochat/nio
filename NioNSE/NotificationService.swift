@@ -26,7 +26,7 @@ class NotificationService: UNNotificationServiceExtension {
             print("didReceive")
             print(bestAttemptContent?.userInfo as Any)
             if let bestAttemptContent = bestAttemptContent {
-                let store = AccountStore.shared
+                let store = await AccountStore.shared
                 // Modify the notification content here...
                 //bestAttemptContent.title = "\(bestAttemptContent.title) [modified]"
                 

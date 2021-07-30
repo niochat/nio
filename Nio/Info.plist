@@ -73,7 +73,7 @@
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>INSendMessageIntent</string>
-		<string>chat.nio.chat</string>
+		<string>org.matrix.room</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

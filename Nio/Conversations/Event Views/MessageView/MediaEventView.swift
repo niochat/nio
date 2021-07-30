@@ -1,5 +1,6 @@
 import SwiftUI
 import class MatrixSDK.MXEvent
+import class NioKit.AccountStore
 import SDWebImageSwiftUI
 
 #if os(macOS)
@@ -12,12 +13,15 @@ struct MediaEventView: View {
     @Environment(\.homeserver) private var homeserver
 
     struct ViewModel {
+        fileprivate let event: MXEvent?
         fileprivate let mediaURLs: [MXURL]
         fileprivate let sender: String
         fileprivate let showSender: Bool
         fileprivate let timestamp: String
         fileprivate var size: CGSize?
         fileprivate var blurhash: String?
+        
+        @State private var imageUrl: URL?
 
         init(mediaURLs: [String],
              sender: String,
@@ -25,6 +29,7 @@ struct MediaEventView: View {
              timestamp: String,
              size: CGSize?,
              blurhash: String?) {
+            self.event = nil
             self.mediaURLs = mediaURLs.compactMap(MXURL.init)
             self.sender = sender
             self.showSender = showSender
@@ -34,6 +39,7 @@ struct MediaEventView: View {
         }
 
         init(event: MXEvent, showSender: Bool) {
+            self.event = event
             self.mediaURLs = event
                 .getMediaURLs()
                 .compactMap(MXURL.init)
@@ -49,12 +55,14 @@ struct MediaEventView: View {
                 self.blurhash = info["xyz.amorgan.blurhash"] as? String
             }
         }
+
     }
 
     let model: ViewModel
     let contextMenuModel: EventContextMenuModel
 
     @ViewBuilder
+    @MainActor
     var placeholder: some View {
         // TBD: isn't there a "placeholder" generator in SwiftUI now?
       #if os(macOS)
@@ -73,9 +81,17 @@ struct MediaEventView: View {
     }
 
     var urls: [URL] {
-        model.mediaURLs.compactMap { mediaURL in
+        return model.mediaURLs.compactMap { mediaURL in
             mediaURL.contentURL(on: self.homeserver)
         }
+    }
+    @State private var encryptedUrl: String?
+    var encrpytedUiImage: UIImage? {
+        guard let encryptedUrl = encryptedUrl else {
+            return nil
+        }
+        print("trying to load image: \(encryptedUrl)")
+        return UIImage(contentsOfFile: encryptedUrl)
     }
 
     private var isMe: Bool {
@@ -95,37 +111,56 @@ struct MediaEventView: View {
     }
 
     var body: some View {
-      #if os(macOS)
         VStack(alignment: isMe ? .trailing : .leading, spacing: 5) {
             senderView
-            WebImage(url: urls.first, isAnimating: .constant(true))
-                .resizable()
-                .placeholder { placeholder }
-                .indicator(.activity)
-                .aspectRatio(model.size ?? CGSize(width: 3, height: 2), contentMode: .fit)
-                .mask(RoundedRectangle(cornerRadius: 15))
+            if let encrpytedUiImage = encrpytedUiImage {
+                Image(uiImage: encrpytedUiImage)
+            } else {
+                WebImage(url: urls.first, isAnimating: .constant(true))
+                                .resizable()
+                                .placeholder { placeholder }
+                                .indicator(.activity)
+                                .aspectRatio(model.size ?? CGSize(width: 3, height: 2), contentMode: .fit)
+                                .mask(RoundedRectangle(cornerRadius: 15))
+                // TODO: use AsyncImage (currently not supporting gifs)
+                /*AsyncImage(url: self.urls.first, content: {phase in
+                    switch phase {
+                    case .empty:
+                        placeholder
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .aspectRatio(model.size ?? CGSize(width: 3, height: 2), contentMode: .fit)
+                            .mask(RoundedRectangle(cornerRadius: 15))
+                    case .failure(let error):
+                        Text("Error loading picture \(error.localizedDescription)")
+                        
+                    default:
+                        placeholder
+                            .onAppear(perform: {
+                                print("This case to AsyncImage is unknown (new)")
+                            })
+                    }
+                })*/
+                    .accessibility(label: Text("Image \(urls.first?.absoluteString ?? "")"))
+            }
             timestampView
         }
         .contextMenu(ContextMenu(menuItems: {
             EventContextMenu(model: contextMenuModel)
         }))
-      #else
-        VStack(alignment: isMe ? .trailing : .leading, spacing: 5) {
-            senderView
-            WebImage(url: urls.first, isAnimating: .constant(true))
-                .resizable()
-                .placeholder { placeholder }
-                .indicator(.activity)
-                .aspectRatio(model.size ?? CGSize(width: 3, height: 2), contentMode: .fit)
-                .mask(RoundedRectangle(cornerRadius: 15))
-            timestampView
-        }
-        .frame(maxWidth: UIScreen.main.bounds.width * 0.75,
-               maxHeight: UIScreen.main.bounds.height * 0.75)
-        .contextMenu(ContextMenu(menuItems: {
-            EventContextMenu(model: contextMenuModel)
-        }))
-      #endif
+        #if os(iOS)
+            .frame(maxWidth: UIScreen.main.bounds.width * 0.75,
+                   maxHeight: UIScreen.main.bounds.height * 0.75)
+        #endif
+            .task {
+                guard let event = self.model.event else {
+                    return
+                }
+                if event.isEncrypted {
+                    self.encryptedUrl = await AccountStore.shared.downloadEncrpytedMedia(event: event)
+                }
+            }
     }
 }
 

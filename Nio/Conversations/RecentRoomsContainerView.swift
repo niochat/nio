@@ -82,7 +82,6 @@ struct RoomsListSection: View {
             NavigationLink(destination: RoomContainerView(room: room), tag: room.id, selection: $selectedRoomId) {
                 RoomListItemContainerView(room: room)
             }
-            //.searchCompletion(room.displayName)
         }
         .onDelete(perform: setLeaveIndex)
     }

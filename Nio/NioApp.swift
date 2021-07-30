@@ -28,7 +28,7 @@ struct NioApp: App {
             RootView()
                 .environmentObject(accountStore)
                 .accentColor(accentColor)
-                .onContinueUserActivity("chat.nio.chat", perform: {activity in
+                .onContinueUserActivity("org.matrix.room", perform: {activity in
                     print("handling activity: \(activity)")
                     if let id = activity.userInfo?["id"] as? String {
                         print("restored room: \(id)")
