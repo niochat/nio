@@ -1,130 +1,12 @@
-import SwiftUI
 import Combine
 import MatrixSDK
+import SwiftUI
+
+import Intents
+import CoreSpotlight
+import CoreServices
 
 import NioKit
-
-struct RoomContainerView: View {
-    @ObservedObject var room: NIORoom
-
-    @State private var showAttachmentPicker = false
-    @State private var showImagePicker = false
-    @State private var eventToReactTo: String?
-    @State private var showJoinAlert = false
-
-    private var roomView: RoomView {
-      RoomView(
-          events: room.events(),
-          isDirect: room.isDirect,
-          showAttachmentPicker: $showAttachmentPicker,
-          onCommit: { message in
-              self.room.send(text: message)
-          },
-          onReact: { eventId in
-              self.eventToReactTo = eventId
-          },
-          onRedact: { eventId, reason in
-              self.room.redact(eventId: eventId, reason: reason)
-          },
-          onEdit: { message, eventId in
-              self.room.edit(text: message, eventId: eventId)
-          }
-      )
-    }
-
-  #if os(macOS)
-    var body: some View {
-        VStack(spacing: 0) {
-            Divider() // TBD: This might be better done w/ toolbar styling
-            roomView
-        }
-        .navigationTitle(Text(room.summary.displayname ?? ""))
-        // TODO: action sheet
-        .sheet(item: $eventToReactTo) { eventId in
-            ReactionPicker { reaction in
-                self.room.react(toEventId: eventId, emoji: reaction)
-                self.eventToReactTo = nil
-            }
-        }
-        // TODO: join alert
-        .onAppear {
-            switch self.room.summary.membership {
-            case .invite:
-                self.showJoinAlert = true
-            case .join:
-                self.room.markAllAsRead()
-            default:
-                break
-            }
-        }
-        .environmentObject(room)
-        // TODO: background sheet thing
-        .background(Color(.textBackgroundColor))
-        .frame(minWidth: Style.minTimelineWidth)
-    }
-  #else // iOS
-    var body: some View {
-        roomView
-        .navigationBarTitle(Text(room.summary.displayname ?? ""), displayMode: .inline)
-        .actionSheet(isPresented: $showAttachmentPicker) {
-            self.attachmentPickerSheet
-        }
-        .sheet(item: $eventToReactTo) { eventId in
-            ReactionPicker { reaction in
-                self.room.react(toEventId: eventId, emoji: reaction)
-                self.eventToReactTo = nil
-            }
-        }
-        .alert(isPresented: $showJoinAlert) {
-            let roomName = self.room.summary.displayname ?? self.room.summary.roomId ?? L10n.Room.Invitation.fallbackTitle
-            return Alert(
-                title: Text(verbatim: L10n.Room.Invitation.JoinAlert.title),
-                message: Text(verbatim: L10n.Room.Invitation.JoinAlert.message(roomName)),
-                primaryButton: .default(
-                    Text(verbatim: L10n.Room.Invitation.JoinAlert.joinButton),
-                    action: {
-                        self.room.room.mxSession.joinRoom(self.room.room.roomId) { _ in
-                            self.room.markAllAsRead()
-                        }
-                    }),
-                secondaryButton: .cancel())
-        }
-        .onAppear {
-            switch self.room.summary.membership {
-            case .invite:
-                self.showJoinAlert = true
-            case .join:
-                self.room.markAllAsRead()
-            default:
-                break
-            }
-        }
-        .environmentObject(room)
-        .background(EmptyView()
-            .sheet(isPresented: $showImagePicker) {
-                ImagePicker(sourceType: .photoLibrary) { image in
-                    self.room.sendImage(image: image)
-                }
-            }
-        )
-    }
-  #endif // iOS
-
-  #if os(macOS)
-    // TODO: port me to macOS
-  #else
-    private var attachmentPickerSheet: ActionSheet {
-        ActionSheet(
-            title: Text(verbatim: L10n.Room.Attachment.selectType), buttons: [
-                .default(Text(verbatim: L10n.Room.Attachment.typePhoto), action: {
-                    self.showImagePicker = true
-                }),
-                .cancel()
-            ]
-        )
-    }
-  #endif
-}
 
 struct RoomView: View {
     @Environment(\.userId) private var userId
@@ -149,43 +31,45 @@ struct RoomView: View {
     @State private var attributedMessage = NSAttributedString(string: "")
 
     @State private var shouldPaginate = false
-  
+    @State private var canScrollFurther = true
+
     private var areOtherUsersTyping: Bool {
-        return !(room.room.typingUsers?.filter { $0 != userId }.isEmpty ?? true)
+        !(room.room.typingUsers?.filter { $0 != userId }.isEmpty ?? true)
     }
 
     var body: some View {
         VStack {
-            ReverseList(events.renderableEvents, hasReachedTop: $shouldPaginate) { event in
+            ReverseList(events.renderableEvents, hasReachedTop: $shouldPaginate, canScrollFurther: $canScrollFurther) { event in
                 EventContainerView(event: event,
                                    reactions: self.events.reactions(for: event),
                                    connectedEdges: self.events.connectedEdges(of: event),
                                    showSender: !self.isDirect,
                                    edits: self.events.relatedEvents(of: event).filter { $0.isEdit() },
                                    contextMenuModel: EventContextMenuModel(
-                                    event: event,
-                                    userId: self.userId,
-                                    onReact: { self.onReact(event.eventId) },
-                                    onReply: { },
-                                    onEdit: { self.edit(event: event) },
-                                    onRedact: {
-                                        if event.sentState == MXEventSentStateFailed {
-                                            room.removeOutgoingMessage(event)
-                                        } else {
-                                            self.eventToRedact = event.eventId
-                                        }
-                                    }))
+                                       event: event,
+                                       userId: self.userId,
+                                       onReact: { self.onReact(event.eventId) },
+                                       onReply: {},
+                                       onEdit: { self.edit(event: event) },
+                                       onRedact: {
+                                           if event.sentState == MXEventSentStateFailed {
+                                               room.removeOutgoingMessage(event)
+                                           } else {
+                                               self.eventToRedact = event.eventId
+                                           }
+                                       }
+                                   ))
                     .padding(.horizontal)
             }
-          
+
             if #available(macOS 11, *) {
                 Divider()
             }
-          
+
             if areOtherUsersTyping {
                 TypingIndicatorContainerView()
             }
-            
+
             MessageComposerView(
                 showAttachmentPicker: $showAttachmentPicker,
                 isEditing: $isEditingMessage,
@@ -194,12 +78,27 @@ struct RoomView: View {
                 onCancel: cancelEdit,
                 onCommit: send
             )
-                .padding(.horizontal)
-                .padding(.bottom, 10)
+                .gesture(DragGesture(minimumDistance: 0.3, coordinateSpace: .local)
+                            .onEnded({ value in
+                    if value.translation.height > 0 {
+                        isEditingMessage = false
+                    }
+                })
+                )
+            
+            .padding(.horizontal)
+            .padding(.bottom, 10)
         }
         .onChange(of: shouldPaginate) { newValue in
             if newValue, let topEvent = events.renderableEvents.first {
-                store.paginate(room: self.room, event: topEvent)
+                asyncDetached {
+                    await paginate(topEvent: topEvent)
+                }
+            }
+        }
+        .onAppear {
+            asyncDetached {
+                await room.createPagination()
             }
         }
         .alert(item: $eventToRedact) { eventId in
@@ -208,8 +107,37 @@ struct RoomView: View {
                   primaryButton: .destructive(Text(verbatim: L10n.Room.Remove.action), action: { self.onRedact(eventId, nil) }),
                   secondaryButton: .cancel())
         }
+        .userActivity("org.matrix.room") { userActivity in
+            userActivity.isEligibleForHandoff = true
+            userActivity.isEligibleForSearch = true
+            userActivity.isEligibleForPrediction = true
+            userActivity.title = room.displayName
+            userActivity.userInfo = ["id": room.id.rawValue as String]
+            
+            let attributes = CSSearchableItemAttributeSet(itemContentType: kUTTypeItem as String)
+            
+            attributes.contentDescription = "Open chat with \(room.displayName)"
+            attributes.instantMessageAddresses = [ room.room.roomId ]
+            userActivity.contentAttributeSet = attributes
+            userActivity.webpageURL = URL(string: "https://matrix.to/#/\(room.room.roomId ?? "")")
+            
+            // TODO: implement with a viewDelegate to save the current text into the handsof
+            // userActivity.needsSave = true
+            
+            print("advertising: \(room.displayName) \(String(describing: userActivity.webpageURL))")
+        }
     }
 
+    private nonisolated func paginate(topEvent: MXEvent) async {
+        print("paginating")
+        let canScroll = await room.paginate(topEvent)
+        await self.setCanScroll(to: canScroll)
+    }
+    
+    private func setCanScroll(to canScroll: Bool) {
+        self.canScrollFurther = canScroll
+    }
+    
     private func send() {
         if editEventId == nil {
             onCommit(attributedMessage.string)

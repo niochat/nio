@@ -1,9 +1,18 @@
 import SwiftUI
 import NioKit
+import MatrixSDK
+import Intents
 
 @main
 struct NioApp: App {
-    @StateObject private var accountStore = AccountStore()
+    #if os(macOS)
+    #else
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    #endif
+    
+    @StateObject private var accountStore = AccountStore.shared
+    
+    //@State private var selectedRoomId: ObjectIdentifier?
 
     @AppStorage("accentColor") private var accentColor: Color = .purple
 
@@ -19,6 +28,16 @@ struct NioApp: App {
             RootView()
                 .environmentObject(accountStore)
                 .accentColor(accentColor)
+                .onContinueUserActivity("org.matrix.room", perform: {activity in
+                    print("handling activity: \(activity)")
+                    if let id = activity.userInfo?["id"] as? String {
+                        print("restored room: \(id)")
+                        AppDelegate.shared.selectedRoom = MXRoom.MXRoomId(id)
+                    }
+                    /*if let id = activity.userInfo?["id"] as? String {
+                        print("found string \(id)")
+                    }*/
+                })
           #endif
         }
       

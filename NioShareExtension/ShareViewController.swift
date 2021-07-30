@@ -34,8 +34,10 @@ class ShareNavigationController: UIViewController {
                         let url = results["url"] as? String else {
                         return
                     }
-                    for room in rooms where room.summary.roomId == roomID {
-                        room.send(text: url)
+                    async {
+                        for room in rooms where room.summary.roomId == roomID {
+                            await room.send(text: url)
+                        }
                     }
                     self.extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
                 }

@@ -1,5 +1,4 @@
 import SwiftUI
-import SDWebImageSwiftUI
 
 import NioKit
 
@@ -18,11 +17,17 @@ struct GenericEventView: View {
         HStack(spacing: 4) {
             Spacer()
             if imageURL != nil {
-                WebImage(url: imageURL!)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 15, height: 15)
-                    .mask(Circle())
+                AsyncImage(url: imageURL, content: {image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 15, height: 15)
+                        .mask(Circle())
+                }, placeholder: {
+                    ProgressView()
+                        .frame(width: 15, height: 15)
+                        .mask(Circle())
+                })
             }
             Text(text)
                 .font(.caption)

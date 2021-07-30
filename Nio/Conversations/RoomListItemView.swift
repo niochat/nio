@@ -1,6 +1,5 @@
 import SwiftUI
 import MatrixSDK
-import SDWebImageSwiftUI
 
 import NioKit
 
@@ -149,14 +148,11 @@ struct RoomListItemView: View {
     }
 
     @ViewBuilder private var image: some View {
-        if let avatarURL = roomAvatarURL {
-            WebImage(url: avatarURL)
+        AsyncImage(url: roomAvatarURL, content: { image in
+            image
                 .resizable()
-                .placeholder { prefixAvatar }
                 .aspectRatio(contentMode: .fill)
-        } else {
-            prefixAvatar
-        }
+        }, placeholder: { prefixAvatar })
     }
 
     @Environment(\.sizeCategory) private var sizeCategory

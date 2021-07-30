@@ -14,11 +14,13 @@ struct ReverseList<Element, Content>: View where Element: Identifiable, Content:
     private let viewForItem: (Element) -> Content
 
     @Binding var hasReachedTop: Bool
+    @Binding var canScrollFurther: Bool
 
-    init(_ items: [Element], reverseItemOrder: Bool = true, hasReachedTop: Binding<Bool>, viewForItem: @escaping (Element) -> Content) {
+    init(_ items: [Element], reverseItemOrder: Bool = true, hasReachedTop: Binding<Bool>, canScrollFurther: Binding<Bool> = .constant(true) , viewForItem: @escaping (Element) -> Content) {
         self.items = items
         self.reverseItemOrder = reverseItemOrder
         self._hasReachedTop = hasReachedTop
+        self._canScrollFurther = canScrollFurther
         self.viewForItem = viewForItem
     }
 
@@ -34,16 +36,18 @@ struct ReverseList<Element, Content>: View where Element: Identifiable, Content:
                     let frame = topViewGeometry.frame(in: .global)
                     let isVisible = contentsGeometry.frame(in: .global).contains(CGPoint(x: frame.midX, y: frame.midY))
 
-                    HStack {
-                        Spacer()
-                        ProgressView().progressViewStyle(CircularProgressViewStyle())
-                        Spacer()
+                    if canScrollFurther {
+                        HStack {
+                            Spacer()
+                            ProgressView().progressViewStyle(CircularProgressViewStyle())
+                            Spacer()
+                        }
+                        .preference(key: IsVisibleKey.self, value: isVisible)
                     }
-                    .preference(key: IsVisibleKey.self, value: isVisible)
                 }
                 .frame(height: 30)      // FIXME: Frame height shouldn't be hard-coded
                 .onPreferenceChange(IsVisibleKey.self) {
-                    hasReachedTop = $0
+                    if $0 != hasReachedTop { hasReachedTop = $0 }
                 }
             }
             .scaleEffect(x: -1.0, y: 1.0)

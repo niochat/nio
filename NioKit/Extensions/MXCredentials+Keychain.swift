@@ -1,10 +1,10 @@
-import MatrixSDK
 import KeychainAccess
+import MatrixSDK
 
-extension MXCredentials {
-    public func save(to keychain: Keychain) {
+public extension MXCredentials {
+    func save(to keychain: Keychain) {
         guard
-            let homeserver = self.homeServer,
+            let homeserver = homeServer,
             let userId = self.userId,
             let accessToken = self.accessToken,
             let deviceId = self.deviceId
@@ -17,14 +17,14 @@ extension MXCredentials {
         keychain["deviceId"] = deviceId
     }
 
-    public func clear(from keychain: Keychain) {
+    func clear(from keychain: Keychain) {
         keychain["homeserver"] = nil
         keychain["userId"] = nil
         keychain["accessToken"] = nil
         keychain["deviceId"] = nil
     }
 
-    public static func from(_ keychain: Keychain) -> MXCredentials? {
+    static func from(_ keychain: Keychain) -> MXCredentials? {
         guard
             let homeserver = keychain["homeserver"],
             let userId = keychain["userId"],

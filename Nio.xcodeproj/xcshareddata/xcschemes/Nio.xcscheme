@@ -75,6 +75,10 @@
             argument = "-clear-stored-credentials"
             isEnabled = "NO">
          </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-clear-stored-sk-search-iterms"
+            isEnabled = "NO">
+         </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>
    <ProfileAction
