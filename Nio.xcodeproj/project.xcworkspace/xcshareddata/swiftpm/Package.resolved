@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/niochat/MatrixSDK",
         "state": {
           "branch": null,
-          "revision": "43da061dbaa0fee9520c5ab23ba127ba305f243b",
-          "version": "0.18.4"
+          "revision": "d53454baff7fa9a6a50bf5e68bab531049a7e5af",
+          "version": "0.19.0"
         }
       },
       {
@@ -80,6 +80,15 @@
           "branch": null,
           "revision": "36ecf80429d00a4cd1e81fbfe4655b1d99ebd651",
           "version": "0.1.2"
+        }
+      },
+      {
+        "package": "SwiftyBeaver",
+        "repositoryURL": "https://github.com/SwiftyBeaver/SwiftyBeaver",
+        "state": {
+          "branch": null,
+          "revision": "2c039501d6eeb4d4cd4aec4a8d884ad28862e044",
+          "version": "1.9.5"
         }
       }
     ]

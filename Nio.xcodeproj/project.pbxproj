@@ -64,6 +64,8 @@
 		4BFEFD92246F686000CCF4A0 /* ShareContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEFD91246F686000CCF4A0 /* ShareContentView.swift */; };
 		A51BF8CE254C2FE5000FB0A4 /* NioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51BF8CD254C2FE5000FB0A4 /* NioApp.swift */; };
 		A51F762C25D6E9950061B4A4 /* MessageTextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51F762B25D6E9950061B4A4 /* MessageTextViewWrapper.swift */; };
+		A56D4FDE267E6CA300D0F1E8 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = A56D4FDD267E6CA300D0F1E8 /* SwiftyBeaver */; };
+		A56D4FE0267E6DF000D0F1E8 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = A56D4FDF267E6DF000D0F1E8 /* SwiftyBeaver */; };
 		A58352A625A667AB00533363 /* MatrixSDK in Frameworks */ = {isa = PBXBuildFile; productRef = A58352A525A667AB00533363 /* MatrixSDK */; };
 		CAAF5BF82478696F006FDC33 /* UITextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAF5BF72478696F006FDC33 /* UITextViewWrapper.swift */; };
 		CAC46D5723A272D10079C24F /* BorderlessMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC46D5423A272D10079C24F /* BorderlessMessageView.swift */; };
@@ -441,6 +443,7 @@
 			files = (
 				E8B4726725F26D9900ACEFCB /* KeychainAccess in Frameworks */,
 				E8B4726525F26D9200ACEFCB /* MatrixSDK in Frameworks */,
+				A56D4FDE267E6CA300D0F1E8 /* SwiftyBeaver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,6 +465,7 @@
 			files = (
 				E897AA2A25F270D700D11427 /* KeychainAccess in Frameworks */,
 				E897AA2825F270CF00D11427 /* MatrixSDK in Frameworks */,
+				A56D4FE0267E6DF000D0F1E8 /* SwiftyBeaver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -991,6 +995,7 @@
 			packageProductDependencies = (
 				E8B4726425F26D9200ACEFCB /* MatrixSDK */,
 				E8B4726625F26D9900ACEFCB /* KeychainAccess */,
+				A56D4FDD267E6CA300D0F1E8 /* SwiftyBeaver */,
 			);
 			productName = "NioKit-iOS";
 			productReference = E8302D4C25F26CA500E962E9 /* libNioKit-iOS.a */;
@@ -1038,6 +1043,7 @@
 			packageProductDependencies = (
 				E897AA2725F270CF00D11427 /* MatrixSDK */,
 				E897AA2925F270D700D11427 /* KeychainAccess */,
+				A56D4FDF267E6DF000D0F1E8 /* SwiftyBeaver */,
 			);
 			productName = "NioKit-macOS";
 			productReference = E897AA1525F2706D00D11427 /* libNioKit-macOS.a */;
@@ -1111,6 +1117,7 @@
 				390D63A22465F62C00B8F640 /* XCRemoteSwiftPackageReference "BlurHash" */,
 				39E5032124EAFA8700FED642 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				A58352A425A667AB00533363 /* XCRemoteSwiftPackageReference "MatrixSDK" */,
+				A56D4FD8267E6BFF00D0F1E8 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 			);
 			productRefGroup = 39C931DA2384328A004449E1 /* Products */;
 			projectDirPath = "";
@@ -2035,12 +2042,20 @@
 				minimumVersion = 0.1.0;
 			};
 		};
+		A56D4FD8267E6BFF00D0F1E8 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.9.5;
+			};
+		};
 		A58352A425A667AB00533363 /* XCRemoteSwiftPackageReference "MatrixSDK" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/niochat/MatrixSDK";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.18.4;
+				minimumVersion = 0.19.0;
 			};
 		};
 		CAF2AE9B245DF4B400D84133 /* XCRemoteSwiftPackageReference "CommonMarkAttributedString" */ = {
@@ -2063,6 +2078,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 39E5032124EAFA8700FED642 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
+		};
+		A56D4FDD267E6CA300D0F1E8 /* SwiftyBeaver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A56D4FD8267E6BFF00D0F1E8 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
+			productName = SwiftyBeaver;
+		};
+		A56D4FDF267E6DF000D0F1E8 /* SwiftyBeaver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A56D4FD8267E6BFF00D0F1E8 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
+			productName = SwiftyBeaver;
 		};
 		A58352A525A667AB00533363 /* MatrixSDK */ = {
 			isa = XCSwiftPackageProductDependency;
