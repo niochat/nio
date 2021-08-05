@@ -35,7 +35,11 @@ struct LoadingView: View {
 
             Spacer()
 
-            Button(action: self.store.logout) {
+            Button(action: {
+                Task.init(priority: .userInitiated) {
+                    self.store.logout
+                }
+            }) {
                 Text(verbatim: L10n.Loading.cancel).font(.callout)
             }
             .padding()

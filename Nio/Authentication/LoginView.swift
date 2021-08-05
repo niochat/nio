@@ -36,8 +36,9 @@ struct LoginContainerView: View {
             print("Invalid homeserver URL '\(homeserver)'")
             return
         }
-
-        store.login(username: username, password: password, homeserver: homeserverURL)
+        Task.init(priority: .userInitiated) {
+            await store.login(username: username, password: password, homeserver: homeserverURL)
+        }
     }
 
     private func guessHomeserverURL() {

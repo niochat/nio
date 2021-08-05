@@ -20,8 +20,9 @@ public struct RoomItem: Codable, Hashable {
     }
 }
 
+@MainActor
 public class NIORoom: ObservableObject {
-    public var room: MXRoom
+    public nonisolated let room: MXRoom
 
     @Published
     public var summary: NIORoomSummary
@@ -29,8 +30,31 @@ public class NIORoom: ObservableObject {
     @Published
     internal var eventCache: [MXEvent] = []
 
+    // MARK: - computed vars
     public var isDirect: Bool {
         room.isDirect
+    }
+    
+    public var isEncrypted: Bool {
+        room.summary.isEncrypted
+    }
+    
+    public var displayName: String {
+        room.summary.displayname
+    }
+
+    public var avatarUrl: URL? {
+        get {
+             guard let avatar = (self.room.summary.avatar ?? nil) else {
+                 return nil
+             }
+
+             if avatar.starts(with: "http") {
+                 return URL(string: avatar)
+             }
+
+             return URL(string: self.room.mxSession.mediaManager.url(ofContent: avatar))
+        }
     }
 
     public var lastMessage: String {
@@ -53,6 +77,7 @@ public class NIORoom: ObservableObject {
         }
     }
 
+    // MARK: - init
     public init(_ room: MXRoom) {
         self.room = room
         self.summary = NIORoomSummary(room.summary)
@@ -88,6 +113,7 @@ public class NIORoom: ObservableObject {
 
         objectWillChange.send()             // room.outgoingMessages() will change
         var localEcho: MXEvent? = nil
+        // TODO: async
         room.sendTextMessage(text, localEcho: &localEcho) { _ in
             self.objectWillChange.send()    // localEcho.sentState has(!) changed
         }
@@ -99,6 +125,7 @@ public class NIORoom: ObservableObject {
 
         objectWillChange.send()             // room.outgoingMessages() will change
         var localEcho: MXEvent? = nil
+        // TODO: async
         room.sendEvent(.reaction, content: content, localEcho: &localEcho) { _ in
             self.objectWillChange.send()    // localEcho.sentState has(!) changed
         }
@@ -111,10 +138,12 @@ public class NIORoom: ObservableObject {
         // swiftlint:disable:next force_try
         let content = try! EditEvent(eventId: eventId, text: text).encodeContent()
         // TODO: Use localEcho to show sent message until it actually comes back
+        // TODO: async
         room.sendMessage(withContent: content, localEcho: &localEcho) { _ in }
     }
 
     public func redact(eventId: String, reason: String?) {
+        // TODO: async
         room.redactEvent(eventId, reason: reason) { _ in }
     }
 
@@ -123,6 +152,7 @@ public class NIORoom: ObservableObject {
 
         var localEcho: MXEvent? = nil
         objectWillChange.send()             // room.outgoingMessages() will change
+        // TODO: async
         room.sendImage(
             data: imageData,
             size: image.size,
@@ -145,7 +175,7 @@ public class NIORoom: ObservableObject {
 }
 
 extension NIORoom: Identifiable {
-    public var id: ObjectIdentifier {
+    public nonisolated var id: ObjectIdentifier {
         room.id
     }
 }

@@ -4,11 +4,20 @@ import NioKit
 struct SettingsContainerView: View {
     @EnvironmentObject var store: AccountStore
 
+    @MainActor
     var body: some View {
       #if os(macOS)
-        MacSettingsView(logoutAction: self.store.logout)
+        MacSettingsView(logoutAction: {
+            Task.init(priority: .userInitiated) {
+                await self.store.logout()
+            }
+        })
       #else
-        SettingsView(logoutAction: self.store.logout)
+        SettingsView(logoutAction: {
+            Task.init(priority:.userInitiated) {
+                await self.store.logout()
+            }
+        })
       #endif
     }
 }

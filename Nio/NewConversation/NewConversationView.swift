@@ -28,10 +28,12 @@ private struct NewConversationView: View {
     @Binding var createdRoomId: ObjectIdentifier?
     @State private var errorMessage: String?
 
+    @MainActor
     private var usersFooter: some View {
         Text("\(L10n.NewConversation.forExample) \(store?.session?.myUserId ?? "@username:server.org")")
     }
 
+    @MainActor
     private var form: some View {
         Form {
             Section(footer: usersFooter) {
@@ -65,7 +67,11 @@ private struct NewConversationView: View {
             Section {
                 HStack {
                   #if !os(macOS)
-                    Button(action: createRoom) {
+                    Button(action: {
+                        Task.init(priority: .userInitiated) {
+                            createRoom
+                        }
+                        }) {
                         Text(verbatim: L10n.NewConversation.createRoom)
                     }
                     .disabled(users.contains("") || (roomName.isEmpty && users.count > 1))
@@ -140,6 +146,7 @@ private struct NewConversationView: View {
         }
     }
 
+    @MainActor
     private func createRoom() {
         isWaiting = true
 
