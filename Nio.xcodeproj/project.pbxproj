@@ -72,6 +72,9 @@
 		955A0D4726BC1E6C0027D188 /* MXRestClient+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955A0D4526BC1E6C0027D188 /* MXRestClient+Async.swift */; };
 		955A0D4926BC1EE80027D188 /* MXRoom+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955A0D4826BC1EE80027D188 /* MXRoom+Async.swift */; };
 		955A0D4A26BC1EE80027D188 /* MXRoom+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955A0D4826BC1EE80027D188 /* MXRoom+Async.swift */; };
+		95AF0C0526BD9AA800AF707E /* RecentRoomsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF0C0426BD9AA800AF707E /* RecentRoomsView.swift */; };
+		95AF0C0726BD9B4A00AF707E /* RecentRoomsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF0C0626BD9B4A00AF707E /* RecentRoomsContainerView.swift */; };
+		95AF0C0826BD9B4A00AF707E /* RecentRoomsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF0C0626BD9B4A00AF707E /* RecentRoomsContainerView.swift */; };
 		A51BF8CE254C2FE5000FB0A4 /* NioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51BF8CD254C2FE5000FB0A4 /* NioApp.swift */; };
 		A51F762C25D6E9950061B4A4 /* MessageTextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51F762B25D6E9950061B4A4 /* MessageTextViewWrapper.swift */; };
 		A56D4FDE267E6CA300D0F1E8 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = A56D4FDD267E6CA300D0F1E8 /* SwiftyBeaver */; };
@@ -127,7 +130,6 @@
 		E843F30925F2781800B0F33B /* MXURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984654423B7ECBA006C173B /* MXURL.swift */; };
 		E843F30A25F2781800B0F33B /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392389932388899200B2E1DF /* Formatter.swift */; };
 		E843F30B25F2781B00B0F33B /* RoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C93208238553E4004449E1 /* RoomView.swift */; };
-		E843F30C25F2781B00B0F33B /* RecentRoomsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C932062384BB13004449E1 /* RecentRoomsView.swift */; };
 		E843F30D25F2781B00B0F33B /* RoomListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3923898E2388707E00B2E1DF /* RoomListItemView.swift */; };
 		E843F30E25F2781F00B0F33B /* EventContextMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392221AF243A6F8E004D8794 /* EventContextMenuModel.swift */; };
 		E843F30F25F2782000B0F33B /* ReactionPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3922219F2437285B004D8794 /* ReactionPicker.swift */; };
@@ -377,6 +379,8 @@
 		955A0D4226BC1E2C0027D188 /* MXAutoDiscovery+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXAutoDiscovery+Async.swift"; sourceTree = "<group>"; };
 		955A0D4526BC1E6C0027D188 /* MXRestClient+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXRestClient+Async.swift"; sourceTree = "<group>"; };
 		955A0D4826BC1EE80027D188 /* MXRoom+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXRoom+Async.swift"; sourceTree = "<group>"; };
+		95AF0C0426BD9AA800AF707E /* RecentRoomsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentRoomsView.swift; sourceTree = "<group>"; };
+		95AF0C0626BD9B4A00AF707E /* RecentRoomsContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentRoomsContainerView.swift; sourceTree = "<group>"; };
 		A51BF8CD254C2FE5000FB0A4 /* NioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NioApp.swift; sourceTree = "<group>"; };
 		A51F762B25D6E9950061B4A4 /* MessageTextViewWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTextViewWrapper.swift; sourceTree = "<group>"; };
 		CAAF5BF72478696F006FDC33 /* UITextViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextViewWrapper.swift; sourceTree = "<group>"; };
@@ -639,11 +643,11 @@
 			children = (
 				4BD3D29424951F150031846F /* Configs */,
 				39C931DB2384328A004449E1 /* Nio */,
-				393411CF239087D2003B49B8 /* NioTests */,
-				CADF662E24614D2300F5063F /* NioKit */,
-				CADF663B24614D2300F5063F /* NioKitTests */,
 				4BFEFD7D246F414D00CCF4A0 /* NioShareExtension */,
 				E843F2DB25F2748200B0F33B /* Mio */,
+				CADF662E24614D2300F5063F /* NioKit */,
+				CADF663B24614D2300F5063F /* NioKitTests */,
+				393411CF239087D2003B49B8 /* NioTests */,
 				39C931DA2384328A004449E1 /* Products */,
 				A58352AA25A667B300533363 /* Frameworks */,
 			);
@@ -717,6 +721,7 @@
 				39C9320A23856033004449E1 /* MessageComposerView.swift */,
 				39B834BF243FC42000AE1EA0 /* TypingIndicatorView.swift */,
 				3907AB482393FE0E00B25DE9 /* Event Views */,
+				95AF0C0626BD9B4A00AF707E /* RecentRoomsContainerView.swift */,
 			);
 			path = Conversations;
 			sourceTree = "<group>";
@@ -789,6 +794,14 @@
 				4BFEFD91246F686000CCF4A0 /* ShareContentView.swift */,
 			);
 			path = NioShareExtension;
+			sourceTree = "<group>";
+		};
+		95AF0C0326BD9A9700AF707E /* Conversations */ = {
+			isa = PBXGroup;
+			children = (
+				95AF0C0426BD9AA800AF707E /* RecentRoomsView.swift */,
+			);
+			path = Conversations;
 			sourceTree = "<group>";
 		};
 		A58352AA25A667B300533363 /* Frameworks */ = {
@@ -882,6 +895,7 @@
 		E843F2DB25F2748200B0F33B /* Mio */ = {
 			isa = PBXGroup;
 			children = (
+				95AF0C0326BD9A9700AF707E /* Conversations */,
 				E843F2E025F2748300B0F33B /* Assets.xcassets */,
 				E843F2E525F2748300B0F33B /* Info.plist */,
 				E843F2E625F2748300B0F33B /* Mio.entitlements */,
@@ -1283,6 +1297,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95AF0C0726BD9B4A00AF707E /* RecentRoomsContainerView.swift in Sources */,
 				39C9320B23856033004449E1 /* MessageComposerView.swift in Sources */,
 				CAC46D5923A272D10079C24F /* BorderedMessageView.swift in Sources */,
 				39B834C0243FC42000AE1EA0 /* TypingIndicatorView.swift in Sources */,
@@ -1389,9 +1404,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95AF0C0826BD9B4A00AF707E /* RecentRoomsContainerView.swift in Sources */,
 				E843F31E25F2782E00B0F33B /* RoomMemberEventView.swift in Sources */,
-				E843F30C25F2781B00B0F33B /* RecentRoomsView.swift in Sources */,
 				E843F30E25F2781F00B0F33B /* EventContextMenuModel.swift in Sources */,
+				95AF0C0526BD9AA800AF707E /* RecentRoomsView.swift in Sources */,
 				E843F30425F2781400B0F33B /* ReverseList.swift in Sources */,
 				E843F32825F2783900B0F33B /* String+Extensions.swift in Sources */,
 				E843F31525F2782700B0F33B /* ReactionsListItemView.swift in Sources */,

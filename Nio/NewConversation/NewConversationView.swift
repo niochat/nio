@@ -100,7 +100,11 @@ private struct NewConversationView: View {
                   }
               }
               ToolbarItem(placement: .confirmationAction) {
-                  Button(action: createRoom) {
+                  Button(action: {
+                      Task.init(priority: .userInitiated) {
+                          createRoom()
+                      }
+                  }) {
                       Text(verbatim: L10n.NewConversation.createRoom)
                   }
                   .disabled(users.contains("") || (roomName.isEmpty && users.count > 1))
