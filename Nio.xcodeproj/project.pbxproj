@@ -62,6 +62,7 @@
 		4BFEFD86246F414D00CCF4A0 /* NioShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4BFEFD7C246F414D00CCF4A0 /* NioShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4BFEFD8C246F458000CCF4A0 /* GetURL.js in Resources */ = {isa = PBXBuildFile; fileRef = 4BFEFD8B246F458000CCF4A0 /* GetURL.js */; };
 		4BFEFD92246F686000CCF4A0 /* ShareContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEFD91246F686000CCF4A0 /* ShareContentView.swift */; };
+		9504FC0326CFD560007E89E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9504FC0226CFD560007E89E1 /* AppDelegate.swift */; };
 		955A0D3D26BC1B310027D188 /* MXSession+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955A0D3C26BC1B310027D188 /* MXSession+Async.swift */; };
 		955A0D3E26BC1B310027D188 /* MXSession+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955A0D3C26BC1B310027D188 /* MXSession+Async.swift */; };
 		955A0D4026BC1BCD0027D188 /* Continuation+MX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955A0D3F26BC1BCD0027D188 /* Continuation+MX.swift */; };
@@ -374,6 +375,7 @@
 		4BFEFD8F246F5EE000CCF4A0 /* NioShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NioShareExtension.entitlements; sourceTree = "<group>"; };
 		4BFEFD90246F5EF500CCF4A0 /* Nio.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nio.entitlements; sourceTree = "<group>"; };
 		4BFEFD91246F686000CCF4A0 /* ShareContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareContentView.swift; sourceTree = "<group>"; };
+		9504FC0226CFD560007E89E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		955A0D3C26BC1B310027D188 /* MXSession+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXSession+Async.swift"; sourceTree = "<group>"; };
 		955A0D3F26BC1BCD0027D188 /* Continuation+MX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Continuation+MX.swift"; sourceTree = "<group>"; };
 		955A0D4226BC1E2C0027D188 /* MXAutoDiscovery+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MXAutoDiscovery+Async.swift"; sourceTree = "<group>"; };
@@ -688,6 +690,7 @@
 				390D63BA246F4BEE00B8F640 /* Resources */,
 				39C931F3238449C2004449E1 /* Supporting Files */,
 				39C931E42384328B004449E1 /* Preview Content */,
+				9504FC0226CFD560007E89E1 /* AppDelegate.swift */,
 			);
 			path = Nio;
 			sourceTree = "<group>";
@@ -1318,6 +1321,7 @@
 				3902B8A52395A77800698B87 /* LoadingView.swift in Sources */,
 				CADF662424614A3300F5063F /* ReactionGroupView.swift in Sources */,
 				392221B6243F88FD004D8794 /* RoomNameEventView.swift in Sources */,
+				9504FC0326CFD560007E89E1 /* AppDelegate.swift in Sources */,
 				4B0A2E47245E2EF800A79443 /* MultilineTextField.swift in Sources */,
 				A51F762C25D6E9950061B4A4 /* MessageTextViewWrapper.swift in Sources */,
 				A51BF8CE254C2FE5000FB0A4 /* NioApp.swift in Sources */,

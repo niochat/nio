@@ -55,12 +55,45 @@ private struct MacSettingsView: View {
 }
 
 private struct SettingsView: View {
+    @EnvironmentObject var store: AccountStore
+    
     @AppStorage("accentColor") private var accentColor: Color = .purple
+    @AppStorage("showDeveloperSettings") private var showDeveloperSettings = false
+    
     @StateObject private var appIconTitle = AppIconTitle()
     let logoutAction: () -> Void
 
+    private let bundleVersion = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as! String
+    private let pusherUrl = Bundle.main.object(forInfoDictionaryKey: "NioPusherUrl") as? String
+    
     @Environment(\.presentationMode) private var presentationMode
 
+    /// Update the pusher config for the accountStore
+    private func updatePusher() {
+        Task(priority: .userInitiated) {
+            guard let deviceToken = AppDelegate.shared.deviceToken else {
+                // TODO: show banner informing of missing token
+                print("missing deviceToken")
+                return
+            }
+            
+            guard let pusherUrl = pusherUrl else {
+                // should never happen
+                print("pusherUrl not set")
+                return
+            }
+            
+            do {
+                try await store.setPusher(url: pusherUrl, deviceToken: deviceToken)
+            } catch {
+                // TODO: inform of failure
+                print("failed to update pusher: \(error.localizedDescription)")
+            }
+            print("pusher updated")
+            // TODO: inform of success
+        }
+    }
+    
     var body: some View {
         NavigationView {
             Form {
@@ -85,6 +118,22 @@ private struct SettingsView: View {
                 Section {
                     Button(action: self.logoutAction) {
                        Text(verbatim: L10n.Settings.logOut)
+                    }
+                }
+                
+                Section("Version") {
+                    Text(bundleVersion)
+                }
+                .onTapGesture {
+                    showDeveloperSettings.toggle()
+                    // TODO: show banner informing of activated developer settings
+                }
+                
+                if showDeveloperSettings {
+                    Section("Developer") {
+                        Button(action: updatePusher) {
+                            Text("Refresh pusher config")
+                        }.disabled(pusherUrl == nil || (pusherUrl?.isEmpty ?? true))
                     }
                 }
             }
