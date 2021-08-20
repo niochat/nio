@@ -20,4 +20,26 @@ extension MXRestClient {
             self.wellKnow({continuation.resume(returning: $0!)}, failure: {continuation.resume(throwing: $0!)})
         }
     }
+    
+    func pushers() async throws -> [MXPusher] {
+        return try await withCheckedThrowingContinuation {continuation in
+            self.pushers({ continuation.resume(returning: $0 ?? []) }, failure: { continuation.resume(throwing: $0!) })
+        }
+    }
+    
+    func setPusher(
+        pushKey: String,
+        kind: MXPusherKind,
+        appId: String,
+        appDisplayName: String,
+        deviceDisplayName: String,
+        profileTag: String,
+        lang: String,
+        data: [String: Any],
+        append: Bool
+    ) async throws {
+        return try await withCheckedThrowingContinuation {continuation in
+            self.setPusher(pushKey: pushKey, kind: kind, appId: appId, appDisplayName: appDisplayName, deviceDisplayName: deviceDisplayName, profileTag: profileTag, lang: lang, data: data, append: append, completion: { continuation.resume(with: $0) })
+        }
+    }
 }

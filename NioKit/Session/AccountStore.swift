@@ -156,9 +156,50 @@ public class AccountStore: ObservableObject {
             self.objectWillChange.send()
         }
     }
+    
+    public func setPusher(url: String, enable: Bool = true, deviceToken: String) async throws {
+        guard let session = session else {
+            throw AccountStoreError.noSession
+        }
+        
+        let appId = Bundle.main.bundleIdentifier ?? "nio.chat"
+        let lang = NSLocale.preferredLanguages.first ?? "en-US"
+        
+        // TODO: generate a pusher profile and use it, instead of a (hopefully) not existing tag
+        let profileTag = "gloaable"
+        
+        let data: [String: Any] = [
+            "url": "https://\(url)/_matrix/push/v1/notify",
+            "format": "event_id_only",
+            "default_payload": [
+                "aps": [
+                    "mutable-content": 1,
+                    "content-available": 1,
+                    // TODO: add acount info, if we ever enable multi accounting
+                    "alert": [
+                        "loc-key": "MESSAGE",
+                        "loc-args": [],
+                    ]
+                ]
+            ]
+        ]
+        
+        try await session.matrixRestClient.setPusher(
+            pushKey: deviceToken,
+            kind: enable ? .http : .none,
+            appId: appId,
+            appDisplayName: "Nio",
+            deviceDisplayName: "Nio iOS",
+            profileTag: profileTag,
+            lang: lang,
+            data: data,
+            append: false
+        )
+    }
 }
 
 enum AccountStoreError: Error {
     case noCredentials
+    case noSession
     case invalidUrl
 }

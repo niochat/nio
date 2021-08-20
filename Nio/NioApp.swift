@@ -3,6 +3,10 @@ import NioKit
 
 @main
 struct NioApp: App {
+    #if os(iOS)
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    #endif
+    
     @StateObject private var accountStore = AccountStore()
 
     @AppStorage("accentColor") private var accentColor: Color = .purple

@@ -10,6 +10,7 @@
 
 NIO_NAMESPACE                             = com.example.nio
 DEVELOPMENT_TEAM                          = Z123456789
+NIO_PUSHER_URL                            = sentinel.nio.chat
 
 APPGROUP                                  = $(NIO_NAMESPACE)
 PRODUCT_BUNDLE_IDENTIFIER                 = $(NIO_NAMESPACE).iOS
