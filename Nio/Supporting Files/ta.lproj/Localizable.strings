@@ -1,1 +1,11 @@
 
+
+"event.reason" = "காரணம்: %@";
+"event.context-menu.reply" = "பதிலளிக்க";
+"new-conversation.title-chat" = "புதிய அரட்டை";
+"event.context-menu.remove" = "நீக்கு";
+"event.context-menu.edit" = "திருத்து";
+"new-conversation.room-name" = "அறையின் பெயர்";
+"new-conversation.title-room" = "புதிய அறை";
+"login.form.password" = "கடவுச்சொல்";
+"login.form.username" = "பயனர் பெயர்";
