@@ -12,7 +12,7 @@
 "loading.2" = "Berichten worden ontfrommeld";
 "loading.3" = "Inloggen";
 "loading.4" = "Sessie herstellen";
-"loading.cancel" = "Annuleer";
+"loading.cancel" = "Annuleren";
 "recent-rooms.accessibility-label.settings" = "Instellingen";
 "recent-rooms.accessibility-label.new-conversation" = "Nieuw Gesprek";
 "recent-rooms.new-message-placeholder" = "Nieuw Bericht";
@@ -39,7 +39,7 @@
 "composer.edit-message" = "Bericht Bewerken:";
 "composer.accessibility-label.send-file" = "Bestand versturen";
 "composer.accessibility-label.send" = "Verstuur";
-"composer.accessibility-label.cancelEdit" = "Annuleer";
+"composer.accessibility-label.cancelEdit" = "Annuleren";
 "typing-indicator.single" = "%@ is aan het typen";
 "typing-indicator.two" = "%@ en %@ zijn aan het typen";
 "typing-indicator.many" = "Meerdere personen zijn aan het typen";
@@ -78,7 +78,7 @@
 "settings.app-icon" = "Appicoon";
 "settings.log-out" = "Uitloggen";
 "settings.dismiss" = "Klaar";
-"new-conversation.cancel" = "Annuleer";
+"new-conversation.cancel" = "Annuleren";
 "new-conversation.alert-failed" = "Chat Starten Mislukt";
 "new-conversation.create-room" = "Start Chat";
 "new-conversation.public-room" = "Publieke Kamer";
