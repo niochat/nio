@@ -1,1 +1,52 @@
 
+
+"event.room-member.joined" = "%@加入了";
+"event.room-member.ban" = "%@封禁了%@";
+"event.room-member.kicked" = "%@將%@踢出";
+"event.room-member.left" = "%@離開了";
+"event.room-member.invited" = "%@邀請了%@";
+"event.unknown-room-name-fallback" = "未知聊天室";
+"event.unknown-sender-fallback" = "未知傳送人";
+"typing-indicator.many" = "有幾位正在打字";
+"typing-indicator.two" = "%@和%@正在打字";
+"typing-indicator.single" = "%@正在打字";
+"composer.accessibility-label.cancelEdit" = "取消";
+"composer.accessibility-label.send" = "傳送";
+"composer.accessibility-label.send-file" = "傳送檔案";
+"composer.edit-message" = "編輯訊息：";
+"composer.new-message" = "新訊息…";
+"room.invitation.join-alert.join-button" = "加入";
+"room.invitation.join-alert.message" = "接受邀請加入「%@」？";
+"room.invitation.join-alert.title" = "加入對話？";
+"room.invitation.fallback-title" = "新對話";
+"room.remove.action" = "移除";
+"room.remove.message" = "確實要移除此訊息嗎？";
+"room.remove.title" = "移除？";
+"room.attachment.type-photo" = "照片";
+"room.attachment.select-type" = "傳送附件";
+"recent-rooms.leave.alert-body" = "確實要離開「%@」嗎？此動作無法復原。";
+"recent-rooms.leave.alert-title" = "離開聊天室";
+"recent-rooms.rooms.header" = "聊天室";
+"recent-rooms.pending-invitations.leave.alert-title" = "拒絕邀請？";
+"recent-rooms.pending-invitations.header" = "待處理的邀請";
+"recent-rooms.accessibility-label.new-message-badge" = "%u條新訊息";
+// Room $NAME, $LAST_ACTIVITY_TIMESTAMP $LAST_MESSAGE
+"recent-rooms.accessibility-label.room" = "%@聊天室，%@ %@";
+// DM with $NAME, $LAST_ACTIVITY_TIMESTAMP $LAST_MESSAGE
+"recent-rooms.accessibility-label.dm" = "與%@私訊，%@ %@";
+"recent-rooms.new-message-placeholder" = "新訊息";
+"recent-rooms.accessibility-label.new-conversation" = "新對話";
+"recent-rooms.accessibility-label.settings" = "設定";
+"loading.cancel" = "取消";
+"loading.4" = "回復對話";
+"loading.3" = "登入中";
+"login.failure-back-to-login" = "返回登入頁";
+"login.register-not-yet-implemented" = "尚未實作創建新帳戶功能。";
+"login.open-registration-prompt" = "還沒有帳戶？";
+"login.sign-in" = "登入";
+"login.form.homeserver-optional-explanation" = "若您選用matrix.org則不必填寫家伺服器。";
+"login.form.homeserver" = "家伺服器";
+"login.form.password" = "密碼";
+"login.form.username" = "使用者名稱";
+"login.welcome-message" = "從登入帳戶開始。";
+"login.welcome-header" = "歡迎使用 ";
