@@ -2055,7 +2055,7 @@
 			repositoryURL = "https://github.com/niochat/MatrixSDK";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.19.0;
+				minimumVersion = 0.20.4;
 			};
 		};
 		CAF2AE9B245DF4B400D84133 /* XCRemoteSwiftPackageReference "CommonMarkAttributedString" */ = {

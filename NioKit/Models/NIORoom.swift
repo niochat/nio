@@ -16,7 +16,7 @@ public struct RoomItem: Codable, Hashable {
     public init(room: MXRoom) {
         self.roomId = room.summary.roomId
         self.displayName = room.summary.displayname ?? ""
-        self.messageDate = room.summary.lastMessageOriginServerTs
+        self.messageDate = room.summary.lastMessage.originServerTs
     }
 }
 
@@ -128,6 +128,7 @@ public class NIORoom: ObservableObject {
             size: image.size,
             mimeType: "image/jpeg",
             thumbnail: image,
+            blurhash: nil,
             localEcho: &localEcho
         ) { _ in
             self.objectWillChange.send()    // localEcho.sentState has(!) changed
