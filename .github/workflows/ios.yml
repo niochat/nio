@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Version
       run: |
-        sudo xcode-select --switch /Applications/Xcode_12.app
+        sudo xcode-select --switch /Applications/Xcode_12.5.1.app
         xcode-select --print-path
         xcodebuild -version
     - name: Prerequisites
@@ -21,8 +21,8 @@ jobs:
     - name: Build
       run: |
         set -o pipefail
-        xcodebuild -scheme Nio -destination 'platform=iOS Simulator,name=iPhone 11' build | xcpretty --color
+        xcodebuild -scheme Nio -destination 'platform=iOS Simulator,name=iPhone 12' build | xcpretty --color
     - name: Test
       run: |
         set -o pipefail
-        xcodebuild -scheme Nio -destination 'platform=iOS Simulator,name=iPhone 11' test | xcpretty --color --test
+        xcodebuild -scheme Nio -destination 'platform=iOS Simulator,name=iPhone 12' test | xcpretty --color --test
