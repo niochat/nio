@@ -1,1 +1,42 @@
 
+
+"composer.accessibility-label.cancelEdit" = "Avbryt";
+"composer.accessibility-label.send" = "Send";
+"composer.accessibility-label.send-file" = "Send fil";
+"composer.edit-message" = "Rediger melding:";
+"composer.new-message" = "Ny melding…";
+"room.invitation.join-alert.join-button" = "Ver med";
+"room.invitation.join-alert.message" = "Godta invitasjon til å vera med i '%@'?";
+"room.invitation.join-alert.title" = "Vere med i samtale?";
+"room.invitation.fallback-title" = "Ny samtale";
+"room.remove.action" = "Fjern";
+"room.remove.message" = "Er du sikker på at du vil fjerna denne meldinga?";
+"recent-rooms.leave.alert-body" = "Er du sikker på at du vil forlata '%@'? Denne handlinga kan ikkje angrast.";
+"room.remove.title" = "Fjerna?";
+"room.attachment.type-photo" = "Foto";
+"room.attachment.select-type" = "Send vedlegg";
+"recent-rooms.leave.alert-title" = "Forlat rommet";
+"recent-rooms.rooms.header" = "Rom";
+"recent-rooms.pending-invitations.leave.alert-title" = "Avvise invitasjon?";
+"recent-rooms.pending-invitations.header" = "Ventande invitasjonar";
+"recent-rooms.accessibility-label.new-message-badge" = "%u nye meldingar";
+// Room $NAME, $LAST_ACTIVITY_TIMESTAMP $LAST_MESSAGE
+"recent-rooms.accessibility-label.room" = "Rom %@, %@ %@";
+// DM with $NAME, $LAST_ACTIVITY_TIMESTAMP $LAST_MESSAGE
+"recent-rooms.accessibility-label.dm" = "DM med %@, %@ %@";
+"recent-rooms.new-message-placeholder" = "Ny melding";
+"recent-rooms.accessibility-label.new-conversation" = "Ny samtale";
+"recent-rooms.accessibility-label.settings" = "Innstillingar";
+"loading.cancel" = "Avbryt";
+"loading.4" = "Gjenopprettar økta";
+"loading.3" = "Loggar inn";
+"login.failure-back-to-login" = "Tilbake til innlogging";
+"login.register-not-yet-implemented" = "Registrering for nye kontoar er enno ikkje implementert.";
+"login.open-registration-prompt" = "Har du ikkje ein konto?";
+"login.sign-in" = "Logg inn";
+"login.form.homeserver-optional-explanation" = "Heimeserver er valfritt om du brukar matrix.org.";
+"login.form.homeserver" = "Heimeserver";
+"login.form.password" = "Passord";
+"login.form.username" = "Brukarnamn";
+"login.welcome-message" = "Logg inn på kontoen din for å koma i gang.";
+"login.welcome-header" = "Velkomen til ";
