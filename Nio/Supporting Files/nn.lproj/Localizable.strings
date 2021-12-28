@@ -79,3 +79,13 @@
 "new-conversation.done" = "Ferdig";
 "new-conversation.edit" = "Rediger";
 "new-conversation.cancel" = "Avbryt";
+"event.room-member.ban" = "%@ stengde ute %@";
+"loading.2" = "Lastar meldingar";
+"event.room-topic.change" = "%@ endra emnet til '%@'";
+"event.room-name.change-name" = "%@ endra romnamnet frå %@ til %@";
+"event.room-name.set-name" = "%@ gav rommet namnet %@";
+"event.room-member.unknown-state" = "Ukjend statushending: %@";
+"event.room-member.remove-avatar" = "%@ fjerna profilbildet sitt";
+"event.room-member.change-avatar" = "%@ oppdaterte profilbildet sitt";
+"event.room-member.set-avatar" = "%@ stilte inn profilbildet sitt";
+"typing-indicator.many" = "Fleire personar skriv";
