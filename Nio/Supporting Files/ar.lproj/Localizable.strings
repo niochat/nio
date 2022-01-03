@@ -53,7 +53,7 @@
 "composer.edit-message" = "تَحريرُ الرِسَالَة:";
 "room.invitation.join-alert.message" = "قُبُل دَعوَة لِلاِنضِمام إلى '%@'؟";
 "loading.1" = "خطوط شبكية";
-"loading.2" = "رَسائِلٌ مُربِكَة";
+"loading.2" = "رَسائِلٌ مُريبَة";
 "event.context-menu.add-reaction" = "إضافَةُ رَدِّ فِعل";
 "event.edited" = "تَمَّ تَحرِيرُه";
 "event.room-topic.change" = "لَقَد غَيَّرَ %@ المَوضُوع إلى '%@'";
