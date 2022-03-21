@@ -1,0 +1,64 @@
+name: Nio
+options:
+  minimumXcodeGenVersion: 2.10.1
+configFiles:
+  Debug: configs/Debug.xcconfig
+  Release: configs/Release.xcconfig
+packages:
+  MatrixCore:
+    url: https://github.com/MatrixCore/MatrixCore
+    branch: main
+targets:
+  NioTests:
+    platform: iOS
+    type: bundle.unit-test
+    configFiles:
+      Debug: configs/NioTests-Debug.xcconfig
+    sources:
+      - Tests/NioTests/
+    dependencies:
+      - target: Nio
+    scheme:
+      gatherCoverageData: true
+  NioKit:
+    platform: [iOS, macOS, tvOS, watchOS]
+    type: framework
+    deploymentTarget:
+      iOS: 15.4
+      macOS: 12.3
+      watchos: 8.5
+      tvOS: 15.4
+    sources:
+      - NioKit
+    dependencies:
+      - package: MatrixCore
+        product: MatrixClient
+    configFiles:
+      Debug: configs/NioKit.xcconfig
+      Release: configs/NioKit.xcconfig
+  NioUIKit:
+    platform: [iOS]
+    type: framework
+    deploymentTarget:
+      iOS: 15.4
+      macOS: 12.3
+      watchos: 8.5
+      tvOS: 15.4
+    sources:
+      - NioUIKit
+    dependencies:
+      - target: NioKit_${platform}
+    configFiles:
+      Debug: configs/NioUIKit.xcconfig
+      Release: configs/NioUIKit.xcconfig
+  Nio:
+    platform: iOS
+    type: application
+    sources:
+      - Nio
+    configFiles:
+      Debug: configs/Nio-Debug.xcconfig
+      Release: configs/Nio-Release.xcconfig
+    dependencies:
+      - target: NioKit_iOS
+      - target: NioUIKit_iOS

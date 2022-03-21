@@ -1,0 +1,4 @@
+**/*/xcuserdata
+fastlane/Appfile
+Configs/LocalConfig.xcconfig
+Nio.xcodeproj
