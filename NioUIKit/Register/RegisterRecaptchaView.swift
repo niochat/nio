@@ -17,7 +17,7 @@ struct RegisterRecaptchaView: View {
     var publicKey: String?
     var callback: (String) -> Void
 
-    init(serverUrl _: String, parameters params: AnyCodable?, callback: @escaping ((String) -> Void)) {
+    init(serverUrl: String, parameters params: AnyCodable?, callback: @escaping ((String) -> Void)) {
         if let params = params,
            let params = params.value as? [String: Any],
            let publicKey = params["public_key"] as? String
@@ -26,37 +26,12 @@ struct RegisterRecaptchaView: View {
             self.publicKey = publicKey
         }
 
-        serverUrl = "https://matrix.org/" // serverUrl
+        self.serverUrl = serverUrl
         self.callback = callback
     }
 
-    var body: some View {
-        if let publicKey = publicKey {
-            // TODO: nil
-            RegisterRecaptchaWebView(url: URL(string: serverUrl), sitekey: publicKey, callback: callback, logger: logger)
-        } else {
-            Text("Did not find public key")
-        }
-    }
-}
-
-struct RegisterRecaptchaWebView: UIViewRepresentable {
-    var url: URL?
-    var sitekey: String
-    var callback: (String) -> Void
-    var logger: Logger
-
-    func makeCoordinator() -> RegisterRecaptchaWebView.Coordinatior {
-        RegisterRecaptchaWebView.Coordinatior(self)
-    }
-
-    func makeUIView(context _: Context) -> WKWebView {
-        let view = WKWebView()
-        return WKWebView()
-    }
-
-    func updateUIView(_ webView: UIViewType, context: Context) {
-        let html = """
+    var html: String {
+        """
         <html>
         <head>
         <meta name='viewport' content='initial-scale=1.0' />
@@ -71,7 +46,7 @@ struct RegisterRecaptchaWebView: UIViewRepresentable {
         };
         var onloadCallback = function() {
           grecaptcha.render('recaptcha_widget', {
-            'sitekey' : "\(sitekey)",
+            'sitekey' : "\(publicKey ?? "")",
             'callback': verifyCallback
           });
         };
@@ -84,44 +59,28 @@ struct RegisterRecaptchaWebView: UIViewRepresentable {
         </body>
         </html>
         """
-        webView.loadHTMLString(html, baseURL: url)
-        webView.navigationDelegate = context.coordinator
     }
 
-    class Coordinatior: NSObject, WKNavigationDelegate {
-        let parent: RegisterRecaptchaWebView
-
-        init(_ parent: RegisterRecaptchaWebView) {
-            self.parent = parent
-        }
-
-        func webView(_: WKWebView, decidePolicyFor navigationAction: WKNavigationAction) async -> WKNavigationActionPolicy {
-            guard let urlString = navigationAction.request.url?.absoluteString else {
-                return .cancel
-            }
-
-            if urlString.hasPrefix("js:") {
-                let decoder = JSONDecoder()
-
-                guard let jsonString = urlString.components(separatedBy: "js:").last?.removingPercentEncoding,
-                      let response = try? decoder.decode(CallbackResponse.self, from: Data(jsonString.utf8)),
+    var body: some View {
+        if publicKey != nil {
+            RegisterWebView(url: URL(string: serverUrl), html: html, callback: { response in
+                guard let response = response,
                       response.action == "verifyCallback"
                 else {
-                    parent.logger.warning("Could not get json response")
-                    return .cancel
+                    logger.warning("Could not get json response from WebView")
+                    return
                 }
 
-                parent.callback(response.response)
+                callback(response.response)
+            })
+        } else {
+            VStack {
+                Text("Did not find public key")
+                    .bold()
+                    .padding()
 
-                return .cancel
+                Text("Please contact your homeserver administrator")
             }
-
-            return .allow
-        }
-
-        struct CallbackResponse: Decodable {
-            var action: String
-            var response: String
         }
     }
 }

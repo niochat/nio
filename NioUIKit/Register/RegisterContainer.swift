@@ -143,9 +143,12 @@ public struct RegisterContainer: View {
     }
 
     func probeServer() async {
-        // TODO: don't hardcode https
         do {
-            let homeserver = try await MatrixHomeserver(resolve: "https://\(newServer)/")
+            if !newServer.hasPrefix("http") {
+                newServer = "https://\(newServer)"
+            }
+
+            let homeserver = try await MatrixHomeserver(resolve: newServer)
             let client = MatrixClient(homeserver: homeserver)
 
             let registerFlows = try await client.getRegisterFlows()
