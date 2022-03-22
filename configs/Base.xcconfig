@@ -1,0 +1,16 @@
+//
+//  Base.xcconfig
+//  Nio
+//
+//  Created by Finn Behrens on 21.03.22.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+NIO_NAMESPACE                   = chat.nio
+DEVELOPMENT_TEAM                = Z123456789
+
+APPGROUP                        = $(NIO_NAMESPACE)
+
+#include "LocalConfig.xcconfig"
