@@ -9,9 +9,9 @@ import SwiftUI
 import WebKit
 
 struct RegisterWebView: UIViewRepresentable {
-    var url: URL?
-    var html: String
-    var callback: (CallbackResponse?) -> Void
+    @State var url: URL?
+    @State var html: String?
+    @State var callback: (CallbackResponse?) -> Void
 
     func makeUIView(context: Context) -> WKWebView {
         let view = WKWebView()
@@ -22,7 +22,11 @@ struct RegisterWebView: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        uiView.loadHTMLString(html, baseURL: url)
+        if let html = html {
+            uiView.loadHTMLString(html, baseURL: url)
+        } else if let url = url {
+            uiView.load(URLRequest(url: url))
+        }
         uiView.navigationDelegate = context.coordinator
     }
 

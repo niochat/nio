@@ -30,11 +30,10 @@ public struct RegisterContainer: View {
     @State private var emailSendAttempt: Int = 0
     @State private var emailSID: String?
 
-    // FIXME: remove default variables!!!!!!
-    @State private var username: String = "nio_register_test"
-    @State private var password: String = "foobar"
-    @State private var confirmPassword: String = "foobar"
-    @State private var email: String = "nio@kloenk.dev"
+    @State private var username: String = ""
+    @State private var password: String = ""
+    @State private var confirmPassword: String = ""
+    @State private var email: String = ""
 
     public init(callback: @escaping ((MatrixRegister) -> Void)) {
         self.callback = callback
@@ -134,6 +133,31 @@ public struct RegisterContainer: View {
                         await self.next(response: auth)
                     }
                 })
+            case .terms:
+                RegisterTermsView(parameters: flow.params) {
+                    logger.debug("all terms accepted")
+                    Task {
+                        let auth = MatrixInteractiveAuthResponse(session: session, type: .terms)
+                        await self.next(response: auth)
+                    }
+                }
+            case .email:
+                RegisterEmailView(resend: {
+                    logger.debug("resending mail")
+                    emailSendAttempt += 1
+                    // FIXME: implement
+                }, retry: {
+                    Task {
+                        logger.debug("retrying email")
+                        if let emailSID = emailSID {
+                            let auth = MatrixInteractiveAuthResponse(emailClientSecret: emailClientSecret, emailSID: emailSID, session: session)
+                            await self.next(response: auth)
+                        } else {
+                            logger.warning("No EmailSID available")
+                        }
+                    }
+                }, email: email)
+
             default:
                 Text("Not yet implemented: \(flow.flow.rawValue)")
             }
@@ -175,6 +199,7 @@ public struct RegisterContainer: View {
         }
     }
 
+    // FIXME: don't throw
     func next() async throws {
         guard let matrixClient = matrixClient else {
             fatalError("server probing did not run, cannot register")
@@ -222,6 +247,7 @@ public struct RegisterContainer: View {
     }
 
     func next(response: MatrixInteractiveAuthResponse) async {
+        currentState = .working
         guard let matrixClient = matrixClient else {
             fatalError("server probing did not run, cannot register")
         }
@@ -277,119 +303,6 @@ private struct RegisterContainerServerOptions: View {
         }
     }
 }
-
-/* private struct RegisterContainerServerChoocer: View {
-     @Binding var currentServer: Server
-     @Binding var working: Bool
-
-     @State var showEditSheet: Bool = false
-     @State private var selection: ServerRadio
-     @State private var newServer: String = ""
-
-     init(currentServer: Binding<Server>, working: Binding<Bool>) {
-         self._currentServer = currentServer
-         self._working = working
-         self.selection = currentServer.wrappedValue.selection
-     }
-
-     var body: some View {
-         Button(currentServer.rawValue) {
-             showEditSheet = true
-             selection = currentServer.selection
-             newServer = currentServer.newServerValue
-         }.sheet(isPresented: $showEditSheet) {
-             VStack {
-                 HStack {
-                     Button("Cancel") {
-                         showEditSheet = false
-                         working = false
-                     }
-                     Spacer(minLength: 0)
-
-                     Button("Ok") {
-                         if selection == .matrix_org {
-                             currentServer = .matrix_org
-                         } else {
-                             currentServer = .other(newServer)
-                         }
-                         working = true
-
-                         //showEditSheet = false
-                     }
-                 }
-
-                 Spacer(minLength: 0)
-
-                 Text("Decide where your account is hosted")
-                     .bold()
-
-                 Text("We call the places where you can host your account 'homeservers'. Matrix.org is the biggest public homeserver in the world, so it's a good place for many.").fontWeight(.light)
-
-                 Picker(selection: $selection, label: Text("foobar")) {
-                     Text("matrix.org").tag(ServerRadio.matrix_org)
-                     Text("Other Homeserver").tag(ServerRadio.other)
-                 }
-
-                 if (selection == .other) {
-                     TextField("Other Homeserver", text: $newServer)
-                         .keyboardType(.URL)
-                         .textContentType(.URL)
-                         .textInputAutocapitalization(.never)
-                         .disableAutocorrection(true)
-
-                     Text("Use your preferred Matrix homeserver if you have one, or host your own.")
-                         .fontWeight(.light)
-
-                 }
-
-                 Spacer(minLength: 0)
-
-             }
-             .padding()
-         }
-     }
-
-     enum Server: RawRepresentable {
-         init?(rawValue: String) {
-             self = .other(rawValue)
-         }
-
-         case matrix_org
-         case other(String)
-
-         var rawValue: String {
-             switch self {
-             case .matrix_org:
-                 return "matrix.org"
-             case .other(let other):
-                 return other
-             }
-         }
-
-         var selection: ServerRadio {
-             switch self {
-             case .matrix_org:
-                 return .matrix_org
-             case .other(_):
-                 return .other
-             }
-         }
-
-         var newServerValue: String {
-             switch self {
-             case .matrix_org:
-                 return ""
-             case .other(let server):
-                 return server
-             }
-         }
-     }
-
-     enum ServerRadio {
-         case matrix_org
-         case other
-     }
- } */
 
 struct RegisterContainer_Previews: PreviewProvider {
     static var previews: some View {
