@@ -61,8 +61,14 @@ public struct RegisterContainer: View {
                 }
 
                 TextField("Username", text: $username)
+                #if os(macOS)
+                    .textContentType(.username)
+                #else
                     .textContentType(.nickname)
+                #endif
+                #if os(iOS)
                     .textInputAutocapitalization(.never)
+                #endif
 
                 HStack {
                     SecureField("Password", text: $password)
@@ -71,9 +77,11 @@ public struct RegisterContainer: View {
 
                 if supportsEmail {
                     TextField("Email", text: $email)
+                    #if os(iOS)
                         .keyboardType(.emailAddress)
                         .textContentType(.emailAddress)
                         .textInputAutocapitalization(.never)
+                    #endif
                 }
 
                 Button("Next") {
@@ -117,22 +125,24 @@ public struct RegisterContainer: View {
                 Text("We call the places where you can host your account 'homeservers'. Matrix.org is the biggest public homeserver in the world, so it's a good place for many.").fontWeight(.light)
 
                 TextField("Homeserver", text: $newServer)
+                #if os(iOS)
                     .keyboardType(.URL)
                     .textContentType(.URL)
+                #endif
 
                 Spacer(minLength: 0)
             }
 
         case let .flow(flow):
             switch flow.flow {
-            case .recaptcha:
-                RegisterRecaptchaView(serverUrl: currentServer, parameters: flow.params, callback: { token in
-                    logger.debug("got recaptcha token: \(token)")
-                    Task {
-                        let auth = MatrixInteractiveAuthResponse(recaptchaResponse: token, session: session)
-                        await self.next(response: auth)
-                    }
-                })
+            /* case .recaptcha:
+             RegisterRecaptchaView(serverUrl: currentServer, parameters: flow.params, callback: { token in
+                 logger.debug("got recaptcha token: \(token)")
+                 Task {
+                     let auth = MatrixInteractiveAuthResponse(recaptchaResponse: token, session: session)
+                     await self.next(response: auth)
+                 }
+             }) */
             case .terms:
                 RegisterTermsView(parameters: flow.params) {
                     logger.debug("all terms accepted")
@@ -159,7 +169,7 @@ public struct RegisterContainer: View {
                 }, email: email)
 
             default:
-                Text("Not yet implemented: \(flow.flow.rawValue)")
+                RegisterFallbackView(session: session, flow: flow.flow, apiUrl: matrixClient!.homeserver.url.url!)
             }
         default:
             ProgressView()

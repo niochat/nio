@@ -37,7 +37,7 @@ targets:
       Debug: configs/NioKit.xcconfig
       Release: configs/NioKit.xcconfig
   NioUIKit:
-    platform: [iOS]
+    platform: [iOS, macOS, tvOS, watchOS]
     type: framework
     deploymentTarget:
       iOS: 15.4
@@ -62,3 +62,14 @@ targets:
     dependencies:
       - target: NioKit_iOS
       - target: NioUIKit_iOS
+  Nio_macOS:
+    platform: macOS
+    type: application
+    sources:
+      - Nio
+    configFiles:
+      Debug: configs/Nio_macOS-Debug.xcconfig
+      Release: configs/Nio_macOS-Release.xcconfig
+    dependencies:
+      - target: NioKit_macOS
+      - target: NioUIKit_macOS

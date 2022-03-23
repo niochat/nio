@@ -1,0 +1,14 @@
+//
+//  Nio.xcconfig
+//  Nio
+//
+//  Created by Finn Behrens on 21.03.22.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+#include "Base.xcconfig"
+
+PRODUCT_BUNDLE_IDENTIFIER       = $(NIO_NAMESPACE).macOS
+PRODUCT_NAME                    = Nio
