@@ -135,14 +135,14 @@ public struct RegisterContainer: View {
 
         case let .flow(flow):
             switch flow.flow {
-            /* case .recaptcha:
-             RegisterRecaptchaView(serverUrl: currentServer, parameters: flow.params, callback: { token in
-                 logger.debug("got recaptcha token: \(token)")
-                 Task {
-                     let auth = MatrixInteractiveAuthResponse(recaptchaResponse: token, session: session)
-                     await self.next(response: auth)
-                 }
-             }) */
+            case .recaptcha:
+                RegisterRecaptchaView(serverUrl: currentServer, parameters: flow.params, callback: { token in
+                    logger.debug("got recaptcha token: \(token)")
+                    Task {
+                        let auth = MatrixInteractiveAuthResponse(recaptchaResponse: token, session: session)
+                        await self.next(response: auth)
+                    }
+                })
             case .terms:
                 RegisterTermsView(parameters: flow.params) {
                     logger.debug("all terms accepted")
@@ -169,7 +169,11 @@ public struct RegisterContainer: View {
                 }, email: email)
 
             default:
-                RegisterFallbackView(session: session, flow: flow.flow, apiUrl: matrixClient!.homeserver.url.url!)
+                RegisterFallbackView(session: session, flow: flow.flow, apiUrl: matrixClient!.homeserver.url) {
+                    Task {
+                        await self.next(response: MatrixInteractiveAuthResponse(session: session, type: nil))
+                    }
+                }
             }
         default:
             ProgressView()

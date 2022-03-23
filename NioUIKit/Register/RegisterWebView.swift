@@ -8,52 +8,64 @@
 import SwiftUI
 import WebKit
 
+private let userScript = """
+window.onAuthDone = function () {
+    window.webkit.messageHandlers.finishView.postMessage(JSON.stringify({'action': 'onAuthDone'}));
+}
+window.recaptchaCallback = function (response) {
+    window.webkit.messageHandlers.finishView.postMessage(JSON.stringify({'action': 'verifyCallback', 'response': response}));
+}
+"""
+
 struct RegisterWebView {
     @State var url: URL?
     @State var html: String?
     @State var callback: (CallbackResponse?) -> Void
 
-    class Coordinator: NSObject, WKNavigationDelegate {
+    func getConfig(context: Context) -> WKWebViewConfiguration {
+        let config = WKWebViewConfiguration()
+
+        let userController = UserController()
+        userController.add(context.coordinator as WKScriptMessageHandler, name: "finishView")
+        userController.addUserScript(WKUserScript(source: userScript, injectionTime: .atDocumentStart, forMainFrameOnly: false))
+        config.userContentController = userController
+
+        return config
+    }
+
+    class Coordinator: NSObject, WKNavigationDelegate, WKScriptMessageHandler {
         let parent: RegisterWebView
 
         init(_ parent: RegisterWebView) {
             self.parent = parent
         }
 
-        func webView(_: WKWebView, decidePolicyFor navigationAction: WKNavigationAction) async -> WKNavigationActionPolicy {
-            guard let urlString = navigationAction.request.url?.absoluteString else {
-                return .cancel
+        func userContentController(_: WKUserContentController, didReceive message: WKScriptMessage) {
+            let decoder = JSONDecoder()
+            guard let body = message.body as? String,
+                  let response = try? decoder.decode(CallbackResponse.self, from: Data(body.utf8))
+            else {
+                parent.callback(nil)
+                return
             }
 
-            if urlString.hasPrefix("js:") {
-                let decoder = JSONDecoder()
-
-                guard let jsonString = urlString.components(separatedBy: "js:").last?.removingPercentEncoding,
-                      let response = try? decoder.decode(CallbackResponse.self, from: Data(jsonString.utf8))
-                else {
-                    parent.callback(nil)
-                    return .cancel
-                }
-
-                parent.callback(response)
-
-                return .cancel
-            }
-
-            return .allow
+            print(response)
+            parent.callback(response)
         }
     }
 
+    class UserController: WKUserContentController {}
+
     struct CallbackResponse: Decodable {
         var action: String
-        var response: String
+        var response: String?
     }
 }
 
 #if os(macOS)
     extension RegisterWebView: NSViewRepresentable {
         func makeNSView(context: Context) -> WKWebView {
-            let view = WKWebView()
+            let view = WKWebView(frame: .zero, configuration: getConfig(context: context))
 
             view.navigationDelegate = context.coordinator
 
@@ -76,7 +88,7 @@ struct RegisterWebView {
 #else
     extension RegisterWebView: UIViewRepresentable {
         func makeUIView(context: Context) -> WKWebView {
-            let view = WKWebView()
+            let view = WKWebView(frame: .zero, configuration: getConfig(context: context))
 
             view.navigationDelegate = context.coordinator
 
@@ -97,70 +109,6 @@ struct RegisterWebView {
         }
     }
 #endif
-
-/*
- struct RegisterWebView: UIViewRepresentable {
-     @State var url: URL?
-     @State var html: String?
-     @State var callback: (CallbackResponse?) -> Void
-
-     func makeUIView(context: Context) -> WKWebView {
-         let view = WKWebView()
-
-         view.navigationDelegate = context.coordinator
-
-         return view
-     }
-
-     func updateUIView(_ uiView: UIViewType, context: Context) {
-         if let html = html {
-             uiView.loadHTMLString(html, baseURL: url)
-         } else if let url = url {
-             uiView.load(URLRequest(url: url))
-         }
-         uiView.navigationDelegate = context.coordinator
-     }
-
-     func makeCoordinator() -> Coordinator {
-         Coordinator(self)
-     }
-
-     class Coordinator: NSObject, WKNavigationDelegate {
-         let parent: RegisterWebView
-
-         init(_ parent: RegisterWebView) {
-             self.parent = parent
-         }
-
-         func webView(_: WKWebView, decidePolicyFor navigationAction: WKNavigationAction) async -> WKNavigationActionPolicy {
-             guard let urlString = navigationAction.request.url?.absoluteString else {
-                 return .cancel
-             }
-
-             if urlString.hasPrefix("js:") {
-                 let decoder = JSONDecoder()
-
-                 guard let jsonString = urlString.components(separatedBy: "js:").last?.removingPercentEncoding,
-                       let response = try? decoder.decode(CallbackResponse.self, from: Data(jsonString.utf8))
-                 else {
-                     parent.callback(nil)
-                     return .cancel
-                 }
-
-                 parent.callback(response)
-
-                 return .cancel
-             }
-
-             return .allow
-         }
-     }
-
-     struct CallbackResponse: Decodable {
-         var action: String
-         var response: String
-     }
- }*/
 
 struct RegisterWebView_Previews: PreviewProvider {
     static var previews: some View {

@@ -36,18 +36,10 @@ struct RegisterRecaptchaView: View {
         <head>
         <meta name='viewport' content='initial-scale=1.0' />
         <script type="text/javascript">
-        var verifyCallback = function(response) {
-            /* Generic method to make a bridge between JS and the WKWebView */
-            var iframe = document.createElement('iframe');
-            iframe.setAttribute('src', 'js:' + JSON.stringify({'action': 'verifyCallback', 'response': response}));
-            document.documentElement.appendChild(iframe);
-            iframe.parentNode.removeChild(iframe);
-            iframe = null;
-        };
         var onloadCallback = function() {
           grecaptcha.render('recaptcha_widget', {
             'sitekey' : "\(publicKey ?? "")",
-            'callback': verifyCallback
+            'callback': window.recaptchaCallback
           });
         };
 
@@ -65,13 +57,14 @@ struct RegisterRecaptchaView: View {
         if publicKey != nil {
             RegisterWebView(url: URL(string: serverUrl), html: html, callback: { response in
                 guard let response = response,
-                      response.action == "verifyCallback"
+                      response.action == "verifyCallback",
+                      let response = response.response
                 else {
                     logger.warning("Could not get json response from WebView")
                     return
                 }
 
-                callback(response.response)
+                callback(response)
             })
         } else {
             VStack {
