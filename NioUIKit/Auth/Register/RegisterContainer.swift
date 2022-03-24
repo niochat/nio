@@ -19,11 +19,11 @@ public struct RegisterContainer: View {
 
     var logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "register")
 
+    @State private var registerFlows: MatrixInteractiveAuth?
+
     @State private var currentState: CurrentState = .`init`
     @State private var currentServer: String = "matrix.org"
-    @State private var newServer: String = "matrix.org"
 
-    @State private var supportsRegistration: Bool = true
     @State private var supportsEmail: Bool = false
     @State private var requiresEmail: Bool = false
     private var emailClientSecret: String = MatrixRegisterRequestEmailTokenRequest.generateClientSecret()
@@ -45,7 +45,7 @@ public struct RegisterContainer: View {
             ProgressView()
                 .task {
                     Task {
-                        await self.probeServer()
+                        await self.probeServer(currentServer)
                     }
                 }
         case .login:
@@ -95,48 +95,23 @@ public struct RegisterContainer: View {
             }.padding()
 
         case .server:
-            VStack {
-                HStack {
-                    Button("Cancel", role: .cancel) {
-                        currentState = .login
-                    }
-                    Spacer(minLength: 0)
+            AuthServerPicker(currentServer: currentServer, dismissCallback: {
+                self.currentState = .login
+            }, okCallback: { values in
+                self.currentServer = values.serverName
+                self.matrixClient = MatrixClient(homeserver: values.homeserver)
+                self.currentState = .login
 
-                    Button("Ok") {
-                        currentState = .working
+                self.supportsEmail = values.auth!.isOptional(.email)
+                self.requiresEmail = values.auth!.isRequierd(.email)
 
-                        Task {
-                            await self.probeServer()
-                        }
-                    }
-                }
+                self.registerFlows = values.auth
 
-                Spacer(minLength: 0)
-
-                if !supportsRegistration {
-                    Text("Registration not supported by Homeserver")
-                        .bold()
-                        .foregroundColor(.red)
-                }
-
-                Text("Decide where your account is hosted")
-                    .bold()
-
-                Text("We call the places where you can host your account 'homeservers'. Matrix.org is the biggest public homeserver in the world, so it's a good place for many.").fontWeight(.light)
-
-                TextField("Homeserver", text: $newServer)
-                #if os(iOS)
-                    .keyboardType(.URL)
-                    .textContentType(.URL)
-                #endif
-
-                Spacer(minLength: 0)
-            }
-
+            }, checkRegister: true, logger: logger)
         case let .flow(flow):
             switch flow.flow {
             case .recaptcha:
-                RegisterRecaptchaView(serverUrl: currentServer, parameters: flow.params, callback: { token in
+                RegisterRecaptchaView(serverUrl: (matrixClient?.homeserver.url.url!)!, parameters: flow.params, callback: { token in
                     logger.debug("got recaptcha token: \(token)")
                     Task {
                         let auth = MatrixInteractiveAuthResponse(recaptchaResponse: token, session: session)
@@ -180,37 +155,25 @@ public struct RegisterContainer: View {
         }
     }
 
-    func probeServer() async {
-        do {
-            if !newServer.hasPrefix("http") {
-                newServer = "https://\(newServer)"
-            }
+    func probeServer(_ newServer: String) async {
+        let (homeserver, state, auth) = await AuthServerPicker.probeServer(server: newServer, logger: logger, checkRegister: true)
 
-            let homeserver = try await MatrixHomeserver(resolve: newServer)
-            let client = MatrixClient(homeserver: homeserver)
-
-            let registerFlows = try await client.getRegisterFlows()
-
-            supportsEmail = registerFlows.isOptional(.email)
-            requiresEmail = registerFlows.isRequierd(.email)
-
-            matrixClient = client
-
-            currentServer = newServer
-            currentState = .login
-        } catch let error as MatrixServerError {
-            if error.errcode == .Forbidden {
-                logger.info("Register is not supported by the homeserver")
-                supportsRegistration = false
-            } else {
-                logger.error("\(error.localizedDescription)")
-            }
-            currentState = .server
-        } catch {
-            logger.error("\(error.localizedDescription)")
-
-            currentState = .server
+        guard state.canRegister,
+              let homeserver = homeserver,
+              let auth = auth
+        else {
+            logger.fault("Default server cannot register")
+            return
         }
+
+        matrixClient = MatrixClient(homeserver: homeserver)
+        currentState = .login
+
+        supportsEmail = auth.isOptional(.email)
+        requiresEmail = auth.isRequierd(.email)
+
+        registerFlows = auth
+        currentState = .login
     }
 
     // FIXME: don't throw
@@ -226,37 +189,30 @@ public struct RegisterContainer: View {
             return
         }
 
-        var auth: MatrixInteractiveAuth?
-
-        if session == nil {
-            let register = try await matrixClient.register(password: password, username: username)
-
-            if let register = register.successData {
-                callback(register)
-                return
-            }
-
-            if let interactive = register.interactiveData {
-                session = interactive.session
-                auth = interactive
-            }
+        let register = try await matrixClient.register(password: password, username: username)
+        if let register = register.successData {
+            callback(register)
+            return
         }
 
-        if let session = session {
-            if let auth = auth {
-                if auth.isOptional(notCompletedFlow: .email) {
-                    logger.debug("requesting email SID: \(emailSendAttempt)")
-                    let emailTokenRequest = try await matrixClient.requestEmailToken(clientSecret: emailClientSecret, email: email, sendAttempt: emailSendAttempt)
+        guard let auth = register.interactiveData,
+              let session = auth.session
+        else {
+            fatalError("neither success nor interactive")
+        }
+        self.session = session
+        registerFlows = auth
 
-                    emailSID = emailTokenRequest.sid
-                }
+        if auth.isOptional(notCompletedFlow: .email) {
+            logger.debug("requesting email SID: \(emailSendAttempt)")
+            let emailTokenRequest = try await matrixClient.requestEmailToken(clientSecret: emailClientSecret, email: email, sendAttempt: emailSendAttempt)
 
-                if let nextStage = auth.nextStageWithParams {
-                    currentState = .flow(nextStage)
-                }
+            emailSID = emailTokenRequest.sid
+        }
 
-                print("next: \(String(describing: auth.nextStage))")
-            }
+        if let nextStage = auth.nextStageWithParams {
+            logger.debug("entering stage: \(nextStage.flow.rawValue)")
+            currentState = .flow(nextStage)
         }
     }
 

@@ -13,11 +13,11 @@ import WebKit
 struct RegisterRecaptchaView: View {
     var logger = Logger(subsystem: "\(Bundle.main.bundleIdentifier!).register.recaptcha", category: "register")
 
-    var serverUrl: String
+    var serverUrl: URL
     var publicKey: String?
     var callback: (String) -> Void
 
-    init(serverUrl: String, parameters params: AnyCodable?, callback: @escaping ((String) -> Void)) {
+    init(serverUrl: URL, parameters params: AnyCodable?, callback: @escaping ((String) -> Void)) {
         if let params = params,
            let params = params.value as? [String: Any],
            let publicKey = params["public_key"] as? String
@@ -55,7 +55,7 @@ struct RegisterRecaptchaView: View {
 
     var body: some View {
         if publicKey != nil {
-            RegisterWebView(url: URL(string: serverUrl), html: html, callback: { response in
+            RegisterWebView(url: serverUrl, html: html, callback: { response in
                 guard let response = response,
                       response.action == "verifyCallback",
                       let response = response.response
@@ -80,6 +80,6 @@ struct RegisterRecaptchaView: View {
 
 struct RegisterRecaptchaView_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterRecaptchaView(serverUrl: "", parameters: nil, callback: { _ in })
+        RegisterRecaptchaView(serverUrl: URL(string: "https://example.com")!, parameters: nil, callback: { _ in })
     }
 }
