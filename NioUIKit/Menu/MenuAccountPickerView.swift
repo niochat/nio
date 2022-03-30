@@ -15,20 +15,10 @@ public struct MenuAccountPickerContainerView: View {
     @AppStorage("showAccountsInPicker") var showAccounts: Bool = false
 
     public var body: some View {
-        VStack(alignment: .leading) {
-            Button(action: {
-                showAccounts.toggle()
-            }) {
-                Image(systemName: "greaterthan")
-                    .foregroundColor(.gray)
-                    .imageScale(.medium)
-                    .rotationEffect(showAccounts ? .degrees(90) : .zero)
-            }.padding(.bottom)
-
-            if showAccounts {
-                MenuAccountPickerView(currentAccount: $currentAccount)
-                    .padding(.leading)
-            }
+        DisclosureGroup("Accounts", isExpanded: $showAccounts) {
+            MenuAccountPickerView(currentAccount: $currentAccount)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.top)
         }
     }
 }
@@ -47,12 +37,13 @@ public struct MenuAccountPickerView: View {
     public var body: some View {
         VStack(alignment: .leading) {
             ForEach(accounts, id: \.userID) { account in
-                Button(action: {
+                Button {
                     print("switching account to \(account.userID ?? "Unknown user")")
                     currentAccount = account.userID ?? ""
-                }) {
+                } label: {
                     MenuAccountPickerAccountView(account: account).tag(account.userID ?? "Unknown user")
-                }.padding(.vertical)
+                }
+                .padding(.vertical)
             }
 
             Button(action: {
@@ -76,11 +67,7 @@ struct MenuAccountPickerAccountView: View {
     let account: MatrixAccount
 
     var body: some View {
-        HStack {
-            // TODO: if account.avatarURL
-            Image(systemName: "person")
-                .foregroundColor(.gray)
-                .imageScale(.large)
+        Label {
             VStack(alignment: .leading) {
                 Text(account.displayName ?? account.userID ?? "Unknown user")
                     .foregroundColor(.gray)
@@ -91,6 +78,11 @@ struct MenuAccountPickerAccountView: View {
                         .font(.subheadline)
                 }
             }
+        } icon: {
+            // TODO: avatar
+            Image(systemName: "person")
+                .foregroundColor(.gray)
+                .imageScale(.large)
         }
     }
 }
@@ -103,6 +95,7 @@ struct MenuAccountPickerView_Previews: PreviewProvider {
 
             MenuAccountPickerContainerView(currentAccount: .constant("@amir_sanders:example.com"), showAccounts: true)
                 .previewLayout(.fixed(width: 300, height: 200))
+                .padding()
         }
         .environment(\.managedObjectContext, MatrixStore.preview.viewContext)
     }
