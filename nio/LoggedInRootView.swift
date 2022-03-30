@@ -6,6 +6,7 @@
 //
 
 import MatrixCore
+import NioKit
 import SwiftUI
 
 struct LoggedInRootView: View {
@@ -13,10 +14,21 @@ struct LoggedInRootView: View {
 
     @FetchRequest(sortDescriptors: []) var accounts: FetchedResults<MatrixAccount>
 
+    @EnvironmentObject var store: NioAccountStore
+
     var body: some View {
         VStack {
-            ForEach(accounts, id: \.self) { account in
-                Text(account.userID ?? "??")
+            ForEach(Array(store.accounts.keys), id: \.self) { key in
+                Button((store.accounts[key]?.displayName ?? store.accounts[key]?.userID.FQMXID) ?? "??") {
+                    Task {
+                        do {
+                            try await store.logout(accountName: key)
+                        } catch {
+                            print(error)
+                        }
+                        print("foo")
+                    }
+                }
             }
             Button("delete", role: .destructive) {
                 Task {

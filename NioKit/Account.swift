@@ -9,6 +9,7 @@ import Foundation
 import MatrixClient
 import MatrixCore
 import OSLog
+import Security
 
 @MainActor
 public class NioAccountStore: ObservableObject {
@@ -61,13 +62,50 @@ public class NioAccountStore: ObservableObject {
         }
         NioAccountStore.logger.debug("Added new Account to store")
     }
+
+    // MARK: - logout
+
+    public func logout(account: NioAccount) async throws {
+        let userID = await account.userID.FQMXID!
+        accounts.removeValue(forKey: userID)
+
+        try await account.logout()
+    }
+
+    public func logout(accountName: String) async throws {
+        guard let account = accounts.removeValue(forKey: accountName) else {
+            return
+        }
+
+        try await account.logout()
+    }
+
+    public static func removeAllKeychainEntries() {
+        var keychainQuery = MatrixCore.extraKeychainArguments
+
+        keychainQuery[kSecClass as String] = kSecClassInternetPassword
+
+        let status = SecItemDelete(keychainQuery as CFDictionary)
+        guard status == errSecSuccess else {
+            NioAccountStore.logger.fault("Failed to delete keychain items: \(status)")
+            return
+        }
+    }
 }
 
 @MainActor
 public class NioAccount: ObservableObject {
-    let matrixCore: MatrixCore
+    public let matrixCore: MatrixCore
+    public let userID: MatrixUserIdentifier
+    public let displayName: String?
 
     public init(_ account: MatrixCore) async {
         matrixCore = account
+        userID = await account.userID
+        displayName = await account.displayName
+    }
+
+    public func logout() async throws {
+        try await matrixCore.logout()
     }
 }

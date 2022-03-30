@@ -17,6 +17,7 @@ struct RootView: View {
         if account.hasAccount {
             LoggedInRootView()
                 .environment(\.managedObjectContext, MatrixStore.shared.viewContext)
+                .environmentObject(account)
         } else {
             NavigationView {
                 VStack {
@@ -39,6 +40,16 @@ struct RootView: View {
                                     // try await account.store.addMatrixAccount(homeserver: .init(resolve: "https://matrix.org"), userID: "@kloenk_nio:matrix.org")
                                 } catch {
                                     print(error)
+                                }
+                            }
+                        }
+
+                        Button("deleteAll") {
+                            Task {
+                                do {
+                                    try await MatrixStore.shared.deleteAll()
+                                } catch {
+                                    fatalError("\(error.localizedDescription)")
                                 }
                             }
                         }
