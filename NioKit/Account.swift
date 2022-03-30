@@ -38,7 +38,7 @@ public class NioAccountStore: ObservableObject {
         let accounts = try await MatrixCore.loadFromCoreData()
 
         for account in accounts {
-            self.accounts[await account.userID.FQMXID!] = await NioAccount(account)
+            await addAccount(account: account)
         }
 
         NioAccountStore.logger.info("Finished loading from CoreData")
@@ -55,12 +55,17 @@ public class NioAccountStore: ObservableObject {
     public func addAccount(homeserver: MatrixHomeserver, login: MatrixLogin) async {
         do {
             let account = try await MatrixCore(homeserver: homeserver, login: login, matrixStore: store)
-            accounts[await account.userID.FQMXID!] = await NioAccount(account)
+            await addAccount(account: account)
         } catch {
             NioAccountStore.logger.fault("Failed to create MatrixCore instance: \(error.localizedDescription)")
             assertionFailure("Login did not create a MatrixCore instance")
         }
         NioAccountStore.logger.debug("Added new Account to store")
+    }
+
+    internal func addAccount(account: MatrixCore) async {
+        let nioAccount = await NioAccount(account)
+        accounts[nioAccount.userID.FQMXID!] = nioAccount
     }
 
     // MARK: - logout
@@ -81,7 +86,7 @@ public class NioAccountStore: ObservableObject {
     }
 
     public static func removeAllKeychainEntries() {
-        var keychainQuery = MatrixCore.extraKeychainArguments
+        var keychainQuery = MatrixCoreSettings.extraKeychainArguments
 
         keychainQuery[kSecClass as String] = kSecClassInternetPassword
 
@@ -97,12 +102,20 @@ public class NioAccountStore: ObservableObject {
 public class NioAccount: ObservableObject {
     public let matrixCore: MatrixCore
     public let userID: MatrixUserIdentifier
-    public let displayName: String?
+
+    // MARK: Computed variables
+
+    public var displayName: String? {
+        matrixCore.displayName
+    }
 
     public init(_ account: MatrixCore) async {
         matrixCore = account
-        userID = await account.userID
-        displayName = await account.displayName
+        userID = account.userID
+
+        Task {
+            try await self.matrixCore.updateDisplayName()
+        }
     }
 
     public func logout() async throws {
