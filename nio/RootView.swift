@@ -11,13 +11,13 @@ import NioUIKit
 import SwiftUI
 
 struct RootView: View {
-    @ObservedObject var account = NioAccountStore.shared
+    @ObservedObject var store = NioAccountStore.shared
 
     var body: some View {
-        if account.hasAccount {
+        if store.hasAccount {
             LoggedInRootView()
                 .environment(\.managedObjectContext, MatrixStore.shared.viewContext)
-                .environmentObject(account)
+                .environmentObject(store)
         } else {
             NavigationView {
                 VStack {
@@ -29,7 +29,7 @@ struct RootView: View {
                     NavigationLink("Login") {
                         LoginContainerView { homeserver, response in
                             Task {
-                                await account.addAccount(homeserver: homeserver, login: response)
+                                await store.addAccount(homeserver: homeserver, login: response)
                             }
                         }
                     }
