@@ -51,7 +51,7 @@ public struct MenuAccountPickerView: View {
                     print("switching account to \(account.userID ?? "Unknown user")")
                     currentAccount = account.userID ?? ""
                 }) {
-                    MenuAccountPickerAccountView(currentAccount: $currentAccount, account: account).tag(account.userID ?? "Unknown user")
+                    MenuAccountPickerAccountView(account: account).tag(account.userID ?? "Unknown user")
                 }.padding(.vertical)
             }
 
@@ -73,8 +73,6 @@ public struct MenuAccountPickerView: View {
 }
 
 struct MenuAccountPickerAccountView: View {
-    @Binding var currentAccount: String
-
     let account: MatrixAccount
 
     var body: some View {
@@ -83,9 +81,16 @@ struct MenuAccountPickerAccountView: View {
             Image(systemName: "person")
                 .foregroundColor(.gray)
                 .imageScale(.large)
-            Text(account.displayName ?? account.userID ?? "Unknown user")
-                .foregroundColor(.gray)
-                .font(.headline)
+            VStack(alignment: .leading) {
+                Text(account.displayName ?? account.userID ?? "Unknown user")
+                    .foregroundColor(.gray)
+                    .font(.headline)
+                if account.displayName != nil {
+                    Text(account.userID ?? "Unknown mxid")
+                        .foregroundColor(.gray)
+                        .font(.subheadline)
+                }
+            }
         }
     }
 }

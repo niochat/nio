@@ -30,25 +30,10 @@ struct MenuOwnAccountView: View {
     var body: some View {
         VStack(alignment: .leading) {
             ForEach(accounts, id: \.userID) { account in
-                HStack {
-                    // TODO: if account.avatarURL
-                    Image(systemName: "person")
-                        .foregroundColor(.gray)
-                        .imageScale(.large)
-                        .frame(width: 45, height: 45)
-
-                    VStack(alignment: .leading) {
-                        Text(account.displayName ?? account.userID ?? "Unknown User")
-                            .foregroundColor(.gray)
-                            .font(.headline)
-
-                        // Only show handle if not shown above
-                        if account.displayName != nil {
-                            Text(account.userID ?? "Unknown mxid")
-                                .foregroundColor(.gray)
-                                .font(.subheadline)
-                        }
-                    }
+                NavigationLink(destination: {
+                    Text("Account")
+                }) {
+                    MenuAccountPickerAccountView(account: account)
                 }
             }
             // TODO: add a banner if no accounts are returned, because of an Invalid currentAccount?
