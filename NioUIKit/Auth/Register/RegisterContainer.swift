@@ -6,13 +6,13 @@
 //
 
 import MatrixClient
-import os
+import OSLog
 import SwiftUI
 
 public struct RegisterContainer: View {
     // TODO: callback functions
 
-    var callback: (MatrixRegister) -> Void
+    var callback: (MatrixHomeserver, MatrixRegister) -> Void
 
     @State private var matrixClient: MatrixClient?
     @State private var session: String?
@@ -35,7 +35,7 @@ public struct RegisterContainer: View {
     @State private var confirmPassword: String = ""
     @State private var email: String = ""
 
-    public init(callback: @escaping ((MatrixRegister) -> Void)) {
+    public init(callback: @escaping ((MatrixHomeserver, MatrixRegister) -> Void)) {
         self.callback = callback
     }
 
@@ -100,12 +100,13 @@ public struct RegisterContainer: View {
             }, okCallback: { values in
                 self.currentServer = values.serverName
                 self.matrixClient = MatrixClient(homeserver: values.homeserver)
-                self.currentState = .login
 
                 self.supportsEmail = values.auth!.isOptional(.email)
                 self.requiresEmail = values.auth!.isRequierd(.email)
 
                 self.registerFlows = values.auth
+
+                self.currentState = .login
 
             }, checkRegister: true, logger: logger)
         case let .flow(flow):
@@ -191,7 +192,7 @@ public struct RegisterContainer: View {
 
         let register = try await matrixClient.register(password: password, username: username)
         if let register = register.successData {
-            callback(register)
+            callback(matrixClient.homeserver, register)
             return
         }
 
@@ -232,7 +233,7 @@ public struct RegisterContainer: View {
                 }
                 currentState = .flow(matrixInteractiveAuth.nextStageWithParams!)
             case let .success(matrixRegister):
-                callback(matrixRegister)
+                callback(matrixClient.homeserver, matrixRegister)
                 return
             }
         } catch {
@@ -250,7 +251,7 @@ public struct RegisterContainer: View {
 }
 
 /// View holding The Server Options info dialog and the container.
-private struct RegisterContainerServerOptions: View {
+internal struct RegisterContainerServerOptions: View {
     @State private var showPopover: Bool = false
 
     var body: some View {
@@ -277,7 +278,7 @@ private struct RegisterContainerServerOptions: View {
 struct RegisterContainer_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            RegisterContainer(callback: { token in
+            RegisterContainer(callback: { _, token in
                 print("got token: \(token)")
             })
         }
