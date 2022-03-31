@@ -15,13 +15,8 @@ public struct MenuContainerView<Content: View>: View {
 
     let content: () -> Content
 
-    public init(currentAccount: Binding<String>, content: @escaping () -> Content) {
-        _currentAccount = currentAccount
-        self.content = content
-    }
-
-    public var body: some View {
-        let drag = DragGesture()
+    var dragGesture: some Gesture {
+        DragGesture()
             .onEnded { vector in
                 if vector.translation.width < -100 {
                     withAnimation {
@@ -29,8 +24,15 @@ public struct MenuContainerView<Content: View>: View {
                     }
                 }
             }
+    }
 
-        return GeometryReader { geometry in
+    public init(currentAccount: Binding<String>, content: @escaping () -> Content) {
+        _currentAccount = currentAccount
+        self.content = content
+    }
+
+    public var body: some View {
+        GeometryReader { geometry in
             ZStack(alignment: .leading) {
                 content()
                     .frame(width: geometry.size.width, height: geometry.size.height)
@@ -41,7 +43,7 @@ public struct MenuContainerView<Content: View>: View {
                         .frame(width: geometry.size.width * 0.8, height: geometry.size.height)
                 }
             }
-            .gesture(drag)
+            .gesture(dragGesture)
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
