@@ -6,6 +6,7 @@
 //
 
 import MatrixCore
+import NioKit
 import SwiftUI
 
 struct ProfileSettingsContainerView: View {
@@ -35,15 +36,14 @@ struct ProfileSettingsContainerView: View {
 
             Section(header: Text("SECURITY")) {
                 NavigationLink("Security") {
-                    VStack {
-                        Text("Device id's and fun")
-                    }
-                    .navigationTitle("Security")
+                    ProfileSettingsSecurityContainerView()
+                        .environmentObject(account)
                 }
             }
 
-            ProfileSettingsDangerZone(account: account)
+            ProfileSettingsDangerZone()
         }
+        .environmentObject(account)
         .navigationTitle(account.displayName ?? account.userID ?? "Settings")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -65,7 +65,8 @@ struct ProfileSettingsContainerView: View {
 }
 
 struct ProfileSettingsDangerZone: View {
-    @ObservedObject var account: MatrixAccount
+    @EnvironmentObject var account: MatrixAccount
+    @EnvironmentObject var store: NioAccountStore
 
     @Environment(\.dismiss) private var dismiss
 
@@ -81,6 +82,13 @@ struct ProfileSettingsDangerZone: View {
             .confirmationDialog("Are you sure you want to sign out?", isPresented: $showSignOutDialog, titleVisibility: .visible) {
                 Button("Sign out", role: .destructive) {
                     print("TODO: implement sign out")
+                    Task(priority: .userInitiated) {
+                        do {
+                            try await self.store.logout(accountName: account.userID!)
+                        } catch {
+                            NioAccountStore.logger.fault("Failed to log out: \(error.localizedDescription)")
+                        }
+                    }
                     // TODO:
                 }
             }
