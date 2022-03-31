@@ -7,6 +7,7 @@
 
 import MatrixCore
 import NioKit
+import NioUIKit
 import SwiftUI
 
 struct LoggedInRootView: View {
@@ -16,30 +17,20 @@ struct LoggedInRootView: View {
 
     @EnvironmentObject var store: NioAccountStore
 
+    @AppStorage("LastSelectedAccount") var currentSelectedAccountName: String = ""
+
+    @State var currentSelectedAccount: NioAccount?
+
     var body: some View {
-        VStack {
-            ForEach(Array(store.accounts.keys), id: \.self) { key in
-                Button((store.accounts[key]?.displayName ?? store.accounts[key]?.userID.FQMXID) ?? "??") {
-                    Task {
-                        do {
-                            try await store.logout(accountName: key)
-                        } catch {
-                            print(error)
-                        }
-                        print("foo")
-                    }
+        NavigationView {
+            MenuContainerView(currentAccount: $currentSelectedAccountName) {
+                Text("foo")
+            }.task {
+                if self.currentSelectedAccount == nil {
+                    self.currentSelectedAccountName = store.accounts.keys.first ?? ""
                 }
-            }
-            Button("delete", role: .destructive) {
-                Task {
-                    try? await self.context.perform {
-                        let accounts = try self.context.fetch(MatrixAccount.fetchRequest())
-                        for account in accounts {
-                            self.context.delete(account)
-                        }
-                        try self.context.save()
-                    }
-                }
+
+                self.currentSelectedAccount = store.accounts[self.currentSelectedAccountName]
             }
         }
     }
