@@ -5,14 +5,21 @@
 //  Created by Finn Behrens on 30.03.22.
 //
 
+import MatrixClient
 import MatrixCore
 import NioKit
 import SwiftUI
 
 struct ProfileSettingsContainerView: View {
     @ObservedObject var account: MatrixAccount
+    @EnvironmentObject var store: NioAccountStore
 
+    @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) private var dismiss
+
+    @State var capabilities = MatrixCapabilities()
+
+    @State var task: Task<Void, Never>?
 
     var body: some View {
         List {
@@ -26,12 +33,14 @@ struct ProfileSettingsContainerView: View {
 
                     TextField("Display Name", text: $account.wrappedDisplayName)
                         .multilineTextAlignment(.trailing)
+                        .disabled(!self.capabilities.capabilities.canSetDisplayName)
                 }
 
                 // Password
                 Button("Change password", role: .destructive) {
                     print("TODO: implement change password")
                 }
+                .disabled(!self.capabilities.capabilities.canChangePassword)
             }
 
             Section(header: Text("SECURITY")) {
@@ -50,16 +59,59 @@ struct ProfileSettingsContainerView: View {
             ToolbarItem {
                 Button(action: {
                     print("saving...")
-                    // TODO: save to CoreData
-                    dismiss()
+                    Task(priority: .userInitiated) {
+                        let changes = account.changedValues()
+
+                        let nioAccount = store.accounts[account.userID!]!
+
+                        if let displayName = changes["displayName"] as? String {
+                            NioAccountStore.logger.debug("Changing displayName to \(displayName)")
+
+                            do {
+                                try await nioAccount.matrixCore.client.setDisplayName(displayName, userID: account.userID!)
+                            } catch {
+                                NioAccountStore.logger.fault("Failed to save displayName to matrix account")
+                            }
+                        }
+                        do {
+                            try moc.save()
+                        } catch {
+                            NioAccountStore.logger.fault("Failed to save changed account to CoreData")
+                        }
+
+                        // TODO: save to CoreData
+                        self.dismiss()
+                    }
                 }) {
                     Text("Save")
                 }
                 .disabled(!account.hasChanges)
             }
         }
+        .onAppear {
+            moc.undoManager = UndoManager()
+            self.probeServer()
+        }
         .onDisappear {
+            task?.cancel()
             print("discarding")
+            moc.undoManager?.undo()
+            moc.undoManager = nil
+        }
+    }
+
+    private func probeServer() {
+        task = Task(priority: .high) {
+            let nioAccount = store.accounts[account.userID!]
+
+            do {
+                let capabilities = try await nioAccount?.matrixCore.client.getCapabilities()
+                if let capabilities = capabilities {
+                    self.capabilities = capabilities
+                }
+            } catch {
+                NioAccountStore.logger.fault("Failed to get server capabilities")
+            }
         }
     }
 }

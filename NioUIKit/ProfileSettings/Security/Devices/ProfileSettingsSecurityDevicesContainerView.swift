@@ -63,6 +63,9 @@ struct ProfileSettingsSecurityDevicesContainerView: View {
                 }
             }
         }
+        .refreshable {
+            await self.updateDevices()
+        }
         .toolbar {
             ToolbarItem {
                 if editMode == .active {
@@ -87,19 +90,23 @@ struct ProfileSettingsSecurityDevicesContainerView: View {
     }
 
     private func updateDevices() {
-        NioAccountStore.logger.debug("Updating device list")
         Task(priority: .high) {
-            do {
-                var devices = try await self.store.accounts[account.userID!]?.matrixCore.client.getDevices().devices ?? []
+            await self.updateDevices()
+        }
+    }
 
-                if let ownIndex = devices.firstIndex(where: { $0.deviceID == account.deviceID ?? "" }) {
-                    self.ownDevice = devices.remove(at: ownIndex)
-                }
+    private func updateDevices() async {
+        NioAccountStore.logger.debug("Updating device list")
+        do {
+            var devices = try await store.accounts[account.userID!]?.matrixCore.client.getDevices().devices ?? []
 
-                self.devices = devices
-            } catch {
-                NioAccountStore.logger.fault("Failed to get device list: \(error.localizedDescription)")
+            if let ownIndex = devices.firstIndex(where: { $0.deviceID == account.deviceID ?? "" }) {
+                ownDevice = devices.remove(at: ownIndex)
             }
+
+            self.devices = devices
+        } catch {
+            NioAccountStore.logger.fault("Failed to get device list: \(error.localizedDescription)")
         }
     }
 

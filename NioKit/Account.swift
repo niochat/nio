@@ -71,7 +71,7 @@ public class NioAccountStore: ObservableObject {
     // MARK: - logout
 
     public func logout(account: NioAccount) async throws {
-        let userID = await account.userID.FQMXID!
+        let userID = account.userID.FQMXID!
         accounts.removeValue(forKey: userID)
 
         try await account.logout()
