@@ -10,6 +10,7 @@
 
 NIO_NAMESPACE                   = chat.nio
 DEVELOPMENT_TEAM                = Z123456789
+MARKETING_VERSION               = 0.1.0
 
 APPGROUP                        = $(NIO_NAMESPACE)
 

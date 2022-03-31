@@ -32,7 +32,7 @@ targets:
       - NioKit
     dependencies:
       - package: MatrixCore
-        product: MatrixClient
+        product: MatrixCore
     configFiles:
       Debug: configs/NioKit.xcconfig
       Release: configs/NioKit.xcconfig
@@ -62,6 +62,7 @@ targets:
     dependencies:
       - target: NioKit_iOS
       - target: NioUIKit_iOS
+    scheme: {}
   Nio_macOS:
     platform: macOS
     type: application
