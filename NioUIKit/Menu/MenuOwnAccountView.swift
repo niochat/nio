@@ -31,7 +31,7 @@ struct MenuOwnAccountView: View {
         VStack(alignment: .leading) {
             ForEach(accounts, id: \.userID) { account in
                 NavigationLink(destination: {
-                    Text("Account")
+                    ProfileSettingsContainerView(account: account)
                 }) {
                     MenuAccountPickerAccountView(account: account)
                 }
