@@ -80,6 +80,7 @@ struct ProfileSettingsContainerView: View {
                         }
 
                         // TODO: save to CoreData
+                        self.moc.undoManager = nil
                         self.dismiss()
                     }
                 }) {
@@ -89,14 +90,14 @@ struct ProfileSettingsContainerView: View {
             }
         }
         .onAppear {
-            moc.undoManager = UndoManager()
+            self.moc.undoManager = UndoManager()
             self.probeServer()
         }
         .onDisappear {
-            task?.cancel()
+            self.task?.cancel()
             print("discarding")
-            moc.undoManager?.undo()
-            moc.undoManager = nil
+            self.moc.undoManager?.undo()
+            self.moc.undoManager = nil
         }
     }
 
