@@ -6,11 +6,13 @@ configFiles:
   Release: configs/Release.xcconfig
 packages:
   MatrixCore:
-    url: https://github.com/MatrixCore/MatrixCore
+    path: "../MatrixCore"
     branch: main
+    #url: https://github.com/MatrixCore/MatrixCore
   MatrixSQLiteStore:
+    path: "../MatrixSQLiteStore"
     branch: main
-    url: https://github.com/MatrixCore/MatrixSQLiteStore
+    #url: https://github.com/MatrixCore/MatrixSQLiteStore
 targets:
   NioTests:
     platform: iOS

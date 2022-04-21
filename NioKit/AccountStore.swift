@@ -19,10 +19,7 @@ public class NioAccountStore: ObservableObject {
 
     public static let shared = NioAccountStore()
 
-    @Published public internal(set) var accounts: [String: NioAccount]
-
-    @AppStorage("currentAccount")
-    public internal(set) var currentAccount: String?
+    @Published public internal(set) var accounts: [NioAccount] = []
 
     public private(set) var store: Store
 
@@ -32,22 +29,9 @@ public class NioAccountStore: ObservableObject {
         !accounts.isEmpty
     }
 
-    public var getAccount: NioAccount? {
-        if let currentAccount = currentAccount {
-            return accounts[currentAccount]
-        }
-        if let account = accounts.first?.value {
-            currentAccount = account.mxID.FQMXID
-            return account
-        }
-        return nil
-    }
-
     // MARK: - init
 
     private init(preview: Bool = false) {
-        accounts = [:]
-
         if _fastPath(!preview) {
             let db = try! FileManager.default.url(
                 for: .documentDirectory,
@@ -69,7 +53,7 @@ public class NioAccountStore: ObservableObject {
                 try await self.runInit()
                 #if DEBUG
                     if preview {
-                        try await self.populatePreviewData()
+                        await self.populatePreviewData()
                     }
                 #endif
             } catch {
@@ -82,61 +66,57 @@ public class NioAccountStore: ObservableObject {
         let accounts = try await store.getAccounts()
 
         for account in accounts {
-            await addAccount(account)
+            addAccount(account)
         }
     }
 
-    public func addAccount(_ account: MatrixCore<Store>) async {
-        accounts[account.FQMXID] = NioAccount(core: account)
+    public func addAccount(_ account: MatrixCore<Store>) {
+        addAccount(NioAccount(core: account))
     }
 
-    /// Switch to account descriped by account.
-    ///
-    /// Throws ``MatrixCoreError.missingData`` when account does not exists.
-    public func switchToAccount(_ account: String) throws {
-        if !accounts.keys.contains(account) {
-            throw MatrixCoreError.missingData
-        }
-        currentAccount = account
+    public func addAccount(_ account: NioAccount) {
+        accounts.append(account)
     }
 
     /// Issue logout request to homeserver and remove account from store.
-    public func logoutAccount(_ accountID: String) async throws {
-        guard let account = accounts[accountID] else {
-            return
-        }
-        try await account.logout()
-        accounts.removeValue(forKey: accountID)
-        if currentAccount == accountID {
-            currentAccount = nil
-        }
+    public func logoutAccount(_: String) async throws {
+        // TODO:
+        fatalError("TODO")
+        /* guard let account = accounts[accountID] else {
+             return
+         }
+         try await account.logout()
+         accounts.removeValue(forKey: accountID)
+         if currentAccount == accountID {
+             currentAccount = nil
+         } */
     }
 
     public func logoutAllAccounts() async throws {
-        for account in accounts.values {
+        for account in accounts {
             try? await account.logout()
         }
-        accounts = [:]
-        currentAccount = nil
+        accounts = []
     }
 
     // MARK: - Preview
 
     #if DEBUG
         public static let preview = NioAccountStore(preview: true)
+        public nonisolated static let exampleServer = MatrixHomeserver(string: "https://example.com/")!
+
+        public static func generatePreviewAccount(_ store: NioAccountStore, name: String, domain _: String = "example.com", displayName: String? = nil) -> NioAccount {
+            let bob = Store.AccountInfo(name: name, displayName: displayName, mxID: MatrixFullUserIdentifier(localpart: name.lowercased(), domain: "example.com"), homeServer: NioAccountStore.exampleServer, accessToken: "")
+            return NioAccount(core: MatrixCore(store: store.store, account: bob))
+        }
+
+        func populatePreviewData() async {
+            addAccount(NioAccountStore.generatePreviewAccount(self, name: "Bob"))
+            addAccount(NioAccountStore.generatePreviewAccount(self, name: "Alice", displayName: "Alice"))
+            addAccount(NioAccountStore.generatePreviewAccount(self, name: "Charlie", displayName: "Charlie"))
+        }
+
     #endif
-
-    func populatePreviewData() async throws {
-        let homeserver = MatrixHomeserver(string: "https://example.com/")!
-        let bob = Store.AccountInfo(name: "Bob", mxID: MatrixFullUserIdentifier(localpart: "bob", domain: "example.com"), homeServer: homeserver, accessToken: "")
-        await addAccount(MatrixCore(store: store, account: bob))
-        let alice = Store.AccountInfo(name: "Alice", displayName: "Alice", mxID: .init(localpart: "alice", domain: "example.com"), homeServer: homeserver, accessToken: "")
-        await addAccount(MatrixCore(store: store, account: alice))
-        let charlie = Store.AccountInfo(name: "Charlie", displayName: "Charlie", mxID: .init(localpart: "charlie", domain: "example.com"), homeServer: homeserver, accessToken: "")
-        await addAccount(MatrixCore(store: store, account: charlie))
-
-        try switchToAccount("@charlie:example.com")
-    }
 }
 
 /* public class NioAccountStore: ObservableObject {

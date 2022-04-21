@@ -10,7 +10,7 @@ import MatrixClient
 import MatrixCore
 
 @MainActor
-public class NioAccount: ObservableObject, Comparable {
+public class NioAccount: ObservableObject, Comparable, Identifiable {
     public static func == (lhs: NioAccount, rhs: NioAccount) -> Bool {
         lhs.mxID == rhs.mxID
     }
