@@ -15,7 +15,7 @@ struct NioApp: App {
     init() {
         Task {
             if CommandLine.arguments.contains("-clear-stored-credentials") {
-                NioAccountStore.removeAllKeychainEntries()
+                // NioAccountStore.removeAllKeychainEntries()
                 NioAccountStore.logger.info("🗑 cleared stored credentials from keychain")
             }
         }
@@ -24,6 +24,7 @@ struct NioApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
+                .frame(minWidth: 200, minHeight: 200)
         }
     }
 }

@@ -9,8 +9,6 @@ import MatrixCore
 import SwiftUI
 
 public struct MenuContainerView<Content: View>: View {
-    @Binding var currentAccount: String
-
     @State var showMenu: Bool = false
 
     let content: () -> Content
@@ -26,8 +24,7 @@ public struct MenuContainerView<Content: View>: View {
             }
     }
 
-    public init(currentAccount: Binding<String>, content: @escaping () -> Content) {
-        _currentAccount = currentAccount
+    public init(content: @escaping () -> Content) {
         self.content = content
     }
 
@@ -39,38 +36,38 @@ public struct MenuContainerView<Content: View>: View {
                     .offset(x: self.showMenu ? geometry.size.width * 0.8 : 0)
                     .disabled(self.showMenu)
                 if self.showMenu {
-                    MenuView(currentAccount: $currentAccount)
+                    MenuView()
                         .frame(width: geometry.size.width * 0.8, height: geometry.size.height)
                 }
             }
             .gesture(dragGesture)
         }
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: {
-                    withAnimation {
-                        self.showMenu.toggle()
+            #if !os(macOS)
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        withAnimation {
+                            self.showMenu.toggle()
+                        }
+                    }) {
+                        Image(systemName: "line.horizontal.3")
+                            .imageScale(.large)
+                            .rotationEffect(self.showMenu ? .degrees(90) : .zero)
                     }
-                }) {
-                    Image(systemName: "line.horizontal.3")
-                        .imageScale(.large)
-                        .rotationEffect(self.showMenu ? .degrees(90) : .zero)
                 }
-            }
+            #endif
         }
     }
 }
 
 struct MenuView: View {
-    @Binding var currentAccount: String
-
     var body: some View {
         VStack(alignment: .leading) {
-            MenuOwnAccountContainerView(currentAccount: currentAccount)
+            MenuOwnAccountContainerView()
                 .padding()
 
             // TODO: collapse view
-            MenuAccountPickerContainerView(currentAccount: $currentAccount)
+            MenuAccountPickerContainerView()
 
             Spacer(minLength: 0)
         }
@@ -83,13 +80,13 @@ struct MenuView: View {
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            MenuView(currentAccount: .constant("@preview:example.com"))
+            MenuView()
 
-            MenuContainerView(currentAccount: .constant("@preview:example.com")) {
+            MenuContainerView {
                 Text("foo")
             }
 
-            MenuContainerView(currentAccount: .constant("@preview:example.com")) {
+            MenuContainerView {
                 Text("foo")
             }
         }

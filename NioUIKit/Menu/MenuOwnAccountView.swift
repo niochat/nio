@@ -6,35 +6,25 @@
 //
 
 import MatrixCore
+import NioKit
 import SwiftUI
 
 struct MenuOwnAccountContainerView: View {
-    let currentAccount: String
-
     var body: some View {
-        MenuOwnAccountView(currentAccount: currentAccount)
+        MenuOwnAccountView()
+        Text("TODO")
     }
 }
 
 struct MenuOwnAccountView: View {
-    let currentAccount: String
-
-    @FetchRequest(sortDescriptors: []) var accounts: FetchedResults<MatrixAccount>
-
-    init(currentAccount: String) {
-        self.currentAccount = currentAccount
-
-        _accounts = FetchRequest<MatrixAccount>(sortDescriptors: [NSSortDescriptor(key: "userID", ascending: true)], predicate: NSPredicate(format: "userID == %@", currentAccount))
-    }
+    @EnvironmentObject var store: NioAccountStore
 
     var body: some View {
         VStack(alignment: .leading) {
-            ForEach(accounts, id: \.userID) { account in
-                NavigationLink(destination: {
-                    Text("Account")
-                }) {
-                    MenuAccountPickerAccountView(account: account)
-                }
+            NavigationLink {
+                Text("Account")
+            } label: {
+                MenuAccountPickerAccountView(account: store.getAccount!)
             }
             // TODO: add a banner if no accounts are returned, because of an Invalid currentAccount?
         }
@@ -44,9 +34,9 @@ struct MenuOwnAccountView: View {
 struct MenuOwnAccountView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            MenuOwnAccountView(currentAccount: "@amir_sanders:example.com")
-                .environment(\.managedObjectContext, MatrixStore.preview.viewContext)
-                .previewLayout(.fixed(width: 300, height: 60))
+            /* MenuOwnAccountView(currentAccount: "@amir_sanders:example.com")
+             .environment(\.managedObjectContext, MatrixStore.preview.viewContext)
+             .previewLayout(.fixed(width: 300, height: 60)) */
         }
     }
 }

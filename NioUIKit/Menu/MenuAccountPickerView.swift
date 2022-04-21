@@ -10,13 +10,11 @@ import NioKit
 import SwiftUI
 
 public struct MenuAccountPickerContainerView: View {
-    @Binding var currentAccount: String
-
     @AppStorage("showAccountsInPicker") var showAccounts: Bool = false
 
     public var body: some View {
         DisclosureGroup("Accounts", isExpanded: $showAccounts) {
-            MenuAccountPickerView(currentAccount: $currentAccount)
+            MenuAccountPickerView()
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top)
         }
@@ -24,24 +22,25 @@ public struct MenuAccountPickerContainerView: View {
 }
 
 public struct MenuAccountPickerView: View {
-    @Binding var currentAccount: String
+    public init() {}
 
-    @FetchRequest(sortDescriptors: []) var accounts: FetchedResults<MatrixAccount>
-
-    init(currentAccount: Binding<String>) {
-        _currentAccount = currentAccount
-
-        _accounts = FetchRequest<MatrixAccount>(sortDescriptors: [NSSortDescriptor(key: "userID", ascending: true)], predicate: NSPredicate(format: "userID != %@", currentAccount.wrappedValue))
-    }
+    @EnvironmentObject var store: NioAccountStore
 
     public var body: some View {
         VStack(alignment: .leading) {
-            ForEach(accounts, id: \.userID) { account in
+            ForEach(store.accounts.sorted(by: >), id: \.key) { account in
                 Button {
-                    print("switching account to \(account.userID ?? "Unknown user")")
-                    currentAccount = account.userID ?? ""
+                    print("switching account to \(account.value.info.name)")
+                    do {
+                        try withAnimation { () throws in
+                            try store.switchToAccount(account.value.mxID.FQMXID)
+                        }
+                    } catch {
+                        fatalError("Failed to switch to account: \(error.localizedDescription)")
+                    }
+                    // TODO: switch account
                 } label: {
-                    MenuAccountPickerAccountView(account: account).tag(account.userID ?? "Unknown user")
+                    MenuAccountPickerAccountView(account: account.value).tag(account.value.mxID.FQMXID)
                 }
                 .padding(.vertical)
             }
@@ -64,16 +63,16 @@ public struct MenuAccountPickerView: View {
 }
 
 struct MenuAccountPickerAccountView: View {
-    let account: MatrixAccount
+    @ObservedObject var account: NioAccount
 
     var body: some View {
         Label {
             VStack(alignment: .leading) {
-                Text(account.displayName ?? account.userID ?? "Unknown user")
+                Text(account.displayName ?? account.mxID.FQMXID)
                     .foregroundColor(.gray)
                     .font(.headline)
                 if account.displayName != nil {
-                    Text(account.userID ?? "Unknown mxid")
+                    Text(account.mxID.FQMXID)
                         .foregroundColor(.gray)
                         .font(.subheadline)
                 }
@@ -90,13 +89,13 @@ struct MenuAccountPickerAccountView: View {
 struct MenuAccountPickerView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            MenuAccountPickerView(currentAccount: .constant("@amir_sanders:example.com"))
+            MenuAccountPickerView()
                 .previewLayout(.fixed(width: 300, height: 200))
 
-            MenuAccountPickerContainerView(currentAccount: .constant("@amir_sanders:example.com"), showAccounts: true)
+            MenuAccountPickerContainerView(showAccounts: true)
                 .previewLayout(.fixed(width: 300, height: 200))
                 .padding()
         }
-        .environment(\.managedObjectContext, MatrixStore.preview.viewContext)
+        .environmentObject(NioAccountStore.preview)
     }
 }

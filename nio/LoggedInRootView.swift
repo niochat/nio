@@ -11,26 +11,29 @@ import NioUIKit
 import SwiftUI
 
 struct LoggedInRootView: View {
-    @Environment(\.managedObjectContext) var context
-
-    @FetchRequest(sortDescriptors: []) var accounts: FetchedResults<MatrixAccount>
-
     @EnvironmentObject var store: NioAccountStore
 
     @AppStorage("LastSelectedAccount") var currentSelectedAccountName: String = ""
 
-    @State var currentSelectedAccount: NioAccount?
-
     var body: some View {
         NavigationView {
-            MenuContainerView(currentAccount: $currentSelectedAccountName) {
+            MenuContainerView {
+                /* List{
+                     ForEach(rooms, id: \.roomID) { room in
+                         HStack {
+                             Text(room.roomID!)
+                             Text(room.name ?? "")
+                             Text(room.owningAccount?.displayName ?? "foo")
+                         }
+                     }
+                 } */
                 Text("foo")
             }.task {
-                if self.currentSelectedAccount == nil {
-                    self.currentSelectedAccountName = store.accounts.keys.first ?? ""
-                }
+                /* if self.currentSelectedAccount == nil {
+                     self.currentSelectedAccountName = store.accounts.keys.first ?? ""
+                 }
 
-                self.currentSelectedAccount = store.accounts[self.currentSelectedAccountName]
+                 self.currentSelectedAccount = store.accounts[self.currentSelectedAccountName] */
             }
         }
     }

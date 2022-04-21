@@ -6,3 +6,6 @@
 //
 
 import Foundation
+import MatrixSQLiteStore
+
+public typealias Store = MatrixSQLiteStore

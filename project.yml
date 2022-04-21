@@ -8,6 +8,9 @@ packages:
   MatrixCore:
     url: https://github.com/MatrixCore/MatrixCore
     branch: main
+  MatrixSQLiteStore:
+    branch: main
+    url: https://github.com/MatrixCore/MatrixSQLiteStore
 targets:
   NioTests:
     platform: iOS
@@ -33,9 +36,24 @@ targets:
     dependencies:
       - package: MatrixCore
         product: MatrixCore
+      - package: MatrixSQLiteStore
+        product: MatrixSQLiteStore
     configFiles:
       Debug: configs/NioKit.xcconfig
       Release: configs/NioKit.xcconfig
+  NioKitTests:
+    platform: [iOS, macOS, tvOS, watchOS]
+    type: bundle.unit-test
+    sources:
+      - path: NioKitTests
+    configFiles:
+      Debug: configs/NioKitTests.xcconfig
+    dependencies:
+      - target: NioKit_${platform}
+    scheme:
+      gatherCoverageData: true
+      testTargets:
+        - NioKitTests_${platform}
   NioUIKit:
     platform: [iOS, macOS, tvOS, watchOS]
     type: framework

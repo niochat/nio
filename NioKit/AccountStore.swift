@@ -1,0 +1,198 @@
+//
+//  Account.swift
+//  Nio
+//
+//  Created by Finn Behrens on 24.03.22.
+//
+
+import Foundation
+import MatrixClient
+import MatrixCore
+import MatrixSQLiteStore
+import OSLog
+import Security
+import SwiftUI
+
+@MainActor
+public class NioAccountStore: ObservableObject {
+    public nonisolated static let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "accountStore")
+
+    public static let shared = NioAccountStore()
+
+    @Published public internal(set) var accounts: [String: NioAccount]
+
+    @AppStorage("currentAccount")
+    public internal(set) var currentAccount: String?
+
+    public private(set) var store: Store
+
+    // MARK: - computed variables
+
+    public var hasAccounts: Bool {
+        !accounts.isEmpty
+    }
+
+    public var getAccount: NioAccount? {
+        if let currentAccount = currentAccount {
+            return accounts[currentAccount]
+        }
+        if let account = accounts.first?.value {
+            currentAccount = account.mxID.FQMXID
+            return account
+        }
+        return nil
+    }
+
+    // MARK: - init
+
+    private init(preview: Bool = false) {
+        accounts = [:]
+
+        if _fastPath(!preview) {
+            let db = try! FileManager.default.url(
+                for: .documentDirectory,
+                in: .userDomainMask,
+                appropriateFor: nil,
+                create: true
+            )
+            store = try! Store(path: db.path)
+        } else {
+            #if DEBUG
+                store = Store.inMemory()
+            #else
+                assertionFailure()
+            #endif
+        }
+
+        Task(priority: .high) {
+            do {
+                try await self.runInit()
+                #if DEBUG
+                    if preview {
+                        try await self.populatePreviewData()
+                    }
+                #endif
+            } catch {
+                NioAccountStore.logger.fault("Failed to initialise: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    private func runInit() async throws {
+        let accounts = try await store.getAccounts()
+
+        for account in accounts {
+            await addAccount(account)
+        }
+    }
+
+    public func addAccount(_ account: MatrixCore<Store>) async {
+        accounts[account.FQMXID] = NioAccount(core: account)
+    }
+
+    /// Switch to account descriped by account.
+    ///
+    /// Throws ``MatrixCoreError.missingData`` when account does not exists.
+    public func switchToAccount(_ account: String) throws {
+        if !accounts.keys.contains(account) {
+            throw MatrixCoreError.missingData
+        }
+        currentAccount = account
+    }
+
+    /// Issue logout request to homeserver and remove account from store.
+    public func logoutAccount(_ accountID: String) async throws {
+        guard let account = accounts[accountID] else {
+            return
+        }
+        try await account.logout()
+        accounts.removeValue(forKey: accountID)
+        if currentAccount == accountID {
+            currentAccount = nil
+        }
+    }
+
+    public func logoutAllAccounts() async throws {
+        for account in accounts.values {
+            try? await account.logout()
+        }
+        accounts = [:]
+        currentAccount = nil
+    }
+
+    // MARK: - Preview
+
+    #if DEBUG
+        public static let preview = NioAccountStore(preview: true)
+    #endif
+
+    func populatePreviewData() async throws {
+        let homeserver = MatrixHomeserver(string: "https://example.com/")!
+        let bob = Store.AccountInfo(name: "Bob", mxID: MatrixFullUserIdentifier(localpart: "bob", domain: "example.com"), homeServer: homeserver, accessToken: "")
+        await addAccount(MatrixCore(store: store, account: bob))
+        let alice = Store.AccountInfo(name: "Alice", displayName: "Alice", mxID: .init(localpart: "alice", domain: "example.com"), homeServer: homeserver, accessToken: "")
+        await addAccount(MatrixCore(store: store, account: alice))
+        let charlie = Store.AccountInfo(name: "Charlie", displayName: "Charlie", mxID: .init(localpart: "charlie", domain: "example.com"), homeServer: homeserver, accessToken: "")
+        await addAccount(MatrixCore(store: store, account: charlie))
+
+        try switchToAccount("@charlie:example.com")
+    }
+}
+
+/* public class NioAccountStore: ObservableObject {
+     public func addAccount(homeserver: MatrixHomeserver, login: MatrixLogin) async {
+         do {
+             let account = try await MatrixCore(homeserver: homeserver, login: login, matrixStore: store)
+             await addAccount(account: account)
+         } catch {
+             NioAccountStore.logger.fault("Failed to create MatrixCore instance: \(error.localizedDescription)")
+             assertionFailure("Login did not create a MatrixCore instance")
+         }
+         NioAccountStore.logger.debug("Added new Account to store")
+     }
+
+     public static func removeAllKeychainEntries() {
+         var keychainQuery = MatrixCoreSettings.extraKeychainArguments
+
+         keychainQuery[kSecClass as String] = kSecClassInternetPassword
+
+         let status = SecItemDelete(keychainQuery as CFDictionary)
+         guard status == errSecSuccess else {
+             NioAccountStore.logger.fault("Failed to delete keychain items: \(status)")
+             return
+         }
+     }
+ }
+
+ @MainActor
+ public class NioAccount: ObservableObject {
+     public let matrixCore: MatrixCore
+     public let userID: MatrixUserIdentifier
+
+     // MARK: Computed variables
+
+     public var displayName: String? {
+         matrixCore.displayName
+     }
+
+     public init(_ account: MatrixCore) async {
+         account.setDefaultDelegate()
+         matrixCore = account
+         userID = account.userID
+
+         do {
+             try self.matrixCore.startSync()
+         } catch {
+             print(error)
+         }
+
+         Task {
+             try await self.matrixCore.updateDisplayName()
+         }
+     }
+
+     public func logout() async throws {
+         try await matrixCore.logout()
+     }
+ }
+ */
