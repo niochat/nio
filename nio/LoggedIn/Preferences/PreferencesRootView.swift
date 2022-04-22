@@ -5,6 +5,7 @@
 //  Created by Finn Behrens on 21.04.22.
 //
 
+import AcknowList
 import NioKit
 import SwiftUI
 
@@ -12,16 +13,10 @@ struct PreferencesRootView: View {
     @EnvironmentObject var store: NioAccountStore
     @EnvironmentObject var deepLinker: DeepLinker
 
+    let appVersion = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String)!
+    let buildVersion = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String)!
+
     var body: some View {
-        /* List(store.accounts, id: \.mxID) { account in
-             NavigationLink(tag: .account(account.mxID), selection: $deepLinker.preferenceSelector) {
-                 AccountPreferencesView()
-                     .environmentObject(account)
-                     .tag(account.mxID)
-             } label: {
-                 Text(account.info.name)
-             }
-         } */
         List {
             Section("accounts") {
                 ForEach(store.accounts, id: \.mxID) { account in
@@ -64,6 +59,32 @@ struct PreferencesRootView: View {
                             Spacer(minLength: 5)
                             Text(UIApplication.shared.alternateIconName ?? "Nio")
                         }
+                    }
+                )
+            }
+
+            Section {
+                HStack {
+                    Text("Version")
+                    Spacer()
+                    Text("\(appVersion) (\(buildVersion))")
+                }
+
+                Link("Show source on github", destination: URL(string: "https://github.com/niochat/nio")!)
+
+                NavigationLink(
+                    tag: .acknow,
+                    selection: $deepLinker.preferenceSelection,
+                    destination: {
+                        AcknowledgmentsList(plistName: "Acknowledgments")
+                            .navigationTitle("Acknowledgments")
+                            .padding()
+
+                    },
+                    label: {
+                        Text("Acknowledgments")
+                            .font(.footnote)
+                            .foregroundColor(.gray)
                     }
                 )
             }

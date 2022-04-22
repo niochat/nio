@@ -35,5 +35,6 @@ extension DeepLinker {
         case newAccount
 
         case icon
+        case acknow
     }
 }

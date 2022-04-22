@@ -13,6 +13,9 @@ packages:
     path: "../MatrixSQLiteStore"
     branch: main
     #url: https://github.com/MatrixCore/MatrixSQLiteStore
+  AcknowList:
+    url: https://github.com/vtourraine/AcknowList
+    from: 2.1.0
 targets:
   NioTests:
     platform: iOS
@@ -82,6 +85,7 @@ targets:
     dependencies:
       - target: NioKit_iOS
       - target: NioUIKit_iOS
+      - package: AcknowList
     scheme: {}
   Nio_macOS:
     platform: macOS
