@@ -5,15 +5,14 @@
 //  Created by Finn Behrens on 21.04.22.
 //
 
-import SwiftUI
+import Combine
 import MatrixClient
 import NioKit
-import Combine
+import SwiftUI
 
 struct AccountListAccountSectionView: View {
     @EnvironmentObject var account: NioAccount
     @Binding var searchText: String
-
 
     @State var showMuteAlert: Bool = false
 
@@ -25,21 +24,25 @@ struct AccountListAccountSectionView: View {
     var body: some View {
         Section(account.info.name) {
             NavigationLink(tag: .home(account.mxID), selection: $deepLinker.mainSelection) {
-                //Text("\(account.info.name) foo" )
+                // Text("\(account.info.name) foo" )
                 Button("Foo") {
                     deepLinker.mainSelection = .preferences
-                    deepLinker.preferenceSelector = .account(account.mxID)
+                    deepLinker.preferenceSelection = .account(account.mxID)
                 }
             } label: {
                 Label("Home", systemImage: "house")
             }
 
             ForEach(spaces, id: \.self) { space in
-                NavigationLink(tag: .space(account.mxID, space), selection: $deepLinker.mainSelection, destination: { Text("\(account.info.name): space") }, label: { Label(space, systemImage: "house.fill")})
+                NavigationLink(
+                    tag: .space(account.mxID, space),
+                    selection: $deepLinker.mainSelection,
+                    destination: { Text("\(account.info.name): space") },
+                    label: { Label(space, systemImage: "house.fill") }
+                )
                 .tag(space)
                 .disabled(editMode?.wrappedValue != EditMode.inactive)
                 .swipeActions(allowsFullSwipe: true) {
-
                     Button {
                         print("muting")
                         showMuteAlert = true
@@ -75,7 +78,7 @@ struct AccountListAccountSectionView: View {
 struct AccountListAccountSectionView_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            //AccountListAccountSectionView(searchText: .constant("")).environmentObject( NioAccountStore.generatePreviewAccount(NioAccountStore.preview, name: "Bob"))
+            // AccountListAccountSectionView(searchText: .constant("")).environmentObject( NioAccountStore.generatePreviewAccount(NioAccountStore.preview, name: "Bob"))
         }
         .listStyle(.sidebar)
     }

@@ -6,28 +6,34 @@
 //
 
 import Foundation
-import SwiftUI
 import MatrixClient
+import SwiftUI
 
 @MainActor
 class DeepLinker: ObservableObject {
+    // FIXME: revert to nil for prod
+    @Published var mainSelection: MainSelector? = .preferences
 
-    @Published var mainSelection: MainSelector?
-
-    @Published var preferenceSelector: PreferenceSelector?
+    @Published var preferenceSelection: PreferenceSelector?
 }
 
 extension DeepLinker {
     /// Selector for the main view.
     enum MainSelector: Hashable, Equatable {
-        case preferences
+        case all
+        case favourites
+
         case home(MatrixFullUserIdentifier)
         case space(MatrixFullUserIdentifier, String)
+
+        case preferences
     }
 
     /// Selector for a view inside the Preference section.
     enum PreferenceSelector: Hashable, Equatable {
         case account(MatrixFullUserIdentifier)
+        case newAccount
+
+        case icon
     }
 }
-

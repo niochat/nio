@@ -12,7 +12,7 @@ import SwiftUI
 
 struct LoggedInRootView: View {
     @EnvironmentObject var store: NioAccountStore
-    //@Environment(\.deepLinker) var deepLinker
+    // @Environment(\.deepLinker) var deepLinker
     @EnvironmentObject var deepLinker: DeepLinker
 
     @State var search: String = ""
@@ -21,20 +21,46 @@ struct LoggedInRootView: View {
 
     var body: some View {
         NavigationView {
-            HStack {
-            List(store.accounts, id: \.mxID) {
-                AccountListAccountSectionView(searchText: $search)
-                    .environmentObject($0)
-                    .tag($0.mxID)
+            List {
+                NavigationLink(
+                    tag: .all,
+                    selection: $deepLinker.mainSelection,
+                    destination: { Text("All") },
+                    label: { Label("All Rooms", systemImage: "tray.2") }
+                )
+                NavigationLink(
+                    tag: .favourites,
+                    selection: $deepLinker.mainSelection,
+                    destination: { Text("Favs") },
+                    label: {
+                        Label("Favourites", systemImage: "star")
+                            .tint(.yellow)
+                    }
+                )
+
+                ForEach(store.accounts, id: \.mxID) { account in
+                    AccountListAccountSectionView(searchText: $search)
+                        .environmentObject(account)
+                        .tag(account.mxID)
+                }
+
+                // Hidden settings View
+                NavigationLink(
+                    tag: DeepLinker.MainSelector.preferences,
+                    selection: $deepLinker.mainSelection,
+                    destination: { PreferencesRootView() },
+                    label: { EmptyView() }
+                )
             }
-            //.searchable(text: $search)
+            // .searchable(text: $search)
             .listStyle(.sidebar)
+            .navigationTitle("Accounts")
             .toolbar {
                 ToolbarItem(id: "more", placement: .primaryAction) {
                     Menu {
                         Button {
                             withAnimation {
-                                deepLinker.preferenceSelector = nil
+                                deepLinker.preferenceSelection = nil
                                 deepLinker.mainSelection = .preferences
                             }
                         } label: {
@@ -44,9 +70,6 @@ struct LoggedInRootView: View {
                         Label("Settings", systemImage: "ellipsis.circle")
                     }
                 }
-            }
-
-                NavigationLink(tag: DeepLinker.MainSelector.preferences, selection: $deepLinker.mainSelection, destination: { PreferencesRootView() }, label: { EmptyView() })
             }
         }
     }

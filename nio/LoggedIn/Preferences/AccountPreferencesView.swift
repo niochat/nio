@@ -5,9 +5,9 @@
 //  Created by Finn Behrens on 21.04.22.
 //
 
-import SwiftUI
-import NioKit
 import MatrixClient
+import NioKit
+import SwiftUI
 
 struct AccountPreferencesView: View {
     @EnvironmentObject var account: NioAccount
@@ -18,7 +18,7 @@ struct AccountPreferencesView: View {
     @State private var newAccountName: String = ""
 
     var body: some View {
-        List{
+        List {
             Section {
                 // Profile name
                 HStack {
@@ -44,8 +44,8 @@ struct AccountPreferencesView: View {
                         .progressViewStyle(CircularProgressViewStyle())
                 } else {
                     Button("Save", action: self.save)
-                    // TODO: some way to see if there is something to save
-                    .disabled(false)
+                        // TODO: some way to see if there is something to save
+                        .disabled(false)
                 }
             }
         }
@@ -55,7 +55,7 @@ struct AccountPreferencesView: View {
     }
 
     private func save() {
-        self.working = true
+        working = true
         Task(priority: .userInitiated) {
             print("save")
             do {
@@ -66,16 +66,17 @@ struct AccountPreferencesView: View {
                     self.dismiss()
                 }
             } catch {
-                NioAccountStore.logger.warning("Failed to save user config for user \(self.account.info.name) (\(self.account.mxID)")
+                NioAccountStore.logger
+                    .warning("Failed to save user config for user \(self.account.info.name) (\(self.account.mxID)")
                 working = false
             }
         }
     }
 
     private func saveAccountName() async throws {
-        if self.account.info.name != newAccountName {
+        if account.info.name != newAccountName {
             NioAccountStore.logger.debug("Saving account name")
-            self.account.info.name = newAccountName
+            account.info.name = newAccountName
             try await account.updateInfo()
         }
     }
