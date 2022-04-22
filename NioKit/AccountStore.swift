@@ -17,7 +17,7 @@ import SwiftUI
 public class NioAccountStore: ObservableObject {
     public nonisolated static let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "accountStore")
 
-    // public static let shared = NioAccountStore()
+    public static let shared = NioAccountStore()
 
     @Published public internal(set) var accounts: [NioAccount] = []
 
@@ -33,13 +33,19 @@ public class NioAccountStore: ObservableObject {
 
     private init(preview: Bool = false) {
         if _fastPath(!preview) {
-            let db = try! FileManager.default.url(
-                for: .documentDirectory,
-                in: .userDomainMask,
-                appropriateFor: nil,
-                create: true
-            )
-            store = try! Store(path: db.path)
+            /* let db = try! FileManager.default.url(
+                 for: .documentDirectory,
+                 in: .userDomainMask,
+                 appropriateFor: nil,
+                 create: true
+             ) */
+            let appGroup = Bundle.main.infoDictionary?["AppGroup"] as? String ?? "chat.nio"
+            print(appGroup)
+            let groupFolder = FileManager.default
+                .containerURL(forSecurityApplicationGroupIdentifier: "group.\(appGroup)")
+
+            let dbFile = groupFolder?.appendingPathComponent("db.sqlite")
+            store = try! Store(path: dbFile!.path)
         } else {
             #if DEBUG
                 store = Store.inMemory()
@@ -76,6 +82,19 @@ public class NioAccountStore: ObservableObject {
 
     public func addAccount(_ account: NioAccount) {
         accounts.append(account)
+    }
+
+    /// Add and save account from ``MatrixLogin``
+    public func addAccount(homeserver: MatrixHomeserver, login: MatrixLogin) async throws {
+        let account = Store.AccountInfo(
+            name: login.userId!.localpart,
+            mxID: login.userId!,
+            homeServer: homeserver,
+            accessToken: login.accessToken
+        )
+        try await store.saveAccountInfo(account: account)
+        let core = MatrixCore(store: store, account: account)
+        addAccount(core)
     }
 
     /// Issue logout request to homeserver and remove account from store.

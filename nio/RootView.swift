@@ -64,10 +64,15 @@ import SwiftUI
  } */
 
 struct RootView: View {
+    @EnvironmentObject var store: NioAccountStore
+
     var body: some View {
-        LoggedInRootView()
-            .environmentObject(NioAccountStore.preview)
-            .environmentObject(DeepLinker())
+        if store.hasAccounts {
+            LoggedInRootView()
+                .environmentObject(DeepLinker())
+        } else {
+            LoggedOutView()
+        }
     }
 }
 

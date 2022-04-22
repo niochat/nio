@@ -11,8 +11,7 @@ import SwiftUI
 
 @MainActor
 class DeepLinker: ObservableObject {
-    // FIXME: revert to nil for prod
-    @Published var mainSelection: MainSelector? = .preferences
+    @Published var mainSelection: MainSelector?
 
     @Published var preferenceSelection: PreferenceSelector?
 }

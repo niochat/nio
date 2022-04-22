@@ -16,7 +16,7 @@ struct NioApp: App {
     @ObservedObject var store: NioAccountStore // = NioAccountStore.preview
 
     init() {
-        store = NioAccountStore.preview
+        store = NioAccountStore.shared
 
         Task {
             if CommandLine.arguments.contains("-clear-stored-credentials") {
@@ -30,6 +30,7 @@ struct NioApp: App {
         WindowGroup {
             RootView()
                 .frame(minWidth: 200, minHeight: 200)
+                .environmentObject(store)
         }
     }
 }
