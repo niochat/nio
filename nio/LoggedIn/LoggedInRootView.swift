@@ -15,22 +15,35 @@ struct LoggedInRootView: View {
 
     @State var search: String = ""
 
+    // FIXME: change to false for prod
+    @State var showSettings = false
+
     @AppStorage("LastSelectedAccount") var currentSelectedAccountName: String = ""
 
     var body: some View {
         NavigationView {
             List(store.accounts, id: \.mxID) {
-                AccountListAccountSectionView(searchText: $search).environmentObject($0).tag($0.mxID)
+                AccountListAccountSectionView(searchText: $search)
+                    .environmentObject($0)
+                    .tag($0.mxID)
             }
             //.searchable(text: $search)
             .listStyle(.sidebar)
             .toolbar {
-                ToolbarItem() {
-                    Button(action: {
-                        print("foo")
-                    }, label: { Image(systemName: "ellipse") })
+                ToolbarItem(id: "more", placement: .primaryAction) {
+                    Menu {
+                        Button {
+                            showSettings = true
+                        } label: {
+                            Label("Settings", systemImage: "gear")
+                        }
+                    } label: {
+                        Label("Settings", systemImage: "ellipsis.circle")
+                    }
                 }
             }
+
+            NavigationLink(destination: PreferencesRootView().onDisappear{ showSettings = false }, isActive: $showSettings, label: { EmptyView() })
         }
     }
 }

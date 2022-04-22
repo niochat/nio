@@ -11,30 +11,14 @@ import MatrixCore
 
 @MainActor
 public class NioAccount: ObservableObject, Comparable, Identifiable {
-    public static func == (lhs: NioAccount, rhs: NioAccount) -> Bool {
-        lhs.mxID == rhs.mxID
-    }
-
-    public static func < (lhs: NioAccount, rhs: NioAccount) -> Bool {
-        lhs.mxID < rhs.mxID
-    }
-
-    public let core: MatrixCore<Store>
+    @Published public var core: MatrixCore<Store>
 
     public var store: Store {
         core.store
     }
 
-    public var id: Store.AccountInfo.AccountIdentifier {
-        core.id
-    }
-
     public var mxID: MatrixFullUserIdentifier {
         core.mxID
-    }
-
-    public var info: Store.AccountInfo {
-        core.info
     }
 
     public var displayName: String? {
@@ -56,5 +40,19 @@ public class NioAccount: ObservableObject, Comparable, Identifiable {
 
     public func logout() async throws {
         try await core.logout()
+    }
+}
+
+public extension NioAccount {
+    /* var id: Store.AccountInfo.AccountIdentifier {
+         core.id
+     } */
+
+    static func == (lhs: NioAccount, rhs: NioAccount) -> Bool {
+        lhs.mxID == rhs.mxID
+    }
+
+    static func < (lhs: NioAccount, rhs: NioAccount) -> Bool {
+        lhs.mxID < rhs.mxID
     }
 }

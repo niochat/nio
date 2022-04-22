@@ -12,6 +12,9 @@ import SwiftUI
 
 @main
 struct NioApp: App {
+    // TODO: set to shared
+    @ObservedObject var store: NioAccountStore = NioAccountStore.preview
+
     init() {
         Task {
             if CommandLine.arguments.contains("-clear-stored-credentials") {

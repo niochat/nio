@@ -1,0 +1,5 @@
+--maxwidth 120
+--disable enumNamespaces
+--swiftversion 5.5
+--trimwhitespace always
+
