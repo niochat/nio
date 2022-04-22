@@ -17,7 +17,7 @@ import SwiftUI
 public class NioAccountStore: ObservableObject {
     public nonisolated static let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "accountStore")
 
-    public static let shared = NioAccountStore()
+    // public static let shared = NioAccountStore()
 
     @Published public internal(set) var accounts: [NioAccount] = []
 
@@ -105,8 +105,19 @@ public class NioAccountStore: ObservableObject {
         public static let preview = NioAccountStore(preview: true)
         public nonisolated static let exampleServer = MatrixHomeserver(string: "https://example.com/")!
 
-        public static func generatePreviewAccount(_ store: NioAccountStore, name: String, domain _: String = "example.com", displayName: String? = nil) -> NioAccount {
-            let bob = Store.AccountInfo(name: name, displayName: displayName, mxID: MatrixFullUserIdentifier(localpart: name.lowercased(), domain: "example.com"), homeServer: NioAccountStore.exampleServer, accessToken: "")
+        public static func generatePreviewAccount(
+            _ store: NioAccountStore,
+            name: String,
+            domain _: String = "example.com",
+            displayName: String? = nil
+        ) -> NioAccount {
+            let bob = Store.AccountInfo(
+                name: name,
+                displayName: displayName,
+                mxID: MatrixFullUserIdentifier(localpart: name.lowercased(), domain: "example.com"),
+                homeServer: NioAccountStore.exampleServer,
+                accessToken: ""
+            )
             return NioAccount(core: MatrixCore(store: store.store, account: bob))
         }
 

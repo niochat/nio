@@ -7,9 +7,11 @@
 
 import SwiftUI
 import NioKit
+import MatrixClient
 
 struct AccountPreferencesView: View {
     @EnvironmentObject var account: NioAccount
+    @EnvironmentObject var deepLinker: DeepLinker
     @Environment(\.dismiss) private var dismiss
 
     @State private var working = false
@@ -25,6 +27,10 @@ struct AccountPreferencesView: View {
 
                     TextField("Account Name", text: $newAccountName)
                         .multilineTextAlignment(.trailing)
+                }
+
+                Button("foo") {
+                    deepLinker.mainSelection = .home(MatrixFullUserIdentifier(localpart: "bob", domain: "example.com"))
                 }
             } header: {
                 Text("USER SETTINGS")

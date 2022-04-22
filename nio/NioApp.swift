@@ -13,9 +13,11 @@ import SwiftUI
 @main
 struct NioApp: App {
     // TODO: set to shared
-    @ObservedObject var store: NioAccountStore = NioAccountStore.preview
+    @ObservedObject var store: NioAccountStore //= NioAccountStore.preview
 
     init() {
+        store = NioAccountStore.preview
+
         Task {
             if CommandLine.arguments.contains("-clear-stored-credentials") {
                 // NioAccountStore.removeAllKeychainEntries()

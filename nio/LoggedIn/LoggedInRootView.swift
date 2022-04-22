@@ -12,16 +12,16 @@ import SwiftUI
 
 struct LoggedInRootView: View {
     @EnvironmentObject var store: NioAccountStore
+    //@Environment(\.deepLinker) var deepLinker
+    @EnvironmentObject var deepLinker: DeepLinker
 
     @State var search: String = ""
-
-    // FIXME: change to false for prod
-    @State var showSettings = false
 
     @AppStorage("LastSelectedAccount") var currentSelectedAccountName: String = ""
 
     var body: some View {
         NavigationView {
+            HStack {
             List(store.accounts, id: \.mxID) {
                 AccountListAccountSectionView(searchText: $search)
                     .environmentObject($0)
@@ -33,7 +33,10 @@ struct LoggedInRootView: View {
                 ToolbarItem(id: "more", placement: .primaryAction) {
                     Menu {
                         Button {
-                            showSettings = true
+                            withAnimation {
+                                deepLinker.preferenceSelector = nil
+                                deepLinker.mainSelection = .preferences
+                            }
                         } label: {
                             Label("Settings", systemImage: "gear")
                         }
@@ -43,7 +46,8 @@ struct LoggedInRootView: View {
                 }
             }
 
-            NavigationLink(destination: PreferencesRootView().onDisappear{ showSettings = false }, isActive: $showSettings, label: { EmptyView() })
+                NavigationLink(tag: DeepLinker.MainSelector.preferences, selection: $deepLinker.mainSelection, destination: { PreferencesRootView() }, label: { EmptyView() })
+            }
         }
     }
 }

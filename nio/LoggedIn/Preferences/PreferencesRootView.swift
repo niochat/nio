@@ -10,21 +10,23 @@ import NioKit
 
 struct PreferencesRootView: View {
     @EnvironmentObject var store: NioAccountStore
+    @EnvironmentObject var deepLinker: DeepLinker
 
     var body: some View {
-        //NavigationView() {
-            List(store.accounts, id: \.mxID) { account in
-                NavigationLink {
+        List(store.accounts, id: \.mxID) { account in
+            NavigationLink(tag: .account(account.mxID), selection: $deepLinker.preferenceSelector) {
                 AccountPreferencesView()
                     .environmentObject(account)
                     .tag(account.mxID)
-                } label: {
-                    Text(account.info.name)
-                }
+            } label: {
+                Text(account.info.name)
             }
-        //}
+        }
         .navigationViewStyle(.stack)
         .navigationTitle("Settings")
+        .onAppear{
+            print(deepLinker)
+        }
     }
 }
 

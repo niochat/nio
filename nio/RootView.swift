@@ -67,6 +67,7 @@ struct RootView: View {
     var body: some View {
         LoggedInRootView()
             .environmentObject(NioAccountStore.preview)
+            .environmentObject(DeepLinker())
     }
 }
 
