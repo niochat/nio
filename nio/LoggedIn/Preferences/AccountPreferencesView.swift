@@ -16,6 +16,7 @@ struct AccountPreferencesView: View {
 
     @State private var working = false
     @State private var newAccountName: String = ""
+    @State private var newDisplayName: String = ""
 
     var body: some View {
         List {
@@ -29,11 +30,31 @@ struct AccountPreferencesView: View {
                         .multilineTextAlignment(.trailing)
                 }
 
-                Button("foo") {
-                    deepLinker.mainSelection = .home(MatrixFullUserIdentifier(localpart: "bob", domain: "example.com"))
+                // Matrix Display name
+                HStack {
+                    Text("Display Name")
+                    Spacer(minLength: 10)
+
+                    TextField("Display Name", text: $newDisplayName)
+                        .multilineTextAlignment(.trailing)
                 }
+
+                // TODO:
+                Text("Change Password")
             } header: {
                 Text("USER SETTINGS")
+            }
+
+            Section {
+                NavigationLink(
+                    "Security",
+                    destination: {
+                        AccountPreferencesSecurityView()
+                            .environmentObject(account)
+                    }
+                )
+            } header: {
+                Text("Security")
             }
         }
         .navigationTitle(account.info.name)
@@ -51,6 +72,7 @@ struct AccountPreferencesView: View {
         }
         .onAppear {
             self.newAccountName = account.info.name
+            self.newDisplayName = account.info.displayName ?? ""
         }
     }
 
@@ -59,6 +81,7 @@ struct AccountPreferencesView: View {
         Task(priority: .userInitiated) {
             print("save")
             do {
+                try await self.saveDisplayName()
                 try await self.saveAccountName()
 
                 DispatchQueue.main.async {
@@ -70,6 +93,16 @@ struct AccountPreferencesView: View {
                     .warning("Failed to save user config for user \(self.account.info.name) (\(self.account.mxID)")
                 working = false
             }
+        }
+    }
+
+    private func saveDisplayName() async throws {
+        if account.info.displayName != newDisplayName {
+            NioAccountStore.logger.debug("Applying DisplayName")
+            account.info.displayName = newDisplayName
+
+            // TODO: use MatrixUserIdentifer instead of stringified version
+            try await account.core.client.setDisplayName(newDisplayName, userID: account.info.FQMXID)
         }
     }
 

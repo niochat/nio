@@ -86,12 +86,9 @@ public class NioAccountStore: ObservableObject {
 
     /// Add and save account from ``MatrixLogin``
     public func addAccount(homeserver: MatrixHomeserver, login: MatrixLogin) async throws {
-        let account = Store.AccountInfo(
-            name: login.userId!.localpart,
-            mxID: login.userId!,
-            homeServer: homeserver,
-            accessToken: login.accessToken
-        )
+        guard let account = Store.AccountInfo(homeserver, login: login) else {
+            throw MatrixCoreError.missingData
+        }
         try await store.saveAccountInfo(account: account)
         let core = MatrixCore(store: store, account: account)
         addAccount(core)
@@ -135,7 +132,8 @@ public class NioAccountStore: ObservableObject {
                 displayName: displayName,
                 mxID: MatrixFullUserIdentifier(localpart: name.lowercased(), domain: "example.com"),
                 homeServer: NioAccountStore.exampleServer,
-                accessToken: ""
+                accessToken: "",
+                deviceID: "preview_device_\(name)"
             )
             return NioAccount(core: MatrixCore(store: store.store, account: bob))
         }
