@@ -94,18 +94,32 @@ public class NioAccountStore: ObservableObject {
         addAccount(core)
     }
 
+    public func getAccount(_ id: MatrixFullUserIdentifier) -> NioAccount? {
+        accounts.first(where: { $0.mxID == id })
+    }
+
+    public func getAccount(mxID: String) -> NioAccount? {
+        accounts.first { $0.mxID.FQMXID == mxID }
+    }
+
+    @discardableResult
+    public func removeAccount(_ id: MatrixFullUserIdentifier) async throws -> NioAccount? {
+        guard let index = accounts.firstIndex(where: { $0.mxID == id }) else {
+            return nil
+        }
+        let account = accounts.remove(at: index)
+        try await store.deleteAccountInfo(account: account.info)
+        return account
+    }
+
     /// Issue logout request to homeserver and remove account from store.
-    public func logoutAccount(_: String) async throws {
-        // TODO:
-        fatalError("TODO")
-        /* guard let account = accounts[accountID] else {
-             return
-         }
-         try await account.logout()
-         accounts.removeValue(forKey: accountID)
-         if currentAccount == accountID {
-             currentAccount = nil
-         } */
+    public func logoutAccount(_ mxID: String) async throws {
+        guard let account = getAccount(mxID: mxID) else {
+            throw MatrixCoreError.missingData
+        }
+
+        try await account.logout()
+        try await removeAccount(account.mxID)
     }
 
     public func logoutAllAccounts() async throws {

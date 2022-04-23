@@ -5,12 +5,14 @@
 //  Created by Finn Behrens on 22.04.22.
 //
 
+import LocalAuthentication
 import MatrixClient
 import NioKit
 import SwiftUI
 
 struct AccountPreferencesSecurityDevicesView: View {
     @EnvironmentObject var account: NioAccount
+    @EnvironmentObject var store: NioAccountStore
 
     @State private var devices: [MatrixDevice] = []
     @State private var ownDevice: MatrixDevice?
@@ -35,17 +37,23 @@ struct AccountPreferencesSecurityDevicesView: View {
             }
 
             // TODO: verified/unverified devices sections?
-            Section("Devices") {
-                ForEach(devices, id: \.deviceID) { device in
-                    NavigationLink {
-                        DeviceDetailView(device: device)
-                            .environmentObject(account)
-                    } label: {
-                        DeviceView(device: device)
+            if !devices.isEmpty {
+                Section("Devices") {
+                    ForEach(devices, id: \.deviceID) { device in
+                        NavigationLink {
+                            DeviceDetailView(device: device)
+                                .environmentObject(account)
+                        } label: {
+                            DeviceView(device: device)
+                        }
+                        .tag(device.id)
                     }
-                    .tag(device.id)
+                    .onDelete(perform: delete)
                 }
-                .onDelete(perform: delete)
+            }
+
+            Section {
+                Button("Logout All", role: .destructive, action: logoutAll)
             }
         }
         .refreshable {
@@ -113,6 +121,35 @@ struct AccountPreferencesSecurityDevicesView: View {
                  print(error)
              } */
         }
+    }
+
+    private func logoutAll() {
+        Task(priority: .userInitiated) {
+            await self.logoutAll()
+        }
+    }
+
+    private func logoutAll() async {
+        do {
+            let laContext = LAContext()
+            if laContext.canEvaluatePolicy(.deviceOwnerAuthentication, error: nil) {
+                if try await laContext.evaluatePolicy(
+                    .deviceOwnerAuthentication,
+                    localizedReason: "Logout all devices"
+                ) {
+                    try await doLogoutAll()
+                }
+            } else {
+                fatalError("No legacy methode implemented to fallback on missing deviceOwnerAuthentication")
+            }
+        } catch {
+            NioAccountStore.logger.fault("Failed to logout all accounts: \(error.localizedDescription)")
+        }
+    }
+
+    private func doLogoutAll() async throws {
+        let account = try await store.removeAccount(account.mxID)
+        try await account?.core.client.logoutAll()
     }
 }
 

@@ -5,12 +5,14 @@
 //  Created by Finn Behrens on 21.04.22.
 //
 
+import LocalAuthentication
 import MatrixClient
 import NioKit
 import SwiftUI
 
 struct AccountPreferencesView: View {
     @EnvironmentObject var account: NioAccount
+    @EnvironmentObject var store: NioAccountStore
     @EnvironmentObject var deepLinker: DeepLinker
     @Environment(\.dismiss) private var dismiss
 
@@ -51,10 +53,19 @@ struct AccountPreferencesView: View {
                     destination: {
                         AccountPreferencesSecurityView()
                             .environmentObject(account)
+                            .environmentObject(store)
                     }
                 )
             } header: {
                 Text("Security")
+            }
+
+            Section {
+                Button("Logout", role: .destructive) {
+                    Task(priority: .userInitiated) {
+                        await self.logout()
+                    }
+                }
             }
         }
         .navigationTitle(account.info.name)
@@ -112,6 +123,31 @@ struct AccountPreferencesView: View {
             account.info.name = newAccountName
             try await account.updateInfo()
         }
+    }
+
+    private func logout() async {
+        do {
+            let laContext = LAContext()
+            if laContext.canEvaluatePolicy(.deviceOwnerAuthentication, error: nil) {
+                if try await laContext.evaluatePolicy(
+                    .deviceOwnerAuthentication,
+                    localizedReason: "Are you sure you want to log out this device?"
+                ) {
+                    try await doLogout()
+                }
+            } else {
+                // TODO: legacy sheet
+                fatalError("Legacy logout sheet without deviceOwnerAuthentication not yet implemented")
+            }
+        } catch {
+            NioAccountStore.logger.fault("Failed to authorise logout request: \(error.localizedDescription)")
+        }
+    }
+
+    private func doLogout() async throws {
+        try await account.logout()
+        try await store.removeAccount(account.mxID)
+        dismiss()
     }
 }
 
