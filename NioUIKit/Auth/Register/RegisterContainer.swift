@@ -190,30 +190,30 @@ public struct RegisterContainer: View {
             return
         }
 
-        let register = try await matrixClient.register(password: password, username: username)
-        if let register = register.successData {
+        do {
+            let register = try await matrixClient.register(password: password, username: username)
             callback(matrixClient.homeserver, register)
-            return
-        }
+        } catch let error as MatrixServerError {
+            guard let auth = error.interactiveAuth,
+                  let session = auth.session
+            else {
+                throw error
+            }
 
-        guard let auth = register.interactiveData,
-              let session = auth.session
-        else {
-            fatalError("neither success nor interactive")
-        }
-        self.session = session
-        registerFlows = auth
+            self.session = session
+            registerFlows = auth
 
-        if auth.isOptional(notCompletedFlow: .email) {
-            logger.debug("requesting email SID: \(emailSendAttempt)")
-            let emailTokenRequest = try await matrixClient.requestEmailToken(clientSecret: emailClientSecret, email: email, sendAttempt: emailSendAttempt)
+            if auth.isOptional(notCompletedFlow: .email) {
+                logger.debug("requesting email SID: \(emailSendAttempt)")
+                let emailTokenRequest = try await matrixClient.requestEmailToken(clientSecret: emailClientSecret, email: email, sendAttempt: emailSendAttempt)
 
-            emailSID = emailTokenRequest.sid
-        }
+                emailSID = emailTokenRequest.sid
+            }
 
-        if let nextStage = auth.nextStageWithParams {
-            logger.debug("entering stage: \(nextStage.flow.rawValue)")
-            currentState = .flow(nextStage)
+            if let nextStage = auth.nextStageWithParams {
+                logger.debug("entering stage: \(nextStage.flow.rawValue)")
+                currentState = .flow(nextStage)
+            }
         }
     }
 
@@ -225,17 +225,17 @@ public struct RegisterContainer: View {
 
         do {
             let register = try await matrixClient.register(password: password, username: username, auth: response)
-
-            switch register {
-            case let .interactive(matrixInteractiveAuth):
-                if session == nil {
-                    session = matrixInteractiveAuth.session
-                }
-                currentState = .flow(matrixInteractiveAuth.nextStageWithParams!)
-            case let .success(matrixRegister):
-                callback(matrixClient.homeserver, matrixRegister)
+            callback(matrixClient.homeserver, register)
+        } catch let error as MatrixServerError {
+            guard let auth = error.interactiveAuth else {
+                logger.warning("\(error.localizedDescription)")
                 return
             }
+            if session == nil {
+                session = auth.session
+            }
+            currentState = .flow(auth.nextStageWithParams!)
+
         } catch {
             logger.warning("\(error.localizedDescription)")
         }
