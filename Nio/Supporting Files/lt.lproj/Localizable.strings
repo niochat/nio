@@ -13,3 +13,17 @@
 "login.register-not-yet-implemented" = "Naujų paskyrų registracija kol kas neįgyvendinta.";
 "loading.cancel" = "Atsisakyti";
 "recent-rooms.accessibility-label.settings" = "Nustatymai";
+"composer.accessibility-label.send" = "Siųsti";
+"composer.accessibility-label.send-file" = "Siųsti failą";
+"composer.edit-message" = "Redaguoti žinutę:";
+"composer.new-message" = "Nauja žinutė…";
+"room.invitation.join-alert.message" = "Priimti kvietimą prisijungti prie '%@'?";
+"room.invitation.join-alert.title" = "Prisijungti prie pokalbio?";
+"room.invitation.fallback-title" = "Naujas pokalbis";
+"room.remove.action" = "Pašalinti";
+"room.attachment.type-photo" = "Nuotrauka";
+"recent-rooms.rooms.header" = "Kambariai";
+"room.remove.title" = "Pašalinti?";
+"room.invitation.join-alert.join-button" = "Prisijungti";
+"recent-rooms.leave.alert-title" = "Palikti kambarį";
+"login.form.homeserver" = "Namų serveris";
