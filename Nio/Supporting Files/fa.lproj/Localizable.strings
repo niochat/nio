@@ -18,7 +18,7 @@
 "settings.dismiss" = "انجام شد";
 "settings.log-out" = "خروج از حساب";
 "settings.app-icon" = "آیکن اپلیکیشن";
-"settings.accent-color" = "رنگ تأکیدی";
+"settings.accent-color" = "رنگ لهجه";
 "settings.title" = "تنظیمات";
 "reaction-picker.title" = "روی ایموجی تپ کنید تا واکنش ارسال شود.";
 "event.context-menu.remove" = "حذف";
@@ -27,8 +27,8 @@
 "event.context-menu.add-reaction" = "اضافه کردن واکنش";
 "event.edited" = "ویرایش شده";
 "event.redaction.redact-other" = "%@ پیام %@ را حذف کرد";
-"event.room-power-level.change-self" = "%@ سطح قدرت خود را از %@ به %@ تغییر دادند";
-"event.room-power-level.change-other" = "%@ سطح قدرت خود را از %@ به %@ و %@ تغییر دادند";
+"event.room-power-level.change-self" = "%@ سطح قدرتش را از %@ به %@ تغییر داد";
+"event.room-power-level.change-other" = "%@ سطح قدرت %@ را از %@ به %@ تغییر داد";
 "room-power-level.custom" = "شخصی سازی (%d)";
 "room-power-level.admin" = "مدیر";
 "room-power-level.moderator" = "ناظم";
@@ -84,8 +84,9 @@
 "login.open-registration-prompt" = "هنوز حساب کاربری ندارید؟";
 "login.sign-in" = "ورود";
 "login.form.homeserver-optional-explanation" = "سرور خانه اختیاری است اگر از matrix.org استفاده می‌کنید.";
-"login.form.homeserver" = "سرور خانه";
+"login.form.homeserver" = "کارساز خانگی";
 "login.form.password" = "رمز عبور";
 "login.form.username" = "نام کاربری";
 "login.welcome-message" = "برای شروع به اکانت خود وارد شوید.";
 "login.welcome-header" = "خوش آمدید به ";
+"event.room-member.unknown-state" = "رویداد وضعیت ناشناخته:‌ %@";
