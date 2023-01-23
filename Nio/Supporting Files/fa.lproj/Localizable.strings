@@ -90,3 +90,4 @@
 "login.welcome-message" = "برای شروع به اکانت خود وارد شوید.";
 "login.welcome-header" = "خوش آمدید به ";
 "event.room-member.unknown-state" = "رویداد وضعیت ناشناخته:‌ %@";
+"loading.1" = "در حال اتصال ارتباط";
