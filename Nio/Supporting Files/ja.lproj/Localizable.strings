@@ -90,4 +90,4 @@
 "login.form.homeserver" = "ホームサーバー";
 "login.form.password" = "パスワード";
 "login.form.username" = "ユーザー名";
-"login.welcome-message" = "あなたのアカウントでサインインして始めましょう。";
+"login.welcome-message" = "はじめに、アカウントでサインインしましょう。";
