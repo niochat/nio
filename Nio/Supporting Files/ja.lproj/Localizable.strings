@@ -19,7 +19,7 @@
 // Room $NAME, $LAST_ACTIVITY_TIMESTAMP $LAST_MESSAGE
 "recent-rooms.accessibility-label.room" = "ルーム @%, %@ %@";
 "typing-indicator.many" = "複数人が入力しています";
-"typing-indicator.two" = "%@ と %@ が入力しています";
+"typing-indicator.two" = "%@と%@が入力しています";
 "composer.accessibility-label.cancelEdit" = "キャンセル";
 "composer.accessibility-label.send" = "送信";
 "composer.accessibility-label.send-file" = "ファイルを送信";
