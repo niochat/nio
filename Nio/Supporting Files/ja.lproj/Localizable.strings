@@ -9,8 +9,8 @@
 "event.room-member.set-avatar" = "%@がプロフィール画像を設定しました";
 "event.room-member.change-name" = "%@が表示名を%@に変更しました";
 "event.room-member.joined" = "%@が参加しました";
-"event.room-member.ban" = "%@ が %@ をブロックしました";
-"event.room-member.kicked" = "%@ が %@ をキックしました";
+"event.room-member.ban" = "%@が%@をブロックしました";
+"event.room-member.kicked" = "%@が%@をキックしました";
 "event.room-member.left" = "%@が退出しました";
 "new-conversation.for-example" = "例えば";
 "room.remove.title" = "削除しますか？";
