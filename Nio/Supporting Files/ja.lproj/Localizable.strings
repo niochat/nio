@@ -82,7 +82,7 @@
 "login.welcome-header" = "ようこそ ";
 "login.failure-back-to-login" = "ログイン画面に戻る";
 "login.register-not-yet-implemented" = "アカウントの作成機能はまだ準備できていません。";
-"login.form.homeserver-optional-explanation" = "matrix.orgをお使いですか？ホームサーバの選択は任意です。";
+"login.form.homeserver-optional-explanation" = "matrix.orgを使用する場合、ホームサーバの選択は任意です。";
 "loading.4" = "セッションを復元しています";
 "loading.3" = "ログインしています";
 "login.open-registration-prompt" = "まだアカウントをお持ちではありませんか？";
