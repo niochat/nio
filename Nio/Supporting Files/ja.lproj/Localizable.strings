@@ -68,7 +68,7 @@
 "recent-rooms.new-message-placeholder" = "新しいメッセージ";
 "recent-rooms.accessibility-label.new-conversation" = "新しい会話";
 "recent-rooms.pending-invitations.header" = "保留中の招待";
-"recent-rooms.pending-invitations.leave.alert-title" = "招待を拒否しますか？";
+"recent-rooms.pending-invitations.leave.alert-title" = "招待を辞退しますか？";
 "loading.2" = "メッセージを混合しています";
 "loading.1" = "Matrixを復号化しています";
 "typing-indicator.single" = "%@ が入力しています";
