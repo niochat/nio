@@ -68,7 +68,7 @@
 "recent-rooms.new-message-placeholder" = "新しいメッセージ";
 "recent-rooms.accessibility-label.new-conversation" = "新しい会話";
 "recent-rooms.pending-invitations.header" = "保留中の招待";
-"recent-rooms.pending-invitations.leave.alert-title" = "招待を拒否しますか？";
+"recent-rooms.pending-invitations.leave.alert-title" = "招待を辞退しますか？";
 "loading.2" = "メッセージを混合しています";
 "loading.1" = "Matrixを復号化しています";
 "typing-indicator.single" = "%@ が入力しています";
@@ -82,7 +82,7 @@
 "login.welcome-header" = "ようこそ ";
 "login.failure-back-to-login" = "ログイン画面に戻る";
 "login.register-not-yet-implemented" = "アカウントの作成機能はまだ準備できていません。";
-"login.form.homeserver-optional-explanation" = "matrix.orgをお使いですか？ホームサーバの選択は任意です。";
+"login.form.homeserver-optional-explanation" = "matrix.orgを使用する場合、ホームサーバの選択は任意です。";
 "loading.4" = "セッションを復元しています";
 "loading.3" = "ログインしています";
 "login.open-registration-prompt" = "まだアカウントをお持ちではありませんか？";
