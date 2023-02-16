@@ -40,7 +40,7 @@
 "event.redaction.redact-self" = "@%がメッセージを削除しました";
 "event.room-power-level.change-other" = "%@が%@の権限レベルを%@から%@に変更しました";
 "event.room-power-level.change-self" = "%@が権限レベルを%@から%@に変更しました";
-"room-power-level.custom" = "カスタム（%d）";
+"room-power-level.custom" = "ユーザー定義（%d）";
 "room-power-level.admin" = "管理者";
 "room-power-level.moderator" = "モデレーター";
 "room-power-level.default" = "既定";
