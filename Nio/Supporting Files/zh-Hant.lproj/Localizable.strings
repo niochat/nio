@@ -8,8 +8,8 @@
 "event.unknown-room-name-fallback" = "未知傳送人";
 "event.unknown-sender-fallback" = "未知聊天室";
 "typing-indicator.many" = "有幾位正在打字";
-"typing-indicator.two" = "%@和%@正在打字";
-"typing-indicator.single" = "%@正在打字";
+"typing-indicator.two" = "%@ 和 %@ 正在打字";
+"typing-indicator.single" = "%@ 正在打字";
 "composer.accessibility-label.cancelEdit" = "取消";
 "composer.accessibility-label.send" = "傳送";
 "composer.accessibility-label.send-file" = "傳送檔案";
@@ -20,7 +20,7 @@
 "room.invitation.join-alert.title" = "加入對話？";
 "room.invitation.fallback-title" = "新對話";
 "room.remove.action" = "移除";
-"room.remove.message" = "確實要移除此訊息嗎？";
+"room.remove.message" = "您確定要刪除這則訊息嗎？";
 "room.remove.title" = "移除？";
 "room.attachment.type-photo" = "照片";
 "room.attachment.select-type" = "傳送附件";
@@ -29,7 +29,7 @@
 "recent-rooms.rooms.header" = "聊天室";
 "recent-rooms.pending-invitations.leave.alert-title" = "拒絕邀請？";
 "recent-rooms.pending-invitations.header" = "待處理的邀請";
-"recent-rooms.accessibility-label.new-message-badge" = "%u條新訊息";
+"recent-rooms.accessibility-label.new-message-badge" = "%u 則新訊息";
 // Room $NAME, $LAST_ACTIVITY_TIMESTAMP $LAST_MESSAGE
 "recent-rooms.accessibility-label.room" = "%@聊天室，%@ %@";
 // DM with $NAME, $LAST_ACTIVITY_TIMESTAMP $LAST_MESSAGE
@@ -76,7 +76,7 @@
 "new-conversation.edit" = "編輯";
 "new-conversation.cancel" = "取消";
 "new-conversation.alert-failed" = "開始聊天發生錯誤";
-"new-conversation.create-room" = "開始聊天對話";
+"new-conversation.create-room" = "開始聊天";
 "new-conversation.public-room" = "公開聊天室";
 "new-conversation.room-name" = "聊天室名稱";
 "new-conversation.for-example" = "例如";
