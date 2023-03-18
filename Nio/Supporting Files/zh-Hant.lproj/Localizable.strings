@@ -3,7 +3,7 @@
 "event.room-member.joined" = "%@ 已加入";
 "event.room-member.ban" = "%@封禁了%@";
 "event.room-member.kicked" = "%@將%@踢出";
-"event.room-member.left" = "%@離開了";
+"event.room-member.left" = "%@ 已離開";
 "event.room-member.invited" = "%@邀請了%@";
 "event.unknown-room-name-fallback" = "未知傳送人";
 "event.unknown-sender-fallback" = "未知聊天室";
