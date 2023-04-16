@@ -89,3 +89,5 @@
 "event.room-member.change-avatar" = "%@ oppdaterte profilbildet sitt";
 "event.room-member.set-avatar" = "%@ stilte inn profilbildet sitt";
 "typing-indicator.many" = "Fleire personar skriv";
+"event.room-member.left" = "%@ forlét rommet";
+"loading.1" = "Retikulerande splines";
