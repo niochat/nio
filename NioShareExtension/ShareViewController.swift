@@ -5,6 +5,8 @@ import SwiftUI
 import NioKit
 import MatrixSDK
 
+@available(macCatalystApplicationExtension 14.0, *)
+@available(iOSApplicationExtension 14.0, *)
 @objc(ShareNavigationController)
 class ShareNavigationController: UIViewController {
 

@@ -56,8 +56,12 @@
 		39DD77BB2470C49D00A29DEE /* Six Colors Light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DD77B92470C49D00A29DEE /* Six Colors Light@2x.png */; };
 		39E5032324EAFA8700FED642 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 39E5032224EAFA8700FED642 /* Introspect */; };
 		4B0A2E47245E2EF800A79443 /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A2E46245E2EF800A79443 /* MultilineTextField.swift */; };
+		4B0B26C826050818009E2D3A /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0B26C726050818009E2D3A /* Contacts.swift */; };
+		4B0B26C926050818009E2D3A /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0B26C726050818009E2D3A /* Contacts.swift */; };
 		4B29F5B52466EC240084043B /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B29F5B42466EC240084043B /* ImagePicker.swift */; };
 		4B693515249BBBFE0029D549 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEFD7E246F414D00CCF4A0 /* ShareViewController.swift */; };
+		4B8225A426091A5F0013E733 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B8225A626091A5F0013E733 /* InfoPlist.strings */; };
+		4B9AB8C32608D08A005E1092 /* IdentityServerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9AB8C22608D08A005E1092 /* IdentityServerSettings.swift */; };
 		4BD867272460ADEF0014E3D6 /* NewConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD867262460ADEF0014E3D6 /* NewConversationView.swift */; };
 		4BFEFD86246F414D00CCF4A0 /* NioShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4BFEFD7C246F414D00CCF4A0 /* NioShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4BFEFD8C246F458000CCF4A0 /* GetURL.js in Resources */ = {isa = PBXBuildFile; fileRef = 4BFEFD8B246F458000CCF4A0 /* GetURL.js */; };
@@ -350,7 +354,11 @@
 		4B058B5524573A570059BC75 /* EditEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEvent.swift; sourceTree = "<group>"; };
 		4B08F0A82495202A008E4286 /* LocalConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = LocalConfig.xcconfig; sourceTree = "<group>"; };
 		4B0A2E46245E2EF800A79443 /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
+		4B0B26C726050818009E2D3A /* Contacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contacts.swift; sourceTree = "<group>"; };
 		4B29F5B42466EC240084043B /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		4B8225A526091A5F0013E733 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4B8225AD26091A650013E733 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4B9AB8C22608D08A005E1092 /* IdentityServerSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityServerSettings.swift; sourceTree = "<group>"; };
 		4BD3D29224951E3B0031846F /* GlobalConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = GlobalConfig.xcconfig; sourceTree = "<group>"; };
 		4BD3DCA32482FF08009B5048 /* AccountStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStore.swift; sourceTree = "<group>"; };
 		4BD867262460ADEF0014E3D6 /* NewConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationView.swift; sourceTree = "<group>"; };
@@ -477,6 +485,7 @@
 			children = (
 				3902B8A22395935600698B87 /* SettingsView.swift */,
 				39DD77AE247006E300A29DEE /* AppIcon.swift */,
+				4B9AB8C22608D08A005E1092 /* IdentityServerSettings.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -665,7 +674,6 @@
 				39D166C42385C7F6006DD257 /* Extensions */,
 				3921175D2442563A00892B00 /* Generated */,
 				39C931E22384328B004449E1 /* Assets.xcassets */,
-				39C931EA2384328B004449E1 /* Info.plist */,
 				390D63BA246F4BEE00B8F640 /* Resources */,
 				39C931F3238449C2004449E1 /* Supporting Files */,
 				39C931E42384328B004449E1 /* Preview Content */,
@@ -684,10 +692,12 @@
 		39C931F3238449C2004449E1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				39C931EA2384328B004449E1 /* Info.plist */,
 				39C931F623846B2D004449E1 /* .swiftlint.yml */,
 				3921175B244255D600892B00 /* swiftgen.yml */,
 				39C931E72384328B004449E1 /* LaunchScreen.storyboard */,
 				392117592442556700892B00 /* Localizable.strings */,
+				4B8225A626091A5F0013E733 /* InfoPlist.strings */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -813,6 +823,7 @@
 				393411C823904428003B49B8 /* MXEvent+Extensions.swift */,
 				4BEB8C03250403D200E90699 /* UserDefaults.swift */,
 				E897AA3325F2716F00D11427 /* UXKit.swift */,
+				4B0B26C726050818009E2D3A /* Contacts.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1149,6 +1160,7 @@
 				392117572442556700892B00 /* Localizable.strings in Resources */,
 				39C931F723846B2D004449E1 /* .swiftlint.yml in Resources */,
 				39DD77B62470C38300A29DEE /* Six Colors Dark@3x.png in Resources */,
+				4B8225A426091A5F0013E733 /* InfoPlist.strings in Resources */,
 				39C931E92384328B004449E1 /* LaunchScreen.storyboard in Resources */,
 				39C931E62384328B004449E1 /* Preview Assets.xcassets in Resources */,
 				39DD77BA2470C49D00A29DEE /* Six Colors Light@3x.png in Resources */,
@@ -1272,6 +1284,7 @@
 				3923898F2388707E00B2E1DF /* RoomListItemView.swift in Sources */,
 				4B29F5B52466EC240084043B /* ImagePicker.swift in Sources */,
 				CAF2AE8B2458EF0900D84133 /* MarkdownText.swift in Sources */,
+				4B9AB8C32608D08A005E1092 /* IdentityServerSettings.swift in Sources */,
 				395E06FD25DDC1790059F6AD /* SFSymbol.swift in Sources */,
 				39DD77AF247006E300A29DEE /* AppIcon.swift in Sources */,
 				CAFCB323245F6E6700869320 /* NSAttributedString+Extensions.swift in Sources */,
@@ -1350,6 +1363,7 @@
 				E8B4725925F26D5A00ACEFCB /* NIORoomSummary.swift in Sources */,
 				E8B4725725F26D5A00ACEFCB /* EditEvent.swift in Sources */,
 				E8B4726125F26D5A00ACEFCB /* AccountStore.swift in Sources */,
+				4B0B26C826050818009E2D3A /* Contacts.swift in Sources */,
 				E8B4725825F26D5A00ACEFCB /* CustomEvent.swift in Sources */,
 				E8B4725F25F26D5A00ACEFCB /* Configuration.swift in Sources */,
 				E8B4725D25F26D5A00ACEFCB /* EventCollection.swift in Sources */,
@@ -1433,6 +1447,7 @@
 				E897AA1B25F2707C00D11427 /* Configuration.swift in Sources */,
 				E897AA1C25F2707C00D11427 /* CustomEvent.swift in Sources */,
 				E897AA2325F2707C00D11427 /* Reaction.swift in Sources */,
+				4B0B26C926050818009E2D3A /* Contacts.swift in Sources */,
 				E897AA1925F2707C00D11427 /* EditEvent.swift in Sources */,
 				E897AA1F25F2707C00D11427 /* MX+Identifiable.swift in Sources */,
 				E897AA1D25F2707C00D11427 /* MXCredentials+Keychain.swift in Sources */,
@@ -1525,6 +1540,15 @@
 				39C931E82384328B004449E1 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		4B8225A626091A5F0013E733 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4B8225A526091A5F0013E733 /* en */,
+				4B8225AD26091A650013E733 /* nl */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1699,7 +1723,7 @@
 				CURRENT_PROJECT_VERSION = 36;
 				DEVELOPMENT_ASSET_PATHS = "\"Nio/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Nio/Info.plist;
+				INFOPLIST_FILE = "Nio/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1723,7 +1747,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Nio/Preview Content\"";
 				DEVELOPMENT_TEAM = HU85FER47E;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Nio/Info.plist;
+				INFOPLIST_FILE = "Nio/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
