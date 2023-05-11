@@ -83,7 +83,7 @@
 "new-conversation.cancel" = "Anuluj";
 "new-conversation.alert-failed" = "Nie udało się rozpocząć czatu";
 "new-conversation.create-room" = "Rozpocznij czat";
-"new-conversation.public-room" = "Publiczny pokój";
+"new-conversation.public-room" = "Pokój publiczny";
 "new-conversation.room-name" = "Nazwa pokoju";
 "new-conversation.for-example" = "Na przykład";
 "new-conversation.username-placeholder" = "Identyfikator Matrix";
