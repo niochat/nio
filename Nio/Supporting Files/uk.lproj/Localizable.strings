@@ -48,7 +48,7 @@
 "room-power-level.moderator" = "Модератор";
 "room-power-level.default" = "Типово";
 "event.reason" = "Причина: %@";
-"event.room-member.change-name" = "%@ змінили своє показуване ім'я на %@";
+"event.room-member.change-name" = "%@ змінили свій псевдонім на %@";
 "event.room-member.joined" = "%@ приєднується";
 "event.room-member.ban" = "%@ блокує %@";
 "event.room-member.kicked" = "%@ викидає %@";
