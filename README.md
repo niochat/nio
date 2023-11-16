@@ -10,7 +10,9 @@ Nio is an upcoming [Matrix](https://matrix.org) client for iOS.
 
 For the time being this project is still very much a work in progress. For updates, please check by in our matrix room → [#niochat:matrix.org](https://matrix.to/#/#niochat:matrix.org).
 
-Want to give it a spin? Join the public [TestFlight Beta](https://testflight.apple.com/join/KlXr3kKz).
+~~Want to give it a spin? Join the public [TestFlight Beta](https://testflight.apple.com/join/KlXr3kKz).~~
+
+**This project is currently on hiatus and not under active development. Please use one of the other [fantastic iOS Matrix clients](https://matrix.org/ecosystem/clients/) :)**
 
 ![screenshot](https://nio.chat/screenshots.png)
 
