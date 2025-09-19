@@ -44,7 +44,7 @@ Thank you! ❤️
 
 You might also have fun checking out the following applications.
 
-- [FluffyChat](https://fluffychat.im/en/), arguably the cutest mobile Matrix client.
+- [FluffyChat](https://fluffychat.im/), arguably the cutest mobile Matrix client.
 - [Ditto Chat](https://www.dittochat.org/), cross-platform (based on ReactNative) and just as purple 💜
 
 ### Why "Nio"?
