@@ -1,4 +1,5 @@
 import SwiftUI
+import MatrixSDK
 import NioKit
 
 struct SettingsContainerView: View {
@@ -49,6 +50,7 @@ private struct SettingsView: View {
     @AppStorage("accentColor") private var accentColor: Color = .purple
     @StateObject private var appIconTitle = AppIconTitle()
     let logoutAction: () -> Void
+    @EnvironmentObject var store: AccountStore
 
     @Environment(\.presentationMode) private var presentationMode
 
@@ -72,6 +74,8 @@ private struct SettingsView: View {
                         ForEach(AppIconTitle.alternatives) { AppIcon(title: $0) }
                     }
                 }
+
+                IdentityServerSettingsContainerView()
 
                 Section {
                     Button(action: self.logoutAction) {

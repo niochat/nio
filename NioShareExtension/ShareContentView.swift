@@ -2,6 +2,7 @@ import SwiftUI
 import NioKit
 import UIKit
 
+@available(iOSApplicationExtension 14.0, *)
 struct ShareContentView: View {
     @State var parentView: ShareNavigationController
     @State var showConfirm = false

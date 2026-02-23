@@ -170,6 +170,8 @@ internal enum L10n {
     internal static let alertFailed = L10n.tr("Localizable", "new-conversation.alert-failed")
     /// Cancel
     internal static let cancel = L10n.tr("Localizable", "new-conversation.cancel")
+    /// Contacts on Matrix
+    internal static let contactsMatrix = L10n.tr("Localizable", "new-conversation.contacts-matrix")
     /// Start Chat
     internal static let createRoom = L10n.tr("Localizable", "new-conversation.create-room")
     /// Done
@@ -188,6 +190,8 @@ internal enum L10n {
     internal static let titleRoom = L10n.tr("Localizable", "new-conversation.title-room")
     /// Matrix ID
     internal static let usernamePlaceholder = L10n.tr("Localizable", "new-conversation.username-placeholder")
+    /// Matrix ID, Phone, or Email
+    internal static let usernamePlaceholderExtended = L10n.tr("Localizable", "new-conversation.username-placeholder-extended")
   }
 
   internal enum ReactionPicker {
@@ -293,6 +297,49 @@ internal enum L10n {
     internal static let logOut = L10n.tr("Localizable", "settings.log-out")
     /// Settings
     internal static let title = L10n.tr("Localizable", "settings.title")
+  }
+
+  internal enum SettingsIdentityServer {
+    /// Closed Federation
+    internal static let closedFederation = L10n.tr("Localizable", "settings-identity-server.closed-federation")
+    /// At the moment, the identity servers are in a closed federation configuration. This means that there are only two identity servers (matrix.org, vector.im) and all data uploaded to one is copied to the other.
+    internal static let closedFederationText = L10n.tr("Localizable", "settings-identity-server.closed-federation-text")
+    /// Sync Contacts
+    internal static let contactSync = L10n.tr("Localizable", "settings-identity-server.contact-sync")
+    /// Continue
+    internal static let `continue` = L10n.tr("Localizable", "settings-identity-server.continue")
+    /// Data
+    internal static let data = L10n.tr("Localizable", "settings-identity-server.data")
+    /// Data & Privacy
+    internal static let dataPrivacy = L10n.tr("Localizable", "settings-identity-server.data-privacy")
+    /// By using the identity server, your email address and phone number will be sent to the identity server and will be linked to your Matrix ID (%@).
+    internal static func dataText(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "settings-identity-server.data-text", String(describing: p1))
+    }
+    /// Learn More
+    internal static let learnMore = L10n.tr("Localizable", "settings-identity-server.learn-more")
+    /// Match
+    internal static let match = L10n.tr("Localizable", "settings-identity-server.match")
+    /// Any user can retrieve your Matrix ID by entering your email address or phone number, but cannot find your email address or phone number by entering your Matrix ID.
+    internal static let matchText = L10n.tr("Localizable", "settings-identity-server.match-text")
+    /// (Optional) Contact Sync
+    internal static let optionalContactSync = L10n.tr("Localizable", "settings-identity-server.optional-contact-sync")
+    /// When activating contact syncronization, Nio will periodically send the email addresses and phone numbers of all your contacts to the identity server to see if that contact has a linked Matrix ID. This contact information is never stored or shared with other parties by Nio.
+    internal static let optionalContactSyncText = L10n.tr("Localizable", "settings-identity-server.optional-contact-sync-text")
+    /// Please go to Settings and turn on the permissions.
+    internal static let permissionAlertBody = L10n.tr("Localizable", "settings-identity-server.permission-alert-body")
+    /// No permissions
+    internal static let permissionAlertTitle = L10n.tr("Localizable", "settings-identity-server.permission-alert-title")
+    /// Cancel
+    internal static let permissionCancelButton = L10n.tr("Localizable", "settings-identity-server.permission-cancel-button")
+    /// Settings
+    internal static let permissionSettingsButton = L10n.tr("Localizable", "settings-identity-server.permission-settings-button")
+    /// Identity Server
+    internal static let title = L10n.tr("Localizable", "settings-identity-server.title")
+    /// Enable Identity Server
+    internal static let toggle = L10n.tr("Localizable", "settings-identity-server.toggle")
+    /// Identity URL
+    internal static let url = L10n.tr("Localizable", "settings-identity-server.url")
   }
 
   internal enum TypingIndicator {

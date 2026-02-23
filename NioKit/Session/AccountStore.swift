@@ -2,6 +2,7 @@ import Foundation
 import Combine
 import MatrixSDK
 import KeychainAccess
+import SwiftUI
 
 public enum LoginState {
     case loggedOut
@@ -10,9 +11,17 @@ public enum LoginState {
     case loggedIn(userId: String)
 }
 
+@available(iOS 14.0, *)
 public class AccountStore: ObservableObject {
+    @AppStorage("identityServer") private var identityServer: String = "https://vector.im"
+    @AppStorage("identityServerBool") private var identityServerBool: Bool = false
+    @AppStorage("matrixUsers") private var matrixUsersJSON: String = ""
+    @AppStorage("locSyncContacts") private var locSyncContacts: Bool = false
+
     public var client: MXRestClient?
     public var session: MXSession?
+
+    public var identityService: MXIdentityService?
 
     var fileStore: MXFileStore?
     var credentials: MXCredentials?
@@ -120,6 +129,14 @@ public class AccountStore: ObservableObject {
         self.session = MXSession(matrixRestClient: self.client!)
         self.fileStore = MXFileStore()
 
+        if self.identityServerBool {
+            self.setIdentityService()
+        }
+
+        if self.locSyncContacts && Contacts.hasPermission(){
+            self.updateMatrixContacts()
+        }
+
         self.session!.setStore(fileStore!) { response in
             switch response {
             case .failure(let error):
@@ -198,6 +215,52 @@ public class AccountStore: ObservableObject {
         }
         timeline?.resetPaginationAroundInitialEvent(withLimit: 40) { _ in
             self.objectWillChange.send()
+        }
+    }
+
+    public func setIdentityService() {
+        self.identityService = MXIdentityService.init(
+            identityServer: URL(string: identityServer)!,
+            accessToken: nil,
+            homeserverRestClient: self.client!
+        )
+    }
+
+    public func updateMatrixContacts() {
+        var matrixUsers: [MatrixUser] = { () -> [MatrixUser] in
+            do {
+                return try JSONDecoder().decode(
+                    [MatrixUser].self, from: matrixUsersJSON.data(using: .utf8) ?? Data()
+                )
+            } catch {
+                return []
+            }
+        }()
+        let contacts = Contacts.getAllContacts()
+        contacts.forEach { (contact) in
+            var mx3pids: [MX3PID] = []
+            contact.emailAddresses.forEach { (email) in
+                mx3pids.append(MX3PID.init(medium: MX3PID.Medium.email, address: email.value as String))
+            }
+            self.identityService?.lookup3PIDs(mx3pids) { [self] response in
+                response.value?.forEach({ (responseItem: (key: MX3PID, value: String)) in
+                    do {
+                        if (!matrixUsers.contains(where: { user in
+                            return user.matrixID == responseItem.value
+                        })) {
+                            matrixUsers.append(
+                                MatrixUser(
+                                    firstName: contact.givenName,
+                                    lastName: contact.familyName,
+                                    matrixID: responseItem.value
+                                )
+                            )
+                            let jsonData = try JSONEncoder().encode(matrixUsers)
+                            self.matrixUsersJSON = String(data: jsonData, encoding: .utf8)!
+                        }
+                    } catch { print(error) }
+                })
+            }
         }
     }
 }
